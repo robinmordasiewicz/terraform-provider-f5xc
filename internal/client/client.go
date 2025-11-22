@@ -4150,3 +4150,100 @@ func (c *Client) DeleteWorkload(ctx context.Context, namespace, name string) err
 	path := fmt.Sprintf("/api/config/namespaces/%s/workloads/%s", namespace, name)
 	return c.Delete(ctx, path)
 }
+
+// ===== DNSLoadBalancer =====
+type DNSLoadBalancer struct {
+	Metadata Metadata            `json:"metadata"`
+	Spec     DNSLoadBalancerSpec `json:"spec"`
+}
+type DNSLoadBalancerSpec struct {
+	Description string `json:"description,omitempty"`
+}
+
+func (c *Client) CreateDNSLoadBalancer(ctx context.Context, resource *DNSLoadBalancer) (*DNSLoadBalancer, error) {
+	var result DNSLoadBalancer
+	path := fmt.Sprintf("/api/config/namespaces/%s/dns_load_balancers", resource.Metadata.Namespace)
+	err := c.Post(ctx, path, resource, &result)
+	return &result, err
+}
+func (c *Client) GetDNSLoadBalancer(ctx context.Context, namespace, name string) (*DNSLoadBalancer, error) {
+	var result DNSLoadBalancer
+	path := fmt.Sprintf("/api/config/namespaces/%s/dns_load_balancers/%s", namespace, name)
+	err := c.Get(ctx, path, &result)
+	return &result, err
+}
+func (c *Client) UpdateDNSLoadBalancer(ctx context.Context, resource *DNSLoadBalancer) (*DNSLoadBalancer, error) {
+	var result DNSLoadBalancer
+	path := fmt.Sprintf("/api/config/namespaces/%s/dns_load_balancers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	err := c.Put(ctx, path, resource, &result)
+	return &result, err
+}
+func (c *Client) DeleteDNSLoadBalancer(ctx context.Context, namespace, name string) error {
+	path := fmt.Sprintf("/api/config/namespaces/%s/dns_load_balancers/%s", namespace, name)
+	return c.Delete(ctx, path)
+}
+
+// ===== Role =====
+type Role struct {
+	Metadata Metadata `json:"metadata"`
+	Spec     RoleSpec `json:"spec"`
+}
+type RoleSpec struct {
+	Description string `json:"description,omitempty"`
+}
+
+func (c *Client) CreateRole(ctx context.Context, resource *Role) (*Role, error) {
+	var result Role
+	path := fmt.Sprintf("/api/config/namespaces/%s/roles", resource.Metadata.Namespace)
+	err := c.Post(ctx, path, resource, &result)
+	return &result, err
+}
+func (c *Client) GetRole(ctx context.Context, namespace, name string) (*Role, error) {
+	var result Role
+	path := fmt.Sprintf("/api/config/namespaces/%s/roles/%s", namespace, name)
+	err := c.Get(ctx, path, &result)
+	return &result, err
+}
+func (c *Client) UpdateRole(ctx context.Context, resource *Role) (*Role, error) {
+	var result Role
+	path := fmt.Sprintf("/api/config/namespaces/%s/roles/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	err := c.Put(ctx, path, resource, &result)
+	return &result, err
+}
+func (c *Client) DeleteRole(ctx context.Context, namespace, name string) error {
+	path := fmt.Sprintf("/api/config/namespaces/%s/roles/%s", namespace, name)
+	return c.Delete(ctx, path)
+}
+
+// ===== SiteState =====
+type SiteState struct {
+	Metadata Metadata      `json:"metadata"`
+	Spec     SiteStateSpec `json:"spec"`
+}
+type SiteStateSpec struct {
+	Description string `json:"description,omitempty"`
+	State       string `json:"state,omitempty"`
+}
+
+func (c *Client) CreateSiteState(ctx context.Context, resource *SiteState) (*SiteState, error) {
+	var result SiteState
+	path := fmt.Sprintf("/api/config/namespaces/%s/site_states", resource.Metadata.Namespace)
+	err := c.Post(ctx, path, resource, &result)
+	return &result, err
+}
+func (c *Client) GetSiteState(ctx context.Context, namespace, name string) (*SiteState, error) {
+	var result SiteState
+	path := fmt.Sprintf("/api/config/namespaces/%s/site_states/%s", namespace, name)
+	err := c.Get(ctx, path, &result)
+	return &result, err
+}
+func (c *Client) UpdateSiteState(ctx context.Context, resource *SiteState) (*SiteState, error) {
+	var result SiteState
+	path := fmt.Sprintf("/api/config/namespaces/%s/site_states/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	err := c.Put(ctx, path, resource, &result)
+	return &result, err
+}
+func (c *Client) DeleteSiteState(ctx context.Context, namespace, name string) error {
+	path := fmt.Sprintf("/api/config/namespaces/%s/site_states/%s", namespace, name)
+	return c.Delete(ctx, path)
+}

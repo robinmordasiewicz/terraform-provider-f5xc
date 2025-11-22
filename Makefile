@@ -85,6 +85,8 @@ docs:
 		$(GO) install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs@latest; \
 		tfplugindocs generate; \
 	fi
+	@echo "Transforming documentation to Volterra-style format..."
+	$(GO) run $(TOOLS_DIR)/transform-docs.go
 
 # Clean build artifacts
 clean:

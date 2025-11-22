@@ -271,6 +271,16 @@ func (p *F5XCProvider) DataSources(ctx context.Context) []func() datasource.Data
 		NewRateLimiterDataSource,
 		NewAWSTGWSiteDataSource,
 		NewDNSLoadBalancerDataSource,
+		NewVirtualNetworkDataSource,
+		NewAppTypeDataSource,
+		NewFleetDataSource,
+		NewSiteDataSource,
+		NewIPPrefixSetDataSource,
+		NewNetworkFirewallDataSource,
+		NewNetworkPolicyDataSource,
+		NewUserIdentificationDataSource,
+		NewWAFExclusionPolicyDataSource,
+		NewDNSDomainDataSource,
 	}
 }
 

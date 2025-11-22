@@ -1,9 +1,9 @@
 resource "f5xc_namespace" "example" {
-  name        = "example-namespace"
-  description = "Example namespace created by terraform-provider-f5xc"
-
+  name        = "my-namespace"
+  description = "Example namespace for application workloads"
+  
   labels = {
-    environment = "development"
-    managed-by  = "terraform"
+    environment = "production"
+    team        = "platform"
   }
 }

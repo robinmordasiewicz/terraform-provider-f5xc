@@ -1,6 +1,9 @@
 // Copyright (c) F5XC Community
 // SPDX-License-Identifier: MPL-2.0
 
+// terraform-provider-f5xc provides Terraform resources for managing F5 Distributed Cloud services.
+// For documentation, see https://registry.terraform.io/providers/f5xc/f5xc/latest/docs
+
 package main
 
 import (

@@ -131,7 +131,7 @@ type NamespaceSpec struct {
 }
 func (c *Client) CreateNamespace(ctx context.Context, resource *Namespace) (*Namespace, error) {
 	var result Namespace
-	path := fmt.Sprintf("/api/web/namespaces")
+	path := "/api/web/namespaces"
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }

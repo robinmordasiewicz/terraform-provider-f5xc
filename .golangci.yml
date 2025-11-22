@@ -3,11 +3,11 @@
 
 run:
   timeout: 5m
-  # Skip the tools directory - contains standalone scripts with multiple main functions
-  skip-dirs:
-    - tools
 
 issues:
+  # Exclude the tools directory - contains standalone scripts with multiple main functions
+  exclude-dirs:
+    - tools
   # Exclude some linters from running on test files
   exclude-rules:
     - path: _test\.go

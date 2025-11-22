@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_bgp_asn_set Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Create bgp_asn_set creates a new object in the storage backend for metadata.namespace.
 ---

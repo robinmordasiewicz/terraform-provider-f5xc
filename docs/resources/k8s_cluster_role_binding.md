@@ -66,7 +66,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`subjects` - (Optional) Subjects. List of subjects (user, group or service account) to which this role is bound Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io. See [Subjects](#subjects) below for details.
+`subjects` - (Optional) Subjects. List of subjects (user, group or service account) to which this role is bound. See [Subjects](#subjects) below for details.
 
 
 ### Attributes Reference
@@ -81,27 +81,27 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--k8s_cluster_role"></a>
 ### K8s Cluster Role
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--subjects"></a>
 ### Subjects
 
-`group` - (Optional) Group. Exclusive with [service_account user] Group id of the user group ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1 (`String`).
+`group` - (Optional) Group. Group id of the user group (`String`).
 
 `service_account` - (Optional) ServiceAccountType. See [Service Account](#nestedblock--subjects--service_account) below.
 
-`user` - (Optional) User. Exclusive with [group service_account] User id of the user ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1 (`String`).
+`user` - (Optional) User. User id of the user (`String`).
 
 <a id="nestedblock--subjects--service_account"></a>
 ### Subjects Service Account
 
-`name` - (Optional) Name. Name of the service account Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1 (`String`).
+`name` - (Optional) Name. Name of the service account (`String`).
 
-`namespace` - (Optional) Namespace. Namespace of the service account Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1 (`String`).
+`namespace` - (Optional) Namespace. Namespace of the service account (`String`).
 
 
 ## Import

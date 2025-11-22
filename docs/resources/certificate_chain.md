@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_certificate_chain Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Certificates"
 description: |-
   Shape of the Certificate Chain specification
 ---
@@ -48,7 +48,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`certificate_url` - (Optional) Certificates. Certificate chain is the list of intermediate certificates in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificates. Certificate chain is the list of intermediate certificates in PEM format including the PEM headers (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 

@@ -48,9 +48,9 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`burst_size` - (Optional) Burst Size(pps). The maximum size permitted for bursts of data. e.g. 10000 pps burst Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 (`Number`).
+`burst_size` - (Optional) Burst Size(pps). The maximum size permitted for bursts of data. e.g. 10000 pps burst (`Number`).
 
-`committed_information_rate` - (Optional) Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps Required: YES ves.io.schema (`Number`).
+`committed_information_rate` - (Optional) Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps (`Number`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 

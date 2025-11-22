@@ -64,7 +64,7 @@ The following arguments are optional:
 
 `business_logic_markup_setting` - (Optional) API Discovery Settings. Settings specifying how API Discovery will be performed. See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
 
-`features` - (Optional) Features. List of various AI/ML features enabled ves.io.schema.rules.repeated.unique: true. See [Features](#features) below for details.
+`features` - (Optional) Features. List of various AI/ML features enabled. See [Features](#features) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--business_logic_markup_setting--discovered_api_settings"></a>
 ### Business Logic Markup Setting Discovered Api Settings
 
-`purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 7 (`Number`).
+`purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
 
 <a id="nestedblock--business_logic_markup_setting--enable"></a>
 ### Business Logic Markup Setting Enable

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_dns_lb_health_check Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "DNS"
 description: |-
   Create DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error.
 ---
@@ -91,24 +91,24 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--http_health_check"></a>
 ### Http Health Check
 
-`health_check_port` - (Optional) Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
-`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema (`Number`).
+`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass (`Number`).
 
 `receive` - (Optional) Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match (`String`).
 
-`send` - (Optional) Send String. HTTP payload to send to the target ves.io.schema.rules.string.max_len: 2048 (`String`).
+`send` - (Optional) Send String. HTTP payload to send to the target (`String`).
 
 <a id="nestedblock--https_health_check"></a>
 ### Https Health Check
 
-`health_check_port` - (Optional) Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
-`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema (`Number`).
+`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass (`Number`).
 
 `receive` - (Optional) Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match (`String`).
 
-`send` - (Optional) Send String. HTTP payload to send to the target ves.io.schema.rules.string.max_len: 2048 (`String`).
+`send` - (Optional) Send String. HTTP payload to send to the target (`String`).
 
 <a id="nestedblock--icmp_health_check"></a>
 ### Icmp Health Check
@@ -116,35 +116,35 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--tcp_health_check"></a>
 ### Tcp Health Check
 
-`health_check_port` - (Optional) Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
-`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema (`Number`).
+`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass (`Number`).
 
 `receive` - (Optional) Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax (`String`).
 
-`send` - (Optional) Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS) ves.io.schema.rules.string.max_len: 2048 (`String`).
+`send` - (Optional) Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS) (`String`).
 
 <a id="nestedblock--tcp_hex_health_check"></a>
 ### Tcp Hex Health Check
 
-`health_check_port` - (Optional) Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
-`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema (`Number`).
+`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass (`Number`).
 
-`receive` - (Optional) Receive Payload. Hex encoded raw bytes expected in the response. ves.io.schema.rules.string.hex: true ves.io.schema.rules.string.max_len: 2048 (`String`).
+`receive` - (Optional) Receive Payload. Hex encoded raw bytes expected in the response (`String`).
 
-`send` - (Optional) Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check. ves.io.schema.rules.string.hex: true ves.io.schema.rules.string.max_len: 2048 (`String`).
+`send` - (Optional) Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check (`String`).
 
 <a id="nestedblock--udp_health_check"></a>
 ### Udp Health Check
 
-`health_check_port` - (Optional) Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
-`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema (`Number`).
+`health_check_secondary_port` - (Optional) Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass (`Number`).
 
-`receive` - (Optional) Receive String. UDP response to be matched. It can be a regex. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string (`String`).
+`receive` - (Optional) Receive String. UDP response to be matched. It can be a regex (`String`).
 
-`send` - (Optional) Send String. UDP payload Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string.min_len: 1 (`String`).
+`send` - (Optional) Send String. UDP payload (`String`).
 
 
 ## Import

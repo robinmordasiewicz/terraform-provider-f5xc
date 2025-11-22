@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_api_credential Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Authentication"
 description: |-
   Create request specification.
 ---

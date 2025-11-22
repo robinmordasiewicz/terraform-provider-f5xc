@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_bot_defense_app_infrastructure Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Creates Bot Defense App Infrastructure in a given namespace.
 ---
@@ -87,54 +87,54 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--cloud_hosted"></a>
 ### Cloud Hosted
 
-`egress` - (Optional) Egress. Egress Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Egress](#nestedblock--cloud_hosted--egress) below.
+`egress` - (Optional) Egress. Egress. See [Egress](#nestedblock--cloud_hosted--egress) below.
 
-`infra_host_name` - (Optional) Infra Host Name. Infra Host Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true (`String`).
+`infra_host_name` - (Optional) Infra Host Name. Infra Host Name (`String`).
 
-`ingress` - (Optional) Ingress. Ingress Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Ingress](#nestedblock--cloud_hosted--ingress) below.
+`ingress` - (Optional) Ingress. Ingress. See [Ingress](#nestedblock--cloud_hosted--ingress) below.
 
 `region` - (Optional) Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region (`String`).
 
 <a id="nestedblock--cloud_hosted--egress"></a>
 ### Cloud Hosted Egress
 
-`ip_address` - (Optional) IP Address. Egress IP address Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true (`String`).
+`ip_address` - (Optional) IP Address. Egress IP address (`String`).
 
 `location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 ... (`String`).
 
 <a id="nestedblock--cloud_hosted--ingress"></a>
 ### Cloud Hosted Ingress
 
-`host_name` - (Optional) Ingress value. Exclusive with [ip_address] Ingress Host Name ves.io.schema.rules.string.hostname: true (`String`).
+`host_name` - (Optional) Ingress value. Ingress Host Name (`String`).
 
-`ip_address` - (Optional) Ingress value. Exclusive with [host_name] Ingress IP Address ves.io.schema.rules.string.ip: true (`String`).
+`ip_address` - (Optional) Ingress value. Ingress IP Address (`String`).
 
 `location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 ... (`String`).
 
 <a id="nestedblock--data_center_hosted"></a>
 ### Data Center Hosted
 
-`egress` - (Optional) Egress. Egress Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Egress](#nestedblock--data_center_hosted--egress) below.
+`egress` - (Optional) Egress. Egress. See [Egress](#nestedblock--data_center_hosted--egress) below.
 
-`infra_host_name` - (Optional) Infra Host Name. Infra Host Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true (`String`).
+`infra_host_name` - (Optional) Infra Host Name. Infra Host Name (`String`).
 
-`ingress` - (Optional) Ingress. Ingress Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Ingress](#nestedblock--data_center_hosted--ingress) below.
+`ingress` - (Optional) Ingress. Ingress. See [Ingress](#nestedblock--data_center_hosted--ingress) below.
 
 `region` - (Optional) Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region (`String`).
 
 <a id="nestedblock--data_center_hosted--egress"></a>
 ### Data Center Hosted Egress
 
-`ip_address` - (Optional) IP Address. Egress IP address Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true (`String`).
+`ip_address` - (Optional) IP Address. Egress IP address (`String`).
 
 `location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 ... (`String`).
 
 <a id="nestedblock--data_center_hosted--ingress"></a>
 ### Data Center Hosted Ingress
 
-`host_name` - (Optional) Ingress value. Exclusive with [ip_address] Ingress Host Name ves.io.schema.rules.string.hostname: true (`String`).
+`host_name` - (Optional) Ingress value. Ingress Host Name (`String`).
 
-`ip_address` - (Optional) Ingress value. Exclusive with [host_name] Ingress IP Address ves.io.schema.rules.string.ip: true (`String`).
+`ip_address` - (Optional) Ingress value. Ingress IP Address (`String`).
 
 `location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 ... (`String`).
 

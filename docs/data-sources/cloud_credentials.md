@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_cloud_credentials Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Authentication"
 description: |-
   API to create cloud_credentials object
 ---

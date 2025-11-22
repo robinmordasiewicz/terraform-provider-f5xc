@@ -54,11 +54,11 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`item_count` - (Optional) Elastic IP Count Per Node. number of Elastic Ips / Public Ips associated with this object per Node ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 8 (`Number`).
+`item_count` - (Optional) Elastic IP Count Per Node. number of Elastic Ips / Public Ips associated with this object per Node (`Number`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`site_ref` - (Optional) Site Reference. Site to which this cloud elastic ip object is attached Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Site Ref](#site-ref) below for details.
+`site_ref` - (Optional) Site Reference. Site to which this cloud elastic ip object is attached. See [Site Ref](#site-ref) below for details.
 
 
 ### Attributes Reference

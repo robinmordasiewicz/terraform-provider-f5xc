@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_oidc_provider Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Authentication"
 description: |-
   CustomCreateSpecType is the spec to create oidc provider
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_forward_proxy_policy Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Shape of the Forward Proxy Policy specification
 ---
@@ -131,11 +131,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#nestedblock--allow_list--default_action_next_policy) below.
 
-`dest_list` - (Optional) L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Dest List](#nestedblock--allow_list--dest_list) below.
+`dest_list` - (Optional) L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI. See [Dest List](#nestedblock--allow_list--dest_list) below.
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Http List](#nestedblock--allow_list--http_list) below.
+`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [Http List](#nestedblock--allow_list--http_list) below.
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Tls List](#nestedblock--allow_list--tls_list) below.
+`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [Tls List](#nestedblock--allow_list--tls_list) below.
 
 <a id="nestedblock--allow_list--default_action_allow"></a>
 ### Allow List Default Action Allow
@@ -149,28 +149,28 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--allow_list--dest_list"></a>
 ### Allow List Dest List
 
-`ipv6_prefixes` - (Optional) IPv6 Prefixes. Destination IPv6 prefixes. ves.io.schema.rules.repeated.items.string.ipv6_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`ipv6_prefixes` - (Optional) IPv6 Prefixes. Destination IPv6 prefixes (`List`).
 
-`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. Required: YES ves.io.schema.rules.message (`String`).
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
-`prefixes` - (Optional) IPv4 Prefixes. Destination IPv4 prefixes. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefixes. Destination IPv4 prefixes (`List`).
 
 <a id="nestedblock--allow_list--http_list"></a>
 ### Allow List Http List
 
 `any_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Path](#nestedblock--allow_list--http_list--any_path) below.
 
-`exact_value` - (Optional) Exact Values. Exclusive with [regex_value suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`exact_value` - (Optional) Exact Values. Exact domain name (`String`).
 
-`path_exact_value` - (Optional) Exact Path. Exclusive with [any_path path_prefix_value path_regex_value] Exact Path to match. ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules (`String`).
+`path_exact_value` - (Optional) Exact Path. Exact Path to match (`String`).
 
-`path_prefix_value` - (Optional) Prefix of Path. Exclusive with [any_path path_exact_value path_regex_value] Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' ves.io.schema.rules.string.http_path: true ves.io.schema.rules (`String`).
+`path_prefix_value` - (Optional) Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' (`String`).
 
-`path_regex_value` - (Optional) Regex of Path. Exclusive with [any_path path_exact_value path_prefix_value] Regular Expression value for the Path to match ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string (`String`).
+`path_regex_value` - (Optional) Regex of Path. Regular Expression value for the Path to match (`String`).
 
-`regex_value` - (Optional) Regex Values of Domains. Exclusive with [exact_value suffix_value] Regular Expression value for the domain name ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io (`String`).
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
 
-`suffix_value` - (Optional) Suffix Values. Exclusive with [exact_value regex_value] Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`suffix_value` - (Optional) Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' (`String`).
 
 <a id="nestedblock--allow_list--http_list--any_path"></a>
 ### Allow List Http List Any Path
@@ -178,11 +178,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--allow_list--tls_list"></a>
 ### Allow List Tls List
 
-`exact_value` - (Optional) Exact Value. Exclusive with [regex_value suffix_value] Exact domain name. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
-`regex_value` - (Optional) Regex Values of Domains. Exclusive with [exact_value suffix_value] Regular Expression value for the domain name ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io (`String`).
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
 
-`suffix_value` - (Optional) Suffix Value. Exclusive with [exact_value regex_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 <a id="nestedblock--any_proxy"></a>
 ### Any Proxy
@@ -196,11 +196,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#nestedblock--deny_list--default_action_next_policy) below.
 
-`dest_list` - (Optional) L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Dest List](#nestedblock--deny_list--dest_list) below.
+`dest_list` - (Optional) L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI. See [Dest List](#nestedblock--deny_list--dest_list) below.
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Http List](#nestedblock--deny_list--http_list) below.
+`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [Http List](#nestedblock--deny_list--http_list) below.
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Tls List](#nestedblock--deny_list--tls_list) below.
+`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [Tls List](#nestedblock--deny_list--tls_list) below.
 
 <a id="nestedblock--deny_list--default_action_allow"></a>
 ### Deny List Default Action Allow
@@ -214,28 +214,28 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--deny_list--dest_list"></a>
 ### Deny List Dest List
 
-`ipv6_prefixes` - (Optional) IPv6 Prefixes. Destination IPv6 prefixes. ves.io.schema.rules.repeated.items.string.ipv6_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`ipv6_prefixes` - (Optional) IPv6 Prefixes. Destination IPv6 prefixes (`List`).
 
-`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. Required: YES ves.io.schema.rules.message (`String`).
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
-`prefixes` - (Optional) IPv4 Prefixes. Destination IPv4 prefixes. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefixes. Destination IPv4 prefixes (`List`).
 
 <a id="nestedblock--deny_list--http_list"></a>
 ### Deny List Http List
 
 `any_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Path](#nestedblock--deny_list--http_list--any_path) below.
 
-`exact_value` - (Optional) Exact Values. Exclusive with [regex_value suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`exact_value` - (Optional) Exact Values. Exact domain name (`String`).
 
-`path_exact_value` - (Optional) Exact Path. Exclusive with [any_path path_prefix_value path_regex_value] Exact Path to match. ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules (`String`).
+`path_exact_value` - (Optional) Exact Path. Exact Path to match (`String`).
 
-`path_prefix_value` - (Optional) Prefix of Path. Exclusive with [any_path path_exact_value path_regex_value] Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' ves.io.schema.rules.string.http_path: true ves.io.schema.rules (`String`).
+`path_prefix_value` - (Optional) Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' (`String`).
 
-`path_regex_value` - (Optional) Regex of Path. Exclusive with [any_path path_exact_value path_prefix_value] Regular Expression value for the Path to match ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string (`String`).
+`path_regex_value` - (Optional) Regex of Path. Regular Expression value for the Path to match (`String`).
 
-`regex_value` - (Optional) Regex Values of Domains. Exclusive with [exact_value suffix_value] Regular Expression value for the domain name ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io (`String`).
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
 
-`suffix_value` - (Optional) Suffix Values. Exclusive with [exact_value regex_value] Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`suffix_value` - (Optional) Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' (`String`).
 
 <a id="nestedblock--deny_list--http_list--any_path"></a>
 ### Deny List Http List Any Path
@@ -243,11 +243,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--deny_list--tls_list"></a>
 ### Deny List Tls List
 
-`exact_value` - (Optional) Exact Value. Exclusive with [regex_value suffix_value] Exact domain name. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
-`regex_value` - (Optional) Regex Values of Domains. Exclusive with [exact_value suffix_value] Regular Expression value for the domain name ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io (`String`).
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
 
-`suffix_value` - (Optional) Suffix Value. Exclusive with [exact_value regex_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 <a id="nestedblock--drp_http_connect"></a>
 ### Drp Http Connect
@@ -255,21 +255,21 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--network_connector"></a>
 ### Network Connector
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--proxy_label_selector"></a>
 ### Proxy Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--rule_list"></a>
 ### Rule List
 
-`rules` - (Optional) Custom Rule List. List of custom rules Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema. See [Rules](#nestedblock--rule_list--rules) below.
+`rules` - (Optional) Custom Rule List. List of custom rules. See [Rules](#nestedblock--rule_list--rules) below.
 
 <a id="nestedblock--rule_list--rules"></a>
 ### Rule List Rules
@@ -322,35 +322,35 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--dst_asn_set"></a>
 ### Rule List Rules Dst Asn Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--rule_list--rules--dst_ip_prefix_set"></a>
 ### Rule List Rules Dst Ip Prefix Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--rule_list--rules--dst_label_selector"></a>
 ### Rule List Rules Dst Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--rule_list--rules--dst_prefix_list"></a>
 ### Rule List Rules Dst Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--rule_list--rules--http_list"></a>
 ### Rule List Rules Http List
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Http List](#nestedblock--rule_list--rules--http_list--http_list) below.
+`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [Http List](#nestedblock--rule_list--rules--http_list--http_list) below.
 
 <a id="nestedblock--rule_list--rules--http_list--http_list"></a>
 ### Rule List Rules Http List Http List
@@ -358,23 +358,23 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--ip_prefix_set"></a>
 ### Rule List Rules Ip Prefix Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--rule_list--rules--label_selector"></a>
 ### Rule List Rules Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--rule_list--rules--metadata"></a>
 ### Rule List Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--rule_list--rules--no_http_connect_port"></a>
 ### Rule List Rules No Http Connect Port
@@ -389,12 +389,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--prefix_list"></a>
 ### Rule List Rules Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--rule_list--rules--tls_list"></a>
 ### Rule List Rules Tls List
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Tls List](#nestedblock--rule_list--rules--tls_list--tls_list) below.
+`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [Tls List](#nestedblock--rule_list--rules--tls_list--tls_list) below.
 
 <a id="nestedblock--rule_list--rules--tls_list--tls_list"></a>
 ### Rule List Rules Tls List Tls List
@@ -402,7 +402,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--url_category_list"></a>
 ### Rule List Rules Url Category List
 
-`url_categories` - (Optional) URL Categories. List of url categories to be selected Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true (`List`).
+`url_categories` - (Optional) URL Categories. List of url categories to be selected (`List`).
 
 
 ## Import

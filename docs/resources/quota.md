@@ -62,13 +62,13 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`api_limits` - (Optional) API Limits. API Limits defines ratelimit parameters for an API at the stdlib service The key of the api_limits map is rpc FQN e.g. 'ves.io.schema.advertise_policy.API.Create' ves.io.schema.rules.map. See [Api Limits](#api-limits) below for details.
+`api_limits` - (Optional) API Limits. API Limits defines ratelimit parameters for an API at the stdlib service The key of the api_limits map is rpc FQN e.g. 'ves.io.schema.advertise_policy.API.Create'. See [Api Limits](#api-limits) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`object_limits` - (Optional) Object Limits. Object Limits define maximum number of instances that can be present per object kind for the tenant The key of the object_limits map is object kind e.g. 'virtual_host' ves.io.schema. See [Object Limits](#object-limits) below for details.
+`object_limits` - (Optional) Object Limits. Object Limits define maximum number of instances that can be present per object kind for the tenant The key of the object_limits map is object kind e.g. 'virtual_host'. See [Object Limits](#object-limits) below for details.
 
-`resource_limits` - (Optional) Resource Limits. Resource Limits define maximum value of resources in the appropriate units that can be present. The key of the resource limits is the resource name ves.io.schema.rules.map.keys. See [Resource Limits](#resource-limits) below for details.
+`resource_limits` - (Optional) Resource Limits. Resource Limits define maximum value of resources in the appropriate units that can be present. The key of the resource limits is the resource name. See [Resource Limits](#resource-limits) below for details.
 
 
 ### Attributes Reference

@@ -68,9 +68,9 @@ The following arguments are optional:
 
 ###### One of the arguments from this list "port, port_ranges" must be set
 
-`port` - (Optional) TCP/UDP Port. Exclusive with [port_ranges] Port to advertise. ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) TCP/UDP Port. Port to advertise (`Number`).
 
-`port_ranges` - (Optional) Port Ranges. Exclusive with [port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string (`String`).
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
 `protocol` - (Optional) Protocol. Protocol to advertise (`String`).
 
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [No Client Certificate](#nestedblock--tls_parameters--no_client_certificate) below.
 
-`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. ves.io.schema.rules.repeated.items.enum (`List`).
+`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
 
 <a id="nestedblock--tls_parameters--client_certificate_optional"></a>
 ### Tls Parameters Client Certificate Optional
@@ -140,7 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--tls_parameters--common_params--tls_certificates"></a>
 ### Tls Parameters Common Params Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms) below.
 
@@ -171,7 +171,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca](#nestedblock--tls_parameters--common_params--validation_params--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate (`List`).
 
@@ -199,7 +199,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--site--ref) below.
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
 
 <a id="nestedblock--where--site--disable_internet_vip"></a>
 ### Where Site Disable Internet Vip
@@ -223,7 +223,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--where--virtual_network"></a>
 ### Where Virtual Network
 
-`ref` - (Optional) Reference. A virtual network direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_network--ref) below.
+`ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#nestedblock--where--virtual_network--ref) below.
 
 <a id="nestedblock--where--virtual_network--ref"></a>
 ### Where Virtual Network Ref
@@ -247,7 +247,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_site--ref) below.
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
 
 <a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
 ### Where Virtual Site Disable Internet Vip

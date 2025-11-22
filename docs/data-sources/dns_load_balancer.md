@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_dns_load_balancer Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Create DNS Load Balancer in a given namespace. If one already exist it will give a error.
 ---

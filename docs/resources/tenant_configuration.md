@@ -83,31 +83,31 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--basic_configuration"></a>
 ### Basic Configuration
 
-`display_name` - (Optional) Display Name. Tenant display name in the login screen ves.io.schema.rules.string.k8s_label_value: true ves.io.schema.rules.string.max_len: 255 (`String`).
+`display_name` - (Optional) Display Name. Tenant display name in the login screen (`String`).
 
 <a id="nestedblock--brute_force_detection_settings"></a>
 ### Brute Force Detection Settings
 
-`max_login_failures` - (Optional) Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes. ves.io.schema.rules.uint32.lte: 30 (`Number`).
+`max_login_failures` - (Optional) Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes (`Number`).
 
 <a id="nestedblock--password_policy"></a>
 ### Password Policy
 
-`digits` - (Optional) Min Number Of Digits. The number of digits required to be in the password string. ves.io.schema.rules.uint32.lte: 16 (`Number`).
+`digits` - (Optional) Min Number Of Digits. The number of digits required to be in the password string (`Number`).
 
-`expire_password` - (Optional) Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password. ves.io.schema.rules.uint32.lte: 1080 (`Number`).
+`expire_password` - (Optional) Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password (`Number`).
 
-`lowercase_characters` - (Optional) Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string. ves.io.schema.rules.uint32.lte: 16 (`Number`).
+`lowercase_characters` - (Optional) Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string (`Number`).
 
-`minimum_length` - (Optional) Minimum Length. Minimum length of password. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 7 (`Number`).
+`minimum_length` - (Optional) Minimum Length. Minimum length of password (`Number`).
 
 `not_recently_used` - (Optional) Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password (`Number`).
 
 `not_username` - (Optional) Not Username. When set, the password is not allowed to be the same as the username (`Bool`).
 
-`special_characters` - (Optional) Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string. ves.io.schema.rules.uint32.lte: 16 (`Number`).
+`special_characters` - (Optional) Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string (`Number`).
 
-`uppercase_characters` - (Optional) Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string. ves.io.schema.rules.uint32.lte: 16 (`Number`).
+`uppercase_characters` - (Optional) Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string (`Number`).
 
 
 ## Import

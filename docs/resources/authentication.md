@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_authentication Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Authentication"
 description: |-
   Manages a Authentication in F5 Distributed Cloud.
 ---
@@ -89,18 +89,18 @@ In addition to all arguments above, the following attributes are exported:
 
 `kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object. See [Kms Key Hmac](#nestedblock--cookie_params--kms_key_hmac) below.
 
-`session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours). ves.io (`Number`).
+`session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
 
 <a id="nestedblock--cookie_params--auth_hmac"></a>
 ### Cookie Params Auth Hmac
 
 `prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Prim Key](#nestedblock--cookie_params--auth_hmac--prim_key) below.
 
-`prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time Required: YES ves.io.schema.rules.message.required: true (`String`).
+`prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time (`String`).
 
 `sec_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Sec Key](#nestedblock--cookie_params--auth_hmac--sec_key) below.
 
-`sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time Required: YES ves.io.schema.rules.message.required: true (`String`).
+`sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time (`String`).
 
 <a id="nestedblock--cookie_params--auth_hmac--prim_key"></a>
 ### Cookie Params Auth Hmac Prim Key
@@ -138,9 +138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `oidc_auth_params` - (Optional) OIDCAuthParams. See [Oidc Auth Params](#nestedblock--oidc_auth--oidc_auth_params) below.
 
-`oidc_client_id` - (Optional) OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema (`String`).
+`oidc_client_id` - (Optional) OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server (`String`).
 
-`oidc_well_known_config_url` - (Optional) Well-known Configuration URL. Exclusive with [oidc_auth_params] An OIDC well-known configuration URL that will be used to fetch authentication related endpoints ves.io.schema.rules.string (`String`).
+`oidc_well_known_config_url` - (Optional) Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints (`String`).
 
 <a id="nestedblock--oidc_auth--client_secret"></a>
 ### Oidc Auth Client Secret
@@ -154,7 +154,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -168,11 +168,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--oidc_auth--oidc_auth_params"></a>
 ### Oidc Auth Oidc Auth Params
 
-`auth_endpoint_url` - (Optional) Authorization Endpoint. URL of the authorization server's authorization endpoint. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules (`String`).
+`auth_endpoint_url` - (Optional) Authorization Endpoint. URL of the authorization server's authorization endpoint (`String`).
 
-`end_session_endpoint_url` - (Optional) Logout Endpoint. URL of the authorization server's Logout endpoint. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string (`String`).
+`end_session_endpoint_url` - (Optional) Logout Endpoint. URL of the authorization server's Logout endpoint (`String`).
 
-`token_endpoint_url` - (Optional) Token Endpoint. URL of the authorization server's Token endpoint. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string (`String`).
+`token_endpoint_url` - (Optional) Token Endpoint. URL of the authorization server's Token endpoint (`String`).
 
 
 ## Import

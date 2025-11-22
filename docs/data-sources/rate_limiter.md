@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_rate_limiter Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create rate_limiter creates a new object in the storage backend for metadata.namespace.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_api_testing Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "API Security"
 description: |-
   Manages a APITesting in F5 Distributed Cloud.
 ---
@@ -62,9 +62,9 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`custom_header_value` - (Optional) Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic ves.io.schema.rules.string.max_len: 128 (`String`).
+`custom_header_value` - (Optional) Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic (`String`).
 
-`domains` - (Optional) Testing Environments. Add and configure testing domains and credentials Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32. See [Domains](#domains) below for details.
+`domains` - (Optional) Testing Environments. Add and configure testing domains and credentials. See [Domains](#domains) below for details.
 
 ###### One of the arguments from this list "every_day, every_month, every_week" must be set
 
@@ -91,7 +91,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `allow_destructive_methods` - (Optional) Run API tests for destructive methods (e.g., DELETE, PUT).. Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data (`Bool`).
 
-`credentials` - (Optional) Credentials. Add credentials for API testing to use in the selected environment. Required: YES ves.io.schema.rules.message.required: true. See [Credentials](#nestedblock--domains--credentials) below.
+`credentials` - (Optional) Credentials. Add credentials for API testing to use in the selected environment. See [Credentials](#nestedblock--domains--credentials) below.
 
 `domain` - (Optional) Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing enviro... (`String`).
 
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `bearer_token` - (Optional) Bearer. See [Bearer Token](#nestedblock--domains--credentials--bearer_token) below.
 
-`credential_name` - (Optional) Name. Enter a unique name for the credentials used in API testing Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`credential_name` - (Optional) Name. Enter a unique name for the credentials used in API testing (`String`).
 
 `login_endpoint` - (Optional) Login Endpoint. See [Login Endpoint](#nestedblock--domains--credentials--login_endpoint) below.
 
@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--domains--credentials--api_key"></a>
 ### Domains Credentials Api Key
 
-`key` - (Optional) Key. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`key` - (Optional) Key (`String`).
 
 `value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Value](#nestedblock--domains--credentials--api_key--value) below.
 
@@ -130,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--domains--credentials--basic_auth--password) below.
 
-`user` - (Optional) User. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`user` - (Optional) User (`String`).
 
 <a id="nestedblock--domains--credentials--basic_auth--password"></a>
 ### Domains Credentials Basic Auth Password
@@ -150,9 +150,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
 
-`path` - (Optional) Path. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 1024 (`String`).
+`path` - (Optional) Path (`String`).
 
-`token_response_key` - (Optional) Token Response Key. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`token_response_key` - (Optional) Token Response Key (`String`).
 
 <a id="nestedblock--domains--credentials--login_endpoint--json_payload"></a>
 ### Domains Credentials Login Endpoint Json Payload

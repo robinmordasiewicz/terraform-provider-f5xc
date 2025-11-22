@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_dns_load_balancer Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Create DNS Load Balancer in a given namespace. If one already exist it will give a error.
 ---
@@ -95,11 +95,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--fallback_pool"></a>
 ### Fallback Pool
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--response_cache"></a>
 ### Response Cache
@@ -119,16 +119,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--response_cache--response_cache_parameters"></a>
 ### Response Cache Response Cache Parameters
 
-`cache_cidr_ipv4` - (Optional) Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 32 (`Number`).
+`cache_cidr_ipv4` - (Optional) Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients (`Number`).
 
-`cache_cidr_ipv6` - (Optional) Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 128 (`Number`).
+`cache_cidr_ipv6` - (Optional) Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients (`Number`).
 
-`cache_ttl` - (Optional) TTL. TTL for response cache ves.io.schema.rules.uint32.gte: 0 (`Number`).
+`cache_ttl` - (Optional) TTL. TTL for response cache (`Number`).
 
 <a id="nestedblock--rule_list"></a>
 ### Rule List
 
-`rules` - (Optional) Load Balancing Rules. Rules to perform load balancing Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1 ves. See [Rules](#nestedblock--rule_list--rules) below.
+`rules` - (Optional) Load Balancing Rules. Rules to perform load balancing. See [Rules](#nestedblock--rule_list--rules) below.
 
 <a id="nestedblock--rule_list--rules"></a>
 ### Rule List Rules
@@ -147,7 +147,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--rule_list--rules--pool) below.
 
-`score` - (Optional) Score. When multiple load balancing rules match a query, the one with the highest score is chosen ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 32767 (`Number`).
+`score` - (Optional) Score. When multiple load balancing rules match a query, the one with the highest score is chosen (`Number`).
 
 <a id="nestedblock--rule_list--rules--asn_list"></a>
 ### Rule List Rules Asn List
@@ -157,7 +157,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--asn_matcher"></a>
 ### Rule List Rules Asn Matcher
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Asn Sets](#nestedblock--rule_list--rules--asn_matcher--asn_sets) below.
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#nestedblock--rule_list--rules--asn_matcher--asn_sets) below.
 
 <a id="nestedblock--rule_list--rules--asn_matcher--asn_sets"></a>
 ### Rule List Rules Asn Matcher Asn Sets
@@ -165,30 +165,30 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--geo_location_label_selector"></a>
 ### Rule List Rules Geo Location Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--rule_list--rules--geo_location_set"></a>
 ### Rule List Rules Geo Location Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--rule_list--rules--ip_prefix_list"></a>
 ### Rule List Rules Ip Prefix List
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
-`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
 <a id="nestedblock--rule_list--rules--ip_prefix_set"></a>
 ### Rule List Rules Ip Prefix Set
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Prefix Sets](#nestedblock--rule_list--rules--ip_prefix_set--prefix_sets) below.
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#nestedblock--rule_list--rules--ip_prefix_set--prefix_sets) below.
 
 <a id="nestedblock--rule_list--rules--ip_prefix_set--prefix_sets"></a>
 ### Rule List Rules Ip Prefix Set Prefix Sets
@@ -196,11 +196,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--pool"></a>
 ### Rule List Rules Pool
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

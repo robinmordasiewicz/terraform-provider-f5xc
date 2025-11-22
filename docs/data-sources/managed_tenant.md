@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_managed_tenant Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Organization"
 description: |-
   Creates a managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage.
 ---

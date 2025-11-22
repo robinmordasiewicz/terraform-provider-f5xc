@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_api_definition Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "API Security"
 description: |-
   x-required Create API Definition.
 ---
@@ -55,9 +55,9 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`api_inventory_exclusion_list` - (Optional) API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory. ves.io.schema.rules.repeated.max_items: 1000 ves.io.schema.rules.repeated.unique: true. See [Api Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
+`api_inventory_exclusion_list` - (Optional) API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory. See [Api Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
 
-`api_inventory_inclusion_list` - (Optional) API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list. ves.io.schema.rules.repeated. See [Api Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
+`api_inventory_inclusion_list` - (Optional) API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list. See [Api Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -65,7 +65,7 @@ The following arguments are optional:
 
 `mixed_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed. See [Mixed Schema Origin](#mixed-schema-origin) below for details.
 
-`non_api_endpoints` - (Optional) API Discovery Exclusion List. List of Non-API Endpoints. ves.io.schema.rules.repeated.max_items: 1000 ves.io.schema.rules.repeated.unique: true. See [Non Api Endpoints](#non-api-endpoints) below for details.
+`non_api_endpoints` - (Optional) API Discovery Exclusion List. List of Non-API Endpoints. See [Non Api Endpoints](#non-api-endpoints) below for details.
 
 `strict_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed. See [Strict Schema Origin](#strict-schema-origin) below for details.
 
@@ -86,14 +86,14 @@ In addition to all arguments above, the following attributes are exported:
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
 
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification Required: YES ves.io.schema (`String`).
+`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
 <a id="nestedblock--api_inventory_inclusion_list"></a>
 ### Api Inventory Inclusion List
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
 
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification Required: YES ves.io.schema (`String`).
+`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
 <a id="nestedblock--mixed_schema_origin"></a>
 ### Mixed Schema Origin
@@ -103,7 +103,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
 
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification Required: YES ves.io.schema (`String`).
+`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
 <a id="nestedblock--strict_schema_origin"></a>
 ### Strict Schema Origin

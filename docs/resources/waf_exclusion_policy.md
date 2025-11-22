@@ -64,7 +64,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`waf_exclusion_rules` - (Optional) WAF Exclusion Rules. An ordered list of rules. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated. See [Waf Exclusion Rules](#waf-exclusion-rules) below for details.
+`waf_exclusion_rules` - (Optional) WAF Exclusion Rules. An ordered list of rules. See [Waf Exclusion Rules](#waf-exclusion-rules) below for details.
 
 
 ### Attributes Reference
@@ -85,19 +85,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria. See [App Firewall Detection Control](#nestedblock--waf_exclusion_rules--app_firewall_detection_control) below.
 
-`exact_value` - (Optional) Exact Value. Exclusive with [any_domain suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
 `expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired (`String`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--waf_exclusion_rules--metadata) below.
 
-`methods` - (Optional) Methods. methods to be matched ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`methods` - (Optional) Methods. methods to be matched (`List`).
 
-`path_prefix` - (Optional) Prefix. Exclusive with [any_path path_regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path_prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
 
-`path_regex` - (Optional) Path Regex. Exclusive with [any_path path_prefix] Define the regex for the path. For example, the regex ^/.*$ will match on all paths ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`path_regex` - (Optional) Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths (`String`).
 
-`suffix_value` - (Optional) Suffix Value. Exclusive with [any_domain exact_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 `waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Waf Skip Processing](#nestedblock--waf_exclusion_rules--waf_skip_processing) below.
 
@@ -110,13 +110,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control"></a>
 ### Waf Exclusion Rules App Firewall Detection Control
 
-`exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true. See [Exclude Attack Type Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_attack_type_contexts) below.
+`exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria. See [Exclude Attack Type Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_attack_type_contexts) below.
 
-`exclude_bot_name_contexts` - (Optional) Bot Names. Bot Names to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true. See [Exclude Bot Name Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_bot_name_contexts) below.
+`exclude_bot_name_contexts` - (Optional) Bot Names. Bot Names to be excluded for the defined match criteria. See [Exclude Bot Name Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_bot_name_contexts) below.
 
-`exclude_signature_contexts` - (Optional) Signature IDs. Signature IDs to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 1024 ves.io.schema.rules.repeated.unique: true. See [Exclude Signature Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_signature_contexts) below.
+`exclude_signature_contexts` - (Optional) Signature IDs. Signature IDs to be excluded for the defined match criteria. See [Exclude Signature Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_signature_contexts) below.
 
-`exclude_violation_contexts` - (Optional) Violations. Violations to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true. See [Exclude Violation Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_violation_contexts) below.
+`exclude_violation_contexts` - (Optional) Violations. Violations to be excluded for the defined match criteria. See [Exclude Violation Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_violation_contexts) below.
 
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_attack_type_contexts"></a>
 ### Waf Exclusion Rules App Firewall Detection Control Exclude Attack Type Contexts
@@ -130,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_bot_name_contexts"></a>
 ### Waf Exclusion Rules App Firewall Detection Control Exclude Bot Name Contexts
 
-`bot_name` - (Optional) Bot Name. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`bot_name` - (Optional) Bot Name (`String`).
 
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_signature_contexts"></a>
 ### Waf Exclusion Rules App Firewall Detection Control Exclude Signature Contexts
@@ -139,7 +139,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check (`String`).
 
-`signature_id` - (Optional) SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context. Required: YES ves.io.schema (`Number`).
+`signature_id` - (Optional) SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context (`Number`).
 
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_violation_contexts"></a>
 ### Waf Exclusion Rules App Firewall Detection Control Exclude Violation Contexts
@@ -153,9 +153,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waf_exclusion_rules--metadata"></a>
 ### Waf Exclusion Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--waf_exclusion_rules--waf_skip_processing"></a>
 ### Waf Exclusion Rules Waf Skip Processing

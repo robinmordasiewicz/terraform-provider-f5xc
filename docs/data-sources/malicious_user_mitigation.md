@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_malicious_user_mitigation Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.
 ---

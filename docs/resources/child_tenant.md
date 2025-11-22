@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_child_tenant Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Organization"
 description: |-
   Creates a child_tenant config instance. Name of the object is the name of the child tenant to be created.
 ---
@@ -64,7 +64,7 @@ The following arguments are optional:
 
 `child_tenant_manager` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Child Tenant Manager](#child-tenant-manager) below for details.
 
-`company_name` - (Optional) Company Name. Company name (enterprise only) ves.io.schema.rules.string.max_len: 256 (`String`).
+`company_name` - (Optional) Company Name. Company name (enterprise only) (`String`).
 
 `contact_detail` - (Optional) Contact. Instance of one single contact that can be used to communicate with customers. See [Contact Detail](#contact-detail) below for details.
 
@@ -89,11 +89,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--child_tenant_manager"></a>
 ### Child Tenant Manager
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--contact_detail"></a>
 ### Contact Detail
@@ -121,22 +121,22 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--customer_info"></a>
 ### Customer Info
 
-`additional_info` - (Optional) Additional Info. Use this field for any additional information about the new child tenant ves.io.schema.rules.string.max_len: 1024 (`String`).
+`additional_info` - (Optional) Additional Info. Use this field for any additional information about the new child tenant (`String`).
 
-`email` - (Optional) Email. ves.io.schema.rules.string.email: true (`String`).
+`email` - (Optional) Email (`String`).
 
-`first_name` - (Optional) First Name. ves.io.schema.rules.string.max_len: 128 (`String`).
+`first_name` - (Optional) First Name (`String`).
 
-`last_name` - (Optional) Last Name. ves.io.schema.rules.string.max_len: 128 (`String`).
+`last_name` - (Optional) Last Name (`String`).
 
 <a id="nestedblock--tenant_profile"></a>
 ### Tenant Profile
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

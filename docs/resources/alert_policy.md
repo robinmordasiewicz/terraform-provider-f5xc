@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_alert_policy Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Monitoring"
 description: |-
   Creates a new Alert Policy Object
 ---
@@ -72,9 +72,9 @@ The following arguments are optional:
 
 `notification_parameters` - (Optional) Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers. See [Notification Parameters](#notification-parameters) below for details.
 
-`receivers` - (Optional) Alert Receivers. list of Alert Receivers where the alerts will be sent Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Receivers](#receivers) below for details.
+`receivers` - (Optional) Alert Receivers. list of Alert Receivers where the alerts will be sent. See [Receivers](#receivers) below for details.
 
-`routes` - (Optional) Policy Rules. Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match. Required: YES ves.io.schema.rules.message. See [Routes](#routes) below for details.
+`routes` - (Optional) Policy Rules. Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match. See [Routes](#routes) below for details.
 
 
 ### Attributes Reference
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--notification_parameters--custom"></a>
 ### Notification Parameters Custom
 
-`labels` - (Optional) Labels. Name of labels to group/aggregate the alerts ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$ (`List`).
+`labels` - (Optional) Labels. Name of labels to group/aggregate the alerts (`List`).
 
 <a id="nestedblock--notification_parameters--default"></a>
 ### Notification Parameters Default
@@ -135,7 +135,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `alertname` - (Optional) AlertName. List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low ... (`String`).
 
-`alertname_regex` - (Optional) Matching RegEx of Alertname. Exclusive with [alertname any custom group severity] Regular Expression match for the alertname (`String`).
+`alertname_regex` - (Optional) Matching RegEx of Alertname. Regular Expression match for the alertname (`String`).
 
 `any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#nestedblock--routes--any) below.
 
@@ -157,7 +157,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--custom"></a>
 ### Routes Custom
 
-`alertlabel` - (Optional) AlertLabel. AlertLabel to configure the alert policy rule ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.keys.string. See [Alertlabel](#nestedblock--routes--custom--alertlabel) below.
+`alertlabel` - (Optional) AlertLabel. AlertLabel to configure the alert policy rule. See [Alertlabel](#nestedblock--routes--custom--alertlabel) below.
 
 `alertname` - (Optional) Label Matcher. See [Alertname](#nestedblock--routes--custom--alertname) below.
 
@@ -171,23 +171,23 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--custom--alertname"></a>
 ### Routes Custom Alertname
 
-`exact_match` - (Optional) Exact Match. Exclusive with [regex_match] Equality match value for the label (`String`).
+`exact_match` - (Optional) Exact Match. Equality match value for the label (`String`).
 
-`regex_match` - (Optional) RegEx Match. Exclusive with [exact_match] Regular expression match value for the label (`String`).
+`regex_match` - (Optional) RegEx Match. Regular expression match value for the label (`String`).
 
 <a id="nestedblock--routes--custom--group"></a>
 ### Routes Custom Group
 
-`exact_match` - (Optional) Exact Match. Exclusive with [regex_match] Equality match value for the label (`String`).
+`exact_match` - (Optional) Exact Match. Equality match value for the label (`String`).
 
-`regex_match` - (Optional) RegEx Match. Exclusive with [exact_match] Regular expression match value for the label (`String`).
+`regex_match` - (Optional) RegEx Match. Regular expression match value for the label (`String`).
 
 <a id="nestedblock--routes--custom--severity"></a>
 ### Routes Custom Severity
 
-`exact_match` - (Optional) Exact Match. Exclusive with [regex_match] Equality match value for the label (`String`).
+`exact_match` - (Optional) Exact Match. Equality match value for the label (`String`).
 
-`regex_match` - (Optional) RegEx Match. Exclusive with [exact_match] Regular expression match value for the label (`String`).
+`regex_match` - (Optional) RegEx Match. Regular expression match value for the label (`String`).
 
 <a id="nestedblock--routes--dont_send"></a>
 ### Routes Dont Send
@@ -217,7 +217,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--notification_parameters--custom"></a>
 ### Routes Notification Parameters Custom
 
-`labels` - (Optional) Labels. Name of labels to group/aggregate the alerts ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$ (`List`).
+`labels` - (Optional) Labels. Name of labels to group/aggregate the alerts (`List`).
 
 <a id="nestedblock--routes--notification_parameters--default"></a>
 ### Routes Notification Parameters Default

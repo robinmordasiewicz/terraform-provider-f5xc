@@ -48,11 +48,11 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`disallowed_query_type_list` - (Optional) Disallowed Query Type Values. Disallowed Query Type Values ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true (`List`).
+`disallowed_query_type_list` - (Optional) Disallowed Query Type Values. Disallowed Query Type Values (`List`).
 
-`disallowed_resource_record_type_list` - (Optional) Disallowed Resource Record Types. Disallowed Resource Record Type List ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true (`List`).
+`disallowed_resource_record_type_list` - (Optional) Disallowed Resource Record Types. Disallowed Resource Record Type List (`List`).
 
-`domain_denylist` - (Optional) Domain Deny list. List of domains to be denied by configuration object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 30 ves.io.schema.rules.repeated (`List`).
+`domain_denylist` - (Optional) Domain Deny list. List of domains to be denied by configuration object (`List`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 

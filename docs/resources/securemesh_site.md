@@ -84,7 +84,7 @@ The following arguments are required:
 
 The following arguments are optional:
 
-`address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude. ves.io.schema.rules.string.max_len: 256 (`String`).
+`address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
@@ -116,7 +116,7 @@ The following arguments are optional:
 
 `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
 
-`master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.num_items: 1,3. See [Master Node Configuration](#master-node-configuration) below for details.
+`master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes. See [Master Node Configuration](#master-node-configuration) below for details.
 
 `no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
 
@@ -128,9 +128,9 @@ The following arguments are optional:
 
 `sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
 
-`volterra_certified_hw` - (Optional) Generic Server Certified Hardware. Name for generic server certified hardware to form this Secure Mesh site. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`volterra_certified_hw` - (Optional) Generic Server Certified Hardware. Name for generic server certified hardware to form this Secure Mesh site (`String`).
 
-`worker_nodes` - (Optional) Worker Nodes. Names of worker nodes ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true (`List`).
+`worker_nodes` - (Optional) Worker Nodes. Names of worker nodes (`List`).
 
 
 ### Attributes Reference
@@ -145,7 +145,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--blocked_services"></a>
 ### Blocked Services
 
-`blocked_sevice` - (Optional) Disable Node Local Services. ves.io.schema.rules.repeated.unique: true. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
+`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
 
 <a id="nestedblock--blocked_services--blocked_sevice"></a>
 ### Blocked Services Blocked Sevice
@@ -170,22 +170,22 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bond_device_list"></a>
 ### Bond Device List
 
-`bond_devices` - (Optional) Bond Devices. List of bond devices Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules. See [Bond Devices](#nestedblock--bond_device_list--bond_devices) below.
+`bond_devices` - (Optional) Bond Devices. List of bond devices. See [Bond Devices](#nestedblock--bond_device_list--bond_devices) below.
 
 <a id="nestedblock--bond_device_list--bond_devices"></a>
 ### Bond Device List Bond Devices
 
 `active_backup` - (Optional) Empty. This can be used for messages where no values are needed. See [Active Backup](#nestedblock--bond_device_list--bond_devices--active_backup) below.
 
-`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema (`List`).
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
 
 `lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#nestedblock--bond_device_list--bond_devices--lacp) below.
 
-`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 500 ves.io.schema.rules.uint32.lte: 5000 (`Number`).
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
 
-`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 1000 (`Number`).
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
 
-`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
 
 <a id="nestedblock--bond_device_list--bond_devices--active_backup"></a>
 ### Bond Device List Bond Devices Active Backup
@@ -193,14 +193,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bond_device_list--bond_devices--lacp"></a>
 ### Bond Device List Bond Devices Lacp
 
-`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 30 (`Number`).
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
 
 <a id="nestedblock--coordinates"></a>
 ### Coordinates
 
-`latitude` - (Optional) Latitude. Latitude of the site location ves.io.schema.rules.float.gte: -90.0 ves.io.schema.rules.float.lte: 90.0 (`Number`).
+`latitude` - (Optional) Latitude. Latitude of the site location (`Number`).
 
-`longitude` - (Optional) Longitude. longitude of site location ves.io.schema.rules.float.gte: -180.0 ves.io.schema.rules.float.lte: 180.0 (`Number`).
+`longitude` - (Optional) Longitude. longitude of site location (`Number`).
 
 <a id="nestedblock--custom_network_config"></a>
 ### Custom Network Config
@@ -244,44 +244,44 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_network_config--active_enhanced_firewall_policies"></a>
 ### Custom Network Config Active Enhanced Firewall Policies
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules. See [Enhanced Firewall Policies](#nestedblock--custom_network_config--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--custom_network_config--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--custom_network_config--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 ### Custom Network Config Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--custom_network_config--active_forward_proxy_policies"></a>
 ### Custom Network Config Active Forward Proxy Policies
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated. See [Forward Proxy Policies](#nestedblock--custom_network_config--active_forward_proxy_policies--forward_proxy_policies) below.
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--custom_network_config--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--custom_network_config--active_forward_proxy_policies--forward_proxy_policies"></a>
 ### Custom Network Config Active Forward Proxy Policies Forward Proxy Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--custom_network_config--active_network_policies"></a>
 ### Custom Network Config Active Network Policies
 
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema. See [Network Policies](#nestedblock--custom_network_config--active_network_policies--network_policies) below.
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--custom_network_config--active_network_policies--network_policies) below.
 
 <a id="nestedblock--custom_network_config--active_network_policies--network_policies"></a>
 ### Custom Network Config Active Network Policies Network Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--custom_network_config--default_config"></a>
 ### Custom Network Config Default Config
@@ -298,7 +298,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_network_config--global_network_list"></a>
 ### Custom Network Config Global Network List
 
-`global_network_connections` - (Optional) Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1. See [Global Network Connections](#nestedblock--custom_network_config--global_network_list--global_network_connections) below.
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--custom_network_config--global_network_list--global_network_connections) below.
 
 <a id="nestedblock--custom_network_config--global_network_list--global_network_connections"></a>
 ### Custom Network Config Global Network List Global Network Connections
@@ -316,7 +316,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_network_config--interface_list"></a>
 ### Custom Network Config Interface List
 
-`interfaces` - (Optional) List of Interface. Configure network interfaces for this Secure Mesh site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules. See [Interfaces](#nestedblock--custom_network_config--interface_list--interfaces) below.
+`interfaces` - (Optional) List of Interface. Configure network interfaces for this Secure Mesh site. See [Interfaces](#nestedblock--custom_network_config--interface_list--interfaces) below.
 
 <a id="nestedblock--custom_network_config--interface_list--interfaces"></a>
 ### Custom Network Config Interface List Interfaces
@@ -329,11 +329,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration. See [Dedicated Management Interface](#nestedblock--custom_network_config--interface_list--interfaces--dedicated_management_interface) below.
 
-`description` - (Optional) Interface Description. Description for this Interface ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
 
 `ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Ethernet Interface](#nestedblock--custom_network_config--interface_list--interfaces--ethernet_interface) below.
 
-`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io. See [Labels](#nestedblock--custom_network_config--interface_list--interfaces--labels) below.
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy. See [Labels](#nestedblock--custom_network_config--interface_list--interfaces--labels) below.
 
 <a id="nestedblock--custom_network_config--interface_list--interfaces--dc_cluster_group_connectivity_interface_disabled"></a>
 ### Custom Network Config Interface List Interfaces Dc Cluster Group Connectivity Interface Disabled
@@ -367,9 +367,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#nestedblock--custom_network_config--sli_config--dc_cluster_group) below.
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema. See [Labels](#nestedblock--custom_network_config--sli_config--labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#nestedblock--custom_network_config--sli_config--labels) below.
 
-`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution ves.io.schema.rules.string.ipv4: true (`String`).
+`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
 `no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--custom_network_config--sli_config--no_dc_cluster_group) below.
 
@@ -381,16 +381,16 @@ In addition to all arguments above, the following attributes are exported:
 
 `static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#nestedblock--custom_network_config--sli_config--static_v6_routes) below.
 
-`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP. ves.io.schema.rules.string.ipv4: true (`String`).
+`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
 
 <a id="nestedblock--custom_network_config--sli_config--dc_cluster_group"></a>
 ### Custom Network Config Sli Config Dc Cluster Group
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--custom_network_config--sli_config--labels"></a>
 ### Custom Network Config Sli Config Labels
@@ -407,7 +407,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_network_config--sli_config--static_routes"></a>
 ### Custom Network Config Sli Config Static Routes
 
-`static_routes` - (Optional) Static Routes. List of static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules. See [Static Routes](#nestedblock--custom_network_config--sli_config--static_routes--static_routes) below.
+`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#nestedblock--custom_network_config--sli_config--static_routes--static_routes) below.
 
 <a id="nestedblock--custom_network_config--sli_config--static_routes--static_routes"></a>
 ### Custom Network Config Sli Config Static Routes Static Routes
@@ -415,7 +415,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_network_config--sli_config--static_v6_routes"></a>
 ### Custom Network Config Sli Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io. See [Static Routes](#nestedblock--custom_network_config--sli_config--static_v6_routes--static_routes) below.
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#nestedblock--custom_network_config--sli_config--static_v6_routes--static_routes) below.
 
 <a id="nestedblock--custom_network_config--sli_config--static_v6_routes--static_routes"></a>
 ### Custom Network Config Sli Config Static V6 Routes Static Routes
@@ -425,9 +425,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#nestedblock--custom_network_config--slo_config--dc_cluster_group) below.
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema. See [Labels](#nestedblock--custom_network_config--slo_config--labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#nestedblock--custom_network_config--slo_config--labels) below.
 
-`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution ves.io.schema.rules.string.ipv4: true (`String`).
+`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
 `no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--custom_network_config--slo_config--no_dc_cluster_group) below.
 
@@ -439,16 +439,16 @@ In addition to all arguments above, the following attributes are exported:
 
 `static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#nestedblock--custom_network_config--slo_config--static_v6_routes) below.
 
-`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP. ves.io.schema.rules.string.ipv4: true (`String`).
+`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
 
 <a id="nestedblock--custom_network_config--slo_config--dc_cluster_group"></a>
 ### Custom Network Config Slo Config Dc Cluster Group
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--custom_network_config--slo_config--labels"></a>
 ### Custom Network Config Slo Config Labels
@@ -465,7 +465,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_network_config--slo_config--static_routes"></a>
 ### Custom Network Config Slo Config Static Routes
 
-`static_routes` - (Optional) Static Routes. List of static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules. See [Static Routes](#nestedblock--custom_network_config--slo_config--static_routes--static_routes) below.
+`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#nestedblock--custom_network_config--slo_config--static_routes--static_routes) below.
 
 <a id="nestedblock--custom_network_config--slo_config--static_routes--static_routes"></a>
 ### Custom Network Config Slo Config Static Routes Static Routes
@@ -473,7 +473,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_network_config--slo_config--static_v6_routes"></a>
 ### Custom Network Config Slo Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io. See [Static Routes](#nestedblock--custom_network_config--slo_config--static_v6_routes--static_routes) below.
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#nestedblock--custom_network_config--slo_config--static_v6_routes--static_routes) below.
 
 <a id="nestedblock--custom_network_config--slo_config--static_v6_routes--static_routes"></a>
 ### Custom Network Config Slo Config Static V6 Routes Static Routes
@@ -505,7 +505,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
 
-`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000 (`Number`).
+`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes (`Number`).
 
@@ -520,11 +520,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--log_receiver"></a>
 ### Log Receiver
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--logs_streaming_disabled"></a>
 ### Logs Streaming Disabled
@@ -532,9 +532,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--master_node_configuration"></a>
 ### Master Node Configuration
 
-`name` - (Optional) Name. Names of master node Required: YES ves.io.schema.rules.message.required: true (`String`).
+`name` - (Optional) Name. Names of master node (`String`).
 
-`public_ip` - (Optional) Public IP. IP Address of the master node. This ip will be used when other sites connect via Site Mesh Group ves.io.schema.rules.string.ipv4: true (`String`).
+`public_ip` - (Optional) Public IP. IP Address of the master node. This ip will be used when other sites connect via Site Mesh Group (`String`).
 
 <a id="nestedblock--no_bond_devices"></a>
 ### No Bond Devices
@@ -557,7 +557,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Os Version](#nestedblock--os--default_os_version) below.
 
-`operating_system_version` - (Optional) Operating System Version. Exclusive with [default_os_version] Specify a OS version to be used e.g. 9.2024.6. ves.io.schema.rules.string.max_len: 20 (`String`).
+`operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
 
 <a id="nestedblock--os--default_os_version"></a>
 ### Os Default Os Version
@@ -590,7 +590,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--sw--default_sw_version) below.
 
-`volterra_software_version` - (Optional) F5XC Software Version. Exclusive with [default_sw_version] Specify a F5XC Software Version to be used e.g. crt-20210329-1002. ves.io.schema.rules.string.max_len: 20 (`String`).
+`volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
 
 <a id="nestedblock--sw--default_sw_version"></a>
 ### Sw Default Sw Version

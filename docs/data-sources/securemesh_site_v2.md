@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_securemesh_site_v2 Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Shape of the Secure Mesh site specification
 ---

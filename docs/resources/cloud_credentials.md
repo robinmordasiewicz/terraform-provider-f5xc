@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_cloud_credentials Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Authentication"
 description: |-
   API to create cloud_credentials object
 ---
@@ -86,19 +86,19 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--aws_assume_role"></a>
 ### Aws Assume Role
 
-`custom_external_id` - (Optional) External ID is Custom ID. Exclusive with [external_id_is_optional external_id_is_tenant_id] External ID is Custom ID ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 2 (`String`).
+`custom_external_id` - (Optional) External ID is Custom ID. External ID is Custom ID (`String`).
 
-`duration_seconds` - (Optional) Role Session Duration Seconds. The duration, in seconds of the role session. ves.io.schema.rules.uint32.gte: 3600 ves.io.schema.rules.uint32.lte: 43200 (`Number`).
+`duration_seconds` - (Optional) Role Session Duration Seconds. The duration, in seconds of the role session (`Number`).
 
 `external_id_is_optional` - (Optional) Empty. This can be used for messages where no values are needed. See [External Id Is Optional](#nestedblock--aws_assume_role--external_id_is_optional) below.
 
 `external_id_is_tenant_id` - (Optional) Empty. This can be used for messages where no values are needed. See [External Id Is Tenant Id](#nestedblock--aws_assume_role--external_id_is_tenant_id) below.
 
-`role_arn` - (Optional) IAM Role ARN. IAM Role ARN to assume the role Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string.min_len: 20 ves.io.schema (`String`).
+`role_arn` - (Optional) IAM Role ARN. IAM Role ARN to assume the role (`String`).
 
-`session_name` - (Optional) Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console Required: YES ves.io.schema.rules.message.required: true ves.io (`String`).
+`session_name` - (Optional) Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console (`String`).
 
-`session_tags` - (Optional) Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role ves.io.schema.rules.map.keys.string.max_len: 127 ves.io.schema.rules.map.max_pairs: 40 ves.io. See [Session Tags](#nestedblock--aws_assume_role--session_tags) below.
+`session_tags` - (Optional) Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role. See [Session Tags](#nestedblock--aws_assume_role--session_tags) below.
 
 <a id="nestedblock--aws_assume_role--external_id_is_optional"></a>
 ### Aws Assume Role External Id Is Optional
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--aws_secret_key"></a>
 ### Aws Secret Key
 
-`access_key` - (Optional) Access Key ID. Access key ID for your AWS account Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`access_key` - (Optional) Access Key ID. Access key ID for your AWS account (`String`).
 
 `secret_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Key](#nestedblock--aws_secret_key--secret_key) below.
 
@@ -128,7 +128,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -142,13 +142,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--azure_client_secret"></a>
 ### Azure Client Secret
 
-`client_id` - (Optional) Client ID. Client ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`client_id` - (Optional) Client ID. Client ID for your Azure service principal (`String`).
 
 `client_secret` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Client Secret](#nestedblock--azure_client_secret--client_secret) below.
 
-`subscription_id` - (Optional) Subscription ID. Subscription ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`subscription_id` - (Optional) Subscription ID. Subscription ID for your Azure service principal (`String`).
 
-`tenant_id` - (Optional) Tenant ID. Tenant ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`tenant_id` - (Optional) Tenant ID. Tenant ID for your Azure service principal (`String`).
 
 <a id="nestedblock--azure_client_secret--client_secret"></a>
 ### Azure Client Secret Client Secret
@@ -162,7 +162,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -178,13 +178,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) URL for Client Certificate. URL for Client Certificate in '.pfx' or ' (`String`).
 
-`client_id` - (Optional) Client ID. Client ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`client_id` - (Optional) Client ID. Client ID for your Azure service principal (`String`).
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--azure_pfx_certificate--password) below.
 
-`subscription_id` - (Optional) Subscription ID. Subscription ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`subscription_id` - (Optional) Subscription ID. Subscription ID for your Azure service principal (`String`).
 
-`tenant_id` - (Optional) Tenant ID. Tenant ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`tenant_id` - (Optional) Tenant ID. Tenant ID for your Azure service principal (`String`).
 
 <a id="nestedblock--azure_pfx_certificate--password"></a>
 ### Azure Pfx Certificate Password
@@ -198,7 +198,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -226,7 +226,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 

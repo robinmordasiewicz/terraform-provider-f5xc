@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_endpoint Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Create endpoint will create the object in the storage backend for namespace metadata.namespace
 ---

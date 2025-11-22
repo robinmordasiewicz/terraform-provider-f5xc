@@ -94,17 +94,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#nestedblock--aws_site_type_choice--apm_aws_site--admin_password) below.
 
-`admin_username` - (Optional) Admin Username. Admin Username for BIG-IP Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`admin_username` - (Optional) Admin Username. Admin Username for BIG-IP (`String`).
 
 `aws_tgw_site` - (Optional) BIG-IP AWS TGW Site. BIG-IP AWS TGW site specification. See [Aws Tgw Site](#nestedblock--aws_site_type_choice--apm_aws_site--aws_tgw_site) below.
 
 `endpoint_service` - (Optional) Endpoint Service. Endpoint Service is a type of service where the packets are destined to BIG-IP APM device and service modifies the destination with a new destination address. See [Endpoint Service](#nestedblock--aws_site_type_choice--apm_aws_site--endpoint_service) below.
 
-`nodes` - (Optional) Service Nodes. Specify how and where the service nodes are spawned Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 2 ves.io.schema.rules.repeated. See [Nodes](#nestedblock--aws_site_type_choice--apm_aws_site--nodes) below.
+`nodes` - (Optional) Service Nodes. Specify how and where the service nodes are spawned. See [Nodes](#nestedblock--aws_site_type_choice--apm_aws_site--nodes) below.
 
-`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the BIG-IP nodes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1 (`String`).
+`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the BIG-IP nodes (`String`).
 
-`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. ves.io.schema.rules.map.keys.string. See [Tags](#nestedblock--aws_site_type_choice--apm_aws_site--tags) below.
+`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. See [Tags](#nestedblock--aws_site_type_choice--apm_aws_site--tags) below.
 
 <a id="nestedblock--aws_site_type_choice--apm_aws_site--admin_password"></a>
 ### Aws Site Type Choice Apm Aws Site Admin Password
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `automatic_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic Vip](#nestedblock--aws_site_type_choice--apm_aws_site--endpoint_service--automatic_vip) below.
 
-`configured_vip` - (Optional) Configured VIP. Exclusive with [automatic_vip] Enter IP address for the default VIP ves.io.schema.rules.string.ip: true ves.io.schema.rules.string.not_in: 0.0.0.0 (`String`).
+`configured_vip` - (Optional) Configured VIP. Enter IP address for the default VIP (`String`).
 
 `custom_tcp_ports` - (Optional) Port Range List. List of port ranges. See [Custom Tcp Ports](#nestedblock--aws_site_type_choice--apm_aws_site--endpoint_service--custom_tcp_ports) below.
 
@@ -192,15 +192,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `automatic_prefix` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic Prefix](#nestedblock--aws_site_type_choice--apm_aws_site--nodes--automatic_prefix) below.
 
-`aws_az_name` - (Optional) AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site Required: YES ves.io.schema.rules.message (`String`).
+`aws_az_name` - (Optional) AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site (`String`).
 
 `mgmt_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Mgmt Subnet](#nestedblock--aws_site_type_choice--apm_aws_site--nodes--mgmt_subnet) below.
 
-`node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service (`String`).
 
 `reserved_mgmt_subnet` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Mgmt Subnet](#nestedblock--aws_site_type_choice--apm_aws_site--nodes--reserved_mgmt_subnet) below.
 
-`tunnel_prefix` - (Optional) Tunnel IP Prefix. Exclusive with [automatic_prefix] Enter IP prefix for the tunnel, it has to be /30 ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`tunnel_prefix` - (Optional) Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30 (`String`).
 
 <a id="nestedblock--aws_site_type_choice--apm_aws_site--nodes--automatic_prefix"></a>
 ### Aws Site Type Choice Apm Aws Site Nodes Automatic Prefix
@@ -237,17 +237,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#nestedblock--baremetal_site_type_choice--f5_bare_metal_site--admin_password) below.
 
-`admin_username` - (Optional) Admin Username. Admin Username for BIG-IP Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`admin_username` - (Optional) Admin Username. Admin Username for BIG-IP (`String`).
 
 `bare_metal_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Bare Metal Site](#nestedblock--baremetal_site_type_choice--f5_bare_metal_site--bare_metal_site) below.
 
 `bigiq_instance` - (Optional) License Server Details. Specification for BIG-IQ Instance, where and what. See [Bigiq Instance](#nestedblock--baremetal_site_type_choice--f5_bare_metal_site--bigiq_instance) below.
 
-`nodes` - (Optional) Service Nodes. Specify how and where the service nodes are spawned Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated. See [Nodes](#nestedblock--baremetal_site_type_choice--f5_bare_metal_site--nodes) below.
+`nodes` - (Optional) Service Nodes. Specify how and where the service nodes are spawned. See [Nodes](#nestedblock--baremetal_site_type_choice--f5_bare_metal_site--nodes) below.
 
-`public_download_url` - (Optional) Image URL. Public URL where BIG-IP VE image (qcow2) is hosted Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri: true (`String`).
+`public_download_url` - (Optional) Image URL. Public URL where BIG-IP VE image (qcow2) is hosted (`String`).
 
-`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the BIG-IP nodes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1 (`String`).
+`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the BIG-IP nodes (`String`).
 
 <a id="nestedblock--baremetal_site_type_choice--f5_bare_metal_site--admin_password"></a>
 ### Baremetal Site Type Choice F5 Bare Metal Site Admin Password
@@ -265,24 +265,24 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--baremetal_site_type_choice--f5_bare_metal_site--bare_metal_site"></a>
 ### Baremetal Site Type Choice F5 Bare Metal Site Bare Metal Site
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--baremetal_site_type_choice--f5_bare_metal_site--bigiq_instance"></a>
 ### Baremetal Site Type Choice F5 Bare Metal Site Bigiq Instance
 
-`license_pool_name` - (Optional) License Pool Name. Name of Utility Pool on BIG-IQ Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`license_pool_name` - (Optional) License Pool Name. Name of Utility Pool on BIG-IQ (`String`).
 
-`license_server_ip` - (Optional) License Server IP. IP Address from the TCP Load Balancer which is configured to communicate with License Server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`license_server_ip` - (Optional) License Server IP. IP Address from the TCP Load Balancer which is configured to communicate with License Server (`String`).
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--baremetal_site_type_choice--f5_bare_metal_site--bigiq_instance--password) below.
 
-`sku_name` - (Optional) Offering Name. License offering name aka SKU name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`sku_name` - (Optional) Offering Name. License offering name aka SKU name (`String`).
 
-`username` - (Optional) User Name. User Name used to access BIG-IQ to activate the license Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string (`String`).
+`username` - (Optional) User Name. User Name used to access BIG-IQ to activate the license (`String`).
 
 <a id="nestedblock--baremetal_site_type_choice--f5_bare_metal_site--bigiq_instance--password"></a>
 ### Baremetal Site Type Choice F5 Bare Metal Site Bigiq Instance Password
@@ -298,7 +298,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `internal_interface` - (Optional) Interface. x-required BIG-IP interface details. See [Internal Interface](#nestedblock--baremetal_site_type_choice--f5_bare_metal_site--nodes--internal_interface) below.
 
-`node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service (`String`).
 
 <a id="nestedblock--baremetal_site_type_choice--f5_bare_metal_site--nodes--external_interface"></a>
 ### Baremetal Site Type Choice F5 Bare Metal Site Nodes External Interface
@@ -323,9 +323,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Https Port](#nestedblock--https_management--default_https_port) below.
 
-`domain_suffix` - (Optional) Domain Suffix. Domain suffix will be used along with node name to form URL to access node management Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true (`String`).
+`domain_suffix` - (Optional) Domain Suffix. Domain suffix will be used along with node name to form URL to access node management (`String`).
 
-`https_port` - (Optional) HTTPS Port. Exclusive with [default_https_port] Enter TCP port number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`https_port` - (Optional) HTTPS Port. Enter TCP port number (`Number`).
 
 <a id="nestedblock--https_management--advertise_on_internet"></a>
 ### Https Management Advertise On Internet
@@ -335,11 +335,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_management--advertise_on_internet--public_ip"></a>
 ### Https Management Advertise On Internet Public Ip
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--https_management--advertise_on_internet_default_vip"></a>
 ### Https Management Advertise On Internet Default Vip
@@ -349,7 +349,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https_management--advertise_on_sli_vip--no_mtls) below.
 
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io. See [Tls Certificates](#nestedblock--https_management--advertise_on_sli_vip--tls_certificates) below.
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https_management--advertise_on_sli_vip--tls_certificates) below.
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_management--advertise_on_sli_vip--tls_config) below.
 
@@ -361,7 +361,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_certificates"></a>
 ### Https Management Advertise On Sli Vip Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https_management--advertise_on_sli_vip--tls_certificates--custom_hash_algorithms) below.
 
@@ -419,7 +419,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_management--advertise_on_sli_vip--use_mtls--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_management--advertise_on_sli_vip--use_mtls--xfcc_disabled) below.
 
@@ -445,7 +445,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https_management--advertise_on_slo_internet_vip--no_mtls) below.
 
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates) below.
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates) below.
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_config) below.
 
@@ -457,7 +457,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates"></a>
 ### Https Management Advertise On Slo Internet Vip Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--custom_hash_algorithms) below.
 
@@ -515,7 +515,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--xfcc_disabled) below.
 
@@ -541,7 +541,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https_management--advertise_on_slo_sli--no_mtls) below.
 
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_sli--tls_certificates) below.
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_sli--tls_certificates) below.
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_management--advertise_on_slo_sli--tls_config) below.
 
@@ -553,7 +553,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_certificates"></a>
 ### Https Management Advertise On Slo Sli Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https_management--advertise_on_slo_sli--tls_certificates--custom_hash_algorithms) below.
 
@@ -611,7 +611,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_management--advertise_on_slo_sli--use_mtls--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_management--advertise_on_slo_sli--use_mtls--xfcc_disabled) below.
 
@@ -637,7 +637,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https_management--advertise_on_slo_vip--no_mtls) below.
 
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_vip--tls_certificates) below.
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_vip--tls_certificates) below.
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_management--advertise_on_slo_vip--tls_config) below.
 
@@ -649,7 +649,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_certificates"></a>
 ### Https Management Advertise On Slo Vip Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https_management--advertise_on_slo_vip--tls_certificates--custom_hash_algorithms) below.
 
@@ -707,7 +707,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_management--advertise_on_slo_vip--use_mtls--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_management--advertise_on_slo_vip--use_mtls--xfcc_disabled) below.
 

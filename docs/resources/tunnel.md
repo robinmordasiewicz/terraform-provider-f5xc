@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--local_ip--intf"></a>
 ### Local Ip Intf
 
-`local_intf` - (Optional) Local Interface. Local interface to be used for filling in source information of IP and network for transport ves.io.schema.rules.repeated.max_items: 1. See [Local Intf](#nestedblock--local_ip--intf--local_intf) below.
+`local_intf` - (Optional) Local Interface. Local interface to be used for filling in source information of IP and network for transport. See [Local Intf](#nestedblock--local_ip--intf--local_intf) below.
 
 <a id="nestedblock--local_ip--intf--local_intf"></a>
 ### Local Ip Intf Local Intf
@@ -202,7 +202,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--remote_ip--ip--ipv4"></a>
 ### Remote Ip Ip Ipv4
 
-`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation ves.io.schema.rules.string.ipv4: true (`String`).
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
 
 <a id="nestedblock--remote_ip--ip--ipv6"></a>
 ### Remote Ip Ip Ipv6

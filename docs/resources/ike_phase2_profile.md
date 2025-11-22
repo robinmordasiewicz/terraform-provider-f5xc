@@ -62,7 +62,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`authentication_algos` - (Optional) Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Required: YES ves.io.schema.rules.message (`List`).
+`authentication_algos` - (Optional) Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms (`List`).
 
 ###### One of the arguments from this list "dh_group_set, disable_pfs" must be set
 
@@ -70,7 +70,7 @@ The following arguments are optional:
 
 `disable_pfs` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Pfs](#disable-pfs) below for details.
 
-`encryption_algos` - (Optional) Encryption Algorithms. Choose one or more encryption algorithms. Required: YES ves.io.schema.rules.message.required: true (`List`).
+`encryption_algos` - (Optional) Encryption Algorithms. Choose one or more encryption algorithms (`List`).
 
 ###### One of the arguments from this list "ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime" must be set
 
@@ -95,7 +95,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--dh_group_set"></a>
 ### Dh Group Set
 
-`dh_groups` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. Required: YES ves.io.schema.rules.message.required: true (`List`).
+`dh_groups` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile (`List`).
 
 <a id="nestedblock--disable_pfs"></a>
 ### Disable Pfs
@@ -103,12 +103,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ike_keylifetime_hours"></a>
 ### Ike Keylifetime Hours
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--ike_keylifetime_minutes"></a>
 ### Ike Keylifetime Minutes
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 300 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--use_default_keylifetime"></a>
 ### Use Default Keylifetime

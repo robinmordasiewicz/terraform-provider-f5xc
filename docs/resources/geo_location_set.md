@@ -72,7 +72,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_geo_location_selector"></a>
 ### Custom Geo Location Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--global"></a>
 ### Global

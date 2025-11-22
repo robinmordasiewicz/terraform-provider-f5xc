@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_securemesh_site_v2 Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Shape of the Secure Mesh site specification
 ---
@@ -200,37 +200,37 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--active_enhanced_firewall_policies"></a>
 ### Active Enhanced Firewall Policies
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules. See [Enhanced Firewall Policies](#nestedblock--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 ### Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--active_forward_proxy_policies"></a>
 ### Active Forward Proxy Policies
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated. See [Forward Proxy Policies](#nestedblock--active_forward_proxy_policies--forward_proxy_policies) below.
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--active_forward_proxy_policies--forward_proxy_policies"></a>
 ### Active Forward Proxy Policies Forward Proxy Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--admin_user_credentials"></a>
 ### Admin User Credentials
 
 `admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#nestedblock--admin_user_credentials--admin_password) below.
 
-`ssh_key` - (Optional) Public SSH key. Provided Public SSH key can be used for accessing nodes of the site. When provided, customers can ssh to the nodes of this Customer Edge site using admin as the user. ves.io.schema (`String`).
+`ssh_key` - (Optional) Public SSH key. Provided Public SSH key can be used for accessing nodes of the site. When provided, customers can ssh to the nodes of this Customer Edge site using admin as the user (`String`).
 
 <a id="nestedblock--admin_user_credentials--admin_password"></a>
 ### Admin User Credentials Admin Password
@@ -244,7 +244,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -268,11 +268,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--aws--not_managed--node_list"></a>
 ### Aws Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--aws--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--aws--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -292,11 +292,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--azure--not_managed--node_list"></a>
 ### Azure Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--azure--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--azure--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -316,11 +316,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--baremetal--not_managed--node_list"></a>
 ### Baremetal Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--baremetal--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--baremetal--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -333,7 +333,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--blocked_services"></a>
 ### Blocked Services
 
-`blocked_sevice` - (Optional) Disable Node Local Services. ves.io.schema.rules.repeated.unique: true. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
+`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
 
 <a id="nestedblock--blocked_services--blocked_sevice"></a>
 ### Blocked Services Blocked Sevice
@@ -364,9 +364,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--custom_proxy--password) below.
 
-`proxy_ip_address` - (Optional) Proxy IPv4 Address. Specify the IPv4 Address of the internal Enterprise Proxy Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4: true (`String`).
+`proxy_ip_address` - (Optional) Proxy IPv4 Address. Specify the IPv4 Address of the internal Enterprise Proxy (`String`).
 
-`proxy_port` - (Optional) Proxy Port. Specify the Port of the internal Enterprise Proxy Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`proxy_port` - (Optional) Proxy Port. Specify the Port of the internal Enterprise Proxy (`Number`).
 
 `username` - (Optional) Username. If the internal Enterprise Proxy is using basic authentication, specify the username. This is an optional field (`String`).
 
@@ -388,7 +388,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -402,25 +402,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_proxy_bypass"></a>
 ### Custom Proxy Bypass
 
-`proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy ves.io.schema.rules.repeated.items.string.hostname_or_ip: true ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.repeated (`List`).
+`proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy (`List`).
 
 <a id="nestedblock--dc_cluster_group_sli"></a>
 ### Dc Cluster Group Sli
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--dc_cluster_group_slo"></a>
 ### Dc Cluster Group Slo
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--disable_ha"></a>
 ### Disable Ha
@@ -442,12 +442,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--dns_ntp_config--custom_dns"></a>
 ### Dns Ntp Config Custom Dns
 
-`dns_servers` - (Optional) DNS Servers. DNS Servers ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true (`List`).
+`dns_servers` - (Optional) DNS Servers. DNS Servers (`List`).
 
 <a id="nestedblock--dns_ntp_config--custom_ntp"></a>
 ### Dns Ntp Config Custom Ntp
 
-`ntp_servers` - (Optional) NTP Servers. NTP Servers ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true (`List`).
+`ntp_servers` - (Optional) NTP Servers. NTP Servers (`List`).
 
 <a id="nestedblock--dns_ntp_config--f5_dns_default"></a>
 ### Dns Ntp Config F5 Dns Default
@@ -474,11 +474,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--equinix--not_managed--node_list"></a>
 ### Equinix Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--equinix--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--equinix--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -501,11 +501,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--gcp--not_managed--node_list"></a>
 ### Gcp Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--gcp--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--gcp--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -525,11 +525,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--kvm--not_managed--node_list"></a>
 ### Kvm Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--kvm--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--kvm--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -561,9 +561,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--local_vrf--sli_config"></a>
 ### Local Vrf Sli Config
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema. See [Labels](#nestedblock--local_vrf--sli_config--labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#nestedblock--local_vrf--sli_config--labels) below.
 
-`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution ves.io.schema.rules.string.ipv4: true (`String`).
+`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
 `no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#nestedblock--local_vrf--sli_config--no_static_routes) below.
 
@@ -573,7 +573,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#nestedblock--local_vrf--sli_config--static_v6_routes) below.
 
-`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP. ves.io.schema.rules.string.ipv4: true (`String`).
+`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
 
 <a id="nestedblock--local_vrf--sli_config--labels"></a>
 ### Local Vrf Sli Config Labels
@@ -587,7 +587,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--local_vrf--sli_config--static_routes"></a>
 ### Local Vrf Sli Config Static Routes
 
-`static_routes` - (Optional) Static Routes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Static Routes](#nestedblock--local_vrf--sli_config--static_routes--static_routes) below.
+`static_routes` - (Optional) Static Routes. See [Static Routes](#nestedblock--local_vrf--sli_config--static_routes--static_routes) below.
 
 <a id="nestedblock--local_vrf--sli_config--static_routes--static_routes"></a>
 ### Local Vrf Sli Config Static Routes Static Routes
@@ -595,7 +595,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--local_vrf--sli_config--static_v6_routes"></a>
 ### Local Vrf Sli Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io. See [Static Routes](#nestedblock--local_vrf--sli_config--static_v6_routes--static_routes) below.
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#nestedblock--local_vrf--sli_config--static_v6_routes--static_routes) below.
 
 <a id="nestedblock--local_vrf--sli_config--static_v6_routes--static_routes"></a>
 ### Local Vrf Sli Config Static V6 Routes Static Routes
@@ -603,9 +603,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--local_vrf--slo_config"></a>
 ### Local Vrf Slo Config
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema. See [Labels](#nestedblock--local_vrf--slo_config--labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#nestedblock--local_vrf--slo_config--labels) below.
 
-`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution ves.io.schema.rules.string.ipv4: true (`String`).
+`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
 `no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#nestedblock--local_vrf--slo_config--no_static_routes) below.
 
@@ -615,7 +615,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#nestedblock--local_vrf--slo_config--static_v6_routes) below.
 
-`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP. ves.io.schema.rules.string.ipv4: true (`String`).
+`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
 
 <a id="nestedblock--local_vrf--slo_config--labels"></a>
 ### Local Vrf Slo Config Labels
@@ -629,7 +629,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--local_vrf--slo_config--static_routes"></a>
 ### Local Vrf Slo Config Static Routes
 
-`static_routes` - (Optional) Static Routes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Static Routes](#nestedblock--local_vrf--slo_config--static_routes--static_routes) below.
+`static_routes` - (Optional) Static Routes. See [Static Routes](#nestedblock--local_vrf--slo_config--static_routes--static_routes) below.
 
 <a id="nestedblock--local_vrf--slo_config--static_routes--static_routes"></a>
 ### Local Vrf Slo Config Static Routes Static Routes
@@ -637,7 +637,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--local_vrf--slo_config--static_v6_routes"></a>
 ### Local Vrf Slo Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io. See [Static Routes](#nestedblock--local_vrf--slo_config--static_v6_routes--static_routes) below.
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#nestedblock--local_vrf--slo_config--static_v6_routes--static_routes) below.
 
 <a id="nestedblock--local_vrf--slo_config--static_v6_routes--static_routes"></a>
 ### Local Vrf Slo Config Static V6 Routes Static Routes
@@ -645,11 +645,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--log_receiver"></a>
 ### Log Receiver
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--logs_streaming_disabled"></a>
 ### Logs Streaming Disabled
@@ -682,11 +682,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--nutanix--not_managed--node_list"></a>
 ### Nutanix Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--nutanix--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--nutanix--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -706,11 +706,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--oci--not_managed--node_list"></a>
 ### Oci Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--oci--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--oci--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -743,11 +743,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--openstack--not_managed--node_list"></a>
 ### Openstack Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--openstack--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--openstack--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
@@ -790,7 +790,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--re_select--specific_re"></a>
 ### Re Select Specific Re
 
-`primary_re` - (Optional) Primary RE Geography. Select primary RE for this site. ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1 (`String`).
+`primary_re` - (Optional) Primary RE Geography. Select primary RE for this site (`String`).
 
 <a id="nestedblock--site_mesh_group_on_slo"></a>
 ### Site Mesh Group On Slo
@@ -809,11 +809,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--site_mesh_group_on_slo--site_mesh_group"></a>
 ### Site Mesh Group On Slo Site Mesh Group
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--site_mesh_group_on_slo--sm_connection_public_ip"></a>
 ### Site Mesh Group On Slo Sm Connection Public Ip
@@ -833,7 +833,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Os Version](#nestedblock--software_settings--os--default_os_version) below.
 
-`operating_system_version` - (Optional) Operating System Version. Exclusive with [default_os_version] Specify a OS version to be used e.g. 9.2024.6. ves.io.schema.rules.string.max_len: 20 (`String`).
+`operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
 
 <a id="nestedblock--software_settings--os--default_os_version"></a>
 ### Software Settings Os Default Os Version
@@ -843,7 +843,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--software_settings--sw--default_sw_version) below.
 
-`volterra_software_version` - (Optional) F5XC Software Version. Exclusive with [default_sw_version] Specify a F5XC Software Version to be used e.g. crt-20210329-1002. ves.io.schema.rules.string.max_len: 20 (`String`).
+`volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
 
 <a id="nestedblock--software_settings--sw--default_sw_version"></a>
 ### Software Settings Sw Default Sw Version
@@ -868,7 +868,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--upgrade_settings--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
 
-`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000 (`Number`).
+`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes (`Number`).
 
@@ -893,11 +893,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--vmware--not_managed--node_list"></a>
 ### Vmware Not Managed Node List
 
-`hostname` - (Optional) Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Interface List](#nestedblock--vmware--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--vmware--not_managed--node_list--interface_list) below.
 
-`public_ip` - (Optional) Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256 (`String`).
+`public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 

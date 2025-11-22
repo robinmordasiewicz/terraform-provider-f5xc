@@ -64,7 +64,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`pod_security_admission_specs` - (Optional) K8s Pod Security Admission. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated. See [Pod Security Admission Specs](#pod-security-admission-specs) below for details.
+`pod_security_admission_specs` - (Optional) K8s Pod Security Admission. See [Pod Security Admission Specs](#pod-security-admission-specs) below for details.
 
 
 ### Attributes Reference

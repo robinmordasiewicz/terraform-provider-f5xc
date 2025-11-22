@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_fast_acl Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create a fast_acl object, fast_acl object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to fast_acl_rule
 ---
@@ -85,11 +85,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--protocol_policer"></a>
 ### Protocol Policer
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--re_acl"></a>
 ### Re Acl
@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_tenant_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Tenant Vip](#nestedblock--re_acl--default_tenant_vip) below.
 
-`fast_acl_rules` - (Optional) Rules. Fast ACL rules to match ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Fast Acl Rules](#nestedblock--re_acl--fast_acl_rules) below.
+`fast_acl_rules` - (Optional) Rules. Fast ACL rules to match. See [Fast Acl Rules](#nestedblock--re_acl--fast_acl_rules) below.
 
 `selected_tenant_vip` - (Optional) Specific Tenant VIP. Select various tenant public VIP(s). See [Selected Tenant Vip](#nestedblock--re_acl--selected_tenant_vip) below.
 
@@ -117,7 +117,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--re_acl--fast_acl_rules--metadata) below.
 
-`port` - (Optional) Source Ports. L4 port numbers to match ves.io.schema.rules.repeated.max_items: 128. See [Port](#nestedblock--re_acl--fast_acl_rules--port) below.
+`port` - (Optional) Source Ports. L4 port numbers to match. See [Port](#nestedblock--re_acl--fast_acl_rules--port) below.
 
 `prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#nestedblock--re_acl--fast_acl_rules--prefix) below.
 
@@ -139,7 +139,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--re_acl--fast_acl_rules--ip_prefix_set"></a>
 ### Re Acl Fast Acl Rules Ip Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--re_acl--fast_acl_rules--ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--re_acl--fast_acl_rules--ip_prefix_set--ref) below.
 
 <a id="nestedblock--re_acl--fast_acl_rules--ip_prefix_set--ref"></a>
 ### Re Acl Fast Acl Rules Ip Prefix Set Ref
@@ -147,9 +147,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--re_acl--fast_acl_rules--metadata"></a>
 ### Re Acl Fast Acl Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--re_acl--fast_acl_rules--port"></a>
 ### Re Acl Fast Acl Rules Port
@@ -158,7 +158,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed. See [Dns](#nestedblock--re_acl--fast_acl_rules--port--dns) below.
 
-`user_defined` - (Optional) User defined port. Exclusive with [all dns] Matches the user defined port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
 
 <a id="nestedblock--re_acl--fast_acl_rules--port--all"></a>
 ### Re Acl Fast Acl Rules Port All
@@ -169,30 +169,30 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--re_acl--fast_acl_rules--prefix"></a>
 ### Re Acl Fast Acl Rules Prefix
 
-`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256 (`List`).
+`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 <a id="nestedblock--re_acl--selected_tenant_vip"></a>
 ### Re Acl Selected Tenant Vip
 
 `default_tenant_vip` - (Optional) Include Tenant VIP. Include tenant vip in list of specific VIP(s) (`Bool`).
 
-`public_ip_refs` - (Optional) Select Public VIP(s). Select additional public VIP(s) Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1. See [Public Ip Refs](#nestedblock--re_acl--selected_tenant_vip--public_ip_refs) below.
+`public_ip_refs` - (Optional) Select Public VIP(s). Select additional public VIP(s). See [Public Ip Refs](#nestedblock--re_acl--selected_tenant_vip--public_ip_refs) below.
 
 <a id="nestedblock--re_acl--selected_tenant_vip--public_ip_refs"></a>
 ### Re Acl Selected Tenant Vip Public Ip Refs
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--site_acl"></a>
 ### Site Acl
 
 `all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [All Services](#nestedblock--site_acl--all_services) below.
 
-`fast_acl_rules` - (Optional) Rules. Fast ACL rules to match ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Fast Acl Rules](#nestedblock--site_acl--fast_acl_rules) below.
+`fast_acl_rules` - (Optional) Rules. Fast ACL rules to match. See [Fast Acl Rules](#nestedblock--site_acl--fast_acl_rules) below.
 
 `inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--site_acl--inside_network) below.
 
@@ -214,7 +214,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--site_acl--fast_acl_rules--metadata) below.
 
-`port` - (Optional) Source Ports. L4 port numbers to match ves.io.schema.rules.repeated.max_items: 128. See [Port](#nestedblock--site_acl--fast_acl_rules--port) below.
+`port` - (Optional) Source Ports. L4 port numbers to match. See [Port](#nestedblock--site_acl--fast_acl_rules--port) below.
 
 `prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#nestedblock--site_acl--fast_acl_rules--prefix) below.
 
@@ -236,7 +236,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--site_acl--fast_acl_rules--ip_prefix_set"></a>
 ### Site Acl Fast Acl Rules Ip Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--site_acl--fast_acl_rules--ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--site_acl--fast_acl_rules--ip_prefix_set--ref) below.
 
 <a id="nestedblock--site_acl--fast_acl_rules--ip_prefix_set--ref"></a>
 ### Site Acl Fast Acl Rules Ip Prefix Set Ref
@@ -244,9 +244,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--site_acl--fast_acl_rules--metadata"></a>
 ### Site Acl Fast Acl Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--site_acl--fast_acl_rules--port"></a>
 ### Site Acl Fast Acl Rules Port
@@ -255,7 +255,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed. See [Dns](#nestedblock--site_acl--fast_acl_rules--port--dns) below.
 
-`user_defined` - (Optional) User defined port. Exclusive with [all dns] Matches the user defined port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
 
 <a id="nestedblock--site_acl--fast_acl_rules--port--all"></a>
 ### Site Acl Fast Acl Rules Port All
@@ -266,7 +266,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--site_acl--fast_acl_rules--prefix"></a>
 ### Site Acl Fast Acl Rules Prefix
 
-`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256 (`List`).
+`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 <a id="nestedblock--site_acl--inside_network"></a>
 ### Site Acl Inside Network

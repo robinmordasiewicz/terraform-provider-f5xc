@@ -99,12 +99,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ike_keylifetime_hours"></a>
 ### Ike Keylifetime Hours
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--ike_keylifetime_minutes"></a>
 ### Ike Keylifetime Minutes
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 300 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--use_default_keylifetime"></a>
 ### Use Default Keylifetime

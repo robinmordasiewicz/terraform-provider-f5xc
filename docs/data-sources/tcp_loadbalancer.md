@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_tcp_loadbalancer Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Shape of the TCP load balancer create specification
 ---

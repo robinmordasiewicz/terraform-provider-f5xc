@@ -68,7 +68,7 @@ The following arguments are optional:
 
 ###### One of the arguments from this list "append_server_name, default_header, pass_through, server_name" must be set
 
-`append_server_name` - (Optional) Append Server Name if absent. Exclusive with [default_header pass_through server_name] Specifies the value to be used for Server header if it is not already present (`String`).
+`append_server_name` - (Optional) Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed (`String`).
 
 ###### One of the arguments from this list "authentication, no_authentication" must be set
 
@@ -132,23 +132,23 @@ The following arguments are optional:
 
 `proxy` - (Optional) Type of Proxy. ProxyType tells the type of proxy to install for the virtual host (`String`).
 
-`rate_limiter_allowed_prefixes` - (Optional) Rate Limiter Allowed Prefixes. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. ves.io. See [Rate Limiter Allowed Prefixes](#rate-limiter-allowed-prefixes) below for details.
+`rate_limiter_allowed_prefixes` - (Optional) Rate Limiter Allowed Prefixes. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. See [Rate Limiter Allowed Prefixes](#rate-limiter-allowed-prefixes) below for details.
 
 `request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. See [Request Cookies To Add](#request-cookies-to-add) below for details.
 
-`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema (`List`).
+`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream (`List`).
 
-`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. See [Request Headers To Add](#request-headers-to-add) below for details.
+`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied. See [Request Headers To Add](#request-headers-to-add) below for details.
 
-`request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true (`List`).
+`request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
 
 `response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. See [Response Cookies To Add](#response-cookies-to-add) below for details.
 
-`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules (`List`).
+`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed (`List`).
 
-`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. See [Response Headers To Add](#response-headers-to-add) below for details.
+`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied. See [Response Headers To Add](#response-headers-to-add) below for details.
 
-`response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated (`List`).
+`response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
 
 `retry_policy` - (Optional) Retry Policy. Retry policy configuration for route destination. See [Retry Policy](#retry-policy) below for details.
 
@@ -156,7 +156,7 @@ The following arguments are optional:
 
 `sensitive_data_policy` - (Optional) Sensitive Data Discovery. References to sensitive_data_policy objects. See [Sensitive Data Policy](#sensitive-data-policy) below for details.
 
-`server_name` - (Optional) Server Name. Exclusive with [append_server_name default_header pass_through] Specifies the value to be used for Server header inserted in responses (`String`).
+`server_name` - (Optional) Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header (`String`).
 
 `slow_ddos_mitigation` - (Optional) Slow DDoS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users. See [Slow Ddos Mitigation](#slow-ddos-mitigation) below for details.
 
@@ -166,7 +166,7 @@ The following arguments are optional:
 
 `tls_parameters` - (Optional) Downstream TLS Parameters. TLS configuration for downstream connections. See [Tls Parameters](#tls-parameters) below for details.
 
-`user_identification` - (Optional) User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. ves.io.schema. See [User Identification](#user-identification) below for details.
+`user_identification` - (Optional) User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. See [User Identification](#user-identification) below for details.
 
 `waf_type` - (Optional) WAF Instance. WAF instance will be pointing to an app_firewall object. See [Waf Type](#waf-type) below for details.
 
@@ -196,13 +196,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--authentication"></a>
 ### Authentication
 
-`auth_config` - (Optional) Reference to Authentication Object. Reference to Authentication Config Object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Auth Config](#nestedblock--authentication--auth_config) below.
+`auth_config` - (Optional) Reference to Authentication Object. Reference to Authentication Config Object. See [Auth Config](#nestedblock--authentication--auth_config) below.
 
 `cookie_params` - (Optional) Cookie Parameters. Specifies different cookie related config parameters for authentication. See [Cookie Params](#nestedblock--authentication--cookie_params) below.
 
 `redirect_dynamic` - (Optional) Empty. This can be used for messages where no values are needed. See [Redirect Dynamic](#nestedblock--authentication--redirect_dynamic) below.
 
-`redirect_url` - (Optional) Configure Redirect URL. Exclusive with [redirect_dynamic] user can provide a url for e.g https://abc.xyz.com where user gets redirected (`String`).
+`redirect_url` - (Optional) Configure Redirect URL. user can provide a url for e.g https://abc.xyz.com where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider (`String`).
 
 `use_auth_object_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Auth Object Config](#nestedblock--authentication--use_auth_object_config) below.
 
@@ -230,18 +230,18 @@ In addition to all arguments above, the following attributes are exported:
 
 `kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object. See [Kms Key Hmac](#nestedblock--authentication--cookie_params--kms_key_hmac) below.
 
-`session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours). ves.io (`Number`).
+`session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
 
 <a id="nestedblock--authentication--cookie_params--auth_hmac"></a>
 ### Authentication Cookie Params Auth Hmac
 
 `prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Prim Key](#nestedblock--authentication--cookie_params--auth_hmac--prim_key) below.
 
-`prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time Required: YES ves.io.schema.rules.message.required: true (`String`).
+`prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time (`String`).
 
 `sec_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Sec Key](#nestedblock--authentication--cookie_params--auth_hmac--sec_key) below.
 
-`sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time Required: YES ves.io.schema.rules.message.required: true (`String`).
+`sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time (`String`).
 
 <a id="nestedblock--authentication--cookie_params--auth_hmac--prim_key"></a>
 ### Authentication Cookie Params Auth Hmac Prim Key
@@ -263,12 +263,12 @@ In addition to all arguments above, the following attributes are exported:
 
 `disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
 
-`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response. ves.io.schema.rules.uint32 (`Number`).
+`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
 
 <a id="nestedblock--captcha_challenge"></a>
 ### Captcha Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
@@ -288,7 +288,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--compression_params"></a>
 ### Compression Params
 
-`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30. ves.io.schema.rules.uint32.gte: 30 (`Number`).
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
 
 `content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascri... (`List`).
 
@@ -303,11 +303,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `allow_headers` - (Optional) Allow Headers. Specifies the content for the access-control-allow-headers header (`String`).
 
-`allow_methods` - (Optional) Allow Methods. Specifies the content for the access-control-allow-methods header ves.io.schema.rules.string.http_valid_methods: true (`String`).
+`allow_methods` - (Optional) Allow Methods. Specifies the content for the access-control-allow-methods header (`String`).
 
-`allow_origin` - (Optional) Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match ves.io.schema.rules.repeated.items.string (`List`).
+`allow_origin` - (Optional) Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
 
-`allow_origin_regex` - (Optional) Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match ves.io.schema.rules.repeated.items.string (`List`).
+`allow_origin_regex` - (Optional) Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
 
 `disabled` - (Optional) Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route (`Bool`).
 
@@ -330,7 +330,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--csrf_policy--custom_domain_list"></a>
 ### Csrf Policy Custom Domain List
 
-`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form. Required: YES ves.io (`List`).
+`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form. ves.io.schema.. (`List`).
 
 <a id="nestedblock--csrf_policy--disabled"></a>
 ### Csrf Policy Disabled
@@ -350,7 +350,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--dynamic_reverse_proxy"></a>
 ### Dynamic Reverse Proxy
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) ves.io.schema.rules.uint32.lte: 600000 (`Number`).
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
 
 `resolution_network` - (Optional) Resolution Network. Reference to virtual network where the endpoint is resolved. Reference is valid only when the network type is VIRTUAL_NETWORK_PER_SITE or VIRTUAL_NETWORK_GLOBAL. See [Resolution Network](#nestedblock--dynamic_reverse_proxy--resolution_network) below.
 
@@ -420,11 +420,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--js_challenge"></a>
 ### Js Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
-`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
 <a id="nestedblock--no_authentication"></a>
 ### No Authentication
@@ -454,13 +454,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--request_cookies_to_add"></a>
 ### Request Cookies To Add
 
-`name` - (Optional) Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
 `overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--request_cookies_to_add--secret_value) below.
 
-`value` - (Optional) Value. Exclusive with [secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096 (`String`).
+`value` - (Optional) Value. Value of the Cookie header (`String`).
 
 <a id="nestedblock--request_cookies_to_add--secret_value"></a>
 ### Request Cookies To Add Secret Value
@@ -474,7 +474,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -490,11 +490,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
 
-`name` - (Optional) Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the HTTP header (`String`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--request_headers_to_add--secret_value) below.
 
-`value` - (Optional) Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096 (`String`).
+`value` - (Optional) Value. Value of the HTTP header (`String`).
 
 <a id="nestedblock--request_headers_to_add--secret_value"></a>
 ### Request Headers To Add Secret Value
@@ -508,7 +508,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -522,15 +522,15 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--response_cookies_to_add"></a>
 ### Response Cookies To Add
 
-`add_domain` - (Optional) Add Domain. Exclusive with [ignore_domain] Add domain attribute ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
 
-`add_expiry` - (Optional) Add expiry. Exclusive with [ignore_expiry] Add expiry attribute ves.io.schema.rules.string.max_len: 256 (`String`).
+`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
 
 `add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#nestedblock--response_cookies_to_add--add_httponly) below.
 
 `add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#nestedblock--response_cookies_to_add--add_partitioned) below.
 
-`add_path` - (Optional) Add path. Exclusive with [ignore_path] Add path attribute ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`add_path` - (Optional) Add path. Add path attribute (`String`).
 
 `add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#nestedblock--response_cookies_to_add--add_secure) below.
 
@@ -552,9 +552,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `ignore_value` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Value](#nestedblock--response_cookies_to_add--ignore_value) below.
 
-`max_age_value` - (Optional) Add Max Age. Exclusive with [ignore_max_age] Add max age attribute ves.io.schema.rules.uint32.lte: 34560000 (`Number`).
+`max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
 
-`name` - (Optional) Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
 `overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
 
@@ -566,7 +566,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--response_cookies_to_add--secret_value) below.
 
-`value` - (Optional) Value. Exclusive with [ignore_value secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096 (`String`).
+`value` - (Optional) Value. Value of the Cookie header (`String`).
 
 <a id="nestedblock--response_cookies_to_add--add_httponly"></a>
 ### Response Cookies To Add Add Httponly
@@ -625,7 +625,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -641,11 +641,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
 
-`name` - (Optional) Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the HTTP header (`String`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--response_headers_to_add--secret_value) below.
 
-`value` - (Optional) Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096 (`String`).
+`value` - (Optional) Value. Value of the HTTP header (`String`).
 
 <a id="nestedblock--response_headers_to_add--secret_value"></a>
 ### Response Headers To Add Secret Value
@@ -659,7 +659,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -675,18 +675,18 @@ In addition to all arguments above, the following attributes are exported:
 
 `back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#nestedblock--retry_policy--back_off) below.
 
-`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry ves.io.schema.rules (`Number`).
+`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry (`Number`).
 
-`per_try_timeout` - (Optional) Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds ves.io.schema.rules.uint32.lte: 600000 (`Number`).
+`per_try_timeout` - (Optional) Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds (`Number`).
 
-`retriable_status_codes` - (Optional) Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`retriable_status_codes` - (Optional) Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on (`List`).
 
 `retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements (`List`).
 
 <a id="nestedblock--retry_policy--back_off"></a>
 ### Retry Policy Back Off
 
-`base_interval` - (Optional) Base Retry Interval. Specifies the base interval between retries in milliseconds ves.io.schema.rules.uint32.gt: 0 (`Number`).
+`base_interval` - (Optional) Base Retry Interval. Specifies the base interval between retries in milliseconds (`Number`).
 
 `max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set (`Number`).
 
@@ -723,7 +723,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds (`Number`).
 
-`request_timeout` - (Optional) Custom Timeout. Exclusive with [disable_request_timeout] ves.io.schema.rules.uint32.gte: 2000 ves.io.schema.rules.uint32.lte: 300000 (`Number`).
+`request_timeout` - (Optional) Custom Timeout (`Number`).
 
 <a id="nestedblock--slow_ddos_mitigation--disable_request_timeout"></a>
 ### Slow Ddos Mitigation Disable Request Timeout
@@ -731,7 +731,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--tls_cert_params"></a>
 ### Tls Cert Params
 
-`certificates` - (Optional) Certificates. Set of certificates Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1. See [Certificates](#nestedblock--tls_cert_params--certificates) below.
+`certificates` - (Optional) Certificates. Set of certificates. See [Certificates](#nestedblock--tls_cert_params--certificates) below.
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_E... (`List`).
 
@@ -747,7 +747,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#nestedblock--tls_cert_params--validation_params) below.
 
-`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. ves.io.schema.rules.repeated.items.enum (`List`).
+`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
 
 <a id="nestedblock--tls_cert_params--certificates"></a>
 ### Tls Cert Params Certificates
@@ -778,14 +778,14 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca](#nestedblock--tls_cert_params--validation_params--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate (`List`).
 
 <a id="nestedblock--tls_cert_params--validation_params--trusted_ca"></a>
 ### Tls Cert Params Validation Params Trusted Ca
 
-`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate ves.io.schema.rules.repeated.max_items: 1. See [Trusted Ca List](#nestedblock--tls_cert_params--validation_params--trusted_ca--trusted_ca_list) below.
+`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca List](#nestedblock--tls_cert_params--validation_params--trusted_ca--trusted_ca_list) below.
 
 <a id="nestedblock--tls_cert_params--validation_params--trusted_ca--trusted_ca_list"></a>
 ### Tls Cert Params Validation Params Trusted Ca Trusted Ca List
@@ -801,7 +801,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [No Client Certificate](#nestedblock--tls_parameters--no_client_certificate) below.
 
-`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. ves.io.schema.rules.repeated.items.enum (`List`).
+`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
 
 <a id="nestedblock--tls_parameters--client_certificate_optional"></a>
 ### Tls Parameters Client Certificate Optional
@@ -825,7 +825,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--tls_parameters--common_params--tls_certificates"></a>
 ### Tls Parameters Common Params Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms) below.
 
@@ -856,7 +856,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca](#nestedblock--tls_parameters--common_params--validation_params--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate (`List`).
 
@@ -891,7 +891,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waf_type--app_firewall"></a>
 ### Waf Type App Firewall
 
-`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.num_items: 1. See [App Firewall](#nestedblock--waf_type--app_firewall--app_firewall) below.
+`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object. See [App Firewall](#nestedblock--waf_type--app_firewall--app_firewall) below.
 
 <a id="nestedblock--waf_type--app_firewall--app_firewall"></a>
 ### Waf Type App Firewall App Firewall

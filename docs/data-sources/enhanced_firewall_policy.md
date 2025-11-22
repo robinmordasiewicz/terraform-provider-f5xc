@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_enhanced_firewall_policy Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Shape of Enhanced Firewall Policy specification
 ---

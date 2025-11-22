@@ -64,7 +64,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`protocol_policer` - (Optional) Protocol Policer. List of L4 protocol match condition and associated traffic rate limits ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true. See [Protocol Policer](#protocol-policer) below for details.
+`protocol_policer` - (Optional) Protocol Policer. List of L4 protocol match condition and associated traffic rate limits. See [Protocol Policer](#protocol-policer) below for details.
 
 
 ### Attributes Reference
@@ -79,7 +79,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--protocol_policer"></a>
 ### Protocol Policer
 
-`policer` - (Optional) Policer. Reference to policer object to apply traffic rate limits Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated. See [Policer](#nestedblock--protocol_policer--policer) below.
+`policer` - (Optional) Policer. Reference to policer object to apply traffic rate limits. See [Policer](#nestedblock--protocol_policer--policer) below.
 
 `protocol` - (Optional) Protocol Type. Protocol and protocol specific flags to be matched in packet. See [Protocol](#nestedblock--protocol_policer--protocol) below.
 

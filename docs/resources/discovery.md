@@ -76,7 +76,7 @@ The following arguments are optional:
 
 ###### One of the arguments from this list "cluster_id, no_cluster_id" must be set
 
-`cluster_id` - (Optional) Discovery cluster Identifier. Exclusive with [no_cluster_id] Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object (`String`).
+`cluster_id` - (Optional) Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object (`String`).
 
 ###### One of the arguments from this list "discovery_consul, discovery_k8s" must be set
 
@@ -117,7 +117,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--discovery_consul--access_info--connection_info"></a>
 ### Discovery Consul Access Info Connection Info
 
-`api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
 `tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [Tls Info](#nestedblock--discovery_consul--access_info--connection_info--tls_info) below.
 
@@ -129,7 +129,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd Url](#nestedblock--discovery_consul--access_info--http_basic_auth_info--passwd_url) below.
 
-`user_name` - (Optional) User Name. username in consul ves.io.schema.rules.string.max_len: 64 (`String`).
+`user_name` - (Optional) User Name. username in consul (`String`).
 
 <a id="nestedblock--discovery_consul--access_info--http_basic_auth_info--passwd_url"></a>
 ### Discovery Consul Access Info Http Basic Auth Info Passwd Url
@@ -172,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--discovery_k8s--access_info--connection_info"></a>
 ### Discovery K8s Access Info Connection Info
 
-`api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
 `tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [Tls Info](#nestedblock--discovery_k8s--access_info--connection_info--tls_info) below.
 
@@ -211,7 +211,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `namespace` - (Optional) F5XC Application Namespaces. Select a namespace (`String`).
 
-`namespace_regex` - (Optional) K8S Namespaces. The regex here will be used to match K8s namespace(s). ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.regex: true (`String`).
+`namespace_regex` - (Optional) K8S Namespaces. The regex here will be used to match K8s namespace(s) (`String`).
 
 <a id="nestedblock--discovery_k8s--publish_info"></a>
 ### Discovery K8s Publish Info
@@ -232,7 +232,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns_mode` - (Optional) DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-dns KubeDNS: External K8s cluster is running kube-dns (`String`).
 
-`subdomain` - (Optional) Subdomain. The DNS subdomain for which F5XC will respond to DNS queries. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`subdomain` - (Optional) Subdomain. The DNS subdomain for which F5XC will respond to DNS queries (`String`).
 
 <a id="nestedblock--discovery_k8s--publish_info--publish"></a>
 ### Discovery K8s Publish Info Publish
@@ -263,7 +263,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--site--ref) below.
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
 
 <a id="nestedblock--where--site--disable_internet_vip"></a>
 ### Where Site Disable Internet Vip
@@ -287,7 +287,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--where--virtual_network"></a>
 ### Where Virtual Network
 
-`ref` - (Optional) Reference. A virtual network direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_network--ref) below.
+`ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#nestedblock--where--virtual_network--ref) below.
 
 <a id="nestedblock--where--virtual_network--ref"></a>
 ### Where Virtual Network Ref
@@ -311,7 +311,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_site--ref) below.
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
 
 <a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
 ### Where Virtual Site Disable Internet Vip

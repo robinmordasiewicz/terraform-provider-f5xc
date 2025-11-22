@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_cloud_link Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Creates a new CloudLink with configured parameters
 ---

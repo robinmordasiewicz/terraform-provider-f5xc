@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_api_discovery Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "API Security"
 description: |-
   Create api discovery creates a new object in the storage backend for metadata.namespace.
 ---
@@ -71,7 +71,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_auth_types"></a>
 ### Custom Auth Types
 
-`parameter_name` - (Optional) Parameter Name. The authentication parameter name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true (`String`).
+`parameter_name` - (Optional) Parameter Name. The authentication parameter name (`String`).
 
 `parameter_type` - (Optional) Authentication Parameter Type. Enumeration for authentication parameter types (`String`).
 

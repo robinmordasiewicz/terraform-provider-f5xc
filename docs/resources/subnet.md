@@ -72,7 +72,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`site_subnet_params` - (Optional) Site Subnet Parameters. Configure subnet parameters per site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated. See [Site Subnet Params](#site-subnet-params) below for details.
+`site_subnet_params` - (Optional) Site Subnet Parameters. Configure subnet parameters per site. See [Site Subnet Params](#site-subnet-params) below for details.
 
 
 ### Attributes Reference
@@ -92,11 +92,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--connect_to_layer2--layer2_intf_ref"></a>
 ### Connect To Layer2 Layer2 Intf Ref
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--connect_to_slo"></a>
 ### Connect To Slo
@@ -121,11 +121,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--site_subnet_params--site"></a>
 ### Site Subnet Params Site
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--site_subnet_params--static_ip"></a>
 ### Site Subnet Params Static Ip
@@ -133,12 +133,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--site_subnet_params--subnet_dhcp_server_params"></a>
 ### Site Subnet Params Subnet Dhcp Server Params
 
-`dhcp_networks` - (Optional) Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.unique: true. See [Dhcp Networks](#nestedblock--site_subnet_params--subnet_dhcp_server_params--dhcp_networks) below.
+`dhcp_networks` - (Optional) Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses. See [Dhcp Networks](#nestedblock--site_subnet_params--subnet_dhcp_server_params--dhcp_networks) below.
 
 <a id="nestedblock--site_subnet_params--subnet_dhcp_server_params--dhcp_networks"></a>
 ### Site Subnet Params Subnet Dhcp Server Params Dhcp Networks
 
-`network_prefix` - (Optional) Network Prefix. Exclusive with [] Network prefix for subnet ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`network_prefix` - (Optional) Network Prefix. Network prefix for subnet (`String`).
 
 
 ## Import

@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `passwd` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd](#nestedblock--code_base_integration--bitbucket--passwd) below.
 
-`username` - (Optional) BitBucket Username. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`username` - (Optional) BitBucket Username (`String`).
 
 <a id="nestedblock--code_base_integration--bitbucket--passwd"></a>
 ### Code Base Integration Bitbucket Passwd
@@ -136,9 +136,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `passwd` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd](#nestedblock--code_base_integration--bitbucket_server--passwd) below.
 
-`url` - (Optional) BitBucket Server URL. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`url` - (Optional) BitBucket Server URL (`String`).
 
-`username` - (Optional) BitBucket Server Username. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`username` - (Optional) BitBucket Server Username (`String`).
 
 `verify_ssl` - (Optional) Verify SSL (`Bool`).
 
@@ -160,7 +160,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#nestedblock--code_base_integration--github--access_token) below.
 
-`username` - (Optional) GitHub Username. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`username` - (Optional) GitHub Username (`String`).
 
 `verify_ssl` - (Optional) GitHub Verify SSL (`Bool`).
 
@@ -182,9 +182,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#nestedblock--code_base_integration--github_enterprise--access_token) below.
 
-`hostname` - (Optional) GitHub Hostname. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`hostname` - (Optional) GitHub Hostname (`String`).
 
-`username` - (Optional) GitHub Username. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`username` - (Optional) GitHub Username (`String`).
 
 <a id="nestedblock--code_base_integration--github_enterprise--access_token"></a>
 ### Code Base Integration Github Enterprise Access Token
@@ -222,7 +222,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#nestedblock--code_base_integration--gitlab_enterprise--access_token) below.
 
-`url` - (Optional) GitLab URL. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`url` - (Optional) GitLab URL (`String`).
 
 <a id="nestedblock--code_base_integration--gitlab_enterprise--access_token"></a>
 ### Code Base Integration Gitlab Enterprise Access Token

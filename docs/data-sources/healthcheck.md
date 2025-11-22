@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_healthcheck Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Healthcheck object defines method to determine if the given Endpoint is healthy. Single Healthcheck object can be referred to by one or many Cluster objects.
 ---

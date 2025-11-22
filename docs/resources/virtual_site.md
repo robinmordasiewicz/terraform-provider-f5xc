@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_virtual_site Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Create a virtual site object in given namespace
 ---
@@ -75,7 +75,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--site_selector"></a>
 ### Site Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 
 ## Import

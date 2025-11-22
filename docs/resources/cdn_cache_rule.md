@@ -83,9 +83,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `eligible_for_cache` - (Optional) Cache Action Options. List of options for Cache Action. See [Eligible For Cache](#nestedblock--cache_rules--eligible_for_cache) below.
 
-`rule_expression_list` - (Optional) Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs.. Required: YES ves.io.schema.rules.message.required: true ves. See [Rule Expression List](#nestedblock--cache_rules--rule_expression_list) below.
+`rule_expression_list` - (Optional) Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs.. See [Rule Expression List](#nestedblock--cache_rules--rule_expression_list) below.
 
-`rule_name` - (Optional) Rule Name. Name of the Cache Rule Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`rule_name` - (Optional) Rule Name. Name of the Cache Rule (`String`).
 
 <a id="nestedblock--cache_rules--cache_bypass"></a>
 ### Cache Rules Cache Bypass
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `cache_override` - (Optional) Cache Override. Honour Cache Override (`Bool`).
 
-`cache_ttl` - (Optional) Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days Required: YES ves.io.schema (`String`).
+`cache_ttl` - (Optional) Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days (`String`).
 
 `ignore_response_cookie` - (Optional) Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present (`Bool`).
 
@@ -111,27 +111,27 @@ In addition to all arguments above, the following attributes are exported:
 
 `cache_override` - (Optional) Cache Override. Honour Cache Override (`Bool`).
 
-`cache_ttl` - (Optional) Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days Required: YES ves.io.schema (`String`).
+`cache_ttl` - (Optional) Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days (`String`).
 
 `ignore_response_cookie` - (Optional) Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present (`Bool`).
 
 <a id="nestedblock--cache_rules--rule_expression_list"></a>
 ### Cache Rules Rule Expression List
 
-`cache_rule_expression` - (Optional) Terms. The Cache Rule Expression Terms that are ANDed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves. See [Cache Rule Expression](#nestedblock--cache_rules--rule_expression_list--cache_rule_expression) below.
+`cache_rule_expression` - (Optional) Terms. The Cache Rule Expression Terms that are ANDed. See [Cache Rule Expression](#nestedblock--cache_rules--rule_expression_list--cache_rule_expression) below.
 
-`expression_name` - (Optional) Expression Name. Name of the Expressions items that are ANDed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`expression_name` - (Optional) Expression Name. Name of the Expressions items that are ANDed (`String`).
 
 <a id="nestedblock--cache_rules--rule_expression_list--cache_rule_expression"></a>
 ### Cache Rules Rule Expression List Cache Rule Expression
 
-`cache_headers` - (Optional) Cache Headers. Configure cache rule headers to match the criteria ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true. See [Cache Headers](#nestedblock--cache_rules--rule_expression_list--cache_rule_expression--cache_headers) below.
+`cache_headers` - (Optional) Cache Headers. Configure cache rule headers to match the criteria. See [Cache Headers](#nestedblock--cache_rules--rule_expression_list--cache_rule_expression--cache_headers) below.
 
 `cookie_matcher` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. See [Cookie Matcher](#nestedblock--cache_rules--rule_expression_list--cache_rule_expression--cookie_matcher) below.
 
 `path_match` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path Match](#nestedblock--cache_rules--rule_expression_list--cache_rule_expression--path_match) below.
 
-`query_parameters` - (Optional) Query Parameters. List of (key, value) query parameters ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true. See [Query Parameters](#nestedblock--cache_rules--rule_expression_list--cache_rule_expression--query_parameters) below.
+`query_parameters` - (Optional) Query Parameters. List of (key, value) query parameters. See [Query Parameters](#nestedblock--cache_rules--rule_expression_list--cache_rule_expression--query_parameters) below.
 
 <a id="nestedblock--cache_rules--rule_expression_list--cache_rule_expression--cache_headers"></a>
 ### Cache Rules Rule Expression List Cache Rule Expression Cache Headers

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_cdn_loadbalancer Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Shape of the CDN loadbalancer specification
 ---

@@ -66,7 +66,7 @@ The following arguments are optional:
 
 `expiration_never` - (Optional) Empty. This can be used for messages where no values are needed. See [Expiration Never](#expiration-never) below for details.
 
-`expiration_timestamp` - (Optional) Expiration Time (UTC). Exclusive with [expiration_never one_day one_hour one_month one_year] This deny list rule will expire at the given timestamp and will be removed from the system afterwards (`String`).
+`expiration_timestamp` - (Optional) Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -78,7 +78,7 @@ The following arguments are optional:
 
 `one_year` - (Optional) Empty. This can be used for messages where no values are needed. See [One Year](#one-year) below for details.
 
-`prefix` - (Optional) Prefix. Prefix Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip_prefix_globally_routable: true (`String`).
+`prefix` - (Optional) Prefix. Prefix (`String`).
 
 
 ### Attributes Reference

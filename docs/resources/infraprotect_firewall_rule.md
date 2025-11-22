@@ -72,7 +72,7 @@ The following arguments are optional:
 
 `destination_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Prefix All](#destination-prefix-all) below for details.
 
-`destination_prefix_single` - (Optional) Prefix. Exclusive with [destination_prefix_all] Prefix ves.io.schema.rules.string.ip_prefix_globally_routable: true (`String`).
+`destination_prefix_single` - (Optional) Prefix. Prefix (`String`).
 
 ###### One of the arguments from this list "fragments_allow, fragments_deny" must be set
 
@@ -106,7 +106,7 @@ The following arguments are optional:
 
 `source_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Prefix All](#source-prefix-all) below for details.
 
-`source_prefix_single` - (Optional) Prefix. Exclusive with [source_prefix_all] Prefix ves.io.schema.rules.string.ip_prefix_globally_routable: true (`String`).
+`source_prefix_single` - (Optional) Prefix. Prefix (`String`).
 
 ###### One of the arguments from this list "state_off, state_on" must be set
 
@@ -209,11 +209,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#nestedblock--protocol_tcp--destination_port_all) below.
 
-`destination_port_range` - (Optional) Port Range. Exclusive with [destination_port_all] Port Range ves.io.schema.rules.string.port_range: true (`String`).
+`destination_port_range` - (Optional) Port Range. Port Range (`String`).
 
 `source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#nestedblock--protocol_tcp--source_port_all) below.
 
-`source_port_range` - (Optional) Port Range. Exclusive with [source_port_all] Port Range ves.io.schema.rules.string.port_range: true (`String`).
+`source_port_range` - (Optional) Port Range. Port Range (`String`).
 
 <a id="nestedblock--protocol_tcp--destination_port_all"></a>
 ### Protocol Tcp Destination Port All
@@ -228,11 +228,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#nestedblock--protocol_udp--destination_port_all) below.
 
-`destination_port_range` - (Optional) Port Range. Exclusive with [destination_port_all] Port Range ves.io.schema.rules.string.port_range: true (`String`).
+`destination_port_range` - (Optional) Port Range. Port Range (`String`).
 
 `source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#nestedblock--protocol_udp--source_port_all) below.
 
-`source_port_range` - (Optional) Port Range. Exclusive with [source_port_all] Port Range ves.io.schema.rules.string.port_range: true (`String`).
+`source_port_range` - (Optional) Port Range. Port Range (`String`).
 
 <a id="nestedblock--protocol_udp--destination_port_all"></a>
 ### Protocol Udp Destination Port All

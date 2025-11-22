@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_api_discovery Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "API Security"
 description: |-
   Create api discovery creates a new object in the storage backend for metadata.namespace.
 ---

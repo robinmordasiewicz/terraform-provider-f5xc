@@ -58,11 +58,11 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`compliances` - (Optional) Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery. ves.io.schema.rules.repeated.items.enum (`List`).
+`compliances` - (Optional) Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery (`List`).
 
-`custom_data_types` - (Optional) Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery ves.io.schema.rules.repeated.unique: true. See [Custom Data Types](#custom-data-types) below for details.
+`custom_data_types` - (Optional) Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery. See [Custom Data Types](#custom-data-types) below for details.
 
-`disabled_predefined_data_types` - (Optional) Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery ves.io.schema.rules.repeated (`List`).
+`disabled_predefined_data_types` - (Optional) Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery (`List`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -84,11 +84,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_data_types--custom_data_type_ref"></a>
 ### Custom Data Types Custom Data Type Ref
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

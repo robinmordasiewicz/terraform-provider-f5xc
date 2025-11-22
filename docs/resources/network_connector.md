@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_network_connector Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Network Connector is created by users in system namespace
 ---
@@ -92,17 +92,17 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_forward_proxy"></a>
 ### Enable Forward Proxy
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) ves.io.schema.rules.uint32.lte: 600000 (`Number`).
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
 
-`max_connect_attempts` - (Optional) Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1. ves.io.schema.rules.uint32.lte: 8 (`Number`).
+`max_connect_attempts` - (Optional) Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1 (`Number`).
 
 `no_interception` - (Optional) Empty. This can be used for messages where no values are needed. See [No Interception](#nestedblock--enable_forward_proxy--no_interception) below.
 
 `tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception. See [Tls Intercept](#nestedblock--enable_forward_proxy--tls_intercept) below.
 
-`white_listed_ports` - (Optional) TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port ves.io.schema.rules.repeated.items.uint32.lte: 65535 ves.io (`List`).
+`white_listed_ports` - (Optional) TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port (`List`).
 
-`white_listed_prefixes` - (Optional) IP Prefixes to Skip Protocol Parsing. Traffic to these destination ip prefixes is not subjected to protocol parsing Example 'tmate' server ip ves.io.schema.rules.repeated.items.string (`List`).
+`white_listed_prefixes` - (Optional) IP Prefixes to Skip Protocol Parsing. Traffic to these destination ip prefixes is not subjected to protocol parsing Example 'tmate' server ip (`List`).
 
 <a id="nestedblock--enable_forward_proxy--no_interception"></a>
 ### Enable Forward Proxy No Interception
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `policy` - (Optional) TLS Interception Policy. Policy to enable or disable TLS interception. See [Policy](#nestedblock--enable_forward_proxy--tls_intercept--policy) below.
 
-`trusted_ca_url` - (Optional) Custom Root CA Certificate. Exclusive with [volterra_trusted_ca] Custom Root CA Certificate for validating upstream server certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate (`String`).
 
 `volterra_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Certificate](#nestedblock--enable_forward_proxy--tls_intercept--volterra_certificate) below.
 
@@ -125,7 +125,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate"></a>
 ### Enable Forward Proxy Tls Intercept Custom Certificate
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--custom_hash_algorithms) below.
 
@@ -155,7 +155,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_forward_proxy--tls_intercept--policy"></a>
 ### Enable Forward Proxy Tls Intercept Policy
 
-`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io. See [Interception Rules](#nestedblock--enable_forward_proxy--tls_intercept--policy--interception_rules) below.
+`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception. See [Interception Rules](#nestedblock--enable_forward_proxy--tls_intercept--policy--interception_rules) below.
 
 <a id="nestedblock--enable_forward_proxy--tls_intercept--policy--interception_rules"></a>
 ### Enable Forward Proxy Tls Intercept Policy Interception Rules
@@ -174,11 +174,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--sli_to_global_dr--global_vn"></a>
 ### Sli To Global Dr Global Vn
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--sli_to_slo_snat"></a>
 ### Sli To Slo Snat
@@ -201,11 +201,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--slo_to_global_dr--global_vn"></a>
 ### Slo To Global Dr Global Vn
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

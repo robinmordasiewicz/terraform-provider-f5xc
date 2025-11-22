@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_network_connector Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Network Connector is created by users in system namespace
 ---

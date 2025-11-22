@@ -53,7 +53,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`trusted_ca_url` - (Optional) Root CA Certificate. Trusted CA certificates for validating certificates ves.io.schema.rules.string.max_len: 512000 ves.io.schema.rules.string.truststore_url: true (`String`).
+`trusted_ca_url` - (Optional) Root CA Certificate. Trusted CA certificates for validating certificates (`String`).
 
 
 ### Attributes Reference

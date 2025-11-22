@@ -88,7 +88,7 @@ The following arguments are optional:
 
 `bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing. See [Bot Action](#bot-action) below for details.
 
-`client_name` - (Optional) Client Name. Exclusive with [any_client client_name_matcher client_selector ip_threat_category_list] The expected name of the client invoking the request API (`String`).
+`client_name` - (Optional) Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name (`String`).
 
 `client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Client Name Matcher](#client-name-matcher) below for details.
 
@@ -160,7 +160,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_matcher` - (Optional) Invert String Matcher. Invert the match result (`Bool`).
 
-`match` - (Optional) Exact Values. A list of exact values to match the input against. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 63 ves.io.schema.rules (`List`).
+`match` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
 <a id="nestedblock--arg_matchers"></a>
 ### Arg Matchers
@@ -184,11 +184,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--arg_matchers--item"></a>
 ### Arg Matchers Item
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true (`List`).
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--asn_list"></a>
 ### Asn List
@@ -198,7 +198,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--asn_matcher"></a>
 ### Asn Matcher
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Asn Sets](#nestedblock--asn_matcher--asn_sets) below.
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#nestedblock--asn_matcher--asn_sets) below.
 
 <a id="nestedblock--asn_matcher--asn_sets"></a>
 ### Asn Matcher Asn Sets
@@ -216,11 +216,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--body_matcher"></a>
 ### Body Matcher
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true (`List`).
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--bot_action"></a>
 ### Bot Action
@@ -238,14 +238,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--client_name_matcher"></a>
 ### Client Name Matcher
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--client_selector"></a>
 ### Client Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--cookie_matchers"></a>
 ### Cookie Matchers
@@ -258,7 +258,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Item](#nestedblock--cookie_matchers--item) below.
 
-`name` - (Optional) Cookie Name. A case-sensitive cookie name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 256 (`String`).
+`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
 
 <a id="nestedblock--cookie_matchers--check_not_present"></a>
 ### Cookie Matchers Check Not Present
@@ -269,18 +269,18 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--cookie_matchers--item"></a>
 ### Cookie Matchers Item
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true (`List`).
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--domain_matcher"></a>
 ### Domain Matcher
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--headers"></a>
 ### Headers
@@ -293,7 +293,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Item](#nestedblock--headers--item) below.
 
-`name` - (Optional) Header Name. A case-insensitive HTTP header name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 (`String`).
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
 
 <a id="nestedblock--headers--check_not_present"></a>
 ### Headers Check Not Present
@@ -304,25 +304,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--headers--item"></a>
 ### Headers Item
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true (`List`).
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--http_method"></a>
 ### Http Method
 
 `invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
 
-`methods` - (Optional) Method List. List of methods values to match against. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`methods` - (Optional) Method List. List of methods values to match against (`List`).
 
 <a id="nestedblock--ip_matcher"></a>
 ### Ip Matcher
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Prefix Sets](#nestedblock--ip_matcher--prefix_sets) below.
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#nestedblock--ip_matcher--prefix_sets) below.
 
 <a id="nestedblock--ip_matcher--prefix_sets"></a>
 ### Ip Matcher Prefix Sets
@@ -342,17 +342,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
-`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
 <a id="nestedblock--ip_threat_category_list"></a>
 ### Ip Threat Category List
 
-`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions Required: YES ves.io.schema.rules (`List`).
+`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions (`List`).
 
 <a id="nestedblock--ja4_tls_fingerprint"></a>
 ### Ja4 Tls Fingerprint
 
-`exact_values` - (Optional) Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against ves.io.schema.rules.repeated.items.string.len: 36 ves.io.schema.rules.repeated.max_items: 16 ves.io (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against (`List`).
 
 <a id="nestedblock--jwt_claims"></a>
 ### Jwt Claims
@@ -365,7 +365,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Item](#nestedblock--jwt_claims--item) below.
 
-`name` - (Optional) JWT Claim Name. JWT claim name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 256 (`String`).
+`name` - (Optional) JWT Claim Name. JWT claim name (`String`).
 
 <a id="nestedblock--jwt_claims--check_not_present"></a>
 ### Jwt Claims Check Not Present
@@ -376,16 +376,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--jwt_claims--item"></a>
 ### Jwt Claims Item
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true (`List`).
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--label_matcher"></a>
 ### Label Matcher
 
-`keys` - (Optional) Keys. The list of label key names that have to match ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated (`List`).
+`keys` - (Optional) Keys. The list of label key names that have to match (`List`).
 
 <a id="nestedblock--mum_action"></a>
 ### Mum Action
@@ -403,17 +403,17 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--path"></a>
 ### Path
 
-`exact_values` - (Optional) Exact Values. A list of exact path values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.http_path: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact path values to match the input HTTP path against (`List`).
 
 `invert_matcher` - (Optional) Invert Path Matcher. Invert the match result (`Bool`).
 
-`prefix_values` - (Optional) Prefix Values. A list of path prefix values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.http_path: true ves.io.schema.rules.repeated.items.string (`List`).
+`prefix_values` - (Optional) Prefix Values. A list of path prefix values to match the input HTTP path against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input HTTP path against (`List`).
 
-`suffix_values` - (Optional) Suffix Values. A list of path suffix values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string.not_empty: true ves (`List`).
+`suffix_values` - (Optional) Suffix Values. A list of path suffix values to match the input HTTP path against (`List`).
 
-`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true (`List`).
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--port_matcher"></a>
 ### Port Matcher
@@ -433,7 +433,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Item](#nestedblock--query_params--item) below.
 
-`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 256 (`String`).
+`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
 
 <a id="nestedblock--query_params--check_not_present"></a>
 ### Query Params Check Not Present
@@ -444,64 +444,64 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--query_params--item"></a>
 ### Query Params Item
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true (`List`).
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--request_constraints"></a>
 ### Request Constraints
 
-`max_cookie_count_exceeds` - (Optional) Match on the Count for all Cookies that exceed this value. Exclusive with [max_cookie_count_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 1024 (`Number`).
+`max_cookie_count_exceeds` - (Optional) Match on the Count for all Cookies that exceed this value (`Number`).
 
 `max_cookie_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Count None](#nestedblock--request_constraints--max_cookie_count_none) below.
 
-`max_cookie_key_size_exceeds` - (Optional) Match on the Name Size per Cookie that exceed this value. Exclusive with [max_cookie_key_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 1024 (`Number`).
+`max_cookie_key_size_exceeds` - (Optional) Match on the Name Size per Cookie that exceed this value (`Number`).
 
 `max_cookie_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Key Size None](#nestedblock--request_constraints--max_cookie_key_size_none) below.
 
-`max_cookie_value_size_exceeds` - (Optional) Match on the Value Size per Cookie that exceed this value. Exclusive with [max_cookie_value_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 32768 (`Number`).
+`max_cookie_value_size_exceeds` - (Optional) Match on the Value Size per Cookie that exceed this value (`Number`).
 
 `max_cookie_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Value Size None](#nestedblock--request_constraints--max_cookie_value_size_none) below.
 
-`max_header_count_exceeds` - (Optional) Match on the Count for all Headers that exceed this value. Exclusive with [max_header_count_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 40 (`Number`).
+`max_header_count_exceeds` - (Optional) Match on the Count for all Headers that exceed this value (`Number`).
 
 `max_header_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Count None](#nestedblock--request_constraints--max_header_count_none) below.
 
-`max_header_key_size_exceeds` - (Optional) Match on the Name Size per Header that exceed this value. Exclusive with [max_header_key_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 1024 (`Number`).
+`max_header_key_size_exceeds` - (Optional) Match on the Name Size per Header that exceed this value (`Number`).
 
 `max_header_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Key Size None](#nestedblock--request_constraints--max_header_key_size_none) below.
 
-`max_header_value_size_exceeds` - (Optional) Match on the Value Size per Header that exceed this value. Exclusive with [max_header_value_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 64000 (`Number`).
+`max_header_value_size_exceeds` - (Optional) Match on the Value Size per Header that exceed this value (`Number`).
 
 `max_header_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Value Size None](#nestedblock--request_constraints--max_header_value_size_none) below.
 
-`max_parameter_count_exceeds` - (Optional) Match on the Parameter Count that exceed this value. Exclusive with [max_parameter_count_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 1024 (`Number`).
+`max_parameter_count_exceeds` - (Optional) Match on the Parameter Count that exceed this value (`Number`).
 
 `max_parameter_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Count None](#nestedblock--request_constraints--max_parameter_count_none) below.
 
-`max_parameter_name_size_exceeds` - (Optional) Match on the Parameter Name Size that exceed this value. Exclusive with [max_parameter_name_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 1024 (`Number`).
+`max_parameter_name_size_exceeds` - (Optional) Match on the Parameter Name Size that exceed this value (`Number`).
 
 `max_parameter_name_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Name Size None](#nestedblock--request_constraints--max_parameter_name_size_none) below.
 
-`max_parameter_value_size_exceeds` - (Optional) Match on the Parameter Value Size that exceed this value. Exclusive with [max_parameter_value_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 1073741824 (`Number`).
+`max_parameter_value_size_exceeds` - (Optional) Match on the Parameter Value Size that exceed this value (`Number`).
 
 `max_parameter_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Value Size None](#nestedblock--request_constraints--max_parameter_value_size_none) below.
 
-`max_query_size_exceeds` - (Optional) Match on the URL Query Size that exceed this value. Exclusive with [max_query_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`max_query_size_exceeds` - (Optional) Match on the URL Query Size that exceed this value (`Number`).
 
 `max_query_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Query Size None](#nestedblock--request_constraints--max_query_size_none) below.
 
-`max_request_line_size_exceeds` - (Optional) Match on the Request Line Size that exceed this value. Exclusive with [max_request_line_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65536 (`Number`).
+`max_request_line_size_exceeds` - (Optional) Match on the Request Line Size that exceed this value (`Number`).
 
 `max_request_line_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Request Line Size None](#nestedblock--request_constraints--max_request_line_size_none) below.
 
-`max_request_size_exceeds` - (Optional) Match on the Request Size that exceed this value. Exclusive with [max_request_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65536 (`Number`).
+`max_request_size_exceeds` - (Optional) Match on the Request Size that exceed this value (`Number`).
 
 `max_request_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Request Size None](#nestedblock--request_constraints--max_request_size_none) below.
 
-`max_url_size_exceeds` - (Optional) Match on the URL Size that exceed this value. Exclusive with [max_url_size_none] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 128000 (`Number`).
+`max_url_size_exceeds` - (Optional) Match on the URL Size that exceed this value (`Number`).
 
 `max_url_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Url Size None](#nestedblock--request_constraints--max_url_size_none) below.
 
@@ -563,16 +563,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--segment_policy--dst_segments"></a>
 ### Segment Policy Dst Segments
 
-`segments` - (Optional) Segments. Select list of segments Required: YES ves.io.schema.rules.message.required: true. See [Segments](#nestedblock--segment_policy--dst_segments--segments) below.
+`segments` - (Optional) Segments. Select list of segments. See [Segments](#nestedblock--segment_policy--dst_segments--segments) below.
 
 <a id="nestedblock--segment_policy--dst_segments--segments"></a>
 ### Segment Policy Dst Segments Segments
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--segment_policy--intra_segment"></a>
 ### Segment Policy Intra Segment
@@ -583,23 +583,23 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--segment_policy--src_segments"></a>
 ### Segment Policy Src Segments
 
-`segments` - (Optional) Segments. Select list of segments Required: YES ves.io.schema.rules.message.required: true. See [Segments](#nestedblock--segment_policy--src_segments--segments) below.
+`segments` - (Optional) Segments. Select list of segments. See [Segments](#nestedblock--segment_policy--src_segments--segments) below.
 
 <a id="nestedblock--segment_policy--src_segments--segments"></a>
 ### Segment Policy Src Segments Segments
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--tls_fingerprint_matcher"></a>
 ### Tls Fingerprint Matcher
 
-`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated (`List`).
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
-`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.items.string.len: 32 ves.io.schema.rules.repeated.max_items: 16 ves.io (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
 `excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint (`List`).
 
@@ -615,13 +615,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waf_action--app_firewall_detection_control"></a>
 ### Waf Action App Firewall Detection Control
 
-`exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true. See [Exclude Attack Type Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_attack_type_contexts) below.
+`exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria. See [Exclude Attack Type Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_attack_type_contexts) below.
 
-`exclude_bot_name_contexts` - (Optional) Bot Names. Bot Names to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true. See [Exclude Bot Name Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_bot_name_contexts) below.
+`exclude_bot_name_contexts` - (Optional) Bot Names. Bot Names to be excluded for the defined match criteria. See [Exclude Bot Name Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_bot_name_contexts) below.
 
-`exclude_signature_contexts` - (Optional) Signature IDs. Signature IDs to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 1024 ves.io.schema.rules.repeated.unique: true. See [Exclude Signature Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_signature_contexts) below.
+`exclude_signature_contexts` - (Optional) Signature IDs. Signature IDs to be excluded for the defined match criteria. See [Exclude Signature Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_signature_contexts) below.
 
-`exclude_violation_contexts` - (Optional) Violations. Violations to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true. See [Exclude Violation Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_violation_contexts) below.
+`exclude_violation_contexts` - (Optional) Violations. Violations to be excluded for the defined match criteria. See [Exclude Violation Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_violation_contexts) below.
 
 <a id="nestedblock--waf_action--app_firewall_detection_control--exclude_attack_type_contexts"></a>
 ### Waf Action App Firewall Detection Control Exclude Attack Type Contexts
@@ -635,7 +635,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waf_action--app_firewall_detection_control--exclude_bot_name_contexts"></a>
 ### Waf Action App Firewall Detection Control Exclude Bot Name Contexts
 
-`bot_name` - (Optional) Bot Name. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`bot_name` - (Optional) Bot Name (`String`).
 
 <a id="nestedblock--waf_action--app_firewall_detection_control--exclude_signature_contexts"></a>
 ### Waf Action App Firewall Detection Control Exclude Signature Contexts
@@ -644,7 +644,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check (`String`).
 
-`signature_id` - (Optional) SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context. Required: YES ves.io.schema (`Number`).
+`signature_id` - (Optional) SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context (`Number`).
 
 <a id="nestedblock--waf_action--app_firewall_detection_control--exclude_violation_contexts"></a>
 ### Waf Action App Firewall Detection Control Exclude Violation Contexts

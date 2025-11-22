@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_forward_proxy_policy Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Shape of the Forward Proxy Policy specification
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_fleet Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Create fleet will create a fleet object in 'system' namespace of the user
 ---
@@ -86,7 +86,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. ves.io.schema.rules.repeated.max_items: 6. See [Blocked Services](#blocked-services) below for details.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. See [Blocked Services](#blocked-services) below for details.
 
 ###### One of the arguments from this list "bond_device_list, no_bond_devices" must be set
 
@@ -132,7 +132,7 @@ The following arguments are optional:
 
 `fleet_label` - (Optional) Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant (`String`).
 
-`inside_virtual_network` - (Optional) Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet ves.io.schema.rules.repeated.max_items: 1. See [Inside Virtual Network](#inside-virtual-network) below for details.
+`inside_virtual_network` - (Optional) Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet. See [Inside Virtual Network](#inside-virtual-network) below for details.
 
 `interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interface List](#interface-list) below for details.
 
@@ -166,9 +166,9 @@ The following arguments are optional:
 
 `no_storage_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Static Routes](#no-storage-static-routes) below for details.
 
-`operating_system_version` - (Optional) Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config. ves.io.schema (`String`).
+`operating_system_version` - (Optional) Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config (`String`).
 
-`outside_virtual_network` - (Optional) Outside (Site Local) Virtual Network. Default outside (site local) virtual network for the fleet ves.io.schema.rules.repeated.max_items: 1. See [Outside Virtual Network](#outside-virtual-network) below for details.
+`outside_virtual_network` - (Optional) Outside (Site Local) Virtual Network. Default outside (site local) virtual network for the fleet. See [Outside Virtual Network](#outside-virtual-network) below for details.
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
@@ -222,22 +222,22 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bond_device_list"></a>
 ### Bond Device List
 
-`bond_devices` - (Optional) Bond Devices. List of bond devices Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules. See [Bond Devices](#nestedblock--bond_device_list--bond_devices) below.
+`bond_devices` - (Optional) Bond Devices. List of bond devices. See [Bond Devices](#nestedblock--bond_device_list--bond_devices) below.
 
 <a id="nestedblock--bond_device_list--bond_devices"></a>
 ### Bond Device List Bond Devices
 
 `active_backup` - (Optional) Empty. This can be used for messages where no values are needed. See [Active Backup](#nestedblock--bond_device_list--bond_devices--active_backup) below.
 
-`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema (`List`).
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
 
 `lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#nestedblock--bond_device_list--bond_devices--lacp) below.
 
-`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 500 ves.io.schema.rules.uint32.lte: 5000 (`Number`).
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
 
-`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 1000 (`Number`).
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
 
-`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
 
 <a id="nestedblock--bond_device_list--bond_devices--active_backup"></a>
 ### Bond Device List Bond Devices Active Backup
@@ -245,25 +245,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bond_device_list--bond_devices--lacp"></a>
 ### Bond Device List Bond Devices Lacp
 
-`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 30 (`Number`).
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
 
 <a id="nestedblock--dc_cluster_group"></a>
 ### Dc Cluster Group
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--dc_cluster_group_inside"></a>
 ### Dc Cluster Group Inside
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--default_config"></a>
 ### Default Config
@@ -315,9 +315,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `feature_type` - (Optional) Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server (`String`).
 
-`server_address` - (Optional) License Server Address. Set License Server Address ves.io.schema.rules.string.hostname_or_ip: true (`String`).
+`server_address` - (Optional) License Server Address. Set License Server Address (`String`).
 
-`server_port` - (Optional) License Server Port Number. Set License Server port number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`server_port` - (Optional) License Server Port Number. Set License Server port number (`Number`).
 
 <a id="nestedblock--enable_vm"></a>
 ### Enable Vm
@@ -338,16 +338,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--interface_list"></a>
 ### Interface List
 
-`interfaces` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated. See [Interfaces](#nestedblock--interface_list--interfaces) below.
+`interfaces` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interfaces](#nestedblock--interface_list--interfaces) below.
 
 <a id="nestedblock--interface_list--interfaces"></a>
 ### Interface List Interfaces
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--kubernetes_upgrade_drain"></a>
 ### Kubernetes Upgrade Drain
@@ -364,7 +364,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
 
-`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000 (`Number`).
+`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes (`Number`).
 
@@ -379,11 +379,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--log_receiver"></a>
 ### Log Receiver
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--logs_streaming_disabled"></a>
 ### Logs Streaming Disabled
@@ -468,26 +468,26 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--sriov_interfaces"></a>
 ### Sriov Interfaces
 
-`sriov_interface` - (Optional) Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration ves.io.schema.rules.repeated.unique: true. See [Sriov Interface](#nestedblock--sriov_interfaces--sriov_interface) below.
+`sriov_interface` - (Optional) Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration. See [Sriov Interface](#nestedblock--sriov_interfaces--sriov_interface) below.
 
 <a id="nestedblock--sriov_interfaces--sriov_interface"></a>
 ### Sriov Interfaces Sriov Interface
 
-`interface_name` - (Optional) Name of physical interface. Name of SR-IOV physical interface Required: YES ves.io.schema.rules.message.required: true (`String`).
+`interface_name` - (Optional) Name of physical interface. Name of SR-IOV physical interface (`String`).
 
 `number_of_vfio_vfs` - (Optional) Number of virtual functions reserved for vfio. Number of virtual functions reserved for VNFs and DPDK-based CNFs (`Number`).
 
-`number_of_vfs` - (Optional) Total number of virtual functions. Total number of virtual functions Required: YES ves.io.schema.rules.message.required: true (`Number`).
+`number_of_vfs` - (Optional) Total number of virtual functions. Total number of virtual functions (`Number`).
 
 <a id="nestedblock--storage_class_list"></a>
 ### Storage Class List
 
-`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true. See [Storage Classes](#nestedblock--storage_class_list--storage_classes) below.
+`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#nestedblock--storage_class_list--storage_classes) below.
 
 <a id="nestedblock--storage_class_list--storage_classes"></a>
 ### Storage Class List Storage Classes
 
-`advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 64 ves. See [Advanced Storage Parameters](#nestedblock--storage_class_list--storage_classes--advanced_storage_parameters) below.
+`advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Storage Parameters](#nestedblock--storage_class_list--storage_classes--advanced_storage_parameters) below.
 
 `allow_volume_expansion` - (Optional) Allow Volume Expansion. Allow volume expansion (`Bool`).
 
@@ -495,7 +495,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
 
-`description` - (Optional) Storage Class Description. Description for this storage class ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Storage Class Description. Description for this storage class (`String`).
 
 `hpe_storage` - (Optional) HPE Storage. Storage class Device configuration for HPE Storage. See [Hpe Storage](#nestedblock--storage_class_list--storage_classes--hpe_storage) below.
 
@@ -503,11 +503,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator. See [Pure Service Orchestrator](#nestedblock--storage_class_list--storage_classes--pure_service_orchestrator) below.
 
-`reclaim_policy` - (Optional) Reclaim Policy. Reclaim Policy ves.io.schema.rules.string.max_len: 16 (`String`).
+`reclaim_policy` - (Optional) Reclaim Policy. Reclaim Policy (`String`).
 
-`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ves_object_name: true (`String`).
+`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
 
-`storage_device` - (Optional) Storage Device. Storage device that this class will use. The Device name defined at previous step. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`storage_device` - (Optional) Storage Device. Storage device that this class will use. The Device name defined at previous step (`String`).
 
 <a id="nestedblock--storage_class_list--storage_classes--advanced_storage_parameters"></a>
 ### Storage Class List Storage Classes Advanced Storage Parameters
@@ -515,38 +515,38 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--storage_class_list--storage_classes--custom_storage"></a>
 ### Storage Class List Storage Classes Custom Storage
 
-`yaml` - (Optional) Storage Class YAML. K8s YAML for StorageClass ves.io.schema.rules.string.max_len: 4096 ves.io.schema.rules.string.uri_ref: true (`String`).
+`yaml` - (Optional) Storage Class YAML. K8s YAML for StorageClass (`String`).
 
 <a id="nestedblock--storage_class_list--storage_classes--hpe_storage"></a>
 ### Storage Class List Storage Classes Hpe Storage
 
-`allow_mutations` - (Optional) allowMutations. mutation can override specified parameters ves.io.schema.rules.string.max_len: 256 (`String`).
+`allow_mutations` - (Optional) allowMutations. mutation can override specified parameters (`String`).
 
-`allow_overrides` - (Optional) allowOverrides. PVC can override specified parameters ves.io.schema.rules.string.max_len: 256 (`String`).
+`allow_overrides` - (Optional) allowOverrides. PVC can override specified parameters (`String`).
 
 `dedupe_enabled` - (Optional) dedupeEnabled. Indicates that the volume should enable deduplication (`Bool`).
 
-`description` - (Optional) Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information ves.io.schema.rules.string.max_len: 512 (`String`).
+`description` - (Optional) Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information (`String`).
 
 `destroy_on_delete` - (Optional) destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted (`Bool`).
 
 `encrypted` - (Optional) encrypted. Indicates that the volume should be encrypted (`Bool`).
 
-`folder` - (Optional) folder. The name of the folder in which to place the volume. ves.io.schema.rules.string.max_len: 128 (`String`).
+`folder` - (Optional) folder. The name of the folder in which to place the volume (`String`).
 
 `limit_iops` - (Optional) limitIops. The IOPS limit of the volume (`String`).
 
 `limit_mbps` - (Optional) limitMbps. The IOPS limit of the volume (`String`).
 
-`performance_policy` - (Optional) performancePolicy. The name of the performance policy to assign to the volume. ves.io.schema.rules.string.max_len: 128 (`String`).
+`performance_policy` - (Optional) performancePolicy. The name of the performance policy to assign to the volume (`String`).
 
-`pool` - (Optional) pool. The name of the pool in which to place the volume. ves.io.schema.rules.string.max_len: 128 (`String`).
+`pool` - (Optional) pool. The name of the pool in which to place the volume (`String`).
 
-`protection_template` - (Optional) protectionTemplate. The name of the performance policy to assign to the volume. ves.io.schema.rules.string.max_len: 128 (`String`).
+`protection_template` - (Optional) protectionTemplate. The name of the performance policy to assign to the volume (`String`).
 
-`secret_name` - (Optional) Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information ves.io.schema.rules.string.max_len: 256 (`String`).
+`secret_name` - (Optional) Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information (`String`).
 
-`secret_namespace` - (Optional) Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides ves.io.schema.rules.string.max_len: 256 (`String`).
+`secret_namespace` - (Optional) Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides (`String`).
 
 `sync_on_detach` - (Optional) syncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node (`Bool`).
 
@@ -557,7 +557,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `selector` - (Optional) Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool. See [Selector](#nestedblock--storage_class_list--storage_classes--netapp_trident--selector) below.
 
-`storage_pools` - (Optional) Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes ves.io.schema.rules.string.max_len: 512 (`String`).
+`storage_pools` - (Optional) Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes (`String`).
 
 <a id="nestedblock--storage_class_list--storage_classes--netapp_trident--selector"></a>
 ### Storage Class List Storage Classes Netapp Trident Selector
@@ -569,17 +569,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `bandwidth_limit` - (Optional) Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol (`String`).
 
-`iops_limit` - (Optional) IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined. ves.io.schema.rules.uint32.ranges: 0,100-100000000 (`Number`).
+`iops_limit` - (Optional) IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined (`Number`).
 
 <a id="nestedblock--storage_device_list"></a>
 ### Storage Device List
 
-`storage_devices` - (Optional) List of Storage Devices. List of custom storage devices ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true. See [Storage Devices](#nestedblock--storage_device_list--storage_devices) below.
+`storage_devices` - (Optional) List of Storage Devices. List of custom storage devices. See [Storage Devices](#nestedblock--storage_device_list--storage_devices) below.
 
 <a id="nestedblock--storage_device_list--storage_devices"></a>
 ### Storage Device List Storage Devices
 
-`advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 64 ves. See [Advanced Advanced Parameters](#nestedblock--storage_device_list--storage_devices--advanced_advanced_parameters) below.
+`advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Advanced Parameters](#nestedblock--storage_device_list--storage_devices--advanced_advanced_parameters) below.
 
 `custom_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Custom Storage](#nestedblock--storage_device_list--storage_devices--custom_storage) below.
 
@@ -589,7 +589,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator. See [Pure Service Orchestrator](#nestedblock--storage_device_list--storage_devices--pure_service_orchestrator) below.
 
-`storage_device` - (Optional) Storage Device. Storage device and device unit Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`storage_device` - (Optional) Storage Device. Storage device and device unit (`String`).
 
 <a id="nestedblock--storage_device_list--storage_devices--advanced_advanced_parameters"></a>
 ### Storage Device List Storage Devices Advanced Advanced Parameters
@@ -600,19 +600,19 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--storage_device_list--storage_devices--hpe_storage"></a>
 ### Storage Device List Storage Devices Hpe Storage
 
-`api_server_port` - (Optional) Storage server Port. Enter Storage Server Port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`api_server_port` - (Optional) Storage server Port. Enter Storage Server Port (`Number`).
 
 `iscsi_chap_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Iscsi Chap Password](#nestedblock--storage_device_list--storage_devices--hpe_storage--iscsi_chap_password) below.
 
-`iscsi_chap_user` - (Optional) iscsi chapUser. chap Username to connect to the HPE storage ves.io.schema.rules.string.max_len: 256 (`String`).
+`iscsi_chap_user` - (Optional) iscsi chapUser. chap Username to connect to the HPE storage (`String`).
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--storage_device_list--storage_devices--hpe_storage--password) below.
 
-`storage_server_ip_address` - (Optional) Storage Server IP address. Enter storage server IP address ves.io.schema.rules.string.ipv4: true (`String`).
+`storage_server_ip_address` - (Optional) Storage Server IP address. Enter storage server IP address (`String`).
 
-`storage_server_name` - (Optional) Storage Server Name. Enter storage server Name ves.io.schema.rules.string.hostname: true (`String`).
+`storage_server_name` - (Optional) Storage Server Name. Enter storage server Name (`String`).
 
-`username` - (Optional) Username. Username to connect to the HPE storage management IP Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`username` - (Optional) Username. Username to connect to the HPE storage management IP (`String`).
 
 <a id="nestedblock--storage_device_list--storage_devices--hpe_storage--iscsi_chap_password"></a>
 ### Storage Device List Storage Devices Hpe Storage Iscsi Chap Password
@@ -650,32 +650,32 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--storage_interface_list"></a>
 ### Storage Interface List
 
-`interfaces` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated. See [Interfaces](#nestedblock--storage_interface_list--interfaces) below.
+`interfaces` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interfaces](#nestedblock--storage_interface_list--interfaces) below.
 
 <a id="nestedblock--storage_interface_list--interfaces"></a>
 ### Storage Interface List Interfaces
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--storage_static_routes"></a>
 ### Storage Static Routes
 
-`storage_routes` - (Optional) List of Static Routes. List of storage static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves. See [Storage Routes](#nestedblock--storage_static_routes--storage_routes) below.
+`storage_routes` - (Optional) List of Static Routes. List of storage static routes. See [Storage Routes](#nestedblock--storage_static_routes--storage_routes) below.
 
 <a id="nestedblock--storage_static_routes--storage_routes"></a>
 ### Storage Static Routes Storage Routes
 
-`attrs` - (Optional) Attributes. List of route attributes associated with the static route ves.io.schema.rules.repeated.max_items: 4 (`List`).
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route (`List`).
 
 `labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy. See [Labels](#nestedblock--storage_static_routes--storage_routes--labels) below.
 
 `nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#nestedblock--storage_static_routes--storage_routes--nexthop) below.
 
-`subnets` - (Optional) Subnets. List of route prefixes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256. See [Subnets](#nestedblock--storage_static_routes--storage_routes--subnets) below.
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#nestedblock--storage_static_routes--storage_routes--subnets) below.
 
 <a id="nestedblock--storage_static_routes--storage_routes--labels"></a>
 ### Storage Static Routes Storage Routes Labels
@@ -683,7 +683,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--storage_static_routes--storage_routes--nexthop"></a>
 ### Storage Static Routes Storage Routes Nexthop
 
-`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface' ves.io.schema.rules.repeated.max_items: 1. See [Interface](#nestedblock--storage_static_routes--storage_routes--nexthop--interface) below.
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#nestedblock--storage_static_routes--storage_routes--nexthop--interface) below.
 
 `nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#nestedblock--storage_static_routes--storage_routes--nexthop--nexthop_address) below.
 
@@ -711,11 +711,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--usb_policy"></a>
 ### Usb Policy
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_global_log_receiver Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Monitoring"
 description: |-
   Creates a new Global Log Receiver object
 ---

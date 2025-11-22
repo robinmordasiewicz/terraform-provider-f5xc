@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_nat_policy Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   NAT Policy create specification configures NAT Policy with multiple Rules,
 ---
@@ -64,7 +64,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`rules` - (Optional) Rule. List of rules to apply under the NAT Policy. Rule that matches first would be applied Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64. See [Rules](#rules) below for details.
+`rules` - (Optional) Rule. List of rules to apply under the NAT Policy. Rule that matches first would be applied. See [Rules](#rules) below for details.
 
 `site` - (Optional) Site Reference Type. Reference to Site Object. See [Site](#site) below for details.
 
@@ -91,7 +91,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--rules--enable) below.
 
-`name` - (Optional) Name. Name of the Rule Required: YES ves.io.schema.rules.message.required: true (`String`).
+`name` - (Optional) Name. Name of the Rule (`String`).
 
 `network_interface` - (Optional) NetworkInterface Reference Type. Reference to Network Interface Object. See [Network Interface](#nestedblock--rules--network_interface) below.
 
@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dynamic` - (Optional) Dynamic Pool. Dynamic Pool Configuration. See [Dynamic](#nestedblock--rules--action--dynamic) below.
 
-`virtual_cidr` - (Optional) Virtual Subnet NAT. Exclusive with [dynamic] Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectiona... (`String`).
+`virtual_cidr` - (Optional) Virtual Subnet NAT. Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectional fashion (`String`).
 
 <a id="nestedblock--rules--action--dynamic"></a>
 ### Rules Action Dynamic
@@ -122,7 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--cloud_connect"></a>
 ### Rules Cloud Connect
 
-`refs` - (Optional) Cloud Connect. Reference to Cloud Connect Object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Refs](#nestedblock--rules--cloud_connect--refs) below.
+`refs` - (Optional) Cloud Connect. Reference to Cloud Connect Object. See [Refs](#nestedblock--rules--cloud_connect--refs) below.
 
 <a id="nestedblock--rules--cloud_connect--refs"></a>
 ### Rules Cloud Connect Refs
@@ -142,7 +142,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#nestedblock--rules--criteria--any) below.
 
-`destination_cidr` - (Optional) Destination IP. Destination IP of the packet to match ves.io.schema.rules.string.ip_prefix: true (`List`).
+`destination_cidr` - (Optional) Destination IP. Destination IP of the packet to match (`List`).
 
 `destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#nestedblock--rules--criteria--destination_port) below.
 
@@ -152,7 +152,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#nestedblock--rules--criteria--segment) below.
 
-`source_cidr` - (Optional) Source IP. Source IP of the packet to match ves.io.schema.rules.string.ip_prefix: true (`List`).
+`source_cidr` - (Optional) Source IP. Source IP of the packet to match (`List`).
 
 `source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#nestedblock--rules--criteria--source_port) below.
 
@@ -170,9 +170,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--rules--criteria--destination_port--no_port_match) below.
 
-`port` - (Optional) Port. Exclusive with [no_port_match port_ranges] Exact Port to match ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Exclusive with [no_port_match port] Port range to match ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range: true (`String`).
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="nestedblock--rules--criteria--destination_port--no_port_match"></a>
 ### Rules Criteria Destination Port No Port Match
@@ -183,7 +183,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--criteria--segment"></a>
 ### Rules Criteria Segment
 
-`refs` - (Optional) Segment. Reference to Segment Object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Refs](#nestedblock--rules--criteria--segment--refs) below.
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#nestedblock--rules--criteria--segment--refs) below.
 
 <a id="nestedblock--rules--criteria--segment--refs"></a>
 ### Rules Criteria Segment Refs
@@ -193,9 +193,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--rules--criteria--source_port--no_port_match) below.
 
-`port` - (Optional) Port. Exclusive with [no_port_match port_ranges] Exact Port to match ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Exclusive with [no_port_match port] Port range to match ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range: true (`String`).
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="nestedblock--rules--criteria--source_port--no_port_match"></a>
 ### Rules Criteria Source Port No Port Match
@@ -229,7 +229,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--criteria--virtual_network"></a>
 ### Rules Criteria Virtual Network
 
-`refs` - (Optional) Virtual Network Reference. Reference to virtual network ves.io.schema.rules.repeated.max_items: 1. See [Refs](#nestedblock--rules--criteria--virtual_network--refs) below.
+`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#nestedblock--rules--criteria--virtual_network--refs) below.
 
 <a id="nestedblock--rules--criteria--virtual_network--refs"></a>
 ### Rules Criteria Virtual Network Refs
@@ -243,7 +243,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--network_interface"></a>
 ### Rules Network Interface
 
-`refs` - (Optional) Network Interface. Reference to Network Interface Object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Refs](#nestedblock--rules--network_interface--refs) below.
+`refs` - (Optional) Network Interface. Reference to Network Interface Object. See [Refs](#nestedblock--rules--network_interface--refs) below.
 
 <a id="nestedblock--rules--network_interface--refs"></a>
 ### Rules Network Interface Refs
@@ -261,7 +261,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--segment"></a>
 ### Rules Segment
 
-`refs` - (Optional) Segment. Reference to Segment Object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Refs](#nestedblock--rules--segment--refs) below.
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#nestedblock--rules--segment--refs) below.
 
 <a id="nestedblock--rules--segment--refs"></a>
 ### Rules Segment Refs
@@ -279,7 +279,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--virtual_network"></a>
 ### Rules Virtual Network
 
-`refs` - (Optional) Virtual Network Reference. Reference to virtual network ves.io.schema.rules.repeated.max_items: 1. See [Refs](#nestedblock--rules--virtual_network--refs) below.
+`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#nestedblock--rules--virtual_network--refs) below.
 
 <a id="nestedblock--rules--virtual_network--refs"></a>
 ### Rules Virtual Network Refs
@@ -297,7 +297,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--site"></a>
 ### Site
 
-`refs` - (Optional) Site. Reference to Site Object Required: YES ves.io.schema.rules.message.required: true. See [Refs](#nestedblock--site--refs) below.
+`refs` - (Optional) Site. Reference to Site Object. See [Refs](#nestedblock--site--refs) below.
 
 <a id="nestedblock--site--refs"></a>
 ### Site Refs

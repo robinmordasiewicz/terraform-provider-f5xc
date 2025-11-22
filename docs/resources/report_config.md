@@ -81,16 +81,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--report_recipients"></a>
 ### Report Recipients
 
-`user_groups` - (Optional) User Groups. Select one or more user groups, to which the report should be sent via email ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true. See [User Groups](#nestedblock--report_recipients--user_groups) below.
+`user_groups` - (Optional) User Groups. Select one or more user groups, to which the report should be sent via email. See [User Groups](#nestedblock--report_recipients--user_groups) below.
 
 <a id="nestedblock--report_recipients--user_groups"></a>
 ### Report Recipients User Groups
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--waap"></a>
 ### Waap
@@ -111,26 +111,26 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waap--daily"></a>
 ### Waap Daily
 
-`report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules (`String`).
+`report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
 <a id="nestedblock--waap--monthly"></a>
 ### Waap Monthly
 
 `date` - (Optional) Report Generation Date. report generation date Indicates field not being set Create report on Last day of month (`String`).
 
-`report_generation_time` - (Optional) Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules (`String`).
+`report_generation_time` - (Optional) Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
 <a id="nestedblock--waap--namespaces"></a>
 ### Waap Namespaces
 
-`namespaces` - (Optional) Namespaces. list of namespaces for which user wants to generate report Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated (`List`).
+`namespaces` - (Optional) Namespaces. list of namespaces for which user wants to generate report (`List`).
 
 <a id="nestedblock--waap--weekly"></a>
 ### Waap Weekly
 
 `day` - (Optional) Report Generation Weekday. report generation weekday Indicates field not being set (`String`).
 
-`report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules (`String`).
+`report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
 
 ## Import

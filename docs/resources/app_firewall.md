@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_app_firewall Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create Application Firewall
 ---
@@ -131,7 +131,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--allowed_response_codes"></a>
 ### Allowed Response Codes
 
-`response_code` - (Optional) Response Code. List of HTTP response status codes that are allowed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.uint32.gte: 100 ves.io.schema.rules (`List`).
+`response_code` - (Optional) Response Code. List of HTTP response status codes that are allowed (`List`).
 
 <a id="nestedblock--blocking"></a>
 ### Blocking
@@ -155,7 +155,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_anonymization"></a>
 ### Custom Anonymization
 
-`anonymization_config` - (Optional) Configuration. List of HTTP headers, cookies and query parameters whose values will be masked Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves. See [Anonymization Config](#nestedblock--custom_anonymization--anonymization_config) below.
+`anonymization_config` - (Optional) Configuration. List of HTTP headers, cookies and query parameters whose values will be masked. See [Anonymization Config](#nestedblock--custom_anonymization--anonymization_config) below.
 
 <a id="nestedblock--custom_anonymization--anonymization_config"></a>
 ### Custom Anonymization Anonymization Config
@@ -169,17 +169,17 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--custom_anonymization--anonymization_config--cookie"></a>
 ### Custom Anonymization Anonymization Config Cookie
 
-`cookie_name` - (Optional) Cookie Name. Masks the cookie value. The setting does not mask the cookie name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`cookie_name` - (Optional) Cookie Name. Masks the cookie value. The setting does not mask the cookie name (`String`).
 
 <a id="nestedblock--custom_anonymization--anonymization_config--http_header"></a>
 ### Custom Anonymization Anonymization Config Http Header
 
-`header_name` - (Optional) Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true (`String`).
+`header_name` - (Optional) Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name (`String`).
 
 <a id="nestedblock--custom_anonymization--anonymization_config--query_parameter"></a>
 ### Custom Anonymization Anonymization Config Query Parameter
 
-`query_param_name` - (Optional) Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`query_param_name` - (Optional) Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name (`String`).
 
 <a id="nestedblock--default_anonymization"></a>
 ### Default Anonymization
@@ -263,7 +263,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--detection_settings--signature_selection_setting--attack_type_settings"></a>
 ### Detection Settings Signature Selection Setting Attack Type Settings
 
-`disabled_attack_types` - (Optional) Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 22 ves.io (`List`).
+`disabled_attack_types` - (Optional) Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection (`List`).
 
 <a id="nestedblock--detection_settings--signature_selection_setting--default_attack_type_settings"></a>
 ### Detection Settings Signature Selection Setting Default Attack Type Settings
@@ -280,17 +280,17 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--detection_settings--stage_new_and_updated_signatures"></a>
 ### Detection Settings Stage New And Updated Signatures
 
-`staging_period` - (Optional) Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days. Required: YES ves.io.schema.rules.message.required: true ves.io (`Number`).
+`staging_period` - (Optional) Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days (`Number`).
 
 <a id="nestedblock--detection_settings--stage_new_signatures"></a>
 ### Detection Settings Stage New Signatures
 
-`staging_period` - (Optional) Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days. Required: YES ves.io.schema.rules.message.required: true ves.io (`Number`).
+`staging_period` - (Optional) Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days (`Number`).
 
 <a id="nestedblock--detection_settings--violation_settings"></a>
 ### Detection Settings Violation Settings
 
-`disabled_violation_types` - (Optional) Disabled Violations. List of violations to be excluded Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 40 ves.io.schema.rules.repeated.unique: true (`List`).
+`disabled_violation_types` - (Optional) Disabled Violations. List of violations to be excluded (`List`).
 
 <a id="nestedblock--disable_anonymization"></a>
 ### Disable Anonymization

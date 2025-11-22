@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_fast_acl_rule Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create a new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply
 ---
@@ -70,7 +70,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`port` - (Optional) Source Ports. L4 port numbers to match Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128. See [Port](#port) below for details.
+`port` - (Optional) Source Ports. L4 port numbers to match. See [Port](#port) below for details.
 
 `prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#prefix) below for details.
 
@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--action--policer_action"></a>
 ### Action Policer Action
 
-`ref` - (Optional) Reference. A policer direct reference ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--action--policer_action--ref) below.
+`ref` - (Optional) Reference. A policer direct reference. See [Ref](#nestedblock--action--policer_action--ref) below.
 
 <a id="nestedblock--action--policer_action--ref"></a>
 ### Action Policer Action Ref
@@ -114,7 +114,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--action--protocol_policer_action"></a>
 ### Action Protocol Policer Action
 
-`ref` - (Optional) Protocol policer Reference. Reference to protocol policer object ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--action--protocol_policer_action--ref) below.
+`ref` - (Optional) Protocol policer Reference. Reference to protocol policer object. See [Ref](#nestedblock--action--protocol_policer_action--ref) below.
 
 <a id="nestedblock--action--protocol_policer_action--ref"></a>
 ### Action Protocol Policer Action Ref
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ip_prefix_set"></a>
 ### Ip Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--ip_prefix_set--ref) below.
 
 <a id="nestedblock--ip_prefix_set--ref"></a>
 ### Ip Prefix Set Ref
@@ -154,7 +154,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed. See [Dns](#nestedblock--port--dns) below.
 
-`user_defined` - (Optional) User defined port. Exclusive with [all dns] Matches the user defined port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
 
 <a id="nestedblock--port--all"></a>
 ### Port All
@@ -165,7 +165,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--prefix"></a>
 ### Prefix
 
-`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256 (`List`).
+`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 
 ## Import

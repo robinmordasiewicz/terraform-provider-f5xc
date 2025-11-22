@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_cloud_connect Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Shape of the Cloud Connect specification
 ---
@@ -94,25 +94,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--aws_tgw_site--cred"></a>
 ### Aws Tgw Site Cred
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--aws_tgw_site--site"></a>
 ### Aws Tgw Site Site
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--aws_tgw_site--vpc_attachments"></a>
 ### Aws Tgw Site Vpc Attachments
 
-`vpc_list` - (Optional) VPC List. ves.io.schema.rules.repeated.max_items: 128. See [Vpc List](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list) below.
+`vpc_list` - (Optional) VPC List. See [Vpc List](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list) below.
 
 <a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list"></a>
 ### Aws Tgw Site Vpc Attachments Vpc List
@@ -125,7 +125,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--manual_routing) below.
 
-`vpc_id` - (Optional) VPC ID. Enter the VPC ID of the VPC to be attached Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string (`String`).
+`vpc_id` - (Optional) VPC ID. Enter the VPC ID of the VPC to be attached (`String`).
 
 <a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--custom_routing"></a>
 ### Aws Tgw Site Vpc Attachments Vpc List Custom Routing
@@ -149,16 +149,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--azure_vnet_site--site"></a>
 ### Azure Vnet Site Site
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--azure_vnet_site--vnet_attachments"></a>
 ### Azure Vnet Site Vnet Attachments
 
-`vnet_list` - (Optional) VNET List. ves.io.schema.rules.repeated.max_items: 128. See [Vnet List](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list) below.
+`vnet_list` - (Optional) VNET List. See [Vnet List](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list) below.
 
 <a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list"></a>
 ### Azure Vnet Site Vnet Attachments Vnet List
@@ -171,9 +171,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--manual_routing) below.
 
-`subscription_id` - (Optional) Subscription ID. Enter the Subscription ID of the VNET to be attached Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`subscription_id` - (Optional) Subscription ID. Enter the Subscription ID of the VNET to be attached (`String`).
 
-`vnet_id` - (Optional) VNET ID. Enter the vnet ID of the VNET to be attached in format /<resource-group-name>/<vnet-name> Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`vnet_id` - (Optional) VNET ID. Enter the vnet ID of the VNET to be attached in format /<resource-group-name>/<vnet-name> (`String`).
 
 <a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--custom_routing"></a>
 ### Azure Vnet Site Vnet Attachments Vnet List Custom Routing
@@ -190,11 +190,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--segment"></a>
 ### Segment
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

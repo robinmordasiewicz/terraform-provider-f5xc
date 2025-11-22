@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_oidc_provider Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Authentication"
 description: |-
   CustomCreateSpecType is the spec to create oidc provider
 ---
@@ -89,13 +89,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--azure_oidc_spec_type"></a>
 ### Azure Oidc Spec Type
 
-`authorization_url` - (Optional) Authorization URL. The authorization url of your OIDC application. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`authorization_url` - (Optional) Authorization URL. The authorization url of your OIDC application (`String`).
 
 `backchannel_logout` - (Optional) Backchannel Logout. Does the external IDP support backchannel logout? (`Bool`).
 
-`client_id` - (Optional) Client ID. Client ID of the OIDC application registered with azure provider. REQUIRED field Required: YES ves.io.schema.rules.message.required: true (`String`).
+`client_id` - (Optional) Client ID. Client ID of the OIDC application registered with azure provider. REQUIRED field (`String`).
 
-`client_secret` - (Optional) Client Secret. Secret of the OIDC application registered with azure provider. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`client_secret` - (Optional) Client Secret. Secret of the OIDC application registered with azure provider (`String`).
 
 `default_scopes` - (Optional) Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes (`String`).
 
@@ -107,16 +107,16 @@ In addition to all arguments above, the following attributes are exported:
 
 `prompt` - (Optional) Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request (`String`).
 
-`token_url` - (Optional) Token URL. The token URL of your OIDC application. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`token_url` - (Optional) Token URL. The token URL of your OIDC application (`String`).
 
 `user_info_url` - (Optional) User Info URL. The User Info Url specified in your OIDC application (`String`).
 
 <a id="nestedblock--google_oidc_spec_type"></a>
 ### Google Oidc Spec Type
 
-`client_id` - (Optional) Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field Required: YES ves.io.schema.rules.message.required: true (`String`).
+`client_id` - (Optional) Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field (`String`).
 
-`client_secret` - (Optional) Client Secret. Secret of the OIDC application registered with google provider. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`client_secret` - (Optional) Client Secret. Secret of the OIDC application registered with google provider (`String`).
 
 `hosted_domain` - (Optional) Hosted Domain. set hosted domain to restrict user input on login form to use email address from this email domain. for example, setting value company (`String`).
 
@@ -125,13 +125,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `allowed_clock_skew` - (Optional) Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens. Default value is zero (`String`).
 
-`authorization_url` - (Optional) Authorization URL. The authorization url of your OIDC application. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`authorization_url` - (Optional) Authorization URL. The authorization url of your OIDC application (`String`).
 
 `backchannel_logout` - (Optional) Backchannel Logout. Does the external IDP support backchannel logout? (`Bool`).
 
-`client_id` - (Optional) Client ID. Client ID of the OIDC application registered with your identity/OIDC provider. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`client_id` - (Optional) Client ID. Client ID of the OIDC application registered with your identity/OIDC provider (`String`).
 
-`client_secret` - (Optional) Client Secret. Secret of the OIDC application registered with your identity/OIDC provider. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`client_secret` - (Optional) Client Secret. Secret of the OIDC application registered with your identity/OIDC provider (`String`).
 
 `default_scopes` - (Optional) Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes (`String`).
 
@@ -153,7 +153,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `prompt` - (Optional) Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request (`String`).
 
-`token_url` - (Optional) Token URL. The token URL of your OIDC application. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`token_url` - (Optional) Token URL. The token URL of your OIDC application (`String`).
 
 `user_info_url` - (Optional) User Info URL. The User Info Url specified in your OIDC application (`String`).
 
@@ -162,13 +162,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--okta_oidc_spec_type"></a>
 ### Okta Oidc Spec Type
 
-`authorization_url` - (Optional) Authorization URL. The authorization url of your OIDC application. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`authorization_url` - (Optional) Authorization URL. The authorization url of your OIDC application (`String`).
 
 `backchannel_logout` - (Optional) Backchannel Logout. Does the external IDP support backchannel logout? (`Bool`).
 
-`client_id` - (Optional) Client ID. Client ID of the OIDC application registered with azure provider. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`client_id` - (Optional) Client ID. Client ID of the OIDC application registered with azure provider (`String`).
 
-`client_secret` - (Optional) Client Secret. Secret of the OIDC application registered with azure provider. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`client_secret` - (Optional) Client Secret. Secret of the OIDC application registered with azure provider (`String`).
 
 `default_scopes` - (Optional) Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes (`String`).
 
@@ -180,7 +180,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `prompt` - (Optional) Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request (`String`).
 
-`token_url` - (Optional) Token URL. The token URL of your OIDC application. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`token_url` - (Optional) Token URL. The token URL of your OIDC application (`String`).
 
 `user_info_url` - (Optional) User Info URL. The User Info Url specified in your OIDC application (`String`).
 

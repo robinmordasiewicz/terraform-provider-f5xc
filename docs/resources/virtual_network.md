@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_virtual_network Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Create virtual network in given namespace
 ---
@@ -72,7 +72,7 @@ The following arguments are optional:
 
 `site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#site-local-network) below for details.
 
-`static_routes` - (Optional) Static Routes. List of static routes on the virtual network ves.io.schema.rules.repeated.max_items: 165 ves.io.schema.rules.repeated.unique: true. See [Static Routes](#static-routes) below for details.
+`static_routes` - (Optional) Static Routes. List of static routes on the virtual network. See [Static Routes](#static-routes) below for details.
 
 
 ### Attributes Reference
@@ -96,13 +96,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--static_routes"></a>
 ### Static Routes
 
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true (`List`).
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
 
 `default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#nestedblock--static_routes--default_gateway) below.
 
-`ip_address` - (Optional) IP Address. Exclusive with [default_gateway node_interface] Traffic matching the ip prefixes is sent to this IP Address ves.io.schema.rules.string.ipv4: true (`String`).
+`ip_address` - (Optional) IP Address. Traffic matching the ip prefixes is sent to this IP Address (`String`).
 
-`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves (`List`).
+`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
 
 `node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#nestedblock--static_routes--node_interface) below.
 
@@ -112,12 +112,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--static_routes--node_interface"></a>
 ### Static Routes Node Interface
 
-`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface ves.io.schema.rules.repeated.max_items: 8. See [List](#nestedblock--static_routes--node_interface--list) below.
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#nestedblock--static_routes--node_interface--list) below.
 
 <a id="nestedblock--static_routes--node_interface--list"></a>
 ### Static Routes Node Interface List
 
-`interface` - (Optional) Interface. Interface reference on this node ves.io.schema.rules.repeated.max_items: 1. See [Interface](#nestedblock--static_routes--node_interface--list--interface) below.
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#nestedblock--static_routes--node_interface--list--interface) below.
 
 `node` - (Optional) Node. Node name on this site (`String`).
 

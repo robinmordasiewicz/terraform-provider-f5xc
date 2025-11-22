@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_k8s_cluster Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Create k8s_cluster will create the object in the storage backend for namespace metadata.namespace
 ---

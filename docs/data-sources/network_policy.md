@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_network_policy Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Creates a new network policy with configured parameters in specified namespace
 ---

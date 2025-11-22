@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_rate_limiter Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create rate_limiter creates a new object in the storage backend for metadata.namespace.
 ---
@@ -55,9 +55,9 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`limits` - (Optional) Rate Limit Values. A list of RateLimitValues that specifies the total number of allowed requests for each specified period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema. See [Limits](#limits) below for details.
+`limits` - (Optional) Rate Limit Values. A list of RateLimitValues that specifies the total number of allowed requests for each specified period. See [Limits](#limits) below for details.
 
-`user_identification` - (Optional) User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. ves.io.schema. See [User Identification](#user-identification) below for details.
+`user_identification` - (Optional) User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. See [User Identification](#user-identification) below for details.
 
 
 ### Attributes Reference
@@ -74,17 +74,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `action_block` - (Optional) Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold. See [Action Block](#nestedblock--limits--action_block) below.
 
-`burst_multiplier` - (Optional) Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 100 (`Number`).
+`burst_multiplier` - (Optional) Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate (`Number`).
 
 `disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#nestedblock--limits--disabled) below.
 
 `leaky_bucket` - (Optional) Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5. See [Leaky Bucket](#nestedblock--limits--leaky_bucket) below.
 
-`period_multiplier` - (Optional) Periods. This setting, combined with Per Period units, provides a duration ves.io.schema.rules.uint32.gte: 0 (`Number`).
+`period_multiplier` - (Optional) Periods. This setting, combined with Per Period units, provides a duration (`Number`).
 
 `token_bucket` - (Optional) Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits. See [Token Bucket](#nestedblock--limits--token_bucket) below.
 
-`total_number` - (Optional) Number Of Requests. The total number of allowed requests per rate-limiting period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32 (`Number`).
+`total_number` - (Optional) Number Of Requests. The total number of allowed requests per rate-limiting period (`Number`).
 
 `unit` - (Optional) Rate Limit Period Unit. Unit for the period per which the rate limit is applied (`String`).
 
@@ -100,17 +100,17 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--limits--action_block--hours"></a>
 ### Limits Action Block Hours
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 48 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--limits--action_block--minutes"></a>
 ### Limits Action Block Minutes
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 60 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--limits--action_block--seconds"></a>
 ### Limits Action Block Seconds
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 300 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--limits--disabled"></a>
 ### Limits Disabled

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_malicious_user_mitigation Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.
 ---
@@ -77,7 +77,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--mitigation_type"></a>
 ### Mitigation Type
 
-`rules` - (Optional) Rules. Define the threat levels and the corresponding mitigation actions to be taken Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema. See [Rules](#nestedblock--mitigation_type--rules) below.
+`rules` - (Optional) Rules. Define the threat levels and the corresponding mitigation actions to be taken. See [Rules](#nestedblock--mitigation_type--rules) below.
 
 <a id="nestedblock--mitigation_type--rules"></a>
 ### Mitigation Type Rules

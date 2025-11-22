@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_azure_vnet_site Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Shape of the Azure VNet site specification
 ---
@@ -107,19 +107,19 @@ The following arguments are required:
 
 The following arguments are optional:
 
-`address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude. ves.io.schema.rules.string.max_len: 256 (`String`).
+`address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
 
 `admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
 
 ###### One of the arguments from this list "alternate_region, azure_region" must be set
 
-`alternate_region` - (Optional) Alternate Azure Region Name. Exclusive with [azure_region] Name of the azure region which does not support availability zones. ves.io.schema.rules.string.max_len: 64 (`String`).
+`alternate_region` - (Optional) Alternate Azure Region Name. Name of the azure region which does not support availability zones (`String`).
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
 `azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Azure Cred](#azure-cred) below for details.
 
-`azure_region` - (Optional) Recommended Azure Region Name. Exclusive with [alternate_region] Name of the azure region which supports availability zones. ves.io.schema.rules.string.max_len: 64 (`String`).
+`azure_region` - (Optional) Recommended Azure Region Name. Name of the azure region which supports availability zones (`String`).
 
 ###### One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set
 
@@ -133,7 +133,7 @@ The following arguments are optional:
 
 `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
 
-`disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB ves.io.schema.rules.uint32.lte: 4095 (`Number`).
+`disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
 ###### One of the arguments from this list "ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar" must be set
 
@@ -161,21 +161,21 @@ The following arguments are optional:
 
 `no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Worker Nodes](#no-worker-nodes) below for details.
 
-`nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Exclusive with [no_worker_nodes total_nodes] Desired Worker Nodes Per AZ. Max limit is up to 21 ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 21 (`Number`).
+`nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global C.... See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
 `os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [Os](#os) below for details.
 
-`resource_group` - (Optional) Resource Group. Azure resource group for resources that will be created Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string (`String`).
+`resource_group` - (Optional) Resource Group. Azure resource group for resources that will be created (`String`).
 
-`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the site. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1 (`String`).
+`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the site (`String`).
 
 `sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
 
-`tags` - (Optional) Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console. ves.io.schema.rules.map.keys. See [Tags](#tags) below for details.
+`tags` - (Optional) Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console. See [Tags](#tags) below for details.
 
-`total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Exclusive with [no_worker_nodes nodes_per_az] Total number of worker nodes to be deployed across all AZ's used in the Site ves.io.schema.rules.uint32 (`Number`).
+`total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
 
 `vnet` - (Optional) Azure Vnet choice. This defines choice about Azure Vnet for a view. See [Vnet](#vnet) below for details.
 
@@ -205,7 +205,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -219,11 +219,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--azure_cred"></a>
 ### Azure Cred
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--block_all_services"></a>
 ### Block All Services
@@ -231,7 +231,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--blocked_services"></a>
 ### Blocked Services
 
-`blocked_sevice` - (Optional) Disable Node Local Services. ves.io.schema.rules.repeated.unique: true. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
+`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
 
 <a id="nestedblock--blocked_services--blocked_sevice"></a>
 ### Blocked Services Blocked Sevice
@@ -256,16 +256,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--coordinates"></a>
 ### Coordinates
 
-`latitude` - (Optional) Latitude. Latitude of the site location ves.io.schema.rules.float.gte: -90.0 ves.io.schema.rules.float.lte: 90.0 (`Number`).
+`latitude` - (Optional) Latitude. Latitude of the site location (`Number`).
 
-`longitude` - (Optional) Longitude. longitude of site location ves.io.schema.rules.float.gte: -180.0 ves.io.schema.rules.float.lte: 180.0 (`Number`).
+`longitude` - (Optional) Longitude. longitude of site location (`Number`).
 
 <a id="nestedblock--custom_dns"></a>
 ### Custom Dns
 
-`inside_nameserver` - (Optional) DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network ves.io.schema.rules.string.ipv4: true (`String`).
+`inside_nameserver` - (Optional) DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network (`String`).
 
-`outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network ves.io.schema.rules.string.ipv4: true (`String`).
+`outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
 
 <a id="nestedblock--default_blocked_services"></a>
 ### Default Blocked Services
@@ -281,9 +281,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--ingress_egress_gw--active_network_policies) below.
 
-`az_nodes` - (Optional) Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Az Nodes](#nestedblock--ingress_egress_gw--az_nodes) below.
+`az_nodes` - (Optional) Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. See [Az Nodes](#nestedblock--ingress_egress_gw--az_nodes) below.
 
-`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
 
 `dc_cluster_group_inside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside Vn](#nestedblock--ingress_egress_gw--dc_cluster_group_inside_vn) below.
 
@@ -335,49 +335,49 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw--active_enhanced_firewall_policies"></a>
 ### Ingress Egress Gw Active Enhanced Firewall Policies
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules. See [Enhanced Firewall Policies](#nestedblock--ingress_egress_gw--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--ingress_egress_gw--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 ### Ingress Egress Gw Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw--active_forward_proxy_policies"></a>
 ### Ingress Egress Gw Active Forward Proxy Policies
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated. See [Forward Proxy Policies](#nestedblock--ingress_egress_gw--active_forward_proxy_policies--forward_proxy_policies) below.
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--ingress_egress_gw--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_forward_proxy_policies--forward_proxy_policies"></a>
 ### Ingress Egress Gw Active Forward Proxy Policies Forward Proxy Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw--active_network_policies"></a>
 ### Ingress Egress Gw Active Network Policies
 
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema. See [Network Policies](#nestedblock--ingress_egress_gw--active_network_policies--network_policies) below.
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--ingress_egress_gw--active_network_policies--network_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_network_policies--network_policies"></a>
 ### Ingress Egress Gw Active Network Policies Network Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw--az_nodes"></a>
 ### Ingress Egress Gw Az Nodes
 
-`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input Required: YES ves.io.schema.rules.message.required: true (`String`).
+`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input (`String`).
 
 `inside_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Inside Subnet](#nestedblock--ingress_egress_gw--az_nodes--inside_subnet) below.
 
@@ -412,20 +412,20 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw--dc_cluster_group_inside_vn"></a>
 ### Ingress Egress Gw Dc Cluster Group Inside Vn
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw--dc_cluster_group_outside_vn"></a>
 ### Ingress Egress Gw Dc Cluster Group Outside Vn
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw--forward_proxy_allow_all"></a>
 ### Ingress Egress Gw Forward Proxy Allow All
@@ -433,7 +433,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw--global_network_list"></a>
 ### Ingress Egress Gw Global Network List
 
-`global_network_connections` - (Optional) Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1. See [Global Network Connections](#nestedblock--ingress_egress_gw--global_network_list--global_network_connections) below.
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--ingress_egress_gw--global_network_list--global_network_connections) below.
 
 <a id="nestedblock--ingress_egress_gw--global_network_list--global_network_connections"></a>
 ### Ingress Egress Gw Global Network List Global Network Connections
@@ -455,7 +455,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `express_route_enabled` - (Optional) Express Route Configuration. Express Route Configuration. See [Express Route Enabled](#nestedblock--ingress_egress_gw--hub--express_route_enabled) below.
 
-`spoke_vnets` - (Optional) Spoke VNet Peering (Legacy). Spoke VNet Peering ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.unique: true. See [Spoke Vnets](#nestedblock--ingress_egress_gw--hub--spoke_vnets) below.
+`spoke_vnets` - (Optional) Spoke VNet Peering (Legacy). Spoke VNet Peering. See [Spoke Vnets](#nestedblock--ingress_egress_gw--hub--spoke_vnets) below.
 
 <a id="nestedblock--ingress_egress_gw--hub--express_route_disabled"></a>
 ### Ingress Egress Gw Hub Express Route Disabled
@@ -467,9 +467,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#nestedblock--ingress_egress_gw--hub--express_route_enabled--auto_asn) below.
 
-`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated. See [Connections](#nestedblock--ingress_egress_gw--hub--express_route_enabled--connections) below.
+`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site. See [Connections](#nestedblock--ingress_egress_gw--hub--express_route_enabled--connections) below.
 
-`custom_asn` - (Optional) Custom ASN. Exclusive with [auto_asn] Set custom ASN for F5XC Site ves.io.schema.rules.uint32.gt: 1 ves.io.schema.rules.uint32.lte: 65535 ves.io.schema.rules.uint32 (`Number`).
+`custom_asn` - (Optional) Custom ASN. Set custom ASN for F5XC Site (`Number`).
 
 `do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise To Route Server](#nestedblock--ingress_egress_gw--hub--express_route_enabled--do_not_advertise_to_route_server) below.
 
@@ -551,14 +551,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw--inside_static_routes"></a>
 ### Ingress Egress Gw Inside Static Routes
 
-`static_route_list` - (Optional) List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1. See [Static Route List](#nestedblock--ingress_egress_gw--inside_static_routes--static_route_list) below.
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw--inside_static_routes--static_route_list) below.
 
 <a id="nestedblock--ingress_egress_gw--inside_static_routes--static_route_list"></a>
 ### Ingress Egress Gw Inside Static Routes Static Route List
 
 `custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw--inside_static_routes--static_route_list--custom_static_route) below.
 
-`simple_static_route` - (Optional) Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--ingress_egress_gw--inside_static_routes--static_route_list--custom_static_route"></a>
 ### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route
@@ -587,14 +587,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw--outside_static_routes"></a>
 ### Ingress Egress Gw Outside Static Routes
 
-`static_route_list` - (Optional) List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1. See [Static Route List](#nestedblock--ingress_egress_gw--outside_static_routes--static_route_list) below.
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw--outside_static_routes--static_route_list) below.
 
 <a id="nestedblock--ingress_egress_gw--outside_static_routes--static_route_list"></a>
 ### Ingress Egress Gw Outside Static Routes Static Route List
 
 `custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw--outside_static_routes--static_route_list--custom_static_route) below.
 
-`simple_static_route` - (Optional) Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--ingress_egress_gw--outside_static_routes--static_route_list--custom_static_route"></a>
 ### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route
@@ -639,7 +639,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--ingress_egress_gw_ar--active_network_policies) below.
 
-`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
 
 `dc_cluster_group_inside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside Vn](#nestedblock--ingress_egress_gw_ar--dc_cluster_group_inside_vn) below.
 
@@ -693,62 +693,62 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw_ar--active_enhanced_firewall_policies"></a>
 ### Ingress Egress Gw Ar Active Enhanced Firewall Policies
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules. See [Enhanced Firewall Policies](#nestedblock--ingress_egress_gw_ar--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--ingress_egress_gw_ar--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 ### Ingress Egress Gw Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--active_forward_proxy_policies"></a>
 ### Ingress Egress Gw Ar Active Forward Proxy Policies
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated. See [Forward Proxy Policies](#nestedblock--ingress_egress_gw_ar--active_forward_proxy_policies--forward_proxy_policies) below.
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--ingress_egress_gw_ar--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--active_forward_proxy_policies--forward_proxy_policies"></a>
 ### Ingress Egress Gw Ar Active Forward Proxy Policies Forward Proxy Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--active_network_policies"></a>
 ### Ingress Egress Gw Ar Active Network Policies
 
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema. See [Network Policies](#nestedblock--ingress_egress_gw_ar--active_network_policies--network_policies) below.
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--ingress_egress_gw_ar--active_network_policies--network_policies) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--active_network_policies--network_policies"></a>
 ### Ingress Egress Gw Ar Active Network Policies Network Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--dc_cluster_group_inside_vn"></a>
 ### Ingress Egress Gw Ar Dc Cluster Group Inside Vn
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--dc_cluster_group_outside_vn"></a>
 ### Ingress Egress Gw Ar Dc Cluster Group Outside Vn
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--forward_proxy_allow_all"></a>
 ### Ingress Egress Gw Ar Forward Proxy Allow All
@@ -756,7 +756,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw_ar--global_network_list"></a>
 ### Ingress Egress Gw Ar Global Network List
 
-`global_network_connections` - (Optional) Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1. See [Global Network Connections](#nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections) below.
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections"></a>
 ### Ingress Egress Gw Ar Global Network List Global Network Connections
@@ -778,7 +778,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `express_route_enabled` - (Optional) Express Route Configuration. Express Route Configuration. See [Express Route Enabled](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled) below.
 
-`spoke_vnets` - (Optional) Spoke VNet Peering (Legacy). Spoke VNet Peering ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.unique: true. See [Spoke Vnets](#nestedblock--ingress_egress_gw_ar--hub--spoke_vnets) below.
+`spoke_vnets` - (Optional) Spoke VNet Peering (Legacy). Spoke VNet Peering. See [Spoke Vnets](#nestedblock--ingress_egress_gw_ar--hub--spoke_vnets) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_disabled"></a>
 ### Ingress Egress Gw Ar Hub Express Route Disabled
@@ -790,9 +790,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--auto_asn) below.
 
-`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated. See [Connections](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--connections) below.
+`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site. See [Connections](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--connections) below.
 
-`custom_asn` - (Optional) Custom ASN. Exclusive with [auto_asn] Set custom ASN for F5XC Site ves.io.schema.rules.uint32.gt: 1 ves.io.schema.rules.uint32.lte: 65535 ves.io.schema.rules.uint32 (`Number`).
+`custom_asn` - (Optional) Custom ASN. Set custom ASN for F5XC Site (`Number`).
 
 `do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise To Route Server](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--do_not_advertise_to_route_server) below.
 
@@ -874,14 +874,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw_ar--inside_static_routes"></a>
 ### Ingress Egress Gw Ar Inside Static Routes
 
-`static_route_list` - (Optional) List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1. See [Static Route List](#nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list) below.
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list"></a>
 ### Ingress Egress Gw Ar Inside Static Routes Static Route List
 
 `custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list--custom_static_route) below.
 
-`simple_static_route` - (Optional) Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list--custom_static_route"></a>
 ### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route
@@ -907,15 +907,15 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw_ar--node"></a>
 ### Ingress Egress Gw Ar Node
 
-`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 3 (`Number`).
+`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set (`Number`).
 
 `inside_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Inside Subnet](#nestedblock--ingress_egress_gw_ar--node--inside_subnet) below.
 
-`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3. Required: YES ves.io.schema.rules.message.required: true (`Number`).
+`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
 
 `outside_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Outside Subnet](#nestedblock--ingress_egress_gw_ar--node--outside_subnet) below.
 
-`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 20 (`Number`).
+`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set (`Number`).
 
 <a id="nestedblock--ingress_egress_gw_ar--node--inside_subnet"></a>
 ### Ingress Egress Gw Ar Node Inside Subnet
@@ -949,14 +949,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_egress_gw_ar--outside_static_routes"></a>
 ### Ingress Egress Gw Ar Outside Static Routes
 
-`static_route_list` - (Optional) List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1. See [Static Route List](#nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list) below.
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list"></a>
 ### Ingress Egress Gw Ar Outside Static Routes Static Route List
 
 `custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list--custom_static_route) below.
 
-`simple_static_route` - (Optional) Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list--custom_static_route"></a>
 ### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route
@@ -995,9 +995,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `accelerated_networking` - (Optional) Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen. See [Accelerated Networking](#nestedblock--ingress_gw--accelerated_networking) below.
 
-`az_nodes` - (Optional) Ingress Gateway (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Az Nodes](#nestedblock--ingress_gw--az_nodes) below.
+`az_nodes` - (Optional) Ingress Gateway (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. See [Az Nodes](#nestedblock--ingress_gw--az_nodes) below.
 
-`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#nestedblock--ingress_gw--performance_enhancement_mode) below.
 
@@ -1017,7 +1017,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_gw--az_nodes"></a>
 ### Ingress Gw Az Nodes
 
-`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input Required: YES ves.io.schema.rules.message.required: true (`String`).
+`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input (`String`).
 
 `local_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Local Subnet](#nestedblock--ingress_gw--az_nodes--local_subnet) below.
 
@@ -1062,7 +1062,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `accelerated_networking` - (Optional) Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen. See [Accelerated Networking](#nestedblock--ingress_gw_ar--accelerated_networking) below.
 
-`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
 
 `node` - (Optional) Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region. See [Node](#nestedblock--ingress_gw_ar--node) below.
 
@@ -1084,13 +1084,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_gw_ar--node"></a>
 ### Ingress Gw Ar Node
 
-`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 3 (`Number`).
+`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set (`Number`).
 
 `local_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Local Subnet](#nestedblock--ingress_gw_ar--node--local_subnet) below.
 
-`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3. Required: YES ves.io.schema.rules.message.required: true (`Number`).
+`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
 
-`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 20 (`Number`).
+`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set (`Number`).
 
 <a id="nestedblock--ingress_gw_ar--node--local_subnet"></a>
 ### Ingress Gw Ar Node Local Subnet
@@ -1143,7 +1143,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
 
-`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000 (`Number`).
+`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes (`Number`).
 
@@ -1158,11 +1158,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--log_receiver"></a>
 ### Log Receiver
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--logs_streaming_disabled"></a>
 ### Logs Streaming Disabled
@@ -1188,7 +1188,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Os Version](#nestedblock--os--default_os_version) below.
 
-`operating_system_version` - (Optional) Operating System Version. Exclusive with [default_os_version] Specify a OS version to be used e.g. 9.2024.6. ves.io.schema.rules.string.max_len: 20 (`String`).
+`operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
 
 <a id="nestedblock--os--default_os_version"></a>
 ### Os Default Os Version
@@ -1198,7 +1198,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--sw--default_sw_version) below.
 
-`volterra_software_version` - (Optional) F5XC Software Version. Exclusive with [default_sw_version] Specify a F5XC Software Version to be used e.g. crt-20210329-1002. ves.io.schema.rules.string.max_len: 20 (`String`).
+`volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
 
 <a id="nestedblock--sw--default_sw_version"></a>
 ### Sw Default Sw Version
@@ -1220,9 +1220,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#nestedblock--vnet--existing_vnet--manual_routing) below.
 
-`resource_group` - (Optional) Existing Vnet Resource Group. Resource group of existing Vnet Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1 (`String`).
+`resource_group` - (Optional) Existing Vnet Resource Group. Resource group of existing Vnet (`String`).
 
-`vnet_name` - (Optional) Existing Vnet Name. Name of existing Vnet Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1 (`String`).
+`vnet_name` - (Optional) Existing Vnet Name. Name of existing Vnet (`String`).
 
 <a id="nestedblock--vnet--existing_vnet--f5_orchestrated_routing"></a>
 ### Vnet Existing Vnet F5 Orchestrated Routing
@@ -1235,9 +1235,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `autogenerate` - (Optional) Empty. This can be used for messages where no values are needed. See [Autogenerate](#nestedblock--vnet--new_vnet--autogenerate) below.
 
-`name` - (Optional) Choose Vnet Name. Exclusive with [autogenerate] Specify the Vnet Name ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1 (`String`).
+`name` - (Optional) Choose Vnet Name. Specify the Vnet Name (`String`).
 
-`primary_ipv4` - (Optional) IPv4 CIDR block. IPv4 CIDR block for this Vnet. It has to be private address space. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema (`String`).
+`primary_ipv4` - (Optional) IPv4 CIDR block. IPv4 CIDR block for this Vnet. It has to be private address space (`String`).
 
 <a id="nestedblock--vnet--new_vnet--autogenerate"></a>
 ### Vnet New Vnet Autogenerate
@@ -1253,9 +1253,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--voltstack_cluster--active_network_policies) below.
 
-`az_nodes` - (Optional) App Stack Cluster (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Az Nodes](#nestedblock--voltstack_cluster--az_nodes) below.
+`az_nodes` - (Optional) App Stack Cluster (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. See [Az Nodes](#nestedblock--voltstack_cluster--az_nodes) below.
 
-`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#nestedblock--voltstack_cluster--dc_cluster_group) below.
 
@@ -1303,49 +1303,49 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster--active_enhanced_firewall_policies"></a>
 ### Voltstack Cluster Active Enhanced Firewall Policies
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules. See [Enhanced Firewall Policies](#nestedblock--voltstack_cluster--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--voltstack_cluster--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--voltstack_cluster--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 ### Voltstack Cluster Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--active_forward_proxy_policies"></a>
 ### Voltstack Cluster Active Forward Proxy Policies
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated. See [Forward Proxy Policies](#nestedblock--voltstack_cluster--active_forward_proxy_policies--forward_proxy_policies) below.
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--voltstack_cluster--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--voltstack_cluster--active_forward_proxy_policies--forward_proxy_policies"></a>
 ### Voltstack Cluster Active Forward Proxy Policies Forward Proxy Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--active_network_policies"></a>
 ### Voltstack Cluster Active Network Policies
 
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema. See [Network Policies](#nestedblock--voltstack_cluster--active_network_policies--network_policies) below.
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--voltstack_cluster--active_network_policies--network_policies) below.
 
 <a id="nestedblock--voltstack_cluster--active_network_policies--network_policies"></a>
 ### Voltstack Cluster Active Network Policies Network Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--az_nodes"></a>
 ### Voltstack Cluster Az Nodes
 
-`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input Required: YES ves.io.schema.rules.message.required: true (`String`).
+`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input (`String`).
 
 `local_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Local Subnet](#nestedblock--voltstack_cluster--az_nodes--local_subnet) below.
 
@@ -1365,11 +1365,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster--dc_cluster_group"></a>
 ### Voltstack Cluster Dc Cluster Group
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--default_storage"></a>
 ### Voltstack Cluster Default Storage
@@ -1380,7 +1380,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster--global_network_list"></a>
 ### Voltstack Cluster Global Network List
 
-`global_network_connections` - (Optional) Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1. See [Global Network Connections](#nestedblock--voltstack_cluster--global_network_list--global_network_connections) below.
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--voltstack_cluster--global_network_list--global_network_connections) below.
 
 <a id="nestedblock--voltstack_cluster--global_network_list--global_network_connections"></a>
 ### Voltstack Cluster Global Network List Global Network Connections
@@ -1398,11 +1398,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster--k8s_cluster"></a>
 ### Voltstack Cluster K8s Cluster
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--no_dc_cluster_group"></a>
 ### Voltstack Cluster No Dc Cluster Group
@@ -1425,14 +1425,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster--outside_static_routes"></a>
 ### Voltstack Cluster Outside Static Routes
 
-`static_route_list` - (Optional) List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1. See [Static Route List](#nestedblock--voltstack_cluster--outside_static_routes--static_route_list) below.
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--voltstack_cluster--outside_static_routes--static_route_list) below.
 
 <a id="nestedblock--voltstack_cluster--outside_static_routes--static_route_list"></a>
 ### Voltstack Cluster Outside Static Routes Static Route List
 
 `custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--voltstack_cluster--outside_static_routes--static_route_list--custom_static_route) below.
 
-`simple_static_route` - (Optional) Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--voltstack_cluster--outside_static_routes--static_route_list--custom_static_route"></a>
 ### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route
@@ -1446,14 +1446,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster--storage_class_list"></a>
 ### Voltstack Cluster Storage Class List
 
-`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true. See [Storage Classes](#nestedblock--voltstack_cluster--storage_class_list--storage_classes) below.
+`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#nestedblock--voltstack_cluster--storage_class_list--storage_classes) below.
 
 <a id="nestedblock--voltstack_cluster--storage_class_list--storage_classes"></a>
 ### Voltstack Cluster Storage Class List Storage Classes
 
 `default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
 
-`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ves_object_name: true (`String`).
+`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
 
 <a id="nestedblock--voltstack_cluster_ar"></a>
 ### Voltstack Cluster Ar
@@ -1466,7 +1466,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--voltstack_cluster_ar--active_network_policies) below.
 
-`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#nestedblock--voltstack_cluster_ar--dc_cluster_group) below.
 
@@ -1516,53 +1516,53 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster_ar--active_enhanced_firewall_policies"></a>
 ### Voltstack Cluster Ar Active Enhanced Firewall Policies
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules. See [Enhanced Firewall Policies](#nestedblock--voltstack_cluster_ar--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--voltstack_cluster_ar--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--voltstack_cluster_ar--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 ### Voltstack Cluster Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster_ar--active_forward_proxy_policies"></a>
 ### Voltstack Cluster Ar Active Forward Proxy Policies
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated. See [Forward Proxy Policies](#nestedblock--voltstack_cluster_ar--active_forward_proxy_policies--forward_proxy_policies) below.
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--voltstack_cluster_ar--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--voltstack_cluster_ar--active_forward_proxy_policies--forward_proxy_policies"></a>
 ### Voltstack Cluster Ar Active Forward Proxy Policies Forward Proxy Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster_ar--active_network_policies"></a>
 ### Voltstack Cluster Ar Active Network Policies
 
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema. See [Network Policies](#nestedblock--voltstack_cluster_ar--active_network_policies--network_policies) below.
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--voltstack_cluster_ar--active_network_policies--network_policies) below.
 
 <a id="nestedblock--voltstack_cluster_ar--active_network_policies--network_policies"></a>
 ### Voltstack Cluster Ar Active Network Policies Network Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster_ar--dc_cluster_group"></a>
 ### Voltstack Cluster Ar Dc Cluster Group
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster_ar--default_storage"></a>
 ### Voltstack Cluster Ar Default Storage
@@ -1573,7 +1573,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster_ar--global_network_list"></a>
 ### Voltstack Cluster Ar Global Network List
 
-`global_network_connections` - (Optional) Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1. See [Global Network Connections](#nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections) below.
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections) below.
 
 <a id="nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections"></a>
 ### Voltstack Cluster Ar Global Network List Global Network Connections
@@ -1591,11 +1591,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster_ar--k8s_cluster"></a>
 ### Voltstack Cluster Ar K8s Cluster
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster_ar--no_dc_cluster_group"></a>
 ### Voltstack Cluster Ar No Dc Cluster Group
@@ -1618,13 +1618,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster_ar--node"></a>
 ### Voltstack Cluster Ar Node
 
-`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 3 (`Number`).
+`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set (`Number`).
 
 `local_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Local Subnet](#nestedblock--voltstack_cluster_ar--node--local_subnet) below.
 
-`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3. Required: YES ves.io.schema.rules.message.required: true (`Number`).
+`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
 
-`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 20 (`Number`).
+`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set (`Number`).
 
 <a id="nestedblock--voltstack_cluster_ar--node--local_subnet"></a>
 ### Voltstack Cluster Ar Node Local Subnet
@@ -1642,14 +1642,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster_ar--outside_static_routes"></a>
 ### Voltstack Cluster Ar Outside Static Routes
 
-`static_route_list` - (Optional) List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1. See [Static Route List](#nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list) below.
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list) below.
 
 <a id="nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list"></a>
 ### Voltstack Cluster Ar Outside Static Routes Static Route List
 
 `custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list--custom_static_route) below.
 
-`simple_static_route` - (Optional) Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list--custom_static_route"></a>
 ### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route
@@ -1663,14 +1663,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--voltstack_cluster_ar--storage_class_list"></a>
 ### Voltstack Cluster Ar Storage Class List
 
-`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true. See [Storage Classes](#nestedblock--voltstack_cluster_ar--storage_class_list--storage_classes) below.
+`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#nestedblock--voltstack_cluster_ar--storage_class_list--storage_classes) below.
 
 <a id="nestedblock--voltstack_cluster_ar--storage_class_list--storage_classes"></a>
 ### Voltstack Cluster Ar Storage Class List Storage Classes
 
 `default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
 
-`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ves_object_name: true (`String`).
+`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
 
 
 ## Import

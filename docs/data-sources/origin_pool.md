@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_origin_pool Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Shape of the origin pool create specification
 ---

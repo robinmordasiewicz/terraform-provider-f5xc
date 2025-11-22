@@ -70,7 +70,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`rules` - (Optional) Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response Required: YES ves.io.schema.rules.message. See [Rules](#rules) below for details.
+`rules` - (Optional) Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response. See [Rules](#rules) below for details.
 
 
 ### Attributes Reference
@@ -96,14 +96,14 @@ In addition to all arguments above, the following attributes are exported:
 
 `exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_pattern--exact_values) below.
 
-`regex_value` - (Optional) Regex Value. Exclusive with [exact_values substring_value] Search for values matching this regular expression ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.regex: true (`String`).
+`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
-`substring_value` - (Optional) Substring Search. Exclusive with [exact_values regex_value] Search for values that include this substring ves.io.schema.rules.string.max_bytes: 1024 (`String`).
+`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
 <a id="nestedblock--rules--key_pattern--exact_values"></a>
 ### Rules Key Pattern Exact Values
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 1024 ves.io.schema.rules.repeated (`List`).
+`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
 
 <a id="nestedblock--rules--key_value_pattern"></a>
 ### Rules Key Value Pattern
@@ -117,9 +117,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_value_pattern--key_pattern--exact_values) below.
 
-`regex_value` - (Optional) Regex Value. Exclusive with [exact_values substring_value] Search for values matching this regular expression ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.regex: true (`String`).
+`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
-`substring_value` - (Optional) Substring Search. Exclusive with [exact_values regex_value] Search for values that include this substring ves.io.schema.rules.string.max_bytes: 1024 (`String`).
+`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
 <a id="nestedblock--rules--key_value_pattern--key_pattern--exact_values"></a>
 ### Rules Key Value Pattern Key Pattern Exact Values
@@ -129,9 +129,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_value_pattern--value_pattern--exact_values) below.
 
-`regex_value` - (Optional) Regex Value. Exclusive with [exact_values substring_value] Search for values matching this regular expression ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.regex: true (`String`).
+`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
-`substring_value` - (Optional) Substring Search. Exclusive with [exact_values regex_value] Search for values that include this substring ves.io.schema.rules.string.max_bytes: 1024 (`String`).
+`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
 <a id="nestedblock--rules--key_value_pattern--value_pattern--exact_values"></a>
 ### Rules Key Value Pattern Value Pattern Exact Values
@@ -141,14 +141,14 @@ In addition to all arguments above, the following attributes are exported:
 
 `exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--value_pattern--exact_values) below.
 
-`regex_value` - (Optional) Regex Value. Exclusive with [exact_values substring_value] Search for values matching this regular expression ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.regex: true (`String`).
+`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
-`substring_value` - (Optional) Substring Search. Exclusive with [exact_values regex_value] Search for values that include this substring ves.io.schema.rules.string.max_bytes: 1024 (`String`).
+`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
 <a id="nestedblock--rules--value_pattern--exact_values"></a>
 ### Rules Value Pattern Exact Values
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 1024 ves.io.schema.rules.repeated (`List`).
+`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
 
 
 ## Import

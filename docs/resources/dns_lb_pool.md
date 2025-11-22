@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_dns_lb_pool Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "DNS"
 description: |-
   Create DNS Load Balancer Pool in a given namespace. If one already exist it will give a error.
 ---
@@ -80,7 +80,7 @@ The following arguments are optional:
 
 ###### One of the arguments from this list "ttl, use_rrset_ttl" must be set
 
-`ttl` - (Optional) TTL. Exclusive with [use_rrset_ttl] Custom TTL in seconds (default 30) for responses from this pool ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 2147483647 (`Number`).
+`ttl` - (Optional) TTL. Custom TTL in seconds (default 30) for responses from this pool (`Number`).
 
 `use_rrset_ttl` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Rrset Ttl](#use-rrset-ttl) below for details.
 
@@ -101,9 +101,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `health_check` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Health Check](#nestedblock--a_pool--health_check) below.
 
-`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema (`Number`).
+`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
-`members` - (Optional) Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Members](#nestedblock--a_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#nestedblock--a_pool--members) below.
 
 <a id="nestedblock--a_pool--disable_health_check"></a>
 ### A Pool Disable Health Check
@@ -111,102 +111,102 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--a_pool--health_check"></a>
 ### A Pool Health Check
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--a_pool--members"></a>
 ### A Pool Members
 
 `disable` - (Optional) Disable. A value of true will disable the pool-member (`Bool`).
 
-`ip_endpoint` - (Optional) Public IP. Public IP address Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true (`String`).
+`ip_endpoint` - (Optional) Public IP. Public IP address (`String`).
 
-`name` - (Optional) Name. Pool member name ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Pool member name (`String`).
 
-`priority` - (Optional) Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 255 (`Number`).
+`priority` - (Optional) Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority (`Number`).
 
-`ratio` - (Optional) Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100 (`Number`).
+`ratio` - (Optional) Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member (`Number`).
 
 <a id="nestedblock--aaaa_pool"></a>
 ### Aaaa Pool
 
-`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema (`Number`).
+`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
-`members` - (Optional) Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Members](#nestedblock--aaaa_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#nestedblock--aaaa_pool--members) below.
 
 <a id="nestedblock--aaaa_pool--members"></a>
 ### Aaaa Pool Members
 
 `disable` - (Optional) Disable. A value of true will disable the pool-member (`Bool`).
 
-`ip_endpoint` - (Optional) Public IP. Public IP address Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true (`String`).
+`ip_endpoint` - (Optional) Public IP. Public IP address (`String`).
 
-`name` - (Optional) Name. Pool member name ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Pool member name (`String`).
 
-`priority` - (Optional) Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 255 (`Number`).
+`priority` - (Optional) Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority (`Number`).
 
-`ratio` - (Optional) Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100 (`Number`).
+`ratio` - (Optional) Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member (`Number`).
 
 <a id="nestedblock--cname_pool"></a>
 ### Cname Pool
 
-`members` - (Optional) Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Members](#nestedblock--cname_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#nestedblock--cname_pool--members) below.
 
 <a id="nestedblock--cname_pool--members"></a>
 ### Cname Pool Members
 
-`domain` - (Optional) Domain. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true (`String`).
+`domain` - (Optional) Domain (`String`).
 
 `final_translation` - (Optional) Final Translation. If this flag is true, the CNAME record will not be translated further (`Bool`).
 
-`name` - (Optional) Name. Pool member name ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Pool member name (`String`).
 
-`ratio` - (Optional) Load Balancing Ratio. Ratio ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100 (`Number`).
+`ratio` - (Optional) Load Balancing Ratio. Ratio (`Number`).
 
 <a id="nestedblock--mx_pool"></a>
 ### Mx Pool
 
-`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema (`Number`).
+`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
-`members` - (Optional) Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Members](#nestedblock--mx_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#nestedblock--mx_pool--members) below.
 
 <a id="nestedblock--mx_pool--members"></a>
 ### Mx Pool Members
 
-`domain` - (Optional) Domain. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true (`String`).
+`domain` - (Optional) Domain (`String`).
 
-`name` - (Optional) Name. Pool member name ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Pool member name (`String`).
 
-`priority` - (Optional) MX Record Priority. MX Record priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`priority` - (Optional) MX Record Priority. MX Record priority (`Number`).
 
-`ratio` - (Optional) Load Balancing Ratio. Load Balancing Ratio ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100 (`Number`).
+`ratio` - (Optional) Load Balancing Ratio. Load Balancing Ratio (`Number`).
 
 <a id="nestedblock--srv_pool"></a>
 ### Srv Pool
 
-`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema (`Number`).
+`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
-`members` - (Optional) Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true. See [Members](#nestedblock--srv_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#nestedblock--srv_pool--members) below.
 
 <a id="nestedblock--srv_pool--members"></a>
 ### Srv Pool Members
 
 `final_translation` - (Optional) Final Translation. If this flag is true, the SRV record will not be translated further (`Bool`).
 
-`name` - (Optional) Name. Pool member name ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Pool member name (`String`).
 
-`port` - (Optional) Port. Port on which the service can be found Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Port on which the service can be found (`Number`).
 
-`priority` - (Optional) Priority. Priority of the target. A lower number indicates a higher preference. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32 (`Number`).
+`priority` - (Optional) Priority. Priority of the target. A lower number indicates a higher preference (`Number`).
 
-`ratio` - (Optional) Load Balancing Ratio. Ratio ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100 (`Number`).
+`ratio` - (Optional) Load Balancing Ratio. Ratio (`Number`).
 
-`target` - (Optional) Target. Domain name of the machine providing the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^[.]$|^([a-zA-Z0-9]{1}[a-zA-Z0-9_-]{0,62})(\ (`String`).
+`target` - (Optional) Target. Domain name of the machine providing the service (`String`).
 
-`weight` - (Optional) Weight. Weight of the target. A higher number indicates a higher preference. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32 (`Number`).
+`weight` - (Optional) Weight. Weight of the target. A higher number indicates a higher preference (`Number`).
 
 <a id="nestedblock--use_rrset_ttl"></a>
 ### Use Rrset Ttl

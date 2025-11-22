@@ -80,11 +80,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--jira_config--adhoc_rest_api"></a>
 ### Jira Config Adhoc Rest Api
 
-`account_email` - (Optional) Account Email. Username (email) for the Atlassian account Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.email: true ves.io.schema.rules.string.min_len: 1 (`String`).
+`account_email` - (Optional) Account Email. Username (email) for the Atlassian account (`String`).
 
 `api_token` - (Optional) API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database (`String`).
 
-`organization_domain` - (Optional) Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io (`String`).
+`organization_domain` - (Optional) Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034 (`String`).
 
 
 ## Import

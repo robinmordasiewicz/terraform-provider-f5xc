@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_cloud_link Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Creates a new CloudLink with configured parameters
 ---
@@ -93,42 +93,42 @@ In addition to all arguments above, the following attributes are exported:
 
 `byoc` - (Optional) Bring Your Own Connections. List of Bring You Own Connection. See [Byoc](#nestedblock--aws--byoc) below.
 
-`custom_asn` - (Optional) Custom ASN. Exclusive with [] F5XC will use custom ASN to create a Direct Connect Gateway ves.io.schema.rules.uint32.ranges: 64512-65534, 4200000000-4294967294 (`Number`).
+`custom_asn` - (Optional) Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294 (`Number`).
 
 <a id="nestedblock--aws--aws_cred"></a>
 ### Aws Aws Cred
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--aws--byoc"></a>
 ### Aws Byoc
 
-`connections` - (Optional) Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs. Required: YES ves.io.schema. See [Connections](#nestedblock--aws--byoc--connections) below.
+`connections` - (Optional) Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs. See [Connections](#nestedblock--aws--byoc--connections) below.
 
 <a id="nestedblock--aws--byoc--connections"></a>
 ### Aws Byoc Connections
 
 `auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Auth Key](#nestedblock--aws--byoc--connections--auth_key) below.
 
-`bgp_asn` - (Optional) BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS. Required: YES ves.io.schema.rules.message (`Number`).
+`bgp_asn` - (Optional) BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS (`Number`).
 
-`connection_id` - (Optional) Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules (`String`).
+`connection_id` - (Optional) Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection (`String`).
 
 `ipv4` - (Optional) IPv4 Peering. Configure BGP IPv4 peering for endpoints. See [Ipv4](#nestedblock--aws--byoc--connections--ipv4) below.
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--aws--byoc--connections--metadata) below.
 
-`region` - (Optional) Region. Region where the connection is setup Required: YES ves.io.schema.rules.message.required: true (`String`).
+`region` - (Optional) Region. Region where the connection is setup (`String`).
 
 `system_generated_name` - (Optional) Empty. This can be used for messages where no values are needed. See [System Generated Name](#nestedblock--aws--byoc--connections--system_generated_name) below.
 
 `tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. See [Tags](#nestedblock--aws--byoc--connections--tags) below.
 
-`user_assigned_name` - (Optional) User Assigned. Exclusive with [system_generated_name] User is managing the AWS resource name ves.io.schema.rules.string.max_len: 256 (`String`).
+`user_assigned_name` - (Optional) User Assigned. User is managing the AWS resource name (`String`).
 
 `virtual_interface_type` - (Optional) Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private ... (`String`).
 
@@ -172,13 +172,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--gcp--byoc--connections"></a>
 ### Gcp Byoc Connections
 
-`interconnect_attachment_name` - (Optional) Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 63 ves.io.schema (`String`).
+`interconnect_attachment_name` - (Optional) Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment (`String`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--gcp--byoc--connections--metadata) below.
 
-`project` - (Optional) Specified Project. Exclusive with [same_as_credential] Specify a GCP Project for the interconnect attachment ves.io.schema.rules.string.max_len: 30 ves.io.schema.rules.string.min_len: 4 (`String`).
+`project` - (Optional) Specified Project. Specify a GCP Project for the interconnect attachment (`String`).
 
-`region` - (Optional) Region. GCP Region in which the GCP Cloud Interconnect attachment is configured Required: YES ves.io.schema.rules.message.required: true (`String`).
+`region` - (Optional) Region. GCP Region in which the GCP Cloud Interconnect attachment is configured (`String`).
 
 `same_as_credential` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Credential](#nestedblock--gcp--byoc--connections--same_as_credential) below.
 
@@ -191,11 +191,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--gcp--gcp_cred"></a>
 ### Gcp Gcp Cred
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

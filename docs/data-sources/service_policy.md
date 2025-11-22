@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_service_policy Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create service_policy creates a new object in the storage backend for metadata.namespace.
 ---

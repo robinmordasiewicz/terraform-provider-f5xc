@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_crl Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Certificates"
 description: |-
   API to create CRL object
 ---
@@ -58,13 +58,13 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`refresh_interval` - (Optional) CRL Refresh interval. CRL refresh interval, in hours. ves.io.schema.rules.uint32.gte: 6 ves.io.schema.rules.uint32.lte: 168 (`Number`).
+`refresh_interval` - (Optional) CRL Refresh interval. CRL refresh interval, in hours (`Number`).
 
-`server_address` - (Optional) CRL Server address. CRL server address or hostname Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname_or_ip: true ves.io.schema.rules.string.max_len: 255 (`String`).
+`server_address` - (Optional) CRL Server address. CRL server address or hostname (`String`).
 
-`server_port` - (Optional) CRL Server Port. Set CRL Server port number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`server_port` - (Optional) CRL Server Port. Set CRL Server port number (`Number`).
 
-`timeout` - (Optional) CRL download timeout. CRL download wait time, in seconds ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 180 (`Number`).
+`timeout` - (Optional) CRL download timeout. CRL download wait time, in seconds (`Number`).
 
 
 ### Attributes Reference
@@ -79,7 +79,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--http_access"></a>
 ### Http Access
 
-`path` - (Optional) CRL File path. CRL file location ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path` - (Optional) CRL File path. CRL file location (`String`).
 
 
 ## Import

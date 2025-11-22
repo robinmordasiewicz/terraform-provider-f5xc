@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_gcp_vpc_site Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Shape of the GCP VPC site specification
 ---

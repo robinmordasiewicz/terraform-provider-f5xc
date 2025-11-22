@@ -66,7 +66,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`provider_name` - (Optional) Provider Name. Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object Required: YES ves.io.schema.rules.message (`String`).
+`provider_name` - (Optional) Provider Name. Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object (`String`).
 
 `where` - (Optional) Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using fol.... See [Where](#where) below for details.
 
@@ -87,7 +87,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `scheme` - (Optional) URL Scheme. SchemeType is used to indicate URL scheme http:// scheme https:// scheme (`String`).
 
-`server_endpoint` - (Optional) Server Endpoint and Port. endpoint to connect to, in host:port format Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string (`String`).
+`server_endpoint` - (Optional) Server Endpoint and Port. endpoint to connect to, in host:port format (`String`).
 
 `tls_config` - (Optional) Upstream TLS Parameters. TLS configuration for upstream connections. See [Tls Config](#nestedblock--access_info--tls_config) below.
 
@@ -115,7 +115,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--access_info--rest_auth_info--headers_auth"></a>
 ### Access Info Rest Auth Info Headers Auth
 
-`headers` - (Optional) Headers. The set of authentication headers to pass in HTTP request ves.io.schema.rules.map.keys.string.max_len: 256 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 16. See [Headers](#nestedblock--access_info--rest_auth_info--headers_auth--headers) below.
+`headers` - (Optional) Headers. The set of authentication headers to pass in HTTP request. See [Headers](#nestedblock--access_info--rest_auth_info--headers_auth--headers) below.
 
 <a id="nestedblock--access_info--rest_auth_info--headers_auth--headers"></a>
 ### Access Info Rest Auth Info Headers Auth Headers
@@ -123,7 +123,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--access_info--rest_auth_info--query_params_auth"></a>
 ### Access Info Rest Auth Info Query Params Auth
 
-`query_params` - (Optional) Query Parameters. The set of authentication parameters to be passed as query parameters ves.io.schema.rules.map.keys.string.max_len: 256 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema. See [Query Params](#nestedblock--access_info--rest_auth_info--query_params_auth--query_params) below.
+`query_params` - (Optional) Query Parameters. The set of authentication parameters to be passed as query parameters. See [Query Params](#nestedblock--access_info--rest_auth_info--query_params_auth--query_params) below.
 
 <a id="nestedblock--access_info--rest_auth_info--query_params_auth--query_params"></a>
 ### Access Info Rest Auth Info Query Params Auth Query Params
@@ -141,16 +141,16 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#nestedblock--access_info--tls_config--disable_sni) below.
 
-`max_session_keys` - (Optional) Max Session Keys Cached. Exclusive with [default_session_key_caching disable_session_key_caching] x-example:'25' Number of session keys that are cached. ves.io.schema.rules.uint32.gte: 2 ves.io (`Number`).
+`max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
 
-`sni` - (Optional) SNI Value. Exclusive with [disable_sni use_host_header_as_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
 `use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#nestedblock--access_info--tls_config--use_host_header_as_sni) below.
 
 <a id="nestedblock--access_info--tls_config--cert_params"></a>
 ### Access Info Tls Config Cert Params
 
-`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1 ves.io.schema.rules.string. See [Certificates](#nestedblock--access_info--tls_config--cert_params--certificates) below.
+`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication. See [Certificates](#nestedblock--access_info--tls_config--cert_params--certificates) below.
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_E... (`List`).
 
@@ -245,7 +245,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--site--ref) below.
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
 
 <a id="nestedblock--where--site--disable_internet_vip"></a>
 ### Where Site Disable Internet Vip
@@ -269,7 +269,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--where--virtual_network"></a>
 ### Where Virtual Network
 
-`ref` - (Optional) Reference. A virtual network direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_network--ref) below.
+`ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#nestedblock--where--virtual_network--ref) below.
 
 <a id="nestedblock--where--virtual_network--ref"></a>
 ### Where Virtual Network Ref
@@ -293,7 +293,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_site--ref) below.
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
 
 <a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
 ### Where Virtual Site Disable Internet Vip

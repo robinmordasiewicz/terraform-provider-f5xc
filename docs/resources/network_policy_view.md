@@ -62,11 +62,11 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`egress_rules` - (Optional) Egress Rules. Ordered list of rules applied to connections from policy endpoints. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Egress Rules](#egress-rules) below for details.
+`egress_rules` - (Optional) Egress Rules. Ordered list of rules applied to connections from policy endpoints. See [Egress Rules](#egress-rules) below for details.
 
 `endpoint` - (Optional) Endpoint Choice. Shape of the endpoint choices for a view. See [Endpoint](#endpoint) below for details.
 
-`ingress_rules` - (Optional) Ingress Rules. Ordered list of rules applied to connections to policy endpoints. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Ingress Rules](#ingress-rules) below for details.
+`ingress_rules` - (Optional) Ingress Rules. Ordered list of rules applied to connections to policy endpoints. See [Ingress Rules](#ingress-rules) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -141,7 +141,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--egress_rules--ip_prefix_set"></a>
 ### Egress Rules Ip Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--egress_rules--ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--egress_rules--ip_prefix_set--ref) below.
 
 <a id="nestedblock--egress_rules--ip_prefix_set--ref"></a>
 ### Egress Rules Ip Prefix Set Ref
@@ -159,19 +159,19 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--egress_rules--label_matcher"></a>
 ### Egress Rules Label Matcher
 
-`keys` - (Optional) Keys. The list of label key names that have to match ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated (`List`).
+`keys` - (Optional) Keys. The list of label key names that have to match (`List`).
 
 <a id="nestedblock--egress_rules--label_selector"></a>
 ### Egress Rules Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--egress_rules--metadata"></a>
 ### Egress Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--egress_rules--outside_endpoints"></a>
 ### Egress Rules Outside Endpoints
@@ -179,12 +179,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--egress_rules--prefix_list"></a>
 ### Egress Rules Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--egress_rules--protocol_port_range"></a>
 ### Egress Rules Protocol Port Range
 
-`port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules (`List`).
+`port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
 
 `protocol` - (Optional) Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp (`String`).
 
@@ -210,7 +210,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--endpoint--label_selector"></a>
 ### Endpoint Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--endpoint--outside_endpoints"></a>
 ### Endpoint Outside Endpoints
@@ -218,7 +218,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--endpoint--prefix_list"></a>
 ### Endpoint Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--ingress_rules"></a>
 ### Ingress Rules
@@ -281,7 +281,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_rules--ip_prefix_set"></a>
 ### Ingress Rules Ip Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--ingress_rules--ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--ingress_rules--ip_prefix_set--ref) below.
 
 <a id="nestedblock--ingress_rules--ip_prefix_set--ref"></a>
 ### Ingress Rules Ip Prefix Set Ref
@@ -299,19 +299,19 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_rules--label_matcher"></a>
 ### Ingress Rules Label Matcher
 
-`keys` - (Optional) Keys. The list of label key names that have to match ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated (`List`).
+`keys` - (Optional) Keys. The list of label key names that have to match (`List`).
 
 <a id="nestedblock--ingress_rules--label_selector"></a>
 ### Ingress Rules Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--ingress_rules--metadata"></a>
 ### Ingress Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--ingress_rules--outside_endpoints"></a>
 ### Ingress Rules Outside Endpoints
@@ -319,12 +319,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ingress_rules--prefix_list"></a>
 ### Ingress Rules Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--ingress_rules--protocol_port_range"></a>
 ### Ingress Rules Protocol Port Range
 
-`port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules (`List`).
+`port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
 
 `protocol` - (Optional) Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp (`String`).
 

@@ -48,9 +48,9 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`code` - (Optional) iRule code. iRule code content, this content will be base64 encoded for preserving formating ves.io.schema.rules.string.max_bytes: 1048576 ves.io.schema.rules.string.min_bytes: 1 (`String`).
+`code` - (Optional) iRule code. iRule code content, this content will be base64 encoded for preserving formating (`String`).
 
-`irule_name` - (Optional) iRule name. iRule name ves.io.schema.rules.string.max_len: 256 (`String`).
+`irule_name` - (Optional) iRule name. iRule name (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 

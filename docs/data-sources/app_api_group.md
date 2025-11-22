@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_app_api_group Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "API Security"
 description: |-
   Create app_api_group creates a new object in the storage backend for metadata.namespace.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_namespace Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Organization"
 description: |-
   Creates a new namespace. Name of the object is name of the name space.
 ---

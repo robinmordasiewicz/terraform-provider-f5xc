@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_aws_tgw_site Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Shape of the AWS TGW site specification
 ---

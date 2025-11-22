@@ -54,7 +54,7 @@ The following arguments are optional:
 
 `address_allocation_scheme` - (Optional) Address Allocation Scheme. Decides the scheme to be used to allocate addresses from the configured address pool. See [Address Allocation Scheme](#address-allocation-scheme) below for details.
 
-`address_pool` - (Optional) Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`address_pool` - (Optional) Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients (`List`).
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
@@ -75,7 +75,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--address_allocation_scheme"></a>
 ### Address Allocation Scheme
 
-`allocation_unit` - (Optional) Allocation Unit. Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool. Required: YES ves (`Number`).
+`allocation_unit` - (Optional) Allocation Unit. Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool (`Number`).
 
 `local_interface_address_offset` - (Optional) Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet (`Number`).
 

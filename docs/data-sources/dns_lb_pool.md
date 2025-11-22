@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_dns_lb_pool Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "DNS"
 description: |-
   Create DNS Load Balancer Pool in a given namespace. If one already exist it will give a error.
 ---

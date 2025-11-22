@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_network_firewall Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   network firewall is created by users in system namespace
 ---

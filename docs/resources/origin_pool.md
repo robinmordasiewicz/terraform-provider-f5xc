@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_origin_pool Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Shape of the origin pool create specification
 ---
@@ -158,9 +158,9 @@ The following arguments are optional:
 
 ###### One of the arguments from this list "health_check_port, same_as_endpoint_port" must be set
 
-`health_check_port` - (Optional) Health check port. Exclusive with [same_as_endpoint_port] Port used for performing health check ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`health_check_port` - (Optional) Health check port. Port used for performing health check (`Number`).
 
-`healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects ves.io.schema.rules.repeated.max_items: 4. See [Healthcheck](#healthcheck) below for details.
+`healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects. See [Healthcheck](#healthcheck) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -172,9 +172,9 @@ The following arguments are optional:
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#no-tls) below for details.
 
-`origin_servers` - (Optional) Origin Servers. List of origin servers in this pool Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves. See [Origin Servers](#origin-servers) below for details.
+`origin_servers` - (Optional) Origin Servers. List of origin servers in this pool. See [Origin Servers](#origin-servers) below for details.
 
-`port` - (Optional) Port. Exclusive with [automatic_port lb_port] Endpoint service is available on this port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Endpoint service is available on this port (`Number`).
 
 `same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Endpoint Port](#same-as-endpoint-port) below for details.
 
@@ -199,7 +199,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests .... See [Circuit Breaker](#nestedblock--advanced_options--circuit_breaker) below.
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds ves.io.schema.rules.uint32.lte: 1800000 (`Number`).
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds (`Number`).
 
 `default_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Circuit Breaker](#nestedblock--advanced_options--default_circuit_breaker) below.
 
@@ -227,7 +227,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them fr.... See [Outlier Detection](#nestedblock--advanced_options--outlier_detection) below.
 
-`panic_threshold` - (Optional) Panic threshold. Exclusive with [no_panic_threshold] x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignorin... (`Number`).
+`panic_threshold` - (Optional) Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status (`Number`).
 
 `proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V1](#nestedblock--advanced_options--proxy_protocol_v1) below.
 
@@ -247,7 +247,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request (`String`).
 
-`retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time (`Number`).
+`retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
 
 <a id="nestedblock--advanced_options--default_circuit_breaker"></a>
 ### Advanced Options Default Circuit Breaker
@@ -277,7 +277,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_subset` - (Optional) Origin Pool Default Subset. Default Subset definition. See [Default Subset](#nestedblock--advanced_options--enable_subsets--default_subset) below.
 
-`endpoint_subsets` - (Optional) Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class. Required: YES ves. See [Endpoint Subsets](#nestedblock--advanced_options--enable_subsets--endpoint_subsets) below.
+`endpoint_subsets` - (Optional) Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class. See [Endpoint Subsets](#nestedblock--advanced_options--enable_subsets--endpoint_subsets) below.
 
 `fail_request` - (Optional) Empty. This can be used for messages where no values are needed. See [Fail Request](#nestedblock--advanced_options--enable_subsets--fail_request) below.
 
@@ -287,7 +287,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advanced_options--enable_subsets--default_subset"></a>
 ### Advanced Options Enable Subsets Default Subset
 
-`default_subset` - (Optional) Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists. ves.io.schema.rules.map. See [Default Subset](#nestedblock--advanced_options--enable_subsets--default_subset--default_subset) below.
+`default_subset` - (Optional) Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists. See [Default Subset](#nestedblock--advanced_options--enable_subsets--default_subset--default_subset) below.
 
 <a id="nestedblock--advanced_options--enable_subsets--default_subset--default_subset"></a>
 ### Advanced Options Enable Subsets Default Subset Default Subset
@@ -295,7 +295,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advanced_options--enable_subsets--endpoint_subsets"></a>
 ### Advanced Options Enable Subsets Endpoint Subsets
 
-`keys` - (Optional) Keys. List of keys that define a cluster subset class. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`keys` - (Optional) Keys. List of keys that define a cluster subset class (`List`).
 
 <a id="nestedblock--advanced_options--enable_subsets--fail_request"></a>
 ### Advanced Options Enable Subsets Fail Request
@@ -347,7 +347,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `interval` - (Optional) Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s (`Number`).
 
-`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value. ves.io.schema (`Number`).
+`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
 
 <a id="nestedblock--advanced_options--proxy_protocol_v1"></a>
 ### Advanced Options Proxy Protocol V1
@@ -361,11 +361,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--healthcheck"></a>
 ### Healthcheck
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--lb_port"></a>
 ### Lb Port
@@ -401,7 +401,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_servers--cbip_service"></a>
 ### Origin Servers Cbip Service
 
-`service_name` - (Optional) Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`service_name` - (Optional) Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin (`String`).
 
 <a id="nestedblock--origin_servers--consul_service"></a>
 ### Origin Servers Consul Service
@@ -410,7 +410,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--origin_servers--consul_service--outside_network) below.
 
-`service_name` - (Optional) Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`service_name` - (Optional) Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id (`String`).
 
 `site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#nestedblock--origin_servers--consul_service--site_locator) below.
 
@@ -456,11 +456,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_servers--custom_endpoint_object--endpoint"></a>
 ### Origin Servers Custom Endpoint Object Endpoint
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--origin_servers--k8s_service"></a>
 ### Origin Servers K8s Service
@@ -471,7 +471,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP (`String`).
 
-`service_name` - (Optional) Service Name. Exclusive with [] K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename (`String`).
+`service_name` - (Optional) Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename (`String`).
 
 `site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#nestedblock--origin_servers--k8s_service--site_locator) below.
 
@@ -522,7 +522,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--origin_servers--private_ip--inside_network) below.
 
-`ip` - (Optional) IP. Exclusive with [] Private IPV4 address ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) IP. Private IPV4 address (`String`).
 
 `outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--origin_servers--private_ip--outside_network) below.
 
@@ -541,11 +541,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_servers--private_ip--segment"></a>
 ### Origin Servers Private Ip Segment
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--origin_servers--private_ip--site_locator"></a>
 ### Origin Servers Private Ip Site Locator
@@ -576,13 +576,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_servers--private_name"></a>
 ### Origin Servers Private Name
 
-`dns_name` - (Optional) DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true (`String`).
+`dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
 `inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--origin_servers--private_name--inside_network) below.
 
 `outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--origin_servers--private_name--outside_network) below.
 
-`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 ves.io.schema.rules.uint32.ranges: 0,10-604800 (`Number`).
+`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 (`Number`).
 
 `segment` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Segment](#nestedblock--origin_servers--private_name--segment) below.
 
@@ -599,11 +599,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_servers--private_name--segment"></a>
 ### Origin Servers Private Name Segment
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--origin_servers--private_name--site_locator"></a>
 ### Origin Servers Private Name Site Locator
@@ -634,46 +634,46 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_servers--public_ip"></a>
 ### Origin Servers Public Ip
 
-`ip` - (Optional) Public IPV4. Exclusive with [] Public IPV4 address ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) Public IPV4. Public IPV4 address (`String`).
 
 <a id="nestedblock--origin_servers--public_name"></a>
 ### Origin Servers Public Name
 
-`dns_name` - (Optional) DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
-`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 ves.io.schema.rules.uint32.ranges: 0,10-604800 (`Number`).
+`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 (`Number`).
 
 <a id="nestedblock--origin_servers--vn_private_ip"></a>
 ### Origin Servers Vn Private Ip
 
-`ip` - (Optional) IPV4. Exclusive with [] IPV4 address ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) IPV4. IPV4 address (`String`).
 
 `virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#nestedblock--origin_servers--vn_private_ip--virtual_network) below.
 
 <a id="nestedblock--origin_servers--vn_private_ip--virtual_network"></a>
 ### Origin Servers Vn Private Ip Virtual Network
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--origin_servers--vn_private_name"></a>
 ### Origin Servers Vn Private Name
 
-`dns_name` - (Optional) DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true (`String`).
+`dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
 `private_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Private Network](#nestedblock--origin_servers--vn_private_name--private_network) below.
 
 <a id="nestedblock--origin_servers--vn_private_name--private_network"></a>
 ### Origin Servers Vn Private Name Private Network
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--same_as_endpoint_port"></a>
 ### Same As Endpoint Port
@@ -700,13 +700,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#nestedblock--use_tls--disable_sni) below.
 
-`max_session_keys` - (Optional) Max Session Keys Cached. Exclusive with [default_session_key_caching disable_session_key_caching] x-example:'25' Number of session keys that are cached. ves.io.schema.rules.uint32.gte: 2 ves.io (`Number`).
+`max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--use_tls--no_mtls) below.
 
 `skip_server_verification` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Server Verification](#nestedblock--use_tls--skip_server_verification) below.
 
-`sni` - (Optional) SNI Value. Exclusive with [disable_sni use_host_header_as_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--use_tls--tls_config) below.
 
@@ -749,7 +749,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--use_tls--tls_config--custom_security"></a>
 ### Use Tls Tls Config Custom Security
 
-`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.unique: true (`List`).
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
 
 `max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version (`String`).
 
@@ -770,12 +770,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--use_tls--use_mtls"></a>
 ### Use Tls Use Mtls
 
-`tls_certificates` - (Optional) mTLS Client Certificate. mTLS Client Certificate Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1. See [Tls Certificates](#nestedblock--use_tls--use_mtls--tls_certificates) below.
+`tls_certificates` - (Optional) mTLS Client Certificate. mTLS Client Certificate. See [Tls Certificates](#nestedblock--use_tls--use_mtls--tls_certificates) below.
 
 <a id="nestedblock--use_tls--use_mtls--tls_certificates"></a>
 ### Use Tls Use Mtls Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--use_tls--use_mtls--tls_certificates--custom_hash_algorithms) below.
 
@@ -802,27 +802,27 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--use_tls--use_mtls_obj"></a>
 ### Use Tls Use Mtls Obj
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--use_tls--use_server_verification"></a>
 ### Use Tls Use Server Verification
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--use_tls--use_server_verification--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate ves.io.schema.rules.string (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate (`String`).
 
 <a id="nestedblock--use_tls--use_server_verification--trusted_ca"></a>
 ### Use Tls Use Server Verification Trusted Ca
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--use_tls--volterra_trusted_ca"></a>
 ### Use Tls Volterra Trusted Ca

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_cluster Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Create cluster will create the object in the storage backend for namespace metadata.namespace
 ---
@@ -68,7 +68,7 @@ The following arguments are optional:
 
 `circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests .... See [Circuit Breaker](#circuit-breaker) below for details.
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds ves.io.schema.rules.uint32.lte: 600000 (`Number`).
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds (`Number`).
 
 `default_subset` - (Optional) Default Subset. List of key-value pairs that define default subset. See [Default Subset](#default-subset) below for details.
 
@@ -80,11 +80,11 @@ The following arguments are optional:
 
 `endpoint_subsets` - (Optional) Endpoint Subsets. Cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. See [Endpoint Subsets](#endpoint-subsets) below for details.
 
-`endpoints` - (Optional) Endpoints. List of references to all endpoint objects that belong to this cluster. ves.io.schema.rules.repeated.max_items: 32. See [Endpoints](#endpoints) below for details.
+`endpoints` - (Optional) Endpoints. List of references to all endpoint objects that belong to this cluster. See [Endpoints](#endpoints) below for details.
 
 `fallback_policy` - (Optional) Subset Fallback Policy. Enumeration for SubsetFallbackPolicy if subset match is not found (`String`).
 
-`health_checks` - (Optional) Health Checks. List of references to healthcheck object for this cluster. ves.io.schema.rules.repeated.max_items: 4. See [Health Checks](#health-checks) below for details.
+`health_checks` - (Optional) Health Checks. List of references to healthcheck object for this cluster. See [Health Checks](#health-checks) below for details.
 
 `http1_config` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections. See [Http1 Config](#http1-config) below for details.
 
@@ -102,7 +102,7 @@ The following arguments are optional:
 
 `outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them fr.... See [Outlier Detection](#outlier-detection) below for details.
 
-`panic_threshold` - (Optional) Panic threshold. Exclusive with [no_panic_threshold] Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health sta... (`Number`).
+`panic_threshold` - (Optional) Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status (`Number`).
 
 `proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V1](#proxy-protocol-v1) below for details.
 
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request (`String`).
 
-`retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time (`Number`).
+`retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
 
 <a id="nestedblock--default_subset"></a>
 ### Default Subset
@@ -147,7 +147,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--endpoint_subsets"></a>
 ### Endpoint Subsets
 
-`keys` - (Optional) Keys. List of keys that define a cluster subset class. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`keys` - (Optional) Keys. List of keys that define a cluster subset class (`List`).
 
 <a id="nestedblock--endpoints"></a>
 ### Endpoints
@@ -222,7 +222,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `interval` - (Optional) Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s (`Number`).
 
-`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value. ves.io.schema (`Number`).
+`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
 
 <a id="nestedblock--proxy_protocol_v1"></a>
 ### Proxy Protocol V1
@@ -243,16 +243,16 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#nestedblock--tls_parameters--disable_sni) below.
 
-`max_session_keys` - (Optional) Max Session Keys Cached. Exclusive with [default_session_key_caching disable_session_key_caching] x-example:'25' Number of session keys that are cached. ves.io.schema.rules.uint32.gte: 2 ves.io (`Number`).
+`max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
 
-`sni` - (Optional) SNI Value. Exclusive with [disable_sni use_host_header_as_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
 `use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#nestedblock--tls_parameters--use_host_header_as_sni) below.
 
 <a id="nestedblock--tls_parameters--cert_params"></a>
 ### Tls Parameters Cert Params
 
-`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1 ves.io.schema.rules.string. See [Certificates](#nestedblock--tls_parameters--cert_params--certificates) below.
+`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication. See [Certificates](#nestedblock--tls_parameters--cert_params--certificates) below.
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_E... (`List`).
 
@@ -282,7 +282,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca](#nestedblock--tls_parameters--cert_params--validation_params--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate (`List`).
 
@@ -305,7 +305,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--tls_parameters--common_params--tls_certificates"></a>
 ### Tls Parameters Common Params Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms) below.
 
@@ -336,7 +336,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca](#nestedblock--tls_parameters--common_params--validation_params--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate (`List`).
 

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_bgp_asn_set Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Create bgp_asn_set creates a new object in the storage backend for metadata.namespace.
 ---
@@ -48,7 +48,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy. Required: YES ves.io.schema.rules (`List`).
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy (`List`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 

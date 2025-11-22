@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_certificate_chain Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Certificates"
 description: |-
   Shape of the Certificate Chain specification
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_ip_prefix_set Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Create ip_prefix_set creates a new object in the storage backend for metadata.namespace.
 ---

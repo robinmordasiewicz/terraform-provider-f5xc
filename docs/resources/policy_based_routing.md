@@ -66,7 +66,7 @@ The following arguments are optional:
 
 `forward_proxy_pbr` - (Optional) L3/L4 routing rule. Network(L3/L4) routing policy rule. See [Forward Proxy Pbr](#forward-proxy-pbr) below for details.
 
-`forwarding_class_list` - (Optional) Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules. See [Forwarding Class List](#forwarding-class-list) below for details.
+`forwarding_class_list` - (Optional) Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match. See [Forwarding Class List](#forwarding-class-list) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--forward_proxy_pbr"></a>
 ### Forward Proxy Pbr
 
-`forward_proxy_pbr_rules` - (Optional) L3/L4 routing rules. Network(L3/L4) routing policy rules. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Forward Proxy Pbr Rules](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules) below.
+`forward_proxy_pbr_rules` - (Optional) L3/L4 routing rules. Network(L3/L4) routing policy rules. See [Forward Proxy Pbr Rules](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules) below.
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules
@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `all_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sources](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--all_sources) below.
 
-`forwarding_class_list` - (Optional) Forwarding Class. Ordered list of forwarding Class to be used if no rule match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules. See [Forwarding Class List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--forwarding_class_list) below.
+`forwarding_class_list` - (Optional) Forwarding Class. Ordered list of forwarding Class to be used if no rule match. See [Forwarding Class List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--forwarding_class_list) below.
 
 `http_list` - (Optional) URLListType. See [Http List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list) below.
 
@@ -117,16 +117,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--forwarding_class_list"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Forwarding Class List
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Http List
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Http List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list--http_list) below.
+`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [Http List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list--http_list) below.
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list--http_list"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Http List Http List
@@ -134,33 +134,33 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--ip_prefix_set"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Ip Prefix Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--label_selector"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--metadata"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--prefix_list"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--tls_list"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Tls List
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Tls List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--tls_list--tls_list) below.
+`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [Tls List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--tls_list--tls_list) below.
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--tls_list--tls_list"></a>
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Tls List Tls List
@@ -168,11 +168,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--forwarding_class_list"></a>
 ### Forwarding Class List
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--network_pbr"></a>
 ### Network Pbr
@@ -181,7 +181,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Label Selector](#nestedblock--network_pbr--label_selector) below.
 
-`network_pbr_rules` - (Optional) L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Network Pbr Rules](#nestedblock--network_pbr--network_pbr_rules) below.
+`network_pbr_rules` - (Optional) L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule. See [Network Pbr Rules](#nestedblock--network_pbr--network_pbr_rules) below.
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#nestedblock--network_pbr--prefix_list) below.
 
@@ -191,7 +191,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--network_pbr--label_selector"></a>
 ### Network Pbr Label Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--network_pbr--network_pbr_rules"></a>
 ### Network Pbr Network Pbr Rules
@@ -206,9 +206,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#nestedblock--network_pbr--network_pbr_rules--applications) below.
 
-`dns_name` - (Optional) DNS Name to IP. Exclusive with [any ip_prefix_set prefix_list] Resolve hostname to get the IP ves.io.schema.rules.string.hostname: true (`String`).
+`dns_name` - (Optional) DNS Name to IP. Resolve hostname to get the IP (`String`).
 
-`forwarding_class_list` - (Optional) Forwarding Classes. Ordered list of forwarding Class to be used if rule match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules. See [Forwarding Class List](#nestedblock--network_pbr--network_pbr_rules--forwarding_class_list) below.
+`forwarding_class_list` - (Optional) Forwarding Classes. Ordered list of forwarding Class to be used if rule match. See [Forwarding Class List](#nestedblock--network_pbr--network_pbr_rules--forwarding_class_list) below.
 
 `ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [Ip Prefix Set](#nestedblock--network_pbr--network_pbr_rules--ip_prefix_set) below.
 
@@ -238,16 +238,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--network_pbr--network_pbr_rules--forwarding_class_list"></a>
 ### Network Pbr Network Pbr Rules Forwarding Class List
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--network_pbr--network_pbr_rules--ip_prefix_set"></a>
 ### Network Pbr Network Pbr Rules Ip Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--network_pbr--network_pbr_rules--ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--network_pbr--network_pbr_rules--ip_prefix_set--ref) below.
 
 <a id="nestedblock--network_pbr--network_pbr_rules--ip_prefix_set--ref"></a>
 ### Network Pbr Network Pbr Rules Ip Prefix Set Ref
@@ -255,26 +255,26 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--network_pbr--network_pbr_rules--metadata"></a>
 ### Network Pbr Network Pbr Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--network_pbr--network_pbr_rules--prefix_list"></a>
 ### Network Pbr Network Pbr Rules Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--network_pbr--network_pbr_rules--protocol_port_range"></a>
 ### Network Pbr Network Pbr Rules Protocol Port Range
 
-`port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules (`List`).
+`port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
 
 `protocol` - (Optional) Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp (`String`).
 
 <a id="nestedblock--network_pbr--prefix_list"></a>
 ### Network Pbr Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 
 ## Import

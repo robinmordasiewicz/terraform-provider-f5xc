@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_http_loadbalancer Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Shape of the HTTP load balancer specification
 ---
@@ -212,7 +212,7 @@ The following arguments are optional:
 
 `app_firewall` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [App Firewall](#app-firewall) below for details.
 
-`blocked_clients` - (Optional) Client Blocking Rules. Define rules to block IP Prefixes or AS numbers. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Blocked Clients](#blocked-clients) below for details.
+`blocked_clients` - (Optional) Client Blocking Rules. Define rules to block IP Prefixes or AS numbers. See [Blocked Clients](#blocked-clients) below for details.
 
 ###### One of the arguments from this list "bot_defense, bot_defense_advanced, disable_bot_defense" must be set
 
@@ -242,7 +242,7 @@ The following arguments are optional:
 
 `data_guard_rules` - (Optional) Data Guard Rules. Data Guard prevents responses from exposing sensitive information by masking the data. See [Data Guard Rules](#data-guard-rules) below for details.
 
-`ddos_mitigation_rules` - (Optional) DDoS Mitigation Rules. Define manual mitigation rules to block L7 DDoS attacks. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Ddos Mitigation Rules](#ddos-mitigation-rules) below for details.
+`ddos_mitigation_rules` - (Optional) DDoS Mitigation Rules. Define manual mitigation rules to block L7 DDoS attacks. See [Ddos Mitigation Rules](#ddos-mitigation-rules) below for details.
 
 ###### One of the arguments from this list "default_pool, default_pool_list" must be set
 
@@ -250,7 +250,7 @@ The following arguments are optional:
 
 `default_pool_list` - (Optional) Origin Pool List Type. List of Origin Pools. See [Default Pool List](#default-pool-list) below for details.
 
-`default_route_pools` - (Optional) Origin Pools. Origin Pools used when no route is specified (default route) ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true. See [Default Route Pools](#default-route-pools) below for details.
+`default_route_pools` - (Optional) Origin Pools. Origin Pools used when no route is specified (default route). See [Default Route Pools](#default-route-pools) below for details.
 
 ###### One of the arguments from this list "default_sensitive_data_policy, sensitive_data_policy" must be set
 
@@ -382,7 +382,7 @@ The following arguments are optional:
 
 `system_default_timeouts` - (Optional) Empty. This can be used for messages where no values are needed. See [System Default Timeouts](#system-default-timeouts) below for details.
 
-`trusted_clients` - (Optional) Trusted Client Rules. Define rules to skip processing of one or more features such as WAF, Bot Defense etc. for clients. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated. See [Trusted Clients](#trusted-clients) below for details.
+`trusted_clients` - (Optional) Trusted Client Rules. Define rules to skip processing of one or more features such as WAF, Bot Defense etc. for clients. See [Trusted Clients](#trusted-clients) below for details.
 
 ###### One of the arguments from this list "user_id_client_ip, user_identification" must be set
 
@@ -410,25 +410,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--active_service_policies--policies"></a>
 ### Active Service Policies Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--advertise_custom"></a>
 ### Advertise Custom
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules. See [Advertise Where](#nestedblock--advertise_custom--advertise_where) below.
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--advertise_custom--advertise_where) below.
 
 <a id="nestedblock--advertise_custom--advertise_where"></a>
 ### Advertise Custom Advertise Where
 
 `advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#nestedblock--advertise_custom--advertise_where--advertise_on_public) below.
 
-`port` - (Optional) Listen Port. Exclusive with [port_ranges use_default_port] Port to Listen. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Listen Port. Port to Listen (`Number`).
 
-`port_ranges` - (Optional) Listen Port Ranges. Exclusive with [port use_default_port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io (`String`).
+`port_ranges` - (Optional) Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
 `site` - (Optional) Site. This defines a reference to a CE site along with network type and an optional ip address where a load balancer could be advertised. See [Site](#nestedblock--advertise_custom--advertise_where--site) below.
 
@@ -453,7 +453,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advertise_custom--advertise_where--site"></a>
 ### Advertise Custom Advertise Where Site
 
-`ip` - (Optional) IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks (`String`).
 
@@ -472,9 +472,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Vip](#nestedblock--advertise_custom--advertise_where--virtual_network--default_vip) below.
 
-`specific_v6_vip` - (Optional) Specific V6 VIP. Exclusive with [default_v6_vip] Use given IPV6 address as VIP on virtual Network ves.io.schema.rules.string.ipv6: true (`String`).
+`specific_v6_vip` - (Optional) Specific V6 VIP. Use given IPV6 address as VIP on virtual Network (`String`).
 
-`specific_vip` - (Optional) Specific V4 VIP. Exclusive with [default_vip] Use given IPV4 address as VIP on virtual Network ves.io.schema.rules.string.ipv4: true (`String`).
+`specific_vip` - (Optional) Specific V4 VIP. Use given IPV4 address as VIP on virtual Network (`String`).
 
 `virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#nestedblock--advertise_custom--advertise_where--virtual_network--virtual_network) below.
 
@@ -500,7 +500,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advertise_custom--advertise_where--virtual_site_with_vip"></a>
 ### Advertise Custom Advertise Where Virtual Site With Vip
 
-`ip` - (Optional) IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
 
 `network` - (Optional) Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks (`String`).
 
@@ -530,11 +530,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advertise_on_public--public_ip"></a>
 ### Advertise On Public Public Ip
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--advertise_on_public_default_vip"></a>
 ### Advertise On Public Default Vip
@@ -542,9 +542,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_protection_rules"></a>
 ### Api Protection Rules
 
-`api_endpoint_rules` - (Optional) API Endpoints. This category defines specific rules per API endpoints. If request matches any of these rules, skipping second category rules. ves.io.schema.rules.repeated.max_items: 20. See [Api Endpoint Rules](#nestedblock--api_protection_rules--api_endpoint_rules) below.
+`api_endpoint_rules` - (Optional) API Endpoints. This category defines specific rules per API endpoints. If request matches any of these rules, skipping second category rules. See [Api Endpoint Rules](#nestedblock--api_protection_rules--api_endpoint_rules) below.
 
-`api_groups_rules` - (Optional) Server URLs and API Groups. This category includes rules per API group or Server URL. For API groups, refer to API Definition which includes API groups derived from uploaded swaggers. ves.io.schema. See [Api Groups Rules](#nestedblock--api_protection_rules--api_groups_rules) below.
+`api_groups_rules` - (Optional) Server URLs and API Groups. This category includes rules per API group or Server URL. For API groups, refer to API Definition which includes API groups derived from uploaded swaggers. See [Api Groups Rules](#nestedblock--api_protection_rules--api_groups_rules) below.
 
 <a id="nestedblock--api_protection_rules--api_endpoint_rules"></a>
 ### Api Protection Rules Api Endpoint Rules
@@ -555,7 +555,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_endpoint_method` - (Optional) HTTP Method Matcher. A http method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. See [Api Endpoint Method](#nestedblock--api_protection_rules--api_endpoint_rules--api_endpoint_method) below.
 
-`api_endpoint_path` - (Optional) API Endpoint. The endpoint (path) of the request. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1024 ves.io.schema.rules.string.templated_http_path: true (`String`).
+`api_endpoint_path` - (Optional) API Endpoint. The endpoint (path) of the request (`String`).
 
 `client_matcher` - (Optional) Client Matcher. Client conditions for matching a rule. See [Client Matcher](#nestedblock--api_protection_rules--api_endpoint_rules--client_matcher) below.
 
@@ -563,7 +563,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `request_matcher` - (Optional) Request Matcher. Request conditions for matching a rule. See [Request Matcher](#nestedblock--api_protection_rules--api_endpoint_rules--request_matcher) below.
 
-`specific_domain` - (Optional) Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. For example: api.example.com ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true (`String`).
+`specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain. For example: api.example.com (`String`).
 
 <a id="nestedblock--api_protection_rules--api_endpoint_rules--action"></a>
 ### Api Protection Rules Api Endpoint Rules Action
@@ -586,7 +586,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
 
-`methods` - (Optional) Method List. List of methods values to match against. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`methods` - (Optional) Method List. List of methods values to match against (`List`).
 
 <a id="nestedblock--api_protection_rules--api_endpoint_rules--client_matcher"></a>
 ### Api Protection Rules Api Endpoint Rules Client Matcher
@@ -639,9 +639,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_protection_rules--api_endpoint_rules--metadata"></a>
 ### Api Protection Rules Api Endpoint Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--api_protection_rules--api_endpoint_rules--request_matcher"></a>
 ### Api Protection Rules Api Endpoint Rules Request Matcher
@@ -675,7 +675,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_group` - (Optional) API Group. API groups derived from API Definition swaggers (`String`).
 
-`base_path` - (Optional) Base Path. Prefix of the request path. For example: /v1 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`base_path` - (Optional) Base Path. Prefix of the request path. For example: /v1 (`String`).
 
 `client_matcher` - (Optional) Client Matcher. Client conditions for matching a rule. See [Client Matcher](#nestedblock--api_protection_rules--api_groups_rules--client_matcher) below.
 
@@ -683,7 +683,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `request_matcher` - (Optional) Request Matcher. Request conditions for matching a rule. See [Request Matcher](#nestedblock--api_protection_rules--api_groups_rules--request_matcher) below.
 
-`specific_domain` - (Optional) Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. For example: api.example.com ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true (`String`).
+`specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain. For example: api.example.com (`String`).
 
 <a id="nestedblock--api_protection_rules--api_groups_rules--action"></a>
 ### Api Protection Rules Api Groups Rules Action
@@ -752,9 +752,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_protection_rules--api_groups_rules--metadata"></a>
 ### Api Protection Rules Api Groups Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--api_protection_rules--api_groups_rules--request_matcher"></a>
 ### Api Protection Rules Api Groups Rules Request Matcher
@@ -801,7 +801,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_endpoint_method` - (Optional) HTTP Method Matcher. A http method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. See [Api Endpoint Method](#nestedblock--api_rate_limit--api_endpoint_rules--api_endpoint_method) below.
 
-`api_endpoint_path` - (Optional) API Endpoint. The endpoint (path) of the request. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1024 ves.io.schema.rules.string.templated_http_path: true (`String`).
+`api_endpoint_path` - (Optional) API Endpoint. The endpoint (path) of the request (`String`).
 
 `client_matcher` - (Optional) Client Matcher. Client conditions for matching a rule. See [Client Matcher](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher) below.
 
@@ -811,7 +811,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `request_matcher` - (Optional) Request Matcher. Request conditions for matching a rule. See [Request Matcher](#nestedblock--api_rate_limit--api_endpoint_rules--request_matcher) below.
 
-`specific_domain` - (Optional) Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true (`String`).
+`specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain (`String`).
 
 <a id="nestedblock--api_rate_limit--api_endpoint_rules--any_domain"></a>
 ### Api Rate Limit Api Endpoint Rules Any Domain
@@ -821,7 +821,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
 
-`methods` - (Optional) Method List. List of methods values to match against. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`methods` - (Optional) Method List. List of methods values to match against (`List`).
 
 <a id="nestedblock--api_rate_limit--api_endpoint_rules--client_matcher"></a>
 ### Api Rate Limit Api Endpoint Rules Client Matcher
@@ -876,7 +876,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ref_user_id` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ref User Id](#nestedblock--api_rate_limit--api_endpoint_rules--inline_rate_limiter--ref_user_id) below.
 
-`threshold` - (Optional) Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32 (`Number`).
+`threshold` - (Optional) Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period (`Number`).
 
 `unit` - (Optional) Rate Limit Period Unit. Unit for the period per which the rate limit is applied (`String`).
 
@@ -891,11 +891,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_rate_limit--api_endpoint_rules--ref_rate_limiter"></a>
 ### Api Rate Limit Api Endpoint Rules Ref Rate Limiter
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--api_rate_limit--api_endpoint_rules--request_matcher"></a>
 ### Api Rate Limit Api Endpoint Rules Request Matcher
@@ -923,7 +923,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_rate_limit--bypass_rate_limiting_rules"></a>
 ### Api Rate Limit Bypass Rate Limiting Rules
 
-`bypass_rate_limiting_rules` - (Optional) Bypass Rate Limiting. This category defines rules per URL or API group. If request matches any of these rules, skip Rate Limiting. ves.io.schema.rules.repeated.max_items: 20. See [Bypass Rate Limiting Rules](#nestedblock--api_rate_limit--bypass_rate_limiting_rules--bypass_rate_limiting_rules) below.
+`bypass_rate_limiting_rules` - (Optional) Bypass Rate Limiting. This category defines rules per URL or API group. If request matches any of these rules, skip Rate Limiting. See [Bypass Rate Limiting Rules](#nestedblock--api_rate_limit--bypass_rate_limiting_rules--bypass_rate_limiting_rules) below.
 
 <a id="nestedblock--api_rate_limit--bypass_rate_limiting_rules--bypass_rate_limiting_rules"></a>
 ### Api Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules
@@ -936,13 +936,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_groups` - (Optional) API Groups. See [Api Groups](#nestedblock--api_rate_limit--bypass_rate_limiting_rules--bypass_rate_limiting_rules--api_groups) below.
 
-`base_path` - (Optional) Base Path. Exclusive with [any_url api_endpoint api_groups] The base path which this validation applies to ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`base_path` - (Optional) Base Path. The base path which this validation applies to (`String`).
 
 `client_matcher` - (Optional) Client Matcher. Client conditions for matching a rule. See [Client Matcher](#nestedblock--api_rate_limit--bypass_rate_limiting_rules--bypass_rate_limiting_rules--client_matcher) below.
 
 `request_matcher` - (Optional) Request Matcher. Request conditions for matching a rule. See [Request Matcher](#nestedblock--api_rate_limit--bypass_rate_limiting_rules--bypass_rate_limiting_rules--request_matcher) below.
 
-`specific_domain` - (Optional) Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. For example: api.example.com ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true (`String`).
+`specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain. For example: api.example.com (`String`).
 
 <a id="nestedblock--api_rate_limit--bypass_rate_limiting_rules--bypass_rate_limiting_rules--any_domain"></a>
 ### Api Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Any Domain
@@ -965,21 +965,21 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_rate_limit--custom_ip_allowed_list"></a>
 ### Api Rate Limit Custom Ip Allowed List
 
-`rate_limiter_allowed_prefixes` - (Optional) List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. Required: YES ves. See [Rate Limiter Allowed Prefixes](#nestedblock--api_rate_limit--custom_ip_allowed_list--rate_limiter_allowed_prefixes) below.
+`rate_limiter_allowed_prefixes` - (Optional) List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. See [Rate Limiter Allowed Prefixes](#nestedblock--api_rate_limit--custom_ip_allowed_list--rate_limiter_allowed_prefixes) below.
 
 <a id="nestedblock--api_rate_limit--custom_ip_allowed_list--rate_limiter_allowed_prefixes"></a>
 ### Api Rate Limit Custom Ip Allowed List Rate Limiter Allowed Prefixes
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--api_rate_limit--ip_allowed_list"></a>
 ### Api Rate Limit Ip Allowed List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--api_rate_limit--no_ip_allowed_list"></a>
 ### Api Rate Limit No Ip Allowed List
@@ -991,7 +991,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_group` - (Optional) API Group. API groups derived from API Definition swaggers (`String`).
 
-`base_path` - (Optional) Base Path. Prefix of the request path. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`base_path` - (Optional) Base Path. Prefix of the request path (`String`).
 
 `client_matcher` - (Optional) Client Matcher. Client conditions for matching a rule. See [Client Matcher](#nestedblock--api_rate_limit--server_url_rules--client_matcher) below.
 
@@ -1001,7 +1001,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `request_matcher` - (Optional) Request Matcher. Request conditions for matching a rule. See [Request Matcher](#nestedblock--api_rate_limit--server_url_rules--request_matcher) below.
 
-`specific_domain` - (Optional) Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true (`String`).
+`specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain (`String`).
 
 <a id="nestedblock--api_rate_limit--server_url_rules--any_domain"></a>
 ### Api Rate Limit Server Url Rules Any Domain
@@ -1059,7 +1059,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ref_user_id` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ref User Id](#nestedblock--api_rate_limit--server_url_rules--inline_rate_limiter--ref_user_id) below.
 
-`threshold` - (Optional) Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32 (`Number`).
+`threshold` - (Optional) Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period (`Number`).
 
 `unit` - (Optional) Rate Limit Period Unit. Unit for the period per which the rate limit is applied (`String`).
 
@@ -1074,11 +1074,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_rate_limit--server_url_rules--ref_rate_limiter"></a>
 ### Api Rate Limit Server Url Rules Ref Rate Limiter
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--api_rate_limit--server_url_rules--request_matcher"></a>
 ### Api Rate Limit Server Url Rules Request Matcher
@@ -1117,11 +1117,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_specification--api_definition"></a>
 ### Api Specification Api Definition
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--api_specification--validation_all_spec_endpoints"></a>
 ### Api Specification Validation All Spec Endpoints
@@ -1196,7 +1196,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `fall_through_mode` - (Optional) Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules). See [Fall Through Mode](#nestedblock--api_specification--validation_custom_list--fall_through_mode) below.
 
-`open_api_validation_rules` - (Optional) Validation List. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 15 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Open Api Validation Rules](#nestedblock--api_specification--validation_custom_list--open_api_validation_rules) below.
+`open_api_validation_rules` - (Optional) Validation List. See [Open Api Validation Rules](#nestedblock--api_specification--validation_custom_list--open_api_validation_rules) below.
 
 `settings` - (Optional) Common Settings. OpenAPI specification validation settings relevant for 'API Inventory' enforcement and for 'Custom list' enforcement. See [Settings](#nestedblock--api_specification--validation_custom_list--settings) below.
 
@@ -1220,13 +1220,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_endpoint` - (Optional) API Endpoint. This defines api endpoint. See [Api Endpoint](#nestedblock--api_specification--validation_custom_list--open_api_validation_rules--api_endpoint) below.
 
-`api_group` - (Optional) API Group. Exclusive with [api_endpoint base_path] The API group which this validation applies to ves.io.schema.rules.string.max_len: 128 (`String`).
+`api_group` - (Optional) API Group. The API group which this validation applies to (`String`).
 
-`base_path` - (Optional) Base Path. Exclusive with [api_endpoint api_group] The base path which this validation applies to ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`base_path` - (Optional) Base Path. The base path which this validation applies to (`String`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--api_specification--validation_custom_list--open_api_validation_rules--metadata) below.
 
-`specific_domain` - (Optional) Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true (`String`).
+`specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain (`String`).
 
 `validation_mode` - (Optional) Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger). See [Validation Mode](#nestedblock--api_specification--validation_custom_list--open_api_validation_rules--validation_mode) below.
 
@@ -1271,9 +1271,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--api_testing"></a>
 ### Api Testing
 
-`custom_header_value` - (Optional) Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic ves.io.schema.rules.string.max_len: 128 (`String`).
+`custom_header_value` - (Optional) Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic (`String`).
 
-`domains` - (Optional) Testing Environments. Add and configure testing domains and credentials Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32. See [Domains](#nestedblock--api_testing--domains) below.
+`domains` - (Optional) Testing Environments. Add and configure testing domains and credentials. See [Domains](#nestedblock--api_testing--domains) below.
 
 `every_day` - (Optional) Empty. This can be used for messages where no values are needed. See [Every Day](#nestedblock--api_testing--every_day) below.
 
@@ -1286,7 +1286,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `allow_destructive_methods` - (Optional) Use Destructive Methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data (`Bool`).
 
-`credentials` - (Optional) Credentials. Add credentials for API testing to use in the selected environment. Required: YES ves.io.schema.rules.message.required: true. See [Credentials](#nestedblock--api_testing--domains--credentials) below.
+`credentials` - (Optional) Credentials. Add credentials for API testing to use in the selected environment. See [Credentials](#nestedblock--api_testing--domains--credentials) below.
 
 `domain` - (Optional) Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing enviro... (`String`).
 
@@ -1301,7 +1301,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `bearer_token` - (Optional) Bearer. See [Bearer Token](#nestedblock--api_testing--domains--credentials--bearer_token) below.
 
-`credential_name` - (Optional) Name. Enter a unique name for the credentials used in API testing Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`credential_name` - (Optional) Name. Enter a unique name for the credentials used in API testing (`String`).
 
 `login_endpoint` - (Optional) Login Endpoint. See [Login Endpoint](#nestedblock--api_testing--domains--credentials--login_endpoint) below.
 
@@ -1337,18 +1337,18 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--app_firewall"></a>
 ### App Firewall
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--blocked_clients"></a>
 ### Blocked Clients
 
-`actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule ves.io.schema.rules.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 10 ves.io.schema.rules.repeated (`List`).
+`actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule (`List`).
 
-`as_number` - (Optional) AS Number. Exclusive with [http_header ip_prefix ipv6_prefix user_identifier] RFC 6793 defined 4-byte AS number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 401308 (`Number`).
+`as_number` - (Optional) AS Number. RFC 6793 defined 4-byte AS number (`Number`).
 
 `bot_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Bot Skip Processing](#nestedblock--blocked_clients--bot_skip_processing) below.
 
@@ -1356,15 +1356,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_header` - (Optional) HTTP Header. Request header name and value pairs. See [Http Header](#nestedblock--blocked_clients--http_header) below.
 
-`ip_prefix` - (Optional) IPv4 Prefix. Exclusive with [as_number http_header ipv6_prefix user_identifier] IPv4 prefix string. ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`ip_prefix` - (Optional) IPv4 Prefix. IPv4 prefix string (`String`).
 
-`ipv6_prefix` - (Optional) IPv6 Prefix. Exclusive with [as_number http_header ip_prefix user_identifier] IPv6 prefix string. ves.io.schema.rules.string.ipv6_prefix: true (`String`).
+`ipv6_prefix` - (Optional) IPv6 Prefix. IPv6 prefix string (`String`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--blocked_clients--metadata) below.
 
 `skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Processing](#nestedblock--blocked_clients--skip_processing) below.
 
-`user_identifier` - (Optional) User Identifier. Exclusive with [as_number http_header ip_prefix ipv6_prefix] Identify user based on user identifier. User identifier value needs to be copied from security event. ves.io.schema.rules (`String`).
+`user_identifier` - (Optional) User Identifier. Identify user based on user identifier. User identifier value needs to be copied from security event (`String`).
 
 `waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Waf Skip Processing](#nestedblock--blocked_clients--waf_skip_processing) below.
 
@@ -1374,27 +1374,27 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--blocked_clients--http_header"></a>
 ### Blocked Clients Http Header
 
-`headers` - (Optional) HTTP Headers. List of HTTP header name and value pairs Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Headers](#nestedblock--blocked_clients--http_header--headers) below.
+`headers` - (Optional) HTTP Headers. List of HTTP header name and value pairs. See [Headers](#nestedblock--blocked_clients--http_header--headers) below.
 
 <a id="nestedblock--blocked_clients--http_header--headers"></a>
 ### Blocked Clients Http Header Headers
 
-`exact` - (Optional) Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true (`String`).
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`name` - (Optional) Name. Name of the header (`String`).
 
-`presence` - (Optional) Presence. Exclusive with [exact regex] If true, check for presence of header (`Bool`).
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
-`regex` - (Optional) Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string (`String`).
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
 <a id="nestedblock--blocked_clients--metadata"></a>
 ### Blocked Clients Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--blocked_clients--skip_processing"></a>
 ### Blocked Clients Skip Processing
@@ -1413,7 +1413,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `regional_endpoint` - (Optional) Bot Defense Region. Defines a selection for Bot Defense region - AUTO: AUTO Automatic selection based on client IP address - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region (`String`).
 
-`timeout` - (Optional) Timeout. The timeout for the inference check, in milliseconds. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`timeout` - (Optional) Timeout. The timeout for the inference check, in milliseconds (`Number`).
 
 <a id="nestedblock--bot_defense--disable_cors_support"></a>
 ### Bot Defense Disable Cors Support
@@ -1430,7 +1430,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `javascript_mode` - (Optional) Web Client JavaScript Mode. Web Client JavaScript Mode (`String`).
 
-`js_download_path` - (Optional) JavaScript Download Path. Customize Bot Defense Client JavaScript path. If not specified, default `/common.js` ves.io.schema.rules.string.http_path: true (`String`).
+`js_download_path` - (Optional) JavaScript Download Path. Customize Bot Defense Client JavaScript path. If not specified, default `/common.js` (`String`).
 
 `js_insert_all_pages` - (Optional) Insert Bot Defense JavaScript in All Pages. Insert Bot Defense JavaScript in all pages. See [Js Insert All Pages](#nestedblock--bot_defense--policy--js_insert_all_pages) below.
 
@@ -1440,7 +1440,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `mobile_sdk_config` - (Optional) Mobile SDK Configuration. Mobile SDK configuration. See [Mobile Sdk Config](#nestedblock--bot_defense--policy--mobile_sdk_config) below.
 
-`protected_app_endpoints` - (Optional) App Endpoint Type. List of protected endpoints. Limit: Approx '128 endpoints per Load Balancer (LB)' upto 4 LBs, '32 endpoints per LB' after 4 LBs. Required: YES ves.io.schema.rules.message. See [Protected App Endpoints](#nestedblock--bot_defense--policy--protected_app_endpoints) below.
+`protected_app_endpoints` - (Optional) App Endpoint Type. List of protected endpoints. Limit: Approx '128 endpoints per Load Balancer (LB)' upto 4 LBs, '32 endpoints per LB' after 4 LBs. See [Protected App Endpoints](#nestedblock--bot_defense--policy--protected_app_endpoints) below.
 
 <a id="nestedblock--bot_defense--policy--disable_js_insert"></a>
 ### Bot Defense Policy Disable Js Insert
@@ -1456,7 +1456,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bot_defense--policy--js_insert_all_pages_except"></a>
 ### Bot Defense Policy Js Insert All Pages Except
 
-`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Exclude List](#nestedblock--bot_defense--policy--js_insert_all_pages_except--exclude_list) below.
+`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#nestedblock--bot_defense--policy--js_insert_all_pages_except--exclude_list) below.
 
 `javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag (`String`).
 
@@ -1466,9 +1466,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bot_defense--policy--js_insertion_rules"></a>
 ### Bot Defense Policy Js Insertion Rules
 
-`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Exclude List](#nestedblock--bot_defense--policy--js_insertion_rules--exclude_list) below.
+`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#nestedblock--bot_defense--policy--js_insertion_rules--exclude_list) below.
 
-`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io. See [Rules](#nestedblock--bot_defense--policy--js_insertion_rules--rules) below.
+`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript. See [Rules](#nestedblock--bot_defense--policy--js_insertion_rules--rules) below.
 
 <a id="nestedblock--bot_defense--policy--js_insertion_rules--exclude_list"></a>
 ### Bot Defense Policy Js Insertion Rules Exclude List
@@ -1497,7 +1497,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. See [Headers](#nestedblock--bot_defense--policy--protected_app_endpoints--headers) below.
 
-`http_methods` - (Optional) HTTP Methods. List of HTTP methods. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 5 ves (`List`).
+`http_methods` - (Optional) HTTP Methods. List of HTTP methods (`List`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--bot_defense--policy--protected_app_endpoints--metadata) below.
 
@@ -1594,7 +1594,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bot_defense_advanced--js_insert_all_pages_except"></a>
 ### Bot Defense Advanced Js Insert All Pages Except
 
-`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Exclude List](#nestedblock--bot_defense_advanced--js_insert_all_pages_except--exclude_list) below.
+`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#nestedblock--bot_defense_advanced--js_insert_all_pages_except--exclude_list) below.
 
 `javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag (`String`).
 
@@ -1624,9 +1624,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bot_defense_advanced--js_insertion_rules"></a>
 ### Bot Defense Advanced Js Insertion Rules
 
-`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Exclude List](#nestedblock--bot_defense_advanced--js_insertion_rules--exclude_list) below.
+`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#nestedblock--bot_defense_advanced--js_insertion_rules--exclude_list) below.
 
-`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io. See [Rules](#nestedblock--bot_defense_advanced--js_insertion_rules--rules) below.
+`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript. See [Rules](#nestedblock--bot_defense_advanced--js_insertion_rules--rules) below.
 
 <a id="nestedblock--bot_defense_advanced--js_insertion_rules--exclude_list"></a>
 ### Bot Defense Advanced Js Insertion Rules Exclude List
@@ -1679,11 +1679,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bot_defense_advanced--mobile"></a>
 ### Bot Defense Advanced Mobile
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--bot_defense_advanced--mobile_sdk_config"></a>
 ### Bot Defense Advanced Mobile Sdk Config
@@ -1693,7 +1693,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bot_defense_advanced--mobile_sdk_config--mobile_identifier"></a>
 ### Bot Defense Advanced Mobile Sdk Config Mobile Identifier
 
-`headers` - (Optional) Headers. Headers that can be used to identify mobile traffic. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true. See [Headers](#nestedblock--bot_defense_advanced--mobile_sdk_config--mobile_identifier--headers) below.
+`headers` - (Optional) Headers. Headers that can be used to identify mobile traffic. See [Headers](#nestedblock--bot_defense_advanced--mobile_sdk_config--mobile_identifier--headers) below.
 
 <a id="nestedblock--bot_defense_advanced--mobile_sdk_config--mobile_identifier--headers"></a>
 ### Bot Defense Advanced Mobile Sdk Config Mobile Identifier Headers
@@ -1701,11 +1701,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bot_defense_advanced--web"></a>
 ### Bot Defense Advanced Web
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--caching_policy"></a>
 ### Caching Policy
@@ -1722,20 +1722,20 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--caching_policy--custom_cache_rule--cdn_cache_rules"></a>
 ### Caching Policy Custom Cache Rule Cdn Cache Rules
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--caching_policy--default_cache_action"></a>
 ### Caching Policy Default Cache Action
 
 `cache_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Cache Disabled](#nestedblock--caching_policy--default_cache_action--cache_disabled) below.
 
-`cache_ttl_default` - (Optional) Fallback Cache TTL (d/ h/ m). Exclusive with [cache_disabled cache_ttl_override] Use Cache TTL Provided by Origin, and set a contigency TTL value in case one is not provided ves.io.schema.rules (`String`).
+`cache_ttl_default` - (Optional) Fallback Cache TTL (d/ h/ m). Use Cache TTL Provided by Origin, and set a contigency TTL value in case one is not provided (`String`).
 
-`cache_ttl_override` - (Optional) Override Cache TTL (d/ h/ m/ s). Exclusive with [cache_disabled cache_ttl_default] Always override the Cahce TTL provided by Origin ves.io.schema.rules.string.time_interval: true (`String`).
+`cache_ttl_override` - (Optional) Override Cache TTL (d/ h/ m/ s). Always override the Cahce TTL provided by Origin (`String`).
 
 <a id="nestedblock--caching_policy--default_cache_action--cache_disabled"></a>
 ### Caching Policy Default Cache Action Cache Disabled
@@ -1743,7 +1743,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--captcha_challenge"></a>
 ### Captcha Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
@@ -1772,7 +1772,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--client_side_defense--policy--js_insert_all_pages_except"></a>
 ### Client Side Defense Policy Js Insert All Pages Except
 
-`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Exclude List](#nestedblock--client_side_defense--policy--js_insert_all_pages_except--exclude_list) below.
+`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#nestedblock--client_side_defense--policy--js_insert_all_pages_except--exclude_list) below.
 
 <a id="nestedblock--client_side_defense--policy--js_insert_all_pages_except--exclude_list"></a>
 ### Client Side Defense Policy Js Insert All Pages Except Exclude List
@@ -1780,9 +1780,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--client_side_defense--policy--js_insertion_rules"></a>
 ### Client Side Defense Policy Js Insertion Rules
 
-`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true. See [Exclude List](#nestedblock--client_side_defense--policy--js_insertion_rules--exclude_list) below.
+`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#nestedblock--client_side_defense--policy--js_insertion_rules--exclude_list) below.
 
-`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves. See [Rules](#nestedblock--client_side_defense--policy--js_insertion_rules--rules) below.
+`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript. See [Rules](#nestedblock--client_side_defense--policy--js_insertion_rules--rules) below.
 
 <a id="nestedblock--client_side_defense--policy--js_insertion_rules--exclude_list"></a>
 ### Client Side Defense Policy Js Insertion Rules Exclude List
@@ -1803,7 +1803,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Secure](#nestedblock--cookie_stickiness--ignore_secure) below.
 
-`name` - (Optional) Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced (`String`).
 
 `path` - (Optional) Path. The name of the path for the cookie. If no path is specified here, no path will be set for the cookie (`String`).
 
@@ -1846,11 +1846,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `allow_headers` - (Optional) Allow Headers. Specifies the content for the access-control-allow-headers header (`String`).
 
-`allow_methods` - (Optional) Allow Methods. Specifies the content for the access-control-allow-methods header ves.io.schema.rules.string.http_valid_methods: true (`String`).
+`allow_methods` - (Optional) Allow Methods. Specifies the content for the access-control-allow-methods header (`String`).
 
-`allow_origin` - (Optional) Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match ves.io.schema.rules.repeated.items.string (`List`).
+`allow_origin` - (Optional) Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
 
-`allow_origin_regex` - (Optional) Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match ves.io.schema.rules.repeated.items.string (`List`).
+`allow_origin_regex` - (Optional) Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
 
 `disabled` - (Optional) Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route (`Bool`).
 
@@ -1873,7 +1873,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--csrf_policy--custom_domain_list"></a>
 ### Csrf Policy Custom Domain List
 
-`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form. Required: YES ves.io (`List`).
+`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form. ves.io.schema.. (`List`).
 
 <a id="nestedblock--csrf_policy--disabled"></a>
 ### Csrf Policy Disabled
@@ -1885,7 +1885,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `apply_data_guard` - (Optional) Empty. This can be used for messages where no values are needed. See [Apply Data Guard](#nestedblock--data_guard_rules--apply_data_guard) below.
 
-`exact_value` - (Optional) Exact Value. Exclusive with [any_domain suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--data_guard_rules--metadata) below.
 
@@ -1893,7 +1893,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `skip_data_guard` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Data Guard](#nestedblock--data_guard_rules--skip_data_guard) below.
 
-`suffix_value` - (Optional) Suffix Value. Exclusive with [any_domain exact_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 <a id="nestedblock--data_guard_rules--any_domain"></a>
 ### Data Guard Rules Any Domain
@@ -1904,18 +1904,18 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--data_guard_rules--metadata"></a>
 ### Data Guard Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--data_guard_rules--path"></a>
 ### Data Guard Rules Path
 
-`path` - (Optional) Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path` - (Optional) Exact. Exact path value to match (`String`).
 
-`prefix` - (Optional) Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
 
-`regex` - (Optional) Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves (`String`).
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="nestedblock--data_guard_rules--skip_data_guard"></a>
 ### Data Guard Rules Skip Data Guard
@@ -1941,7 +1941,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. See [Asn List](#nestedblock--ddos_mitigation_rules--ddos_client_source--asn_list) below.
 
-`country_list` - (Optional) Country List. Sources that are located in one of the countries in the given list ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema (`List`).
+`country_list` - (Optional) Country List. Sources that are located in one of the countries in the given list (`List`).
 
 `ja4_tls_fingerprint_matcher` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 Tls Fingerprint Matcher](#nestedblock--ddos_mitigation_rules--ddos_client_source--ja4_tls_fingerprint_matcher) below.
 
@@ -1955,14 +1955,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ddos_mitigation_rules--ddos_client_source--ja4_tls_fingerprint_matcher"></a>
 ### Ddos Mitigation Rules Ddos Client Source Ja4 Tls Fingerprint Matcher
 
-`exact_values` - (Optional) Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against ves.io.schema.rules.repeated.items.string.len: 36 ves.io.schema.rules.repeated.max_items: 16 ves.io (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against (`List`).
 
 <a id="nestedblock--ddos_mitigation_rules--ddos_client_source--tls_fingerprint_matcher"></a>
 ### Ddos Mitigation Rules Ddos Client Source Tls Fingerprint Matcher
 
-`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated (`List`).
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
-`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.items.string.len: 32 ves.io.schema.rules.repeated.max_items: 16 ves.io (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
 `excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint (`List`).
 
@@ -1971,14 +1971,14 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
-`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
 <a id="nestedblock--ddos_mitigation_rules--metadata"></a>
 ### Ddos Mitigation Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--default_pool"></a>
 ### Default Pool
@@ -1989,9 +1989,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints f... (`String`).
 
-`health_check_port` - (Optional) Health check port. Exclusive with [same_as_endpoint_port] Port used for performing health check ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`health_check_port` - (Optional) Health check port. Port used for performing health check (`Number`).
 
-`healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects ves.io.schema.rules.repeated.max_items: 4. See [Healthcheck](#nestedblock--default_pool--healthcheck) below.
+`healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects. See [Healthcheck](#nestedblock--default_pool--healthcheck) below.
 
 `lb_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Lb Port](#nestedblock--default_pool--lb_port) below.
 
@@ -1999,9 +1999,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--default_pool--no_tls) below.
 
-`origin_servers` - (Optional) Origin Servers. List of origin servers in this pool Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves. See [Origin Servers](#nestedblock--default_pool--origin_servers) below.
+`origin_servers` - (Optional) Origin Servers. List of origin servers in this pool. See [Origin Servers](#nestedblock--default_pool--origin_servers) below.
 
-`port` - (Optional) Port. Exclusive with [automatic_port lb_port] Endpoint service is available on this port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Endpoint service is available on this port (`Number`).
 
 `same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Endpoint Port](#nestedblock--default_pool--same_as_endpoint_port) below.
 
@@ -2018,7 +2018,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests .... See [Circuit Breaker](#nestedblock--default_pool--advanced_options--circuit_breaker) below.
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds ves.io.schema.rules.uint32.lte: 1800000 (`Number`).
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds (`Number`).
 
 `default_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Circuit Breaker](#nestedblock--default_pool--advanced_options--default_circuit_breaker) below.
 
@@ -2046,7 +2046,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them fr.... See [Outlier Detection](#nestedblock--default_pool--advanced_options--outlier_detection) below.
 
-`panic_threshold` - (Optional) Panic threshold. Exclusive with [no_panic_threshold] x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignorin... (`Number`).
+`panic_threshold` - (Optional) Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status (`Number`).
 
 `proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V1](#nestedblock--default_pool--advanced_options--proxy_protocol_v1) below.
 
@@ -2066,7 +2066,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request (`String`).
 
-`retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time (`Number`).
+`retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
 
 <a id="nestedblock--default_pool--advanced_options--default_circuit_breaker"></a>
 ### Default Pool Advanced Options Default Circuit Breaker
@@ -2096,7 +2096,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_subset` - (Optional) Origin Pool Default Subset. Default Subset definition. See [Default Subset](#nestedblock--default_pool--advanced_options--enable_subsets--default_subset) below.
 
-`endpoint_subsets` - (Optional) Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class. Required: YES ves. See [Endpoint Subsets](#nestedblock--default_pool--advanced_options--enable_subsets--endpoint_subsets) below.
+`endpoint_subsets` - (Optional) Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class. See [Endpoint Subsets](#nestedblock--default_pool--advanced_options--enable_subsets--endpoint_subsets) below.
 
 `fail_request` - (Optional) Empty. This can be used for messages where no values are needed. See [Fail Request](#nestedblock--default_pool--advanced_options--enable_subsets--fail_request) below.
 
@@ -2139,7 +2139,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `interval` - (Optional) Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s (`Number`).
 
-`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value. ves.io.schema (`Number`).
+`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
 
 <a id="nestedblock--default_pool--advanced_options--proxy_protocol_v1"></a>
 ### Default Pool Advanced Options Proxy Protocol V1
@@ -2153,11 +2153,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool--healthcheck"></a>
 ### Default Pool Healthcheck
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--default_pool--lb_port"></a>
 ### Default Pool Lb Port
@@ -2193,7 +2193,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool--origin_servers--cbip_service"></a>
 ### Default Pool Origin Servers Cbip Service
 
-`service_name` - (Optional) Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`service_name` - (Optional) Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin (`String`).
 
 <a id="nestedblock--default_pool--origin_servers--consul_service"></a>
 ### Default Pool Origin Servers Consul Service
@@ -2202,7 +2202,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--default_pool--origin_servers--consul_service--outside_network) below.
 
-`service_name` - (Optional) Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`service_name` - (Optional) Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id (`String`).
 
 `site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#nestedblock--default_pool--origin_servers--consul_service--site_locator) below.
 
@@ -2237,7 +2237,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP (`String`).
 
-`service_name` - (Optional) Service Name. Exclusive with [] K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename (`String`).
+`service_name` - (Optional) Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename (`String`).
 
 `site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#nestedblock--default_pool--origin_servers--k8s_service--site_locator) below.
 
@@ -2268,7 +2268,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--default_pool--origin_servers--private_ip--inside_network) below.
 
-`ip` - (Optional) IP. Exclusive with [] Private IPV4 address ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) IP. Private IPV4 address (`String`).
 
 `outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--default_pool--origin_servers--private_ip--outside_network) below.
 
@@ -2296,13 +2296,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool--origin_servers--private_name"></a>
 ### Default Pool Origin Servers Private Name
 
-`dns_name` - (Optional) DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true (`String`).
+`dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
 `inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--default_pool--origin_servers--private_name--inside_network) below.
 
 `outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--default_pool--origin_servers--private_name--outside_network) below.
 
-`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 ves.io.schema.rules.uint32.ranges: 0,10-604800 (`Number`).
+`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 (`Number`).
 
 `segment` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Segment](#nestedblock--default_pool--origin_servers--private_name--segment) below.
 
@@ -2328,19 +2328,19 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool--origin_servers--public_ip"></a>
 ### Default Pool Origin Servers Public Ip
 
-`ip` - (Optional) Public IPV4. Exclusive with [] Public IPV4 address ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) Public IPV4. Public IPV4 address (`String`).
 
 <a id="nestedblock--default_pool--origin_servers--public_name"></a>
 ### Default Pool Origin Servers Public Name
 
-`dns_name` - (Optional) DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
-`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 ves.io.schema.rules.uint32.ranges: 0,10-604800 (`Number`).
+`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 (`Number`).
 
 <a id="nestedblock--default_pool--origin_servers--vn_private_ip"></a>
 ### Default Pool Origin Servers Vn Private Ip
 
-`ip` - (Optional) IPV4. Exclusive with [] IPV4 address ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) IPV4. IPV4 address (`String`).
 
 `virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#nestedblock--default_pool--origin_servers--vn_private_ip--virtual_network) below.
 
@@ -2350,7 +2350,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool--origin_servers--vn_private_name"></a>
 ### Default Pool Origin Servers Vn Private Name
 
-`dns_name` - (Optional) DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true (`String`).
+`dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
 `private_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Private Network](#nestedblock--default_pool--origin_servers--vn_private_name--private_network) below.
 
@@ -2382,13 +2382,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#nestedblock--default_pool--use_tls--disable_sni) below.
 
-`max_session_keys` - (Optional) Max Session Keys Cached. Exclusive with [default_session_key_caching disable_session_key_caching] x-example:'25' Number of session keys that are cached. ves.io.schema.rules.uint32.gte: 2 ves.io (`Number`).
+`max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--default_pool--use_tls--no_mtls) below.
 
 `skip_server_verification` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Server Verification](#nestedblock--default_pool--use_tls--skip_server_verification) below.
 
-`sni` - (Optional) SNI Value. Exclusive with [disable_sni use_host_header_as_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--default_pool--use_tls--tls_config) below.
 
@@ -2446,7 +2446,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool--use_tls--use_mtls"></a>
 ### Default Pool Use Tls Use Mtls
 
-`tls_certificates` - (Optional) mTLS Client Certificate. mTLS Client Certificate Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1. See [Tls Certificates](#nestedblock--default_pool--use_tls--use_mtls--tls_certificates) below.
+`tls_certificates` - (Optional) mTLS Client Certificate. mTLS Client Certificate. See [Tls Certificates](#nestedblock--default_pool--use_tls--use_mtls--tls_certificates) below.
 
 <a id="nestedblock--default_pool--use_tls--use_mtls--tls_certificates"></a>
 ### Default Pool Use Tls Use Mtls Tls Certificates
@@ -2454,18 +2454,18 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool--use_tls--use_mtls_obj"></a>
 ### Default Pool Use Tls Use Mtls Obj
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--default_pool--use_tls--use_server_verification"></a>
 ### Default Pool Use Tls Use Server Verification
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--default_pool--use_tls--use_server_verification--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate ves.io.schema.rules.string (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate (`String`).
 
 <a id="nestedblock--default_pool--use_tls--use_server_verification--trusted_ca"></a>
 ### Default Pool Use Tls Use Server Verification Trusted Ca
@@ -2476,16 +2476,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool--view_internal"></a>
 ### Default Pool View Internal
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--default_pool_list"></a>
 ### Default Pool List
 
-`pools` - (Optional) Origin Pools. List of Origin Pools ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true. See [Pools](#nestedblock--default_pool_list--pools) below.
+`pools` - (Optional) Origin Pools. List of Origin Pools. See [Pools](#nestedblock--default_pool_list--pools) below.
 
 <a id="nestedblock--default_pool_list--pools"></a>
 ### Default Pool List Pools
@@ -2503,11 +2503,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool_list--pools--cluster"></a>
 ### Default Pool List Pools Cluster
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--default_pool_list--pools--endpoint_subsets"></a>
 ### Default Pool List Pools Endpoint Subsets
@@ -2515,11 +2515,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_pool_list--pools--pool"></a>
 ### Default Pool List Pools Pool
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--default_route_pools"></a>
 ### Default Route Pools
@@ -2537,11 +2537,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_route_pools--cluster"></a>
 ### Default Route Pools Cluster
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--default_route_pools--endpoint_subsets"></a>
 ### Default Route Pools Endpoint Subsets
@@ -2549,11 +2549,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--default_route_pools--pool"></a>
 ### Default Route Pools Pool
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--default_sensitive_data_policy"></a>
 ### Default Sensitive Data Policy
@@ -2627,7 +2627,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_api_discovery--api_crawler--api_crawler_config"></a>
 ### Enable Api Discovery Api Crawler Api Crawler Config
 
-`domains` - (Optional) Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer. Required: YES ves.io. See [Domains](#nestedblock--enable_api_discovery--api_crawler--api_crawler_config--domains) below.
+`domains` - (Optional) Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer. See [Domains](#nestedblock--enable_api_discovery--api_crawler--api_crawler_config--domains) below.
 
 <a id="nestedblock--enable_api_discovery--api_crawler--api_crawler_config--domains"></a>
 ### Enable Api Discovery Api Crawler Api Crawler Config Domains
@@ -2638,7 +2638,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_api_discovery--api_discovery_from_code_scan"></a>
 ### Enable Api Discovery Api Discovery From Code Scan
 
-`code_base_integrations` - (Optional) Select Code Base Integrations. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true. See [Code Base Integrations](#nestedblock--enable_api_discovery--api_discovery_from_code_scan--code_base_integrations) below.
+`code_base_integrations` - (Optional) Select Code Base Integrations. See [Code Base Integrations](#nestedblock--enable_api_discovery--api_discovery_from_code_scan--code_base_integrations) below.
 
 <a id="nestedblock--enable_api_discovery--api_discovery_from_code_scan--code_base_integrations"></a>
 ### Enable Api Discovery Api Discovery From Code Scan Code Base Integrations
@@ -2666,11 +2666,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_api_discovery--custom_api_auth_discovery--api_discovery_ref"></a>
 ### Enable Api Discovery Custom Api Auth Discovery Api Discovery Ref
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--enable_api_discovery--default_api_auth_discovery"></a>
 ### Enable Api Discovery Default Api Auth Discovery
@@ -2681,7 +2681,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_api_discovery--discovered_api_settings"></a>
 ### Enable Api Discovery Discovered Api Settings
 
-`purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 7 (`Number`).
+`purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
 
 <a id="nestedblock--enable_api_discovery--enable_learn_from_redirect_traffic"></a>
 ### Enable Api Discovery Enable Learn From Redirect Traffic
@@ -2704,7 +2704,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_challenge--captcha_challenge_parameters"></a>
 ### Enable Challenge Captcha Challenge Parameters
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
@@ -2720,25 +2720,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--enable_challenge--js_challenge_parameters"></a>
 ### Enable Challenge Js Challenge Parameters
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
-`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
 <a id="nestedblock--enable_challenge--malicious_user_mitigation"></a>
 ### Enable Challenge Malicious User Mitigation
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--enable_ip_reputation"></a>
 ### Enable Ip Reputation
 
-`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied. Required: YES ves.io.schema.rules.message (`List`).
+`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied (`List`).
 
 <a id="nestedblock--enable_malicious_user_detection"></a>
 ### Enable Malicious User Detection
@@ -2756,9 +2756,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#nestedblock--graphql_rules--any_domain) below.
 
-`exact_path` - (Optional) Path. Specifies the exact path to GraphQL endpoint. Default value is /graphql. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules (`String`).
+`exact_path` - (Optional) Path. Specifies the exact path to GraphQL endpoint. Default value is /graphql (`String`).
 
-`exact_value` - (Optional) Exact Value. Exclusive with [any_domain suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
 `graphql_settings` - (Optional) GraphQL Settings. GraphQL configuration. See [Graphql Settings](#nestedblock--graphql_rules--graphql_settings) below.
 
@@ -2768,7 +2768,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `method_post` - (Optional) Empty. This can be used for messages where no values are needed. See [Method Post](#nestedblock--graphql_rules--method_post) below.
 
-`suffix_value` - (Optional) Suffix Value. Exclusive with [any_domain exact_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 <a id="nestedblock--graphql_rules--any_domain"></a>
 ### Graphql Rules Any Domain
@@ -2780,11 +2780,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `enable_introspection` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Introspection](#nestedblock--graphql_rules--graphql_settings--enable_introspection) below.
 
-`max_batched_queries` - (Optional) Maximum Batched Queries. Specify maximum number of queries in a single batched request. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules (`Number`).
+`max_batched_queries` - (Optional) Maximum Batched Queries. Specify maximum number of queries in a single batched request (`Number`).
 
-`max_depth` - (Optional) Maximum Structure Depth. Specify maximum depth for the GraphQL query. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 20 (`Number`).
+`max_depth` - (Optional) Maximum Structure Depth. Specify maximum depth for the GraphQL query (`Number`).
 
-`max_total_length` - (Optional) Maximum Total Length. Specify maximum length in bytes for the GraphQL query. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32 (`Number`).
+`max_total_length` - (Optional) Maximum Total Length. Specify maximum length in bytes for the GraphQL query (`Number`).
 
 <a id="nestedblock--graphql_rules--graphql_settings--disable_introspection"></a>
 ### Graphql Rules Graphql Settings Disable Introspection
@@ -2795,9 +2795,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--graphql_rules--metadata"></a>
 ### Graphql Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--graphql_rules--method_get"></a>
 ### Graphql Rules Method Get
@@ -2810,16 +2810,16 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud (`Bool`).
 
-`port` - (Optional) HTTP Listen Port. Exclusive with [port_ranges] HTTP port to Listen. ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) HTTP Listen Port. HTTP port to Listen (`Number`).
 
-`port_ranges` - (Optional) Port Ranges. Exclusive with [port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string (`String`).
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
 <a id="nestedblock--https"></a>
 ### Https
 
 `add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
 
-`append_server_name` - (Optional) Append header value. Exclusive with [default_header pass_through server_name] Define the header value for the header name “server” (`String`).
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
 
 `coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#nestedblock--https--coalescing_options) below.
 
@@ -2841,11 +2841,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `pass_through` - (Optional) Empty. This can be used for messages where no values are needed. See [Pass Through](#nestedblock--https--pass_through) below.
 
-`port` - (Optional) HTTPS Port. Exclusive with [port_ranges] HTTPS port to Listen. ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) HTTPS Port. HTTPS port to Listen (`Number`).
 
-`port_ranges` - (Optional) Port Ranges. Exclusive with [port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string (`String`).
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
-`server_name` - (Optional) Modify header value. Exclusive with [append_server_name default_header pass_through] Define the header value for the header name “server” (`String`).
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
 
 `tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [Tls Cert Params](#nestedblock--https--tls_cert_params) below.
 
@@ -2908,7 +2908,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https--tls_cert_params"></a>
 ### Https Tls Cert Params
 
-`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated. See [Certificates](#nestedblock--https--tls_cert_params--certificates) below.
+`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#nestedblock--https--tls_cert_params--certificates) below.
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https--tls_cert_params--no_mtls) below.
 
@@ -2919,11 +2919,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https--tls_cert_params--certificates"></a>
 ### Https Tls Cert Params Certificates
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--https--tls_cert_params--no_mtls"></a>
 ### Https Tls Cert Params No Mtls
@@ -2962,7 +2962,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https--tls_cert_params--use_mtls--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https--tls_cert_params--use_mtls--xfcc_disabled) below.
 
@@ -2988,7 +2988,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https--tls_parameters--no_mtls) below.
 
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io. See [Tls Certificates](#nestedblock--https--tls_parameters--tls_certificates) below.
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https--tls_parameters--tls_certificates) below.
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https--tls_parameters--tls_config) below.
 
@@ -3000,7 +3000,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https--tls_parameters--tls_certificates"></a>
 ### Https Tls Parameters Tls Certificates
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https--tls_parameters--tls_certificates--custom_hash_algorithms) below.
 
@@ -3058,7 +3058,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https--tls_parameters--use_mtls--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https--tls_parameters--use_mtls--xfcc_disabled) below.
 
@@ -3084,7 +3084,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
 
-`append_server_name` - (Optional) Append header value. Exclusive with [default_header pass_through server_name] Define the header value for the header name “server” (`String`).
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
 
 `coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#nestedblock--https_auto_cert--coalescing_options) below.
 
@@ -3108,11 +3108,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `pass_through` - (Optional) Empty. This can be used for messages where no values are needed. See [Pass Through](#nestedblock--https_auto_cert--pass_through) below.
 
-`port` - (Optional) HTTPS Listen Port. Exclusive with [port_ranges] HTTPS port to Listen. ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) HTTPS Listen Port. HTTPS port to Listen (`Number`).
 
-`port_ranges` - (Optional) Port Ranges. Exclusive with [port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string (`String`).
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
-`server_name` - (Optional) Modify header value. Exclusive with [append_server_name default_header pass_through] Define the header value for the header name “server” (`String`).
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_auto_cert--tls_config) below.
 
@@ -3189,7 +3189,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_auto_cert--tls_config--custom_security"></a>
 ### Https Auto Cert Tls Config Custom Security
 
-`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.unique: true (`List`).
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
 
 `max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version (`String`).
 
@@ -3215,7 +3215,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_auto_cert--use_mtls--trusted_ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_auto_cert--use_mtls--xfcc_disabled) below.
 
@@ -3224,11 +3224,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_auto_cert--use_mtls--crl"></a>
 ### Https Auto Cert Use Mtls Crl
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--https_auto_cert--use_mtls--no_crl"></a>
 ### Https Auto Cert Use Mtls No Crl
@@ -3236,11 +3236,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_auto_cert--use_mtls--trusted_ca"></a>
 ### Https Auto Cert Use Mtls Trusted Ca
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--https_auto_cert--use_mtls--xfcc_disabled"></a>
 ### Https Auto Cert Use Mtls Xfcc Disabled
@@ -3248,16 +3248,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--https_auto_cert--use_mtls--xfcc_options"></a>
 ### Https Auto Cert Use Mtls Xfcc Options
 
-`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.enum (`List`).
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`List`).
 
 <a id="nestedblock--js_challenge"></a>
 ### Js Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
-`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
 <a id="nestedblock--jwt_validation"></a>
 ### Jwt Validation
@@ -3295,7 +3295,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--jwt_validation--mandatory_claims"></a>
 ### Jwt Validation Mandatory Claims
 
-`claim_names` - (Optional) Claim Names. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`claim_names` - (Optional) Claim Names (`List`).
 
 <a id="nestedblock--jwt_validation--reserved_claims"></a>
 ### Jwt Validation Reserved Claims
@@ -3304,7 +3304,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `audience_disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Audience Disable](#nestedblock--jwt_validation--reserved_claims--audience_disable) below.
 
-`issuer` - (Optional) Exact Match. Exclusive with [issuer_disable] (`String`).
+`issuer` - (Optional) Exact Match (`String`).
 
 `issuer_disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Issuer Disable](#nestedblock--jwt_validation--reserved_claims--issuer_disable) below.
 
@@ -3315,7 +3315,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--jwt_validation--reserved_claims--audience"></a>
 ### Jwt Validation Reserved Claims Audience
 
-`audiences` - (Optional) Values. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true (`List`).
+`audiences` - (Optional) Values (`List`).
 
 <a id="nestedblock--jwt_validation--reserved_claims--audience_disable"></a>
 ### Jwt Validation Reserved Claims Audience Disable
@@ -3344,12 +3344,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--jwt_validation--target--api_groups"></a>
 ### Jwt Validation Target Api Groups
 
-`api_groups` - (Optional) API Groups. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated (`List`).
+`api_groups` - (Optional) API Groups (`List`).
 
 <a id="nestedblock--jwt_validation--target--base_paths"></a>
 ### Jwt Validation Target Base Paths
 
-`base_paths` - (Optional) Prefix Values. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.http_path: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`base_paths` - (Optional) Prefix Values (`List`).
 
 <a id="nestedblock--jwt_validation--token_location"></a>
 ### Jwt Validation Token Location
@@ -3368,11 +3368,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--l7_ddos_action_js_challenge"></a>
 ### L7 Ddos Action Js Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
-`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
 <a id="nestedblock--l7_ddos_protection"></a>
 ### L7 Ddos Protection
@@ -3395,23 +3395,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `mitigation_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. See [Mitigation Js Challenge](#nestedblock--l7_ddos_protection--mitigation_js_challenge) below.
 
-`rps_threshold` - (Optional) Custom. Exclusive with [default_rps_threshold] Configure custom RPS threshold ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 20000 (`Number`).
+`rps_threshold` - (Optional) Custom. Configure custom RPS threshold (`Number`).
 
 <a id="nestedblock--l7_ddos_protection--clientside_action_captcha_challenge"></a>
 ### L7 Ddos Protection Clientside Action Captcha Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
 <a id="nestedblock--l7_ddos_protection--clientside_action_js_challenge"></a>
 ### L7 Ddos Protection Clientside Action Js Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
-`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
 <a id="nestedblock--l7_ddos_protection--clientside_action_none"></a>
 ### L7 Ddos Protection Clientside Action None
@@ -3419,11 +3419,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--l7_ddos_protection--ddos_policy_custom"></a>
 ### L7 Ddos Protection Ddos Policy Custom
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--l7_ddos_protection--ddos_policy_none"></a>
 ### L7 Ddos Protection Ddos Policy None
@@ -3437,18 +3437,18 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--l7_ddos_protection--mitigation_captcha_challenge"></a>
 ### L7 Ddos Protection Mitigation Captcha Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
 <a id="nestedblock--l7_ddos_protection--mitigation_js_challenge"></a>
 ### L7 Ddos Protection Mitigation Js Challenge
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
-`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
 <a id="nestedblock--least_active"></a>
 ### Least Active
@@ -3456,7 +3456,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--malware_protection_settings"></a>
 ### Malware Protection Settings
 
-`malware_protection_rules` - (Optional) Malware Detection Rules. Configure the match criteria to trigger Malware Protection Scan Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io. See [Malware Protection Rules](#nestedblock--malware_protection_settings--malware_protection_rules) below.
+`malware_protection_rules` - (Optional) Malware Detection Rules. Configure the match criteria to trigger Malware Protection Scan. See [Malware Protection Rules](#nestedblock--malware_protection_settings--malware_protection_rules) below.
 
 <a id="nestedblock--malware_protection_settings--malware_protection_rules"></a>
 ### Malware Protection Settings Malware Protection Rules
@@ -3465,7 +3465,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `domain` - (Optional) Domain to Match. Domain to be matched. See [Domain](#nestedblock--malware_protection_settings--malware_protection_rules--domain) below.
 
-`http_methods` - (Optional) HTTP Methods. Methods to be matched ves.io.schema.rules.repeated.unique: true (`List`).
+`http_methods` - (Optional) HTTP Methods. Methods to be matched (`List`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--malware_protection_settings--malware_protection_rules--metadata) below.
 
@@ -3500,18 +3500,18 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--malware_protection_settings--malware_protection_rules--metadata"></a>
 ### Malware Protection Settings Malware Protection Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--malware_protection_settings--malware_protection_rules--path"></a>
 ### Malware Protection Settings Malware Protection Rules Path
 
-`path` - (Optional) Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path` - (Optional) Exact. Exact path value to match (`String`).
 
-`prefix` - (Optional) Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
 
-`regex` - (Optional) Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves (`String`).
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="nestedblock--more_option"></a>
 ### More Option
@@ -3534,31 +3534,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. See [Request Cookies To Add](#nestedblock--more_option--request_cookies_to_add) below.
 
-`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema (`List`).
+`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream (`List`).
 
-`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. See [Request Headers To Add](#nestedblock--more_option--request_headers_to_add) below.
+`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied. See [Request Headers To Add](#nestedblock--more_option--request_headers_to_add) below.
 
-`request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated (`List`).
+`request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
 
 `response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. See [Response Cookies To Add](#nestedblock--more_option--response_cookies_to_add) below.
 
-`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules (`List`).
+`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed (`List`).
 
-`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. See [Response Headers To Add](#nestedblock--more_option--response_headers_to_add) below.
+`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied. See [Response Headers To Add](#nestedblock--more_option--response_headers_to_add) below.
 
-`response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules (`List`).
+`response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
 
 <a id="nestedblock--more_option--buffer_policy"></a>
 ### More Option Buffer Policy
 
 `disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
 
-`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response. ves.io.schema.rules.uint32 (`Number`).
+`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
 
 <a id="nestedblock--more_option--compression_params"></a>
 ### More Option Compression Params
 
-`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30. ves.io.schema.rules.uint32.gte: 30 (`Number`).
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
 
 `content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascri... (`List`).
 
@@ -3578,13 +3578,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--more_option--request_cookies_to_add"></a>
 ### More Option Request Cookies To Add
 
-`name` - (Optional) Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
 `overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--more_option--request_cookies_to_add--secret_value) below.
 
-`value` - (Optional) Value. Exclusive with [secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096 (`String`).
+`value` - (Optional) Value. Value of the Cookie header (`String`).
 
 <a id="nestedblock--more_option--request_cookies_to_add--secret_value"></a>
 ### More Option Request Cookies To Add Secret Value
@@ -3604,11 +3604,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
 
-`name` - (Optional) Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the HTTP header (`String`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--more_option--request_headers_to_add--secret_value) below.
 
-`value` - (Optional) Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096 (`String`).
+`value` - (Optional) Value. Value of the HTTP header (`String`).
 
 <a id="nestedblock--more_option--request_headers_to_add--secret_value"></a>
 ### More Option Request Headers To Add Secret Value
@@ -3626,15 +3626,15 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--more_option--response_cookies_to_add"></a>
 ### More Option Response Cookies To Add
 
-`add_domain` - (Optional) Add Domain. Exclusive with [ignore_domain] Add domain attribute ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
 
-`add_expiry` - (Optional) Add expiry. Exclusive with [ignore_expiry] Add expiry attribute ves.io.schema.rules.string.max_len: 256 (`String`).
+`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
 
 `add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#nestedblock--more_option--response_cookies_to_add--add_httponly) below.
 
 `add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#nestedblock--more_option--response_cookies_to_add--add_partitioned) below.
 
-`add_path` - (Optional) Add path. Exclusive with [ignore_path] Add path attribute ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`add_path` - (Optional) Add path. Add path attribute (`String`).
 
 `add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#nestedblock--more_option--response_cookies_to_add--add_secure) below.
 
@@ -3656,9 +3656,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `ignore_value` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Value](#nestedblock--more_option--response_cookies_to_add--ignore_value) below.
 
-`max_age_value` - (Optional) Add Max Age. Exclusive with [ignore_max_age] Add max age attribute ves.io.schema.rules.uint32.lte: 34560000 (`Number`).
+`max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
 
-`name` - (Optional) Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
 `overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
 
@@ -3670,7 +3670,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--more_option--response_cookies_to_add--secret_value) below.
 
-`value` - (Optional) Value. Exclusive with [ignore_value secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096 (`String`).
+`value` - (Optional) Value. Value of the Cookie header (`String`).
 
 <a id="nestedblock--more_option--response_cookies_to_add--add_httponly"></a>
 ### More Option Response Cookies To Add Add Httponly
@@ -3735,11 +3735,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
 
-`name` - (Optional) Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the HTTP header (`String`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--more_option--response_headers_to_add--secret_value) below.
 
-`value` - (Optional) Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096 (`String`).
+`value` - (Optional) Value. Value of the HTTP header (`String`).
 
 <a id="nestedblock--more_option--response_headers_to_add--secret_value"></a>
 ### More Option Response Headers To Add Secret Value
@@ -3781,7 +3781,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Client Selector](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--client_selector) below.
 
-`country_codes` - (Optional) Country Codes List. List of Country Codes ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true (`List`).
+`country_codes` - (Optional) Country Codes List. List of Country Codes (`List`).
 
 `ip_matcher` - (Optional) IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [Ip Matcher](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--ip_matcher) below.
 
@@ -3793,7 +3793,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `origin_server_subsets_action` - (Optional) Action. Add labels to select one or more origin servers. Note: The pre-requisite settings to be configured in the origin pool are: 1. Add labels to origin servers 2. See [Origin Server Subsets Action](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--origin_server_subsets_action) below.
 
-`re_name_list` - (Optional) RE Names. List of RE names for match ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.max_len: 64 (`List`).
+`re_name_list` - (Optional) RE Names. List of RE names for match (`List`).
 
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--any_asn"></a>
 ### Origin Server Subset Rule List Origin Server Subset Rules Any Asn
@@ -3809,7 +3809,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--asn_matcher"></a>
 ### Origin Server Subset Rule List Origin Server Subset Rules Asn Matcher
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Asn Sets](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--asn_matcher--asn_sets) below.
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--asn_matcher--asn_sets) below.
 
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--asn_matcher--asn_sets"></a>
 ### Origin Server Subset Rule List Origin Server Subset Rules Asn Matcher Asn Sets
@@ -3817,14 +3817,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--client_selector"></a>
 ### Origin Server Subset Rule List Origin Server Subset Rules Client Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--ip_matcher"></a>
 ### Origin Server Subset Rule List Origin Server Subset Rules Ip Matcher
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Prefix Sets](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--ip_matcher--prefix_sets) below.
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--ip_matcher--prefix_sets) below.
 
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--ip_matcher--prefix_sets"></a>
 ### Origin Server Subset Rule List Origin Server Subset Rules Ip Matcher Prefix Sets
@@ -3834,14 +3834,14 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
-`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--metadata"></a>
 ### Origin Server Subset Rule List Origin Server Subset Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--none"></a>
 ### Origin Server Subset Rule List Origin Server Subset Rules None
@@ -3885,7 +3885,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--policy_based_challenge--captcha_challenge_parameters"></a>
 ### Policy Based Challenge Captcha Challenge Parameters
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
@@ -3904,20 +3904,20 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--policy_based_challenge--js_challenge_parameters"></a>
 ### Policy Based Challenge Js Challenge Parameters
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32 (`Number`).
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
-`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000 (`Number`).
+`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
 <a id="nestedblock--policy_based_challenge--malicious_user_mitigation"></a>
 ### Policy Based Challenge Malicious User Mitigation
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--policy_based_challenge--no_challenge"></a>
 ### Policy Based Challenge No Challenge
@@ -3964,9 +3964,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Secure](#nestedblock--protected_cookies--ignore_secure) below.
 
-`max_age_value` - (Optional) Add Max Age. Exclusive with [ignore_max_age] Add max age attribute ves.io.schema.rules.uint32.lte: 34560000 (`Number`).
+`max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
 
-`name` - (Optional) Cookie Name. Name of the Cookie Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Cookie Name. Name of the Cookie (`String`).
 
 `samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Lax](#nestedblock--protected_cookies--samesite_lax) below.
 
@@ -4028,21 +4028,21 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rate_limit--custom_ip_allowed_list"></a>
 ### Rate Limit Custom Ip Allowed List
 
-`rate_limiter_allowed_prefixes` - (Optional) List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. Required: YES ves. See [Rate Limiter Allowed Prefixes](#nestedblock--rate_limit--custom_ip_allowed_list--rate_limiter_allowed_prefixes) below.
+`rate_limiter_allowed_prefixes` - (Optional) List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. See [Rate Limiter Allowed Prefixes](#nestedblock--rate_limit--custom_ip_allowed_list--rate_limiter_allowed_prefixes) below.
 
 <a id="nestedblock--rate_limit--custom_ip_allowed_list--rate_limiter_allowed_prefixes"></a>
 ### Rate Limit Custom Ip Allowed List Rate Limiter Allowed Prefixes
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--rate_limit--ip_allowed_list"></a>
 ### Rate Limit Ip Allowed List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--rate_limit--no_ip_allowed_list"></a>
 ### Rate Limit No Ip Allowed List
@@ -4053,33 +4053,33 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rate_limit--policies"></a>
 ### Rate Limit Policies
 
-`policies` - (Optional) Rate Limiter Policies. Ordered list of rate limiter policies. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Policies](#nestedblock--rate_limit--policies--policies) below.
+`policies` - (Optional) Rate Limiter Policies. Ordered list of rate limiter policies. See [Policies](#nestedblock--rate_limit--policies--policies) below.
 
 <a id="nestedblock--rate_limit--policies--policies"></a>
 ### Rate Limit Policies Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--rate_limit--rate_limiter"></a>
 ### Rate Limit Rate Limiter
 
 `action_block` - (Optional) Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold. See [Action Block](#nestedblock--rate_limit--rate_limiter--action_block) below.
 
-`burst_multiplier` - (Optional) Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 100 (`Number`).
+`burst_multiplier` - (Optional) Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate (`Number`).
 
 `disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#nestedblock--rate_limit--rate_limiter--disabled) below.
 
 `leaky_bucket` - (Optional) Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5. See [Leaky Bucket](#nestedblock--rate_limit--rate_limiter--leaky_bucket) below.
 
-`period_multiplier` - (Optional) Periods. This setting, combined with Per Period units, provides a duration ves.io.schema.rules.uint32.gte: 0 (`Number`).
+`period_multiplier` - (Optional) Periods. This setting, combined with Per Period units, provides a duration (`Number`).
 
 `token_bucket` - (Optional) Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits. See [Token Bucket](#nestedblock--rate_limit--rate_limiter--token_bucket) below.
 
-`total_number` - (Optional) Number Of Requests. The total number of allowed requests per rate-limiting period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32 (`Number`).
+`total_number` - (Optional) Number Of Requests. The total number of allowed requests per rate-limiting period (`Number`).
 
 `unit` - (Optional) Rate Limit Period Unit. Unit for the period per which the rate limit is applied (`String`).
 
@@ -4113,16 +4113,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ring_hash"></a>
 ### Ring Hash
 
-`hash_policy` - (Optional) Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request Required: YES ves. See [Hash Policy](#nestedblock--ring_hash--hash_policy) below.
+`hash_policy` - (Optional) Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request. See [Hash Policy](#nestedblock--ring_hash--hash_policy) below.
 
 <a id="nestedblock--ring_hash--hash_policy"></a>
 ### Ring Hash Hash Policy
 
 `cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. See [Cookie](#nestedblock--ring_hash--hash_policy--cookie) below.
 
-`header_name` - (Optional) Header Name. Exclusive with [cookie source_ip] The name or key of the request header that will be used to obtain the hash key ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string (`String`).
+`header_name` - (Optional) Header Name. The name or key of the request header that will be used to obtain the hash key (`String`).
 
-`source_ip` - (Optional) Source IP. Exclusive with [cookie header_name] Hash based on source IP address (`Bool`).
+`source_ip` - (Optional) Source IP. Hash based on source IP address (`Bool`).
 
 `terminal` - (Optional) Terminal. Specify if its a terminal policy (`Bool`).
 
@@ -4139,7 +4139,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Secure](#nestedblock--ring_hash--hash_policy--cookie--ignore_secure) below.
 
-`name` - (Optional) Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced (`String`).
 
 `path` - (Optional) Path. The name of the path for the cookie. If no path is specified here, no path will be set for the cookie (`String`).
 
@@ -4197,16 +4197,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--custom_route_object--route_ref"></a>
 ### Routes Custom Route Object Route Ref
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--routes--direct_response_route"></a>
 ### Routes Direct Response Route
 
-`headers` - (Optional) Headers. List of (key, value) headers ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Headers](#nestedblock--routes--direct_response_route--headers) below.
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#nestedblock--routes--direct_response_route--headers) below.
 
 `http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
 
@@ -4219,24 +4219,24 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--direct_response_route--headers"></a>
 ### Routes Direct Response Route Headers
 
-`exact` - (Optional) Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true (`String`).
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`name` - (Optional) Name. Name of the header (`String`).
 
-`presence` - (Optional) Presence. Exclusive with [exact regex] If true, check for presence of header (`Bool`).
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
-`regex` - (Optional) Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string (`String`).
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
 <a id="nestedblock--routes--direct_response_route--incoming_port"></a>
 ### Routes Direct Response Route Incoming Port
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--routes--direct_response_route--incoming_port--no_port_match) below.
 
-`port` - (Optional) Port. Exclusive with [no_port_match port_ranges] Exact Port to match ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Exclusive with [no_port_match port] Port range to match ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range: true (`String`).
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="nestedblock--routes--direct_response_route--incoming_port--no_port_match"></a>
 ### Routes Direct Response Route Incoming Port No Port Match
@@ -4244,23 +4244,23 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--direct_response_route--path"></a>
 ### Routes Direct Response Route Path
 
-`path` - (Optional) Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path` - (Optional) Exact. Exact path value to match (`String`).
 
-`prefix` - (Optional) Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
 
-`regex` - (Optional) Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves (`String`).
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="nestedblock--routes--direct_response_route--route_direct_response"></a>
 ### Routes Direct Response Route Route Direct Response
 
 `response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g (`String`).
 
-`response_code` - (Optional) Response Code. response code to send ves.io.schema.rules.uint32.gte: 100 ves.io.schema.rules.uint32.lte: 599 (`Number`).
+`response_code` - (Optional) Response Code. response code to send (`Number`).
 
 <a id="nestedblock--routes--redirect_route"></a>
 ### Routes Redirect Route
 
-`headers` - (Optional) Headers. List of (key, value) headers ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Headers](#nestedblock--routes--redirect_route--headers) below.
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#nestedblock--routes--redirect_route--headers) below.
 
 `http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
 
@@ -4273,24 +4273,24 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--redirect_route--headers"></a>
 ### Routes Redirect Route Headers
 
-`exact` - (Optional) Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true (`String`).
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`name` - (Optional) Name. Name of the header (`String`).
 
-`presence` - (Optional) Presence. Exclusive with [exact regex] If true, check for presence of header (`Bool`).
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
-`regex` - (Optional) Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string (`String`).
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
 <a id="nestedblock--routes--redirect_route--incoming_port"></a>
 ### Routes Redirect Route Incoming Port
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--routes--redirect_route--incoming_port--no_port_match) below.
 
-`port` - (Optional) Port. Exclusive with [no_port_match port_ranges] Exact Port to match ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Exclusive with [no_port_match port] Port range to match ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range: true (`String`).
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="nestedblock--routes--redirect_route--incoming_port--no_port_match"></a>
 ### Routes Redirect Route Incoming Port No Port Match
@@ -4298,28 +4298,28 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--redirect_route--path"></a>
 ### Routes Redirect Route Path
 
-`path` - (Optional) Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path` - (Optional) Exact. Exact path value to match (`String`).
 
-`prefix` - (Optional) Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
 
-`regex` - (Optional) Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves (`String`).
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="nestedblock--routes--redirect_route--route_redirect"></a>
 ### Routes Redirect Route Route Redirect
 
 `host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
 
-`path_redirect` - (Optional) Path. Exclusive with [prefix_rewrite] swap path part of incoming URL in redirect URL ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path_redirect` - (Optional) Path. swap path part of incoming URL in redirect URL (`String`).
 
-`prefix_rewrite` - (Optional) Prefix Rewrite. Exclusive with [path_redirect] In Redirect response, the matched prefix (or path) should be swapped with this value (`String`).
+`prefix_rewrite` - (Optional) Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request (`String`).
 
 `proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done (`String`).
 
 `remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Remove All Params](#nestedblock--routes--redirect_route--route_redirect--remove_all_params) below.
 
-`replace_params` - (Optional) Replace All Parameters. Exclusive with [remove_all_params retain_all_params] ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`replace_params` - (Optional) Replace All Parameters (`String`).
 
-`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response. ves.io.schema.rules.uint32.lte: 599 (`Number`).
+`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
 
 `retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Retain All Params](#nestedblock--routes--redirect_route--route_redirect--retain_all_params) below.
 
@@ -4338,15 +4338,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Host Rewrite](#nestedblock--routes--simple_route--disable_host_rewrite) below.
 
-`headers` - (Optional) Headers. List of (key, value) headers ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Headers](#nestedblock--routes--simple_route--headers) below.
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#nestedblock--routes--simple_route--headers) below.
 
-`host_rewrite` - (Optional) Host Rewrite Value. Exclusive with [auto_host_rewrite disable_host_rewrite] Host header will be swapped with this value ves.io.schema.rules.string.hostname: true (`String`).
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
 
 `http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
 
 `incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#nestedblock--routes--simple_route--incoming_port) below.
 
-`origin_pools` - (Optional) Origin Pools. Origin Pools for this route Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema. See [Origin Pools](#nestedblock--routes--simple_route--origin_pools) below.
+`origin_pools` - (Optional) Origin Pools. Origin Pools for this route. See [Origin Pools](#nestedblock--routes--simple_route--origin_pools) below.
 
 `path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#nestedblock--routes--simple_route--path) below.
 
@@ -4399,7 +4399,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_retry_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Retry Policy](#nestedblock--routes--simple_route--advanced_options--no_retry_policy) below.
 
-`prefix_rewrite` - (Optional) Enable Prefix Rewrite. Exclusive with [disable_prefix_rewrite regex_rewrite] prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value (`String`).
+`prefix_rewrite` - (Optional) Enable Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value (`String`).
 
 `priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request (`String`).
 
@@ -4407,19 +4407,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. See [Request Cookies To Add](#nestedblock--routes--simple_route--advanced_options--request_cookies_to_add) below.
 
-`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema (`List`).
+`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream (`List`).
 
-`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true. See [Request Headers To Add](#nestedblock--routes--simple_route--advanced_options--request_headers_to_add) below.
+`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. See [Request Headers To Add](#nestedblock--routes--simple_route--advanced_options--request_headers_to_add) below.
 
-`request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated (`List`).
+`request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
 
 `response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. See [Response Cookies To Add](#nestedblock--routes--simple_route--advanced_options--response_cookies_to_add) below.
 
-`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules (`List`).
+`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed (`List`).
 
-`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true. See [Response Headers To Add](#nestedblock--routes--simple_route--advanced_options--response_headers_to_add) below.
+`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. See [Response Headers To Add](#nestedblock--routes--simple_route--advanced_options--response_headers_to_add) below.
 
-`response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules (`List`).
+`response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
 
 `retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Retract Cluster](#nestedblock--routes--simple_route--advanced_options--retract_cluster) below.
 
@@ -4427,7 +4427,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `specific_hash_policy` - (Optional) Hash Policy List. List of hash policy rules. See [Specific Hash Policy](#nestedblock--routes--simple_route--advanced_options--specific_hash_policy) below.
 
-`timeout` - (Optional) Timeout. The timeout for the route including all retries, in milliseconds. Should be set to a high value or 0 (infinite timeout) for server-side streaming. ves.io.schema.rules.uint32.gte: 0 ves.io (`Number`).
+`timeout` - (Optional) Timeout. The timeout for the route including all retries, in milliseconds. Should be set to a high value or 0 (infinite timeout) for server-side streaming (`Number`).
 
 `waf_exclusion_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Waf Exclusion Policy](#nestedblock--routes--simple_route--advanced_options--waf_exclusion_policy) below.
 
@@ -4535,24 +4535,24 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--simple_route--headers"></a>
 ### Routes Simple Route Headers
 
-`exact` - (Optional) Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true (`String`).
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`name` - (Optional) Name. Name of the header (`String`).
 
-`presence` - (Optional) Presence. Exclusive with [exact regex] If true, check for presence of header (`Bool`).
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
-`regex` - (Optional) Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string (`String`).
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
 <a id="nestedblock--routes--simple_route--incoming_port"></a>
 ### Routes Simple Route Incoming Port
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--routes--simple_route--incoming_port--no_port_match) below.
 
-`port` - (Optional) Port. Exclusive with [no_port_match port_ranges] Exact Port to match ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Exclusive with [no_port_match port] Port range to match ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range: true (`String`).
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="nestedblock--routes--simple_route--incoming_port--no_port_match"></a>
 ### Routes Simple Route Incoming Port No Port Match
@@ -4582,18 +4582,18 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--routes--simple_route--path"></a>
 ### Routes Simple Route Path
 
-`path` - (Optional) Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path` - (Optional) Exact. Exact path value to match (`String`).
 
-`prefix` - (Optional) Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
 
-`regex` - (Optional) Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves (`String`).
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="nestedblock--routes--simple_route--query_params"></a>
 ### Routes Simple Route Query Params
 
 `remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Remove All Params](#nestedblock--routes--simple_route--query_params--remove_all_params) below.
 
-`replace_params` - (Optional) Replace All Parameters. Exclusive with [remove_all_params retain_all_params] ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`replace_params` - (Optional) Replace All Parameters (`String`).
 
 `retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Retain All Params](#nestedblock--routes--simple_route--query_params--retain_all_params) below.
 
@@ -4606,7 +4606,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--sensitive_data_disclosure_rules"></a>
 ### Sensitive Data Disclosure Rules
 
-`sensitive_data_types_in_response` - (Optional) Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules. See [Sensitive Data Types In Response](#nestedblock--sensitive_data_disclosure_rules--sensitive_data_types_in_response) below.
+`sensitive_data_types_in_response` - (Optional) Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses. See [Sensitive Data Types In Response](#nestedblock--sensitive_data_disclosure_rules--sensitive_data_types_in_response) below.
 
 <a id="nestedblock--sensitive_data_disclosure_rules--sensitive_data_types_in_response"></a>
 ### Sensitive Data Disclosure Rules Sensitive Data Types In Response
@@ -4622,9 +4622,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--sensitive_data_disclosure_rules--sensitive_data_types_in_response--api_endpoint"></a>
 ### Sensitive Data Disclosure Rules Sensitive Data Types In Response Api Endpoint
 
-`methods` - (Optional) Methods. Methods to be matched ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`methods` - (Optional) Methods. Methods to be matched (`List`).
 
-`path` - (Optional) Path. Path to be matched Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1024 ves.io.schema.rules.string.templated_http_path: true (`String`).
+`path` - (Optional) Path. Path to be matched (`String`).
 
 <a id="nestedblock--sensitive_data_disclosure_rules--sensitive_data_types_in_response--body"></a>
 ### Sensitive Data Disclosure Rules Sensitive Data Types In Response Body
@@ -4645,11 +4645,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--sensitive_data_policy--sensitive_data_policy_ref"></a>
 ### Sensitive Data Policy Sensitive Data Policy Ref
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--service_policies_from_namespace"></a>
 ### Service Policies From Namespace
@@ -4704,7 +4704,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--single_lb_app--enable_discovery--api_discovery_from_code_scan"></a>
 ### Single Lb App Enable Discovery Api Discovery From Code Scan
 
-`code_base_integrations` - (Optional) Select Code Base Integrations. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true. See [Code Base Integrations](#nestedblock--single_lb_app--enable_discovery--api_discovery_from_code_scan--code_base_integrations) below.
+`code_base_integrations` - (Optional) Select Code Base Integrations. See [Code Base Integrations](#nestedblock--single_lb_app--enable_discovery--api_discovery_from_code_scan--code_base_integrations) below.
 
 <a id="nestedblock--single_lb_app--enable_discovery--api_discovery_from_code_scan--code_base_integrations"></a>
 ### Single Lb App Enable Discovery Api Discovery From Code Scan Code Base Integrations
@@ -4726,7 +4726,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--single_lb_app--enable_discovery--discovered_api_settings"></a>
 ### Single Lb App Enable Discovery Discovered Api Settings
 
-`purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 7 (`Number`).
+`purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
 
 <a id="nestedblock--single_lb_app--enable_discovery--enable_learn_from_redirect_traffic"></a>
 ### Single Lb App Enable Discovery Enable Learn From Redirect Traffic
@@ -4741,7 +4741,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds (`Number`).
 
-`request_timeout` - (Optional) Custom Timeout. Exclusive with [disable_request_timeout] ves.io.schema.rules.uint32.gte: 2000 ves.io.schema.rules.uint32.lte: 300000 (`Number`).
+`request_timeout` - (Optional) Custom Timeout (`Number`).
 
 <a id="nestedblock--slow_ddos_mitigation--disable_request_timeout"></a>
 ### Slow Ddos Mitigation Disable Request Timeout
@@ -4755,9 +4755,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--trusted_clients"></a>
 ### Trusted Clients
 
-`actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule ves.io.schema.rules.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 10 ves.io.schema.rules.repeated (`List`).
+`actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule (`List`).
 
-`as_number` - (Optional) AS Number. Exclusive with [http_header ip_prefix ipv6_prefix user_identifier] RFC 6793 defined 4-byte AS number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 401308 (`Number`).
+`as_number` - (Optional) AS Number. RFC 6793 defined 4-byte AS number (`Number`).
 
 `bot_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Bot Skip Processing](#nestedblock--trusted_clients--bot_skip_processing) below.
 
@@ -4765,15 +4765,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_header` - (Optional) HTTP Header. Request header name and value pairs. See [Http Header](#nestedblock--trusted_clients--http_header) below.
 
-`ip_prefix` - (Optional) IPv4 Prefix. Exclusive with [as_number http_header ipv6_prefix user_identifier] IPv4 prefix string. ves.io.schema.rules.string.ipv4_prefix: true (`String`).
+`ip_prefix` - (Optional) IPv4 Prefix. IPv4 prefix string (`String`).
 
-`ipv6_prefix` - (Optional) IPv6 Prefix. Exclusive with [as_number http_header ip_prefix user_identifier] IPv6 prefix string. ves.io.schema.rules.string.ipv6_prefix: true (`String`).
+`ipv6_prefix` - (Optional) IPv6 Prefix. IPv6 prefix string (`String`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--trusted_clients--metadata) below.
 
 `skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Processing](#nestedblock--trusted_clients--skip_processing) below.
 
-`user_identifier` - (Optional) User Identifier. Exclusive with [as_number http_header ip_prefix ipv6_prefix] Identify user based on user identifier. User identifier value needs to be copied from security event. ves.io.schema.rules (`String`).
+`user_identifier` - (Optional) User Identifier. Identify user based on user identifier. User identifier value needs to be copied from security event (`String`).
 
 `waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Waf Skip Processing](#nestedblock--trusted_clients--waf_skip_processing) below.
 
@@ -4783,27 +4783,27 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--trusted_clients--http_header"></a>
 ### Trusted Clients Http Header
 
-`headers` - (Optional) HTTP Headers. List of HTTP header name and value pairs Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Headers](#nestedblock--trusted_clients--http_header--headers) below.
+`headers` - (Optional) HTTP Headers. List of HTTP header name and value pairs. See [Headers](#nestedblock--trusted_clients--http_header--headers) below.
 
 <a id="nestedblock--trusted_clients--http_header--headers"></a>
 ### Trusted Clients Http Header Headers
 
-`exact` - (Optional) Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true (`String`).
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`name` - (Optional) Name. Name of the header (`String`).
 
-`presence` - (Optional) Presence. Exclusive with [exact regex] If true, check for presence of header (`Bool`).
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
-`regex` - (Optional) Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string (`String`).
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
 <a id="nestedblock--trusted_clients--metadata"></a>
 ### Trusted Clients Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--trusted_clients--skip_processing"></a>
 ### Trusted Clients Skip Processing
@@ -4817,11 +4817,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--user_identification"></a>
 ### User Identification
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--waf_exclusion"></a>
 ### Waf Exclusion
@@ -4833,7 +4833,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waf_exclusion--waf_exclusion_inline_rules"></a>
 ### Waf Exclusion Waf Exclusion Inline Rules
 
-`rules` - (Optional) WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Rules](#nestedblock--waf_exclusion--waf_exclusion_inline_rules--rules) below.
+`rules` - (Optional) WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer. See [Rules](#nestedblock--waf_exclusion--waf_exclusion_inline_rules--rules) below.
 
 <a id="nestedblock--waf_exclusion--waf_exclusion_inline_rules--rules"></a>
 ### Waf Exclusion Waf Exclusion Inline Rules Rules
@@ -4844,19 +4844,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria. See [App Firewall Detection Control](#nestedblock--waf_exclusion--waf_exclusion_inline_rules--rules--app_firewall_detection_control) below.
 
-`exact_value` - (Optional) Exact Value. Exclusive with [any_domain suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 (`String`).
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
 `expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired (`String`).
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--waf_exclusion--waf_exclusion_inline_rules--rules--metadata) below.
 
-`methods` - (Optional) Methods. methods to be matched ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`methods` - (Optional) Methods. methods to be matched (`List`).
 
-`path_prefix` - (Optional) Prefix. Exclusive with [any_path path_regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`path_prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
 
-`path_regex` - (Optional) Path Regex. Exclusive with [any_path path_prefix] Define the regex for the path. For example, the regex ^/.*$ will match on all paths ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`path_regex` - (Optional) Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths (`String`).
 
-`suffix_value` - (Optional) Suffix Value. Exclusive with [any_domain exact_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string (`String`).
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 `waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Waf Skip Processing](#nestedblock--waf_exclusion--waf_exclusion_inline_rules--rules--waf_skip_processing) below.
 
@@ -4878,11 +4878,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--waf_exclusion--waf_exclusion_policy"></a>
 ### Waf Exclusion Waf Exclusion Policy
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

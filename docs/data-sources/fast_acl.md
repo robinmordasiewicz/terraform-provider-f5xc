@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_fast_acl Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create a fast_acl object, fast_acl object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to fast_acl_rule
 ---

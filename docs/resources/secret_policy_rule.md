@@ -62,7 +62,7 @@ The following arguments are optional:
 
 ###### One of the arguments from this list "client_name, client_name_matcher, client_selector" must be set
 
-`client_name` - (Optional) Client Name. Exclusive with [client_name_matcher client_selector] The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate (`String`).
+`client_name` - (Optional) Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate (`String`).
 
 `client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Client Name Matcher](#client-name-matcher) below for details.
 
@@ -83,14 +83,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--client_name_matcher"></a>
 ### Client Name Matcher
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--client_selector"></a>
 ### Client Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 
 ## Import

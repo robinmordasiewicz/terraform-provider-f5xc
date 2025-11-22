@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_endpoint Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Create endpoint will create the object in the storage backend for namespace metadata.namespace
 ---
@@ -64,17 +64,17 @@ The following arguments are optional:
 
 ###### One of the arguments from this list "dns_name, dns_name_advanced, ip, service_info" must be set
 
-`dns_name` - (Optional) Endpoint Name. Exclusive with [dns_name_advanced ip service_info] Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name. ves.io.schema (`String`).
+`dns_name` - (Optional) Endpoint Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
 
 `dns_name_advanced` - (Optional) DNS Name Advanced Type. Specifies name and TTL used for DNS resolution. See [Dns Name Advanced](#dns-name-advanced) below for details.
 
 `health_check_port` - (Optional) Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port (`Number`).
 
-`ip` - (Optional) Endpoint IP Address. Exclusive with [dns_name dns_name_advanced service_info] Endpoint is reachable at the given ipv4/ipv6 address ves.io.schema.rules.string.ip: true (`String`).
+`ip` - (Optional) Endpoint IP Address. Endpoint is reachable at the given ipv4/ipv6 address (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`port` - (Optional) Port. Endpoint service is available on this port ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port. Endpoint service is available on this port (`Number`).
 
 `protocol` - (Optional) Protocol. Endpoint protocol. Default is TCP. Both TCP and UDP protocols are supported (`String`).
 
@@ -97,23 +97,23 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--dns_name_advanced"></a>
 ### Dns Name Advanced
 
-`name` - (Optional) Endpoint DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name. ves.io.schema.rules.string.hostname: true ves.io.schema.rules (`String`).
+`name` - (Optional) Endpoint DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
 
-`refresh_interval` - (Optional) DNS Refresh Interval. Exclusive with [] Interval for DNS refresh in seconds. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 604800 (`Number`).
+`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds (`Number`).
 
 <a id="nestedblock--service_info"></a>
 ### Service Info
 
 `discovery_type` - (Optional) Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic ... (`String`).
 
-`service_name` - (Optional) Service Name. Exclusive with [service_selector] Name of the service to discover with an optional namespace and cluster identifier. The format is service_name (`String`).
+`service_name` - (Optional) Service Name. Name of the service to discover with an optional namespace and cluster identifier. The format is service_name (`String`).
 
 `service_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Service Selector](#nestedblock--service_info--service_selector) below.
 
 <a id="nestedblock--service_info--service_selector"></a>
 ### Service Info Service Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--snat_pool"></a>
 ### Snat Pool
@@ -128,7 +128,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--snat_pool--snat_pool"></a>
 ### Snat Pool Snat Pool
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--where"></a>
 ### Where
@@ -148,7 +148,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--site--ref) below.
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
 
 <a id="nestedblock--where--site--disable_internet_vip"></a>
 ### Where Site Disable Internet Vip
@@ -172,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--where--virtual_network"></a>
 ### Where Virtual Network
 
-`ref` - (Optional) Reference. A virtual network direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_network--ref) below.
+`ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#nestedblock--where--virtual_network--ref) below.
 
 <a id="nestedblock--where--virtual_network--ref"></a>
 ### Where Virtual Network Ref
@@ -196,7 +196,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_site--ref) below.
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
 
 <a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
 ### Where Virtual Site Disable Internet Vip

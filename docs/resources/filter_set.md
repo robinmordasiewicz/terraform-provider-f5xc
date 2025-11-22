@@ -62,9 +62,9 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`context_key` - (Optional) Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable Required: YES ves.io.schema.rules.message.required: true (`String`).
+`context_key` - (Optional) Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable (`String`).
 
-`filter_fields` - (Optional) Filter Fields. list of fields and their values selected by the user Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated. See [Filter Fields](#filter-fields) below for details.
+`filter_fields` - (Optional) Filter Fields. list of fields and their values selected by the user. See [Filter Fields](#filter-fields) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `date_field` - (Optional) Filter Date/Time Range Field. either an absolute time range or a relative time interval. See [Date Field](#nestedblock--filter_fields--date_field) below.
 
-`field_id` - (Optional) Field ID. an identifier for the field that maps to some UI filter component Required: YES ves.io.schema.rules.message.required: true (`String`).
+`field_id` - (Optional) Field ID. an identifier for the field that maps to some UI filter component (`String`).
 
 `filter_expression_field` - (Optional) Filter Expression Field. See [Filter Expression Field](#nestedblock--filter_fields--filter_expression_field) below.
 
@@ -94,24 +94,24 @@ In addition to all arguments above, the following attributes are exported:
 
 `absolute` - (Optional) Date Range. Date range is for selecting a date range. See [Absolute](#nestedblock--filter_fields--date_field--absolute) below.
 
-`relative` - (Optional) Relative. Exclusive with [absolute] relative time duration (`String`).
+`relative` - (Optional) Relative. relative time duration (`String`).
 
 <a id="nestedblock--filter_fields--date_field--absolute"></a>
 ### Filter Fields Date Field Absolute
 
-`end_date` - (Optional) End Date. Contains end date Required: YES ves.io.schema.rules.message.required: true (`String`).
+`end_date` - (Optional) End Date. Contains end date (`String`).
 
-`start_date` - (Optional) Start Date. Contains start date Required: YES ves.io.schema.rules.message.required: true (`String`).
+`start_date` - (Optional) Start Date. Contains start date (`String`).
 
 <a id="nestedblock--filter_fields--filter_expression_field"></a>
 ### Filter Fields Filter Expression Field
 
-`expression` - (Optional) Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values Required: YES ves.io.schema.rules.message (`String`).
+`expression` - (Optional) Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values (`String`).
 
 <a id="nestedblock--filter_fields--string_field"></a>
 ### Filter Fields String Field
 
-`field_values` - (Optional) String Value(s). Required: YES ves.io.schema.rules.message.required: true (`List`).
+`field_values` - (Optional) String Value(s) (`List`).
 
 
 ## Import

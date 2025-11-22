@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_cloud_connect Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Shape of the Cloud Connect specification
 ---

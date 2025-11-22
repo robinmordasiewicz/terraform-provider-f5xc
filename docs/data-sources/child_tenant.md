@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_child_tenant Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Organization"
 description: |-
   Creates a child_tenant config instance. Name of the object is the name of the child tenant to be created.
 ---

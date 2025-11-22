@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_api_crawler Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "API Security"
 description: |-
   Manages a APICrawler in F5 Distributed Cloud.
 ---
@@ -62,7 +62,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`domains` - (Optional) API Crawler. API Crawler Configuration Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32. See [Domains](#domains) below for details.
+`domains` - (Optional) API Crawler. API Crawler Configuration. See [Domains](#domains) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -79,7 +79,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--domains"></a>
 ### Domains
 
-`domain` - (Optional) Domains to Crawl. Select the domain to execute API Crawling with given credentials. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema (`String`).
+`domain` - (Optional) Domains to Crawl. Select the domain to execute API Crawling with given credentials (`String`).
 
 `simple_login` - (Optional) Simple Login. See [Simple Login](#nestedblock--domains--simple_login) below.
 
@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--domains--simple_login--password) below.
 
-`user` - (Optional) User. Enter the username to assign credentials for the selected domain to crawl ves.io.schema.rules.string.max_len: 64 (`String`).
+`user` - (Optional) User. Enter the username to assign credentials for the selected domain to crawl (`String`).
 
 <a id="nestedblock--domains--simple_login--password"></a>
 ### Domains Simple Login Password

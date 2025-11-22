@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list"></a>
 ### Rule List
 
-`rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. ves.io.schema.rules.repeated.max_items: 256 ves.io. See [Rules](#nestedblock--rule_list--rules) below.
+`rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. See [Rules](#nestedblock--rule_list--rules) below.
 
 <a id="nestedblock--rule_list--rules"></a>
 ### Rule List Rules
@@ -98,16 +98,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--metadata"></a>
 ### Rule List Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--rule_list--rules--spec"></a>
 ### Rule List Rules Spec
 
 `action` - (Optional) Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward (`String`).
 
-`client_name` - (Optional) Client Name. Exclusive with [client_name_matcher client_selector] The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate (`String`).
+`client_name` - (Optional) Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate (`String`).
 
 `client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Client Name Matcher](#nestedblock--rule_list--rules--spec--client_name_matcher) below.
 

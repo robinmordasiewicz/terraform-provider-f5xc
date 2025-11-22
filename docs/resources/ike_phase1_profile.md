@@ -62,11 +62,11 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`authentication_algos` - (Optional) Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Required: YES ves.io.schema.rules.message (`List`).
+`authentication_algos` - (Optional) Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms (`List`).
 
-`dh_group` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile. Required: YES ves.io.schema.rules.message.required: true (`List`).
+`dh_group` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile (`List`).
 
-`encryption_algos` - (Optional) Configure Encryption Algorithms. Choose one or more encryption algorithms. Required: YES ves.io.schema.rules.message.required: true (`List`).
+`encryption_algos` - (Optional) Configure Encryption Algorithms. Choose one or more encryption algorithms (`List`).
 
 ###### One of the arguments from this list "ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime" must be set
 
@@ -76,7 +76,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`prf` - (Optional) PseudoRandomFunction. Select PseudoRandomFunction for IKE SA. Required: YES ves.io.schema.rules.message.required: true (`List`).
+`prf` - (Optional) PseudoRandomFunction. Select PseudoRandomFunction for IKE SA (`List`).
 
 ###### One of the arguments from this list "reauth_disabled, reauth_timeout_days, reauth_timeout_hours" must be set
 
@@ -101,12 +101,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ike_keylifetime_hours"></a>
 ### Ike Keylifetime Hours
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--ike_keylifetime_minutes"></a>
 ### Ike Keylifetime Minutes
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 300 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--reauth_disabled"></a>
 ### Reauth Disabled
@@ -114,12 +114,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--reauth_timeout_days"></a>
 ### Reauth Timeout Days
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 30 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--reauth_timeout_hours"></a>
 ### Reauth Timeout Hours
 
-`duration` - (Optional) Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5 (`Number`).
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--use_default_keylifetime"></a>
 ### Use Default Keylifetime

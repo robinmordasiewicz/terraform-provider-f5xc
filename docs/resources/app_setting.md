@@ -62,7 +62,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`app_type_settings` - (Optional) Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace Required: YES ves.io.schema.rules.message.required: true ves.io. See [App Type Settings](#app-type-settings) below for details.
+`app_type_settings` - (Optional) Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace. See [App Type Settings](#app-type-settings) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -79,7 +79,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--app_type_settings"></a>
 ### App Type Settings
 
-`app_type_ref` - (Optional) AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data Required: YES ves.io.schema.rules.message. See [App Type Ref](#nestedblock--app_type_settings--app_type_ref) below.
+`app_type_ref` - (Optional) AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data. See [App Type Ref](#nestedblock--app_type_settings--app_type_ref) below.
 
 `business_logic_markup_setting` - (Optional) API Discovery. Settings specifying how API Discovery will be performed. See [Business Logic Markup Setting](#nestedblock--app_type_settings--business_logic_markup_setting) below.
 
@@ -116,12 +116,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--app_type_settings--timeseries_analyses_setting"></a>
 ### App Type Settings Timeseries Analyses Setting
 
-`metric_selectors` - (Optional) Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic ves.io.schema.rules.repeated.unique: true. See [Metric Selectors](#nestedblock--app_type_settings--timeseries_analyses_setting--metric_selectors) below.
+`metric_selectors` - (Optional) Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic. See [Metric Selectors](#nestedblock--app_type_settings--timeseries_analyses_setting--metric_selectors) below.
 
 <a id="nestedblock--app_type_settings--timeseries_analyses_setting--metric_selectors"></a>
 ### App Type Settings Timeseries Analyses Setting Metric Selectors
 
-`metric` - (Optional) Metrics. Choose one or more metrics to be included in the detection logic ves.io.schema.rules.repeated.unique: true (`List`).
+`metric` - (Optional) Metrics. Choose one or more metrics to be included in the detection logic (`List`).
 
 `metrics_source` - (Optional) Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations (`String`).
 
@@ -147,7 +147,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `bola_detection_automatic` - (Optional) Empty. This can be used for messages where no values are needed. See [Bola Detection Automatic](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--bola_detection_automatic) below.
 
-`cooling_off_period` - (Optional) Cooling off period. Exclusive with [] Malicious user detection assigns a threat level to each user based on their activity (`Number`).
+`cooling_off_period` - (Optional) Cooling off period. Malicious user detection assigns a threat level to each user based on their activity (`Number`).
 
 `exclude_bola_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Bola Detection](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_bola_detection) below.
 

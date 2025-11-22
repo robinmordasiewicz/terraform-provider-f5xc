@@ -72,11 +72,11 @@ The following arguments are optional:
 
 `expiration_never` - (Optional) Empty. This can be used for messages where no values are needed. See [Expiration Never](#expiration-never) below for details.
 
-`expiration_timestamp` - (Optional) Expiration Time (UTC). Exclusive with [expiration_never] This advertisement will expire at the given timestamp and will be removed from the system afterwards (`String`).
+`expiration_timestamp` - (Optional) Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`prefix` - (Optional) Prefix. Advertisement Prefix Advertisement prefix lookup depending on type Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip_prefix_globally_routable: true (`String`).
+`prefix` - (Optional) Prefix. Advertisement Prefix Advertisement prefix lookup depending on type (`String`).
 
 
 ### Attributes Reference

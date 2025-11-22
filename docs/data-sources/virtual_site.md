@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_virtual_site Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Create a virtual site object in given namespace
 ---

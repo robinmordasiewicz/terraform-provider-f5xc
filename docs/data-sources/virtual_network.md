@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_virtual_network Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Create virtual network in given namespace
 ---

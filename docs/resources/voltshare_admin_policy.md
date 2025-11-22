@@ -68,7 +68,7 @@ The following arguments are optional:
 
 `max_validity_duration` - (Optional) Maximum Duration for Validity. max_validity_duration contains the maximum amount of time a secret from any users from this team/tenant is valid (`String`).
 
-`user_restrictions` - (Optional) Per Team Decryption Policy. user_restrictions contains per tenant/team list of allowed/disallowed users with whom a secret can be shared using F5XC VoltShare. ves.io.schema.rules.repeated. See [User Restrictions](#user-restrictions) below for details.
+`user_restrictions` - (Optional) Per Team Decryption Policy. user_restrictions contains per tenant/team list of allowed/disallowed users with whom a secret can be shared using F5XC VoltShare. See [User Restrictions](#user-restrictions) below for details.
 
 
 ### Attributes Reference
@@ -97,14 +97,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--author_restrictions--allow_list"></a>
 ### Author Restrictions Allow List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s) ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Custom List](#nestedblock--author_restrictions--allow_list--custom_list) below.
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--author_restrictions--allow_list--custom_list) below.
 
 <a id="nestedblock--author_restrictions--allow_list--custom_list"></a>
 ### Author Restrictions Allow List Custom List
 
-`exact_value` - (Optional) Exact User Id. Exclusive with [regex_pattern] exact_match contains user_id to match against. ves.io.schema.rules.string.email: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
 
-`regex_pattern` - (Optional) Regex For User Id. Exclusive with [exact_value] regex_values contains a regex pattern to match against. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema (`String`).
+`regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
 
 <a id="nestedblock--author_restrictions--deny_all"></a>
 ### Author Restrictions Deny All
@@ -112,14 +112,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--author_restrictions--deny_list"></a>
 ### Author Restrictions Deny List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s) ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Custom List](#nestedblock--author_restrictions--deny_list--custom_list) below.
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--author_restrictions--deny_list--custom_list) below.
 
 <a id="nestedblock--author_restrictions--deny_list--custom_list"></a>
 ### Author Restrictions Deny List Custom List
 
-`exact_value` - (Optional) Exact User Id. Exclusive with [regex_pattern] exact_match contains user_id to match against. ves.io.schema.rules.string.email: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules (`String`).
+`exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
 
-`regex_pattern` - (Optional) Regex For User Id. Exclusive with [exact_value] regex_values contains a regex pattern to match against. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema (`String`).
+`regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
 
 <a id="nestedblock--user_restrictions"></a>
 ### User Restrictions
@@ -128,7 +128,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `individual_users` - (Optional) Empty. This can be used for messages where no values are needed. See [Individual Users](#nestedblock--user_restrictions--individual_users) below.
 
-`tenant` - (Optional) Team/Tenant. Exclusive with [all_tenants individual_users] Team/Tenant for which this rule is valid. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 (`String`).
+`tenant` - (Optional) Team/Tenant. Team/Tenant for which this rule is valid (`String`).
 
 `user_restrictions` - (Optional) User Matcher. user_matcher contains contains the allow/deny list of users/authors. See [User Restrictions](#nestedblock--user_restrictions--user_restrictions) below.
 
@@ -155,7 +155,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--user_restrictions--user_restrictions--allow_list"></a>
 ### User Restrictions User Restrictions Allow List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s) ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Custom List](#nestedblock--user_restrictions--user_restrictions--allow_list--custom_list) below.
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--user_restrictions--user_restrictions--allow_list--custom_list) below.
 
 <a id="nestedblock--user_restrictions--user_restrictions--allow_list--custom_list"></a>
 ### User Restrictions User Restrictions Allow List Custom List
@@ -166,7 +166,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--user_restrictions--user_restrictions--deny_list"></a>
 ### User Restrictions User Restrictions Deny List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s) ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Custom List](#nestedblock--user_restrictions--user_restrictions--deny_list--custom_list) below.
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--user_restrictions--user_restrictions--deny_list--custom_list) below.
 
 <a id="nestedblock--user_restrictions--user_restrictions--deny_list--custom_list"></a>
 ### User Restrictions User Restrictions Deny List Custom List

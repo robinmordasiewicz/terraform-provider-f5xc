@@ -58,7 +58,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`asn` - (Optional) ASN. 2-byte or 4-byte Autonomous System Number (ASN) Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 4199999999 (`Number`).
+`asn` - (Optional) ASN. 2-byte or 4-byte Autonomous System Number (ASN) (`Number`).
 
 ###### One of the arguments from this list "bgp_session_disabled, bgp_session_enabled" must be set
 

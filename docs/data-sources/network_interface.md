@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_network_interface Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Network interface represents configuration of a network device. It is created by users in system namespace.
 ---

@@ -62,15 +62,15 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`email` - (Optional) Email. Email used for the registry ves.io.schema.rules.string.email: true (`String`).
+`email` - (Optional) Email. Email used for the registry (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#password) below for details.
 
-`registry` - (Optional) Server FQDN. Fully qualified name of the registry login server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true (`String`).
+`registry` - (Optional) Server FQDN. Fully qualified name of the registry login server (`String`).
 
-`user_name` - (Optional) User Name. Username used to access the registry Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 (`String`).
+`user_name` - (Optional) User Name. Username used to access the registry (`String`).
 
 
 ### Attributes Reference
@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 

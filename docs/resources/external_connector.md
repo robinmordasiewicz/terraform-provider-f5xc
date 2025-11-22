@@ -81,11 +81,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ce_site_reference"></a>
 ### Ce Site Reference
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ipsec"></a>
 ### Ipsec
@@ -109,7 +109,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `responder` - (Optional) Empty. This can be used for messages where no values are needed. See [Responder](#nestedblock--ipsec--ike_parameters--responder) below.
 
-`rm_hostname` - (Optional) Hostname. Exclusive with [rm_ip_address use_default_remote_ike_id] Configure an hostname Remote IKE ID (`String`).
+`rm_hostname` - (Optional) Hostname. Configure an hostname Remote IKE ID (`String`).
 
 `rm_ip_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Rm Ip Address](#nestedblock--ipsec--ike_parameters--rm_ip_address) below.
 
@@ -123,25 +123,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ipsec--ike_parameters--dpd_keep_alive_timer"></a>
 ### Ipsec Ike Parameters Dpd Keep Alive Timer
 
-`timeout` - (Optional) Keepalive Timer. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5 (`Number`).
+`timeout` - (Optional) Keepalive Timer (`Number`).
 
 <a id="nestedblock--ipsec--ike_parameters--ike_phase1_profile"></a>
 ### Ipsec Ike Parameters Ike Phase1 Profile
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ipsec--ike_parameters--ike_phase2_profile"></a>
 ### Ipsec Ike Parameters Ike Phase2 Profile
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ipsec--ike_parameters--initiator"></a>
 ### Ipsec Ike Parameters Initiator
@@ -173,7 +173,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `peer_ip_address` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [Peer Ip Address](#nestedblock--ipsec--ipsec_tunnel_parameters--peer_ip_address) below.
 
-`psk` - (Optional) Pre-Shared Key. The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`psk` - (Optional) Pre-Shared Key. The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation (`String`).
 
 `segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#nestedblock--ipsec--ipsec_tunnel_parameters--segment) below.
 
@@ -181,19 +181,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#nestedblock--ipsec--ipsec_tunnel_parameters--site_local_network) below.
 
-`tunnel_eps` - (Optional) Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules. See [Tunnel Eps](#nestedblock--ipsec--ipsec_tunnel_parameters--tunnel_eps) below.
+`tunnel_eps` - (Optional) Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses. See [Tunnel Eps](#nestedblock--ipsec--ipsec_tunnel_parameters--tunnel_eps) below.
 
-`tunnel_mtu` - (Optional) MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented Required: YES ves.io.schema.rules.message.required: true ves.io.schema (`Number`).
+`tunnel_mtu` - (Optional) MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented (`Number`).
 
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--peer_ip_address"></a>
 ### Ipsec Ipsec Tunnel Parameters Peer Ip Address
 
-`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation ves.io.schema.rules.string.ipv4: true (`String`).
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
 
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--segment"></a>
 ### Ipsec Ipsec Tunnel Parameters Segment
 
-`refs` - (Optional) Segment. Reference to Segment Object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Refs](#nestedblock--ipsec--ipsec_tunnel_parameters--segment--refs) below.
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#nestedblock--ipsec--ipsec_tunnel_parameters--segment--refs) below.
 
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--segment--refs"></a>
 ### Ipsec Ipsec Tunnel Parameters Segment Refs
@@ -207,13 +207,13 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--tunnel_eps"></a>
 ### Ipsec Ipsec Tunnel Parameters Tunnel Eps
 
-`interface` - (Optional) Interface. For the chosen node, specify the interface that will be the tunnel source. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`interface` - (Optional) Interface. For the chosen node, specify the interface that will be the tunnel source (`String`).
 
-`local_tunnel_ip` - (Optional) Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e (`String`).
+`local_tunnel_ip` - (Optional) Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. the IP address of the tunnel on the CE node itself and a subnet prefix length (`String`).
 
-`node` - (Optional) Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`node` - (Optional) Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection (`String`).
 
-`remote_tunnel_ip` - (Optional) Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e (`String`).
+`remote_tunnel_ip` - (Optional) Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. the IP address of the tunnel on the remote gateway and a subnet prefix length (`String`).
 
 
 ## Import

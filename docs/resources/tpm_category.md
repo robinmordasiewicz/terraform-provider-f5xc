@@ -58,7 +58,7 @@ The following arguments are optional:
 
 `tpm_allow_list` - (Optional) list of allowed TPM EK Certificates. A TPM manufacturer is typically identified by its EK certificate (`List`).
 
-`tpm_manager_ref` - (Optional) TPM Manager reference. Reference to TPM Manager Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1. See [Tpm Manager Ref](#tpm-manager-ref) below for details.
+`tpm_manager_ref` - (Optional) TPM Manager reference. Reference to TPM Manager. See [Tpm Manager Ref](#tpm-manager-ref) below for details.
 
 
 ### Attributes Reference

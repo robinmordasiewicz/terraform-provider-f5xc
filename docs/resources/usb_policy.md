@@ -52,7 +52,7 @@ The following arguments are required:
 
 The following arguments are optional:
 
-`allowed_devices` - (Optional) Allowed USB devices. List of allowed USB devices Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.message.required_one_nonzero_field: true ves.io.schema. See [Allowed Devices](#allowed-devices) below for details.
+`allowed_devices` - (Optional) Allowed USB devices. List of allowed USB devices. See [Allowed Devices](#allowed-devices) below for details.
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 

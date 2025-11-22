@@ -654,7 +654,13 @@ func cleanDescription(desc string) string {
 	desc = regexp.MustCompile(`\s*Example:.*`).ReplaceAllString(desc, "")
 	desc = regexp.MustCompile(`\s*Validation Rules:.*`).ReplaceAllString(desc, "")
 	// Remove ves.io validation annotations (common pattern in F5 XC specs)
+	// Pattern: ves.io.schema.rules.xxx.yyy: value or ves.io.schema.xxx: value
+	desc = regexp.MustCompile(`\s*ves\.io\.schema[^\s]*:\s*\S+`).ReplaceAllString(desc, "")
 	desc = regexp.MustCompile(`\s*ves\.io\.[^\s]*:\s*\[.*?\]`).ReplaceAllString(desc, "")
+	// Remove "Required: YES" or "Required: NO" annotations
+	desc = regexp.MustCompile(`\s*Required:\s*(YES|NO)\s*`).ReplaceAllString(desc, " ")
+	// Remove "Exclusive with [xxx]" patterns
+	desc = regexp.MustCompile(`\s*Exclusive with\s*\[[^\]]*\]\s*`).ReplaceAllString(desc, " ")
 	// Remove escaped quotes and backslashes from raw spec data
 	desc = strings.ReplaceAll(desc, `\"`, `"`)
 	desc = strings.ReplaceAll(desc, `\\`, `\`)
@@ -664,6 +670,8 @@ func cleanDescription(desc string) string {
 	// Escape quotes for Go string literals
 	desc = strings.ReplaceAll(desc, `"`, "'")
 	desc = strings.TrimSpace(desc)
+	// Remove trailing periods that were left after cleanup
+	desc = regexp.MustCompile(`\.\s*\.`).ReplaceAllString(desc, ".")
 	// Limit description length to prevent overly long strings
 	if len(desc) > 500 {
 		desc = desc[:497] + "..."

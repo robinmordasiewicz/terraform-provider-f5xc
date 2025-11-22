@@ -81,11 +81,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_region` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Region](#nestedblock--rules--client_region) below.
 
-`cookie_name` - (Optional) Cookie Name. Exclusive with [client_asn client_city client_country client_ip client_region http_header_name ip_and_http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ja4_tls_fingerp... (`String`).
+`cookie_name` - (Optional) Cookie Name. Use the HTTP cookie value for the given name as user identifier (`String`).
 
-`http_header_name` - (Optional) HTTP Header Name. Exclusive with [client_asn client_city client_country client_ip client_region cookie_name ip_and_http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ja4_tls_fingerp... (`String`).
+`http_header_name` - (Optional) HTTP Header Name. Use the HTTP header value for the given name as user identifier (`String`).
 
-`ip_and_http_header_name` - (Optional) HTTP Header Name. Exclusive with [client_asn client_city client_country client_ip client_region cookie_name http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ja4_tls_fingerprint jw... (`String`).
+`ip_and_http_header_name` - (Optional) HTTP Header Name. Name of HTTP header from which the value should be extracted (`String`).
 
 `ip_and_ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Ip And Ja4 Tls Fingerprint](#nestedblock--rules--ip_and_ja4_tls_fingerprint) below.
 
@@ -93,11 +93,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Ja4 Tls Fingerprint](#nestedblock--rules--ja4_tls_fingerprint) below.
 
-`jwt_claim_name` - (Optional) JWT Claim Name. Exclusive with [client_asn client_city client_country client_ip client_region cookie_name http_header_name ip_and_http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ... (`String`).
+`jwt_claim_name` - (Optional) JWT Claim Name. Use the JWT claim value as user identifier (`String`).
 
 `none` - (Optional) Empty. This can be used for messages where no values are needed. See [None](#nestedblock--rules--none) below.
 
-`query_param_key` - (Optional) Query Parameter Key. Exclusive with [client_asn client_city client_country client_ip client_region cookie_name http_header_name ip_and_http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerp... (`String`).
+`query_param_key` - (Optional) Query Parameter Key. Use the query parameter value for the given key as user identifier (`String`).
 
 `tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Tls Fingerprint](#nestedblock--rules--tls_fingerprint) below.
 

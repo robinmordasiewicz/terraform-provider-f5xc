@@ -70,7 +70,7 @@ The following arguments are optional:
 
 `policy_rule_list` - (Optional) Policy Rule List. List of rules for role permissions. See [Policy Rule List](#policy-rule-list) below for details.
 
-`yaml` - (Optional) K8s YAML. Exclusive with [k8s_cluster_role_selector policy_rule_list] K8s YAML for ClusterRole ves.io.schema.rules.string.max_len: 4096 ves.io.schema.rules.string.uri_ref: true (`String`).
+`yaml` - (Optional) K8s YAML. K8s YAML for ClusterRole (`String`).
 
 
 ### Attributes Reference
@@ -85,12 +85,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--k8s_cluster_role_selector"></a>
 ### K8s Cluster Role Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="nestedblock--policy_rule_list"></a>
 ### Policy Rule List
 
-`policy_rule` - (Optional) Policy Rules. List of rules for role permissions Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io. See [Policy Rule](#nestedblock--policy_rule_list--policy_rule) below.
+`policy_rule` - (Optional) Policy Rules. List of rules for role permissions. See [Policy Rule](#nestedblock--policy_rule_list--policy_rule) below.
 
 <a id="nestedblock--policy_rule_list--policy_rule"></a>
 ### Policy Rule List Policy Rule
@@ -102,20 +102,20 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--policy_rule_list--policy_rule--non_resource_url_list"></a>
 ### Policy Rule List Policy Rule Non Resource Url List
 
-`urls` - (Optional) Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items (`List`).
+`urls` - (Optional) Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex (`List`).
 
-`verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations (`List`).
 
 <a id="nestedblock--policy_rule_list--policy_rule--resource_list"></a>
 ### Policy Rule List Policy Rule Resource List
 
-`api_groups` - (Optional) API Groups. Allowed list of API group that contains resources, all resources of a given api group Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`api_groups` - (Optional) API Groups. Allowed list of API group that contains resources, all resources of a given api group (`List`).
 
-`resource_instances` - (Optional) Resource Instances. Allowed list of resource instances within the resource types. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema (`List`).
+`resource_instances` - (Optional) Resource Instances. Allowed list of resource instances within the resource types (`List`).
 
-`resource_types` - (Optional) Resource Types. Allowed list of resource types within the api groups. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema (`List`).
+`resource_types` - (Optional) Resource Types. Allowed list of resource types within the api groups (`List`).
 
-`verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations (`List`).
 
 
 ## Import

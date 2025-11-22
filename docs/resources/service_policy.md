@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_service_policy Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create service_policy creates a new object in the storage backend for metadata.namespace.
 ---
@@ -99,7 +99,7 @@ The following arguments are optional:
 
 `rule_list` - (Optional) Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm. See [Rule List](#rule-list) below for details.
 
-`server_name` - (Optional) Server Name. Exclusive with [any_server server_name_matcher server_selector] The expected name of the server to which the request API is directed (`String`).
+`server_name` - (Optional) Server Name. The expected name of the server to which the request API is directed (`String`).
 
 `server_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Server Name Matcher](#server-name-matcher) below for details.
 
@@ -123,9 +123,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. See [Asn List](#nestedblock--allow_list--asn_list) below.
 
-`asn_set` - (Optional) BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. ves.io.schema.rules.repeated. See [Asn Set](#nestedblock--allow_list--asn_set) below.
+`asn_set` - (Optional) BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. See [Asn Set](#nestedblock--allow_list--asn_set) below.
 
-`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. ves.io.schema.rules.repeated (`List`).
+`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB (`List`).
 
 `default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Allow](#nestedblock--allow_list--default_action_allow) below.
 
@@ -133,13 +133,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#nestedblock--allow_list--default_action_next_policy) below.
 
-`ip_prefix_set` - (Optional) IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true. See [Ip Prefix Set](#nestedblock--allow_list--ip_prefix_set) below.
+`ip_prefix_set` - (Optional) IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set. See [Ip Prefix Set](#nestedblock--allow_list--ip_prefix_set) below.
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#nestedblock--allow_list--prefix_list) below.
 
-`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated (`List`).
+`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
-`tls_fingerprint_values` - (Optional) TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.items.string.len: 32 ves.io.schema.rules.repeated (`List`).
+`tls_fingerprint_values` - (Optional) TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
 <a id="nestedblock--allow_list--asn_list"></a>
 ### Allow List Asn List
@@ -149,11 +149,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--allow_list--asn_set"></a>
 ### Allow List Asn Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--allow_list--default_action_allow"></a>
 ### Allow List Default Action Allow
@@ -167,16 +167,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--allow_list--ip_prefix_set"></a>
 ### Allow List Ip Prefix Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--allow_list--prefix_list"></a>
 ### Allow List Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--any_server"></a>
 ### Any Server
@@ -189,9 +189,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. See [Asn List](#nestedblock--deny_list--asn_list) below.
 
-`asn_set` - (Optional) BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. ves.io.schema.rules.repeated. See [Asn Set](#nestedblock--deny_list--asn_set) below.
+`asn_set` - (Optional) BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. See [Asn Set](#nestedblock--deny_list--asn_set) below.
 
-`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. ves.io.schema.rules.repeated (`List`).
+`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB (`List`).
 
 `default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Allow](#nestedblock--deny_list--default_action_allow) below.
 
@@ -199,13 +199,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#nestedblock--deny_list--default_action_next_policy) below.
 
-`ip_prefix_set` - (Optional) IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true. See [Ip Prefix Set](#nestedblock--deny_list--ip_prefix_set) below.
+`ip_prefix_set` - (Optional) IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set. See [Ip Prefix Set](#nestedblock--deny_list--ip_prefix_set) below.
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#nestedblock--deny_list--prefix_list) below.
 
-`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated (`List`).
+`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
-`tls_fingerprint_values` - (Optional) TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.items.string.len: 32 ves.io.schema.rules.repeated (`List`).
+`tls_fingerprint_values` - (Optional) TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
 <a id="nestedblock--deny_list--asn_list"></a>
 ### Deny List Asn List
@@ -215,11 +215,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--deny_list--asn_set"></a>
 ### Deny List Asn Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--deny_list--default_action_allow"></a>
 ### Deny List Default Action Allow
@@ -233,21 +233,21 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--deny_list--ip_prefix_set"></a>
 ### Deny List Ip Prefix Set
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--deny_list--prefix_list"></a>
 ### Deny List Prefix List
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated (`List`).
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--rule_list"></a>
 ### Rule List
 
-`rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. ves.io.schema.rules.repeated.max_items: 256 ves.io. See [Rules](#nestedblock--rule_list--rules) below.
+`rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. See [Rules](#nestedblock--rule_list--rules) below.
 
 <a id="nestedblock--rule_list--rules"></a>
 ### Rule List Rules
@@ -259,9 +259,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rule_list--rules--metadata"></a>
 ### Rule List Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--rule_list--rules--spec"></a>
 ### Rule List Rules Spec
@@ -286,7 +286,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing. See [Bot Action](#nestedblock--rule_list--rules--spec--bot_action) below.
 
-`client_name` - (Optional) Client Name. Exclusive with [any_client client_name_matcher client_selector ip_threat_category_list] The expected name of the client invoking the request API (`String`).
+`client_name` - (Optional) Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name (`String`).
 
 `client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Client Name Matcher](#nestedblock--rule_list--rules--spec--client_name_matcher) below.
 
@@ -425,14 +425,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--server_name_matcher"></a>
 ### Server Name Matcher
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--server_selector"></a>
 ### Server Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 
 ## Import

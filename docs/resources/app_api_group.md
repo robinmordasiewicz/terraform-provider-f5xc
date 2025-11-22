@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_app_api_group Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "API Security"
 description: |-
   Create app_api_group creates a new object in the storage backend for metadata.namespace.
 ---
@@ -68,7 +68,7 @@ The following arguments are optional:
 
 `cdn_loadbalancer` - (Optional) API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer. See [Cdn Loadbalancer](#cdn-loadbalancer) below for details.
 
-`elements` - (Optional) API Group Elements. List of API group elements with methods and path regex for matching requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 5000. See [Elements](#elements) below for details.
+`elements` - (Optional) API Group Elements. List of API group elements with methods and path regex for matching requests. See [Elements](#elements) below for details.
 
 `http_loadbalancer` - (Optional) API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer. See [Http Loadbalancer](#http-loadbalancer) below for details.
 
@@ -92,11 +92,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bigip_virtual_server--bigip_virtual_server"></a>
 ### Bigip Virtual Server Bigip Virtual Server
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--cdn_loadbalancer"></a>
 ### Cdn Loadbalancer
@@ -106,18 +106,18 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--cdn_loadbalancer--cdn_loadbalancer"></a>
 ### Cdn Loadbalancer Cdn Loadbalancer
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--elements"></a>
 ### Elements
 
-`methods` - (Optional) HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list. Required: YES ves.io (`List`).
+`methods` - (Optional) HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list (`List`).
 
-`path_regex` - (Optional) Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex. Required: YES ves.io (`String`).
+`path_regex` - (Optional) Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex (`String`).
 
 <a id="nestedblock--http_loadbalancer"></a>
 ### Http Loadbalancer
@@ -127,11 +127,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--http_loadbalancer--http_loadbalancer"></a>
 ### Http Loadbalancer Http Loadbalancer
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 
 ## Import

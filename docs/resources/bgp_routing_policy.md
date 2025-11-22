@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_bgp_routing_policy Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   BGP Routing Policy is a list of rules containing match criteria and action to be applied. These rules help contol routes which are imported or exported to BGP peers
 ---
@@ -64,7 +64,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`rules` - (Optional) Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom. Required: YES ves.io.schema.rules.message.required: true ves. See [Rules](#rules) below for details.
+`rules` - (Optional) Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom. See [Rules](#rules) below for details.
 
 
 ### Attributes Reference
@@ -90,15 +90,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow](#nestedblock--rules--action--allow) below.
 
-`as_path` - (Optional) AS-path to prepend. Exclusive with [aggregate allow community deny local_preference metric] AS-Path Prepending is generally used to influence incoming traffic (`String`).
+`as_path` - (Optional) AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic (`String`).
 
 `community` - (Optional) BGP Community list. List of BGP communities. See [Community](#nestedblock--rules--action--community) below.
 
 `deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny](#nestedblock--rules--action--deny) below.
 
-`local_preference` - (Optional) Local preference. Exclusive with [aggregate allow as_path community deny metric] BGP Local Preference is generally used to influence outgoing traffic (`Number`).
+`local_preference` - (Optional) Local preference. BGP Local Preference is generally used to influence outgoing traffic (`Number`).
 
-`metric` - (Optional) MED/Metric. Exclusive with [aggregate allow as_path community deny local_preference] The Multi-Exit Discriminator metric to indicate the preferred path to AS (`Number`).
+`metric` - (Optional) MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS (`Number`).
 
 <a id="nestedblock--rules--action--aggregate"></a>
 ### Rules Action Aggregate
@@ -109,7 +109,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--action--community"></a>
 ### Rules Action Community
 
-`community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value Required: YES ves.io.schema.rules.message.required: true ves.io.schema (`List`).
+`community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
 
 <a id="nestedblock--rules--action--deny"></a>
 ### Rules Action Deny
@@ -117,7 +117,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--match"></a>
 ### Rules Match
 
-`as_path` - (Optional) AS path to match. Exclusive with [community ip_prefixes] AS path can also be a regex, which will be matched against route information (`String`).
+`as_path` - (Optional) AS path to match. AS path can also be a regex, which will be matched against route information (`String`).
 
 `community` - (Optional) BGP Community list. List of BGP communities. See [Community](#nestedblock--rules--match--community) below.
 
@@ -126,12 +126,12 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--match--community"></a>
 ### Rules Match Community
 
-`community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value Required: YES ves.io.schema.rules.message.required: true ves.io.schema (`List`).
+`community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
 
 <a id="nestedblock--rules--match--ip_prefixes"></a>
 ### Rules Match Ip Prefixes
 
-`prefixes` - (Optional) Prefix list. List of IP prefix Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1. See [Prefixes](#nestedblock--rules--match--ip_prefixes--prefixes) below.
+`prefixes` - (Optional) Prefix list. List of IP prefix. See [Prefixes](#nestedblock--rules--match--ip_prefixes--prefixes) below.
 
 <a id="nestedblock--rules--match--ip_prefixes--prefixes"></a>
 ### Rules Match Ip Prefixes Prefixes

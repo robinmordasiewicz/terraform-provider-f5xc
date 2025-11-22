@@ -68,7 +68,7 @@ The following arguments are optional:
 
 `passport` - (Optional) Passport. Passport stores information about identification and node configuration provided by CE during registration. It can be manually updated by user during approval. See [Passport](#passport) below for details.
 
-`token` - (Optional) Token. Token is used for machine and tenant identification Required: YES ves.io.schema.rules.message.required: true (`String`).
+`token` - (Optional) Token. Token is used for machine and tenant identification (`String`).
 
 
 ### Attributes Reference
@@ -89,13 +89,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `domain` - (Optional) Instance Domain. Machine domain. It's used for Kubernetes cloud provider when domain must be different than Volterra (`String`).
 
-`hostname` - (Optional) Hostname. Must be unique in entire cluster and same as OS settings. '.' (dots) are not allowed in hostname Required: YES ves.io.schema.rules.message.required: true (`String`).
+`hostname` - (Optional) Hostname. Must be unique in entire cluster and same as OS settings. '.' (dots) are not allowed in hostname (`String`).
 
 `hw_info` - (Optional) Os Info. OsInfo holds information about host OS and HW. See [Hw Info](#nestedblock--infra--hw_info) below.
 
 `instance_id` - (Optional) Instance ID. Instance id (assigned by infrastructure provider) (`String`).
 
-`interfaces` - (Optional) Interfaces. Machine interfaces present during registration time Required: YES ves.io.schema.rules.message.required: true. See [Interfaces](#nestedblock--infra--interfaces) below.
+`interfaces` - (Optional) Interfaces. Machine interfaces present during registration time. See [Interfaces](#nestedblock--infra--interfaces) below.
 
 `internet_proxy` - (Optional) Internet Proxy Configuration. Proxy describes options for HTTP or HTTPS proxy configurations. See [Internet Proxy](#nestedblock--infra--internet_proxy) below.
 
@@ -128,7 +128,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Network. List of network devices in server. See [Network](#nestedblock--infra--hw_info--network) below.
 
-`numa_nodes` - (Optional) NUMA nodes count. Non-uniform memory access (NUMA) nodes count ves.io.schema.rules.int32.gte: 0 (`Number`).
+`numa_nodes` - (Optional) NUMA nodes count. Non-uniform memory access (NUMA) nodes count (`Number`).
 
 `os` - (Optional) OS. Details of Operating System. See [Os](#nestedblock--infra--hw_info--os) below.
 
@@ -341,25 +341,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--passport"></a>
 ### Passport
 
-`cluster_name` - (Optional) Cluster Name. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`cluster_name` - (Optional) Cluster Name (`String`).
 
 `cluster_size` - (Optional) Cluster Size. Defines how many master nodes is in the cluster, only 1 or 3 is allowed 1 - cluster have single master, without HA 3 - cluster have 3 masters, with HA, all nodes should be allowed at ... (`Number`).
 
-`cluster_type` - (Optional) Cluster Type. Required: YES ves.io.schema.rules.message.required: true (`String`).
+`cluster_type` - (Optional) Cluster Type (`String`).
 
 `default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Os Version](#nestedblock--passport--default_os_version) below.
 
 `default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--passport--default_sw_version) below.
 
-`latitude` - (Optional) Latitude. Geographic location of this site Required: YES ves.io.schema.rules.float.gte: -90.0 ves.io.schema.rules.float.lte: 90.0 ves.io.schema.rules.message.required: true (`Number`).
+`latitude` - (Optional) Latitude. Geographic location of this site (`Number`).
 
-`longitude` - (Optional) Longitude. Geographic location of this site Required: YES ves.io.schema.rules.float.gte: -180.0 ves.io.schema.rules.float.lte: 180.0 ves.io.schema.rules.message.required: true (`Number`).
+`longitude` - (Optional) Longitude. Geographic location of this site (`Number`).
 
-`operating_system_version` - (Optional) Operating System Version. Exclusive with [default_os_version] Operating System Version is optional parameter, which allows to specify target SW version for particular site e.g. 7.2009.10. ves.io (`String`).
+`operating_system_version` - (Optional) Operating System Version. Operating System Version is optional parameter, which allows to specify target SW version for particular site e.g. 7.2009.10 (`String`).
 
-`private_network_name` - (Optional) Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`private_network_name` - (Optional) Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN (`String`).
 
-`volterra_software_version` - (Optional) F5XC Software Version. Exclusive with [default_sw_version] F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002. ves.io (`String`).
+`volterra_software_version` - (Optional) F5XC Software Version. F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002 (`String`).
 
 <a id="nestedblock--passport--default_os_version"></a>
 ### Passport Default Os Version

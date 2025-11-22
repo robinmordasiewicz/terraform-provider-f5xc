@@ -48,9 +48,9 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`description` - (Optional) Description for iRule. Specify Description for iRule Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description for iRule. Specify Description for iRule (`String`).
 
-`irule` - (Optional) irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals 'www.internal.example.f5.com')} DNS::drop} irule content Required: YES ves.io.schema.rules.message (`String`).
+`irule` - (Optional) irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals 'www.internal.example.f5.com')} DNS::drop} irule content (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 

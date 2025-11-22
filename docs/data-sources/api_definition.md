@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_api_definition Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "API Security"
 description: |-
   x-required Create API Definition.
 ---

@@ -68,7 +68,7 @@ The following arguments are optional:
 
 `psp_spec` - (Optional) Pod Security Policy Specification. Form based pod security specification. See [Psp Spec](#psp-spec) below for details.
 
-`yaml` - (Optional) K8s YAML. Exclusive with [psp_spec] K8s YAML for Pod Security Policy ves.io.schema.rules.string.max_len: 4096 ves.io.schema.rules.string.uri_ref: true (`String`).
+`yaml` - (Optional) K8s YAML. K8s YAML for Pod Security Policy (`String`).
 
 
 ### Attributes Reference
@@ -87,15 +87,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `allowed_capabilities` - (Optional) Capability List. List of capabilities that docker container has. See [Allowed Capabilities](#nestedblock--psp_spec--allowed_capabilities) below.
 
-`allowed_csi_drivers` - (Optional) Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available. ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string (`List`).
+`allowed_csi_drivers` - (Optional) Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available (`List`).
 
-`allowed_flex_volumes` - (Optional) Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves (`List`).
+`allowed_flex_volumes` - (Optional) Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed (`List`).
 
-`allowed_host_paths` - (Optional) Allowed Host Paths. Restrict list of host paths, default all host paths are allowed ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true. See [Allowed Host Paths](#nestedblock--psp_spec--allowed_host_paths) below.
+`allowed_host_paths` - (Optional) Allowed Host Paths. Restrict list of host paths, default all host paths are allowed. See [Allowed Host Paths](#nestedblock--psp_spec--allowed_host_paths) below.
 
-`allowed_proc_mounts` - (Optional) Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts. ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true (`List`).
+`allowed_proc_mounts` - (Optional) Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts (`List`).
 
-`allowed_unsafe_sysctls` - (Optional) Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`allowed_unsafe_sysctls` - (Optional) Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex (`List`).
 
 `default_allow_privilege_escalation` - (Optional) Default Allow Privilege Escalation. Pod has permission for privilege escalation by default (`Bool`).
 
@@ -103,7 +103,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `drop_capabilities` - (Optional) Capability List. List of capabilities that docker container has. See [Drop Capabilities](#nestedblock--psp_spec--drop_capabilities) below.
 
-`forbidden_sysctls` - (Optional) Forbidden Sysctls. Forbidden list of sysctls, empty list forbids none. supports prefix reg-ex ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`forbidden_sysctls` - (Optional) Forbidden Sysctls. Forbidden list of sysctls, empty list forbids none. supports prefix reg-ex (`List`).
 
 `fs_group_strategy_options` - (Optional) ID(User,Group,FSGroup) Strategy. ID ranges and rules. See [Fs Group Strategy Options](#nestedblock--psp_spec--fs_group_strategy_options) below.
 
@@ -113,7 +113,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_pid` - (Optional) Host PID. Host PID determines if the policy allows the use of host PID in the pod spec (`Bool`).
 
-`host_port_ranges` - (Optional) Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed ves.io.schema.rules.string.port_range_list: true (`String`).
+`host_port_ranges` - (Optional) Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed (`String`).
 
 `no_allowed_capabilities` - (Optional) Empty. This can be used for messages where no values are needed. See [No Allowed Capabilities](#nestedblock--psp_spec--no_allowed_capabilities) below.
 
@@ -143,43 +143,43 @@ In addition to all arguments above, the following attributes are exported:
 
 `supplemental_groups` - (Optional) ID(User,Group,FSGroup) Strategy. ID ranges and rules. See [Supplemental Groups](#nestedblock--psp_spec--supplemental_groups) below.
 
-`volumes` - (Optional) Volume. Allow List of volume plugins. Empty no volumes are allowed ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules (`List`).
+`volumes` - (Optional) Volume. Allow List of volume plugins. Empty no volumes are allowed (`List`).
 
 <a id="nestedblock--psp_spec--allowed_capabilities"></a>
 ### Psp Spec Allowed Capabilities
 
-`capabilities` - (Optional) Capability List. List of capabilities that docker container has. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated (`List`).
+`capabilities` - (Optional) Capability List. List of capabilities that docker container has (`List`).
 
 <a id="nestedblock--psp_spec--allowed_host_paths"></a>
 ### Psp Spec Allowed Host Paths
 
-`path_prefix` - (Optional) Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support *. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`path_prefix` - (Optional) Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support * (`String`).
 
 `read_only` - (Optional) Read Only. This volume will be allowed to mount read only (`Bool`).
 
 <a id="nestedblock--psp_spec--default_capabilities"></a>
 ### Psp Spec Default Capabilities
 
-`capabilities` - (Optional) Capability List. List of capabilities that docker container has. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated (`List`).
+`capabilities` - (Optional) Capability List. List of capabilities that docker container has (`List`).
 
 <a id="nestedblock--psp_spec--drop_capabilities"></a>
 ### Psp Spec Drop Capabilities
 
-`capabilities` - (Optional) Capability List. List of capabilities that docker container has. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated (`List`).
+`capabilities` - (Optional) Capability List. List of capabilities that docker container has (`List`).
 
 <a id="nestedblock--psp_spec--fs_group_strategy_options"></a>
 ### Psp Spec Fs Group Strategy Options
 
-`id_ranges` - (Optional) ID Ranges. List of range of ID(s) ves.io.schema.rules.repeated.max_items: 16. See [Id Ranges](#nestedblock--psp_spec--fs_group_strategy_options--id_ranges) below.
+`id_ranges` - (Optional) ID Ranges. List of range of ID(s). See [Id Ranges](#nestedblock--psp_spec--fs_group_strategy_options--id_ranges) below.
 
-`rule` - (Optional) Rule. Rule indicated how the FS group ID range is used ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1 (`String`).
+`rule` - (Optional) Rule. Rule indicated how the FS group ID range is used (`String`).
 
 <a id="nestedblock--psp_spec--fs_group_strategy_options--id_ranges"></a>
 ### Psp Spec Fs Group Strategy Options Id Ranges
 
-`max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
-`min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range (`Number`).
 
 <a id="nestedblock--psp_spec--no_allowed_capabilities"></a>
 ### Psp Spec No Allowed Capabilities
@@ -211,44 +211,44 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--psp_spec--run_as_group"></a>
 ### Psp Spec Run As Group
 
-`id_ranges` - (Optional) ID Ranges. List of range of ID(s) ves.io.schema.rules.repeated.max_items: 16. See [Id Ranges](#nestedblock--psp_spec--run_as_group--id_ranges) below.
+`id_ranges` - (Optional) ID Ranges. List of range of ID(s). See [Id Ranges](#nestedblock--psp_spec--run_as_group--id_ranges) below.
 
-`rule` - (Optional) Rule. Rule indicated how the FS group ID range is used ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1 (`String`).
+`rule` - (Optional) Rule. Rule indicated how the FS group ID range is used (`String`).
 
 <a id="nestedblock--psp_spec--run_as_group--id_ranges"></a>
 ### Psp Spec Run As Group Id Ranges
 
-`max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
-`min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range (`Number`).
 
 <a id="nestedblock--psp_spec--run_as_user"></a>
 ### Psp Spec Run As User
 
-`id_ranges` - (Optional) ID Ranges. List of range of ID(s) ves.io.schema.rules.repeated.max_items: 16. See [Id Ranges](#nestedblock--psp_spec--run_as_user--id_ranges) below.
+`id_ranges` - (Optional) ID Ranges. List of range of ID(s). See [Id Ranges](#nestedblock--psp_spec--run_as_user--id_ranges) below.
 
-`rule` - (Optional) Rule. Rule indicated how the FS group ID range is used ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1 (`String`).
+`rule` - (Optional) Rule. Rule indicated how the FS group ID range is used (`String`).
 
 <a id="nestedblock--psp_spec--run_as_user--id_ranges"></a>
 ### Psp Spec Run As User Id Ranges
 
-`max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
-`min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range (`Number`).
 
 <a id="nestedblock--psp_spec--supplemental_groups"></a>
 ### Psp Spec Supplemental Groups
 
-`id_ranges` - (Optional) ID Ranges. List of range of ID(s) ves.io.schema.rules.repeated.max_items: 16. See [Id Ranges](#nestedblock--psp_spec--supplemental_groups--id_ranges) below.
+`id_ranges` - (Optional) ID Ranges. List of range of ID(s). See [Id Ranges](#nestedblock--psp_spec--supplemental_groups--id_ranges) below.
 
-`rule` - (Optional) Rule. Rule indicated how the FS group ID range is used ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1 (`String`).
+`rule` - (Optional) Rule. Rule indicated how the FS group ID range is used (`String`).
 
 <a id="nestedblock--psp_spec--supplemental_groups--id_ranges"></a>
 ### Psp Spec Supplemental Groups Id Ranges
 
-`max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
-`min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range (`Number`).
 
 
 ## Import

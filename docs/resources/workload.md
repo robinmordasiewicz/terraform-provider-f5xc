@@ -111,18 +111,18 @@ In addition to all arguments above, the following attributes are exported:
 
 `configuration` - (Optional) Configuration Parameters. Configuration parameters of the workload. See [Configuration](#nestedblock--job--configuration) below.
 
-`containers` - (Optional) Containers. Containers to use for the job Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Containers](#nestedblock--job--containers) below.
+`containers` - (Optional) Containers. Containers to use for the job. See [Containers](#nestedblock--job--containers) below.
 
 `deploy_options` - (Optional) Deploy Options. Deploy Options are used to configure the workload deployment options. See [Deploy Options](#nestedblock--job--deploy_options) below.
 
-`num_replicas` - (Optional) Number of Replicas. Number of replicas of the batch job to spawn per site ves.io.schema.rules.int32.lte: 5 (`Number`).
+`num_replicas` - (Optional) Number of Replicas. Number of replicas of the batch job to spawn per site (`Number`).
 
-`volumes` - (Optional) Volumes. Volumes for the job ves.io.schema.rules.repeated.max_items: 16. See [Volumes](#nestedblock--job--volumes) below.
+`volumes` - (Optional) Volumes. Volumes for the job. See [Volumes](#nestedblock--job--volumes) below.
 
 <a id="nestedblock--job--configuration"></a>
 ### Job Configuration
 
-`parameters` - (Optional) Parameters. Parameters for the workload ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true. See [Parameters](#nestedblock--job--configuration--parameters) below.
+`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--job--configuration--parameters) below.
 
 <a id="nestedblock--job--configuration--parameters"></a>
 ### Job Configuration Parameters
@@ -140,9 +140,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--job--containers"></a>
 ### Job Containers
 
-`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD ves.io.schema.rules.repeated.max_items: 128 (`List`).
+`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD (`List`).
 
-`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT ves.io.schema.rules.repeated.max_items: 128 (`List`).
+`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
 
 `custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#nestedblock--job--containers--custom_flavor) below.
 
@@ -156,18 +156,18 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--job--containers--liveness_check) below.
 
-`name` - (Optional) Name. Name of the container Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the container (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--job--containers--readiness_check) below.
 
 <a id="nestedblock--job--containers--custom_flavor"></a>
 ### Job Containers Custom Flavor
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--job--containers--default_flavor"></a>
 ### Job Containers Default Flavor
@@ -198,9 +198,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--job--containers--liveness_check--http_health_check) below.
 
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
 `tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--job--containers--liveness_check--tcp_health_check) below.
 
@@ -226,9 +226,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--job--containers--readiness_check--http_health_check) below.
 
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
 `tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--job--containers--readiness_check--tcp_health_check) below.
 
@@ -269,7 +269,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--job--deploy_options--deploy_ce_sites"></a>
 ### Job Deploy Options Deploy Ce Sites
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io. See [Site](#nestedblock--job--deploy_options--deploy_ce_sites--site) below.
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#nestedblock--job--deploy_options--deploy_ce_sites--site) below.
 
 <a id="nestedblock--job--deploy_options--deploy_ce_sites--site"></a>
 ### Job Deploy Options Deploy Ce Sites Site
@@ -277,7 +277,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--job--deploy_options--deploy_ce_virtual_sites"></a>
 ### Job Deploy Options Deploy Ce Virtual Sites
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Virtual Site](#nestedblock--job--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--job--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--job--deploy_options--deploy_ce_virtual_sites--virtual_site"></a>
 ### Job Deploy Options Deploy Ce Virtual Sites Virtual Site
@@ -285,7 +285,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--job--deploy_options--deploy_re_sites"></a>
 ### Job Deploy Options Deploy Re Sites
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Site](#nestedblock--job--deploy_options--deploy_re_sites--site) below.
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#nestedblock--job--deploy_options--deploy_re_sites--site) below.
 
 <a id="nestedblock--job--deploy_options--deploy_re_sites--site"></a>
 ### Job Deploy Options Deploy Re Sites Site
@@ -293,7 +293,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--job--deploy_options--deploy_re_virtual_sites"></a>
 ### Job Deploy Options Deploy Re Virtual Sites
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Virtual Site](#nestedblock--job--deploy_options--deploy_re_virtual_sites--virtual_site) below.
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--job--deploy_options--deploy_re_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--job--deploy_options--deploy_re_virtual_sites--virtual_site"></a>
 ### Job Deploy Options Deploy Re Virtual Sites Virtual Site
@@ -305,7 +305,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--job--volumes--host_path) below.
 
-`name` - (Optional) Name. Name of the volume ves.io.schema.rules.string.dns_1123_label: true (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--job--volumes--persistent_volume) below.
 
@@ -314,7 +314,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--job--volumes--empty_dir--mount) below.
 
-`size_limit` - (Optional) Size Limit (in GiB). Required: YES ves.io.schema.rules.double.lte: 10 ves.io.schema.rules.message.required: true (`Number`).
+`size_limit` - (Optional) Size Limit (in GiB) (`Number`).
 
 <a id="nestedblock--job--volumes--empty_dir--mount"></a>
 ### Job Volumes Empty Dir Mount
@@ -324,7 +324,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--job--volumes--host_path--mount) below.
 
-`path` - (Optional) Path. Path of the directory on the host Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256+ (`String`).
+`path` - (Optional) Path. Path of the directory on the host (`String`).
 
 <a id="nestedblock--job--volumes--host_path--mount"></a>
 ### Job Volumes Host Path Mount
@@ -349,15 +349,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `configuration` - (Optional) Configuration Parameters. Configuration parameters of the workload. See [Configuration](#nestedblock--service--configuration) below.
 
-`containers` - (Optional) Containers. Containers to use for service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Containers](#nestedblock--service--containers) below.
+`containers` - (Optional) Containers. Containers to use for service. See [Containers](#nestedblock--service--containers) below.
 
 `deploy_options` - (Optional) Deploy Options. Deploy Options are used to configure the workload deployment options. See [Deploy Options](#nestedblock--service--deploy_options) below.
 
-`num_replicas` - (Optional) Number of Replicas. Exclusive with [scale_to_zero] Number of replicas of service to spawn per site ves.io.schema.rules.int32.gt: 0 ves.io.schema.rules.int32.lte: 5 (`Number`).
+`num_replicas` - (Optional) Number of Replicas. Number of replicas of service to spawn per site (`Number`).
 
 `scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed. See [Scale To Zero](#nestedblock--service--scale_to_zero) below.
 
-`volumes` - (Optional) Volumes. Volumes for the service ves.io.schema.rules.repeated.max_items: 16. See [Volumes](#nestedblock--service--volumes) below.
+`volumes` - (Optional) Volumes. Volumes for the service. See [Volumes](#nestedblock--service--volumes) below.
 
 <a id="nestedblock--service--advertise_options"></a>
 ### Service Advertise Options
@@ -373,9 +373,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--service--advertise_options--advertise_custom"></a>
 ### Service Advertise Options Advertise Custom
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules. See [Advertise Where](#nestedblock--service--advertise_options--advertise_custom--advertise_where) below.
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--service--advertise_options--advertise_custom--advertise_where) below.
 
-`ports` - (Optional) Ports. Ports to advertise Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Ports](#nestedblock--service--advertise_options--advertise_custom--ports) below.
+`ports` - (Optional) Ports. Ports to advertise. See [Ports](#nestedblock--service--advertise_options--advertise_custom--ports) below.
 
 <a id="nestedblock--service--advertise_options--advertise_custom--advertise_where"></a>
 ### Service Advertise Options Advertise Custom Advertise Where
@@ -415,7 +415,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--service--configuration"></a>
 ### Service Configuration
 
-`parameters` - (Optional) Parameters. Parameters for the workload ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true. See [Parameters](#nestedblock--service--configuration--parameters) below.
+`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--service--configuration--parameters) below.
 
 <a id="nestedblock--service--configuration--parameters"></a>
 ### Service Configuration Parameters
@@ -433,9 +433,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--service--containers"></a>
 ### Service Containers
 
-`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD ves.io.schema.rules.repeated.max_items: 128 (`List`).
+`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD (`List`).
 
-`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT ves.io.schema.rules.repeated.max_items: 128 (`List`).
+`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
 
 `custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#nestedblock--service--containers--custom_flavor) below.
 
@@ -449,18 +449,18 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--service--containers--liveness_check) below.
 
-`name` - (Optional) Name. Name of the container Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the container (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--service--containers--readiness_check) below.
 
 <a id="nestedblock--service--containers--custom_flavor"></a>
 ### Service Containers Custom Flavor
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--service--containers--default_flavor"></a>
 ### Service Containers Default Flavor
@@ -491,9 +491,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--service--containers--liveness_check--http_health_check) below.
 
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
 `tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--service--containers--liveness_check--tcp_health_check) below.
 
@@ -519,9 +519,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--service--containers--readiness_check--http_health_check) below.
 
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
 `tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--service--containers--readiness_check--tcp_health_check) below.
 
@@ -562,7 +562,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--service--deploy_options--deploy_ce_sites"></a>
 ### Service Deploy Options Deploy Ce Sites
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io. See [Site](#nestedblock--service--deploy_options--deploy_ce_sites--site) below.
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#nestedblock--service--deploy_options--deploy_ce_sites--site) below.
 
 <a id="nestedblock--service--deploy_options--deploy_ce_sites--site"></a>
 ### Service Deploy Options Deploy Ce Sites Site
@@ -570,7 +570,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--service--deploy_options--deploy_ce_virtual_sites"></a>
 ### Service Deploy Options Deploy Ce Virtual Sites
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Virtual Site](#nestedblock--service--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--service--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--service--deploy_options--deploy_ce_virtual_sites--virtual_site"></a>
 ### Service Deploy Options Deploy Ce Virtual Sites Virtual Site
@@ -578,7 +578,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--service--deploy_options--deploy_re_sites"></a>
 ### Service Deploy Options Deploy Re Sites
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Site](#nestedblock--service--deploy_options--deploy_re_sites--site) below.
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#nestedblock--service--deploy_options--deploy_re_sites--site) below.
 
 <a id="nestedblock--service--deploy_options--deploy_re_sites--site"></a>
 ### Service Deploy Options Deploy Re Sites Site
@@ -586,7 +586,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--service--deploy_options--deploy_re_virtual_sites"></a>
 ### Service Deploy Options Deploy Re Virtual Sites
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Virtual Site](#nestedblock--service--deploy_options--deploy_re_virtual_sites--virtual_site) below.
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--service--deploy_options--deploy_re_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--service--deploy_options--deploy_re_virtual_sites--virtual_site"></a>
 ### Service Deploy Options Deploy Re Virtual Sites Virtual Site
@@ -601,7 +601,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--service--volumes--host_path) below.
 
-`name` - (Optional) Name. Name of the volume ves.io.schema.rules.string.dns_1123_label: true (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--service--volumes--persistent_volume) below.
 
@@ -610,7 +610,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--service--volumes--empty_dir--mount) below.
 
-`size_limit` - (Optional) Size Limit (in GiB). Required: YES ves.io.schema.rules.double.lte: 10 ves.io.schema.rules.message.required: true (`Number`).
+`size_limit` - (Optional) Size Limit (in GiB) (`Number`).
 
 <a id="nestedblock--service--volumes--empty_dir--mount"></a>
 ### Service Volumes Empty Dir Mount
@@ -620,7 +620,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--service--volumes--host_path--mount) below.
 
-`path` - (Optional) Path. Path of the directory on the host Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256+ (`String`).
+`path` - (Optional) Path. Path of the directory on the host (`String`).
 
 <a id="nestedblock--service--volumes--host_path--mount"></a>
 ### Service Volumes Host Path Mount
@@ -658,7 +658,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--simple_service--configuration"></a>
 ### Simple Service Configuration
 
-`parameters` - (Optional) Parameters. Parameters for the workload ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true. See [Parameters](#nestedblock--simple_service--configuration--parameters) below.
+`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--simple_service--configuration--parameters) below.
 
 <a id="nestedblock--simple_service--configuration--parameters"></a>
 ### Simple Service Configuration Parameters
@@ -676,9 +676,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--simple_service--container"></a>
 ### Simple Service Container
 
-`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD ves.io.schema.rules.repeated.max_items: 128 (`List`).
+`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD (`List`).
 
-`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT ves.io.schema.rules.repeated.max_items: 128 (`List`).
+`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
 
 `custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#nestedblock--simple_service--container--custom_flavor) below.
 
@@ -692,18 +692,18 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--simple_service--container--liveness_check) below.
 
-`name` - (Optional) Name. Name of the container Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the container (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--simple_service--container--readiness_check) below.
 
 <a id="nestedblock--simple_service--container--custom_flavor"></a>
 ### Simple Service Container Custom Flavor
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--simple_service--container--default_flavor"></a>
 ### Simple Service Container Default Flavor
@@ -734,9 +734,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--simple_service--container--liveness_check--http_health_check) below.
 
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
 `tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--simple_service--container--liveness_check--tcp_health_check) below.
 
@@ -762,9 +762,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--simple_service--container--readiness_check--http_health_check) below.
 
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
 `tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--simple_service--container--readiness_check--tcp_health_check) below.
 
@@ -790,7 +790,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--simple_service--enabled"></a>
 ### Simple Service Enabled
 
-`name` - (Optional) Name. Name of the volume Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.dns_1123_label: true (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--simple_service--enabled--persistent_volume) below.
 
@@ -812,7 +812,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1 (`List`).
 
-`service_port` - (Optional) Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1024 ves.io.schema (`Number`).
+`service_port` - (Optional) Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80 (`Number`).
 
 <a id="nestedblock--stateful_service"></a>
 ### Stateful Service
@@ -821,17 +821,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `configuration` - (Optional) Configuration Parameters. Configuration parameters of the workload. See [Configuration](#nestedblock--stateful_service--configuration) below.
 
-`containers` - (Optional) Containers. Containers to use for service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Containers](#nestedblock--stateful_service--containers) below.
+`containers` - (Optional) Containers. Containers to use for service. See [Containers](#nestedblock--stateful_service--containers) below.
 
 `deploy_options` - (Optional) Deploy Options. Deploy Options are used to configure the workload deployment options. See [Deploy Options](#nestedblock--stateful_service--deploy_options) below.
 
-`num_replicas` - (Optional) Number of Replicas. Exclusive with [scale_to_zero] Number of replicas of service to spawn per site ves.io.schema.rules.int32.gt: 0 ves.io.schema.rules.int32.lte: 5 (`Number`).
+`num_replicas` - (Optional) Number of Replicas. Number of replicas of service to spawn per site (`Number`).
 
-`persistent_volumes` - (Optional) Persistent Storage Configuration. Persistent storage configuration for the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Persistent Volumes](#nestedblock--stateful_service--persistent_volumes) below.
+`persistent_volumes` - (Optional) Persistent Storage Configuration. Persistent storage configuration for the service. See [Persistent Volumes](#nestedblock--stateful_service--persistent_volumes) below.
 
 `scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed. See [Scale To Zero](#nestedblock--stateful_service--scale_to_zero) below.
 
-`volumes` - (Optional) Ephemeral Volumes. Ephemeral volumes for the service ves.io.schema.rules.repeated.max_items: 16. See [Volumes](#nestedblock--stateful_service--volumes) below.
+`volumes` - (Optional) Ephemeral Volumes. Ephemeral volumes for the service. See [Volumes](#nestedblock--stateful_service--volumes) below.
 
 <a id="nestedblock--stateful_service--advertise_options"></a>
 ### Stateful Service Advertise Options
@@ -847,9 +847,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--stateful_service--advertise_options--advertise_custom"></a>
 ### Stateful Service Advertise Options Advertise Custom
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules. See [Advertise Where](#nestedblock--stateful_service--advertise_options--advertise_custom--advertise_where) below.
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--stateful_service--advertise_options--advertise_custom--advertise_where) below.
 
-`ports` - (Optional) Ports. Ports to advertise Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16. See [Ports](#nestedblock--stateful_service--advertise_options--advertise_custom--ports) below.
+`ports` - (Optional) Ports. Ports to advertise. See [Ports](#nestedblock--stateful_service--advertise_options--advertise_custom--ports) below.
 
 <a id="nestedblock--stateful_service--advertise_options--advertise_custom--advertise_where"></a>
 ### Stateful Service Advertise Options Advertise Custom Advertise Where
@@ -889,7 +889,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--stateful_service--configuration"></a>
 ### Stateful Service Configuration
 
-`parameters` - (Optional) Parameters. Parameters for the workload ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true. See [Parameters](#nestedblock--stateful_service--configuration--parameters) below.
+`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--stateful_service--configuration--parameters) below.
 
 <a id="nestedblock--stateful_service--configuration--parameters"></a>
 ### Stateful Service Configuration Parameters
@@ -907,9 +907,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--stateful_service--containers"></a>
 ### Stateful Service Containers
 
-`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD ves.io.schema.rules.repeated.max_items: 128 (`List`).
+`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD (`List`).
 
-`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT ves.io.schema.rules.repeated.max_items: 128 (`List`).
+`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
 
 `custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#nestedblock--stateful_service--containers--custom_flavor) below.
 
@@ -923,18 +923,18 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--stateful_service--containers--liveness_check) below.
 
-`name` - (Optional) Name. Name of the container Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Name. Name of the container (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--stateful_service--containers--readiness_check) below.
 
 <a id="nestedblock--stateful_service--containers--custom_flavor"></a>
 ### Stateful Service Containers Custom Flavor
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--stateful_service--containers--default_flavor"></a>
 ### Stateful Service Containers Default Flavor
@@ -965,9 +965,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--stateful_service--containers--liveness_check--http_health_check) below.
 
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
 `tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--stateful_service--containers--liveness_check--tcp_health_check) below.
 
@@ -993,9 +993,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--stateful_service--containers--readiness_check--http_health_check) below.
 
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
 `tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--stateful_service--containers--readiness_check--tcp_health_check) below.
 
@@ -1036,7 +1036,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--stateful_service--deploy_options--deploy_ce_sites"></a>
 ### Stateful Service Deploy Options Deploy Ce Sites
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io. See [Site](#nestedblock--stateful_service--deploy_options--deploy_ce_sites--site) below.
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#nestedblock--stateful_service--deploy_options--deploy_ce_sites--site) below.
 
 <a id="nestedblock--stateful_service--deploy_options--deploy_ce_sites--site"></a>
 ### Stateful Service Deploy Options Deploy Ce Sites Site
@@ -1044,7 +1044,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--stateful_service--deploy_options--deploy_ce_virtual_sites"></a>
 ### Stateful Service Deploy Options Deploy Ce Virtual Sites
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Virtual Site](#nestedblock--stateful_service--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--stateful_service--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--stateful_service--deploy_options--deploy_ce_virtual_sites--virtual_site"></a>
 ### Stateful Service Deploy Options Deploy Ce Virtual Sites Virtual Site
@@ -1052,7 +1052,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--stateful_service--deploy_options--deploy_re_sites"></a>
 ### Stateful Service Deploy Options Deploy Re Sites
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Site](#nestedblock--stateful_service--deploy_options--deploy_re_sites--site) below.
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#nestedblock--stateful_service--deploy_options--deploy_re_sites--site) below.
 
 <a id="nestedblock--stateful_service--deploy_options--deploy_re_sites--site"></a>
 ### Stateful Service Deploy Options Deploy Re Sites Site
@@ -1060,7 +1060,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--stateful_service--deploy_options--deploy_re_virtual_sites"></a>
 ### Stateful Service Deploy Options Deploy Re Virtual Sites
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated. See [Virtual Site](#nestedblock--stateful_service--deploy_options--deploy_re_virtual_sites--virtual_site) below.
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--stateful_service--deploy_options--deploy_re_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--stateful_service--deploy_options--deploy_re_virtual_sites--virtual_site"></a>
 ### Stateful Service Deploy Options Deploy Re Virtual Sites Virtual Site
@@ -1068,7 +1068,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--stateful_service--persistent_volumes"></a>
 ### Stateful Service Persistent Volumes
 
-`name` - (Optional) Name. Name of the volume Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.dns_1123_label: true (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--stateful_service--persistent_volumes--persistent_volume) below.
 
@@ -1095,14 +1095,14 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--stateful_service--volumes--host_path) below.
 
-`name` - (Optional) Name. Name of the volume ves.io.schema.rules.string.dns_1123_label: true (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 <a id="nestedblock--stateful_service--volumes--empty_dir"></a>
 ### Stateful Service Volumes Empty Dir
 
 `mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--stateful_service--volumes--empty_dir--mount) below.
 
-`size_limit` - (Optional) Size Limit (in GiB). Required: YES ves.io.schema.rules.double.lte: 10 ves.io.schema.rules.message.required: true (`Number`).
+`size_limit` - (Optional) Size Limit (in GiB) (`Number`).
 
 <a id="nestedblock--stateful_service--volumes--empty_dir--mount"></a>
 ### Stateful Service Volumes Empty Dir Mount
@@ -1112,7 +1112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--stateful_service--volumes--host_path--mount) below.
 
-`path` - (Optional) Path. Path of the directory on the host Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256+ (`String`).
+`path` - (Optional) Path. Path of the directory on the host (`String`).
 
 <a id="nestedblock--stateful_service--volumes--host_path--mount"></a>
 ### Stateful Service Volumes Host Path Mount

@@ -48,13 +48,13 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`ephemeral_storage` - (Optional) Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor. ves.io.schema.rules.uint32.ranges: 1-6000 (`String`).
+`ephemeral_storage` - (Optional) Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`memory` - (Optional) Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor. ves.io.schema.rules.uint32.ranges: 1-32768 (`String`).
+`memory` - (Optional) Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor (`String`).
 
-`vcpus` - (Optional) vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core. ves.io.schema.rules.float.gte: 0.0 ves.io.schema.rules.float.lte: 8.0 (`Number`).
+`vcpus` - (Optional) vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core (`Number`).
 
 
 ### Attributes Reference

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_k8s_cluster Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Create k8s_cluster will create the object in the storage backend for namespace metadata.namespace
 ---
@@ -169,7 +169,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--cluster_wide_app_list"></a>
 ### Cluster Wide App List
 
-`cluster_wide_apps` - (Optional) Cluster Wide Application List. List of cluster wide applications Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated. See [Cluster Wide Apps](#nestedblock--cluster_wide_app_list--cluster_wide_apps) below.
+`cluster_wide_apps` - (Optional) Cluster Wide Application List. List of cluster wide applications. See [Cluster Wide Apps](#nestedblock--cluster_wide_app_list--cluster_wide_apps) below.
 
 <a id="nestedblock--cluster_wide_app_list--cluster_wide_apps"></a>
 ### Cluster Wide App List Cluster Wide Apps
@@ -205,16 +205,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--insecure_registry_list"></a>
 ### Insecure Registry List
 
-`insecure_registries` - (Optional) Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000' Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`insecure_registries` - (Optional) Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000' (`List`).
 
 <a id="nestedblock--local_access_config"></a>
 ### Local Access Config
 
 `default_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Port](#nestedblock--local_access_config--default_port) below.
 
-`local_domain` - (Optional) Local Domain. Local K8s API server will be accessible at <site name>.<local domain>. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema (`String`).
+`local_domain` - (Optional) Local Domain. Local K8s API server will be accessible at <site name>.<local domain> (`String`).
 
-`port` - (Optional) Custom k8s Port. Exclusive with [default_port] Use custom K8s port for API server. Available port range is less than 65000 except reserved ports. ves.io.schema.rules.uint32 (`Number`).
+`port` - (Optional) Custom k8s Port. Use custom K8s port for API server. Available port range is less than 65000 except reserved ports (`Number`).
 
 <a id="nestedblock--local_access_config--default_port"></a>
 ### Local Access Config Default Port
@@ -234,53 +234,53 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--use_custom_cluster_role_bindings"></a>
 ### Use Custom Cluster Role Bindings
 
-`cluster_role_bindings` - (Optional) Cluster Role Binding List. List of active cluster role binding list for a K8s cluster Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io. See [Cluster Role Bindings](#nestedblock--use_custom_cluster_role_bindings--cluster_role_bindings) below.
+`cluster_role_bindings` - (Optional) Cluster Role Binding List. List of active cluster role binding list for a K8s cluster. See [Cluster Role Bindings](#nestedblock--use_custom_cluster_role_bindings--cluster_role_bindings) below.
 
 <a id="nestedblock--use_custom_cluster_role_bindings--cluster_role_bindings"></a>
 ### Use Custom Cluster Role Bindings Cluster Role Bindings
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--use_custom_cluster_role_list"></a>
 ### Use Custom Cluster Role List
 
-`cluster_roles` - (Optional) Cluster Role List. List of active cluster role list for a K8s cluster Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated. See [Cluster Roles](#nestedblock--use_custom_cluster_role_list--cluster_roles) below.
+`cluster_roles` - (Optional) Cluster Role List. List of active cluster role list for a K8s cluster. See [Cluster Roles](#nestedblock--use_custom_cluster_role_list--cluster_roles) below.
 
 <a id="nestedblock--use_custom_cluster_role_list--cluster_roles"></a>
 ### Use Custom Cluster Role List Cluster Roles
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--use_custom_pod_security_admission"></a>
 ### Use Custom Pod Security Admission
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--use_custom_psp_list"></a>
 ### Use Custom Psp List
 
-`pod_security_policies` - (Optional) Pod Security Policy List. List of active Pod security policies for a K8s cluster Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema. See [Pod Security Policies](#nestedblock--use_custom_psp_list--pod_security_policies) below.
+`pod_security_policies` - (Optional) Pod Security Policy List. List of active Pod security policies for a K8s cluster. See [Pod Security Policies](#nestedblock--use_custom_psp_list--pod_security_policies) below.
 
 <a id="nestedblock--use_custom_psp_list--pod_security_policies"></a>
 ### Use Custom Psp List Pod Security Policies
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--use_default_cluster_role_bindings"></a>
 ### Use Default Cluster Role Bindings

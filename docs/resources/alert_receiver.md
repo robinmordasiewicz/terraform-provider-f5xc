@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_alert_receiver Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Monitoring"
 description: |-
   Creates a new Alert Receiver object
 ---
@@ -83,14 +83,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--email"></a>
 ### Email
 
-`email` - (Optional) Email. Email id of the user ves.io.schema.rules.string.email: true (`String`).
+`email` - (Optional) Email. Email id of the user (`String`).
 
 <a id="nestedblock--opsgenie"></a>
 ### Opsgenie
 
 `api_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Api Key](#nestedblock--opsgenie--api_key) below.
 
-`url` - (Optional) API URL. URL to send API requests to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true (`String`).
+`url` - (Optional) API URL. URL to send API requests to (`String`).
 
 <a id="nestedblock--opsgenie--api_key"></a>
 ### Opsgenie Api Key
@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -120,7 +120,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `routing_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Routing Key](#nestedblock--pagerduty--routing_key) below.
 
-`url` - (Optional) Pager Duty URL. URL to send API requests to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true (`String`).
+`url` - (Optional) Pager Duty URL. URL to send API requests to (`String`).
 
 <a id="nestedblock--pagerduty--routing_key"></a>
 ### Pagerduty Routing Key
@@ -134,7 +134,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -148,7 +148,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--slack"></a>
 ### Slack
 
-`channel` - (Optional) Channel. Channel or user to send notifications to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^[a-z0-9-_]{1,80}$ (`String`).
+`channel` - (Optional) Channel. Channel or user to send notifications to (`String`).
 
 `url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Url](#nestedblock--slack--url) below.
 
@@ -164,7 +164,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -178,7 +178,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--sms"></a>
 ### Sms
 
-`contact_number` - (Optional) Contact Number. Contact number of the user in ITU E.164 format [+][country code][subscriber number including area code] ves.io.schema.rules.string.phone_number: true (`String`).
+`contact_number` - (Optional) Contact Number. Contact number of the user in ITU E.164 format [+][country code][subscriber number including area code] (`String`).
 
 <a id="nestedblock--webhook"></a>
 ### Webhook
@@ -219,7 +219,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--webhook--http_config--basic_auth--password) below.
 
-`user_name` - (Optional) User Name. HTTP Basic Auth User Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 (`String`).
+`user_name` - (Optional) User Name. HTTP Basic Auth User Name (`String`).
 
 <a id="nestedblock--webhook--http_config--basic_auth--password"></a>
 ### Webhook Http Config Basic Auth Password
@@ -227,7 +227,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--webhook--http_config--client_cert_obj"></a>
 ### Webhook Http Config Client Cert Obj
 
-`use_tls_obj` - (Optional) Certificate Object. Reference to client certificate object ves.io.schema.rules.repeated.max_items: 1. See [Use Tls Obj](#nestedblock--webhook--http_config--client_cert_obj--use_tls_obj) below.
+`use_tls_obj` - (Optional) Certificate Object. Reference to client certificate object. See [Use Tls Obj](#nestedblock--webhook--http_config--client_cert_obj--use_tls_obj) below.
 
 <a id="nestedblock--webhook--http_config--client_cert_obj--use_tls_obj"></a>
 ### Webhook Http Config Client Cert Obj Use Tls Obj
@@ -247,7 +247,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version (`String`).
 
-`sni` - (Optional) SNI Value. Exclusive with [disable_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
 `use_server_verification` - (Optional) TLS Validation Context for Servers. Upstream TLS Validation Context. See [Use Server Verification](#nestedblock--webhook--http_config--use_tls--use_server_verification) below.
 
@@ -274,7 +274,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 

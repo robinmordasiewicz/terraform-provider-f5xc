@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_healthcheck Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Load Balancing"
 description: |-
   Healthcheck object defines method to determine if the given Endpoint is healthy. Single Healthcheck object can be referred to by one or many Cluster objects.
 ---
@@ -67,9 +67,9 @@ The following arguments are optional:
 
 `http_health_check` - (Optional) HTTP Health Check. Healthy if 'get' method on URL 'http(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request. See [Http Health Check](#http-health-check) below for details.
 
-`interval` - (Optional) Interval. Time interval in seconds between two healthcheck requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600 (`Number`).
+`interval` - (Optional) Interval. Time interval in seconds between two healthcheck requests (`Number`).
 
-`jitter_percent` - (Optional) Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests. ves.io.schema.rules.uint32.ranges: 0,10-50 (`Number`).
+`jitter_percent` - (Optional) Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests (`Number`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -96,13 +96,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `expected_status_codes` - (Optional) Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly (`List`).
 
-`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. ves.io.schema.rules.map. See [Headers](#nestedblock--http_health_check--headers) below.
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. See [Headers](#nestedblock--http_health_check--headers) below.
 
-`host_header` - (Optional) Host Header Value. Exclusive with [use_origin_server_name] The value of the host header. ves.io.schema.rules.string.hostport: true ves.io.schema.rules.string.max_len: 262 (`String`).
+`host_header` - (Optional) Host Header Value. The value of the host header (`String`).
 
-`path` - (Optional) Path. Specifies the HTTP path that will be requested during health checking. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules (`String`).
+`path` - (Optional) Path. Specifies the HTTP path that will be requested during health checking (`String`).
 
-`request_headers_to_remove` - (Optional) Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers. ves.io.schema.rules (`List`).
+`request_headers_to_remove` - (Optional) Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers (`List`).
 
 `use_http2` - (Optional) Use HTTP2. If set, health checks will be made using http/2 (`Bool`).
 
@@ -117,9 +117,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--tcp_health_check"></a>
 ### Tcp Health Check
 
-`expected_response` - (Optional) Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload. ves.io.schema.rules.string.hex: true ves.io.schema.rules.string (`String`).
+`expected_response` - (Optional) Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload (`String`).
 
-`send_payload` - (Optional) Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload. ves.io.schema.rules (`String`).
+`send_payload` - (Optional) Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload (`String`).
 
 <a id="nestedblock--udp_icmp_health_check"></a>
 ### Udp Icmp Health Check

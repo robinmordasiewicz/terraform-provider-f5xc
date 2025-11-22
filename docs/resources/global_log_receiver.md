@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_global_log_receiver Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Monitoring"
 description: |-
   Creates a new Global Log Receiver object
 ---
@@ -126,37 +126,37 @@ In addition to all arguments above, the following attributes are exported:
 
 `aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Aws Cred](#nestedblock--aws_cloud_watch_receiver--aws_cred) below.
 
-`aws_region` - (Optional) AWS Region. AWS Region Name Required: YES ves.io.schema.rules.message.required: true (`String`).
+`aws_region` - (Optional) AWS Region. AWS Region Name (`String`).
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--aws_cloud_watch_receiver--batch) below.
 
 `compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--aws_cloud_watch_receiver--compression) below.
 
-`group_name` - (Optional) Group Name. The group name of the target Cloudwatch Logs stream Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string (`String`).
+`group_name` - (Optional) Group Name. The group name of the target Cloudwatch Logs stream (`String`).
 
-`stream_name` - (Optional) Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time Required: YES ves.io.schema.rules.message.required: true ves.io (`String`).
+`stream_name` - (Optional) Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time (`String`).
 
 <a id="nestedblock--aws_cloud_watch_receiver--aws_cred"></a>
 ### Aws Cloud Watch Receiver Aws Cred
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--aws_cloud_watch_receiver--batch"></a>
 ### Aws Cloud Watch Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--aws_cloud_watch_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--aws_cloud_watch_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--aws_cloud_watch_receiver--batch--timeout_seconds_default) below.
 
@@ -192,9 +192,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `connection_string` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Connection String](#nestedblock--azure_event_hubs_receiver--connection_string) below.
 
-`instance` - (Optional) Event Hubs Instance. Event Hubs Instance name into which logs should be stored Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 63 ves.io.schema.rules (`String`).
+`instance` - (Optional) Event Hubs Instance. Event Hubs Instance name into which logs should be stored (`String`).
 
-`namespace` - (Optional) Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`namespace` - (Optional) Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored (`String`).
 
 <a id="nestedblock--azure_event_hubs_receiver--connection_string"></a>
 ### Azure Event Hubs Receiver Connection String
@@ -208,7 +208,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -228,22 +228,22 @@ In addition to all arguments above, the following attributes are exported:
 
 `connection_string` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Connection String](#nestedblock--azure_receiver--connection_string) below.
 
-`container_name` - (Optional) Container Name. Container Name is the name of the container into which logs should be stored Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 63 ves.io (`String`).
+`container_name` - (Optional) Container Name. Container Name is the name of the container into which logs should be stored (`String`).
 
 `filename_options` - (Optional) Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file. See [Filename Options](#nestedblock--azure_receiver--filename_options) below.
 
 <a id="nestedblock--azure_receiver--batch"></a>
 ### Azure Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--azure_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--azure_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--azure_receiver--batch--timeout_seconds_default) below.
 
@@ -286,7 +286,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -300,7 +300,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--azure_receiver--filename_options"></a>
 ### Azure Receiver Filename Options
 
-`custom_folder` - (Optional) Custom Folder. Exclusive with [log_type_folder no_folder] Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\-\._]*$/i` ves (`String`).
+`custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\-\._]*$/i` (`String`).
 
 `log_type_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [Log Type Folder](#nestedblock--azure_receiver--filename_options--log_type_folder) below.
 
@@ -321,26 +321,26 @@ In addition to all arguments above, the following attributes are exported:
 
 `datadog_api_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Datadog Api Key](#nestedblock--datadog_receiver--datadog_api_key) below.
 
-`endpoint` - (Optional) Datadog Endpoint. Exclusive with [site] Datadog Endpoint, example: `example.com:9000` (`String`).
+`endpoint` - (Optional) Datadog Endpoint. Datadog Endpoint, example: `example.com:9000` (`String`).
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--datadog_receiver--no_tls) below.
 
-`site` - (Optional) Datadog Site. Exclusive with [endpoint] Datadog Site, example: `datadoghq.com` ves.io.schema.rules.string.hostname_or_ip: true (`String`).
+`site` - (Optional) Datadog Site. Datadog Site, example: `datadoghq.com` (`String`).
 
 `use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use Tls](#nestedblock--datadog_receiver--use_tls) below.
 
 <a id="nestedblock--datadog_receiver--batch"></a>
 ### Datadog Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--datadog_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--datadog_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--datadog_receiver--batch--timeout_seconds_default) below.
 
@@ -383,7 +383,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -414,7 +414,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--datadog_receiver--use_tls--no_ca) below.
 
-`trusted_ca_url` - (Optional) Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string (`String`).
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 <a id="nestedblock--datadog_receiver--use_tls--disable_verify_certificate"></a>
 ### Datadog Receiver Use Tls Disable Verify Certificate
@@ -434,7 +434,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--datadog_receiver--use_tls--mtls_enable"></a>
 ### Datadog Receiver Use Tls Mtls Enable
 
-`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true (`String`).
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--datadog_receiver--use_tls--mtls_enable--key_url) below.
 
@@ -452,7 +452,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--gcp_bucket_receiver--batch) below.
 
-`bucket` - (Optional) GCP Bucket Name. GCP Bucket Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string (`String`).
+`bucket` - (Optional) GCP Bucket Name. GCP Bucket Name (`String`).
 
 `compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--gcp_bucket_receiver--compression) below.
 
@@ -463,15 +463,15 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--gcp_bucket_receiver--batch"></a>
 ### Gcp Bucket Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--gcp_bucket_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--gcp_bucket_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--gcp_bucket_receiver--batch--timeout_seconds_default) below.
 
@@ -505,7 +505,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--gcp_bucket_receiver--filename_options"></a>
 ### Gcp Bucket Receiver Filename Options
 
-`custom_folder` - (Optional) Custom Folder. Exclusive with [log_type_folder no_folder] Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\-\._]*$/i` ves (`String`).
+`custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\-\._]*$/i` (`String`).
 
 `log_type_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [Log Type Folder](#nestedblock--gcp_bucket_receiver--filename_options--log_type_folder) below.
 
@@ -520,11 +520,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--gcp_bucket_receiver--gcp_cred"></a>
 ### Gcp Bucket Receiver Gcp Cred
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--http_receiver"></a>
 ### Http Receiver
@@ -541,7 +541,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--http_receiver--no_tls) below.
 
-`uri` - (Optional) HTTP Uri. HTTP Uri is the Uri of the HTTP endpoint to send logs to, example: `http://example.com:9000/logs` Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string (`String`).
+`uri` - (Optional) HTTP Uri. HTTP Uri is the Uri of the HTTP endpoint to send logs to, example: `http://example.com:9000/logs` (`String`).
 
 `use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use Tls](#nestedblock--http_receiver--use_tls) below.
 
@@ -550,7 +550,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--http_receiver--auth_basic--password) below.
 
-`user_name` - (Optional) User Name. HTTP Basic Auth User Name ves.io.schema.rules.string.max_len: 64 (`String`).
+`user_name` - (Optional) User Name. HTTP Basic Auth User Name (`String`).
 
 <a id="nestedblock--http_receiver--auth_basic--password"></a>
 ### Http Receiver Auth Basic Password
@@ -589,15 +589,15 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--http_receiver--batch"></a>
 ### Http Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--http_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--http_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--http_receiver--batch--timeout_seconds_default) below.
 
@@ -648,7 +648,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--http_receiver--use_tls--no_ca) below.
 
-`trusted_ca_url` - (Optional) Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string (`String`).
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 <a id="nestedblock--http_receiver--use_tls--disable_verify_certificate"></a>
 ### Http Receiver Use Tls Disable Verify Certificate
@@ -668,7 +668,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--http_receiver--use_tls--mtls_enable"></a>
 ### Http Receiver Use Tls Mtls Enable
 
-`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true (`String`).
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--http_receiver--use_tls--mtls_enable--key_url) below.
 
@@ -683,11 +683,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--kafka_receiver--batch) below.
 
-`bootstrap_servers` - (Optional) Kafka Bootstrap Servers List. List of host:port pairs of the Kafka brokers Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.hostport: true ves.io (`List`).
+`bootstrap_servers` - (Optional) Kafka Bootstrap Servers List. List of host:port pairs of the Kafka brokers (`List`).
 
 `compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--kafka_receiver--compression) below.
 
-`kafka_topic` - (Optional) Kafka Topic. The Kafka topic name to write events to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 255 ves.io.schema.rules.string.min_len: 3 ves.io (`String`).
+`kafka_topic` - (Optional) Kafka Topic. The Kafka topic name to write events to (`String`).
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--kafka_receiver--no_tls) below.
 
@@ -696,15 +696,15 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--kafka_receiver--batch"></a>
 ### Kafka Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--kafka_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--kafka_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--kafka_receiver--batch--timeout_seconds_default) below.
 
@@ -755,7 +755,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--kafka_receiver--use_tls--no_ca) below.
 
-`trusted_ca_url` - (Optional) Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string (`String`).
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 <a id="nestedblock--kafka_receiver--use_tls--disable_verify_certificate"></a>
 ### Kafka Receiver Use Tls Disable Verify Certificate
@@ -775,7 +775,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--kafka_receiver--use_tls--mtls_enable"></a>
 ### Kafka Receiver Use Tls Mtls Enable
 
-`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true (`String`).
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--kafka_receiver--use_tls--mtls_enable--key_url) below.
 
@@ -806,7 +806,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -832,7 +832,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ns_list"></a>
 ### Ns List
 
-`namespaces` - (Optional) namespaces. List of namespaces to stream logs for Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 (`List`).
+`namespaces` - (Optional) namespaces. List of namespaces to stream logs for (`List`).
 
 <a id="nestedblock--qradar_receiver"></a>
 ### Qradar Receiver
@@ -843,22 +843,22 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--qradar_receiver--no_tls) below.
 
-`uri` - (Optional) Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, example: `http://example.com:9000` Required: YES ves.io.schema.rules.message (`String`).
+`uri` - (Optional) Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, example: `http://example.com:9000` (`String`).
 
 `use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use Tls](#nestedblock--qradar_receiver--use_tls) below.
 
 <a id="nestedblock--qradar_receiver--batch"></a>
 ### Qradar Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--qradar_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--qradar_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--qradar_receiver--batch--timeout_seconds_default) below.
 
@@ -909,7 +909,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--qradar_receiver--use_tls--no_ca) below.
 
-`trusted_ca_url` - (Optional) Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string (`String`).
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 <a id="nestedblock--qradar_receiver--use_tls--disable_verify_certificate"></a>
 ### Qradar Receiver Use Tls Disable Verify Certificate
@@ -929,7 +929,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--qradar_receiver--use_tls--mtls_enable"></a>
 ### Qradar Receiver Use Tls Mtls Enable
 
-`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true (`String`).
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--qradar_receiver--use_tls--mtls_enable--key_url) below.
 
@@ -947,11 +947,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Aws Cred](#nestedblock--s3_receiver--aws_cred) below.
 
-`aws_region` - (Optional) AWS Region. AWS Region Name Required: YES ves.io.schema.rules.message.required: true (`String`).
+`aws_region` - (Optional) AWS Region. AWS Region Name (`String`).
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--s3_receiver--batch) below.
 
-`bucket` - (Optional) S3 Bucket Name. S3 Bucket Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string (`String`).
+`bucket` - (Optional) S3 Bucket Name. S3 Bucket Name (`String`).
 
 `compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--s3_receiver--compression) below.
 
@@ -960,24 +960,24 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--s3_receiver--aws_cred"></a>
 ### S3 Receiver Aws Cred
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--s3_receiver--batch"></a>
 ### S3 Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--s3_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--s3_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--s3_receiver--batch--timeout_seconds_default) below.
 
@@ -1011,7 +1011,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--s3_receiver--filename_options"></a>
 ### S3 Receiver Filename Options
 
-`custom_folder` - (Optional) Custom Folder. Exclusive with [log_type_folder no_folder] Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\-\._]*$/i` ves (`String`).
+`custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\-\._]*$/i` (`String`).
 
 `log_type_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [Log Type Folder](#nestedblock--s3_receiver--filename_options--log_type_folder) below.
 
@@ -1033,7 +1033,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--splunk_receiver--compression) below.
 
-`endpoint` - (Optional) Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `https://http-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`) Required: YES ves.io.schema.rules.message (`String`).
+`endpoint` - (Optional) Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `https://http-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`) (`String`).
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--splunk_receiver--no_tls) below.
 
@@ -1044,15 +1044,15 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--splunk_receiver--batch"></a>
 ### Splunk Receiver Batch
 
-`max_bytes` - (Optional) Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32 (`Number`).
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
 `max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--splunk_receiver--batch--max_bytes_disabled) below.
 
-`max_events` - (Optional) Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000 (`Number`).
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
 
 `max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--splunk_receiver--batch--max_events_disabled) below.
 
-`timeout_seconds` - (Optional) Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600 (`String`).
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--splunk_receiver--batch--timeout_seconds_default) below.
 
@@ -1098,7 +1098,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -1126,7 +1126,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--splunk_receiver--use_tls--no_ca) below.
 
-`trusted_ca_url` - (Optional) Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string (`String`).
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 <a id="nestedblock--splunk_receiver--use_tls--disable_verify_certificate"></a>
 ### Splunk Receiver Use Tls Disable Verify Certificate
@@ -1146,7 +1146,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--splunk_receiver--use_tls--mtls_enable"></a>
 ### Splunk Receiver Use Tls Mtls Enable
 
-`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true (`String`).
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--splunk_receiver--use_tls--mtls_enable--key_url) below.
 
@@ -1173,7 +1173,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 

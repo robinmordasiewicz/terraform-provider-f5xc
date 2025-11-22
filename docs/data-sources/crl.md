@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_crl Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Certificates"
 description: |-
   API to create CRL object
 ---

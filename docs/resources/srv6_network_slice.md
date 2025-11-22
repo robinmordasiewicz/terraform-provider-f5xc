@@ -56,7 +56,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`sid_prefixes` - (Optional) IPv6 Prefix for SID Allocation. A SID Locator from the prefix is allocated automatically for each node in each site. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules (`List`).
+`sid_prefixes` - (Optional) IPv6 Prefix for SID Allocation. A SID Locator from the prefix is allocated automatically for each node in each site (`List`).
 
 
 ### Attributes Reference

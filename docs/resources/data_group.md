@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--address_records"></a>
 ### Address Records
 
-`records` - (Optional) Address records. ves.io.schema.rules.map.keys.string.ip: true ves.io.schema.rules.map.max_pairs: 4096 ves.io.schema.rules.map.values.string.pattern: ^[0-9a-zA-Z._-]*$. See [Records](#nestedblock--address_records--records) below.
+`records` - (Optional) Address records. See [Records](#nestedblock--address_records--records) below.
 
 <a id="nestedblock--address_records--records"></a>
 ### Address Records Records
@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--integer_records"></a>
 ### Integer Records
 
-`records` - (Optional) Integer records. ves.io.schema.rules.map.max_pairs: 4096 ves.io.schema.rules.map.values.string.pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$. See [Records](#nestedblock--integer_records--records) below.
+`records` - (Optional) Integer records. See [Records](#nestedblock--integer_records--records) below.
 
 <a id="nestedblock--integer_records--records"></a>
 ### Integer Records Records
@@ -101,7 +101,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--string_records"></a>
 ### String Records
 
-`records` - (Optional) String records. ves.io.schema.rules.map.max_pairs: 4096 ves.io.schema.rules.map.values.string.pattern: ^[0-9a-zA-Z._-]*$. See [Records](#nestedblock--string_records--records) below.
+`records` - (Optional) String records. See [Records](#nestedblock--string_records--records) below.
 
 <a id="nestedblock--string_records--records"></a>
 ### String Records Records

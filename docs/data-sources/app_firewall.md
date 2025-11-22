@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_app_firewall Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Security"
 description: |-
   Create Application Firewall
 ---

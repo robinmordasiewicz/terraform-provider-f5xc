@@ -80,7 +80,7 @@ The following arguments are optional:
 
 `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
 
-`domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to this load balancer. ves.io.schema.rules.repeated.items.string.hostname: true ves.io.schema.rules.repeated.max_items: 32 ves (`List`).
+`domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to this load balancer (`List`).
 
 `enable_per_packet_load_balancing` - (Optional) Per Packet Load Balancing. Per packet load balancing: If disabled (default): First packet identified by source IP/port and local IP/port is sent to an upstream server as the load balancing algorith... (`Bool`).
 
@@ -92,17 +92,17 @@ The following arguments are optional:
 
 `hash_policy_choice_source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Source Ip Stickiness](#hash-policy-choice-source-ip-stickiness) below for details.
 
-`idle_timeout` - (Optional) Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds. ves.io.schema.rules.uint32.lte: 30000 (`Number`).
+`idle_timeout` - (Optional) Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds (`Number`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
 ###### One of the arguments from this list "listen_port, port_ranges" must be set
 
-`listen_port` - (Optional) Listen Port. Exclusive with [port_ranges] Listen Port for this load balancer ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`listen_port` - (Optional) Listen Port. Listen Port for this load balancer (`Number`).
 
-`origin_pools_weights` - (Optional) Origin Pools. Origin pools with weights and priorities used for this load balancer. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true. See [Origin Pools Weights](#origin-pools-weights) below for details.
+`origin_pools_weights` - (Optional) Origin Pools. Origin pools with weights and priorities used for this load balancer. See [Origin Pools Weights](#origin-pools-weights) below for details.
 
-`port_ranges` - (Optional) Port Ranges. Exclusive with [listen_port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules (`String`).
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
 `udp` - (Optional) Empty. This can be used for messages where no values are needed. See [Udp](#udp) below for details.
 
@@ -119,16 +119,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advertise_custom"></a>
 ### Advertise Custom
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules. See [Advertise Where](#nestedblock--advertise_custom--advertise_where) below.
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--advertise_custom--advertise_where) below.
 
 <a id="nestedblock--advertise_custom--advertise_where"></a>
 ### Advertise Custom Advertise Where
 
 `advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#nestedblock--advertise_custom--advertise_where--advertise_on_public) below.
 
-`port` - (Optional) Listen Port. Exclusive with [port_ranges use_default_port] Port to Listen. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Listen Port. Port to Listen (`Number`).
 
-`port_ranges` - (Optional) Listen Port Ranges. Exclusive with [port use_default_port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io (`String`).
+`port_ranges` - (Optional) Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
 `site` - (Optional) Site. This defines a reference to a CE site along with network type and an optional ip address where a load balancer could be advertised. See [Site](#nestedblock--advertise_custom--advertise_where--site) below.
 
@@ -153,7 +153,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advertise_custom--advertise_where--site"></a>
 ### Advertise Custom Advertise Where Site
 
-`ip` - (Optional) IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks (`String`).
 
@@ -172,9 +172,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Vip](#nestedblock--advertise_custom--advertise_where--virtual_network--default_vip) below.
 
-`specific_v6_vip` - (Optional) Specific V6 VIP. Exclusive with [default_v6_vip] Use given IPV6 address as VIP on virtual Network ves.io.schema.rules.string.ipv6: true (`String`).
+`specific_v6_vip` - (Optional) Specific V6 VIP. Use given IPV6 address as VIP on virtual Network (`String`).
 
-`specific_vip` - (Optional) Specific V4 VIP. Exclusive with [default_vip] Use given IPV4 address as VIP on virtual Network ves.io.schema.rules.string.ipv4: true (`String`).
+`specific_vip` - (Optional) Specific V4 VIP. Use given IPV4 address as VIP on virtual Network (`String`).
 
 `virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#nestedblock--advertise_custom--advertise_where--virtual_network--virtual_network) below.
 
@@ -200,7 +200,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advertise_custom--advertise_where--virtual_site_with_vip"></a>
 ### Advertise Custom Advertise Where Virtual Site With Vip
 
-`ip` - (Optional) IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true (`String`).
+`ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
 
 `network` - (Optional) Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks (`String`).
 
@@ -230,11 +230,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--advertise_on_public--public_ip"></a>
 ### Advertise On Public Public Ip
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--advertise_on_public_default_vip"></a>
 ### Advertise On Public Default Vip
@@ -267,11 +267,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_pools_weights--cluster"></a>
 ### Origin Pools Weights Cluster
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--origin_pools_weights--endpoint_subsets"></a>
 ### Origin Pools Weights Endpoint Subsets
@@ -279,11 +279,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--origin_pools_weights--pool"></a>
 ### Origin Pools Weights Pool
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--udp"></a>
 ### Udp

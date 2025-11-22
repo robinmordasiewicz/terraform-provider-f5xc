@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_bgp Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   BGP object is the configuration for peering with external BGP servers. It is created by users in system namespace.
 ---

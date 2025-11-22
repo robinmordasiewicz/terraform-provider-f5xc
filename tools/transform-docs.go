@@ -14,6 +14,66 @@ import (
 	"strings"
 )
 
+// subcategoryMap assigns resources to logical categories for better organization
+var subcategoryMap = map[string]string{
+	// Sites and Infrastructure
+	"aws_vpc_site": "Sites", "azure_vnet_site": "Sites", "gcp_vpc_site": "Sites",
+	"aws_tgw_site": "Sites", "securemesh_site_v2": "Sites", "virtual_site": "Sites",
+	"fleet": "Sites", "k8s_cluster": "Sites",
+
+	// Load Balancing
+	"http_loadbalancer": "Load Balancing", "tcp_loadbalancer": "Load Balancing",
+	"cdn_loadbalancer": "Load Balancing", "dns_load_balancer": "Load Balancing",
+	"origin_pool": "Load Balancing", "healthcheck": "Load Balancing",
+	"endpoint": "Load Balancing", "cluster": "Load Balancing",
+
+	// Security
+	"app_firewall": "Security", "enhanced_firewall_policy": "Security",
+	"network_policy": "Security", "network_firewall": "Security",
+	"forward_proxy_policy": "Security", "service_policy": "Security",
+	"fast_acl": "Security", "fast_acl_rule": "Security", "rate_limiter": "Security",
+	"malicious_user_mitigation": "Security", "bot_defense_app_infrastructure": "Security",
+
+	// Networking
+	"network_connector": "Networking", "network_interface": "Networking",
+	"virtual_network": "Networking", "nat_policy": "Networking",
+	"bgp": "Networking", "bgp_asn_set": "Networking", "bgp_routing_policy": "Networking",
+	"ip_prefix_set": "Networking", "cloud_link": "Networking", "cloud_connect": "Networking",
+
+	// DNS
+	"dns_zone": "DNS", "dns_domain": "DNS", "dns_lb_pool": "DNS",
+	"dns_lb_health_check": "DNS",
+
+	// Authentication & Credentials
+	"api_credential": "Authentication", "cloud_credentials": "Authentication",
+	"authentication": "Authentication", "oidc_provider": "Authentication",
+	"certificate": "Certificates", "certificate_chain": "Certificates", "crl": "Certificates",
+
+	// API Security
+	"api_definition": "API Security", "api_discovery": "API Security",
+	"app_api_group": "API Security", "api_crawler": "API Security",
+	"api_testing": "API Security",
+
+	// Monitoring & Logging
+	"log_receiver": "Monitoring", "global_log_receiver": "Monitoring",
+	"alert_policy": "Monitoring", "alert_receiver": "Monitoring",
+
+	// Namespace & Organization
+	"namespace": "Organization", "managed_tenant": "Organization",
+	"child_tenant": "Organization",
+}
+
+// getSubcategory returns the subcategory for a resource based on filename
+func getSubcategory(filename string) string {
+	base := filepath.Base(filename)
+	name := strings.TrimSuffix(base, ".md")
+
+	if cat, ok := subcategoryMap[name]; ok {
+		return cat
+	}
+	return "" // Default empty subcategory for uncategorized resources
+}
+
 func main() {
 	docsDir := "docs/resources"
 
@@ -75,9 +135,17 @@ func transformDoc(filePath string) error {
 
 	var output strings.Builder
 
-	// Write everything before Schema section
+	// Get subcategory for this resource
+	subcategory := getSubcategory(filePath)
+
+	// Write everything before Schema section, updating subcategory if needed
 	for i := 0; i < schemaStart; i++ {
-		output.WriteString(lines[i])
+		line := lines[i]
+		// Replace empty subcategory with assigned category
+		if strings.HasPrefix(line, "subcategory:") && subcategory != "" {
+			line = fmt.Sprintf("subcategory: \"%s\"", subcategory)
+		}
+		output.WriteString(line)
 		output.WriteString("\n")
 	}
 
@@ -278,8 +346,23 @@ func cleanDescription(desc, attrPath string) string {
 	nestedRefRegex := regexp.MustCompile(`\s*\(see \[below for nested schema\]\([^)]+\)\)`)
 	desc = nestedRefRegex.ReplaceAllString(desc, "")
 
+	// Remove ves.io.schema validation annotations that may have passed through
+	vesSchemaRegex := regexp.MustCompile(`\s*ves\.io\.schema[^\s]*:\s*\S+`)
+	desc = vesSchemaRegex.ReplaceAllString(desc, "")
+
+	// Remove "Required: YES" or "Required: NO" annotations
+	requiredRegex := regexp.MustCompile(`\s*Required:\s*(YES|NO)\s*`)
+	desc = requiredRegex.ReplaceAllString(desc, " ")
+
+	// Remove "Exclusive with [xxx]" patterns
+	exclusiveRegex := regexp.MustCompile(`\s*Exclusive with\s*\[[^\]]*\]\s*`)
+	desc = exclusiveRegex.ReplaceAllString(desc, " ")
+
 	// Clean up whitespace
 	desc = strings.TrimSpace(desc)
+
+	// Normalize multiple spaces
+	desc = regexp.MustCompile(`\s+`).ReplaceAllString(desc, " ")
 
 	// Remove trailing period
 	desc = strings.TrimSuffix(desc, ".")

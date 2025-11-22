@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_authentication Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Authentication"
 description: |-
   Manages a Authentication in F5 Distributed Cloud.
 ---

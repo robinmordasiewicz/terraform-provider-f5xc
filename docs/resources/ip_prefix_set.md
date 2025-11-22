@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_ip_prefix_set Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   Create ip_prefix_set creates a new object in the storage backend for metadata.namespace.
 ---
@@ -51,7 +51,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`ipv4_prefixes` - (Optional) IPv4 Prefixes. list of IPv4 prefixes with description. ves.io.schema.rules.repeated.max_items: 1024 ves.io.schema.rules.repeated.unique: true. See [Ipv4 Prefixes](#ipv4-prefixes) below for details.
+`ipv4_prefixes` - (Optional) IPv4 Prefixes. list of IPv4 prefixes with description. See [Ipv4 Prefixes](#ipv4-prefixes) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
@@ -68,9 +68,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ipv4_prefixes"></a>
 ### Ipv4 Prefixes
 
-`description` - (Optional) Description. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`description` - (Optional) Description (`String`).
 
-`ipv4_prefix` - (Optional) IPv4 Prefix. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema.rules.string.not_empty: true (`String`).
+`ipv4_prefix` - (Optional) IPv4 Prefix (`String`).
 
 
 ## Import

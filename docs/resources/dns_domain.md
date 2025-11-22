@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_dns_domain Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "DNS"
 description: |-
   Create DNS Domain in a given namespace. If one already exist it will give a error.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_azure_vnet_site Data Source - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Sites"
 description: |-
   Shape of the Azure VNet site specification
 ---

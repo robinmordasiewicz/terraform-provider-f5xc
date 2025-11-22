@@ -64,9 +64,9 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`rules` - (Optional) Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated. See [Rules](#rules) below for details.
+`rules` - (Optional) Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified. See [Rules](#rules) below for details.
 
-`server_name` - (Optional) Server Name. Exclusive with [any_server server_name_matcher server_selector] The expected name of the server (`String`).
+`server_name` - (Optional) Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request (`String`).
 
 `server_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Server Name Matcher](#server-name-matcher) below for details.
 
@@ -95,9 +95,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--metadata"></a>
 ### Rules Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--rules--spec"></a>
 ### Rules Spec
@@ -152,7 +152,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--spec--asn_matcher"></a>
 ### Rules Spec Asn Matcher
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Asn Sets](#nestedblock--rules--spec--asn_matcher--asn_sets) below.
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#nestedblock--rules--spec--asn_matcher--asn_sets) below.
 
 <a id="nestedblock--rules--spec--asn_matcher--asn_sets"></a>
 ### Rules Spec Asn Matcher Asn Sets
@@ -163,25 +163,25 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--rules--spec--country_list"></a>
 ### Rules Spec Country List
 
-`country_codes` - (Optional) Country Codes List. List of Country Codes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema (`List`).
+`country_codes` - (Optional) Country Codes List. List of Country Codes (`List`).
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
 <a id="nestedblock--rules--spec--custom_rate_limiter"></a>
 ### Rules Spec Custom Rate Limiter
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--rules--spec--domain_matcher"></a>
 ### Rules Spec Domain Matcher
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--rules--spec--headers"></a>
 ### Rules Spec Headers
@@ -194,7 +194,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Item](#nestedblock--rules--spec--headers--item) below.
 
-`name` - (Optional) Header Name. A case-insensitive HTTP header name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 (`String`).
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
 
 <a id="nestedblock--rules--spec--headers--check_not_present"></a>
 ### Rules Spec Headers Check Not Present
@@ -210,14 +210,14 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
 
-`methods` - (Optional) Method List. List of methods values to match against. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true (`List`).
+`methods` - (Optional) Method List. List of methods values to match against (`List`).
 
 <a id="nestedblock--rules--spec--ip_matcher"></a>
 ### Rules Spec Ip Matcher
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4. See [Prefix Sets](#nestedblock--rules--spec--ip_matcher--prefix_sets) below.
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#nestedblock--rules--spec--ip_matcher--prefix_sets) below.
 
 <a id="nestedblock--rules--spec--ip_matcher--prefix_sets"></a>
 ### Rules Spec Ip Matcher Prefix Sets
@@ -227,34 +227,34 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
-`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated (`List`).
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
 <a id="nestedblock--rules--spec--path"></a>
 ### Rules Spec Path
 
-`exact_values` - (Optional) Exact Values. A list of exact path values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.http_path: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact path values to match the input HTTP path against (`List`).
 
 `invert_matcher` - (Optional) Invert Path Matcher. Invert the match result (`Bool`).
 
-`prefix_values` - (Optional) Prefix Values. A list of path prefix values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.http_path: true ves.io.schema.rules.repeated.items.string (`List`).
+`prefix_values` - (Optional) Prefix Values. A list of path prefix values to match the input HTTP path against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input HTTP path against (`List`).
 
-`suffix_values` - (Optional) Suffix Values. A list of path suffix values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string.not_empty: true ves (`List`).
+`suffix_values` - (Optional) Suffix Values. A list of path suffix values to match the input HTTP path against (`List`).
 
-`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true (`List`).
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--server_name_matcher"></a>
 ### Server Name Matcher
 
-`exact_values` - (Optional) Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules (`List`).
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
-`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io (`List`).
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--server_selector"></a>
 ### Server Selector
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string (`List`).
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 
 ## Import

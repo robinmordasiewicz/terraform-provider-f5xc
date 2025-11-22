@@ -54,7 +54,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`category_ref` - (Optional) TPM Category. APIKey needs a reference to an existing TPM category object TPM category is used for grouping customer owned APIKeys and manage them as one entity Required: YES ves.io.schema.rules. See [Category Ref](#category-ref) below for details.
+`category_ref` - (Optional) TPM Category. APIKey needs a reference to an existing TPM category object TPM category is used for grouping customer owned APIKeys and manage them as one entity. See [Category Ref](#category-ref) below for details.
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 

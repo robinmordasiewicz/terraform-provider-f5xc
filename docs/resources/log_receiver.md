@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_log_receiver Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Monitoring"
 description: |-
   Creates a new Log Receiver object
 ---
@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--syslog"></a>
 ### Syslog
 
-`syslog_rfc5424` - (Optional) Syslog RFC5424 Format. Exclusive with [] Select RFC5424 syslog format and maximum message length. ves.io.schema.rules.uint32.gte: 408 ves.io.schema.rules.uint32.lte: 268435456 (`Number`).
+`syslog_rfc5424` - (Optional) Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length (`Number`).
 
 `tcp_server` - (Optional) TCP Server name and Port Number. Name and port number for a TCP server. See [Tcp Server](#nestedblock--syslog--tcp_server) below.
 
@@ -94,9 +94,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--syslog--tcp_server"></a>
 ### Syslog Tcp Server
 
-`port` - (Optional) Port Number. Port number used for communication Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port Number. Port number used for communication (`Number`).
 
-`server_name` - (Optional) Server name. Server name is fully qualified domain name or IP address of the server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname_or_ip: true ves.io (`String`).
+`server_name` - (Optional) Server name. Server name is fully qualified domain name or IP address of the server (`String`).
 
 <a id="nestedblock--syslog--tls_server"></a>
 ### Syslog Tls Server
@@ -109,11 +109,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `mtls_enable` - (Optional) mTLS Client Config. TLS config for client. See [Mtls Enable](#nestedblock--syslog--tls_server--mtls_enable) below.
 
-`port` - (Optional) TCP Port Number. Exclusive with [default_https_port default_syslog_tls_port] Custom port number used for communication ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) TCP Port Number. Custom port number used for communication (`Number`).
 
-`server_name` - (Optional) SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules (`String`).
+`server_name` - (Optional) SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against (`String`).
 
-`trusted_ca_url` - (Optional) Server CA Certificates. Exclusive with [volterra_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules (`String`).
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 `volterra_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Ca](#nestedblock--syslog--tls_server--volterra_ca) below.
 
@@ -129,7 +129,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--syslog--tls_server--mtls_enable"></a>
 ### Syslog Tls Server Mtls Enable
 
-`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true (`String`).
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--syslog--tls_server--mtls_enable--key_url) below.
 
@@ -142,9 +142,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--syslog--udp_server"></a>
 ### Syslog Udp Server
 
-`port` - (Optional) Port Number. Port number used for communication Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Port Number. Port number used for communication (`Number`).
 
-`server_name` - (Optional) Server name. Server name is fully qualified domain name or IP address of the server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname_or_ip: true ves.io (`String`).
+`server_name` - (Optional) Server name. Server name is fully qualified domain name or IP address of the server (`String`).
 
 
 ## Import

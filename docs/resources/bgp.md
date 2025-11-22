@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_bgp Resource - terraform-provider-f5xc"
-subcategory: ""
+subcategory: "Networking"
 description: |-
   BGP object is the configuration for peering with external BGP servers. It is created by users in system namespace.
 ---
@@ -73,7 +73,7 @@ The following arguments are optional:
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
-`peers` - (Optional) Peers. List of peers Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique_metadata_name: true. See [Peers](#peers) below for details.
+`peers` - (Optional) Peers. List of peers. See [Peers](#peers) below for details.
 
 `where` - (Optional) Site or Virtual Site Reference. VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site. See [Where](#where) below for details.
 
@@ -90,11 +90,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bgp_parameters"></a>
 ### Bgp Parameters
 
-`asn` - (Optional) ASN. Autonomous System Number Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 (`Number`).
+`asn` - (Optional) ASN. Autonomous System Number (`Number`).
 
 `from_site` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site](#nestedblock--bgp_parameters--from_site) below.
 
-`ip_address` - (Optional) IP Address. Exclusive with [from_site local_address] Use the configured IPv4 Address as Router ID. ves.io.schema.rules.string.ipv4: true (`String`).
+`ip_address` - (Optional) IP Address. Use the configured IPv4 Address as Router ID (`String`).
 
 `local_address` - (Optional) Empty. This can be used for messages where no values are needed. See [Local Address](#nestedblock--bgp_parameters--local_address) below.
 
@@ -131,11 +131,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--peers--bfd_enabled"></a>
 ### Peers Bfd Enabled
 
-`multiplier` - (Optional) Multiplier. Specify Number of missed packets to bring session down' Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 255 (`Number`).
+`multiplier` - (Optional) Multiplier. Specify Number of missed packets to bring session down' (`Number`).
 
-`receive_interval_milliseconds` - (Optional) Minimum Receive Interval. BFD receive interval timer, in milliseconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 255000 (`Number`).
+`receive_interval_milliseconds` - (Optional) Minimum Receive Interval. BFD receive interval timer, in milliseconds (`Number`).
 
-`transmit_interval_milliseconds` - (Optional) Transmit Interval. BFD transmit interval timer, in milliseconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 255000 (`Number`).
+`transmit_interval_milliseconds` - (Optional) Transmit Interval. BFD transmit interval timer, in milliseconds (`Number`).
 
 <a id="nestedblock--peers--disable"></a>
 ### Peers Disable
@@ -143,11 +143,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--peers--external"></a>
 ### Peers External
 
-`address` - (Optional) Peer Address. Exclusive with [default_gateway disable external_connector from_site subnet_begin_offset subnet_end_offset] Specify IPV4 peer address. ves.io.schema.rules.string.ipv4: true (`String`).
+`address` - (Optional) Peer Address. Specify IPV4 peer address (`String`).
 
-`address_ipv6` - (Optional) Peer IPv6 Address. Exclusive with [default_gateway_v6 disable_v6 from_site_v6 subnet_begin_offset_v6 subnet_end_offset_v6] Specify peer IPv6 address. ves.io.schema.rules.string.ipv6: true (`String`).
+`address_ipv6` - (Optional) Peer IPv6 Address. Specify peer IPv6 address (`String`).
 
-`asn` - (Optional) ASN. Autonomous System Number for BGP peer Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 (`Number`).
+`asn` - (Optional) ASN. Autonomous System Number for BGP peer (`Number`).
 
 `default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#nestedblock--peers--external--default_gateway) below.
 
@@ -169,19 +169,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `interface_list` - (Optional) Interface List. List of network interfaces. See [Interface List](#nestedblock--peers--external--interface_list) below.
 
-`md5_auth_key` - (Optional) MD5 Authentication Key. Exclusive with [no_authentication] MD5 key for protecting BGP Sessions (RFC 2385) (`String`).
+`md5_auth_key` - (Optional) MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385) (`String`).
 
 `no_authentication` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authentication](#nestedblock--peers--external--no_authentication) below.
 
-`port` - (Optional) Peer Port. Peer TCP port number. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535 (`Number`).
+`port` - (Optional) Peer Port. Peer TCP port number (`Number`).
 
-`subnet_begin_offset` - (Optional) Offset From Beginning Of Subnet. Exclusive with [address default_gateway disable external_connector from_site subnet_end_offset] Calculate peer address using offset from the beginning of the subnet (`Number`).
+`subnet_begin_offset` - (Optional) Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet (`Number`).
 
-`subnet_begin_offset_v6` - (Optional) Offset From Beginning Of Subnet. Exclusive with [address_ipv6 default_gateway_v6 disable_v6 from_site_v6 subnet_end_offset_v6] Calculate peer address using offset from the beginning of the subnet (`Number`).
+`subnet_begin_offset_v6` - (Optional) Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet (`Number`).
 
-`subnet_end_offset` - (Optional) Offset From End Of Subnet. Exclusive with [address default_gateway disable external_connector from_site subnet_begin_offset] Calculate peer address using offset from the end of the subnet. ves.io (`Number`).
+`subnet_end_offset` - (Optional) Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet (`Number`).
 
-`subnet_end_offset_v6` - (Optional) Offset From End Of Subnet. Exclusive with [address_ipv6 default_gateway_v6 disable_v6 from_site_v6 subnet_begin_offset_v6] Calculate peer address using offset from the end of the subnet. ves.io (`Number`).
+`subnet_end_offset_v6` - (Optional) Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet (`Number`).
 
 <a id="nestedblock--peers--external--default_gateway"></a>
 ### Peers External Default Gateway
@@ -220,16 +220,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--peers--external--interface"></a>
 ### Peers External Interface
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--peers--external--interface_list"></a>
 ### Peers External Interface List
 
-`interfaces` - (Optional) Interface List. List of network interfaces. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema. See [Interfaces](#nestedblock--peers--external--interface_list--interfaces) below.
+`interfaces` - (Optional) Interface List. List of network interfaces. See [Interfaces](#nestedblock--peers--external--interface_list--interfaces) below.
 
 <a id="nestedblock--peers--external--interface_list--interfaces"></a>
 ### Peers External Interface List Interfaces
@@ -240,9 +240,9 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--peers--metadata"></a>
 ### Peers Metadata
 
-`description` - (Optional) Description. Human readable description. ves.io.schema.rules.string.max_len: 256 (`String`).
+`description` - (Optional) Description. Human readable description (`String`).
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema (`String`).
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--peers--passive_mode_disabled"></a>
 ### Peers Passive Mode Disabled
@@ -253,7 +253,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--peers--routing_policies"></a>
 ### Peers Routing Policies
 
-`route_policy` - (Optional) BGP Routing policy. Route policy to be applied ves.io.schema.rules.repeated.max_items: 4. See [Route Policy](#nestedblock--peers--routing_policies--route_policy) below.
+`route_policy` - (Optional) BGP Routing policy. Route policy to be applied. See [Route Policy](#nestedblock--peers--routing_policies--route_policy) below.
 
 <a id="nestedblock--peers--routing_policies--route_policy"></a>
 ### Peers Routing Policies Route Policy
@@ -264,7 +264,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `node_name` - (Optional) Nodes. List of nodes on which BGP routing policy has to be applied. See [Node Name](#nestedblock--peers--routing_policies--route_policy--node_name) below.
 
-`object_refs` - (Optional) BGP routing policy. Select route policy to apply. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1. See [Object Refs](#nestedblock--peers--routing_policies--route_policy--object_refs) below.
+`object_refs` - (Optional) BGP routing policy. Select route policy to apply. See [Object Refs](#nestedblock--peers--routing_policies--route_policy--object_refs) below.
 
 `outbound` - (Optional) Empty. This can be used for messages where no values are needed. See [Outbound](#nestedblock--peers--routing_policies--route_policy--outbound) below.
 
@@ -299,7 +299,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--site--ref) below.
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
 
 <a id="nestedblock--where--site--disable_internet_vip"></a>
 ### Where Site Disable Internet Vip
@@ -329,7 +329,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
 
-`ref` - (Optional) Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1. See [Ref](#nestedblock--where--virtual_site--ref) below.
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
 
 <a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
 ### Where Virtual Site Disable Internet Vip

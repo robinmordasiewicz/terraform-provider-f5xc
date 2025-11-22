@@ -48,7 +48,7 @@ The following arguments are optional:
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-`firewall_rule_group_name` - (Optional) Firewall Rule Group Name. Firewall Rule Group Name Required: YES ves.io.schema.rules.message.required: true (`String`).
+`firewall_rule_group_name` - (Optional) Firewall Rule Group Name. Firewall Rule Group Name (`String`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 

@@ -95,14 +95,14 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bandwidth"></a>
 ### Bandwidth
 
-`bandwidth_max_mb` - (Optional) Bandwidth Max in MB. Bandwidth max allowed ves.io.schema.rules.uint32.lte: 9999 (`Number`).
+`bandwidth_max_mb` - (Optional) Bandwidth Max in MB. Bandwidth max allowed (`Number`).
 
 <a id="nestedblock--bgp_information"></a>
 ### Bgp Information
 
 `asn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Asn](#nestedblock--bgp_information--asn) below.
 
-`holddown_timer_seconds` - (Optional) Hold down Timer. BGP hold down timer, in seconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 30 ves.io.schema.rules.uint32.lte: 300 (`Number`).
+`holddown_timer_seconds` - (Optional) Hold down Timer. BGP hold down timer, in seconds (`Number`).
 
 `no_secret` - (Optional) Empty. This can be used for messages where no values are needed. See [No Secret](#nestedblock--bgp_information--no_secret) below.
 
@@ -113,11 +113,11 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--bgp_information--asn"></a>
 ### Bgp Information Asn
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--bgp_information--no_secret"></a>
 ### Bgp Information No Secret
@@ -134,7 +134,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message (`String`).
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
@@ -151,16 +151,16 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--firewall_rule_group"></a>
 ### Firewall Rule Group
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message (`String`).
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64 (`String`).
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--gre_ipv4"></a>
 ### Gre Ipv4
 
-`customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_globally_routable: true (`String`).
+`customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel (`String`).
 
 `fragmentation_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragmentation Disabled](#nestedblock--gre_ipv4--fragmentation_disabled) below.
 
@@ -195,7 +195,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--gre_ipv6"></a>
 ### Gre Ipv6
 
-`customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv6_globally_routable: true (`String`).
+`customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel (`String`).
 
 `ipv4_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Ipv4 Interconnect Disabled](#nestedblock--gre_ipv6--ipv4_interconnect_disabled) below.
 
@@ -210,17 +210,17 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--ip_in_ip"></a>
 ### Ip In Ip
 
-`customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_globally_routable: true (`String`).
+`customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel (`String`).
 
 <a id="nestedblock--ipv6_to_ipv6"></a>
 ### Ipv6 To Ipv6
 
-`customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv6_globally_routable: true (`String`).
+`customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel (`String`).
 
 <a id="nestedblock--tunnel_location"></a>
 ### Tunnel Location
 
-`name` - (Optional) Location Name. Destination tunnel Location. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 (`String`).
+`name` - (Optional) Location Name. Destination tunnel Location (`String`).
 
 `zone1` - (Optional) Empty. This can be used for messages where no values are needed. See [Zone1](#nestedblock--tunnel_location--zone1) below.
 

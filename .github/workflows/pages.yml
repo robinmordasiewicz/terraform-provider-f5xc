@@ -34,11 +34,11 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Zensical
-        run: pip install zensical
+      - name: Install MkDocs and plugins
+        run: pip install mkdocs mkdocs-material mkdocs-swagger-ui-tag
 
       - name: Build documentation
-        run: zensical build --clean
+        run: mkdocs build --clean
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

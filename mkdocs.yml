@@ -39,6 +39,10 @@ theme:
 
 plugins:
   - search
+  - swagger-ui-tag:
+      docExpansion: none
+      syntaxHighlightTheme: monokai
+      tryItOutEnabled: true
 
 markdown_extensions:
   - admonition

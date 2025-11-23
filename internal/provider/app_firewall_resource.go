@@ -46,7 +46,7 @@ func (r *AppFirewallResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create Application Firewall",
+		MarkdownDescription: "Manages Application Firewall in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AppFirewall. Must be unique within the namespace.",
@@ -106,7 +106,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Allowed Response Codes. List of HTTP response status codes that are allowed",
 				Attributes: map[string]schema.Attribute{
 					"response_code": schema.ListAttribute{
-						MarkdownDescription: "Response Code. List of HTTP response status codes that are allowed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.uint32.gte: 100 ves.io.schema.rules.repeated.items.uint32.lte: 999 ves.io.schema.rules.repeated.max_items: 48 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Response Code. List of HTTP response status codes that are allowed",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -120,7 +120,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: blocking_page, use_default_blocking_page] Custom Blocking Response Page. Custom blocking response page body",
 				Attributes: map[string]schema.Attribute{
 					"blocking_page": schema.StringAttribute{
-						MarkdownDescription: "Blocking Response Page Body. Define the content of the response page (e.g., an HTML document or a JSON object), use the {{request_id}} placeholder to provide users with a unique identifier to be able to trace the blocked request in the logs. The maximum allowed size of response body is 4096 bytes after base64 encoding, which would be about 3070 bytes in plain text. ves.io.schema.rules.string.max_len: 4096 ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "Blocking Response Page Body. Define the content of the response page (e.g., an HTML document or a JSON object), use the {{request_id}} placeholder to provide users with a unique identifier to be able to trace the blocked request in the logs. The maximum allowed size of response body is 4096 bytes after base64 encoding, which would be about 3070 bytes in plain text.",
 						Optional: true,
 					},
 					"response_code": schema.StringAttribute{
@@ -154,7 +154,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 				Blocks: map[string]schema.Block{
 					"anonymization_config": schema.ListNestedBlock{
-						MarkdownDescription: "Configuration. List of HTTP headers, cookies and query parameters whose values will be masked Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Configuration. List of HTTP headers, cookies and query parameters whose values will be masked",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -163,7 +163,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies",
 									Attributes: map[string]schema.Attribute{
 										"cookie_name": schema.StringAttribute{
-											MarkdownDescription: "Cookie Name. Masks the cookie value. The setting does not mask the cookie name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Cookie Name. Masks the cookie value. The setting does not mask the cookie name.",
 											Optional: true,
 										},
 									},
@@ -172,7 +172,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Anonymize HTTP Header. Configure anonymization for HTTP Headers",
 									Attributes: map[string]schema.Attribute{
 										"header_name": schema.StringAttribute{
-											MarkdownDescription: "Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true",
+											MarkdownDescription: "Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name.",
 											Optional: true,
 										},
 									},
@@ -181,7 +181,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters",
 									Attributes: map[string]schema.Attribute{
 										"query_param_name": schema.StringAttribute{
-											MarkdownDescription: "Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name.",
 											Optional: true,
 										},
 									},
@@ -253,7 +253,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 								MarkdownDescription: "Attack Type Settings. Specifies attack-type settings to be used by WAF",
 								Attributes: map[string]schema.Attribute{
 									"disabled_attack_types": schema.ListAttribute{
-										MarkdownDescription: "Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 22 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -277,7 +277,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Attack Signatures Staging Settings. Attack Signatures staging configuration.",
 						Attributes: map[string]schema.Attribute{
 							"staging_period": schema.Int64Attribute{
-								MarkdownDescription: "Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 20",
+								MarkdownDescription: "Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days.",
 								Optional: true,
 							},
 						},
@@ -286,7 +286,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Attack Signatures Staging Settings. Attack Signatures staging configuration.",
 						Attributes: map[string]schema.Attribute{
 							"staging_period": schema.Int64Attribute{
-								MarkdownDescription: "Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 20",
+								MarkdownDescription: "Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days.",
 								Optional: true,
 							},
 						},
@@ -295,7 +295,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Violation Settings. Specifies violation settings to be used by WAF",
 						Attributes: map[string]schema.Attribute{
 							"disabled_violation_types": schema.ListAttribute{
-								MarkdownDescription: "Disabled Violations. List of violations to be excluded Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 40 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Disabled Violations. List of violations to be excluded",
 								Optional: true,
 								ElementType: types.StringType,
 							},

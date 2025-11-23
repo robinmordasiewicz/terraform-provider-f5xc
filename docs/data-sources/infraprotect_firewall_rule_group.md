@@ -2,12 +2,12 @@
 page_title: "f5xc_infraprotect_firewall_rule_group Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Amends a DDoS transit Firewall Rule Group
+  Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 ---
 
 # f5xc_infraprotect_firewall_rule_group (Data Source)
 
-Amends a DDoS transit Firewall Rule Group
+Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

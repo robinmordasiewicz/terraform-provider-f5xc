@@ -46,7 +46,7 @@ func (r *Ike1Resource) Metadata(ctx context.Context, req resource.MetadataReques
 
 func (r *Ike1Resource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the IKE Phase1 profile specification",
+		MarkdownDescription: "Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Ike1. Must be unique within the namespace.",
@@ -85,7 +85,7 @@ func (r *Ike1Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime] Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},
@@ -95,7 +95,7 @@ func (r *Ike1Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				MarkdownDescription: "Minutes. Set IKE Key Lifetime in minutes",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 300",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},
@@ -108,7 +108,7 @@ func (r *Ike1Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				MarkdownDescription: "Days. Set Duration in days",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 30",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},
@@ -118,7 +118,7 @@ func (r *Ike1Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				MarkdownDescription: "Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},

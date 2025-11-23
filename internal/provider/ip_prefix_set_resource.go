@@ -46,7 +46,7 @@ func (r *IPPrefixSetResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create ip_prefix_set creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IPPrefixSet. Must be unique within the namespace.",
@@ -82,15 +82,15 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 		},
 		Blocks: map[string]schema.Block{
 			"ipv4_prefixes": schema.ListNestedBlock{
-				MarkdownDescription: "IPv4 Prefixes. list of IPv4 prefixes with description. ves.io.schema.rules.repeated.max_items: 1024 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "IPv4 Prefixes. list of IPv4 prefixes with description.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
-							MarkdownDescription: "Description. ves.io.schema.rules.string.max_bytes: 64",
+							MarkdownDescription: "Description.",
 							Optional: true,
 						},
 						"ipv4_prefix": schema.StringAttribute{
-							MarkdownDescription: "IPv4 Prefix. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema.rules.string.not_empty: true",
+							MarkdownDescription: "IPv4 Prefix.",
 							Optional: true,
 						},
 					},

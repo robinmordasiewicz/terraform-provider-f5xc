@@ -51,7 +51,7 @@ func (r *AdvertisePolicyResource) Metadata(ctx context.Context, req resource.Met
 
 func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers.",
+		MarkdownDescription: "Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AdvertisePolicy. Must be unique within the namespace.",
@@ -85,15 +85,15 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"address": schema.StringAttribute{
-				MarkdownDescription: "VIP. Optional. VIP to advertise. This VIP can be either V4/V6 address You can not specify this if where contains a site or virtual site of type REGIONAL_EDGE or public network If not specified and 'where' is specified with site or virtual site option, inside_vip or outside_vip specified in the site object will be used based on the network type. If inside_vip/outside_vip is not configured in the site object, system use interface ip in the respected networks. ves.io.schema.rules.string.ip: true",
+				MarkdownDescription: "VIP. Optional. VIP to advertise. This VIP can be either V4/V6 address You can not specify this if where contains a site or virtual site of type REGIONAL_EDGE or public network If not specified and 'where' is specified with site or virtual site option, inside_vip or outside_vip specified in the site object will be used based on the network type. If inside_vip/outside_vip is not configured in the site object, system use interface ip in the respected networks.",
 				Optional: true,
 			},
 			"port": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: port, port_ranges] TCP/UDP Port. Exclusive with [port_ranges] Port to advertise. ves.io.schema.rules.uint32.lte: 65535",
+				MarkdownDescription: "[OneOf: port, port_ranges] TCP/UDP Port. Port to advertise.",
 				Optional: true,
 			},
 			"port_ranges": schema.StringAttribute{
-				MarkdownDescription: "Port Ranges. Exclusive with [port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.max_ports: 1024 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.unique_port_range_list: true",
+				MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 				Optional: true,
 			},
 			"protocol": schema.StringAttribute{
@@ -138,7 +138,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "Downstream TLS Parameters. TLS configuration for downstream connections",
 				Attributes: map[string]schema.Attribute{
 					"xfcc_header_elements": schema.ListAttribute{
-						MarkdownDescription: "XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -173,7 +173,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -205,7 +205,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
 										Optional: true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
@@ -249,7 +249,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -283,7 +283,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual network direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual network direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -327,7 +327,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual_site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{

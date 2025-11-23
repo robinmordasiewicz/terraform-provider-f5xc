@@ -48,7 +48,7 @@ func (r *IruleResource) Metadata(ctx context.Context, req resource.MetadataReque
 
 func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create iRule in a given namespace. If one already exists it will give an error.",
+		MarkdownDescription: "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Irule. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description for iRule. Specify Description for iRule Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "Description for iRule. Specify Description for iRule",
 				Optional: true,
 			},
 			"irule": schema.StringAttribute{
-				MarkdownDescription: "irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals 'www.internal.example.f5.com')} DNS::drop} irule content Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 24576",
+				MarkdownDescription: "irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals 'www.internal.example.f5.com')} DNS::drop} irule content",
 				Optional: true,
 			},
 		},

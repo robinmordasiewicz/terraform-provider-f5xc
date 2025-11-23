@@ -2,12 +2,12 @@
 page_title: "f5xc_ticket_tracking_system Data Source - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
-  Create Ticket Tracking System
+  Manages Ticket Tracking System in F5 Distributed Cloud.
 ---
 
 # f5xc_ticket_tracking_system (Data Source)
 
-Create Ticket Tracking System
+Manages Ticket Tracking System in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

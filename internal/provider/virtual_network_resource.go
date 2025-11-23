@@ -47,7 +47,7 @@ func (r *VirtualNetworkResource) Metadata(ctx context.Context, req resource.Meta
 
 func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create virtual network in given namespace",
+		MarkdownDescription: "Manages virtual network in given namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the VirtualNetwork. Must be unique within the namespace.",
@@ -96,20 +96,20 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"static_routes": schema.ListNestedBlock{
-				MarkdownDescription: "Static Routes. List of static routes on the virtual network ves.io.schema.rules.repeated.max_items: 165 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Static Routes. List of static routes on the virtual network",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"attrs": schema.ListAttribute{
-							MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+							MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability",
 							Optional: true,
 							ElementType: types.StringType,
 						},
 						"ip_address": schema.StringAttribute{
-							MarkdownDescription: "IP Address. Exclusive with [default_gateway node_interface] Traffic matching the ip prefixes is sent to this IP Address ves.io.schema.rules.string.ipv4: true",
+							MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
 							Optional: true,
 						},
 						"ip_prefixes": schema.ListAttribute{
-							MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+							MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
 							Optional: true,
 							ElementType: types.StringType,
 						},
@@ -124,7 +124,7 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 							},
 							Blocks: map[string]schema.Block{
 								"list": schema.ListNestedBlock{
-									MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface ves.io.schema.rules.repeated.max_items: 8",
+									MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"node": schema.StringAttribute{
@@ -134,7 +134,7 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 										},
 										Blocks: map[string]schema.Block{
 											"interface": schema.ListNestedBlock{
-												MarkdownDescription: "Interface. Interface reference on this node ves.io.schema.rules.repeated.max_items: 1",
+												MarkdownDescription: "Interface. Interface reference on this node",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{},
 												},

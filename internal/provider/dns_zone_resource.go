@@ -46,7 +46,7 @@ func (r *DNSZoneResource) Metadata(ctx context.Context, req resource.MetadataReq
 
 func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create DNS Zone in a given namespace. If one already exist it will give a error.",
+		MarkdownDescription: "Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSZone. Must be unique within the namespace.",
@@ -91,7 +91,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 				Blocks: map[string]schema.Block{
 					"default_rr_set_group": schema.ListNestedBlock{
-						MarkdownDescription: "Add and manage DNS resource record sets part of Default set group. ves.io.schema.rules.repeated.max_items: 50000",
+						MarkdownDescription: "Add and manage DNS resource record sets part of Default set group.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
@@ -99,7 +99,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Optional: true,
 								},
 								"ttl": schema.Int64Attribute{
-									MarkdownDescription: "Time to live. ves.io.schema.rules.uint32.gte: 60 ves.io.schema.rules.uint32.lte: 2147483647",
+									MarkdownDescription: "Time to live.",
 									Optional: true,
 								},
 							},
@@ -108,11 +108,11 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSAResourceRecord. A Records",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^$|^([*]|[a-zA-Z0-9-/_]{1,63})([.][a-zA-Z0-9-/_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 										"values": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.ipv4: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -122,11 +122,11 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSAAAAResourceRecord. RecordSet for AAAA Records",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^$|^([*]|[a-zA-Z0-9-/_]{1,63})([.][a-zA-Z0-9-/_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 										"values": schema.ListAttribute{
-											MarkdownDescription: "IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.ipv6: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -136,13 +136,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS AFSDB Record. DNS AFSDB Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "AFSDB Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "AFSDB Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -153,7 +153,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSAliasResourceRecord.",
 									Attributes: map[string]schema.Attribute{
 										"value": schema.StringAttribute{
-											MarkdownDescription: "Domain. A valid domain name, for example: example.com ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 255",
+											MarkdownDescription: "Domain. A valid domain name, for example: example.com",
 											Optional: true,
 										},
 									},
@@ -162,13 +162,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSCAAResourceRecord.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^$|^([*]|[a-zA-Z0-9-/_]{1,63})([.][a-zA-Z0-9-/_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "CAA Record Value. ves.io.schema.rules.repeated.max_items: 100",
+											MarkdownDescription: "CAA Record Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -179,13 +179,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS CDS Record. DNS CDS Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "DS Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "DS Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -196,13 +196,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS CERT Record. DNS CERT Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "CERT Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "CERT Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -213,11 +213,11 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSCNAMEResourceRecord.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^([*]|[a-zA-Z0-9-/_]{1,63})([.][a-zA-Z0-9-/_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
-											MarkdownDescription: "Domain. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 255",
+											MarkdownDescription: "Domain.",
 											Optional: true,
 										},
 									},
@@ -226,13 +226,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS DS Record. DNS DS Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "DS Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "DS Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -243,11 +243,11 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS EUI48 Record. DNS EUI48 Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
-											MarkdownDescription: "EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 17 ves.io.schema.rules.string.min_len: 17 ves.io.schema.rules.string.pattern: ^([0-9A-Fa-f]{2}-){5}([0-9A-Fa-f]{2})$",
+											MarkdownDescription: "EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab",
 											Optional: true,
 										},
 									},
@@ -256,11 +256,11 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS EUI64 Record. DNS EUI64 Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
-											MarkdownDescription: "EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 23 ves.io.schema.rules.string.min_len: 23 ves.io.schema.rules.string.pattern: ^([0-9A-Fa-f]{2}-){7}([0-9A-Fa-f]{2})$",
+											MarkdownDescription: "EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef",
 											Optional: true,
 										},
 									},
@@ -269,7 +269,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS Load Balancer Record. DNS Load Balancer Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain. ves.io.schema.rules.string.max_len: 255",
+											MarkdownDescription: "Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain.",
 											Optional: true,
 										},
 									},
@@ -283,13 +283,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS LOC Record. DNS LOC Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "LOC Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "LOC Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -300,13 +300,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSMXResourceRecord.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^$|^([*]|[a-zA-Z0-9-/_]{1,63})([.][a-zA-Z0-9-/_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "MX Record Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100",
+											MarkdownDescription: "MX Record Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -317,13 +317,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS NAPTR Record. DNS NAPTR Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "NAPTR Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "NAPTR Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -334,11 +334,11 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSNSResourceRecord.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^$|^([*]|[a-zA-Z0-9-/_]{1,63})([.][a-zA-Z0-9-/_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 										"values": schema.ListAttribute{
-											MarkdownDescription: "Name Servers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.hostname: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Name Servers.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -348,11 +348,11 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSPTRResourceRecord.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^$|^([*]|[a-zA-Z0-9-/_]{1,63})([.][a-zA-Z0-9-/_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 										"values": schema.ListAttribute{
-											MarkdownDescription: "Domain Name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.hostname: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Domain Name.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -362,13 +362,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSSRVResourceRecord.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^([*]|[a-zA-Z0-9-_]{1,63})([.][a-zA-Z0-9-_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "SRV Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "SRV Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -379,13 +379,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS SSHFP Record. DNS SSHFP Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "SSHFP Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "SSHFP Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -396,13 +396,13 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNS TLSA Record. DNS TLSA Record",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^([a-zA-Z0-9*?]|([a-zA-Z0-9?*]+-[a-zA-Z0-9*?]+)){0,253}",
+											MarkdownDescription: "Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"values": schema.ListNestedBlock{
-											MarkdownDescription: "TLSA Value. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "TLSA Value.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -413,11 +413,11 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "DNSTXTResourceRecord.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain. ves.io.schema.rules.string.pattern: ^$|^([*]|[a-zA-Z0-9-/_]{1,63})([.][a-zA-Z0-9-/_]{1,63})*$",
+											MarkdownDescription: "Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain.",
 											Optional: true,
 										},
 										"values": schema.ListAttribute{
-											MarkdownDescription: "Text. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 4000 ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Text.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -443,7 +443,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 					},
 					"rr_set_group": schema.ListNestedBlock{
-						MarkdownDescription: "Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5. ves.io.schema.rules.repeated.max_items: 50 ves.io.schema.rules.repeated.unique_metadata_name: true",
+						MarkdownDescription: "Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -452,17 +452,17 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
 								},
 								"rr_set": schema.ListNestedBlock{
-									MarkdownDescription: "Resource Record Sets. Collection of DNS resource record sets ves.io.schema.rules.repeated.max_items: 50000",
+									MarkdownDescription: "Resource Record Sets. Collection of DNS resource record sets",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"description": schema.StringAttribute{
@@ -470,7 +470,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 												Optional: true,
 											},
 											"ttl": schema.Int64Attribute{
-												MarkdownDescription: "Time to live. ves.io.schema.rules.uint32.gte: 60 ves.io.schema.rules.uint32.lte: 2147483647",
+												MarkdownDescription: "Time to live.",
 												Optional: true,
 											},
 										},
@@ -548,23 +548,23 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "SOARecordParameterConfig.",
 						Attributes: map[string]schema.Attribute{
 							"expire": schema.Int64Attribute{
-								MarkdownDescription: "Expire. expire value indicates when secondary nameservers should stop answering request for this zone if primary does not respond ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 2147483647",
+								MarkdownDescription: "Expire. expire value indicates when secondary nameservers should stop answering request for this zone if primary does not respond",
 								Optional: true,
 							},
 							"negative_ttl": schema.Int64Attribute{
-								MarkdownDescription: "Negative TTL. negative ttl value indicates how long to cache non-existent resource record for this zone ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 2147483647",
+								MarkdownDescription: "Negative TTL. negative ttl value indicates how long to cache non-existent resource record for this zone",
 								Optional: true,
 							},
 							"refresh": schema.Int64Attribute{
-								MarkdownDescription: "Refresh interval. refresh value indicates when secondary nameservers should query for the SOA record to detect zone changes ves.io.schema.rules.uint32.gte: 3600 ves.io.schema.rules.uint32.lte: 2147483647",
+								MarkdownDescription: "Refresh interval. refresh value indicates when secondary nameservers should query for the SOA record to detect zone changes",
 								Optional: true,
 							},
 							"retry": schema.Int64Attribute{
-								MarkdownDescription: "Retry Interval. retry value indicates when secondary nameservers should retry to request the serial number if primary does not respond ves.io.schema.rules.uint32.gte: 60 ves.io.schema.rules.uint32.lte: 2147483647",
+								MarkdownDescription: "Retry Interval. retry value indicates when secondary nameservers should retry to request the serial number if primary does not respond",
 								Optional: true,
 							},
 							"ttl": schema.Int64Attribute{
-								MarkdownDescription: "TTL. SOA record time to live (in seconds) ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 2147483647",
+								MarkdownDescription: "TTL. SOA record time to live (in seconds)",
 								Optional: true,
 							},
 						},
@@ -576,7 +576,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "SecondaryDNSCreateSpecType.",
 				Attributes: map[string]schema.Attribute{
 					"primary_servers": schema.ListAttribute{
-						MarkdownDescription: "DNS Primary Server IP. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.ipv4: true ves.io.schema.rules.repeated.max_items: 10 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "DNS Primary Server IP.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -585,7 +585,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 						Optional: true,
 					},
 					"tsig_key_name": schema.StringAttribute{
-						MarkdownDescription: "TSIG Key Name. TSIG key name as used in TSIG protocol extension ves.io.schema.rules.string.hostname: true",
+						MarkdownDescription: "TSIG Key Name. TSIG key name as used in TSIG protocol extension",
 						Optional: true,
 					},
 				},
@@ -603,7 +603,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -620,7 +620,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},

@@ -46,7 +46,7 @@ func (r *DcClusterGroupResource) Metadata(ctx context.Context, req resource.Meta
 
 func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create DC Cluster group in given namespace",
+		MarkdownDescription: "Manages DC Cluster group in given namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DcClusterGroup. Must be unique within the namespace.",

@@ -2,12 +2,12 @@
 page_title: "f5xc_cdn_loadbalancer Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Shape of the CDN loadbalancer specification
+  Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 ---
 
 # f5xc_cdn_loadbalancer (Resource)
 
-Shape of the CDN loadbalancer specification
+Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -158,7 +158,7 @@ The following arguments are optional:
 
 `disable_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Waf](#disable-waf) below for details.
 
-`domains` - (Optional) Domains. A list of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain] ves.io.schema.rules.repeated.uniq.. (`List`).
+`domains` - (Optional) Domains. A list of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain] (`List`).
 
 `enable_api_discovery` - (Optional) API Discovery Setting. Specifies the settings used for API discovery. See [Enable Api Discovery](#enable-api-discovery) below for details.
 
@@ -1052,7 +1052,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--csrf_policy--custom_domain_list"></a>
 ### Csrf Policy Custom Domain List
 
-`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form. ves.io.schema.. (`List`).
+`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form (`List`).
 
 <a id="nestedblock--csrf_policy--disabled"></a>
 ### Csrf Policy Disabled

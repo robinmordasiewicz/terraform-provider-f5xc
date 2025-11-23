@@ -42,7 +42,7 @@ func (d *DNSComplianceChecksDataSource) Metadata(ctx context.Context, req dataso
 
 func (d *DNSComplianceChecksDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error.",
+		MarkdownDescription: "Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

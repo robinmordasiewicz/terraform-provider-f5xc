@@ -47,7 +47,7 @@ func (r *K8SPodSecurityPolicyResource) Metadata(ctx context.Context, req resourc
 
 func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace",
+		MarkdownDescription: "Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8SPodSecurityPolicy. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 				},
 			},
 			"yaml": schema.StringAttribute{
-				MarkdownDescription: "K8s YAML. Exclusive with [psp_spec] K8s YAML for Pod Security Policy ves.io.schema.rules.string.max_len: 4096 ves.io.schema.rules.string.uri_ref: true",
+				MarkdownDescription: "K8s YAML. K8s YAML for Pod Security Policy",
 				Optional: true,
 			},
 		},
@@ -94,22 +94,22 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Optional: true,
 					},
 					"allowed_csi_drivers": schema.ListAttribute{
-						MarkdownDescription: "Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available. ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"allowed_flex_volumes": schema.ListAttribute{
-						MarkdownDescription: "Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"allowed_proc_mounts": schema.ListAttribute{
-						MarkdownDescription: "Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts. ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"allowed_unsafe_sysctls": schema.ListAttribute{
-						MarkdownDescription: "Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -118,7 +118,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Optional: true,
 					},
 					"forbidden_sysctls": schema.ListAttribute{
-						MarkdownDescription: "Forbidden Sysctls. Forbidden list of sysctls, empty list forbids none. supports prefix reg-ex ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Forbidden Sysctls. Forbidden list of sysctls, empty list forbids none. supports prefix reg-ex",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -135,7 +135,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Optional: true,
 					},
 					"host_port_ranges": schema.StringAttribute{
-						MarkdownDescription: "Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed ves.io.schema.rules.string.port_range_list: true",
+						MarkdownDescription: "Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed",
 						Optional: true,
 					},
 					"privileged": schema.BoolAttribute{
@@ -147,7 +147,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Optional: true,
 					},
 					"volumes": schema.ListAttribute{
-						MarkdownDescription: "Volume. Allow List of volume plugins. Empty no volumes are allowed ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Volume. Allow List of volume plugins. Empty no volumes are allowed",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -157,18 +157,18 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						MarkdownDescription: "Capability List. List of capabilities that docker container has.",
 						Attributes: map[string]schema.Attribute{
 							"capabilities": schema.ListAttribute{
-								MarkdownDescription: "Capability List. List of capabilities that docker container has. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Capability List. List of capabilities that docker container has.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
 						},
 					},
 					"allowed_host_paths": schema.ListNestedBlock{
-						MarkdownDescription: "Allowed Host Paths. Restrict list of host paths, default all host paths are allowed ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allowed Host Paths. Restrict list of host paths, default all host paths are allowed",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"path_prefix": schema.StringAttribute{
-									MarkdownDescription: "Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support *. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support *.",
 									Optional: true,
 								},
 								"read_only": schema.BoolAttribute{
@@ -182,7 +182,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						MarkdownDescription: "Capability List. List of capabilities that docker container has.",
 						Attributes: map[string]schema.Attribute{
 							"capabilities": schema.ListAttribute{
-								MarkdownDescription: "Capability List. List of capabilities that docker container has. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Capability List. List of capabilities that docker container has.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -192,7 +192,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						MarkdownDescription: "Capability List. List of capabilities that docker container has.",
 						Attributes: map[string]schema.Attribute{
 							"capabilities": schema.ListAttribute{
-								MarkdownDescription: "Capability List. List of capabilities that docker container has. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Capability List. List of capabilities that docker container has.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -202,21 +202,21 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						MarkdownDescription: "ID(User,Group,FSGroup) Strategy. ID ranges and rules",
 						Attributes: map[string]schema.Attribute{
 							"rule": schema.StringAttribute{
-								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used",
 								Optional: true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"id_ranges": schema.ListNestedBlock{
-								MarkdownDescription: "ID Ranges. List of range of ID(s) ves.io.schema.rules.repeated.max_items: 16",
+								MarkdownDescription: "ID Ranges. List of range of ID(s)",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"max_id": schema.Int64Attribute{
-											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range",
 											Optional: true,
 										},
 										"min_id": schema.Int64Attribute{
-											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range",
 											Optional: true,
 										},
 									},
@@ -255,21 +255,21 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						MarkdownDescription: "ID(User,Group,FSGroup) Strategy. ID ranges and rules",
 						Attributes: map[string]schema.Attribute{
 							"rule": schema.StringAttribute{
-								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used",
 								Optional: true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"id_ranges": schema.ListNestedBlock{
-								MarkdownDescription: "ID Ranges. List of range of ID(s) ves.io.schema.rules.repeated.max_items: 16",
+								MarkdownDescription: "ID Ranges. List of range of ID(s)",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"max_id": schema.Int64Attribute{
-											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range",
 											Optional: true,
 										},
 										"min_id": schema.Int64Attribute{
-											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range",
 											Optional: true,
 										},
 									},
@@ -281,21 +281,21 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						MarkdownDescription: "ID(User,Group,FSGroup) Strategy. ID ranges and rules",
 						Attributes: map[string]schema.Attribute{
 							"rule": schema.StringAttribute{
-								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used",
 								Optional: true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"id_ranges": schema.ListNestedBlock{
-								MarkdownDescription: "ID Ranges. List of range of ID(s) ves.io.schema.rules.repeated.max_items: 16",
+								MarkdownDescription: "ID Ranges. List of range of ID(s)",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"max_id": schema.Int64Attribute{
-											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range",
 											Optional: true,
 										},
 										"min_id": schema.Int64Attribute{
-											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range",
 											Optional: true,
 										},
 									},
@@ -307,21 +307,21 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						MarkdownDescription: "ID(User,Group,FSGroup) Strategy. ID ranges and rules",
 						Attributes: map[string]schema.Attribute{
 							"rule": schema.StringAttribute{
-								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used",
 								Optional: true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"id_ranges": schema.ListNestedBlock{
-								MarkdownDescription: "ID Ranges. List of range of ID(s) ves.io.schema.rules.repeated.max_items: 16",
+								MarkdownDescription: "ID Ranges. List of range of ID(s)",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"max_id": schema.Int64Attribute{
-											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range",
 											Optional: true,
 										},
 										"min_id": schema.Int64Attribute{
-											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range",
 											Optional: true,
 										},
 									},

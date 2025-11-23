@@ -2,12 +2,12 @@
 page_title: "f5xc_certificate_chain Data Source - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Shape of the Certificate Chain specification
+  Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 ---
 
 # f5xc_certificate_chain (Data Source)
 
-Shape of the Certificate Chain specification
+Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

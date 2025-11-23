@@ -60,7 +60,7 @@ func (r *VirtualHostResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates virtual host in a given namespace.",
+		MarkdownDescription: "Manages virtual host in a given namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the VirtualHost. Must be unique within the namespace.",
@@ -98,11 +98,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				Optional: true,
 			},
 			"append_server_name": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: append_server_name, default_header, pass_through, server_name] Append Server Name if absent. Exclusive with [default_header pass_through server_name] Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed. ves.io.schema.rules.string.max_len: 8096",
+				MarkdownDescription: "[OneOf: append_server_name, default_header, pass_through, server_name] Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed.",
 				Optional: true,
 			},
 			"connection_idle_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes. ves.io.schema.rules.uint32.lte: 600000",
+				MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
 				Optional: true,
 			},
 			"disable_default_error_pages": schema.BoolAttribute{
@@ -131,27 +131,27 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				Optional: true,
 			},
 			"request_cookies_to_remove": schema.ListAttribute{
-				MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"request_headers_to_remove": schema.ListAttribute{
-				MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"response_cookies_to_remove": schema.ListAttribute{
-				MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"response_headers_to_remove": schema.ListAttribute{
-				MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"server_name": schema.StringAttribute{
-				MarkdownDescription: "Server Name. Exclusive with [append_server_name default_header pass_through] Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header ves.io.schema.rules.string.max_len: 8096",
+				MarkdownDescription: "Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header",
 				Optional: true,
 			},
 		},
@@ -188,13 +188,13 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: authentication, no_authentication] Authentication Details. Authentication related information. This allows to configure the URL to redirect after the authentication Authentication Object Reference, configuration of cookie params etc",
 				Attributes: map[string]schema.Attribute{
 					"redirect_url": schema.StringAttribute{
-						MarkdownDescription: "Configure Redirect URL. Exclusive with [redirect_dynamic] user can provide a url for e.g https://abc.xyz.com where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "Configure Redirect URL. user can provide a url for e.g https://abc.xyz.com where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider",
 						Optional: true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"auth_config": schema.ListNestedBlock{
-						MarkdownDescription: "Reference to Authentication Object. Reference to Authentication Config Object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Reference to Authentication Object. Reference to Authentication Config Object",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
@@ -224,15 +224,15 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Cookie Parameters. Specifies different cookie related config parameters for authentication",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds",
 								Optional: true,
 							},
 							"cookie_refresh_interval": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce re-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, re-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce re-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, re-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds",
 								Optional: true,
 							},
 							"session_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours). ves.io.schema.rules.uint32.lte: 1296000",
+								MarkdownDescription: "Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours).",
 								Optional: true,
 							},
 						},
@@ -241,11 +241,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 								MarkdownDescription: "HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid.",
 								Attributes: map[string]schema.Attribute{
 									"prim_key_expiry": schema.StringAttribute{
-										MarkdownDescription: "HMAC Primary Key Expiry. Primary HMAC Key Expiry time Required: YES ves.io.schema.rules.message.required: true",
+										MarkdownDescription: "HMAC Primary Key Expiry. Primary HMAC Key Expiry time",
 										Optional: true,
 									},
 									"sec_key_expiry": schema.StringAttribute{
-										MarkdownDescription: "HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time Required: YES ves.io.schema.rules.message.required: true",
+										MarkdownDescription: "HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time",
 										Optional: true,
 									},
 								},
@@ -280,7 +280,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional: true,
 					},
 					"max_request_bytes": schema.Int64Attribute{
-						MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response. ves.io.schema.rules.uint32.lte: 10485760",
+						MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
 						Optional: true,
 					},
 				},
@@ -290,11 +290,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: captcha_challenge, js_challenge, no_challenge] Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap...",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 						Optional: true,
 					},
 					"custom_page": schema.StringAttribute{
-						MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io.sch...",
+						MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 						Optional: true,
 					},
 				},
@@ -318,11 +318,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding ...",
 				Attributes: map[string]schema.Attribute{
 					"content_length": schema.Int64Attribute{
-						MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30. ves.io.schema.rules.uint32.gte: 30",
+						MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30.",
 						Optional: true,
 					},
 					"content_type": schema.ListAttribute{
-						MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml' ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 50 ves.io.schema.rules.repeated.uniqu...",
+						MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml'",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -349,16 +349,16 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional: true,
 					},
 					"allow_methods": schema.StringAttribute{
-						MarkdownDescription: "Allow Methods. Specifies the content for the access-control-allow-methods header ves.io.schema.rules.string.http_valid_methods: true",
+						MarkdownDescription: "Allow Methods. Specifies the content for the access-control-allow-methods header",
 						Optional: true,
 					},
 					"allow_origin": schema.ListAttribute{
-						MarkdownDescription: "Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"allow_origin_regex": schema.ListAttribute{
-						MarkdownDescription: "Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.items.string.regex: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -371,7 +371,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional: true,
 					},
 					"maximum_age": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours) ves.io.schema.rules.int32.gte: -1 ves.io.schema.rules.int32.lte: 86400",
+						MarkdownDescription: "Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours)",
 						Optional: true,
 					},
 				},
@@ -389,7 +389,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Domain name list. List of domain names used for Host header matching",
 						Attributes: map[string]schema.Attribute{
 							"domains": schema.ListAttribute{
-								MarkdownDescription: "Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.items.string.vh_domain: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema...",
+								MarkdownDescription: "Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -417,7 +417,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Dynamic Reverse Proxy Type. In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' http header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyTyp...",
 				Attributes: map[string]schema.Attribute{
 					"connection_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) ves.io.schema.rules.uint32.lte: 600000",
+						MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds)",
 						Optional: true,
 					},
 					"resolution_network_type": schema.StringAttribute{
@@ -507,15 +507,15 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o...",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 						Optional: true,
 					},
 					"custom_page": schema.StringAttribute{
-						MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io....",
+						MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 						Optional: true,
 					},
 					"js_script_delay": schema.Int64Attribute{
-						MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000",
+						MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
 						Optional: true,
 					},
 				},
@@ -534,7 +534,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"rate_limiter_allowed_prefixes": schema.ListNestedBlock{
-				MarkdownDescription: "Rate Limiter Allowed Prefixes. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. ves.io.schema.rules.repeated.max_items: 4",
+				MarkdownDescription: "Rate Limiter Allowed Prefixes. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -562,11 +562,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"request_cookies_to_add": schema.ListNestedBlock{
-				MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Name. Name of the cookie in Cookie header.",
 							Optional: true,
 						},
 						"overwrite": schema.BoolAttribute{
@@ -574,7 +574,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional: true,
 						},
 						"value": schema.StringAttribute{
-							MarkdownDescription: "Value. Exclusive with [secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096",
+							MarkdownDescription: "Value. Value of the Cookie header.",
 							Optional: true,
 						},
 					},
@@ -592,7 +592,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											Optional: true,
 										},
 										"location": schema.StringAttribute{
-											MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 											Optional: true,
 										},
 										"store_provider": schema.StringAttribute{
@@ -609,7 +609,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											Optional: true,
 										},
 										"url": schema.StringAttribute{
-											MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 											Optional: true,
 										},
 									},
@@ -621,7 +621,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"request_headers_to_add": schema.ListNestedBlock{
-				MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"append": schema.BoolAttribute{
@@ -629,11 +629,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional: true,
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Name. Name of the HTTP header.",
 							Optional: true,
 						},
 						"value": schema.StringAttribute{
-							MarkdownDescription: "Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096",
+							MarkdownDescription: "Value. Value of the HTTP header.",
 							Optional: true,
 						},
 					},
@@ -651,7 +651,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											Optional: true,
 										},
 										"location": schema.StringAttribute{
-											MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 											Optional: true,
 										},
 										"store_provider": schema.StringAttribute{
@@ -668,7 +668,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											Optional: true,
 										},
 										"url": schema.StringAttribute{
-											MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 											Optional: true,
 										},
 									},
@@ -680,27 +680,27 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"response_cookies_to_add": schema.ListNestedBlock{
-				MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"add_domain": schema.StringAttribute{
-							MarkdownDescription: "Add Domain. Exclusive with [ignore_domain] Add domain attribute ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "Add Domain. Add domain attribute",
 							Optional: true,
 						},
 						"add_expiry": schema.StringAttribute{
-							MarkdownDescription: "Add expiry. Exclusive with [ignore_expiry] Add expiry attribute ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Add expiry. Add expiry attribute",
 							Optional: true,
 						},
 						"add_path": schema.StringAttribute{
-							MarkdownDescription: "Add path. Exclusive with [ignore_path] Add path attribute ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Add path. Add path attribute",
 							Optional: true,
 						},
 						"max_age_value": schema.Int64Attribute{
-							MarkdownDescription: "Add Max Age. Exclusive with [ignore_max_age] Add max age attribute ves.io.schema.rules.uint32.lte: 34560000",
+							MarkdownDescription: "Add Max Age. Add max age attribute",
 							Optional: true,
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Name. Name of the cookie in Cookie header.",
 							Optional: true,
 						},
 						"overwrite": schema.BoolAttribute{
@@ -708,7 +708,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional: true,
 						},
 						"value": schema.StringAttribute{
-							MarkdownDescription: "Value. Exclusive with [ignore_value secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096",
+							MarkdownDescription: "Value. Value of the Cookie header.",
 							Optional: true,
 						},
 					},
@@ -771,7 +771,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											Optional: true,
 										},
 										"location": schema.StringAttribute{
-											MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 											Optional: true,
 										},
 										"store_provider": schema.StringAttribute{
@@ -788,7 +788,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											Optional: true,
 										},
 										"url": schema.StringAttribute{
-											MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 											Optional: true,
 										},
 									},
@@ -800,7 +800,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"response_headers_to_add": schema.ListNestedBlock{
-				MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"append": schema.BoolAttribute{
@@ -808,11 +808,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional: true,
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Name. Name of the HTTP header.",
 							Optional: true,
 						},
 						"value": schema.StringAttribute{
-							MarkdownDescription: "Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096",
+							MarkdownDescription: "Value. Value of the HTTP header.",
 							Optional: true,
 						},
 					},
@@ -830,7 +830,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											Optional: true,
 										},
 										"location": schema.StringAttribute{
-											MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 											Optional: true,
 										},
 										"store_provider": schema.StringAttribute{
@@ -847,7 +847,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											Optional: true,
 										},
 										"url": schema.StringAttribute{
-											MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 											Optional: true,
 										},
 									},
@@ -862,15 +862,15 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Retry Policy. Retry policy configuration for route destination.",
 				Attributes: map[string]schema.Attribute{
 					"num_retries": schema.Int64Attribute{
-						MarkdownDescription: "Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry ves.io.schema.rules.uint32.lte: 8",
+						MarkdownDescription: "Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry",
 						Optional: true,
 					},
 					"per_try_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds ves.io.schema.rules.uint32.lte: 600000",
+						MarkdownDescription: "Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds",
 						Optional: true,
 					},
 					"retriable_status_codes": schema.ListAttribute{
-						MarkdownDescription: "Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -885,7 +885,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Retry BackOff Interval. Specifies parameters that control retry back off.",
 						Attributes: map[string]schema.Attribute{
 							"base_interval": schema.Int64Attribute{
-								MarkdownDescription: "Base Retry Interval. Specifies the base interval between retries in milliseconds ves.io.schema.rules.uint32.gt: 0",
+								MarkdownDescription: "Base Retry Interval. Specifies the base interval between retries in milliseconds",
 								Optional: true,
 							},
 							"max_interval": schema.Int64Attribute{
@@ -957,11 +957,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Slow DDoS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users.",
 				Attributes: map[string]schema.Attribute{
 					"request_headers_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds. This setting provides protection against Slowloris attacks. ves.io.schema.rules.uint32.gte: 2000 ves.io.schema.rules.uint32.lte: 30000",
+						MarkdownDescription: "Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds. This setting provides protection against Slowloris attacks.",
 						Optional: true,
 					},
 					"request_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Custom Timeout. Exclusive with [disable_request_timeout] ves.io.schema.rules.uint32.gte: 2000 ves.io.schema.rules.uint32.lte: 300000",
+						MarkdownDescription: "Custom Timeout.",
 						Optional: true,
 					},
 				},
@@ -989,14 +989,14 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional: true,
 					},
 					"xfcc_header_elements": schema.ListAttribute{
-						MarkdownDescription: "XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"certificates": schema.ListNestedBlock{
-						MarkdownDescription: "Certificates. Set of certificates Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Certificates. Set of certificates",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
@@ -1039,7 +1039,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 								Optional: true,
 							},
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true",
+								MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
 								Optional: true,
 							},
 							"verify_subject_alt_names": schema.ListAttribute{
@@ -1055,7 +1055,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 								},
 								Blocks: map[string]schema.Block{
 									"trusted_ca_list": schema.ListNestedBlock{
-										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate ves.io.schema.rules.repeated.max_items: 1",
+										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1071,7 +1071,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Downstream TLS Parameters. TLS configuration for downstream connections",
 				Attributes: map[string]schema.Attribute{
 					"xfcc_header_elements": schema.ListAttribute{
-						MarkdownDescription: "XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -1106,7 +1106,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -1138,7 +1138,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
 										Optional: true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
@@ -1162,7 +1162,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 
 			},
 			"user_identification": schema.ListNestedBlock{
-				MarkdownDescription: "User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. ves.io.schema.rules.repeated.max_items: 1",
+				MarkdownDescription: "User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -1200,7 +1200,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						},
 						Blocks: map[string]schema.Block{
 							"app_firewall": schema.ListNestedBlock{
-								MarkdownDescription: "Application Firewall. References to an Application Firewall configuration object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.num_items: 1",
+								MarkdownDescription: "Application Firewall. References to an Application Firewall configuration object",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{

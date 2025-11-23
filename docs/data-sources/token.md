@@ -2,12 +2,12 @@
 page_title: "f5xc_token Data Source - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Creates new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration.
+  Manages new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration. in F5 Distributed Cloud.
 ---
 
 # f5xc_token (Data Source)
 
-Creates new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration.
+Manages new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

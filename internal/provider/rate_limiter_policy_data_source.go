@@ -42,7 +42,7 @@ func (d *RateLimiterPolicyDataSource) Metadata(ctx context.Context, req datasour
 
 func (d *RateLimiterPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Rate Limiter Policy Create specification",
+		MarkdownDescription: "Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

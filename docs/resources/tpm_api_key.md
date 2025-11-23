@@ -2,12 +2,12 @@
 page_title: "f5xc_tpm_api_key Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  APIKey object when successfully created returns actual APIKey bytes which is used by the users to call in to TPM provisioning API.
+  Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 ---
 
 # f5xc_tpm_api_key (Resource)
 
-APIKey object when successfully created returns actual APIKey bytes which is used by the users to call in to TPM provisioning API.
+Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

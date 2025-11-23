@@ -46,7 +46,7 @@ func (r *ExternalConnectorResource) Metadata(ctx context.Context, req resource.M
 
 func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the external_connector configuration specification",
+		MarkdownDescription: "Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ExternalConnector. Must be unique within the namespace.",
@@ -85,15 +85,15 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -108,7 +108,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "IKE Parameters. IKE configuration parameters required for IPSec Connection type",
 						Attributes: map[string]schema.Attribute{
 							"rm_hostname": schema.StringAttribute{
-								MarkdownDescription: "Hostname. Exclusive with [rm_ip_address use_default_remote_ike_id] Configure an hostname Remote IKE ID",
+								MarkdownDescription: "Hostname. Configure an hostname Remote IKE ID",
 								Optional: true,
 							},
 						},
@@ -120,7 +120,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Keepalive Timer.",
 								Attributes: map[string]schema.Attribute{
 									"timeout": schema.Int64Attribute{
-										MarkdownDescription: "Keepalive Timer. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5",
+										MarkdownDescription: "Keepalive Timer.",
 										Optional: true,
 									},
 								},
@@ -129,15 +129,15 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -146,15 +146,15 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -190,11 +190,11 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Configure IPSec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment.",
 						Attributes: map[string]schema.Attribute{
 							"psk": schema.StringAttribute{
-								MarkdownDescription: "Pre-Shared Key. The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation. Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "Pre-Shared Key. The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation.",
 								Optional: true,
 							},
 							"tunnel_mtu": schema.Int64Attribute{
-								MarkdownDescription: "MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 512 ves.io.schema.rules.uint32.lte: 1370",
+								MarkdownDescription: "MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented",
 								Optional: true,
 							},
 						},
@@ -203,7 +203,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 								Attributes: map[string]schema.Attribute{
 									"addr": schema.StringAttribute{
-										MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation ves.io.schema.rules.string.ipv4: true",
+										MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
 										Optional: true,
 									},
 								},
@@ -214,7 +214,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 								Blocks: map[string]schema.Block{
 									"refs": schema.ListNestedBlock{
-										MarkdownDescription: "Segment. Reference to Segment Object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+										MarkdownDescription: "Segment. Reference to Segment Object",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -228,23 +228,23 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tunnel_eps": schema.ListNestedBlock{
-								MarkdownDescription: "Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"interface": schema.StringAttribute{
-											MarkdownDescription: "Interface. For the chosen node, specify the interface that will be the tunnel source. Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Interface. For the chosen node, specify the interface that will be the tunnel source.",
 											Optional: true,
 										},
 										"local_tunnel_ip": schema.StringAttribute{
-											MarkdownDescription: "Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. the IP address of the tunnel on the CE node itself and a subnet prefix length Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. the IP address of the tunnel on the CE node itself and a subnet prefix length",
 											Optional: true,
 										},
 										"node": schema.StringAttribute{
-											MarkdownDescription: "Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection. Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection.",
 											Optional: true,
 										},
 										"remote_tunnel_ip": schema.StringAttribute{
-											MarkdownDescription: "Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. the IP address of the tunnel on the remote gateway and a subnet prefix length Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. the IP address of the tunnel on the remote gateway and a subnet prefix length",
 											Optional: true,
 										},
 									},

@@ -50,7 +50,7 @@ func (r *OriginPoolResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the origin pool create specification",
+		MarkdownDescription: "Manages a OriginPool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the OriginPool. Must be unique within the namespace.",
@@ -88,7 +88,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Optional: true,
 			},
 			"health_check_port": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Exclusive with [same_as_endpoint_port] Port used for performing health check ves.io.schema.rules.uint32.lte: 65535",
+				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Port used for performing health check",
 				Optional: true,
 			},
 			"loadbalancer_algorithm": schema.StringAttribute{
@@ -96,7 +96,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Optional: true,
 			},
 			"port": schema.Int64Attribute{
-				MarkdownDescription: "Port. Exclusive with [automatic_port lb_port] Endpoint service is available on this port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+				MarkdownDescription: "Port. Endpoint service is available on this port",
 				Optional: true,
 			},
 		},
@@ -105,15 +105,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Origin Pool Advanced Options. Configure Advanced options for origin pool",
 				Attributes: map[string]schema.Attribute{
 					"connection_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds ves.io.schema.rules.uint32.lte: 1800000",
+						MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds",
 						Optional: true,
 					},
 					"http_idle_timeout": schema.Int64Attribute{
-						MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes. ves.io.schema.rules.uint32.lte: 600000",
+						MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes.",
 						Optional: true,
 					},
 					"panic_threshold": schema.Int64Attribute{
-						MarkdownDescription: "Panic threshold. Exclusive with [no_panic_threshold] x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status. ves.io.schema.rules.uint32.lte: 100",
+						MarkdownDescription: "Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status.",
 						Optional: true,
 					},
 				},
@@ -125,11 +125,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly.",
 						Attributes: map[string]schema.Attribute{
 							"connection_limit": schema.Int64Attribute{
-								MarkdownDescription: "Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit. ves.io.schema.rules.uint32.lte: 32768",
+								MarkdownDescription: "Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit.",
 								Optional: true,
 							},
 							"max_requests": schema.Int64Attribute{
-								MarkdownDescription: "Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count. ves.io.schema.rules.uint32.lte: 32768",
+								MarkdownDescription: "Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count.",
 								Optional: true,
 							},
 							"pending_requests": schema.Int64Attribute{
@@ -141,7 +141,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional: true,
 							},
 							"retries": schema.Int64Attribute{
-								MarkdownDescription: "Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count. ves.io.schema.rules.uint32.lte: 32768",
+								MarkdownDescription: "Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count.",
 								Optional: true,
 							},
 						},
@@ -181,16 +181,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 								Blocks: map[string]schema.Block{
 									"default_subset": schema.SingleNestedBlock{
-										MarkdownDescription: "Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists. ves.io.schema.rules.map.max_pairs: 32",
+										MarkdownDescription: "Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists.",
 									},
 								},
 							},
 							"endpoint_subsets": schema.ListNestedBlock{
-								MarkdownDescription: "Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32",
+								MarkdownDescription: "Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"keys": schema.ListAttribute{
-											MarkdownDescription: "Keys. List of keys that define a cluster subset class. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "Keys. List of keys that define a cluster subset class.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -244,23 +244,23 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i...",
 						Attributes: map[string]schema.Attribute{
 							"base_ejection_time": schema.Int64Attribute{
-								MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds. ves.io.schema.rules.uint32.lte: 1800000",
+								MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds.",
 								Optional: true,
 							},
 							"consecutive_5xx": schema.Int64Attribute{
-								MarkdownDescription: "Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to 5. ves.io.schema.rules.uint32.lte: 1024",
+								MarkdownDescription: "Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to 5.",
 								Optional: true,
 							},
 							"consecutive_gateway_failure": schema.Int64Attribute{
-								MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to 5. ves.io.schema.rules.uint3...",
+								MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to 5.",
 								Optional: true,
 							},
 							"interval": schema.Int64Attribute{
-								MarkdownDescription: "Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds. ves.io.schema.rules.uint32.lte: 600000",
+								MarkdownDescription: "Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds.",
 								Optional: true,
 							},
 							"max_ejection_percent": schema.Int64Attribute{
-								MarkdownDescription: "Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value. ves.io.schema.rules.uint32.lte: 100",
+								MarkdownDescription: "Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value.",
 								Optional: true,
 							},
 						},
@@ -278,19 +278,19 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "[OneOf: automatic_port, lb_port, port] Empty. This can be used for messages where no values are needed",
 			},
 			"healthcheck": schema.ListNestedBlock{
-				MarkdownDescription: "Health Check object. Reference to healthcheck configuration objects ves.io.schema.rules.repeated.max_items: 4",
+				MarkdownDescription: "Health Check object. Reference to healthcheck configuration objects",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 							Optional: true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 							Optional: true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
 						},
 					},
@@ -304,7 +304,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "[OneOf: no_tls, use_tls] Empty. This can be used for messages where no values are needed",
 			},
 			"origin_servers": schema.ListNestedBlock{
-				MarkdownDescription: "Origin Servers. List of origin servers in this pool Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Origin Servers. List of origin servers in this pool",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
@@ -313,7 +313,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "Discovered Classic BIG-IP Service Name. Specify origin server with Classic BIG-IP Service (Virtual Server)",
 							Attributes: map[string]schema.Attribute{
 								"service_name": schema.StringAttribute{
-									MarkdownDescription: "Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin. Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin.",
 									Optional: true,
 								},
 							},
@@ -322,7 +322,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "Consul Service Name on given Sites. Specify origin server with Hashi Corp Consul service name and site information",
 							Attributes: map[string]schema.Attribute{
 								"service_name": schema.StringAttribute{
-									MarkdownDescription: "Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id. Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id.",
 									Optional: true,
 								},
 							},
@@ -370,15 +370,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -393,7 +393,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Optional: true,
 								},
 								"service_name": schema.StringAttribute{
-									MarkdownDescription: "Service Name. Exclusive with [] K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-id. If the servicename is 'frontend', namespace is 'speedtest' and cluster-id is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-id are optional. ves.io.schema.rules.string.ves_service_namespace_name: true",
+									MarkdownDescription: "Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-id. If the servicename is 'frontend', namespace is 'speedtest' and cluster-id is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-id are optional.",
 									Optional: true,
 								},
 							},
@@ -442,7 +442,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "IP address on given Sites. Specify origin server with private or public IP address and site information",
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
-									MarkdownDescription: "IP. Exclusive with [] Private IPV4 address ves.io.schema.rules.string.ipv4: true",
+									MarkdownDescription: "IP. Private IPV4 address",
 									Optional: true,
 								},
 							},
@@ -457,15 +457,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -502,11 +502,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "DNS Name on given Sites. Specify origin server with private or public DNS name and site information",
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
-									MarkdownDescription: "DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "DNS Name. DNS Name",
 									Optional: true,
 								},
 								"refresh_interval": schema.Int64Attribute{
-									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 ves.io.schema.rules.uint32.ranges: 0,10-604800",
+									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
 									Optional: true,
 								},
 							},
@@ -521,15 +521,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -566,7 +566,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "Public IP. Specify origin server with public IP address",
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
-									MarkdownDescription: "Public IPV4. Exclusive with [] Public IPV4 address ves.io.schema.rules.string.ipv4: true",
+									MarkdownDescription: "Public IPV4. Public IPV4 address",
 									Optional: true,
 								},
 							},
@@ -575,11 +575,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "Public DNS Name. Specify origin server with public DNS name",
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
-									MarkdownDescription: "DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "DNS Name. DNS Name",
 									Optional: true,
 								},
 								"refresh_interval": schema.Int64Attribute{
-									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 ves.io.schema.rules.uint32.ranges: 0,10-604800",
+									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
 									Optional: true,
 								},
 							},
@@ -588,7 +588,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "IP address Virtual Network. Specify origin server with IP on Virtual Network",
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
-									MarkdownDescription: "IPV4. Exclusive with [] IPV4 address ves.io.schema.rules.string.ipv4: true",
+									MarkdownDescription: "IPV4. IPV4 address",
 									Optional: true,
 								},
 							},
@@ -597,15 +597,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -616,7 +616,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "DNS Name on Virtual Network. Specify origin server with DNS name on Virtual Network",
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
-									MarkdownDescription: "DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "DNS Name. DNS Name",
 									Optional: true,
 								},
 							},
@@ -625,15 +625,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -665,11 +665,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "TLS Parameters for Origin Servers. Upstream TLS Parameters",
 				Attributes: map[string]schema.Attribute{
 					"max_session_keys": schema.Int64Attribute{
-						MarkdownDescription: "Max Session Keys Cached. Exclusive with [default_session_key_caching disable_session_key_caching] x-example:'25' Number of session keys that are cached. ves.io.schema.rules.uint32.gte: 2 ves.io.schema.rules.uint32.lte: 64",
+						MarkdownDescription: "Max Session Keys Cached. x-example:'25' Number of session keys that are cached.",
 						Optional: true,
 					},
 					"sni": schema.StringAttribute{
-						MarkdownDescription: "SNI Value. Exclusive with [disable_sni use_host_header_as_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256",
+						MarkdownDescription: "SNI Value. SNI value to be used.",
 						Optional: true,
 					},
 				},
@@ -698,7 +698,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 								Attributes: map[string]schema.Attribute{
 									"cipher_suites": schema.ListAttribute{
-										MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -732,11 +732,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "mTLS Client Certificate. mTLS Client Certificate Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "mTLS Client Certificate. mTLS Client Certificate",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -766,15 +766,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -783,7 +783,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "TLS Validation Context for Origin Servers. Upstream TLS Validation Context",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+								MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate",
 								Optional: true,
 							},
 						},
@@ -792,15 +792,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},

@@ -2,12 +2,12 @@
 page_title: "f5xc_registration Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  VPM creates registration using this message, never used by users.
+  Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.
 ---
 
 # f5xc_registration (Data Source)
 
-VPM creates registration using this message, never used by users.
+Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

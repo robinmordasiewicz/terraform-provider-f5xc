@@ -48,7 +48,7 @@ func (r *BotDefenseAppInfrastructureResource) Metadata(ctx context.Context, req 
 
 func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates Bot Defense App Infrastructure in a given namespace.",
+		MarkdownDescription: "Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BotDefenseAppInfrastructure. Must be unique within the namespace.",
@@ -95,7 +95,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				MarkdownDescription: "[OneOf: cloud_hosted, data_center_hosted] F5 Hosted. Infra F5 Hosted",
 				Attributes: map[string]schema.Attribute{
 					"infra_host_name": schema.StringAttribute{
-						MarkdownDescription: "Infra Host Name. Infra Host Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true",
+						MarkdownDescription: "Infra Host Name. Infra Host Name",
 						Optional: true,
 					},
 					"region": schema.StringAttribute{
@@ -105,11 +105,11 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				},
 				Blocks: map[string]schema.Block{
 					"egress": schema.ListNestedBlock{
-						MarkdownDescription: "Egress. Egress Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Egress. Egress",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "IP Address. Egress IP address Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true",
+									MarkdownDescription: "IP Address. Egress IP address",
 									Optional: true,
 								},
 								"location": schema.StringAttribute{
@@ -120,15 +120,15 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 						},
 					},
 					"ingress": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress. Ingress Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Ingress. Ingress",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"host_name": schema.StringAttribute{
-									MarkdownDescription: "Ingress value. Exclusive with [ip_address] Ingress Host Name ves.io.schema.rules.string.hostname: true",
+									MarkdownDescription: "Ingress value. Ingress Host Name",
 									Optional: true,
 								},
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "Ingress value. Exclusive with [host_name] Ingress IP Address ves.io.schema.rules.string.ip: true",
+									MarkdownDescription: "Ingress value. Ingress IP Address",
 									Optional: true,
 								},
 								"location": schema.StringAttribute{
@@ -145,7 +145,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				MarkdownDescription: "F5 Hosted. Infra F5 Hosted",
 				Attributes: map[string]schema.Attribute{
 					"infra_host_name": schema.StringAttribute{
-						MarkdownDescription: "Infra Host Name. Infra Host Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true",
+						MarkdownDescription: "Infra Host Name. Infra Host Name",
 						Optional: true,
 					},
 					"region": schema.StringAttribute{
@@ -155,11 +155,11 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				},
 				Blocks: map[string]schema.Block{
 					"egress": schema.ListNestedBlock{
-						MarkdownDescription: "Egress. Egress Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Egress. Egress",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "IP Address. Egress IP address Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true",
+									MarkdownDescription: "IP Address. Egress IP address",
 									Optional: true,
 								},
 								"location": schema.StringAttribute{
@@ -170,15 +170,15 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 						},
 					},
 					"ingress": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress. Ingress Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Ingress. Ingress",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"host_name": schema.StringAttribute{
-									MarkdownDescription: "Ingress value. Exclusive with [ip_address] Ingress Host Name ves.io.schema.rules.string.hostname: true",
+									MarkdownDescription: "Ingress value. Ingress Host Name",
 									Optional: true,
 								},
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "Ingress value. Exclusive with [host_name] Ingress IP Address ves.io.schema.rules.string.ip: true",
+									MarkdownDescription: "Ingress value. Ingress IP Address",
 									Optional: true,
 								},
 								"location": schema.StringAttribute{

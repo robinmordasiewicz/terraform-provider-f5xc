@@ -47,7 +47,7 @@ func (r *CloudElasticIPResource) Metadata(ctx context.Context, req resource.Meta
 
 func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site",
+		MarkdownDescription: "Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CloudElasticIP. Must be unique within the namespace.",
@@ -81,13 +81,13 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"item_count": schema.Int64Attribute{
-				MarkdownDescription: "Elastic IP Count Per Node. number of Elastic Ips / Public Ips associated with this object per Node ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 8",
+				MarkdownDescription: "Elastic IP Count Per Node. number of Elastic Ips / Public Ips associated with this object per Node",
 				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
 			"site_ref": schema.ListNestedBlock{
-				MarkdownDescription: "Site Reference. Site to which this cloud elastic ip object is attached Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+				MarkdownDescription: "Site Reference. Site to which this cloud elastic ip object is attached",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{

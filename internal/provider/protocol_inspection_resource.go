@@ -47,7 +47,7 @@ func (r *ProtocolInspectionResource) Metadata(ctx context.Context, req resource.
 
 func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create Protocol Inspection Specification in a given namespace. If one already exists it will give an error.",
+		MarkdownDescription: "Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ProtocolInspection. Must be unique within the namespace.",
@@ -98,15 +98,15 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},

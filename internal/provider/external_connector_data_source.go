@@ -42,7 +42,7 @@ func (d *ExternalConnectorDataSource) Metadata(ctx context.Context, req datasour
 
 func (d *ExternalConnectorDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the external_connector configuration specification",
+		MarkdownDescription: "Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

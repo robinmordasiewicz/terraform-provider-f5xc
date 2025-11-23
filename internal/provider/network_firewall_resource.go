@@ -46,7 +46,7 @@ func (r *NetworkFirewallResource) Metadata(ctx context.Context, req resource.Met
 
 func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "network firewall is created by users in system namespace",
+		MarkdownDescription: "Manages a NetworkFirewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkFirewall. Must be unique within the namespace.",
@@ -87,19 +87,19 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"enhanced_firewall_policies": schema.ListNestedBlock{
-						MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+						MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -114,19 +114,19 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"fast_acls": schema.ListNestedBlock{
-						MarkdownDescription: "Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+						MarkdownDescription: "Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -141,19 +141,19 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_policies": schema.ListNestedBlock{
-						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -168,19 +168,19 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"network_policies": schema.ListNestedBlock{
-						MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+						MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},

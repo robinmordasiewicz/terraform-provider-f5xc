@@ -46,7 +46,7 @@ func (r *TicketTrackingSystemResource) Metadata(ctx context.Context, req resourc
 
 func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create Ticket Tracking System",
+		MarkdownDescription: "Manages Ticket Tracking System in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TicketTrackingSystem. Must be unique within the namespace.",
@@ -90,7 +90,7 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 						MarkdownDescription: "JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - https://developer.atlassian.com/cloud/jira/platform/rest/v3/ This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message",
 						Attributes: map[string]schema.Attribute{
 							"account_email": schema.StringAttribute{
-								MarkdownDescription: "Account Email. Username (email) for the Atlassian account Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.email: true ves.io.schema.rules.string.min_len: 1",
+								MarkdownDescription: "Account Email. Username (email) for the Atlassian account",
 								Optional: true,
 							},
 							"api_token": schema.StringAttribute{
@@ -98,7 +98,7 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 								Optional: true,
 							},
 							"organization_domain": schema.StringAttribute{
-								MarkdownDescription: "Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.min_len: 1",
+								MarkdownDescription: "Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034",
 								Optional: true,
 							},
 						},

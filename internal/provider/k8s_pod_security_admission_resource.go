@@ -46,7 +46,7 @@ func (r *K8SPodSecurityAdmissionResource) Metadata(ctx context.Context, req reso
 
 func (r *K8SPodSecurityAdmissionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create k8s_pod_security_admission will create the object in the storage backend",
+		MarkdownDescription: "Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8SPodSecurityAdmission. Must be unique within the namespace.",
@@ -82,7 +82,7 @@ func (r *K8SPodSecurityAdmissionResource) Schema(ctx context.Context, req resour
 		},
 		Blocks: map[string]schema.Block{
 			"pod_security_admission_specs": schema.ListNestedBlock{
-				MarkdownDescription: "K8s Pod Security Admission. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "K8s Pod Security Admission.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},

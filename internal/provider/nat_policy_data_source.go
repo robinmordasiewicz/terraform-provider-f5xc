@@ -42,7 +42,7 @@ func (d *NatPolicyDataSource) Metadata(ctx context.Context, req datasource.Metad
 
 func (d *NatPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "NAT Policy create specification configures NAT Policy with multiple Rules,",
+		MarkdownDescription: "Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

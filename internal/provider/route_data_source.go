@@ -42,7 +42,7 @@ func (d *RouteDataSource) Metadata(ctx context.Context, req datasource.MetadataR
 
 func (d *RouteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object",
+		MarkdownDescription: "Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

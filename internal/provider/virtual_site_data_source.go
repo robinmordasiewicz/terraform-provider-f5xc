@@ -42,7 +42,7 @@ func (d *VirtualSiteDataSource) Metadata(ctx context.Context, req datasource.Met
 
 func (d *VirtualSiteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a virtual site object in given namespace",
+		MarkdownDescription: "Manages virtual site object in given namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

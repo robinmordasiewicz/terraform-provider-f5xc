@@ -46,7 +46,7 @@ func (r *CodeBaseIntegrationResource) Metadata(ctx context.Context, req resource
 
 func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "CREATE integration details",
+		MarkdownDescription: "Manages integration details in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CodeBaseIntegration. Must be unique within the namespace.",
@@ -110,7 +110,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						MarkdownDescription: "BitBucket Cloud Integration.",
 						Attributes: map[string]schema.Attribute{
 							"username": schema.StringAttribute{
-								MarkdownDescription: "BitBucket Username. Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "BitBucket Username.",
 								Optional: true,
 							},
 						},
@@ -134,11 +134,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						MarkdownDescription: "BitBucket Server Integration.",
 						Attributes: map[string]schema.Attribute{
 							"url": schema.StringAttribute{
-								MarkdownDescription: "BitBucket Server URL. Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "BitBucket Server URL.",
 								Optional: true,
 							},
 							"username": schema.StringAttribute{
-								MarkdownDescription: "BitBucket Server Username. Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "BitBucket Server Username.",
 								Optional: true,
 							},
 							"verify_ssl": schema.BoolAttribute{
@@ -166,7 +166,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						MarkdownDescription: "Github Integration.",
 						Attributes: map[string]schema.Attribute{
 							"username": schema.StringAttribute{
-								MarkdownDescription: "GitHub Username. Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "GitHub Username.",
 								Optional: true,
 							},
 							"verify_ssl": schema.BoolAttribute{
@@ -194,11 +194,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						MarkdownDescription: "GitHub Enterprise Integration.",
 						Attributes: map[string]schema.Attribute{
 							"hostname": schema.StringAttribute{
-								MarkdownDescription: "GitHub Hostname. Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "GitHub Hostname.",
 								Optional: true,
 							},
 							"username": schema.StringAttribute{
-								MarkdownDescription: "GitHub Username. Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "GitHub Username.",
 								Optional: true,
 							},
 						},
@@ -242,7 +242,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						MarkdownDescription: "GitLab Enterprise Integration.",
 						Attributes: map[string]schema.Attribute{
 							"url": schema.StringAttribute{
-								MarkdownDescription: "GitLab URL. Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "GitLab URL.",
 								Optional: true,
 							},
 						},

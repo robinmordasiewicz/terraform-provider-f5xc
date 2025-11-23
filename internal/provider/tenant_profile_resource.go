@@ -48,7 +48,7 @@ func (r *TenantProfileResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a tenant_profile config instance. Name of the object is the name of the tenant profile to be created.",
+		MarkdownDescription: "Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TenantProfile. Must be unique within the namespace.",
@@ -86,31 +86,31 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				Optional: true,
 			},
 			"support_email": schema.StringAttribute{
-				MarkdownDescription: "Support Email. Support Email address for child tenant ves.io.schema.rules.string.email: true",
+				MarkdownDescription: "Support Email. Support Email address for child tenant",
 				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
 			"ct_groups": schema.ListNestedBlock{
-				MarkdownDescription: "Child Tenant Groups. List of user groups to be created on child tenant. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Child Tenant Groups. List of user groups to be created on child tenant.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. Name of the child tenant user group. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ves_object_name: true",
+							MarkdownDescription: "Name. Name of the child tenant user group.",
 							Optional: true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"namespace_roles": schema.ListNestedBlock{
-							MarkdownDescription: "Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+							MarkdownDescription: "Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant.",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+										MarkdownDescription: "Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically.",
 										Optional: true,
 									},
 									"role": schema.StringAttribute{
-										MarkdownDescription: "Role. User role that users in the newly created group will inherit Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.ves_object_name: true",
+										MarkdownDescription: "Role. User role that users in the newly created group will inherit",
 										Optional: true,
 									},
 								},
@@ -162,15 +162,15 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},

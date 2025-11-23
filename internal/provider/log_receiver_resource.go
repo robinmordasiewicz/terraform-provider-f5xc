@@ -46,7 +46,7 @@ func (r *LogReceiverResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new Log Receiver object",
+		MarkdownDescription: "Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the LogReceiver. Must be unique within the namespace.",
@@ -88,7 +88,7 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Syslog Server Configuration. Configuration for syslog server",
 				Attributes: map[string]schema.Attribute{
 					"syslog_rfc5424": schema.Int64Attribute{
-						MarkdownDescription: "Syslog RFC5424 Format. Exclusive with [] Select RFC5424 syslog format and maximum message length. ves.io.schema.rules.uint32.gte: 408 ves.io.schema.rules.uint32.lte: 268435456",
+						MarkdownDescription: "Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length.",
 						Optional: true,
 					},
 				},
@@ -97,11 +97,11 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "TCP Server name and Port Number. Name and port number for a TCP server",
 						Attributes: map[string]schema.Attribute{
 							"port": schema.Int64Attribute{
-								MarkdownDescription: "Port Number. Port number used for communication Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+								MarkdownDescription: "Port Number. Port number used for communication",
 								Optional: true,
 							},
 							"server_name": schema.StringAttribute{
-								MarkdownDescription: "Server name. Server name is fully qualified domain name or IP address of the server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname_or_ip: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "Server name. Server name is fully qualified domain name or IP address of the server",
 								Optional: true,
 							},
 						},
@@ -110,15 +110,15 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Client TLS Config. TLS config for client of discovery service",
 						Attributes: map[string]schema.Attribute{
 							"port": schema.Int64Attribute{
-								MarkdownDescription: "TCP Port Number. Exclusive with [default_https_port default_syslog_tls_port] Custom port number used for communication ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+								MarkdownDescription: "TCP Port Number. Custom port number used for communication",
 								Optional: true,
 							},
 							"server_name": schema.StringAttribute{
-								MarkdownDescription: "SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against.",
 								Optional: true,
 							},
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Server CA Certificates. Exclusive with [volterra_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional: true,
 							},
 						},
@@ -136,7 +136,7 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 								MarkdownDescription: "mTLS Client Config. TLS config for client",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
-										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
 										Optional: true,
 									},
 								},
@@ -155,11 +155,11 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "UDP Server Name and Port Number. Name and port number for a UDP server",
 						Attributes: map[string]schema.Attribute{
 							"port": schema.Int64Attribute{
-								MarkdownDescription: "Port Number. Port number used for communication Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+								MarkdownDescription: "Port Number. Port number used for communication",
 								Optional: true,
 							},
 							"server_name": schema.StringAttribute{
-								MarkdownDescription: "Server name. Server name is fully qualified domain name or IP address of the server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname_or_ip: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "Server name. Server name is fully qualified domain name or IP address of the server",
 								Optional: true,
 							},
 						},

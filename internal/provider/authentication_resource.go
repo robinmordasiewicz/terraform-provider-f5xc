@@ -46,7 +46,7 @@ func (r *AuthenticationResource) Metadata(ctx context.Context, req resource.Meta
 
 func (r *AuthenticationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Authentication in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a Authentication resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Authentication. Must be unique within the namespace.",
@@ -85,15 +85,15 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "Cookie Parameters. Specifies different cookie related config parameters for authentication",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds ves.io.schema.rules.uint32.lte: 86400",
+						MarkdownDescription: "Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds",
 						Optional: true,
 					},
 					"cookie_refresh_interval": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce re-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, re-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds ves.io.schema.rules.uint32.lte: 86400",
+						MarkdownDescription: "Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce re-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, re-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds",
 						Optional: true,
 					},
 					"session_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours). ves.io.schema.rules.uint32.lte: 1296000",
+						MarkdownDescription: "Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours).",
 						Optional: true,
 					},
 				},
@@ -102,11 +102,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 						MarkdownDescription: "HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid.",
 						Attributes: map[string]schema.Attribute{
 							"prim_key_expiry": schema.StringAttribute{
-								MarkdownDescription: "HMAC Primary Key Expiry. Primary HMAC Key Expiry time Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "HMAC Primary Key Expiry. Primary HMAC Key Expiry time",
 								Optional: true,
 							},
 							"sec_key_expiry": schema.StringAttribute{
-								MarkdownDescription: "HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time Required: YES ves.io.schema.rules.message.required: true",
+								MarkdownDescription: "HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time",
 								Optional: true,
 							},
 						},
@@ -149,11 +149,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "OIDCAuthType.",
 				Attributes: map[string]schema.Attribute{
 					"oidc_client_id": schema.StringAttribute{
-						MarkdownDescription: "OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server",
 						Optional: true,
 					},
 					"oidc_well_known_config_url": schema.StringAttribute{
-						MarkdownDescription: "Well-known Configuration URL. Exclusive with [oidc_auth_params] An OIDC well-known configuration URL that will be used to fetch authentication related endpoints ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints",
 						Optional: true,
 					},
 				},
@@ -171,7 +171,7 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -188,7 +188,7 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -199,15 +199,15 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 						MarkdownDescription: "OIDCAuthParams.",
 						Attributes: map[string]schema.Attribute{
 							"auth_endpoint_url": schema.StringAttribute{
-								MarkdownDescription: "Authorization Endpoint. URL of the authorization server's authorization endpoint. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Authorization Endpoint. URL of the authorization server's authorization endpoint.",
 								Optional: true,
 							},
 							"end_session_endpoint_url": schema.StringAttribute{
-								MarkdownDescription: "Logout Endpoint. URL of the authorization server's Logout endpoint. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Logout Endpoint. URL of the authorization server's Logout endpoint.",
 								Optional: true,
 							},
 							"token_endpoint_url": schema.StringAttribute{
-								MarkdownDescription: "Token Endpoint. URL of the authorization server's Token endpoint. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Token Endpoint. URL of the authorization server's Token endpoint.",
 								Optional: true,
 							},
 						},

@@ -46,7 +46,7 @@ func (r *NetworkInterfaceResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Network interface represents configuration of a network device. It is created by users in system namespace.",
+		MarkdownDescription: "Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkInterface. Must be unique within the namespace.",
@@ -85,19 +85,19 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: dedicated_interface, dedicated_management_interface, ethernet_interface, layer2_interface, tunnel_interface] Dedicated Interface. Dedicated Interface Configuration",
 				Attributes: map[string]schema.Attribute{
 					"device": schema.StringAttribute{
-						MarkdownDescription: "Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE.",
 						Optional: true,
 					},
 					"mtu": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384 ves.io.schema.rules.uint32.ranges: 0,512-16384",
+						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
 						Optional: true,
 					},
 					"node": schema.StringAttribute{
-						MarkdownDescription: "Specific Node. Exclusive with [cluster] Configuration will apply to a device on the given node of the site. ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node of the site.",
 						Optional: true,
 					},
 					"priority": schema.Int64Attribute{
-						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 255",
+						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
 						Optional: true,
 					},
 				},
@@ -124,15 +124,15 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Dedicated Management Interface. Dedicated Interface Configuration",
 				Attributes: map[string]schema.Attribute{
 					"device": schema.StringAttribute{
-						MarkdownDescription: "Interface Device. Name of the device for which interface is configured Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Interface Device. Name of the device for which interface is configured",
 						Optional: true,
 					},
 					"mtu": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384 ves.io.schema.rules.uint32.ranges: 0,512-16384",
+						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
 						Optional: true,
 					},
 					"node": schema.StringAttribute{
-						MarkdownDescription: "Specific Node. Exclusive with [cluster] Configuration will apply to a device on the given node of the site. ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node of the site.",
 						Optional: true,
 					},
 				},
@@ -147,23 +147,23 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Ethernet Interface. Ethernet Interface Configuration",
 				Attributes: map[string]schema.Attribute{
 					"device": schema.StringAttribute{
-						MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device",
 						Optional: true,
 					},
 					"mtu": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384 ves.io.schema.rules.uint32.ranges: 0,512-16384",
+						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
 						Optional: true,
 					},
 					"node": schema.StringAttribute{
-						MarkdownDescription: "Specific Node. Exclusive with [cluster] Configuration will apply to a device on the given node. ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node.",
 						Optional: true,
 					},
 					"priority": schema.Int64Attribute{
-						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 255",
+						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
 						Optional: true,
 					},
 					"vlan_id": schema.Int64Attribute{
-						MarkdownDescription: "VLAN Id. Exclusive with [untagged] Configure a VLAN tagged ethernet interface ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 4095",
+						MarkdownDescription: "VLAN Id. Configure a VLAN tagged ethernet interface",
 						Optional: true,
 					},
 				},
@@ -186,19 +186,19 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"dhcp_networks": schema.ListNestedBlock{
-								MarkdownDescription: "DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"dgw_address": schema.StringAttribute{
-											MarkdownDescription: "Static IPv4 Configuration. Exclusive with [first_address last_address] Enter a IPv4 address from the network prefix to be used as the default gateway. ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway.",
 											Optional: true,
 										},
 										"dns_address": schema.StringAttribute{
-											MarkdownDescription: "Static IPv4 Configuration. Exclusive with [same_as_dgw] Enter a IPv4 address from the network prefix to be used as the DNS server. ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server.",
 											Optional: true,
 										},
 										"network_prefix": schema.StringAttribute{
-											MarkdownDescription: "Network Prefix. Exclusive with [] Set the network prefix for the site. ex: 10.1.1.0/24 ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24",
 											Optional: true,
 										},
 										"pool_settings": schema.StringAttribute{
@@ -214,7 +214,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 										},
 										"pools": schema.ListNestedBlock{
-											MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -226,7 +226,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								},
 							},
 							"fixed_ip_map": schema.SingleNestedBlock{
-								MarkdownDescription: "Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client. ves.io.schema.rules.map.keys.string.mac: true ves.io.schema.rules.map.max_pairs: 128 ves.io.schema.rules.map.unique_values: true ves.io.schema.rules.map.values.string.ipv4: true",
+								MarkdownDescription: "Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client.",
 							},
 							"interface_ip_map": schema.SingleNestedBlock{
 								MarkdownDescription: "Interface IPv4 Assignments. Specify static IPv4 addresses per node.",
@@ -234,7 +234,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"interface_ip_map": schema.SingleNestedBlock{
-										MarkdownDescription: "Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node. ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 64 ves.io.schema.rules.map.values.string.ipv4: true",
+										MarkdownDescription: "Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node.",
 									},
 								},
 							},
@@ -252,7 +252,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "IPV6AutoConfigRouterType.",
 								Attributes: map[string]schema.Attribute{
 									"network_prefix": schema.StringAttribute{
-										MarkdownDescription: "Network Prefix. Exclusive with [stateful] Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 ves.io.schema.rules.string.ipv6_prefix: true ves.io.schema.rules.string.pattern: .*::/64$",
+										MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
 										Optional: true,
 									},
 								},
@@ -299,7 +299,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"interface_ip_map": schema.SingleNestedBlock{
-										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 128",
+										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
 									},
 								},
 							},
@@ -307,11 +307,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
 								Attributes: map[string]schema.Attribute{
 									"default_gw": schema.StringAttribute{
-										MarkdownDescription: "Default Gateway. IP address of the default gateway. ves.io.schema.rules.string.ip: true",
+										MarkdownDescription: "Default Gateway. IP address of the default gateway.",
 										Optional: true,
 									},
 									"ip_address": schema.StringAttribute{
-										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip_prefix: true",
+										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
 										Optional: true,
 									},
 								},
@@ -329,7 +329,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"interface_ip_map": schema.SingleNestedBlock{
-										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 128",
+										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
 									},
 								},
 							},
@@ -337,11 +337,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
 								Attributes: map[string]schema.Attribute{
 									"default_gw": schema.StringAttribute{
-										MarkdownDescription: "Default Gateway. IP address of the default gateway. ves.io.schema.rules.string.ip: true",
+										MarkdownDescription: "Default Gateway. IP address of the default gateway.",
 										Optional: true,
 									},
 									"ip_address": schema.StringAttribute{
-										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip_prefix: true",
+										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
 										Optional: true,
 									},
 								},
@@ -366,11 +366,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Layer2 SR-IOV Interface. Layer2 SR-IOV Interface Configuration",
 						Attributes: map[string]schema.Attribute{
 							"device": schema.StringAttribute{
-								MarkdownDescription: "Ethernet Device. Physical ethernet interface Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+								MarkdownDescription: "Ethernet Device. Physical ethernet interface",
 								Optional: true,
 							},
 							"vlan_id": schema.Int64Attribute{
-								MarkdownDescription: "VLAN Id. Exclusive with [untagged] Configure a VLAN tagged interface ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 4095",
+								MarkdownDescription: "VLAN Id. Configure a VLAN tagged interface",
 								Optional: true,
 							},
 						},
@@ -384,11 +384,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Layer2 VLAN Interface. Layer2 VLAN Interface Configuration",
 						Attributes: map[string]schema.Attribute{
 							"device": schema.StringAttribute{
-								MarkdownDescription: "Ethernet Device. Physical ethernet interface Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+								MarkdownDescription: "Ethernet Device. Physical ethernet interface",
 								Optional: true,
 							},
 							"vlan_id": schema.Int64Attribute{
-								MarkdownDescription: "VLAN Id. VLAN Id Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 4095",
+								MarkdownDescription: "VLAN Id. VLAN Id",
 								Optional: true,
 							},
 						},
@@ -397,7 +397,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "VLAN on Site Local Outside Interface. Layer2 Site Local Outside VLAN Interface Configuration",
 						Attributes: map[string]schema.Attribute{
 							"vlan_id": schema.Int64Attribute{
-								MarkdownDescription: "VLAN Id. VLAN Id Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 4095",
+								MarkdownDescription: "VLAN Id. VLAN Id",
 								Optional: true,
 							},
 						},
@@ -409,15 +409,15 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Tunnel Interface. Tunnel Interface Configuration",
 				Attributes: map[string]schema.Attribute{
 					"mtu": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384 ves.io.schema.rules.uint32.ranges: 0,512-16384",
+						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
 						Optional: true,
 					},
 					"node": schema.StringAttribute{
-						MarkdownDescription: "Specific Node. Exclusive with [] Configuration will apply to a given device on the given node. ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Specific Node. Configuration will apply to a given device on the given node.",
 						Optional: true,
 					},
 					"priority": schema.Int64Attribute{
-						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 255",
+						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
 						Optional: true,
 					},
 				},
@@ -439,7 +439,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"interface_ip_map": schema.SingleNestedBlock{
-										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 128",
+										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
 									},
 								},
 							},
@@ -447,11 +447,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
 								Attributes: map[string]schema.Attribute{
 									"default_gw": schema.StringAttribute{
-										MarkdownDescription: "Default Gateway. IP address of the default gateway. ves.io.schema.rules.string.ip: true",
+										MarkdownDescription: "Default Gateway. IP address of the default gateway.",
 										Optional: true,
 									},
 									"ip_address": schema.StringAttribute{
-										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip_prefix: true",
+										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
 										Optional: true,
 									},
 								},
@@ -462,15 +462,15 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},

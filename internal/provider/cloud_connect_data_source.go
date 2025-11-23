@@ -42,7 +42,7 @@ func (d *CloudConnectDataSource) Metadata(ctx context.Context, req datasource.Me
 
 func (d *CloudConnectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Cloud Connect specification",
+		MarkdownDescription: "Manages a CloudConnect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

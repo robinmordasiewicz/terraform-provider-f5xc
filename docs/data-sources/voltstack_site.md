@@ -2,12 +2,12 @@
 page_title: "f5xc_voltstack_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Shape of the App Stack site specification
+  Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 ---
 
 # f5xc_voltstack_site (Data Source)
 
-Shape of the App Stack site specification
+Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

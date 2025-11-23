@@ -46,7 +46,7 @@ func (r *ChildTenantManagerResource) Metadata(ctx context.Context, req resource.
 
 func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created.",
+		MarkdownDescription: "Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ChildTenantManager. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 		},
 		Blocks: map[string]schema.Block{
 			"group_assignments": schema.ListNestedBlock{
-				MarkdownDescription: "Group Mapping. The Group Mapping field is used to associate local user groups with user groups in child tenants. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Group Mapping. The Group Mapping field is used to associate local user groups with user groups in child tenants.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"child_tenant_groups": schema.ListAttribute{
-							MarkdownDescription: "Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.uni...",
+							MarkdownDescription: "Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user.",
 							Optional: true,
 							ElementType: types.StringType,
 						},
@@ -96,15 +96,15 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -117,15 +117,15 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},

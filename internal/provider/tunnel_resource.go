@@ -47,7 +47,7 @@ func (r *TunnelResource) Metadata(ctx context.Context, req resource.MetadataRequ
 
 func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create tunnel in a given namespace. If one already exist it will give a error.",
+		MarkdownDescription: "Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Tunnel. Must be unique within the namespace.",
@@ -97,7 +97,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 						},
 						Blocks: map[string]schema.Block{
 							"local_intf": schema.ListNestedBlock{
-								MarkdownDescription: "Local Interface. Local interface to be used for filling in source information of IP and network for transport ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Local Interface. Local interface to be used for filling in source information of IP and network for transport",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -206,7 +206,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 						},
 						Blocks: map[string]schema.Block{
 							"endpoints": schema.SingleNestedBlock{
-								MarkdownDescription: "Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes ves.io.schema.rules.map.keys.string.max_len: 256 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 128",
+								MarkdownDescription: "Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes",
 							},
 						},
 					},
@@ -219,7 +219,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 								MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 								Attributes: map[string]schema.Attribute{
 									"addr": schema.StringAttribute{
-										MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation ves.io.schema.rules.string.ipv4: true",
+										MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
 										Optional: true,
 									},
 								},
@@ -228,7 +228,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 								MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
 								Attributes: map[string]schema.Attribute{
 									"addr": schema.StringAttribute{
-										MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' ves.io.schema.rules.string.ipv6: true",
+										MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
 										Optional: true,
 									},
 								},

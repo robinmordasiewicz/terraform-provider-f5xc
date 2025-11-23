@@ -47,7 +47,7 @@ func (r *TpmCategoryResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a Category object, which is a grouping of APIKeys used for TPM provisioning",
+		MarkdownDescription: "Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TpmCategory. Must be unique within the namespace.",
@@ -88,7 +88,7 @@ func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaReq
 		},
 		Blocks: map[string]schema.Block{
 			"tpm_manager_ref": schema.ListNestedBlock{
-				MarkdownDescription: "TPM Manager reference. Reference to TPM Manager Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1",
+				MarkdownDescription: "TPM Manager reference. Reference to TPM Manager",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{

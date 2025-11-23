@@ -2,12 +2,12 @@
 page_title: "f5xc_child_tenant Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Creates a child_tenant config instance. Name of the object is the name of the child tenant to be created.
+  Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 ---
 
 # f5xc_child_tenant (Data Source)
 
-Creates a child_tenant config instance. Name of the object is the name of the child tenant to be created.
+Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

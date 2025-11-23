@@ -42,7 +42,7 @@ func (d *LogReceiverDataSource) Metadata(ctx context.Context, req datasource.Met
 
 func (d *LogReceiverDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new Log Receiver object",
+		MarkdownDescription: "Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

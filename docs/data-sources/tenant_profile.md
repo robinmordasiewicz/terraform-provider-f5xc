@@ -2,12 +2,12 @@
 page_title: "f5xc_tenant_profile Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Creates a tenant_profile config instance. Name of the object is the name of the tenant profile to be created.
+  Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 ---
 
 # f5xc_tenant_profile (Data Source)
 
-Creates a tenant_profile config instance. Name of the object is the name of the tenant profile to be created.
+Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

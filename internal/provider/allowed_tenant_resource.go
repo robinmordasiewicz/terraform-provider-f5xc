@@ -47,7 +47,7 @@ func (r *AllowedTenantResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage.",
+		MarkdownDescription: "Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AllowedTenant. Must be unique within the namespace.",
@@ -81,25 +81,25 @@ func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"tenant_id": schema.StringAttribute{
-				MarkdownDescription: "Allowed Tenant ID. Specify the Tenant ID of the Original Tenant which is allowed to manage. NOTE: this is the name of the tenant configuration obj. not UID. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "Allowed Tenant ID. Specify the Tenant ID of the Original Tenant which is allowed to manage. NOTE: this is the name of the tenant configuration obj. not UID.",
 				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
 			"allowed_groups": schema.ListNestedBlock{
-				MarkdownDescription: "Allowed Groups. List of references to allowed user_group objects for access in to tenant. Admin can use this to control API access by users from from original tenant into an allowed tenant. User access from original tenant into an allowed tenant will be associated to underlying roles in this user_group. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Allowed Groups. List of references to allowed user_group objects for access in to tenant. Admin can use this to control API access by users from from original tenant into an allowed tenant. User access from original tenant into an allowed tenant will be associated to underlying roles in this user_group.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 							Optional: true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 							Optional: true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
 						},
 					},

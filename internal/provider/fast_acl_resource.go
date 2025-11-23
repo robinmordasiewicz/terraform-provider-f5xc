@@ -46,7 +46,7 @@ func (r *FastACLResource) Metadata(ctx context.Context, req resource.MetadataReq
 
 func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule`",
+		MarkdownDescription: "Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the FastACL. Must be unique within the namespace.",
@@ -85,15 +85,15 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -111,7 +111,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"fast_acl_rules": schema.ListNestedBlock{
-						MarkdownDescription: "Rules. Fast ACL rules to match ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true",
+						MarkdownDescription: "Rules. Fast ACL rules to match",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -139,7 +139,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									},
 									Blocks: map[string]schema.Block{
 										"ref": schema.ListNestedBlock{
-											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -150,21 +150,21 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
 								},
 								"port": schema.ListNestedBlock{
-									MarkdownDescription: "Source Ports. L4 port numbers to match ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "Source Ports. L4 port numbers to match",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"user_defined": schema.Int64Attribute{
-												MarkdownDescription: "User defined port. Exclusive with [all dns] Matches the user defined port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+												MarkdownDescription: "User defined port. Matches the user defined port",
 												Optional: true,
 											},
 										},
@@ -182,7 +182,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
 									Attributes: map[string]schema.Attribute{
 										"prefix": schema.ListAttribute{
-											MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256",
+											MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -201,19 +201,19 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 						Blocks: map[string]schema.Block{
 							"public_ip_refs": schema.ListNestedBlock{
-								MarkdownDescription: "Select Public VIP(s). Select additional public VIP(s) Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Select Public VIP(s). Select additional public VIP(s)",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -233,7 +233,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"fast_acl_rules": schema.ListNestedBlock{
-						MarkdownDescription: "Rules. Fast ACL rules to match ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true",
+						MarkdownDescription: "Rules. Fast ACL rules to match",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -261,7 +261,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									},
 									Blocks: map[string]schema.Block{
 										"ref": schema.ListNestedBlock{
-											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -272,21 +272,21 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
 								},
 								"port": schema.ListNestedBlock{
-									MarkdownDescription: "Source Ports. L4 port numbers to match ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "Source Ports. L4 port numbers to match",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"user_defined": schema.Int64Attribute{
-												MarkdownDescription: "User defined port. Exclusive with [all dns] Matches the user defined port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+												MarkdownDescription: "User defined port. Matches the user defined port",
 												Optional: true,
 											},
 										},
@@ -304,7 +304,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
 									Attributes: map[string]schema.Attribute{
 										"prefix": schema.ListAttribute{
-											MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256",
+											MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
 											Optional: true,
 											ElementType: types.StringType,
 										},

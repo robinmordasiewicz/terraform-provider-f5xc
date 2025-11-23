@@ -49,7 +49,7 @@ func (r *ForwardingClassResource) Metadata(ctx context.Context, req resource.Met
 
 func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Forwarding Class is created by users in system namespace",
+		MarkdownDescription: "Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ForwardingClass. Must be unique within the namespace.",
@@ -91,7 +91,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 			},
 			"tos_value": schema.Int64Attribute{
-				MarkdownDescription: "TOS value. Exclusive with [dscp no_marking] Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low ves.io.schema.rules.uint32.lte: 255",
+				MarkdownDescription: "TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low",
 				Optional: true,
 			},
 		},
@@ -123,15 +123,15 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},

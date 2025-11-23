@@ -58,7 +58,7 @@ func (r *CustomerSupportResource) Metadata(ctx context.Context, req resource.Met
 
 func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new customer support ticket in our customer support provider system.",
+		MarkdownDescription: "Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CustomerSupport. Must be unique within the namespace.",

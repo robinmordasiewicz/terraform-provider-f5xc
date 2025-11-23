@@ -46,7 +46,7 @@ func (r *CloudLinkResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new CloudLink with configured parameters",
+		MarkdownDescription: "Manages new CloudLink with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CloudLink. Must be unique within the namespace.",
@@ -85,7 +85,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				MarkdownDescription: "[OneOf: aws, gcp] Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider",
 				Attributes: map[string]schema.Attribute{
 					"custom_asn": schema.Int64Attribute{
-						MarkdownDescription: "Custom ASN. Exclusive with [] F5XC will use custom ASN to create a Direct Connect Gateway ves.io.schema.rules.uint32.ranges: 64512-65534, 4200000000-4294967294",
+						MarkdownDescription: "Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294",
 						Optional: true,
 					},
 				},
@@ -94,15 +94,15 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -113,23 +113,23 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						Blocks: map[string]schema.Block{
 							"connections": schema.ListNestedBlock{
-								MarkdownDescription: "Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 10 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"bgp_asn": schema.Int64Attribute{
-											MarkdownDescription: "BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 2147483647",
+											MarkdownDescription: "BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS.",
 											Optional: true,
 										},
 										"connection_id": schema.StringAttribute{
-											MarkdownDescription: "Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.pattern: ^(dxcon-)([a-z0-9]{8}|[a-z0-9]{17})$",
+											MarkdownDescription: "Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection",
 											Optional: true,
 										},
 										"region": schema.StringAttribute{
-											MarkdownDescription: "Region. Region where the connection is setup Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Region. Region where the connection is setup",
 											Optional: true,
 										},
 										"user_assigned_name": schema.StringAttribute{
-											MarkdownDescription: "User Assigned. Exclusive with [system_generated_name] User is managing the AWS resource name ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "User Assigned. User is managing the AWS resource name",
 											Optional: true,
 										},
 										"virtual_interface_type": schema.StringAttribute{
@@ -137,7 +137,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											Optional: true,
 										},
 										"vlan": schema.Int64Attribute{
-											MarkdownDescription: "Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 4094",
+											MarkdownDescription: "Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection",
 											Optional: true,
 										},
 									},
@@ -155,7 +155,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 										},
 										"tags": schema.SingleNestedBlock{
-											MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 40 ves.io.schema.rules.map.values.string.max_len: 256 ves.io.schema.rules.map.values.string.min_len: 1",
+											MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags",
 										},
 									},
 								},
@@ -172,7 +172,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				MarkdownDescription: "CloudLink ADN Network Config.",
 				Attributes: map[string]schema.Attribute{
 					"cloudlink_network_name": schema.StringAttribute{
-						MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
 						Optional: true,
 					},
 				},
@@ -189,19 +189,19 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						Blocks: map[string]schema.Block{
 							"connections": schema.ListNestedBlock{
-								MarkdownDescription: "Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 10 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"interconnect_attachment_name": schema.StringAttribute{
-											MarkdownDescription: "Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 63 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment",
 											Optional: true,
 										},
 										"project": schema.StringAttribute{
-											MarkdownDescription: "Specified Project. Exclusive with [same_as_credential] Specify a GCP Project for the interconnect attachment ves.io.schema.rules.string.max_len: 30 ves.io.schema.rules.string.min_len: 4",
+											MarkdownDescription: "Specified Project. Specify a GCP Project for the interconnect attachment",
 											Optional: true,
 										},
 										"region": schema.StringAttribute{
-											MarkdownDescription: "Region. GCP Region in which the GCP Cloud Interconnect attachment is configured Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Region. GCP Region in which the GCP Cloud Interconnect attachment is configured",
 											Optional: true,
 										},
 									},
@@ -221,15 +221,15 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},

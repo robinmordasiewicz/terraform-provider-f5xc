@@ -46,7 +46,7 @@ func (r *DNSLbHealthCheckResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error.",
+		MarkdownDescription: "Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSLbHealthCheck. Must be unique within the namespace.",
@@ -85,19 +85,19 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: http_health_check, https_health_check, icmp_health_check, tcp_health_check, tcp_hex_health_check, udp_health_check] HTTP Health Check.",
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Port. Port used for performing health check",
 						Optional: true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
 						Optional: true,
 					},
 					"receive": schema.StringAttribute{
-						MarkdownDescription: "Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax. ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string.regex: true",
+						MarkdownDescription: "Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax.",
 						Optional: true,
 					},
 					"send": schema.StringAttribute{
-						MarkdownDescription: "Send String. HTTP payload to send to the target ves.io.schema.rules.string.max_len: 2048",
+						MarkdownDescription: "Send String. HTTP payload to send to the target",
 						Optional: true,
 					},
 				},
@@ -107,19 +107,19 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "HTTP Health Check.",
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Port. Port used for performing health check",
 						Optional: true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
 						Optional: true,
 					},
 					"receive": schema.StringAttribute{
-						MarkdownDescription: "Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax. ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string.regex: true",
+						MarkdownDescription: "Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax.",
 						Optional: true,
 					},
 					"send": schema.StringAttribute{
-						MarkdownDescription: "Send String. HTTP payload to send to the target ves.io.schema.rules.string.max_len: 2048",
+						MarkdownDescription: "Send String. HTTP payload to send to the target",
 						Optional: true,
 					},
 				},
@@ -132,19 +132,19 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "TCP Health Check.",
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Port. Port used for performing health check",
 						Optional: true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
 						Optional: true,
 					},
 					"receive": schema.StringAttribute{
-						MarkdownDescription: "Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax. ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string.regex: true",
+						MarkdownDescription: "Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax.",
 						Optional: true,
 					},
 					"send": schema.StringAttribute{
-						MarkdownDescription: "Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS) ves.io.schema.rules.string.max_len: 2048",
+						MarkdownDescription: "Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS)",
 						Optional: true,
 					},
 				},
@@ -154,19 +154,19 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "TCP Hex Health Check.",
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Port. Port used for performing health check",
 						Optional: true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
 						Optional: true,
 					},
 					"receive": schema.StringAttribute{
-						MarkdownDescription: "Receive Payload. Hex encoded raw bytes expected in the response. ves.io.schema.rules.string.hex: true ves.io.schema.rules.string.max_len: 2048",
+						MarkdownDescription: "Receive Payload. Hex encoded raw bytes expected in the response.",
 						Optional: true,
 					},
 					"send": schema.StringAttribute{
-						MarkdownDescription: "Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check. ves.io.schema.rules.string.hex: true ves.io.schema.rules.string.max_len: 2048",
+						MarkdownDescription: "Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check.",
 						Optional: true,
 					},
 				},
@@ -176,19 +176,19 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "UDP Health Check.",
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Port. Port used for performing health check Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Port. Port used for performing health check",
 						Optional: true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
-						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
 						Optional: true,
 					},
 					"receive": schema.StringAttribute{
-						MarkdownDescription: "Receive String. UDP response to be matched. It can be a regex. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.regex: true",
+						MarkdownDescription: "Receive String. UDP response to be matched. It can be a regex.",
 						Optional: true,
 					},
 					"send": schema.StringAttribute{
-						MarkdownDescription: "Send String. UDP payload Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Send String. UDP payload",
 						Optional: true,
 					},
 				},

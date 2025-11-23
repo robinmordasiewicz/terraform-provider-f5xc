@@ -51,7 +51,7 @@ func (r *GCPVPCSiteResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the GCP VPC site specification",
+		MarkdownDescription: "Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the GCPVPCSite. Must be unique within the namespace.",
@@ -85,23 +85,23 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"address": schema.StringAttribute{
-				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude. ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
 				Optional: true,
 			},
 			"disk_size": schema.Int64Attribute{
-				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB ves.io.schema.rules.uint32.lte: 64000",
+				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
 				Optional: true,
 			},
 			"gcp_region": schema.StringAttribute{
-				MarkdownDescription: "GCP Region. Name for GCP Region. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+				MarkdownDescription: "GCP Region. Name for GCP Region.",
 				Optional: true,
 			},
 			"instance_type": schema.StringAttribute{
-				MarkdownDescription: "GCP Instance Type for Node. Select Instance size based on performance needed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+				MarkdownDescription: "GCP Instance Type for Node. Select Instance size based on performance needed",
 				Optional: true,
 			},
 			"ssh_key": schema.StringAttribute{
-				MarkdownDescription: "Public SSH key. Public SSH key for accessing the site. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1",
+				MarkdownDescription: "Public SSH key. Public SSH key for accessing the site.",
 				Optional: true,
 			},
 		},
@@ -119,7 +119,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional: true,
 							},
 							"location": schema.StringAttribute{
-								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 								Optional: true,
 							},
 							"store_provider": schema.StringAttribute{
@@ -136,7 +136,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional: true,
 							},
 							"url": schema.StringAttribute{
-								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 								Optional: true,
 							},
 						},
@@ -153,7 +153,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
-						MarkdownDescription: "Disable Node Local Services. ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Disable Node Local Services.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
@@ -181,15 +181,15 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -199,11 +199,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
-						MarkdownDescription: "Latitude. Latitude of the site location ves.io.schema.rules.float.gte: -90.0 ves.io.schema.rules.float.lte: 90.0",
+						MarkdownDescription: "Latitude. Latitude of the site location",
 						Optional: true,
 					},
 					"longitude": schema.Int64Attribute{
-						MarkdownDescription: "Longitude. longitude of site location ves.io.schema.rules.float.gte: -180.0 ves.io.schema.rules.float.lte: 180.0",
+						MarkdownDescription: "Longitude. longitude of site location",
 						Optional: true,
 					},
 				},
@@ -213,11 +213,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site",
 				Attributes: map[string]schema.Attribute{
 					"inside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network",
 						Optional: true,
 					},
 					"outside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network",
 						Optional: true,
 					},
 				},
@@ -227,17 +227,17 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"gcp_labels": schema.SingleNestedBlock{
-				MarkdownDescription: "GCP Labels. GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console. ves.io.schema.rules.map.keys.string.max_len: 127 ves.io.schema.rules.map.max_pairs: 40 ves.io.schema.rules.map.values.string.max_len: 255",
+				MarkdownDescription: "GCP Labels. GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console.",
 			},
 			"ingress_egress_gw": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: ingress_egress_gw, ingress_gw, voltstack_cluster] GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site",
 				Attributes: map[string]schema.Attribute{
 					"gcp_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
 						Optional: true,
 					},
 					"gcp_zone_names": schema.ListAttribute{
-						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -253,19 +253,19 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -279,19 +279,19 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -305,19 +305,19 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -329,15 +329,15 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -346,15 +346,15 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -368,7 +368,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -393,7 +393,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
 										Optional: true,
 									},
 								},
@@ -402,7 +402,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
 										Optional: true,
 									},
 								},
@@ -418,11 +418,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "List of Static Routes. List of Static routes",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
 											Optional: true,
 										},
 									},
@@ -444,7 +444,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP existing subnet Type. Name of existing gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"subnet_name": schema.StringAttribute{
-										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network",
 										Optional: true,
 									},
 								},
@@ -453,11 +453,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP subnet parameters Type. Parameters for gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"primary_ipv4": schema.StringAttribute{
-										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema.rules.string.max_ip_prefix_length: 28 ves.io.schema.rules.string.min_ip_prefix_length: 8",
+										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
 										Optional: true,
 									},
 									"subnet_name": schema.StringAttribute{
-										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty ves.io.schema.rules.string.max_len: 64",
+										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty",
 										Optional: true,
 									},
 								},
@@ -491,7 +491,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
 										Optional: true,
 									},
 								},
@@ -500,7 +500,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
 										Optional: true,
 									},
 								},
@@ -516,11 +516,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "List of Static Routes. List of Static routes",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
 											Optional: true,
 										},
 									},
@@ -542,7 +542,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP existing subnet Type. Name of existing gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"subnet_name": schema.StringAttribute{
-										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network",
 										Optional: true,
 									},
 								},
@@ -551,11 +551,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP subnet parameters Type. Parameters for gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"primary_ipv4": schema.StringAttribute{
-										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema.rules.string.max_ip_prefix_length: 28 ves.io.schema.rules.string.min_ip_prefix_length: 8",
+										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
 										Optional: true,
 									},
 									"subnet_name": schema.StringAttribute{
-										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty ves.io.schema.rules.string.max_len: 64",
+										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty",
 										Optional: true,
 									},
 								},
@@ -598,11 +598,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "GCP Ingress Gateway. Single interface GCP ingress site",
 				Attributes: map[string]schema.Attribute{
 					"gcp_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
 						Optional: true,
 					},
 					"gcp_zone_names": schema.ListAttribute{
-						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -621,7 +621,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
 										Optional: true,
 									},
 								},
@@ -630,7 +630,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
 										Optional: true,
 									},
 								},
@@ -649,7 +649,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP existing subnet Type. Name of existing gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"subnet_name": schema.StringAttribute{
-										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network",
 										Optional: true,
 									},
 								},
@@ -658,11 +658,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP subnet parameters Type. Parameters for gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"primary_ipv4": schema.StringAttribute{
-										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema.rules.string.max_ip_prefix_length: 28 ves.io.schema.rules.string.min_ip_prefix_length: 8",
+										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
 										Optional: true,
 									},
 									"subnet_name": schema.StringAttribute{
-										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty ves.io.schema.rules.string.max_len: 64",
+										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty",
 										Optional: true,
 									},
 								},
@@ -707,11 +707,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
-								MarkdownDescription: "Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000",
+								MarkdownDescription: "Node Batch Size Count.",
 								Optional: true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value). Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 900",
+								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
 								Optional: true,
 							},
 						},
@@ -731,15 +731,15 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -766,7 +766,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 				Attributes: map[string]schema.Attribute{
 					"operating_system_version": schema.StringAttribute{
-						MarkdownDescription: "Operating System Version. Exclusive with [default_os_version] Specify a OS version to be used e.g. 9.2024.6. ves.io.schema.rules.string.max_len: 20",
+						MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
 						Optional: true,
 					},
 				},
@@ -789,15 +789,15 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -815,7 +815,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
-						MarkdownDescription: "F5XC Software Version. Exclusive with [default_sw_version] Specify a F5XC Software Version to be used e.g. crt-20210329-1002. ves.io.schema.rules.string.max_len: 20",
+						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
 						Optional: true,
 					},
 				},
@@ -830,11 +830,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "GCP App Stack Cluster. App Stack cluster of single interface GCP site",
 				Attributes: map[string]schema.Attribute{
 					"gcp_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
 						Optional: true,
 					},
 					"gcp_zone_names": schema.ListAttribute{
-						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -850,19 +850,19 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -876,19 +876,19 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -902,19 +902,19 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -926,15 +926,15 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -951,7 +951,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -971,15 +971,15 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -1008,11 +1008,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "List of Static Routes. List of Static routes",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
 											Optional: true,
 										},
 									},
@@ -1034,7 +1034,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
 										Optional: true,
 									},
 								},
@@ -1043,7 +1043,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
 										Optional: true,
 									},
 								},
@@ -1062,7 +1062,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP existing subnet Type. Name of existing gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"subnet_name": schema.StringAttribute{
-										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network",
 										Optional: true,
 									},
 								},
@@ -1071,11 +1071,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "GCP subnet parameters Type. Parameters for gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"primary_ipv4": schema.StringAttribute{
-										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema.rules.string.max_ip_prefix_length: 28 ves.io.schema.rules.string.min_ip_prefix_length: 8",
+										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
 										Optional: true,
 									},
 									"subnet_name": schema.StringAttribute{
-										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty ves.io.schema.rules.string.max_len: 64",
+										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty",
 										Optional: true,
 									},
 								},
@@ -1094,7 +1094,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
-								MarkdownDescription: "List of Storage Classes. List of custom storage classes ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "List of Storage Classes. List of custom storage classes",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"default_storage_class": schema.BoolAttribute{
@@ -1102,7 +1102,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional: true,
 										},
 										"storage_class_name": schema.StringAttribute{
-											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
 											Optional: true,
 										},
 									},

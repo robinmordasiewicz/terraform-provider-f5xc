@@ -46,7 +46,7 @@ func (r *APIDiscoveryResource) Metadata(ctx context.Context, req resource.Metada
 
 func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create api discovery creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APIDiscovery. Must be unique within the namespace.",
@@ -86,7 +86,7 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"parameter_name": schema.StringAttribute{
-							MarkdownDescription: "Parameter Name. The authentication parameter name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+							MarkdownDescription: "Parameter Name. The authentication parameter name.",
 							Optional: true,
 						},
 						"parameter_type": schema.StringAttribute{

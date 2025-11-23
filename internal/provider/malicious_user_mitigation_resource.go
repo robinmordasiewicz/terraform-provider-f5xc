@@ -46,7 +46,7 @@ func (r *MaliciousUserMitigationResource) Metadata(ctx context.Context, req reso
 
 func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the MaliciousUserMitigation. Must be unique within the namespace.",
@@ -87,7 +87,7 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 				},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
-						MarkdownDescription: "Rules. Define the threat levels and the corresponding mitigation actions to be taken Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.repeated.unique_threat_level: true",
+						MarkdownDescription: "Rules. Define the threat levels and the corresponding mitigation actions to be taken",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},

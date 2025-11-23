@@ -49,7 +49,7 @@ func (r *WorkloadFlavorResource) Metadata(ctx context.Context, req resource.Meta
 
 func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a workload_flavor",
+		MarkdownDescription: "Manages workload_flavor in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the WorkloadFlavor. Must be unique within the namespace.",
@@ -83,15 +83,15 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"ephemeral_storage": schema.StringAttribute{
-				MarkdownDescription: "Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor. ves.io.schema.rules.uint32.ranges: 1-6000",
+				MarkdownDescription: "Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
 				Optional: true,
 			},
 			"memory": schema.StringAttribute{
-				MarkdownDescription: "Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor. ves.io.schema.rules.uint32.ranges: 1-32768",
+				MarkdownDescription: "Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor.",
 				Optional: true,
 			},
 			"vcpus": schema.Int64Attribute{
-				MarkdownDescription: "vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core. ves.io.schema.rules.float.gte: 0.0 ves.io.schema.rules.float.lte: 8.0",
+				MarkdownDescription: "vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
 				Optional: true,
 			},
 		},

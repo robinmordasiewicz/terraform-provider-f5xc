@@ -2,12 +2,12 @@
 page_title: "f5xc_tcp_loadbalancer Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Shape of the TCP load balancer create specification
+  Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 ---
 
 # f5xc_tcp_loadbalancer (Resource)
 
-Shape of the TCP load balancer create specification
+Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

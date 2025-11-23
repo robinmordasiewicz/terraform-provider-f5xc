@@ -46,7 +46,7 @@ func (r *BGPResource) Metadata(ctx context.Context, req resource.MetadataRequest
 
 func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "BGP object is the configuration for peering with external BGP servers. It is created by users in system namespace.",
+		MarkdownDescription: "Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGP. Must be unique within the namespace.",
@@ -85,11 +85,11 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				MarkdownDescription: "BGP Parameters. BGP parameters for the local site",
 				Attributes: map[string]schema.Attribute{
 					"asn": schema.Int64Attribute{
-						MarkdownDescription: "ASN. Autonomous System Number Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1",
+						MarkdownDescription: "ASN. Autonomous System Number",
 						Optional: true,
 					},
 					"ip_address": schema.StringAttribute{
-						MarkdownDescription: "IP Address. Exclusive with [from_site local_address] Use the configured IPv4 Address as Router ID. ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "IP Address. Use the configured IPv4 Address as Router ID.",
 						Optional: true,
 					},
 				},
@@ -104,7 +104,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 
 			},
 			"peers": schema.ListNestedBlock{
-				MarkdownDescription: "Peers. List of peers Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "Peers. List of peers",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"label": schema.StringAttribute{
@@ -120,15 +120,15 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							MarkdownDescription: "BFD. BFD parameters.",
 							Attributes: map[string]schema.Attribute{
 								"multiplier": schema.Int64Attribute{
-									MarkdownDescription: "Multiplier. Specify Number of missed packets to bring session down' Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 255",
+									MarkdownDescription: "Multiplier. Specify Number of missed packets to bring session down'",
 									Optional: true,
 								},
 								"receive_interval_milliseconds": schema.Int64Attribute{
-									MarkdownDescription: "Minimum Receive Interval. BFD receive interval timer, in milliseconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 255000",
+									MarkdownDescription: "Minimum Receive Interval. BFD receive interval timer, in milliseconds",
 									Optional: true,
 								},
 								"transmit_interval_milliseconds": schema.Int64Attribute{
-									MarkdownDescription: "Transmit Interval. BFD transmit interval timer, in milliseconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 255000",
+									MarkdownDescription: "Transmit Interval. BFD transmit interval timer, in milliseconds",
 									Optional: true,
 								},
 							},
@@ -140,39 +140,39 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							MarkdownDescription: "External BGP Peer. External BGP Peer parameters.",
 							Attributes: map[string]schema.Attribute{
 								"address": schema.StringAttribute{
-									MarkdownDescription: "Peer Address. Exclusive with [default_gateway disable external_connector from_site subnet_begin_offset subnet_end_offset] Specify IPV4 peer address. ves.io.schema.rules.string.ipv4: true",
+									MarkdownDescription: "Peer Address. Specify IPV4 peer address.",
 									Optional: true,
 								},
 								"address_ipv6": schema.StringAttribute{
-									MarkdownDescription: "Peer IPv6 Address. Exclusive with [default_gateway_v6 disable_v6 from_site_v6 subnet_begin_offset_v6 subnet_end_offset_v6] Specify peer IPv6 address. ves.io.schema.rules.string.ipv6: true",
+									MarkdownDescription: "Peer IPv6 Address. Specify peer IPv6 address.",
 									Optional: true,
 								},
 								"asn": schema.Int64Attribute{
-									MarkdownDescription: "ASN. Autonomous System Number for BGP peer Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1",
+									MarkdownDescription: "ASN. Autonomous System Number for BGP peer",
 									Optional: true,
 								},
 								"md5_auth_key": schema.StringAttribute{
-									MarkdownDescription: "MD5 Authentication Key. Exclusive with [no_authentication] MD5 key for protecting BGP Sessions (RFC 2385)",
+									MarkdownDescription: "MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)",
 									Optional: true,
 								},
 								"port": schema.Int64Attribute{
-									MarkdownDescription: "Peer Port. Peer TCP port number. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "Peer Port. Peer TCP port number.",
 									Optional: true,
 								},
 								"subnet_begin_offset": schema.Int64Attribute{
-									MarkdownDescription: "Offset From Beginning Of Subnet. Exclusive with [address default_gateway disable external_connector from_site subnet_end_offset] Calculate peer address using offset from the beginning of the subnet. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 32",
+									MarkdownDescription: "Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet.",
 									Optional: true,
 								},
 								"subnet_begin_offset_v6": schema.Int64Attribute{
-									MarkdownDescription: "Offset From Beginning Of Subnet. Exclusive with [address_ipv6 default_gateway_v6 disable_v6 from_site_v6 subnet_end_offset_v6] Calculate peer address using offset from the beginning of the subnet. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 32",
+									MarkdownDescription: "Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet.",
 									Optional: true,
 								},
 								"subnet_end_offset": schema.Int64Attribute{
-									MarkdownDescription: "Offset From End Of Subnet. Exclusive with [address default_gateway disable external_connector from_site subnet_begin_offset] Calculate peer address using offset from the end of the subnet. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 32",
+									MarkdownDescription: "Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet.",
 									Optional: true,
 								},
 								"subnet_end_offset_v6": schema.Int64Attribute{
-									MarkdownDescription: "Offset From End Of Subnet. Exclusive with [address_ipv6 default_gateway_v6 disable_v6 from_site_v6 subnet_begin_offset_v6] Calculate peer address using offset from the end of the subnet. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 32",
+									MarkdownDescription: "Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet.",
 									Optional: true,
 								},
 							},
@@ -215,15 +215,15 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -234,7 +234,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									},
 									Blocks: map[string]schema.Block{
 										"interfaces": schema.ListNestedBlock{
-											MarkdownDescription: "Interface List. List of network interfaces. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interface List. List of network interfaces.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -250,11 +250,11 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -271,7 +271,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 							Blocks: map[string]schema.Block{
 								"route_policy": schema.ListNestedBlock{
-									MarkdownDescription: "BGP Routing policy. Route policy to be applied ves.io.schema.rules.repeated.max_items: 4",
+									MarkdownDescription: "BGP Routing policy. Route policy to be applied",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 										},
@@ -286,7 +286,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Nodes. List of nodes on which BGP routing policy has to be applied",
 											},
 											"object_refs": schema.ListNestedBlock{
-												MarkdownDescription: "BGP routing policy. Select route policy to apply. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1",
+												MarkdownDescription: "BGP routing policy. Select route policy to apply.",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{},
 												},
@@ -324,7 +324,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -368,7 +368,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual_site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{

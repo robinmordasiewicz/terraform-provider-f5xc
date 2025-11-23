@@ -2,12 +2,12 @@
 page_title: "f5xc_virtual_k8s Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Create virtual_k8s will create the object in the storage backend for namespace metadata.namespace
+  Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_k8s (Data Source)
 
-Create virtual_k8s will create the object in the storage backend for namespace metadata.namespace
+Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

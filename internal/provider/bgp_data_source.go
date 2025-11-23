@@ -42,7 +42,7 @@ func (d *BGPDataSource) Metadata(ctx context.Context, req datasource.MetadataReq
 
 func (d *BGPDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "BGP object is the configuration for peering with external BGP servers. It is created by users in system namespace.",
+		MarkdownDescription: "Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

@@ -42,7 +42,7 @@ func (d *AddonSubscriptionDataSource) Metadata(ctx context.Context, req datasour
 
 func (d *AddonSubscriptionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a new Addon Subscription with Addon Subscription State",
+		MarkdownDescription: "Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

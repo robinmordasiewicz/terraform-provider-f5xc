@@ -46,7 +46,7 @@ func (r *FastACLRuleResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply",
+		MarkdownDescription: "Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the FastACLRule. Must be unique within the namespace.",
@@ -96,7 +96,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 						},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A policer direct reference ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A policer direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -130,7 +130,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 						},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -167,7 +167,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 				Blocks: map[string]schema.Block{
 					"ref": schema.ListNestedBlock{
-						MarkdownDescription: "Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
@@ -197,11 +197,11 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 
 			},
 			"port": schema.ListNestedBlock{
-				MarkdownDescription: "Source Ports. L4 port numbers to match Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128",
+				MarkdownDescription: "Source Ports. L4 port numbers to match",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"user_defined": schema.Int64Attribute{
-							MarkdownDescription: "User defined port. Exclusive with [all dns] Matches the user defined port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+							MarkdownDescription: "User defined port. Matches the user defined port",
 							Optional: true,
 						},
 					},
@@ -220,7 +220,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
-						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256",
+						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
 						Optional: true,
 						ElementType: types.StringType,
 					},

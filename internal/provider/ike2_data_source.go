@@ -42,7 +42,7 @@ func (d *Ike2DataSource) Metadata(ctx context.Context, req datasource.MetadataRe
 
 func (d *Ike2DataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the IKE Phase2 profile specification",
+		MarkdownDescription: "Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

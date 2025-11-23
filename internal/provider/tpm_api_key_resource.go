@@ -47,7 +47,7 @@ func (r *TpmAPIKeyResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "APIKey object when successfully created returns actual APIKey bytes which is used by the users to call in to TPM provisioning API.",
+		MarkdownDescription: "Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TpmAPIKey. Must be unique within the namespace.",
@@ -87,7 +87,7 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 		},
 		Blocks: map[string]schema.Block{
 			"category_ref": schema.ListNestedBlock{
-				MarkdownDescription: "TPM Category. APIKey needs a reference to an existing TPM category object TPM category is used for grouping customer owned APIKeys and manage them as one entity Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1",
+				MarkdownDescription: "TPM Category. APIKey needs a reference to an existing TPM category object TPM category is used for grouping customer owned APIKeys and manage them as one entity",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{

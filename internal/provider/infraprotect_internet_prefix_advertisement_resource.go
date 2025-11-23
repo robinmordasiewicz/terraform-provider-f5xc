@@ -48,7 +48,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Metadata(ctx context.C
 
 func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a DDoS transit Internet Prefix",
+		MarkdownDescription: "Manages DDoS transit Internet Prefix in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectInternetPrefixAdvertisement. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 				},
 			},
 			"expiration_timestamp": schema.StringAttribute{
-				MarkdownDescription: "Expiration Time (UTC). Exclusive with [expiration_never] This advertisement will expire at the given timestamp and will be removed from the system afterwards",
+				MarkdownDescription: "Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards",
 				Optional: true,
 			},
 			"prefix": schema.StringAttribute{
-				MarkdownDescription: "Prefix. Advertisement Prefix Advertisement prefix lookup depending on type Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip_prefix_globally_routable: true",
+				MarkdownDescription: "Prefix. Advertisement Prefix Advertisement prefix lookup depending on type",
 				Optional: true,
 			},
 		},

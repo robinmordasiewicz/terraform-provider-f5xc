@@ -46,7 +46,7 @@ func (r *SubnetResource) Metadata(ctx context.Context, req resource.MetadataRequ
 
 func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Subnet object contains configuration for an interface of a VM/pod. It is created in user or shared namespace.",
+		MarkdownDescription: "Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Subnet. Must be unique within the namespace.",
@@ -90,15 +90,15 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -113,7 +113,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"site_subnet_params": schema.ListNestedBlock{
-				MarkdownDescription: "Site Subnet Parameters. Configure subnet parameters per site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1",
+				MarkdownDescription: "Site Subnet Parameters. Configure subnet parameters per site",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
@@ -125,15 +125,15 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -147,11 +147,11 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							},
 							Blocks: map[string]schema.Block{
 								"dhcp_networks": schema.ListNestedBlock{
-									MarkdownDescription: "Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"network_prefix": schema.StringAttribute{
-												MarkdownDescription: "Network Prefix. Exclusive with [] Network prefix for subnet ves.io.schema.rules.string.ipv4_prefix: true",
+												MarkdownDescription: "Network Prefix. Network prefix for subnet",
 												Optional: true,
 											},
 										},

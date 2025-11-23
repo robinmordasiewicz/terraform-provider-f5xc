@@ -47,7 +47,7 @@ func (r *DNSDomainResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create DNS Domain in a given namespace. If one already exist it will give a error.",
+		MarkdownDescription: "Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSDomain. Must be unique within the namespace.",

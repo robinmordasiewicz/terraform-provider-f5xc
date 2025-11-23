@@ -48,7 +48,7 @@ func (r *SecuremeshSiteV2Resource) Metadata(ctx context.Context, req resource.Me
 
 func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Secure Mesh site specification",
+		MarkdownDescription: "Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SecuremeshSiteV2. Must be unique within the namespace.",
@@ -82,7 +82,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"tunnel_dead_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 180000",
+				MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
 				Optional: true,
 			},
 			"tunnel_type": schema.StringAttribute{
@@ -97,19 +97,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"enhanced_firewall_policies": schema.ListNestedBlock{
-						MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+						MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -124,19 +124,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_policies": schema.ListNestedBlock{
-						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -149,7 +149,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access",
 				Attributes: map[string]schema.Attribute{
 					"ssh_key": schema.StringAttribute{
-						MarkdownDescription: "Public SSH key. Provided Public SSH key can be used for accessing nodes of the site. When provided, customers can ssh to the nodes of this Customer Edge site using admin as the user. ves.io.schema.rules.string.max_len: 8192",
+						MarkdownDescription: "Public SSH key. Provided Public SSH key can be used for accessing nodes of the site. When provided, customers can ssh to the nodes of this Customer Edge site using admin as the user.",
 						Optional: true,
 					},
 				},
@@ -167,7 +167,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -184,7 +184,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -205,15 +205,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -223,7 +223,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -247,15 +247,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -265,7 +265,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -289,15 +289,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -307,7 +307,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -329,7 +329,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
-						MarkdownDescription: "Disable Node Local Services. ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Disable Node Local Services.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
@@ -357,11 +357,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: custom_proxy, f5_proxy] Custom Enterprise Proxy. Custom Enterprise Proxy",
 				Attributes: map[string]schema.Attribute{
 					"proxy_ip_address": schema.StringAttribute{
-						MarkdownDescription: "Proxy IPv4 Address. Specify the IPv4 Address of the internal Enterprise Proxy Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "Proxy IPv4 Address. Specify the IPv4 Address of the internal Enterprise Proxy",
 						Optional: true,
 					},
 					"proxy_port": schema.Int64Attribute{
-						MarkdownDescription: "Proxy Port. Specify the Port of the internal Enterprise Proxy Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Proxy Port. Specify the Port of the internal Enterprise Proxy",
 						Optional: true,
 					},
 					"username": schema.StringAttribute{
@@ -389,7 +389,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -406,7 +406,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -420,7 +420,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: custom_proxy_bypass, no_proxy_bypass] Proxy Bypass. List of domains to bypass the proxy",
 				Attributes: map[string]schema.Attribute{
 					"proxy_bypass": schema.ListAttribute{
-						MarkdownDescription: "Proxy Bypass. List of domains to bypass the proxy ves.io.schema.rules.repeated.items.string.hostname_or_ip: true ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Proxy Bypass. List of domains to bypass the proxy",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -431,15 +431,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: dc_cluster_group_sli, no_s2s_connectivity_sli] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -449,15 +449,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: dc_cluster_group_slo, no_s2s_connectivity_slo, site_mesh_group_on_slo] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -478,7 +478,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "DNS Servers. DNS Servers",
 						Attributes: map[string]schema.Attribute{
 							"dns_servers": schema.ListAttribute{
-								MarkdownDescription: "DNS Servers. DNS Servers ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "DNS Servers. DNS Servers",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -488,7 +488,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "NTP Servers. NTP Servers",
 						Attributes: map[string]schema.Attribute{
 							"ntp_servers": schema.ListAttribute{
-								MarkdownDescription: "NTP Servers. NTP Servers ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "NTP Servers. NTP Servers",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -520,15 +520,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -538,7 +538,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -565,15 +565,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -583,7 +583,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -607,15 +607,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -625,7 +625,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -663,17 +663,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Site Local Network Configuration. Site local network configuration",
 						Attributes: map[string]schema.Attribute{
 							"nameserver": schema.StringAttribute{
-								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution ves.io.schema.rules.string.ipv4: true",
+								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution",
 								Optional: true,
 							},
 							"vip": schema.StringAttribute{
-								MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP. ves.io.schema.rules.string.ipv4: true",
+								MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP.",
 								Optional: true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"labels": schema.SingleNestedBlock{
-								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 16 ves.io.schema.rules.map.values.string.max_len: 64 ves.io.schema.rules.map.values.string.min_len: 1",
+								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy",
 							},
 							"no_static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -687,7 +687,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static Routes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Static Routes.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -700,7 +700,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -713,17 +713,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Site Local Network Configuration. Site local network configuration",
 						Attributes: map[string]schema.Attribute{
 							"nameserver": schema.StringAttribute{
-								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution ves.io.schema.rules.string.ipv4: true",
+								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution",
 								Optional: true,
 							},
 							"vip": schema.StringAttribute{
-								MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP. ves.io.schema.rules.string.ipv4: true",
+								MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP.",
 								Optional: true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"labels": schema.SingleNestedBlock{
-								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 16 ves.io.schema.rules.map.values.string.max_len: 64 ves.io.schema.rules.map.values.string.min_len: 1",
+								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy",
 							},
 							"no_static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -737,7 +737,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static Routes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Static Routes.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -750,7 +750,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -766,15 +766,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -809,15 +809,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -827,7 +827,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -851,15 +851,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -869,7 +869,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -907,15 +907,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -925,7 +925,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -974,7 +974,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Specific RE. Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs.",
 						Attributes: map[string]schema.Attribute{
 							"primary_re": schema.StringAttribute{
-								MarkdownDescription: "Primary RE Geography. Select primary RE for this site. ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+								MarkdownDescription: "Primary RE Geography. Select primary RE for this site.",
 								Optional: true,
 							},
 						},
@@ -994,15 +994,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -1025,7 +1025,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 						Attributes: map[string]schema.Attribute{
 							"operating_system_version": schema.StringAttribute{
-								MarkdownDescription: "Operating System Version. Exclusive with [default_os_version] Specify a OS version to be used e.g. 9.2024.6. ves.io.schema.rules.string.max_len: 20",
+								MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
 								Optional: true,
 							},
 						},
@@ -1039,7 +1039,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 						Attributes: map[string]schema.Attribute{
 							"volterra_software_version": schema.StringAttribute{
-								MarkdownDescription: "F5XC Software Version. Exclusive with [default_sw_version] Specify a F5XC Software Version to be used e.g. crt-20210329-1002. ves.io.schema.rules.string.max_len: 20",
+								MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
 								Optional: true,
 							},
 						},
@@ -1069,11 +1069,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
 								Attributes: map[string]schema.Attribute{
 									"drain_max_unavailable_node_count": schema.Int64Attribute{
-										MarkdownDescription: "Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000",
+										MarkdownDescription: "Node Batch Size Count.",
 										Optional: true,
 									},
 									"drain_node_timeout": schema.Int64Attribute{
-										MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value). Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 900",
+										MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
 										Optional: true,
 									},
 								},
@@ -1102,15 +1102,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
-								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname. Hostname for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Hostname. Hostname for this Node",
 											Optional: true,
 										},
 										"public_ip": schema.StringAttribute{
-											MarkdownDescription: "Public IP. Public IP for this Node ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Public IP. Public IP for this Node",
 											Optional: true,
 										},
 										"type": schema.StringAttribute{
@@ -1120,7 +1120,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"interface_list": schema.ListNestedBlock{
-											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},

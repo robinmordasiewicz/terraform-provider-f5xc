@@ -2,12 +2,12 @@
 page_title: "f5xc_virtual_host Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Creates virtual host in a given namespace.
+  Manages virtual host in a given namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_host (Resource)
 
-Creates virtual host in a given namespace.
+Manages virtual host in a given namespace. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -330,7 +330,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--csrf_policy--custom_domain_list"></a>
 ### Csrf Policy Custom Domain List
 
-`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form. ves.io.schema.. (`List`).
+`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form (`List`).
 
 <a id="nestedblock--csrf_policy--disabled"></a>
 ### Csrf Policy Disabled

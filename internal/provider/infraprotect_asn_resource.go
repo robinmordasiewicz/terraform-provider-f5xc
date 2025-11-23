@@ -47,7 +47,7 @@ func (r *InfraprotectAsnResource) Metadata(ctx context.Context, req resource.Met
 
 func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a DDoS transit ASN",
+		MarkdownDescription: "Manages DDoS transit ASN in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectAsn. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"asn": schema.Int64Attribute{
-				MarkdownDescription: "ASN. 2-byte or 4-byte Autonomous System Number (ASN) Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 4199999999",
+				MarkdownDescription: "ASN. 2-byte or 4-byte Autonomous System Number (ASN)",
 				Optional: true,
 			},
 		},

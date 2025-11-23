@@ -48,7 +48,7 @@ func (r *AddressAllocatorResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create Address Allocator will create an address allocator object in 'system' namespace of the user",
+		MarkdownDescription: "Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AddressAllocator. Must be unique within the namespace.",
@@ -82,7 +82,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"address_pool": schema.ListAttribute{
-				MarkdownDescription: "Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1",
+				MarkdownDescription: "Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -96,7 +96,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Address Allocation Scheme. Decides the scheme to be used to allocate addresses from the configured address pool.",
 				Attributes: map[string]schema.Attribute{
 					"allocation_unit": schema.Int64Attribute{
-						MarkdownDescription: "Allocation Unit. Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 32",
+						MarkdownDescription: "Allocation Unit. Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool.",
 						Optional: true,
 					},
 					"local_interface_address_offset": schema.Int64Attribute{

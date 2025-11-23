@@ -46,7 +46,7 @@ func (r *QuotaResource) Metadata(ctx context.Context, req resource.MetadataReque
 
 func (r *QuotaResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create quota creates a given object from storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Quota. Must be unique within the namespace.",
@@ -82,13 +82,13 @@ func (r *QuotaResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 		},
 		Blocks: map[string]schema.Block{
 			"api_limits": schema.SingleNestedBlock{
-				MarkdownDescription: "API Limits. API Limits defines ratelimit parameters for an API at the stdlib service The key of the api_limits map is rpc FQN e.g. 'ves.io.schema.advertise_policy.API.Create' ves.io.schema.rules.map.keys.string.max_len: 512 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.keys.string.pattern: ^[a-zA-Z][a-zA-Z0-9-._]*[a-zA-Z0-9]$",
+				MarkdownDescription: "API Limits. API Limits defines ratelimit parameters for an API at the stdlib service The key of the api_limits map is rpc FQN e.g. 'ves.io.schema.advertise_policy.API.Create'",
 			},
 			"object_limits": schema.SingleNestedBlock{
-				MarkdownDescription: "Object Limits. Object Limits define maximum number of instances that can be present per object kind for the tenant The key of the object_limits map is object kind e.g. 'virtual_host' ves.io.schema.rules.map.keys.string.max_len: 512 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.keys.string.pattern: ^[a-zA-Z][a-zA-Z0-9-._]*[a-zA-Z0-9]$",
+				MarkdownDescription: "Object Limits. Object Limits define maximum number of instances that can be present per object kind for the tenant The key of the object_limits map is object kind e.g. 'virtual_host'",
 			},
 			"resource_limits": schema.SingleNestedBlock{
-				MarkdownDescription: "Resource Limits. Resource Limits define maximum value of resources in the appropriate units that can be present. The key of the resource limits is the resource name ves.io.schema.rules.map.keys.string.max_len: 512 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.keys.string.pattern: ^[a-zA-Z][a-zA-Z0-9-._]*[a-zA-Z0-9]$",
+				MarkdownDescription: "Resource Limits. Resource Limits define maximum value of resources in the appropriate units that can be present. The key of the resource limits is the resource name",
 			},
 		},
 	}

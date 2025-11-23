@@ -50,7 +50,7 @@ func (r *FleetResource) Metadata(ctx context.Context, req resource.MetadataReque
 
 func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create fleet will create a fleet object in 'system' namespace of the user",
+		MarkdownDescription: "Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Fleet. Must be unique within the namespace.",
@@ -88,15 +88,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Optional: true,
 			},
 			"fleet_label": schema.StringAttribute{
-				MarkdownDescription: "Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet Required: YES ves.io.schema.rules.message.required: true ves...",
+				MarkdownDescription: "Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet",
 				Optional: true,
 			},
 			"operating_system_version": schema.StringAttribute{
-				MarkdownDescription: "Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config. ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config.",
 				Optional: true,
 			},
 			"volterra_software_version": schema.StringAttribute{
-				MarkdownDescription: "Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config. ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config.",
 				Optional: true,
 			},
 		},
@@ -105,7 +105,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Empty. This can be used for messages where no values are needed",
 			},
 			"blocked_services": schema.ListNestedBlock{
-				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. ves.io.schema.rules.repeated.max_items: 6",
+				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"network_type": schema.StringAttribute{
@@ -133,24 +133,24 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"bond_devices": schema.ListNestedBlock{
-						MarkdownDescription: "Bond Devices. List of bond devices Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Bond Devices. List of bond devices",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"devices": schema.ListAttribute{
-									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
 									Optional: true,
 									ElementType: types.StringType,
 								},
 								"link_polling_interval": schema.Int64Attribute{
-									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 500 ves.io.schema.rules.uint32.lte: 5000",
+									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
 									Optional: true,
 								},
 								"link_up_delay": schema.Int64Attribute{
-									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 1000",
+									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0' Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
 									Optional: true,
 								},
 							},
@@ -162,7 +162,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
 									Attributes: map[string]schema.Attribute{
 										"rate": schema.Int64Attribute{
-											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 30",
+											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
 											Optional: true,
 										},
 									},
@@ -177,15 +177,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "[OneOf: dc_cluster_group, dc_cluster_group_inside, no_dc_cluster_group] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -195,15 +195,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -227,7 +227,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"devices": schema.ListNestedBlock{
-						MarkdownDescription: "Devices. Configuration for all devices in the fleet. Examples of devices are - network interfaces, cameras, scanners etc. Configuration a device is applied on VER node if the VER node is member of this fleet and has an corresponding interface/device. The mapping from device configured in fleet with interface/device in VER node depends on the type of device and is documented in device instance specific sections ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Devices. Configuration for all devices in the fleet. Examples of devices are - network interfaces, cameras, scanners etc. Configuration a device is applied on VER node if the VER node is member of this fleet and has an corresponding interface/device. The mapping from device configured in fleet with interface/device in VER node depends on the type of device and is documented in device instance specific sections",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
@@ -280,11 +280,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						Optional: true,
 					},
 					"server_address": schema.StringAttribute{
-						MarkdownDescription: "License Server Address. Set License Server Address ves.io.schema.rules.string.hostname_or_ip: true",
+						MarkdownDescription: "License Server Address. Set License Server Address",
 						Optional: true,
 					},
 					"server_port": schema.Int64Attribute{
-						MarkdownDescription: "License Server Port Number. Set License Server port number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "License Server Port Number. Set License Server port number",
 						Optional: true,
 					},
 				},
@@ -294,7 +294,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "VM Configuration. VMs support configuration",
 			},
 			"inside_virtual_network": schema.ListNestedBlock{
-				MarkdownDescription: "Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet ves.io.schema.rules.repeated.max_items: 1",
+				MarkdownDescription: "Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -327,19 +327,19 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"interfaces": schema.ListNestedBlock{
-						MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -360,11 +360,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
-								MarkdownDescription: "Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000",
+								MarkdownDescription: "Node Batch Size Count.",
 								Optional: true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value). Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 900",
+								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
 								Optional: true,
 							},
 						},
@@ -384,15 +384,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -402,7 +402,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"network_connectors": schema.ListNestedBlock{
-				MarkdownDescription: "Network Connectors. Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet. ves.io.schema.rules.repeated.max_items: 8",
+				MarkdownDescription: "Network Connectors. Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -430,7 +430,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"network_firewall": schema.ListNestedBlock{
-				MarkdownDescription: "Network Firewall. Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network ves.io.schema.rules.repeated.max_items: 1",
+				MarkdownDescription: "Network Firewall. Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -473,7 +473,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "[OneOf: no_storage_static_routes, storage_static_routes] Empty. This can be used for messages where no values are needed",
 			},
 			"outside_virtual_network": schema.ListNestedBlock{
-				MarkdownDescription: "Outside (Site Local) Virtual Network. Default outside (site local) virtual network for the fleet ves.io.schema.rules.repeated.max_items: 1",
+				MarkdownDescription: "Outside (Site Local) Virtual Network. Default outside (site local) virtual network for the fleet",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -530,11 +530,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"sriov_interface": schema.ListNestedBlock{
-						MarkdownDescription: "Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"interface_name": schema.StringAttribute{
-									MarkdownDescription: "Name of physical interface. Name of SR-IOV physical interface Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "Name of physical interface. Name of SR-IOV physical interface",
 									Optional: true,
 								},
 								"number_of_vfio_vfs": schema.Int64Attribute{
@@ -542,7 +542,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Optional: true,
 								},
 								"number_of_vfs": schema.Int64Attribute{
-									MarkdownDescription: "Total number of virtual functions. Total number of virtual functions Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "Total number of virtual functions. Total number of virtual functions",
 									Optional: true,
 								},
 							},
@@ -557,7 +557,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"storage_classes": schema.ListNestedBlock{
-						MarkdownDescription: "List of Storage Classes. List of custom storage classes ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of Storage Classes. List of custom storage classes",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"allow_volume_expansion": schema.BoolAttribute{
@@ -569,31 +569,31 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Optional: true,
 								},
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Storage Class Description. Description for this storage class ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Storage Class Description. Description for this storage class",
 									Optional: true,
 								},
 								"reclaim_policy": schema.StringAttribute{
-									MarkdownDescription: "Reclaim Policy. Reclaim Policy ves.io.schema.rules.string.max_len: 16",
+									MarkdownDescription: "Reclaim Policy. Reclaim Policy",
 									Optional: true,
 								},
 								"storage_class_name": schema.StringAttribute{
-									MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
 									Optional: true,
 								},
 								"storage_device": schema.StringAttribute{
-									MarkdownDescription: "Storage Device. Storage device that this class will use. The Device name defined at previous step. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 64 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Storage Device. Storage device that this class will use. The Device name defined at previous step.",
 									Optional: true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"advanced_storage_parameters": schema.SingleNestedBlock{
-									MarkdownDescription: "Advanced Parameters. Map of parameter name and string value ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 64 ves.io.schema.rules.map.values.string.max_len: 128 ves.io.schema.rules.map.values.string.min_len: 1",
+									MarkdownDescription: "Advanced Parameters. Map of parameter name and string value",
 								},
 								"custom_storage": schema.SingleNestedBlock{
 									MarkdownDescription: "Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site.",
 									Attributes: map[string]schema.Attribute{
 										"yaml": schema.StringAttribute{
-											MarkdownDescription: "Storage Class YAML. K8s YAML for StorageClass ves.io.schema.rules.string.max_len: 4096 ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "Storage Class YAML. K8s YAML for StorageClass",
 											Optional: true,
 										},
 									},
@@ -602,11 +602,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "HPE Storage. Storage class Device configuration for HPE Storage",
 									Attributes: map[string]schema.Attribute{
 										"allow_mutations": schema.StringAttribute{
-											MarkdownDescription: "allowMutations. mutation can override specified parameters ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "allowMutations. mutation can override specified parameters",
 											Optional: true,
 										},
 										"allow_overrides": schema.StringAttribute{
-											MarkdownDescription: "allowOverrides. PVC can override specified parameters ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "allowOverrides. PVC can override specified parameters",
 											Optional: true,
 										},
 										"dedupe_enabled": schema.BoolAttribute{
@@ -614,7 +614,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information ves.io.schema.rules.string.max_len: 512",
+											MarkdownDescription: "Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
 											Optional: true,
 										},
 										"destroy_on_delete": schema.BoolAttribute{
@@ -626,7 +626,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"folder": schema.StringAttribute{
-											MarkdownDescription: "folder. The name of the folder in which to place the volume. ves.io.schema.rules.string.max_len: 128",
+											MarkdownDescription: "folder. The name of the folder in which to place the volume.",
 											Optional: true,
 										},
 										"limit_iops": schema.StringAttribute{
@@ -638,23 +638,23 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"performance_policy": schema.StringAttribute{
-											MarkdownDescription: "performancePolicy. The name of the performance policy to assign to the volume. ves.io.schema.rules.string.max_len: 128",
+											MarkdownDescription: "performancePolicy. The name of the performance policy to assign to the volume.",
 											Optional: true,
 										},
 										"pool": schema.StringAttribute{
-											MarkdownDescription: "pool. The name of the pool in which to place the volume. ves.io.schema.rules.string.max_len: 128",
+											MarkdownDescription: "pool. The name of the pool in which to place the volume.",
 											Optional: true,
 										},
 										"protection_template": schema.StringAttribute{
-											MarkdownDescription: "protectionTemplate. The name of the performance policy to assign to the volume. ves.io.schema.rules.string.max_len: 128",
+											MarkdownDescription: "protectionTemplate. The name of the performance policy to assign to the volume.",
 											Optional: true,
 										},
 										"secret_name": schema.StringAttribute{
-											MarkdownDescription: "Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
 											Optional: true,
 										},
 										"secret_namespace": schema.StringAttribute{
-											MarkdownDescription: "Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides",
 											Optional: true,
 										},
 										"sync_on_detach": schema.BoolAttribute{
@@ -671,7 +671,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "NetApp Trident Storage. Storage class Device configuration for NetApp Trident",
 									Attributes: map[string]schema.Attribute{
 										"storage_pools": schema.StringAttribute{
-											MarkdownDescription: "Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes ves.io.schema.rules.string.max_len: 512",
+											MarkdownDescription: "Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes",
 											Optional: true,
 										},
 									},
@@ -689,11 +689,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"bandwidth_limit": schema.StringAttribute{
-											MarkdownDescription: "Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB. ves.io.schema.rules.string.max_len: 12",
+											MarkdownDescription: "Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB.",
 											Optional: true,
 										},
 										"iops_limit": schema.Int64Attribute{
-											MarkdownDescription: "IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined. ves.io.schema.rules.uint32.ranges: 0,100-100000000",
+											MarkdownDescription: "IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined.",
 											Optional: true,
 										},
 									},
@@ -710,17 +710,17 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"storage_devices": schema.ListNestedBlock{
-						MarkdownDescription: "List of Storage Devices. List of custom storage devices ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of Storage Devices. List of custom storage devices",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"storage_device": schema.StringAttribute{
-									MarkdownDescription: "Storage Device. Storage device and device unit Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+									MarkdownDescription: "Storage Device. Storage device and device unit",
 									Optional: true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"advanced_advanced_parameters": schema.SingleNestedBlock{
-									MarkdownDescription: "Advanced Parameters. Map of parameter name and string value ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 64 ves.io.schema.rules.map.values.string.max_len: 128 ves.io.schema.rules.map.values.string.min_len: 1",
+									MarkdownDescription: "Advanced Parameters. Map of parameter name and string value",
 								},
 								"custom_storage": schema.SingleNestedBlock{
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -729,23 +729,23 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "HPE Storage. Device configuration for HPE Storage",
 									Attributes: map[string]schema.Attribute{
 										"api_server_port": schema.Int64Attribute{
-											MarkdownDescription: "Storage server Port. Enter Storage Server Port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Storage server Port. Enter Storage Server Port",
 											Optional: true,
 										},
 										"iscsi_chap_user": schema.StringAttribute{
-											MarkdownDescription: "iscsi chapUser. chap Username to connect to the HPE storage ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "iscsi chapUser. chap Username to connect to the HPE storage",
 											Optional: true,
 										},
 										"storage_server_ip_address": schema.StringAttribute{
-											MarkdownDescription: "Storage Server IP address. Enter storage server IP address ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "Storage Server IP address. Enter storage server IP address",
 											Optional: true,
 										},
 										"storage_server_name": schema.StringAttribute{
-											MarkdownDescription: "Storage Server Name. Enter storage server Name ves.io.schema.rules.string.hostname: true",
+											MarkdownDescription: "Storage Server Name. Enter storage server Name",
 											Optional: true,
 										},
 										"username": schema.StringAttribute{
-											MarkdownDescription: "Username. Username to connect to the HPE storage management IP Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Username. Username to connect to the HPE storage management IP",
 											Optional: true,
 										},
 									},
@@ -775,7 +775,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator",
 									Attributes: map[string]schema.Attribute{
 										"cluster_id": schema.StringAttribute{
-											MarkdownDescription: "Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 22 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.pattern: ^[a-z0-9_]*$",
+											MarkdownDescription: "Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores",
 											Optional: true,
 										},
 										"enable_storage_topology": schema.BoolAttribute{
@@ -805,19 +805,19 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"interfaces": schema.ListNestedBlock{
-						MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -832,11 +832,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"storage_routes": schema.ListNestedBlock{
-						MarkdownDescription: "List of Static Routes. List of storage static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of Static Routes. List of storage static routes",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"attrs": schema.ListAttribute{
-									MarkdownDescription: "Attributes. List of route attributes associated with the static route ves.io.schema.rules.repeated.max_items: 4",
+									MarkdownDescription: "Attributes. List of route attributes associated with the static route",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -855,7 +855,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 									Blocks: map[string]schema.Block{
 										"interface": schema.ListNestedBlock{
-											MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface' ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -866,7 +866,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"subnets": schema.ListNestedBlock{
-									MarkdownDescription: "Subnets. List of route prefixes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256",
+									MarkdownDescription: "Subnets. List of route prefixes",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 										},
@@ -890,15 +890,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},

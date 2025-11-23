@@ -417,10 +417,8 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 
 	attributes = append(standardAttrs, attributes...)
 
-	description := createSpec.Description
-	if description == "" {
-		description = fmt.Sprintf("Manages a %s in F5 Distributed Cloud.", toTitleCase(resourceName))
-	}
+	// Transform raw API description into user-friendly Terraform description
+	description := transformResourceDescription(resourceName, createSpec.Description)
 
 	// Generate example usage HCL
 	exampleUsage := generateExampleUsage(resourceName, attributes)
@@ -433,7 +431,7 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		TitleCase:     toTitleCase(resourceName),
 		APIPath:       fmt.Sprintf("/api/config/namespaces/%%s/%ss", resourceName),
 		APIPathPlural: resourceName + "s",
-		Description:   cleanDescription(description),
+		Description:   description,
 		Attributes:    attributes,
 		OneOfGroups:   make(map[string][]string),
 		ExampleUsage:  exampleUsage,
@@ -677,6 +675,247 @@ func cleanDescription(desc string) string {
 		desc = desc[:497] + "..."
 	}
 	return desc
+}
+
+// transformResourceDescription converts technical API descriptions into user-friendly
+// Terraform resource descriptions following HashiCorp best practices.
+// Pattern: "Manages a [Resource] in F5 Distributed Cloud [for purpose/capability]."
+func transformResourceDescription(resourceName, rawDescription string) string {
+	titleCase := toTitleCase(resourceName)
+
+	// Clean and normalize the raw description first
+	desc := cleanDescription(rawDescription)
+	desc = strings.TrimSpace(desc)
+
+	// If empty, use default
+	if desc == "" {
+		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud.", titleCase)
+	}
+
+	// Detect and transform common technical description patterns
+	lowerDesc := strings.ToLower(desc)
+
+	// Pattern 1: "Shape of the X specification" -> extract X and make user-friendly
+	if strings.Contains(lowerDesc, "shape of") {
+		return generateCapabilityDescription(resourceName, titleCase, desc)
+	}
+
+	// Pattern 2: "X object" or "X configuration" - technical object reference
+	if strings.HasSuffix(lowerDesc, " object") || strings.HasSuffix(lowerDesc, " configuration") ||
+		strings.HasSuffix(lowerDesc, " spec") || strings.HasSuffix(lowerDesc, " specification") {
+		return generateCapabilityDescription(resourceName, titleCase, desc)
+	}
+
+	// Pattern 3: Already starts with a verb like "Create", "Configure", "Define"
+	// Transform to "Manages" for consistency
+	actionVerbs := []string{"create", "configure", "define", "set up", "establish", "provision"}
+	for _, verb := range actionVerbs {
+		if strings.HasPrefix(lowerDesc, verb) {
+			// Replace the action verb with "Manages" for Terraform consistency
+			remainder := desc[len(verb):]
+			remainder = strings.TrimPrefix(remainder, "s") // handle "Creates" -> "Create"
+			remainder = strings.TrimSpace(remainder)
+			if remainder != "" {
+				// Clean up articles
+				remainder = strings.TrimPrefix(remainder, "a ")
+				remainder = strings.TrimPrefix(remainder, "an ")
+				remainder = strings.TrimPrefix(remainder, "the ")
+				return fmt.Sprintf("Manages %s in F5 Distributed Cloud.", remainder)
+			}
+		}
+	}
+
+	// Pattern 4: Description is already decent but needs "Manages" prefix
+	// If it doesn't start with a verb, add "Manages a X resource" prefix
+	if !startsWithVerb(desc) {
+		// Use the description as the capability explanation
+		capability := extractCapabilityFromDescription(desc)
+		if capability != "" {
+			return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", titleCase, capability)
+		}
+		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud. %s", titleCase, desc)
+	}
+
+	// If description already looks good, just ensure it ends properly
+	if !strings.HasSuffix(desc, ".") {
+		desc = desc + "."
+	}
+	return desc
+}
+
+// generateCapabilityDescription creates a user-friendly description based on resource name
+// and any capability hints from the original description
+func generateCapabilityDescription(resourceName, titleCase, rawDesc string) string {
+	// Resource-specific capability mappings for common F5 XC resources
+	capabilities := map[string]string{
+		// Sites
+		"securemesh_site":    "deploying secure mesh edge sites with distributed security capabilities",
+		"securemesh_site_v2": "deploying secure mesh edge sites with enhanced security and networking features",
+		"aws_vpc_site":       "deploying F5 sites within AWS VPC environments",
+		"azure_vnet_site":    "deploying F5 sites within Azure Virtual Network environments",
+		"gcp_vpc_site":       "deploying F5 sites within Google Cloud VPC environments",
+		"aws_tgw_site":       "deploying F5 sites connected via AWS Transit Gateway",
+		"voltstack_site":     "deploying Volterra stack sites for edge computing",
+		"virtual_site":       "creating logical groupings of sites based on labels and selectors",
+
+		// Load Balancing
+		"http_loadbalancer": "load balancing HTTP/HTTPS traffic with advanced routing and security",
+		"tcp_loadbalancer":  "load balancing TCP traffic across origin pools",
+		"udp_loadbalancer":  "load balancing UDP traffic across origin pools",
+		"dns_load_balancer": "intelligent DNS-based load balancing across multiple endpoints",
+		"cdn_loadbalancer":  "content delivery and edge caching with load balancing",
+		"origin_pool":       "defining backend server pools for load balancer targets",
+		"healthcheck":       "monitoring backend server health and availability",
+		"route":             "defining traffic routing rules for load balancers",
+
+		// Security
+		"app_firewall":              "web application firewall (WAF) protection",
+		"service_policy":            "defining service-level access control and security policies",
+		"network_firewall":          "network-level firewall rules and security controls",
+		"rate_limiter":              "protecting services from traffic spikes and DDoS attacks",
+		"bot_defense_app_infrastructure": "bot detection and mitigation capabilities",
+		"malicious_user_mitigation": "identifying and blocking malicious user behavior",
+		"waf_exclusion_policy":      "excluding specific requests from WAF inspection",
+
+		// Networking
+		"network_connector":  "connecting networks across sites and cloud providers",
+		"virtual_network":    "creating isolated virtual network segments",
+		"cloud_connect":      "establishing connectivity to cloud provider networks",
+		"cloud_link":         "linking F5 sites to cloud provider infrastructure",
+		"bgp":                "BGP routing configuration for network connectivity",
+		"ip_prefix_set":      "defining IP address prefix lists for network policies",
+		"network_interface":  "configuring network interfaces on sites",
+
+		// DNS
+		"dns_zone":              "DNS zone management and configuration",
+		"dns_domain":            "DNS domain registration and management",
+		"dns_lb_pool":           "DNS load balancer endpoint pools",
+		"dns_lb_health_check":   "health monitoring for DNS load balanced endpoints",
+		"dns_compliance_checks": "DNS security and compliance verification",
+
+		// Kubernetes
+		"k8s_cluster":             "Kubernetes cluster integration and management",
+		"virtual_k8s":             "virtual Kubernetes cluster deployment",
+		"k8s_cluster_role":        "Kubernetes RBAC cluster role definitions",
+		"k8s_cluster_role_binding": "Kubernetes RBAC cluster role bindings",
+		"k8s_pod_security_policy": "Kubernetes pod security policy enforcement",
+		"container_registry":      "container image registry configuration",
+
+		// Authentication & Secrets
+		"authentication":   "authentication methods and identity provider integration",
+		"cloud_credentials": "cloud provider credential management for site deployment",
+		"api_credential":   "API credential management for service authentication",
+		"token":            "API token generation and management",
+		"secret_policy":    "secret access policies and controls",
+
+		// Certificates
+		"certificate":       "TLS/SSL certificate management",
+		"certificate_chain": "certificate chain configuration for TLS",
+		"trusted_ca_list":   "trusted certificate authority list management",
+
+		// Monitoring & Logging
+		"log_receiver":        "log collection and forwarding configuration",
+		"global_log_receiver": "global log aggregation settings",
+		"alert_policy":        "alerting rules and notification policies",
+		"alert_receiver":      "alert notification endpoints",
+
+		// API Security
+		"api_definition": "API schema and endpoint definitions for security",
+		"api_discovery":  "automatic API endpoint discovery and inventory",
+		"api_testing":    "API testing and validation capabilities",
+		"api_crawler":    "API endpoint crawling and discovery",
+
+		// Organization
+		"namespace":      "logical namespace isolation for resources",
+		"tenant":         "tenant configuration and management",
+		"role":           "role-based access control definitions",
+		"allowed_tenant": "tenant access permissions and restrictions",
+	}
+
+	// Check if we have a specific capability mapping
+	if capability, ok := capabilities[resourceName]; ok {
+		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", titleCase, capability)
+	}
+
+	// Try to extract capability from raw description
+	capability := extractCapabilityFromDescription(rawDesc)
+	if capability != "" {
+		return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud for %s.", titleCase, capability)
+	}
+
+	// Default fallback
+	return fmt.Sprintf("Manages a %s resource in F5 Distributed Cloud.", titleCase)
+}
+
+// extractCapabilityFromDescription tries to extract a meaningful capability phrase
+// from technical descriptions
+func extractCapabilityFromDescription(desc string) string {
+	lowerDesc := strings.ToLower(desc)
+
+	// Remove common technical prefixes
+	prefixes := []string{
+		"shape of the ",
+		"shape of ",
+		"specification for ",
+		"configuration for ",
+		"defines the ",
+		"defines a ",
+		"represents the ",
+		"represents a ",
+		"the ",
+		"a ",
+		"an ",
+	}
+	for _, prefix := range prefixes {
+		if strings.HasPrefix(lowerDesc, prefix) {
+			desc = desc[len(prefix):]
+			lowerDesc = strings.ToLower(desc)
+			break
+		}
+	}
+
+	// Remove common technical suffixes
+	suffixes := []string{
+		" specification",
+		" spec",
+		" configuration",
+		" config",
+		" object",
+		" definition",
+	}
+	for _, suffix := range suffixes {
+		if strings.HasSuffix(lowerDesc, suffix) {
+			desc = desc[:len(desc)-len(suffix)]
+			break
+		}
+	}
+
+	desc = strings.TrimSpace(desc)
+
+	// If what remains is meaningful (more than just a name), use it
+	if len(desc) > 5 && !strings.Contains(strings.ToLower(desc), "shape") {
+		// Convert to lowercase capability phrase
+		return strings.ToLower(desc) + " configuration"
+	}
+
+	return ""
+}
+
+// startsWithVerb checks if the description starts with an action verb
+func startsWithVerb(desc string) bool {
+	verbs := []string{
+		"manages", "creates", "configures", "defines", "sets", "establishes",
+		"provisions", "deploys", "enables", "allows", "provides", "supports",
+		"manage", "create", "configure", "define", "set", "establish",
+		"provision", "deploy", "enable", "allow", "provide", "support",
+	}
+	lowerDesc := strings.ToLower(desc)
+	for _, verb := range verbs {
+		if strings.HasPrefix(lowerDesc, verb+" ") || strings.HasPrefix(lowerDesc, verb+"s ") {
+			return true
+		}
+	}
+	return false
 }
 
 // extractOneOfGroups extracts x-ves-oneof-field annotations from the raw schema JSON

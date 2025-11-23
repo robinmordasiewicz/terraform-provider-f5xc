@@ -2,12 +2,12 @@
 page_title: "f5xc_subnet Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Subnet object contains configuration for an interface of a VM/pod. It is created in user or shared namespace.
+  Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
 ---
 
 # f5xc_subnet (Data Source)
 
-Subnet object contains configuration for an interface of a VM/pod. It is created in user or shared namespace.
+Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

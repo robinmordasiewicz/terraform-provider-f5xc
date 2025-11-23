@@ -46,7 +46,7 @@ func (r *TokenResource) Metadata(ctx context.Context, req resource.MetadataReque
 
 func (r *TokenResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration.",
+		MarkdownDescription: "Manages new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Token. Must be unique within the namespace.",

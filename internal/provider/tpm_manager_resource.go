@@ -46,7 +46,7 @@ func (r *TpmManagerResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *TpmManagerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a TPM Manager object",
+		MarkdownDescription: "Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TpmManager. Must be unique within the namespace.",

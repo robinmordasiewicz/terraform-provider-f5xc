@@ -2,12 +2,12 @@
 page_title: "f5xc_cdn_cache_rule Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Shape of the CDN loadbalancer specification
+  Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 ---
 
 # f5xc_cdn_cache_rule (Resource)
 
-Shape of the CDN loadbalancer specification
+Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `eligible_for_cache` - (Optional) Cache Action Options. List of options for Cache Action. See [Eligible For Cache](#nestedblock--cache_rules--eligible_for_cache) below.
 
-`rule_expression_list` - (Optional) Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs.. See [Rule Expression List](#nestedblock--cache_rules--rule_expression_list) below.
+`rule_expression_list` - (Optional) Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs. See [Rule Expression List](#nestedblock--cache_rules--rule_expression_list) below.
 
 `rule_name` - (Optional) Rule Name. Name of the Cache Rule (`String`).
 

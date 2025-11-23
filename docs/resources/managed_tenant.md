@@ -2,12 +2,12 @@
 page_title: "f5xc_managed_tenant Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Creates a managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage.
+  Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 ---
 
 # f5xc_managed_tenant (Resource)
 
-Creates a managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage.
+Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

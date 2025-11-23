@@ -2,12 +2,12 @@
 page_title: "f5xc_advertise_policy Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers.
+  Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
 ---
 
 # f5xc_advertise_policy (Resource)
 
-advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers.
+Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

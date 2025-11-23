@@ -2,12 +2,12 @@
 page_title: "f5xc_tenant_configuration Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Shape of the tenant configuration specification
+  Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 ---
 
 # f5xc_tenant_configuration (Resource)
 
-Shape of the tenant configuration specification
+Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

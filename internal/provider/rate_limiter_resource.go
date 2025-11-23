@@ -46,7 +46,7 @@ func (r *RateLimiterResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create rate_limiter creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the RateLimiter. Must be unique within the namespace.",
@@ -82,19 +82,19 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 		},
 		Blocks: map[string]schema.Block{
 			"limits": schema.ListNestedBlock{
-				MarkdownDescription: "Rate Limit Values. A list of RateLimitValues that specifies the total number of allowed requests for each specified period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+				MarkdownDescription: "Rate Limit Values. A list of RateLimitValues that specifies the total number of allowed requests for each specified period.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"burst_multiplier": schema.Int64Attribute{
-							MarkdownDescription: "Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 100",
+							MarkdownDescription: "Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate.",
 							Optional: true,
 						},
 						"period_multiplier": schema.Int64Attribute{
-							MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration ves.io.schema.rules.uint32.gte: 0",
+							MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration",
 							Optional: true,
 						},
 						"total_number": schema.Int64Attribute{
-							MarkdownDescription: "Number Of Requests. The total number of allowed requests per rate-limiting period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 8192",
+							MarkdownDescription: "Number Of Requests. The total number of allowed requests per rate-limiting period.",
 							Optional: true,
 						},
 						"unit": schema.StringAttribute{
@@ -112,7 +112,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Hours. Input Duration Hours",
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
-											MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 48",
+											MarkdownDescription: "Duration.",
 											Optional: true,
 										},
 									},
@@ -121,7 +121,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Minutes. Input Duration Minutes",
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
-											MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 60",
+											MarkdownDescription: "Duration.",
 											Optional: true,
 										},
 									},
@@ -130,7 +130,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Seconds. Input Duration Seconds",
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
-											MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 300",
+											MarkdownDescription: "Duration.",
 											Optional: true,
 										},
 									},
@@ -151,7 +151,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"user_identification": schema.ListNestedBlock{
-				MarkdownDescription: "User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. ves.io.schema.rules.repeated.max_items: 1",
+				MarkdownDescription: "User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{

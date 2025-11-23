@@ -2,12 +2,12 @@
 page_title: "f5xc_aws_tgw_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Shape of the AWS TGW site specification
+  Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 ---
 
 # f5xc_aws_tgw_site (Data Source)
 
-Shape of the AWS TGW site specification
+Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

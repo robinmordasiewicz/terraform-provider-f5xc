@@ -48,7 +48,7 @@ func (r *HTTPLoadBalancerResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the HTTP load balancer specification",
+		MarkdownDescription: "Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the HTTPLoadBalancer. Must be unique within the namespace.",
@@ -102,15 +102,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -125,15 +125,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_where": schema.ListNestedBlock{
-						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"port": schema.Int64Attribute{
-									MarkdownDescription: "Listen Port. Exclusive with [port_ranges use_default_port] Port to Listen. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "Listen Port. Port to Listen.",
 									Optional: true,
 								},
 								"port_ranges": schema.StringAttribute{
-									MarkdownDescription: "Listen Port Ranges. Exclusive with [port use_default_port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.max_ports: 64 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.unique_port_range_list: true",
+									MarkdownDescription: "Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional: true,
 								},
 							},
@@ -152,7 +152,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Site. This defines a reference to a CE site along with network type and an optional ip address where a load balancer could be advertised",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
 											Optional: true,
 										},
 										"network": schema.StringAttribute{
@@ -173,11 +173,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Virtual Network. Parameters to advertise on a given virtual network",
 									Attributes: map[string]schema.Attribute{
 										"specific_v6_vip": schema.StringAttribute{
-											MarkdownDescription: "Specific V6 VIP. Exclusive with [default_v6_vip] Use given IPV6 address as VIP on virtual Network ves.io.schema.rules.string.ipv6: true",
+											MarkdownDescription: "Specific V6 VIP. Use given IPV6 address as VIP on virtual Network",
 											Optional: true,
 										},
 										"specific_vip": schema.StringAttribute{
-											MarkdownDescription: "Specific V4 VIP. Exclusive with [default_vip] Use given IPV4 address as VIP on virtual Network ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "Specific V4 VIP. Use given IPV4 address as VIP on virtual Network",
 											Optional: true,
 										},
 									},
@@ -211,7 +211,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Virtual Site with Specified VIP. This defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
 											Optional: true,
 										},
 										"network": schema.StringAttribute{
@@ -253,15 +253,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -278,15 +278,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"api_endpoint_rules": schema.ListNestedBlock{
-						MarkdownDescription: "API Endpoints. This category defines specific rules per API endpoints. If request matches any of these rules, skipping second category rules. ves.io.schema.rules.repeated.max_items: 20",
+						MarkdownDescription: "API Endpoints. This category defines specific rules per API endpoints. If request matches any of these rules, skipping second category rules.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"api_endpoint_path": schema.StringAttribute{
-									MarkdownDescription: "API Endpoint. The endpoint (path) of the request. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1024 ves.io.schema.rules.string.templated_http_path: true",
+									MarkdownDescription: "API Endpoint. The endpoint (path) of the request.",
 									Optional: true,
 								},
 								"specific_domain": schema.StringAttribute{
-									MarkdownDescription: "Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. For example: api.example.com ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true",
+									MarkdownDescription: "Specific Domain. The rule will apply for a specific domain. For example: api.example.com",
 									Optional: true,
 								},
 							},
@@ -315,7 +315,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Method List. List of methods values to match against. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Method List. List of methods values to match against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -359,11 +359,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -374,25 +374,25 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"cookie_matchers": schema.ListNestedBlock{
-											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"headers": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
-											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"query_params": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -403,19 +403,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"api_groups_rules": schema.ListNestedBlock{
-						MarkdownDescription: "Server URLs and API Groups. This category includes rules per API group or Server URL. For API groups, refer to API Definition which includes API groups derived from uploaded swaggers. ves.io.schema.rules.repeated.max_items: 20",
+						MarkdownDescription: "Server URLs and API Groups. This category includes rules per API group or Server URL. For API groups, refer to API Definition which includes API groups derived from uploaded swaggers.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"api_group": schema.StringAttribute{
-									MarkdownDescription: "API Group. API groups derived from API Definition swaggers. For example oas-all-operations including all paths and methods from the swaggers, oas-base-urls covering all requests under base-paths from the swaggers. Custom groups can be created if user tags paths or operations with 'x-volterra-api-group' extensions inside swaggers. ves.io.schema.rules.string.max_len: 128",
+									MarkdownDescription: "API Group. API groups derived from API Definition swaggers. For example oas-all-operations including all paths and methods from the swaggers, oas-base-urls covering all requests under base-paths from the swaggers. Custom groups can be created if user tags paths or operations with 'x-volterra-api-group' extensions inside swaggers.",
 									Optional: true,
 								},
 								"base_path": schema.StringAttribute{
-									MarkdownDescription: "Base Path. Prefix of the request path. For example: /v1 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 128",
+									MarkdownDescription: "Base Path. Prefix of the request path. For example: /v1",
 									Optional: true,
 								},
 								"specific_domain": schema.StringAttribute{
-									MarkdownDescription: "Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. For example: api.example.com ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true",
+									MarkdownDescription: "Specific Domain. The rule will apply for a specific domain. For example: api.example.com",
 									Optional: true,
 								},
 							},
@@ -474,11 +474,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -489,25 +489,25 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"cookie_matchers": schema.ListNestedBlock{
-											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"headers": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
-											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"query_params": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -526,15 +526,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"api_endpoint_rules": schema.ListNestedBlock{
-						MarkdownDescription: "API Endpoints. Sets of rules for a specific endpoints. Order is matter as it uses first match policy. For creating rule that contain a whole domain or group of endpoints, please use the server URL rules above. ves.io.schema.rules.repeated.max_items: 20",
+						MarkdownDescription: "API Endpoints. Sets of rules for a specific endpoints. Order is matter as it uses first match policy. For creating rule that contain a whole domain or group of endpoints, please use the server URL rules above.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"api_endpoint_path": schema.StringAttribute{
-									MarkdownDescription: "API Endpoint. The endpoint (path) of the request. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1024 ves.io.schema.rules.string.templated_http_path: true",
+									MarkdownDescription: "API Endpoint. The endpoint (path) of the request.",
 									Optional: true,
 								},
 								"specific_domain": schema.StringAttribute{
-									MarkdownDescription: "Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true",
+									MarkdownDescription: "Specific Domain. The rule will apply for a specific domain.",
 									Optional: true,
 								},
 							},
@@ -550,7 +550,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Method List. List of methods values to match against. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Method List. List of methods values to match against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -594,7 +594,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "InlineRateLimiter.",
 									Attributes: map[string]schema.Attribute{
 										"threshold": schema.Int64Attribute{
-											MarkdownDescription: "Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 8192",
+											MarkdownDescription: "Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period.",
 											Optional: true,
 										},
 										"unit": schema.StringAttribute{
@@ -615,15 +615,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -634,25 +634,25 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"cookie_matchers": schema.ListNestedBlock{
-											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"headers": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
-											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"query_params": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -668,15 +668,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"bypass_rate_limiting_rules": schema.ListNestedBlock{
-								MarkdownDescription: "Bypass Rate Limiting. This category defines rules per URL or API group. If request matches any of these rules, skip Rate Limiting. ves.io.schema.rules.repeated.max_items: 20",
+								MarkdownDescription: "Bypass Rate Limiting. This category defines rules per URL or API group. If request matches any of these rules, skip Rate Limiting.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"base_path": schema.StringAttribute{
-											MarkdownDescription: "Base Path. Exclusive with [any_url api_endpoint api_groups] The base path which this validation applies to ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 128",
+											MarkdownDescription: "Base Path. The base path which this validation applies to",
 											Optional: true,
 										},
 										"specific_domain": schema.StringAttribute{
-											MarkdownDescription: "Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. For example: api.example.com ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true",
+											MarkdownDescription: "Specific Domain. The rule will apply for a specific domain. For example: api.example.com",
 											Optional: true,
 										},
 									},
@@ -710,19 +710,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"rate_limiter_allowed_prefixes": schema.ListNestedBlock{
-								MarkdownDescription: "List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -734,7 +734,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
-								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -744,19 +744,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"server_url_rules": schema.ListNestedBlock{
-						MarkdownDescription: "Server URLs. Set of rules for entire domain or base path that contain multiple endpoints. Order is matter as it uses first match policy. For matching also specific endpoints you can use the API endpoint rules set bellow. ves.io.schema.rules.repeated.max_items: 20",
+						MarkdownDescription: "Server URLs. Set of rules for entire domain or base path that contain multiple endpoints. Order is matter as it uses first match policy. For matching also specific endpoints you can use the API endpoint rules set bellow.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"api_group": schema.StringAttribute{
-									MarkdownDescription: "API Group. API groups derived from API Definition swaggers. For example oas-all-operations including all paths and methods from the swaggers, oas-base-urls covering all requests under base-paths from the swaggers. Custom groups can be created if user tags paths or operations with 'x-volterra-api-group' extensions inside swaggers. ves.io.schema.rules.string.max_len: 128",
+									MarkdownDescription: "API Group. API groups derived from API Definition swaggers. For example oas-all-operations including all paths and methods from the swaggers, oas-base-urls covering all requests under base-paths from the swaggers. Custom groups can be created if user tags paths or operations with 'x-volterra-api-group' extensions inside swaggers.",
 									Optional: true,
 								},
 								"base_path": schema.StringAttribute{
-									MarkdownDescription: "Base Path. Prefix of the request path. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 128",
+									MarkdownDescription: "Base Path. Prefix of the request path.",
 									Optional: true,
 								},
 								"specific_domain": schema.StringAttribute{
-									MarkdownDescription: "Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true",
+									MarkdownDescription: "Specific Domain. The rule will apply for a specific domain.",
 									Optional: true,
 								},
 							},
@@ -802,7 +802,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "InlineRateLimiter.",
 									Attributes: map[string]schema.Attribute{
 										"threshold": schema.Int64Attribute{
-											MarkdownDescription: "Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 8192",
+											MarkdownDescription: "Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period.",
 											Optional: true,
 										},
 										"unit": schema.StringAttribute{
@@ -823,15 +823,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -842,25 +842,25 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"cookie_matchers": schema.ListNestedBlock{
-											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"headers": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
-											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"query_params": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -882,15 +882,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -972,19 +972,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 							},
 							"open_api_validation_rules": schema.ListNestedBlock{
-								MarkdownDescription: "Validation List. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 15 ves.io.schema.rules.repeated.unique_metadata_name: true",
+								MarkdownDescription: "Validation List.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"api_group": schema.StringAttribute{
-											MarkdownDescription: "API Group. Exclusive with [api_endpoint base_path] The API group which this validation applies to ves.io.schema.rules.string.max_len: 128",
+											MarkdownDescription: "API Group. The API group which this validation applies to",
 											Optional: true,
 										},
 										"base_path": schema.StringAttribute{
-											MarkdownDescription: "Base Path. Exclusive with [api_endpoint api_group] The base path which this validation applies to ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 128",
+											MarkdownDescription: "Base Path. The base path which this validation applies to",
 											Optional: true,
 										},
 										"specific_domain": schema.StringAttribute{
-											MarkdownDescription: "Specific Domain. Exclusive with [any_domain] The rule will apply for a specific domain. ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.vh_domain: true",
+											MarkdownDescription: "Specific Domain. The rule will apply for a specific domain.",
 											Optional: true,
 										},
 									},
@@ -1035,13 +1035,13 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: api_testing, disable_api_testing] API Testing.",
 				Attributes: map[string]schema.Attribute{
 					"custom_header_value": schema.StringAttribute{
-						MarkdownDescription: "Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic ves.io.schema.rules.string.max_len: 128",
+						MarkdownDescription: "Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic",
 						Optional: true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"domains": schema.ListNestedBlock{
-						MarkdownDescription: "Testing Environments. Add and configure testing domains and credentials Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32",
+						MarkdownDescription: "Testing Environments. Add and configure testing domains and credentials",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"allow_destructive_methods": schema.BoolAttribute{
@@ -1049,17 +1049,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Optional: true,
 								},
 								"domain": schema.StringAttribute{
-									MarkdownDescription: "Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.vh_domain: true",
+									MarkdownDescription: "Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments.",
 									Optional: true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"credentials": schema.ListNestedBlock{
-									MarkdownDescription: "Credentials. Add credentials for API testing to use in the selected environment. Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "Credentials. Add credentials for API testing to use in the selected environment.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"credential_name": schema.StringAttribute{
-												MarkdownDescription: "Name. Enter a unique name for the credentials used in API testing Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+												MarkdownDescription: "Name. Enter a unique name for the credentials used in API testing",
 												Optional: true,
 											},
 										},
@@ -1104,47 +1104,47 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: app_firewall, disable_waf] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
 
 			},
 			"blocked_clients": schema.ListNestedBlock{
-				MarkdownDescription: "Client Blocking Rules. Define rules to block IP Prefixes or AS numbers. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "Client Blocking Rules. Define rules to block IP Prefixes or AS numbers.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"actions": schema.ListAttribute{
-							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule ves.io.schema.rules.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 10 ves.io.schema.rules.repeated.unique: true",
+							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule",
 							Optional: true,
 							ElementType: types.StringType,
 						},
 						"as_number": schema.Int64Attribute{
-							MarkdownDescription: "AS Number. Exclusive with [http_header ip_prefix ipv6_prefix user_identifier] RFC 6793 defined 4-byte AS number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 401308",
+							MarkdownDescription: "AS Number. RFC 6793 defined 4-byte AS number",
 							Optional: true,
 						},
 						"expiration_timestamp": schema.StringAttribute{
-							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore. ves.io.schema.rules.timestamp.within.seconds: 31536000",
+							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
 							Optional: true,
 						},
 						"ip_prefix": schema.StringAttribute{
-							MarkdownDescription: "IPv4 Prefix. Exclusive with [as_number http_header ipv6_prefix user_identifier] IPv4 prefix string. ves.io.schema.rules.string.ipv4_prefix: true",
+							MarkdownDescription: "IPv4 Prefix. IPv4 prefix string.",
 							Optional: true,
 						},
 						"ipv6_prefix": schema.StringAttribute{
-							MarkdownDescription: "IPv6 Prefix. Exclusive with [as_number http_header ip_prefix user_identifier] IPv6 prefix string. ves.io.schema.rules.string.ipv6_prefix: true",
+							MarkdownDescription: "IPv6 Prefix. IPv6 prefix string.",
 							Optional: true,
 						},
 						"user_identifier": schema.StringAttribute{
-							MarkdownDescription: "User Identifier. Exclusive with [as_number http_header ip_prefix ipv6_prefix] Identify user based on user identifier. User identifier value needs to be copied from security event. ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "User Identifier. Identify user based on user identifier. User identifier value needs to be copied from security event.",
 							Optional: true,
 						},
 					},
@@ -1158,11 +1158,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							},
 							Blocks: map[string]schema.Block{
 								"headers": schema.ListNestedBlock{
-									MarkdownDescription: "HTTP Headers. List of HTTP header name and value pairs Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+									MarkdownDescription: "HTTP Headers. List of HTTP header name and value pairs",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"exact": schema.StringAttribute{
-												MarkdownDescription: "Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+												MarkdownDescription: "Exact. Header value to match exactly",
 												Optional: true,
 											},
 											"invert_match": schema.BoolAttribute{
@@ -1170,15 +1170,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												Optional: true,
 											},
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+												MarkdownDescription: "Name. Name of the header",
 												Optional: true,
 											},
 											"presence": schema.BoolAttribute{
-												MarkdownDescription: "Presence. Exclusive with [exact regex] If true, check for presence of header",
+												MarkdownDescription: "Presence. If true, check for presence of header",
 												Optional: true,
 											},
 											"regex": schema.StringAttribute{
-												MarkdownDescription: "Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string.regex: true",
+												MarkdownDescription: "Regex. Regex match of the header value in re2 format",
 												Optional: true,
 											},
 										},
@@ -1190,11 +1190,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -1217,7 +1217,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"timeout": schema.Int64Attribute{
-						MarkdownDescription: "Timeout. The timeout for the inference check, in milliseconds. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 60000",
+						MarkdownDescription: "Timeout. The timeout for the inference check, in milliseconds.",
 						Optional: true,
 					},
 				},
@@ -1236,7 +1236,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Optional: true,
 							},
 							"js_download_path": schema.StringAttribute{
-								MarkdownDescription: "JavaScript Download Path. Customize Bot Defense Client JavaScript path. If not specified, default `/common.js` ves.io.schema.rules.string.http_path: true",
+								MarkdownDescription: "JavaScript Download Path. Customize Bot Defense Client JavaScript path. If not specified, default `/common.js`",
 								Optional: true,
 							},
 						},
@@ -1266,7 +1266,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"exclude_list": schema.ListNestedBlock{
-										MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1279,13 +1279,13 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"exclude_list": schema.ListNestedBlock{
-										MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"rules": schema.ListNestedBlock{
-										MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1303,11 +1303,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 							},
 							"protected_app_endpoints": schema.ListNestedBlock{
-								MarkdownDescription: "App Endpoint Type. List of protected endpoints. Limit: Approx '128 endpoints per Load Balancer (LB)' upto 4 LBs, '32 endpoints per LB' after 4 LBs. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "App Endpoint Type. List of protected endpoints. Limit: Approx '128 endpoints per Load Balancer (LB)' upto 4 LBs, '32 endpoints per LB' after 4 LBs.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"http_methods": schema.ListAttribute{
-											MarkdownDescription: "HTTP Methods. List of HTTP methods. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "HTTP Methods. List of HTTP methods.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -1330,7 +1330,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Bot Defense Flow Label Category. Bot Defense Flow Label Category allows to associate traffic with selected category",
 										},
 										"headers": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -1351,7 +1351,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
 										},
 										"query_params": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -1403,7 +1403,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"exclude_list": schema.ListNestedBlock{
-								MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -1431,7 +1431,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"exclude_list": schema.ListNestedBlock{
-								MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -1452,7 +1452,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 							},
 							"rules": schema.ListNestedBlock{
-								MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"javascript_location": schema.StringAttribute{
@@ -1482,15 +1482,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -1506,7 +1506,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"headers": schema.ListNestedBlock{
-										MarkdownDescription: "Headers. Headers that can be used to identify mobile traffic. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Headers. Headers that can be used to identify mobile traffic.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1519,15 +1519,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -1550,15 +1550,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -1570,11 +1570,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Default Cache Behaviour. This defines a Default Cache Action",
 						Attributes: map[string]schema.Attribute{
 							"cache_ttl_default": schema.StringAttribute{
-								MarkdownDescription: "Fallback Cache TTL (d/ h/ m). Exclusive with [cache_disabled cache_ttl_override] Use Cache TTL Provided by Origin, and set a contigency TTL value in case one is not provided ves.io.schema.rules.string.time_interval: true",
+								MarkdownDescription: "Fallback Cache TTL (d/ h/ m). Use Cache TTL Provided by Origin, and set a contigency TTL value in case one is not provided",
 								Optional: true,
 							},
 							"cache_ttl_override": schema.StringAttribute{
-								MarkdownDescription: "Override Cache TTL (d/ h/ m/ s). Exclusive with [cache_disabled cache_ttl_default] Always override the Cahce TTL provided by Origin ves.io.schema.rules.string.time_interval: true",
+								MarkdownDescription: "Override Cache TTL (d/ h/ m/ s). Always override the Cahce TTL provided by Origin",
 								Optional: true,
 							},
 						},
@@ -1591,11 +1591,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: captcha_challenge, enable_challenge, js_challenge, no_challenge, policy_based_challenge] Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap...",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 						Optional: true,
 					},
 					"custom_page": schema.StringAttribute{
-						MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io.sch...",
+						MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 						Optional: true,
 					},
 				},
@@ -1623,7 +1623,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"exclude_list": schema.ListNestedBlock{
-										MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1636,13 +1636,13 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"exclude_list": schema.ListNestedBlock{
-										MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"rules": schema.ListNestedBlock{
-										MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1658,7 +1658,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: cookie_stickiness, least_active, random, ring_hash, round_robin, source_ip_stickiness] Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g...",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced",
 						Optional: true,
 					},
 					"path": schema.StringAttribute{
@@ -1710,16 +1710,16 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"allow_methods": schema.StringAttribute{
-						MarkdownDescription: "Allow Methods. Specifies the content for the access-control-allow-methods header ves.io.schema.rules.string.http_valid_methods: true",
+						MarkdownDescription: "Allow Methods. Specifies the content for the access-control-allow-methods header",
 						Optional: true,
 					},
 					"allow_origin": schema.ListAttribute{
-						MarkdownDescription: "Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"allow_origin_regex": schema.ListAttribute{
-						MarkdownDescription: "Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.items.string.regex: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -1732,7 +1732,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"maximum_age": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours) ves.io.schema.rules.int32.gte: -1 ves.io.schema.rules.int32.lte: 86400",
+						MarkdownDescription: "Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours)",
 						Optional: true,
 					},
 				},
@@ -1750,7 +1750,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Domain name list. List of domain names used for Host header matching",
 						Attributes: map[string]schema.Attribute{
 							"domains": schema.ListAttribute{
-								MarkdownDescription: "Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.items.string.vh_domain: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema...",
+								MarkdownDescription: "Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -1763,15 +1763,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 
 			},
 			"data_guard_rules": schema.ListNestedBlock{
-				MarkdownDescription: "Data Guard Rules. Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the http response with a string of asterisks (*). Note: App Firewall should be enabled, to use Data Guard feature. ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "Data Guard Rules. Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the http response with a string of asterisks (*). Note: App Firewall should be enabled, to use Data Guard feature.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"exact_value": schema.StringAttribute{
-							MarkdownDescription: "Exact Value. Exclusive with [any_domain suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "Exact Value. Exact domain name",
 							Optional: true,
 						},
 						"suffix_value": schema.StringAttribute{
-							MarkdownDescription: "Suffix Value. Exclusive with [any_domain exact_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
 							Optional: true,
 						},
 					},
@@ -1786,11 +1786,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -1799,15 +1799,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
 							Attributes: map[string]schema.Attribute{
 								"path": schema.StringAttribute{
-									MarkdownDescription: "Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Exact. Exact path value to match",
 									Optional: true,
 								},
 								"prefix": schema.StringAttribute{
-									MarkdownDescription: "Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
 									Optional: true,
 								},
 								"regex": schema.StringAttribute{
-									MarkdownDescription: "Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
 									Optional: true,
 								},
 							},
@@ -1820,11 +1820,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"ddos_mitigation_rules": schema.ListNestedBlock{
-				MarkdownDescription: "DDoS Mitigation Rules. Define manual mitigation rules to block L7 DDoS attacks. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "DDoS Mitigation Rules. Define manual mitigation rules to block L7 DDoS attacks.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"expiration_timestamp": schema.StringAttribute{
-							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore. ves.io.schema.rules.timestamp.within.seconds: 31536000",
+							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
 							Optional: true,
 						},
 					},
@@ -1836,7 +1836,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "DDoS Client Source Choice. DDoS Mitigation sources to be blocked",
 							Attributes: map[string]schema.Attribute{
 								"country_list": schema.ListAttribute{
-									MarkdownDescription: "Country List. Sources that are located in one of the countries in the given list ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Country List. Sources that are located in one of the countries in the given list",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -1846,7 +1846,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
-											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -1856,7 +1856,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against ves.io.schema.rules.repeated.items.string.len: 36 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -1866,17 +1866,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
 									Attributes: map[string]schema.Attribute{
 										"classes": schema.ListAttribute{
-											MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.items.string.len: 32 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"excluded_values": schema.ListAttribute{
-											MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher. ves.io.schema.rules.repeated.items.string.len: 32 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -1892,7 +1892,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Optional: true,
 								},
 								"ip_prefixes": schema.ListAttribute{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -1902,11 +1902,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -1923,7 +1923,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"health_check_port": schema.Int64Attribute{
-						MarkdownDescription: "Health check port. Exclusive with [same_as_endpoint_port] Port used for performing health check ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Health check port. Port used for performing health check",
 						Optional: true,
 					},
 					"loadbalancer_algorithm": schema.StringAttribute{
@@ -1931,7 +1931,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"port": schema.Int64Attribute{
-						MarkdownDescription: "Port. Exclusive with [automatic_port lb_port] Endpoint service is available on this port ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "Port. Endpoint service is available on this port",
 						Optional: true,
 					},
 				},
@@ -1940,15 +1940,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Origin Pool Advanced Options. Configure Advanced options for origin pool",
 						Attributes: map[string]schema.Attribute{
 							"connection_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds ves.io.schema.rules.uint32.lte: 1800000",
+								MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds",
 								Optional: true,
 							},
 							"http_idle_timeout": schema.Int64Attribute{
-								MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes. ves.io.schema.rules.uint32.lte: 600000",
+								MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes.",
 								Optional: true,
 							},
 							"panic_threshold": schema.Int64Attribute{
-								MarkdownDescription: "Panic threshold. Exclusive with [no_panic_threshold] x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status. ves.io.schema.rules.uint32.lte: 100",
+								MarkdownDescription: "Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status.",
 								Optional: true,
 							},
 						},
@@ -1960,11 +1960,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly.",
 								Attributes: map[string]schema.Attribute{
 									"connection_limit": schema.Int64Attribute{
-										MarkdownDescription: "Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit. ves.io.schema.rules.uint32.lte: 32768",
+										MarkdownDescription: "Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit.",
 										Optional: true,
 									},
 									"max_requests": schema.Int64Attribute{
-										MarkdownDescription: "Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count. ves.io.schema.rules.uint32.lte: 32768",
+										MarkdownDescription: "Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count.",
 										Optional: true,
 									},
 									"pending_requests": schema.Int64Attribute{
@@ -1976,7 +1976,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"retries": schema.Int64Attribute{
-										MarkdownDescription: "Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count. ves.io.schema.rules.uint32.lte: 32768",
+										MarkdownDescription: "Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count.",
 										Optional: true,
 									},
 								},
@@ -2014,7 +2014,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Origin Pool Default Subset. Default Subset definition",
 									},
 									"endpoint_subsets": schema.ListNestedBlock{
-										MarkdownDescription: "Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32",
+										MarkdownDescription: "Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -2050,23 +2050,23 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i...",
 								Attributes: map[string]schema.Attribute{
 									"base_ejection_time": schema.Int64Attribute{
-										MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds. ves.io.schema.rules.uint32.lte: 1800000",
+										MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds.",
 										Optional: true,
 									},
 									"consecutive_5xx": schema.Int64Attribute{
-										MarkdownDescription: "Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to 5. ves.io.schema.rules.uint32.lte: 1024",
+										MarkdownDescription: "Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to 5.",
 										Optional: true,
 									},
 									"consecutive_gateway_failure": schema.Int64Attribute{
-										MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to 5. ves.io.schema.rules.uint3...",
+										MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to 5.",
 										Optional: true,
 									},
 									"interval": schema.Int64Attribute{
-										MarkdownDescription: "Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds. ves.io.schema.rules.uint32.lte: 600000",
+										MarkdownDescription: "Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds.",
 										Optional: true,
 									},
 									"max_ejection_percent": schema.Int64Attribute{
-										MarkdownDescription: "Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value. ves.io.schema.rules.uint32.lte: 100",
+										MarkdownDescription: "Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value.",
 										Optional: true,
 									},
 								},
@@ -2083,19 +2083,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"healthcheck": schema.ListNestedBlock{
-						MarkdownDescription: "Health Check object. Reference to healthcheck configuration objects ves.io.schema.rules.repeated.max_items: 4",
+						MarkdownDescription: "Health Check object. Reference to healthcheck configuration objects",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -2108,7 +2108,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"origin_servers": schema.ListNestedBlock{
-						MarkdownDescription: "Origin Servers. List of origin servers in this pool Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Origin Servers. List of origin servers in this pool",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -2117,7 +2117,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Discovered Classic BIG-IP Service Name. Specify origin server with Classic BIG-IP Service (Virtual Server)",
 									Attributes: map[string]schema.Attribute{
 										"service_name": schema.StringAttribute{
-											MarkdownDescription: "Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin. Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin.",
 											Optional: true,
 										},
 									},
@@ -2126,7 +2126,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Consul Service Name on given Sites. Specify origin server with Hashi Corp Consul service name and site information",
 									Attributes: map[string]schema.Attribute{
 										"service_name": schema.StringAttribute{
-											MarkdownDescription: "Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id. Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id.",
 											Optional: true,
 										},
 									},
@@ -2163,7 +2163,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"service_name": schema.StringAttribute{
-											MarkdownDescription: "Service Name. Exclusive with [] K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-id. If the servicename is 'frontend', namespace is 'speedtest' and cluster-id is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-id are optional. ves.io.schema.rules.string.ves_service_namespace_name: true",
+											MarkdownDescription: "Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-id. If the servicename is 'frontend', namespace is 'speedtest' and cluster-id is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-id are optional.",
 											Optional: true,
 										},
 									},
@@ -2192,7 +2192,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "IP address on given Sites. Specify origin server with private or public IP address and site information",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IP. Exclusive with [] Private IPV4 address ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "IP. Private IPV4 address",
 											Optional: true,
 										},
 									},
@@ -2218,11 +2218,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "DNS Name on given Sites. Specify origin server with private or public DNS name and site information",
 									Attributes: map[string]schema.Attribute{
 										"dns_name": schema.StringAttribute{
-											MarkdownDescription: "DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "DNS Name. DNS Name",
 											Optional: true,
 										},
 										"refresh_interval": schema.Int64Attribute{
-											MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 ves.io.schema.rules.uint32.ranges: 0,10-604800",
+											MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
 											Optional: true,
 										},
 									},
@@ -2248,7 +2248,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Public IP. Specify origin server with public IP address",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "Public IPV4. Exclusive with [] Public IPV4 address ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "Public IPV4. Public IPV4 address",
 											Optional: true,
 										},
 									},
@@ -2257,11 +2257,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Public DNS Name. Specify origin server with public DNS name",
 									Attributes: map[string]schema.Attribute{
 										"dns_name": schema.StringAttribute{
-											MarkdownDescription: "DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "DNS Name. DNS Name",
 											Optional: true,
 										},
 										"refresh_interval": schema.Int64Attribute{
-											MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767 ves.io.schema.rules.uint32.ranges: 0,10-604800",
+											MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
 											Optional: true,
 										},
 									},
@@ -2270,7 +2270,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "IP address Virtual Network. Specify origin server with IP on Virtual Network",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IPV4. Exclusive with [] IPV4 address ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "IPV4. IPV4 address",
 											Optional: true,
 										},
 									},
@@ -2284,7 +2284,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "DNS Name on Virtual Network. Specify origin server with DNS name on Virtual Network",
 									Attributes: map[string]schema.Attribute{
 										"dns_name": schema.StringAttribute{
-											MarkdownDescription: "DNS Name. DNS Name Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "DNS Name. DNS Name",
 											Optional: true,
 										},
 									},
@@ -2317,11 +2317,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "TLS Parameters for Origin Servers. Upstream TLS Parameters",
 						Attributes: map[string]schema.Attribute{
 							"max_session_keys": schema.Int64Attribute{
-								MarkdownDescription: "Max Session Keys Cached. Exclusive with [default_session_key_caching disable_session_key_caching] x-example:'25' Number of session keys that are cached. ves.io.schema.rules.uint32.gte: 2 ves.io.schema.rules.uint32.lte: 64",
+								MarkdownDescription: "Max Session Keys Cached. x-example:'25' Number of session keys that are cached.",
 								Optional: true,
 							},
 							"sni": schema.StringAttribute{
-								MarkdownDescription: "SNI Value. Exclusive with [disable_sni use_host_header_as_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "SNI Value. SNI value to be used.",
 								Optional: true,
 							},
 						},
@@ -2369,7 +2369,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"tls_certificates": schema.ListNestedBlock{
-										MarkdownDescription: "mTLS Client Certificate. mTLS Client Certificate Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1",
+										MarkdownDescription: "mTLS Client Certificate. mTLS Client Certificate",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -2380,15 +2380,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -2397,7 +2397,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "TLS Validation Context for Origin Servers. Upstream TLS Validation Context",
 								Attributes: map[string]schema.Attribute{
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate",
 										Optional: true,
 									},
 								},
@@ -2416,15 +2416,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -2438,11 +2438,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"pools": schema.ListNestedBlock{
-						MarkdownDescription: "Origin Pools. List of Origin Pools ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Origin Pools. List of Origin Pools",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"priority": schema.Int64Attribute{
-									MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority. ves.io.schema.rules.uint32.lte: 32",
+									MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority.",
 									Optional: true,
 								},
 								"weight": schema.Int64Attribute{
@@ -2455,15 +2455,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -2475,15 +2475,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -2495,11 +2495,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 
 			},
 			"default_route_pools": schema.ListNestedBlock{
-				MarkdownDescription: "Origin Pools. Origin Pools used when no route is specified (default route) ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Origin Pools. Origin Pools used when no route is specified (default route)",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"priority": schema.Int64Attribute{
-							MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority. ves.io.schema.rules.uint32.lte: 32",
+							MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority.",
 							Optional: true,
 						},
 						"weight": schema.Int64Attribute{
@@ -2512,15 +2512,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -2532,15 +2532,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -2610,7 +2610,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"domains": schema.ListNestedBlock{
-										MarkdownDescription: "Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32",
+										MarkdownDescription: "Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -2628,7 +2628,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"code_base_integrations": schema.ListNestedBlock{
-								MarkdownDescription: "Select Code Base Integrations. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Select Code Base Integrations.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -2656,15 +2656,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -2681,7 +2681,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Discovered API Settings. x-example: '2' Configure Discovered API Settings.",
 						Attributes: map[string]schema.Attribute{
 							"purge_duration_for_inactive_discovered_apis": schema.Int64Attribute{
-								MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 7",
+								MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration.",
 								Optional: true,
 							},
 						},
@@ -2701,11 +2701,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap...",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 								Optional: true,
 							},
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io.sch...",
+								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 						},
@@ -2723,15 +2723,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o...",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 								Optional: true,
 							},
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io....",
+								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 							"js_script_delay": schema.Int64Attribute{
-								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000",
+								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
 								Optional: true,
 							},
 						},
@@ -2740,15 +2740,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -2760,7 +2760,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "IP Threat Category List. List of ip threat categories",
 				Attributes: map[string]schema.Attribute{
 					"ip_threat_categories": schema.ListAttribute{
-						MarkdownDescription: "List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -2785,19 +2785,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 
 			},
 			"graphql_rules": schema.ListNestedBlock{
-				MarkdownDescription: "GraphQL Inspection. GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy configuration to analyze GraphQL queries and prevent GraphQL tailored attacks. ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "GraphQL Inspection. GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy configuration to analyze GraphQL queries and prevent GraphQL tailored attacks.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"exact_path": schema.StringAttribute{
-							MarkdownDescription: "Path. Specifies the exact path to GraphQL endpoint. Default value is /graphql. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Path. Specifies the exact path to GraphQL endpoint. Default value is /graphql.",
 							Optional: true,
 						},
 						"exact_value": schema.StringAttribute{
-							MarkdownDescription: "Exact Value. Exclusive with [any_domain suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "Exact Value. Exact domain name",
 							Optional: true,
 						},
 						"suffix_value": schema.StringAttribute{
-							MarkdownDescription: "Suffix Value. Exclusive with [any_domain exact_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
 							Optional: true,
 						},
 					},
@@ -2809,15 +2809,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "GraphQL Settings. GraphQL configuration.",
 							Attributes: map[string]schema.Attribute{
 								"max_batched_queries": schema.Int64Attribute{
-									MarkdownDescription: "Maximum Batched Queries. Specify maximum number of queries in a single batched request. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 20",
+									MarkdownDescription: "Maximum Batched Queries. Specify maximum number of queries in a single batched request.",
 									Optional: true,
 								},
 								"max_depth": schema.Int64Attribute{
-									MarkdownDescription: "Maximum Structure Depth. Specify maximum depth for the GraphQL query. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 20",
+									MarkdownDescription: "Maximum Structure Depth. Specify maximum depth for the GraphQL query.",
 									Optional: true,
 								},
 								"max_total_length": schema.Int64Attribute{
-									MarkdownDescription: "Maximum Total Length. Specify maximum length in bytes for the GraphQL query. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 16386",
+									MarkdownDescription: "Maximum Total Length. Specify maximum length in bytes for the GraphQL query.",
 									Optional: true,
 								},
 							},
@@ -2834,11 +2834,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -2861,11 +2861,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"port": schema.Int64Attribute{
-						MarkdownDescription: "HTTP Listen Port. Exclusive with [port_ranges] HTTP port to Listen. ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "HTTP Listen Port. HTTP port to Listen.",
 						Optional: true,
 					},
 					"port_ranges": schema.StringAttribute{
-						MarkdownDescription: "Port Ranges. Exclusive with [port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.max_ports: 64 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.unique_port_range_list: true",
+						MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 						Optional: true,
 					},
 				},
@@ -2879,11 +2879,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"append_server_name": schema.StringAttribute{
-						MarkdownDescription: "Append header value. Exclusive with [default_header pass_through server_name] Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is. ves.io.schema.rules.string.max_len: 8096",
+						MarkdownDescription: "Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is.",
 						Optional: true,
 					},
 					"connection_idle_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes. ves.io.schema.rules.uint32.lte: 600000",
+						MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
 						Optional: true,
 					},
 					"http_redirect": schema.BoolAttribute{
@@ -2891,15 +2891,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"port": schema.Int64Attribute{
-						MarkdownDescription: "HTTPS Port. Exclusive with [port_ranges] HTTPS port to Listen. ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "HTTPS Port. HTTPS port to Listen.",
 						Optional: true,
 					},
 					"port_ranges": schema.StringAttribute{
-						MarkdownDescription: "Port Ranges. Exclusive with [port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.max_ports: 64 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.unique_port_range_list: true",
+						MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 						Optional: true,
 					},
 					"server_name": schema.StringAttribute{
-						MarkdownDescription: "Modify header value. Exclusive with [append_server_name default_header pass_through] Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header. ves.io.schema.rules.string.max_len: 8096",
+						MarkdownDescription: "Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header.",
 						Optional: true,
 					},
 				},
@@ -2964,19 +2964,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"certificates": schema.ListNestedBlock{
-								MarkdownDescription: "Certificates. Select one or more certificates with any domain names. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Certificates. Select one or more certificates with any domain names.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -3012,7 +3012,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -3045,11 +3045,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -3100,7 +3100,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -3135,11 +3135,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"append_server_name": schema.StringAttribute{
-						MarkdownDescription: "Append header value. Exclusive with [default_header pass_through server_name] Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is. ves.io.schema.rules.string.max_len: 8096",
+						MarkdownDescription: "Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is.",
 						Optional: true,
 					},
 					"connection_idle_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes. ves.io.schema.rules.uint32.lte: 600000",
+						MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
 						Optional: true,
 					},
 					"http_redirect": schema.BoolAttribute{
@@ -3147,15 +3147,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"port": schema.Int64Attribute{
-						MarkdownDescription: "HTTPS Listen Port. Exclusive with [port_ranges] HTTPS port to Listen. ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "HTTPS Listen Port. HTTPS port to Listen.",
 						Optional: true,
 					},
 					"port_ranges": schema.StringAttribute{
-						MarkdownDescription: "Port Ranges. Exclusive with [port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.max_ports: 64 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.unique_port_range_list: true",
+						MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 						Optional: true,
 					},
 					"server_name": schema.StringAttribute{
-						MarkdownDescription: "Modify header value. Exclusive with [append_server_name default_header pass_through] Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header. ves.io.schema.rules.string.max_len: 8096",
+						MarkdownDescription: "Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header.",
 						Optional: true,
 					},
 				},
@@ -3226,7 +3226,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 								Attributes: map[string]schema.Attribute{
 									"cipher_suites": schema.ListAttribute{
-										MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -3259,7 +3259,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Optional: true,
 							},
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+								MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 								Optional: true,
 							},
 						},
@@ -3268,15 +3268,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -3288,15 +3288,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -3308,7 +3308,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 								Attributes: map[string]schema.Attribute{
 									"xfcc_header_elements": schema.ListAttribute{
-										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.enum.defined_only: true",
+										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -3323,15 +3323,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o...",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 						Optional: true,
 					},
 					"custom_page": schema.StringAttribute{
-						MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io....",
+						MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 						Optional: true,
 					},
 					"js_script_delay": schema.Int64Attribute{
-						MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000",
+						MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
 						Optional: true,
 					},
 				},
@@ -3368,7 +3368,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Mandatory Claims. Configurable Validation of mandatory Claims.",
 						Attributes: map[string]schema.Attribute{
 							"claim_names": schema.ListAttribute{
-								MarkdownDescription: "Claim Names. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Claim Names.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -3378,7 +3378,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Reserved claims configuration. Configurable Validation of reserved Claims",
 						Attributes: map[string]schema.Attribute{
 							"issuer": schema.StringAttribute{
-								MarkdownDescription: "Exact Match. Exclusive with [issuer_disable]",
+								MarkdownDescription: "Exact Match.",
 								Optional: true,
 							},
 						},
@@ -3387,7 +3387,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Audiences.",
 								Attributes: map[string]schema.Attribute{
 									"audiences": schema.ListAttribute{
-										MarkdownDescription: "Values. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Values.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -3419,7 +3419,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "API Groups.",
 								Attributes: map[string]schema.Attribute{
 									"api_groups": schema.ListAttribute{
-										MarkdownDescription: "API Groups. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "API Groups.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -3429,7 +3429,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Base Paths.",
 								Attributes: map[string]schema.Attribute{
 									"base_paths": schema.ListAttribute{
-										MarkdownDescription: "Prefix Values. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.http_path: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Prefix Values.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -3460,15 +3460,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o...",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 						Optional: true,
 					},
 					"custom_page": schema.StringAttribute{
-						MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io....",
+						MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 						Optional: true,
 					},
 					"js_script_delay": schema.Int64Attribute{
-						MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000",
+						MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
 						Optional: true,
 					},
 				},
@@ -3478,7 +3478,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "L7 DDoS Protection Settings. L7 DDoS protection is critical for safeguarding web applications, APIs, and services that are exposed to the internet from sophisticated, volumetric, application-level threats. Configure actions, thresholds and policies to apply during L7 DDoS attack",
 				Attributes: map[string]schema.Attribute{
 					"rps_threshold": schema.Int64Attribute{
-						MarkdownDescription: "Custom. Exclusive with [default_rps_threshold] Configure custom RPS threshold ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 20000",
+						MarkdownDescription: "Custom. Configure custom RPS threshold",
 						Optional: true,
 					},
 				},
@@ -3487,11 +3487,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap...",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 								Optional: true,
 							},
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io.sch...",
+								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 						},
@@ -3500,15 +3500,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o...",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 								Optional: true,
 							},
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io....",
+								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 							"js_script_delay": schema.Int64Attribute{
-								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000",
+								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
 								Optional: true,
 							},
 						},
@@ -3520,15 +3520,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -3546,11 +3546,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap...",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 								Optional: true,
 							},
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io.sch...",
+								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 						},
@@ -3559,15 +3559,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o...",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 								Optional: true,
 							},
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io....",
+								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 							"js_script_delay": schema.Int64Attribute{
-								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000",
+								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
 								Optional: true,
 							},
 						},
@@ -3584,11 +3584,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"malware_protection_rules": schema.ListNestedBlock{
-						MarkdownDescription: "Malware Detection Rules. Configure the match criteria to trigger Malware Protection Scan Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Malware Detection Rules. Configure the match criteria to trigger Malware Protection Scan",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"http_methods": schema.ListAttribute{
-									MarkdownDescription: "HTTP Methods. Methods to be matched ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "HTTP Methods. Methods to be matched",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -3624,11 +3624,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -3637,15 +3637,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Exact. Exact path value to match",
 											Optional: true,
 										},
 										"prefix": schema.StringAttribute{
-											MarkdownDescription: "Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
 											Optional: true,
 										},
 										"regex": schema.StringAttribute{
-											MarkdownDescription: "Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
 											Optional: true,
 										},
 									},
@@ -3664,30 +3664,30 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"idle_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset. ves.io.schema.rules.uint32.lte: 3600000",
+						MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset.",
 						Optional: true,
 					},
 					"max_request_header_size": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question. ves.io.schema.rules.uint32.lte: 96",
+						MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question.",
 						Optional: true,
 					},
 					"request_cookies_to_remove": schema.ListAttribute{
-						MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"request_headers_to_remove": schema.ListAttribute{
-						MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"response_cookies_to_remove": schema.ListAttribute{
-						MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"response_headers_to_remove": schema.ListAttribute{
-						MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -3701,7 +3701,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Optional: true,
 							},
 							"max_request_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response. ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
 								Optional: true,
 							},
 						},
@@ -3710,11 +3710,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding ...",
 						Attributes: map[string]schema.Attribute{
 							"content_length": schema.Int64Attribute{
-								MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30. ves.io.schema.rules.uint32.gte: 30",
+								MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30.",
 								Optional: true,
 							},
 							"content_type": schema.ListAttribute{
-								MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml' ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 50 ves.io.schema.rules.repeated.uniqu...",
+								MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml'",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -3738,11 +3738,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"request_cookies_to_add": schema.ListNestedBlock{
-						MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Name of the cookie in Cookie header.",
 									Optional: true,
 								},
 								"overwrite": schema.BoolAttribute{
@@ -3750,7 +3750,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Optional: true,
 								},
 								"value": schema.StringAttribute{
-									MarkdownDescription: "Value. Exclusive with [secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096",
+									MarkdownDescription: "Value. Value of the Cookie header.",
 									Optional: true,
 								},
 							},
@@ -3772,7 +3772,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"request_headers_to_add": schema.ListNestedBlock{
-						MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"append": schema.BoolAttribute{
@@ -3780,11 +3780,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Name of the HTTP header.",
 									Optional: true,
 								},
 								"value": schema.StringAttribute{
-									MarkdownDescription: "Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096",
+									MarkdownDescription: "Value. Value of the HTTP header.",
 									Optional: true,
 								},
 							},
@@ -3806,27 +3806,27 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"response_cookies_to_add": schema.ListNestedBlock{
-						MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"add_domain": schema.StringAttribute{
-									MarkdownDescription: "Add Domain. Exclusive with [ignore_domain] Add domain attribute ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Add Domain. Add domain attribute",
 									Optional: true,
 								},
 								"add_expiry": schema.StringAttribute{
-									MarkdownDescription: "Add expiry. Exclusive with [ignore_expiry] Add expiry attribute ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Add expiry. Add expiry attribute",
 									Optional: true,
 								},
 								"add_path": schema.StringAttribute{
-									MarkdownDescription: "Add path. Exclusive with [ignore_path] Add path attribute ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Add path. Add path attribute",
 									Optional: true,
 								},
 								"max_age_value": schema.Int64Attribute{
-									MarkdownDescription: "Add Max Age. Exclusive with [ignore_max_age] Add max age attribute ves.io.schema.rules.uint32.lte: 34560000",
+									MarkdownDescription: "Add Max Age. Add max age attribute",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Name of the cookie in Cookie header.",
 									Optional: true,
 								},
 								"overwrite": schema.BoolAttribute{
@@ -3834,7 +3834,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Optional: true,
 								},
 								"value": schema.StringAttribute{
-									MarkdownDescription: "Value. Exclusive with [ignore_value secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096",
+									MarkdownDescription: "Value. Value of the Cookie header.",
 									Optional: true,
 								},
 							},
@@ -3901,7 +3901,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"response_headers_to_add": schema.ListNestedBlock{
-						MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"append": schema.BoolAttribute{
@@ -3909,11 +3909,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Name of the HTTP header.",
 									Optional: true,
 								},
 								"value": schema.StringAttribute{
-									MarkdownDescription: "Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096",
+									MarkdownDescription: "Value. Value of the HTTP header.",
 									Optional: true,
 								},
 							},
@@ -3956,12 +3956,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"country_codes": schema.ListAttribute{
-									MarkdownDescription: "Country Codes List. List of Country Codes ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Country Codes List. List of Country Codes",
 									Optional: true,
 									ElementType: types.StringType,
 								},
 								"re_name_list": schema.ListAttribute{
-									MarkdownDescription: "RE Names. List of RE names for match ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.max_len: 64",
+									MarkdownDescription: "RE Names. List of RE names for match",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -3977,7 +3977,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
-											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -3989,7 +3989,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"asn_sets": schema.ListNestedBlock{
-											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4",
+											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -4000,7 +4000,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -4016,7 +4016,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"prefix_sets": schema.ListNestedBlock{
-											MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4",
+											MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -4031,7 +4031,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"ip_prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -4041,11 +4041,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -4054,7 +4054,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 								},
 								"origin_server_subsets_action": schema.SingleNestedBlock{
-									MarkdownDescription: "Action. Add labels to select one or more origin servers. Note: The pre-requisite settings to be configured in the origin pool are: 1. Add labels to origin servers 2. Enable subset load balancing in the Origin Server Subsets section and configure keys in origin server subsets classes Required: YES ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 16 ves.io.schema.rules.map.values.string.max_len: 128 ves.io.schema....",
+									MarkdownDescription: "Action. Add labels to select one or more origin servers. Note: The pre-requisite settings to be configured in the origin pool are: 1. Add labels to origin servers 2. Enable subset load balancing in the Origin Server Subsets section and configure keys in origin server subsets classes",
 								},
 							},
 						},
@@ -4077,11 +4077,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap...",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 								Optional: true,
 							},
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io.sch...",
+								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 						},
@@ -4102,15 +4102,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o...",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
-								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 86400",
+								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
 								Optional: true,
 							},
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io....",
+								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 							"js_script_delay": schema.Int64Attribute{
-								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds. ves.io.schema.rules.uint32.gte: 1000 ves.io.schema.rules.uint32.lte: 60000",
+								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
 								Optional: true,
 							},
 						},
@@ -4119,15 +4119,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -4141,7 +4141,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"rules": schema.ListNestedBlock{
-								MarkdownDescription: "Rules. Rules that specify the match conditions and challenge type to be launched. When a challenge type is selected to be always enabled, these rules can be used to disable challenge or launch a different challenge for requests that match the specified conditions ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique_metadata_name: true",
+								MarkdownDescription: "Rules. Rules that specify the match conditions and challenge type to be launched. When a challenge type is selected to be always enabled, these rules can be used to disable challenge or launch a different challenge for requests that match the specified conditions",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -4161,7 +4161,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Temporary User Blocking. Specifies configuration for temporary user blocking resulting from user behavior analysis. When Malicious User Mitigation is enabled from service policy rules, users' accessing the application will be analyzed for malicious activity and the configured mitigation actions will be taken on identified malicious users. These mitigation actions include setting up temporary blocking on that user. This configuration specifies settings on how that blocking should be done by th...",
 						Attributes: map[string]schema.Attribute{
 							"custom_page": schema.StringAttribute{
-								MarkdownDescription: "Custom Message for Temporary Blocking. Custom message is of type `uri_ref`. Currently supported URL schemes is `string:///`. For `string:///` scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Blocked..' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Blocked </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' ves.io.schema.rules.string.max_len: 65536 ves.io.sche...",
+								MarkdownDescription: "Custom Message for Temporary Blocking. Custom message is of type `uri_ref`. Currently supported URL schemes is `string:///`. For `string:///` scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Blocked.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Blocked </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
 								Optional: true,
 							},
 						},
@@ -4170,15 +4170,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 
 			},
 			"protected_cookies": schema.ListNestedBlock{
-				MarkdownDescription: "Cookie Protection. Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite. The configured mode of WAF (monitoring or blocking) will be enforced on the request when cookie tampering is identified. Note: We recommend enabling Secure and HttpOnly attributes along with cookie tampering protecti...",
+				MarkdownDescription: "Cookie Protection. Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite. The configured mode of WAF (monitoring or blocking) will be enforced on the request when cookie tampering is identified. Note: We recommend enabling Secure and HttpOnly attributes along with cookie tampering protection.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"max_age_value": schema.Int64Attribute{
-							MarkdownDescription: "Add Max Age. Exclusive with [ignore_max_age] Add max age attribute ves.io.schema.rules.uint32.lte: 34560000",
+							MarkdownDescription: "Add Max Age. Add max age attribute",
 							Optional: true,
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Cookie Name. Name of the Cookie Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Cookie Name. Name of the Cookie",
 							Optional: true,
 						},
 					},
@@ -4234,19 +4234,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"rate_limiter_allowed_prefixes": schema.ListNestedBlock{
-								MarkdownDescription: "List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -4258,7 +4258,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
-								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -4276,19 +4276,19 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"policies": schema.ListNestedBlock{
-								MarkdownDescription: "Rate Limiter Policies. Ordered list of rate limiter policies. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+								MarkdownDescription: "Rate Limiter Policies. Ordered list of rate limiter policies.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -4300,15 +4300,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Rate Limit Value. A tuple consisting of a rate limit period unit and the total number of allowed requests for that period.",
 						Attributes: map[string]schema.Attribute{
 							"burst_multiplier": schema.Int64Attribute{
-								MarkdownDescription: "Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 100",
+								MarkdownDescription: "Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate.",
 								Optional: true,
 							},
 							"period_multiplier": schema.Int64Attribute{
-								MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration ves.io.schema.rules.uint32.gte: 0",
+								MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration",
 								Optional: true,
 							},
 							"total_number": schema.Int64Attribute{
-								MarkdownDescription: "Number Of Requests. The total number of allowed requests per rate-limiting period. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 8192",
+								MarkdownDescription: "Number Of Requests. The total number of allowed requests per rate-limiting period.",
 								Optional: true,
 							},
 							"unit": schema.StringAttribute{
@@ -4353,15 +4353,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"hash_policy": schema.ListNestedBlock{
-						MarkdownDescription: "Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"header_name": schema.StringAttribute{
-									MarkdownDescription: "Header Name. Exclusive with [cookie source_ip] The name or key of the request header that will be used to obtain the hash key ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Header Name. The name or key of the request header that will be used to obtain the hash key",
 									Optional: true,
 								},
 								"source_ip": schema.BoolAttribute{
-									MarkdownDescription: "Source IP. Exclusive with [cookie header_name] Hash based on source IP address",
+									MarkdownDescription: "Source IP. Hash based on source IP address",
 									Optional: true,
 								},
 								"terminal": schema.BoolAttribute{
@@ -4374,7 +4374,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g...",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced",
 											Optional: true,
 										},
 										"path": schema.StringAttribute{
@@ -4423,7 +4423,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"routes": schema.ListNestedBlock{
-				MarkdownDescription: "Routes. Routes allow users to define match condition on a path and/or HTTP method to either forward matching traffic to origin pool or redirect matching traffic to a different URL or respond directly to matching traffic ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Routes. Routes allow users to define match condition on a path and/or HTTP method to either forward matching traffic to origin pool or redirect matching traffic to a different URL or respond directly to matching traffic",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
@@ -4437,15 +4437,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -4462,11 +4462,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							},
 							Blocks: map[string]schema.Block{
 								"headers": schema.ListNestedBlock{
-									MarkdownDescription: "Headers. List of (key, value) headers ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Headers. List of (key, value) headers",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"exact": schema.StringAttribute{
-												MarkdownDescription: "Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+												MarkdownDescription: "Exact. Header value to match exactly",
 												Optional: true,
 											},
 											"invert_match": schema.BoolAttribute{
@@ -4474,15 +4474,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												Optional: true,
 											},
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+												MarkdownDescription: "Name. Name of the header",
 												Optional: true,
 											},
 											"presence": schema.BoolAttribute{
-												MarkdownDescription: "Presence. Exclusive with [exact regex] If true, check for presence of header",
+												MarkdownDescription: "Presence. If true, check for presence of header",
 												Optional: true,
 											},
 											"regex": schema.StringAttribute{
-												MarkdownDescription: "Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string.regex: true",
+												MarkdownDescription: "Regex. Regex match of the header value in re2 format",
 												Optional: true,
 											},
 										},
@@ -4492,11 +4492,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
 									Attributes: map[string]schema.Attribute{
 										"port": schema.Int64Attribute{
-											MarkdownDescription: "Port. Exclusive with [no_port_match port_ranges] Exact Port to match ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Port. Exact Port to match",
 											Optional: true,
 										},
 										"port_ranges": schema.StringAttribute{
-											MarkdownDescription: "Port range. Exclusive with [no_port_match port] Port range to match ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range: true",
+											MarkdownDescription: "Port range. Port range to match",
 											Optional: true,
 										},
 									},
@@ -4510,15 +4510,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Exact. Exact path value to match",
 											Optional: true,
 										},
 										"prefix": schema.StringAttribute{
-											MarkdownDescription: "Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
 											Optional: true,
 										},
 										"regex": schema.StringAttribute{
-											MarkdownDescription: "Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
 											Optional: true,
 										},
 									},
@@ -4527,11 +4527,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response",
 									Attributes: map[string]schema.Attribute{
 										"response_body_encoded": schema.StringAttribute{
-											MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg== ves.io.schema.rules.string.max_bytes: 65536 ves.io.schema.rules.string.uri_ref: true",
+											MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==",
 											Optional: true,
 										},
 										"response_code": schema.Int64Attribute{
-											MarkdownDescription: "Response Code. response code to send ves.io.schema.rules.uint32.gte: 100 ves.io.schema.rules.uint32.lte: 599",
+											MarkdownDescription: "Response Code. response code to send",
 											Optional: true,
 										},
 									},
@@ -4548,11 +4548,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							},
 							Blocks: map[string]schema.Block{
 								"headers": schema.ListNestedBlock{
-									MarkdownDescription: "Headers. List of (key, value) headers ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Headers. List of (key, value) headers",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"exact": schema.StringAttribute{
-												MarkdownDescription: "Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+												MarkdownDescription: "Exact. Header value to match exactly",
 												Optional: true,
 											},
 											"invert_match": schema.BoolAttribute{
@@ -4560,15 +4560,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												Optional: true,
 											},
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+												MarkdownDescription: "Name. Name of the header",
 												Optional: true,
 											},
 											"presence": schema.BoolAttribute{
-												MarkdownDescription: "Presence. Exclusive with [exact regex] If true, check for presence of header",
+												MarkdownDescription: "Presence. If true, check for presence of header",
 												Optional: true,
 											},
 											"regex": schema.StringAttribute{
-												MarkdownDescription: "Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string.regex: true",
+												MarkdownDescription: "Regex. Regex match of the header value in re2 format",
 												Optional: true,
 											},
 										},
@@ -4578,11 +4578,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
 									Attributes: map[string]schema.Attribute{
 										"port": schema.Int64Attribute{
-											MarkdownDescription: "Port. Exclusive with [no_port_match port_ranges] Exact Port to match ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Port. Exact Port to match",
 											Optional: true,
 										},
 										"port_ranges": schema.StringAttribute{
-											MarkdownDescription: "Port range. Exclusive with [no_port_match port] Port range to match ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range: true",
+											MarkdownDescription: "Port range. Port range to match",
 											Optional: true,
 										},
 									},
@@ -4596,15 +4596,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Exact. Exact path value to match",
 											Optional: true,
 										},
 										"prefix": schema.StringAttribute{
-											MarkdownDescription: "Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
 											Optional: true,
 										},
 										"regex": schema.StringAttribute{
-											MarkdownDescription: "Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
 											Optional: true,
 										},
 									},
@@ -4617,11 +4617,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"path_redirect": schema.StringAttribute{
-											MarkdownDescription: "Path. Exclusive with [prefix_rewrite] swap path part of incoming URL in redirect URL ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Path. swap path part of incoming URL in redirect URL",
 											Optional: true,
 										},
 										"prefix_rewrite": schema.StringAttribute{
-											MarkdownDescription: "Prefix Rewrite. Exclusive with [path_redirect] In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request",
 											Optional: true,
 										},
 										"proto_redirect": schema.StringAttribute{
@@ -4629,11 +4629,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"replace_params": schema.StringAttribute{
-											MarkdownDescription: "Replace All Parameters. Exclusive with [remove_all_params retain_all_params] ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Replace All Parameters.",
 											Optional: true,
 										},
 										"response_code": schema.Int64Attribute{
-											MarkdownDescription: "Response Code. The HTTP status code to use in the redirect response. ves.io.schema.rules.uint32.lte: 599",
+											MarkdownDescription: "Response Code. The HTTP status code to use in the redirect response.",
 											Optional: true,
 										},
 									},
@@ -4652,7 +4652,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Simple Route. A simple route matches on path, incoming header, incoming port and/or HTTP method and forwards the matching traffic to the associated pools",
 							Attributes: map[string]schema.Attribute{
 								"host_rewrite": schema.StringAttribute{
-									MarkdownDescription: "Host Rewrite Value. Exclusive with [auto_host_rewrite disable_host_rewrite] Host header will be swapped with this value ves.io.schema.rules.string.hostname: true",
+									MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
 									Optional: true,
 								},
 								"http_method": schema.StringAttribute{
@@ -4669,7 +4669,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"prefix_rewrite": schema.StringAttribute{
-											MarkdownDescription: "Enable Prefix Rewrite. Exclusive with [disable_prefix_rewrite regex_rewrite] prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Enable Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value.",
 											Optional: true,
 										},
 										"priority": schema.StringAttribute{
@@ -4677,27 +4677,27 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"request_cookies_to_remove": schema.ListAttribute{
-											MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"request_headers_to_remove": schema.ListAttribute{
-											MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"response_cookies_to_remove": schema.ListAttribute{
-											MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"response_headers_to_remove": schema.ListAttribute{
-											MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"timeout": schema.Int64Attribute{
-											MarkdownDescription: "Timeout. The timeout for the route including all retries, in milliseconds. Should be set to a high value or 0 (infinite timeout) for server-side streaming. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 600000",
+											MarkdownDescription: "Timeout. The timeout for the route including all retries, in milliseconds. Should be set to a high value or 0 (infinite timeout) for server-side streaming.",
 											Optional: true,
 										},
 									},
@@ -4769,25 +4769,25 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Regex Match Rewrite. RegexMatchRewrite describes how to match a string and then produce a new string using a regular expression and a substitution string.",
 										},
 										"request_cookies_to_add": schema.ListNestedBlock{
-											MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"request_headers_to_add": schema.ListNestedBlock{
-											MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"response_cookies_to_add": schema.ListNestedBlock{
-											MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
 										},
 										"response_headers_to_add": schema.ListNestedBlock{
-											MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -4816,11 +4816,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 								},
 								"headers": schema.ListNestedBlock{
-									MarkdownDescription: "Headers. List of (key, value) headers ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Headers. List of (key, value) headers",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"exact": schema.StringAttribute{
-												MarkdownDescription: "Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+												MarkdownDescription: "Exact. Header value to match exactly",
 												Optional: true,
 											},
 											"invert_match": schema.BoolAttribute{
@@ -4828,15 +4828,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												Optional: true,
 											},
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+												MarkdownDescription: "Name. Name of the header",
 												Optional: true,
 											},
 											"presence": schema.BoolAttribute{
-												MarkdownDescription: "Presence. Exclusive with [exact regex] If true, check for presence of header",
+												MarkdownDescription: "Presence. If true, check for presence of header",
 												Optional: true,
 											},
 											"regex": schema.StringAttribute{
-												MarkdownDescription: "Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string.regex: true",
+												MarkdownDescription: "Regex. Regex match of the header value in re2 format",
 												Optional: true,
 											},
 										},
@@ -4846,11 +4846,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
 									Attributes: map[string]schema.Attribute{
 										"port": schema.Int64Attribute{
-											MarkdownDescription: "Port. Exclusive with [no_port_match port_ranges] Exact Port to match ves.io.schema.rules.uint32.lte: 65535",
+											MarkdownDescription: "Port. Exact Port to match",
 											Optional: true,
 										},
 										"port_ranges": schema.StringAttribute{
-											MarkdownDescription: "Port range. Exclusive with [no_port_match port] Port range to match ves.io.schema.rules.string.max_len: 32 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range: true",
+											MarkdownDescription: "Port range. Port range to match",
 											Optional: true,
 										},
 									},
@@ -4861,11 +4861,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 								},
 								"origin_pools": schema.ListNestedBlock{
-									MarkdownDescription: "Origin Pools. Origin Pools for this route Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Origin Pools. Origin Pools for this route",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"priority": schema.Int64Attribute{
-												MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority. ves.io.schema.rules.uint32.lte: 32",
+												MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority.",
 												Optional: true,
 											},
 											"weight": schema.Int64Attribute{
@@ -4890,15 +4890,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Exact. Exclusive with [prefix regex] Exact path value to match ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Exact. Exact path value to match",
 											Optional: true,
 										},
 										"prefix": schema.StringAttribute{
-											MarkdownDescription: "Prefix. Exclusive with [path regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
 											Optional: true,
 										},
 										"regex": schema.StringAttribute{
-											MarkdownDescription: "Regex. Exclusive with [path prefix] Regular expression of path match (e.g. the value .* will match on all paths) ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
 											Optional: true,
 										},
 									},
@@ -4907,7 +4907,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Query Parameters. Handling of incoming query parameters in simple route.",
 									Attributes: map[string]schema.Attribute{
 										"replace_params": schema.StringAttribute{
-											MarkdownDescription: "Replace All Parameters. Exclusive with [remove_all_params retain_all_params] ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Replace All Parameters.",
 											Optional: true,
 										},
 									},
@@ -4932,7 +4932,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"sensitive_data_types_in_response": schema.ListNestedBlock{
-						MarkdownDescription: "Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -4941,12 +4941,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "API Endpoint. This defines api endpoint",
 									Attributes: map[string]schema.Attribute{
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Methods. Methods to be matched ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Methods. Methods to be matched",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Path. Path to be matched Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1024 ves.io.schema.rules.string.templated_http_path: true",
+											MarkdownDescription: "Path. Path to be matched",
 											Optional: true,
 										},
 									},
@@ -4955,7 +4955,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Body Section Masking Options. Options for HTTP Body Masking",
 									Attributes: map[string]schema.Attribute{
 										"fields": schema.ListAttribute{
-											MarkdownDescription: "Values. List of JSON Path field values. Use square brackets with an underscore [_] to indicate array elements (e.g., person.emails[_]). To reference JSON keys that contain spaces, enclose the entire path in double quotes. For example: 'person.first name'. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.json_path: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema....",
+											MarkdownDescription: "Values. List of JSON Path field values. Use square brackets with an underscore [_] to indicate array elements (e.g., person.emails[_]). To reference JSON keys that contain spaces, enclose the entire path in double quotes. For example: 'person.first name'.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -4982,15 +4982,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -5036,7 +5036,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"code_base_integrations": schema.ListNestedBlock{
-										MarkdownDescription: "Select Code Base Integrations. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Select Code Base Integrations.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -5063,7 +5063,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Discovered API Settings. x-example: '2' Configure Discovered API Settings.",
 								Attributes: map[string]schema.Attribute{
 									"purge_duration_for_inactive_discovered_apis": schema.Int64Attribute{
-										MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 7",
+										MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration.",
 										Optional: true,
 									},
 								},
@@ -5083,11 +5083,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: slow_ddos_mitigation, system_default_timeouts] Slow DDoS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users.",
 				Attributes: map[string]schema.Attribute{
 					"request_headers_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds. This setting provides protection against Slowloris attacks. ves.io.schema.rules.uint32.gte: 2000 ves.io.schema.rules.uint32.lte: 30000",
+						MarkdownDescription: "Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds. This setting provides protection against Slowloris attacks.",
 						Optional: true,
 					},
 					"request_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Custom Timeout. Exclusive with [disable_request_timeout] ves.io.schema.rules.uint32.gte: 2000 ves.io.schema.rules.uint32.lte: 300000",
+						MarkdownDescription: "Custom Timeout.",
 						Optional: true,
 					},
 				},
@@ -5105,32 +5105,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"trusted_clients": schema.ListNestedBlock{
-				MarkdownDescription: "Trusted Client Rules. Define rules to skip processing of one or more features such as WAF, Bot Defense etc. for clients. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "Trusted Client Rules. Define rules to skip processing of one or more features such as WAF, Bot Defense etc. for clients.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"actions": schema.ListAttribute{
-							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule ves.io.schema.rules.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 10 ves.io.schema.rules.repeated.unique: true",
+							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule",
 							Optional: true,
 							ElementType: types.StringType,
 						},
 						"as_number": schema.Int64Attribute{
-							MarkdownDescription: "AS Number. Exclusive with [http_header ip_prefix ipv6_prefix user_identifier] RFC 6793 defined 4-byte AS number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 401308",
+							MarkdownDescription: "AS Number. RFC 6793 defined 4-byte AS number",
 							Optional: true,
 						},
 						"expiration_timestamp": schema.StringAttribute{
-							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore. ves.io.schema.rules.timestamp.within.seconds: 31536000",
+							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
 							Optional: true,
 						},
 						"ip_prefix": schema.StringAttribute{
-							MarkdownDescription: "IPv4 Prefix. Exclusive with [as_number http_header ipv6_prefix user_identifier] IPv4 prefix string. ves.io.schema.rules.string.ipv4_prefix: true",
+							MarkdownDescription: "IPv4 Prefix. IPv4 prefix string.",
 							Optional: true,
 						},
 						"ipv6_prefix": schema.StringAttribute{
-							MarkdownDescription: "IPv6 Prefix. Exclusive with [as_number http_header ip_prefix user_identifier] IPv6 prefix string. ves.io.schema.rules.string.ipv6_prefix: true",
+							MarkdownDescription: "IPv6 Prefix. IPv6 prefix string.",
 							Optional: true,
 						},
 						"user_identifier": schema.StringAttribute{
-							MarkdownDescription: "User Identifier. Exclusive with [as_number http_header ip_prefix ipv6_prefix] Identify user based on user identifier. User identifier value needs to be copied from security event. ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "User Identifier. Identify user based on user identifier. User identifier value needs to be copied from security event.",
 							Optional: true,
 						},
 					},
@@ -5144,11 +5144,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							},
 							Blocks: map[string]schema.Block{
 								"headers": schema.ListNestedBlock{
-									MarkdownDescription: "HTTP Headers. List of HTTP header name and value pairs Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+									MarkdownDescription: "HTTP Headers. List of HTTP header name and value pairs",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"exact": schema.StringAttribute{
-												MarkdownDescription: "Exact. Exclusive with [presence regex] Header value to match exactly ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+												MarkdownDescription: "Exact. Header value to match exactly",
 												Optional: true,
 											},
 											"invert_match": schema.BoolAttribute{
@@ -5156,15 +5156,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												Optional: true,
 											},
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. Name of the header Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+												MarkdownDescription: "Name. Name of the header",
 												Optional: true,
 											},
 											"presence": schema.BoolAttribute{
-												MarkdownDescription: "Presence. Exclusive with [exact regex] If true, check for presence of header",
+												MarkdownDescription: "Presence. If true, check for presence of header",
 												Optional: true,
 											},
 											"regex": schema.StringAttribute{
-												MarkdownDescription: "Regex. Exclusive with [exact presence] Regex match of the header value in re2 format ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true ves.io.schema.rules.string.regex: true",
+												MarkdownDescription: "Regex. Regex match of the header value in re2 format",
 												Optional: true,
 											},
 										},
@@ -5176,11 +5176,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -5202,15 +5202,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -5227,11 +5227,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"rules": schema.ListNestedBlock{
-								MarkdownDescription: "WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true",
+								MarkdownDescription: "WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"exact_value": schema.StringAttribute{
-											MarkdownDescription: "Exact Value. Exclusive with [any_domain suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Exact Value. Exact domain name",
 											Optional: true,
 										},
 										"expiration_timestamp": schema.StringAttribute{
@@ -5239,20 +5239,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Methods. methods to be matched ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Methods. methods to be matched",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"path_prefix": schema.StringAttribute{
-											MarkdownDescription: "Prefix. Exclusive with [any_path path_regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
 											Optional: true,
 										},
 										"path_regex": schema.StringAttribute{
-											MarkdownDescription: "Path Regex. Exclusive with [any_path path_prefix] Define the regex for the path. For example, the regex ^/.*$ will match on all paths ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths",
 											Optional: true,
 										},
 										"suffix_value": schema.StringAttribute{
-											MarkdownDescription: "Suffix Value. Exclusive with [any_domain exact_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
 											Optional: true,
 										},
 									},
@@ -5281,15 +5281,15 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},

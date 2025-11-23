@@ -47,7 +47,7 @@ func (r *SecretManagementAccessResource) Metadata(ctx context.Context, req resou
 
 func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create secret_management_access creates a new object in storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SecretManagementAccess. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 				},
 			},
 			"provider_name": schema.StringAttribute{
-				MarkdownDescription: "Provider Name. Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+				MarkdownDescription: "Provider Name. Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object",
 				Optional: true,
 			},
 		},
@@ -94,7 +94,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 						Optional: true,
 					},
 					"server_endpoint": schema.StringAttribute{
-						MarkdownDescription: "Server Endpoint and Port. endpoint to connect to, in host:port format Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Server Endpoint and Port. endpoint to connect to, in host:port format",
 						Optional: true,
 					},
 				},
@@ -124,7 +124,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								},
 								Blocks: map[string]schema.Block{
 									"headers": schema.SingleNestedBlock{
-										MarkdownDescription: "Headers. The set of authentication headers to pass in HTTP request ves.io.schema.rules.map.keys.string.max_len: 256 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 16",
+										MarkdownDescription: "Headers. The set of authentication headers to pass in HTTP request",
 									},
 								},
 							},
@@ -134,7 +134,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								},
 								Blocks: map[string]schema.Block{
 									"query_params": schema.SingleNestedBlock{
-										MarkdownDescription: "Query Parameters. The set of authentication parameters to be passed as query parameters ves.io.schema.rules.map.keys.string.max_len: 256 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 16",
+										MarkdownDescription: "Query Parameters. The set of authentication parameters to be passed as query parameters",
 									},
 								},
 							},
@@ -144,11 +144,11 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 						MarkdownDescription: "Upstream TLS Parameters. TLS configuration for upstream connections",
 						Attributes: map[string]schema.Attribute{
 							"max_session_keys": schema.Int64Attribute{
-								MarkdownDescription: "Max Session Keys Cached. Exclusive with [default_session_key_caching disable_session_key_caching] x-example:'25' Number of session keys that are cached. ves.io.schema.rules.uint32.gte: 2 ves.io.schema.rules.uint32.lte: 64",
+								MarkdownDescription: "Max Session Keys Cached. x-example:'25' Number of session keys that are cached.",
 								Optional: true,
 							},
 							"sni": schema.StringAttribute{
-								MarkdownDescription: "SNI Value. Exclusive with [disable_sni use_host_header_as_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "SNI Value. SNI value to be used.",
 								Optional: true,
 							},
 						},
@@ -172,7 +172,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								},
 								Blocks: map[string]schema.Block{
 									"certificates": schema.ListNestedBlock{
-										MarkdownDescription: "Client Certificate. Client TLS Certificate required for mTLS authentication Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "Client Certificate. Client TLS Certificate required for mTLS authentication",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -283,7 +283,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -317,7 +317,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 						},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual network direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual network direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -361,7 +361,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual_site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{

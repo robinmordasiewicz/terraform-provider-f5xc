@@ -46,7 +46,7 @@ func (r *DataGroupResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create data group in a given namespace. If one already exists it will give an error.",
+		MarkdownDescription: "Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DataGroup. Must be unique within the namespace.",
@@ -87,7 +87,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{
-						MarkdownDescription: "Address records. ves.io.schema.rules.map.keys.string.ip: true ves.io.schema.rules.map.max_pairs: 4096 ves.io.schema.rules.map.values.string.pattern: ^[0-9a-zA-Z._-]*$",
+						MarkdownDescription: "Address records.",
 					},
 				},
 
@@ -98,7 +98,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{
-						MarkdownDescription: "Integer records. ves.io.schema.rules.map.max_pairs: 4096 ves.io.schema.rules.map.values.string.pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$",
+						MarkdownDescription: "Integer records.",
 					},
 				},
 
@@ -109,7 +109,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{
-						MarkdownDescription: "String records. ves.io.schema.rules.map.max_pairs: 4096 ves.io.schema.rules.map.values.string.pattern: ^[0-9a-zA-Z._-]*$",
+						MarkdownDescription: "String records.",
 					},
 				},
 

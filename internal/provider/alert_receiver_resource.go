@@ -46,7 +46,7 @@ func (r *AlertReceiverResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new Alert Receiver object",
+		MarkdownDescription: "Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification endpoints.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AlertReceiver. Must be unique within the namespace.",
@@ -85,7 +85,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "[OneOf: email, opsgenie, pagerduty, slack, sms, webhook] Email Configuration.",
 				Attributes: map[string]schema.Attribute{
 					"email": schema.StringAttribute{
-						MarkdownDescription: "Email. Email id of the user ves.io.schema.rules.string.email: true",
+						MarkdownDescription: "Email. Email id of the user",
 						Optional: true,
 					},
 				},
@@ -95,7 +95,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "OpsGenie Config. OpsGenie configuration to send alert notifications",
 				Attributes: map[string]schema.Attribute{
 					"url": schema.StringAttribute{
-						MarkdownDescription: "API URL. URL to send API requests to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "API URL. URL to send API requests to",
 						Optional: true,
 					},
 				},
@@ -113,7 +113,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -130,7 +130,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -144,7 +144,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "PagerDuty Config. PagerDuty configuration to send alert notifications",
 				Attributes: map[string]schema.Attribute{
 					"url": schema.StringAttribute{
-						MarkdownDescription: "Pager Duty URL. URL to send API requests to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "Pager Duty URL. URL to send API requests to",
 						Optional: true,
 					},
 				},
@@ -162,7 +162,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -179,7 +179,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -193,7 +193,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Slack Config. Slack configuration to send alert notifications",
 				Attributes: map[string]schema.Attribute{
 					"channel": schema.StringAttribute{
-						MarkdownDescription: "Channel. Channel or user to send notifications to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^[a-z0-9-_]{1,80}$",
+						MarkdownDescription: "Channel. Channel or user to send notifications to",
 						Optional: true,
 					},
 				},
@@ -211,7 +211,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -228,7 +228,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -242,7 +242,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "SMS Configuration.",
 				Attributes: map[string]schema.Attribute{
 					"contact_number": schema.StringAttribute{
-						MarkdownDescription: "Contact Number. Contact number of the user in ITU E.164 format [+][country code][subscriber number including area code] ves.io.schema.rules.string.phone_number: true",
+						MarkdownDescription: "Contact Number. Contact number of the user in ITU E.164 format [+][country code][subscriber number including area code]",
 						Optional: true,
 					},
 				},
@@ -280,7 +280,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "Basic Authorization Credentials. Authorization parameters to access HTPP alert Receiver Endpoint.",
 								Attributes: map[string]schema.Attribute{
 									"user_name": schema.StringAttribute{
-										MarkdownDescription: "User Name. HTTP Basic Auth User Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+										MarkdownDescription: "User Name. HTTP Basic Auth User Name",
 										Optional: true,
 									},
 								},
@@ -296,7 +296,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								Blocks: map[string]schema.Block{
 									"use_tls_obj": schema.ListNestedBlock{
-										MarkdownDescription: "Certificate Object. Reference to client certificate object ves.io.schema.rules.repeated.max_items: 1",
+										MarkdownDescription: "Certificate Object. Reference to client certificate object",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -321,7 +321,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"sni": schema.StringAttribute{
-										MarkdownDescription: "SNI Value. Exclusive with [disable_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256",
+										MarkdownDescription: "SNI Value. SNI value to be used.",
 										Optional: true,
 									},
 								},
@@ -352,7 +352,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -369,7 +369,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},

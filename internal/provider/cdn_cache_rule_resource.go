@@ -46,7 +46,7 @@ func (r *CDNCacheRuleResource) Metadata(ctx context.Context, req resource.Metada
 
 func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the CDN loadbalancer specification",
+		MarkdownDescription: "Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CDNCacheRule. Must be unique within the namespace.",
@@ -85,7 +85,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 				MarkdownDescription: "Cache Rule. This defines a CDN Cache Rule",
 				Attributes: map[string]schema.Attribute{
 					"rule_name": schema.StringAttribute{
-						MarkdownDescription: "Rule Name. Name of the Cache Rule Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128",
+						MarkdownDescription: "Rule Name. Name of the Cache Rule",
 						Optional: true,
 					},
 				},
@@ -106,7 +106,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 										Optional: true,
 									},
 									"cache_ttl": schema.StringAttribute{
-										MarkdownDescription: "Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.time_interval: true",
+										MarkdownDescription: "Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days",
 										Optional: true,
 									},
 									"ignore_response_cookie": schema.BoolAttribute{
@@ -123,7 +123,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 										Optional: true,
 									},
 									"cache_ttl": schema.StringAttribute{
-										MarkdownDescription: "Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.time_interval: true",
+										MarkdownDescription: "Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days",
 										Optional: true,
 									},
 									"ignore_response_cookie": schema.BoolAttribute{
@@ -135,29 +135,29 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 						},
 					},
 					"rule_expression_list": schema.ListNestedBlock{
-						MarkdownDescription: "Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs.. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"expression_name": schema.StringAttribute{
-									MarkdownDescription: "Expression Name. Name of the Expressions items that are ANDed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128",
+									MarkdownDescription: "Expression Name. Name of the Expressions items that are ANDed",
 									Optional: true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"cache_rule_expression": schema.ListNestedBlock{
-									MarkdownDescription: "Terms. The Cache Rule Expression Terms that are ANDed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Terms. The Cache Rule Expression Terms that are ANDed",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 										},
 										Blocks: map[string]schema.Block{
 											"cache_headers": schema.ListNestedBlock{
-												MarkdownDescription: "Cache Headers. Configure cache rule headers to match the criteria ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+												MarkdownDescription: "Cache Headers. Configure cache rule headers to match the criteria",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{},
 												},
 											},
 											"cookie_matcher": schema.ListNestedBlock{
-												MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+												MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{},
 												},
@@ -166,7 +166,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 												MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
 											},
 											"query_parameters": schema.ListNestedBlock{
-												MarkdownDescription: "Query Parameters. List of (key, value) query parameters ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+												MarkdownDescription: "Query Parameters. List of (key, value) query parameters",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{},
 												},

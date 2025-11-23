@@ -46,7 +46,7 @@ func (r *GlobalLogReceiverResource) Metadata(ctx context.Context, req resource.M
 
 func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new Global Log Receiver object",
+		MarkdownDescription: "Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the GlobalLogReceiver. Must be unique within the namespace.",
@@ -88,15 +88,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "[OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver] AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"aws_region": schema.StringAttribute{
-						MarkdownDescription: "AWS Region. AWS Region Name Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "AWS Region. AWS Region Name",
 						Optional: true,
 					},
 					"group_name": schema.StringAttribute{
-						MarkdownDescription: "Group Name. The group name of the target Cloudwatch Logs stream Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string.pattern: ^[\\.\\-_/#A-Za-z0-9]+$",
+						MarkdownDescription: "Group Name. The group name of the target Cloudwatch Logs stream",
 						Optional: true,
 					},
 					"stream_name": schema.StringAttribute{
-						MarkdownDescription: "Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string.pattern: ^[^:*]*$",
+						MarkdownDescription: "Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time",
 						Optional: true,
 					},
 				},
@@ -105,15 +105,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -122,15 +122,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -169,11 +169,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"instance": schema.StringAttribute{
-						MarkdownDescription: "Event Hubs Instance. Event Hubs Instance name into which logs should be stored Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 63 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string.pattern: ^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+						MarkdownDescription: "Event Hubs Instance. Event Hubs Instance name into which logs should be stored",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 63 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string.pattern: ^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+						MarkdownDescription: "Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored",
 						Optional: true,
 					},
 				},
@@ -191,7 +191,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -208,7 +208,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -222,7 +222,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"container_name": schema.StringAttribute{
-						MarkdownDescription: "Container Name. Container Name is the name of the container into which logs should be stored Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 63 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string.pattern: ^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+						MarkdownDescription: "Container Name. Container Name is the name of the container into which logs should be stored",
 						Optional: true,
 					},
 				},
@@ -231,15 +231,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -284,7 +284,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -301,7 +301,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -312,7 +312,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file",
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
-								MarkdownDescription: "Custom Folder. Exclusive with [log_type_folder no_folder] Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i` ves.io.schema.rules.string.pattern: ^[A-Za-z_][A-Za-z0-9\\-\\._]*$",
+								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
 								Optional: true,
 							},
 						},
@@ -332,11 +332,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Datadog Configuration. Configuration for Datadog endpoint",
 				Attributes: map[string]schema.Attribute{
 					"endpoint": schema.StringAttribute{
-						MarkdownDescription: "Datadog Endpoint. Exclusive with [site] Datadog Endpoint, example: `example.com:9000`",
+						MarkdownDescription: "Datadog Endpoint. Datadog Endpoint, example: `example.com:9000`",
 						Optional: true,
 					},
 					"site": schema.StringAttribute{
-						MarkdownDescription: "Datadog Site. Exclusive with [endpoint] Datadog Site, example: `datadoghq.com` ves.io.schema.rules.string.hostname_or_ip: true",
+						MarkdownDescription: "Datadog Site. Datadog Site, example: `datadoghq.com`",
 						Optional: true,
 					},
 				},
@@ -345,15 +345,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -398,7 +398,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -415,7 +415,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -429,7 +429,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional: true,
 							},
 						},
@@ -453,7 +453,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
-										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
 										Optional: true,
 									},
 								},
@@ -478,7 +478,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"bucket": schema.StringAttribute{
-						MarkdownDescription: "GCP Bucket Name. GCP Bucket Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string.pattern: ^[a-z0-9]+[a-z0-9_\\.-]+[a-z0-9]$",
+						MarkdownDescription: "GCP Bucket Name. GCP Bucket Name",
 						Optional: true,
 					},
 				},
@@ -487,15 +487,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -531,7 +531,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file",
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
-								MarkdownDescription: "Custom Folder. Exclusive with [log_type_folder no_folder] Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i` ves.io.schema.rules.string.pattern: ^[A-Za-z_][A-Za-z0-9\\-\\._]*$",
+								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
 								Optional: true,
 							},
 						},
@@ -548,15 +548,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -568,7 +568,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "HTTP Configuration. Configuration for HTTP endpoint",
 				Attributes: map[string]schema.Attribute{
 					"uri": schema.StringAttribute{
-						MarkdownDescription: "HTTP Uri. HTTP Uri is the Uri of the HTTP endpoint to send logs to, example: `http://example.com:9000/logs` Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "HTTP Uri. HTTP Uri is the Uri of the HTTP endpoint to send logs to, example: `http://example.com:9000/logs`",
 						Optional: true,
 					},
 				},
@@ -577,7 +577,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Basic Authentication Credentials. Authentication parameters to access HTPP Log Receiver Endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"user_name": schema.StringAttribute{
-								MarkdownDescription: "User Name. HTTP Basic Auth User Name ves.io.schema.rules.string.max_len: 64",
+								MarkdownDescription: "User Name. HTTP Basic Auth User Name",
 								Optional: true,
 							},
 						},
@@ -624,15 +624,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -671,7 +671,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional: true,
 							},
 						},
@@ -695,7 +695,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
-										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
 										Optional: true,
 									},
 								},
@@ -717,12 +717,12 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Kafka Configuration. Kafka Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"bootstrap_servers": schema.ListAttribute{
-						MarkdownDescription: "Kafka Bootstrap Servers List. List of host:port pairs of the Kafka brokers Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.hostport: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Kafka Bootstrap Servers List. List of host:port pairs of the Kafka brokers",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"kafka_topic": schema.StringAttribute{
-						MarkdownDescription: "Kafka Topic. The Kafka topic name to write events to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 255 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string.pattern: ^[a-zA-Z0-9\\._\\-]+$",
+						MarkdownDescription: "Kafka Topic. The Kafka topic name to write events to",
 						Optional: true,
 					},
 				},
@@ -731,15 +731,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -778,7 +778,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional: true,
 							},
 						},
@@ -802,7 +802,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
-										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
 										Optional: true,
 									},
 								},
@@ -838,7 +838,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -855,7 +855,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -881,7 +881,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Namespace List. Namespace List",
 				Attributes: map[string]schema.Attribute{
 					"namespaces": schema.ListAttribute{
-						MarkdownDescription: "namespaces. List of namespaces to stream logs for Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "namespaces. List of namespaces to stream logs for",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -892,7 +892,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "IBM QRadar Configuration. Configuration for IBM QRadar endpoint",
 				Attributes: map[string]schema.Attribute{
 					"uri": schema.StringAttribute{
-						MarkdownDescription: "Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, example: `http://example.com:9000` Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, example: `http://example.com:9000`",
 						Optional: true,
 					},
 				},
@@ -901,15 +901,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -948,7 +948,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional: true,
 							},
 						},
@@ -972,7 +972,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
-										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
 										Optional: true,
 									},
 								},
@@ -997,11 +997,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "S3 Configuration. S3 Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"aws_region": schema.StringAttribute{
-						MarkdownDescription: "AWS Region. AWS Region Name Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "AWS Region. AWS Region Name",
 						Optional: true,
 					},
 					"bucket": schema.StringAttribute{
-						MarkdownDescription: "S3 Bucket Name. S3 Bucket Name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 3 ves.io.schema.rules.string.pattern: ^[a-z0-9]+[a-z0-9\\.-]+[a-z0-9]$",
+						MarkdownDescription: "S3 Bucket Name. S3 Bucket Name",
 						Optional: true,
 					},
 				},
@@ -1010,15 +1010,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -1027,15 +1027,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -1071,7 +1071,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file",
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
-								MarkdownDescription: "Custom Folder. Exclusive with [log_type_folder no_folder] Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i` ves.io.schema.rules.string.pattern: ^[A-Za-z_][A-Za-z0-9\\-\\._]*$",
+								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
 								Optional: true,
 							},
 						},
@@ -1094,7 +1094,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint",
 				Attributes: map[string]schema.Attribute{
 					"endpoint": schema.StringAttribute{
-						MarkdownDescription: "Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `https://http-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`) Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `https://http-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`)",
 						Optional: true,
 					},
 				},
@@ -1103,15 +1103,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Exclusive with [max_bytes_disabled] Send batch to endpoint after the batch is equal to or larger than this many bytes ves.io.schema.rules.uint32.gte: 4096 ves.io.schema.rules.uint32.lte: 10485760",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
 								Optional: true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Exclusive with [max_events_disabled] Send batch to endpoint after this many log messages are in the batch ves.io.schema.rules.uint32.gte: 32 ves.io.schema.rules.uint32.lte: 2000",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
 								Optional: true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Exclusive with [timeout_seconds_default] Send batch to the endpoint after this many seconds ves.io.schema.rules.uint64.gte: 300 ves.io.schema.rules.uint64.lte: 3600",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
 								Optional: true,
 							},
 						},
@@ -1159,7 +1159,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -1176,7 +1176,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -1187,7 +1187,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Server CA Certificates. Exclusive with [no_ca] The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional: true,
 							},
 						},
@@ -1211,7 +1211,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
-										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain. ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
 										Optional: true,
 									},
 								},
@@ -1247,7 +1247,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -1264,7 +1264,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},

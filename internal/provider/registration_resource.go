@@ -47,7 +47,7 @@ func (r *RegistrationResource) Metadata(ctx context.Context, req resource.Metada
 
 func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "VPM creates registration using this message, never used by users.",
+		MarkdownDescription: "Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Registration. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"token": schema.StringAttribute{
-				MarkdownDescription: "Token. Token is used for machine and tenant identification Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Token. Token is used for machine and tenant identification",
 				Optional: true,
 			},
 		},
@@ -102,7 +102,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"hostname": schema.StringAttribute{
-						MarkdownDescription: "Hostname. Must be unique in entire cluster and same as OS settings. '.' (dots) are not allowed in hostname Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Hostname. Must be unique in entire cluster and same as OS settings. '.' (dots) are not allowed in hostname",
 						Optional: true,
 					},
 					"instance_id": schema.StringAttribute{
@@ -131,7 +131,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Os Info. OsInfo holds information about host OS and HW",
 						Attributes: map[string]schema.Attribute{
 							"numa_nodes": schema.Int64Attribute{
-								MarkdownDescription: "NUMA nodes count. Non-uniform memory access (NUMA) nodes count ves.io.schema.rules.int32.gte: 0",
+								MarkdownDescription: "NUMA nodes count. Non-uniform memory access (NUMA) nodes count",
 								Optional: true,
 							},
 						},
@@ -494,7 +494,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						},
 					},
 					"interfaces": schema.SingleNestedBlock{
-						MarkdownDescription: "Interfaces. Machine interfaces present during registration time Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Interfaces. Machine interfaces present during registration time",
 					},
 					"internet_proxy": schema.SingleNestedBlock{
 						MarkdownDescription: "Internet Proxy Configuration. Proxy describes options for HTTP or HTTPS proxy configurations",
@@ -533,7 +533,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 				MarkdownDescription: "Passport. Passport stores information about identification and node configuration provided by CE during registration. It can be manually updated by user during approval.",
 				Attributes: map[string]schema.Attribute{
 					"cluster_name": schema.StringAttribute{
-						MarkdownDescription: "Cluster Name. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Cluster Name.",
 						Optional: true,
 					},
 					"cluster_size": schema.Int64Attribute{
@@ -541,27 +541,27 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"cluster_type": schema.StringAttribute{
-						MarkdownDescription: "Cluster Type. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Cluster Type.",
 						Optional: true,
 					},
 					"latitude": schema.Int64Attribute{
-						MarkdownDescription: "Latitude. Geographic location of this site Required: YES ves.io.schema.rules.float.gte: -90.0 ves.io.schema.rules.float.lte: 90.0 ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Latitude. Geographic location of this site",
 						Optional: true,
 					},
 					"longitude": schema.Int64Attribute{
-						MarkdownDescription: "Longitude. Geographic location of this site Required: YES ves.io.schema.rules.float.gte: -180.0 ves.io.schema.rules.float.lte: 180.0 ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Longitude. Geographic location of this site",
 						Optional: true,
 					},
 					"operating_system_version": schema.StringAttribute{
-						MarkdownDescription: "Operating System Version. Exclusive with [default_os_version] Operating System Version is optional parameter, which allows to specify target SW version for particular site e.g. 7.2009.10. ves.io.schema.rules.string.max_len: 20",
+						MarkdownDescription: "Operating System Version. Operating System Version is optional parameter, which allows to specify target SW version for particular site e.g. 7.2009.10.",
 						Optional: true,
 					},
 					"private_network_name": schema.StringAttribute{
-						MarkdownDescription: "Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN.",
 						Optional: true,
 					},
 					"volterra_software_version": schema.StringAttribute{
-						MarkdownDescription: "F5XC Software Version. Exclusive with [default_sw_version] F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002. ves.io.schema.rules.string.max_len: 20",
+						MarkdownDescription: "F5XC Software Version. F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002.",
 						Optional: true,
 					},
 				},

@@ -2,12 +2,12 @@
 page_title: "f5xc_fast_acl_rule Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Create a new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply
+  Manages new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 ---
 
 # f5xc_fast_acl_rule (Data Source)
 
-Create a new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply
+Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

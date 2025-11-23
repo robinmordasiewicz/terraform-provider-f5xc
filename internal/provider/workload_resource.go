@@ -46,7 +46,7 @@ func (r *WorkloadResource) Metadata(ctx context.Context, req resource.MetadataRe
 
 func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of Workload",
+		MarkdownDescription: "Manages a Workload resource in F5 Distributed Cloud for workload configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Workload. Must be unique within the namespace.",
@@ -85,7 +85,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "[OneOf: job, service, simple_service, stateful_service] Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc.",
 				Attributes: map[string]schema.Attribute{
 					"num_replicas": schema.Int64Attribute{
-						MarkdownDescription: "Number of Replicas. Number of replicas of the batch job to spawn per site ves.io.schema.rules.int32.lte: 5",
+						MarkdownDescription: "Number of Replicas. Number of replicas of the batch job to spawn per site",
 						Optional: true,
 					},
 				},
@@ -96,7 +96,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Parameters. Parameters for the workload",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -113,16 +113,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"containers": schema.ListNestedBlock{
-						MarkdownDescription: "Containers. Containers to use for the job Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "Containers. Containers to use for the job",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"args": schema.ListAttribute{
-									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD",
 									Optional: true,
 									ElementType: types.StringType,
 								},
 								"command": schema.ListAttribute{
-									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -135,7 +135,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Name of the container",
 									Optional: true,
 								},
 							},
@@ -144,15 +144,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -164,7 +164,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
@@ -185,23 +185,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional: true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
 											Optional: true,
 										},
 										"interval": schema.Int64Attribute{
-											MarkdownDescription: "Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Interval. Time interval in seconds between two health check requests.",
 											Optional: true,
 										},
 										"timeout": schema.Int64Attribute{
-											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 											Optional: true,
 										},
 										"unhealthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy.",
 											Optional: true,
 										},
 									},
@@ -221,23 +221,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional: true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
 											Optional: true,
 										},
 										"interval": schema.Int64Attribute{
-											MarkdownDescription: "Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Interval. Time interval in seconds between two health check requests.",
 											Optional: true,
 										},
 										"timeout": schema.Int64Attribute{
-											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 											Optional: true,
 										},
 										"unhealthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy.",
 											Optional: true,
 										},
 									},
@@ -273,7 +273,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -286,7 +286,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -299,7 +299,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -312,7 +312,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -322,11 +322,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Volumes. Volumes for the job ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "Volumes. Volumes for the job",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume ves.io.schema.rules.string.dns_1123_label: true",
+									MarkdownDescription: "Name. Name of the volume",
 									Optional: true,
 								},
 							},
@@ -335,7 +335,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload",
 									Attributes: map[string]schema.Attribute{
 										"size_limit": schema.Int64Attribute{
-											MarkdownDescription: "Size Limit (in GiB). Required: YES ves.io.schema.rules.double.lte: 10 ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Size Limit (in GiB).",
 											Optional: true,
 										},
 									},
@@ -349,7 +349,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Path. Path of the directory on the host Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256+",
+											MarkdownDescription: "Path. Path of the directory on the host",
 											Optional: true,
 										},
 									},
@@ -382,7 +382,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc.",
 				Attributes: map[string]schema.Attribute{
 					"num_replicas": schema.Int64Attribute{
-						MarkdownDescription: "Number of Replicas. Exclusive with [scale_to_zero] Number of replicas of service to spawn per site ves.io.schema.rules.int32.gt: 0 ves.io.schema.rules.int32.lte: 5",
+						MarkdownDescription: "Number of Replicas. Number of replicas of service to spawn per site",
 						Optional: true,
 					},
 				},
@@ -398,13 +398,13 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"advertise_where": schema.ListNestedBlock{
-										MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"ports": schema.ListNestedBlock{
-										MarkdownDescription: "Ports. Ports to advertise Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+										MarkdownDescription: "Ports. Ports to advertise",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -448,7 +448,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Parameters. Parameters for the workload",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -465,16 +465,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"containers": schema.ListNestedBlock{
-						MarkdownDescription: "Containers. Containers to use for service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "Containers. Containers to use for service",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"args": schema.ListAttribute{
-									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD",
 									Optional: true,
 									ElementType: types.StringType,
 								},
 								"command": schema.ListAttribute{
-									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -487,7 +487,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Name of the container",
 									Optional: true,
 								},
 							},
@@ -496,15 +496,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -516,7 +516,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
@@ -537,23 +537,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional: true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
 											Optional: true,
 										},
 										"interval": schema.Int64Attribute{
-											MarkdownDescription: "Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Interval. Time interval in seconds between two health check requests.",
 											Optional: true,
 										},
 										"timeout": schema.Int64Attribute{
-											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 											Optional: true,
 										},
 										"unhealthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy.",
 											Optional: true,
 										},
 									},
@@ -573,23 +573,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional: true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
 											Optional: true,
 										},
 										"interval": schema.Int64Attribute{
-											MarkdownDescription: "Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Interval. Time interval in seconds between two health check requests.",
 											Optional: true,
 										},
 										"timeout": schema.Int64Attribute{
-											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 											Optional: true,
 										},
 										"unhealthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy.",
 											Optional: true,
 										},
 									},
@@ -625,7 +625,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -638,7 +638,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -651,7 +651,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -664,7 +664,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -677,11 +677,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Volumes. Volumes for the service ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "Volumes. Volumes for the service",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume ves.io.schema.rules.string.dns_1123_label: true",
+									MarkdownDescription: "Name. Name of the volume",
 									Optional: true,
 								},
 							},
@@ -690,7 +690,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload",
 									Attributes: map[string]schema.Attribute{
 										"size_limit": schema.Int64Attribute{
-											MarkdownDescription: "Size Limit (in GiB). Required: YES ves.io.schema.rules.double.lte: 10 ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Size Limit (in GiB).",
 											Optional: true,
 										},
 									},
@@ -704,7 +704,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Path. Path of the directory on the host Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256+",
+											MarkdownDescription: "Path. Path of the directory on the host",
 											Optional: true,
 										},
 									},
@@ -748,7 +748,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Parameters. Parameters for the workload",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -768,12 +768,12 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Container Configuration. ContainerType configures the container information",
 						Attributes: map[string]schema.Attribute{
 							"args": schema.ListAttribute{
-								MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD ves.io.schema.rules.repeated.max_items: 128",
+								MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD",
 								Optional: true,
 								ElementType: types.StringType,
 							},
 							"command": schema.ListAttribute{
-								MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT ves.io.schema.rules.repeated.max_items: 128",
+								MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -786,7 +786,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								Optional: true,
 							},
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. Name of the container Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "Name. Name of the container",
 								Optional: true,
 							},
 						},
@@ -795,15 +795,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -815,7 +815,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+										MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
 										Optional: true,
 									},
 									"pull_policy": schema.StringAttribute{
@@ -836,23 +836,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
 								Attributes: map[string]schema.Attribute{
 									"healthy_threshold": schema.Int64Attribute{
-										MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+										MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 										Optional: true,
 									},
 									"initial_delay": schema.Int64Attribute{
-										MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600",
+										MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
 										Optional: true,
 									},
 									"interval": schema.Int64Attribute{
-										MarkdownDescription: "Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+										MarkdownDescription: "Interval. Time interval in seconds between two health check requests.",
 										Optional: true,
 									},
 									"timeout": schema.Int64Attribute{
-										MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+										MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 										Optional: true,
 									},
 									"unhealthy_threshold": schema.Int64Attribute{
-										MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+										MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy.",
 										Optional: true,
 									},
 								},
@@ -872,23 +872,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
 								Attributes: map[string]schema.Attribute{
 									"healthy_threshold": schema.Int64Attribute{
-										MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+										MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 										Optional: true,
 									},
 									"initial_delay": schema.Int64Attribute{
-										MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600",
+										MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
 										Optional: true,
 									},
 									"interval": schema.Int64Attribute{
-										MarkdownDescription: "Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+										MarkdownDescription: "Interval. Time interval in seconds between two health check requests.",
 										Optional: true,
 									},
 									"timeout": schema.Int64Attribute{
-										MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+										MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 										Optional: true,
 									},
 									"unhealthy_threshold": schema.Int64Attribute{
-										MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+										MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy.",
 										Optional: true,
 									},
 								},
@@ -916,7 +916,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Persistent Storage Volume. Persistent storage volume configuration for the workload",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. Name of the volume Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.dns_1123_label: true",
+								MarkdownDescription: "Name. Name of the volume",
 								Optional: true,
 							},
 						},
@@ -945,7 +945,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								ElementType: types.StringType,
 							},
 							"service_port": schema.Int64Attribute{
-								MarkdownDescription: "Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1024 ves.io.schema.rules.uint32.lte: 65535",
+								MarkdownDescription: "Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80",
 								Optional: true,
 							},
 						},
@@ -957,7 +957,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc.",
 				Attributes: map[string]schema.Attribute{
 					"num_replicas": schema.Int64Attribute{
-						MarkdownDescription: "Number of Replicas. Exclusive with [scale_to_zero] Number of replicas of service to spawn per site ves.io.schema.rules.int32.gt: 0 ves.io.schema.rules.int32.lte: 5",
+						MarkdownDescription: "Number of Replicas. Number of replicas of service to spawn per site",
 						Optional: true,
 					},
 				},
@@ -973,13 +973,13 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"advertise_where": schema.ListNestedBlock{
-										MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"ports": schema.ListNestedBlock{
-										MarkdownDescription: "Ports. Ports to advertise Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+										MarkdownDescription: "Ports. Ports to advertise",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1023,7 +1023,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Parameters. Parameters for the workload",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -1040,16 +1040,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"containers": schema.ListNestedBlock{
-						MarkdownDescription: "Containers. Containers to use for service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "Containers. Containers to use for service",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"args": schema.ListAttribute{
-									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD",
 									Optional: true,
 									ElementType: types.StringType,
 								},
 								"command": schema.ListAttribute{
-									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -1062,7 +1062,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Name of the container",
 									Optional: true,
 								},
 							},
@@ -1071,15 +1071,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -1091,7 +1091,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
@@ -1112,23 +1112,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional: true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
 											Optional: true,
 										},
 										"interval": schema.Int64Attribute{
-											MarkdownDescription: "Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Interval. Time interval in seconds between two health check requests.",
 											Optional: true,
 										},
 										"timeout": schema.Int64Attribute{
-											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 											Optional: true,
 										},
 										"unhealthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy.",
 											Optional: true,
 										},
 									},
@@ -1148,23 +1148,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional: true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
 											Optional: true,
 										},
 										"interval": schema.Int64Attribute{
-											MarkdownDescription: "Interval. Time interval in seconds between two health check requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Interval. Time interval in seconds between two health check requests.",
 											Optional: true,
 										},
 										"timeout": schema.Int64Attribute{
-											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+											MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 											Optional: true,
 										},
 										"unhealthy_threshold": schema.Int64Attribute{
-											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+											MarkdownDescription: "Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy.",
 											Optional: true,
 										},
 									},
@@ -1200,7 +1200,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1213,7 +1213,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1226,7 +1226,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1239,7 +1239,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1249,11 +1249,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"persistent_volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Persistent Storage Configuration. Persistent storage configuration for the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "Persistent Storage Configuration. Persistent storage configuration for the service",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.dns_1123_label: true",
+									MarkdownDescription: "Name. Name of the volume",
 									Optional: true,
 								},
 							},
@@ -1278,11 +1278,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Ephemeral Volumes. Ephemeral volumes for the service ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "Ephemeral Volumes. Ephemeral volumes for the service",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume ves.io.schema.rules.string.dns_1123_label: true",
+									MarkdownDescription: "Name. Name of the volume",
 									Optional: true,
 								},
 							},
@@ -1291,7 +1291,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload",
 									Attributes: map[string]schema.Attribute{
 										"size_limit": schema.Int64Attribute{
-											MarkdownDescription: "Size Limit (in GiB). Required: YES ves.io.schema.rules.double.lte: 10 ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Size Limit (in GiB).",
 											Optional: true,
 										},
 									},
@@ -1305,7 +1305,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Path. Path of the directory on the host Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256+",
+											MarkdownDescription: "Path. Path of the directory on the host",
 											Optional: true,
 										},
 									},

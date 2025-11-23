@@ -47,7 +47,7 @@ func (r *K8SClusterRoleResource) Metadata(ctx context.Context, req resource.Meta
 
 func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace",
+		MarkdownDescription: "Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8SClusterRole. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"yaml": schema.StringAttribute{
-				MarkdownDescription: "K8s YAML. Exclusive with [k8s_cluster_role_selector policy_rule_list] K8s YAML for ClusterRole ves.io.schema.rules.string.max_len: 4096 ves.io.schema.rules.string.uri_ref: true",
+				MarkdownDescription: "K8s YAML. K8s YAML for ClusterRole",
 				Optional: true,
 			},
 		},
@@ -90,7 +90,7 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "[OneOf: k8s_cluster_role_selector, policy_rule_list, yaml] Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -103,7 +103,7 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 				},
 				Blocks: map[string]schema.Block{
 					"policy_rule": schema.ListNestedBlock{
-						MarkdownDescription: "Policy Rules. List of rules for role permissions Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Policy Rules. List of rules for role permissions",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -112,12 +112,12 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 									MarkdownDescription: "List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource",
 									Attributes: map[string]schema.Attribute{
 										"urls": schema.ListAttribute{
-											MarkdownDescription: "Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"verbs": schema.ListAttribute{
-											MarkdownDescription: "Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -127,22 +127,22 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 									MarkdownDescription: "Resource List. List of resources in terms of api groups/resource types/resource instances and verbs allowed",
 									Attributes: map[string]schema.Attribute{
 										"api_groups": schema.ListAttribute{
-											MarkdownDescription: "API Groups. Allowed list of API group that contains resources, all resources of a given api group Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "API Groups. Allowed list of API group that contains resources, all resources of a given api group",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"resource_instances": schema.ListAttribute{
-											MarkdownDescription: "Resource Instances. Allowed list of resource instances within the resource types. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Resource Instances. Allowed list of resource instances within the resource types.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"resource_types": schema.ListAttribute{
-											MarkdownDescription: "Resource Types. Allowed list of resource types within the api groups. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Resource Types. Allowed list of resource types within the api groups.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"verbs": schema.ListAttribute{
-											MarkdownDescription: "Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations",
 											Optional: true,
 											ElementType: types.StringType,
 										},

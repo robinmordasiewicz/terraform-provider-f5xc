@@ -2,12 +2,12 @@
 page_title: "f5xc_dns_lb_health_check Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Create DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error.
+  Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_dns_lb_health_check (Resource)
 
-Create DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error.
+Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

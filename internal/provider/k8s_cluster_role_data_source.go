@@ -42,7 +42,7 @@ func (d *K8SClusterRoleDataSource) Metadata(ctx context.Context, req datasource.
 
 func (d *K8SClusterRoleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace",
+		MarkdownDescription: "Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

@@ -49,7 +49,7 @@ func (r *ContainerRegistryResource) Metadata(ctx context.Context, req resource.M
 
 func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of Container Registry",
+		MarkdownDescription: "Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ContainerRegistry. Must be unique within the namespace.",
@@ -83,15 +83,15 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"email": schema.StringAttribute{
-				MarkdownDescription: "Email. Email used for the registry ves.io.schema.rules.string.email: true",
+				MarkdownDescription: "Email. Email used for the registry",
 				Optional: true,
 			},
 			"registry": schema.StringAttribute{
-				MarkdownDescription: "Server FQDN. Fully qualified name of the registry login server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true",
+				MarkdownDescription: "Server FQDN. Fully qualified name of the registry login server",
 				Optional: true,
 			},
 			"user_name": schema.StringAttribute{
-				MarkdownDescription: "User Name. Username used to access the registry Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128",
+				MarkdownDescription: "User Name. Username used to access the registry",
 				Optional: true,
 			},
 		},
@@ -109,7 +109,7 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 								Optional: true,
 							},
 							"location": schema.StringAttribute{
-								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 								Optional: true,
 							},
 							"store_provider": schema.StringAttribute{
@@ -126,7 +126,7 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 								Optional: true,
 							},
 							"url": schema.StringAttribute{
-								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 								Optional: true,
 							},
 						},

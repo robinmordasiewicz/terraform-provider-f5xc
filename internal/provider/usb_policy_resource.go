@@ -46,7 +46,7 @@ func (r *UsbPolicyResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new USB policy object",
+		MarkdownDescription: "Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the UsbPolicy. Must be unique within the namespace.",
@@ -82,7 +82,7 @@ func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 		},
 		Blocks: map[string]schema.Block{
 			"allowed_devices": schema.ListNestedBlock{
-				MarkdownDescription: "Allowed USB devices. List of allowed USB devices Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.message.required_one_nonzero_field: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1",
+				MarkdownDescription: "Allowed USB devices. List of allowed USB devices",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"b_device_class": schema.StringAttribute{

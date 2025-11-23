@@ -47,7 +47,7 @@ func (r *ProxyResource) Metadata(ctx context.Context, req resource.MetadataReque
 
 func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the TCP loadbalancer create specification",
+		MarkdownDescription: "Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Proxy. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"connection_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) ves.io.schema.rules.uint32.lte: 1800000",
+				MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds)",
 				Optional: true,
 			},
 		},
@@ -92,19 +92,19 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_policies": schema.ListNestedBlock{
-						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -145,30 +145,30 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Optional: true,
 									},
 									"idle_timeout": schema.Int64Attribute{
-										MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset. ves.io.schema.rules.uint32.lte: 3600000",
+										MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset.",
 										Optional: true,
 									},
 									"max_request_header_size": schema.Int64Attribute{
-										MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question. ves.io.schema.rules.uint32.lte: 96",
+										MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question.",
 										Optional: true,
 									},
 									"request_cookies_to_remove": schema.ListAttribute{
-										MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
 									"request_headers_to_remove": schema.ListAttribute{
-										MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
 									"response_cookies_to_remove": schema.ListAttribute{
-										MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
 										Optional: true,
 										ElementType: types.StringType,
 									},
 									"response_headers_to_remove": schema.ListAttribute{
-										MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -190,25 +190,25 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"request_cookies_to_add": schema.ListNestedBlock{
-										MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"request_headers_to_add": schema.ListNestedBlock{
-										MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"response_cookies_to_add": schema.ListNestedBlock{
-										MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"response_headers_to_add": schema.ListNestedBlock{
-										MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -230,30 +230,30 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Optional: true,
 									},
 									"idle_timeout": schema.Int64Attribute{
-										MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset. ves.io.schema.rules.uint32.lte: 3600000",
+										MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset.",
 										Optional: true,
 									},
 									"max_request_header_size": schema.Int64Attribute{
-										MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question. ves.io.schema.rules.uint32.lte: 96",
+										MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question.",
 										Optional: true,
 									},
 									"request_cookies_to_remove": schema.ListAttribute{
-										MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
 									"request_headers_to_remove": schema.ListAttribute{
-										MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
 									"response_cookies_to_remove": schema.ListAttribute{
-										MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
 										Optional: true,
 										ElementType: types.StringType,
 									},
 									"response_headers_to_remove": schema.ListAttribute{
-										MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -275,25 +275,25 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"request_cookies_to_add": schema.ListNestedBlock{
-										MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"request_headers_to_add": schema.ListNestedBlock{
-										MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"response_cookies_to_add": schema.ListNestedBlock{
-										MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
 									},
 									"response_headers_to_add": schema.ListNestedBlock{
-										MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -309,7 +309,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"tls_certificates": schema.ListNestedBlock{
-										MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+										MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -328,7 +328,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "Dynamic SNI Proxy Type. Parameters for dynamic SNI proxy",
 						Attributes: map[string]schema.Attribute{
 							"idle_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. ves.io.schema.rules.uint32.lte: 86400000",
+								MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds.",
 								Optional: true,
 							},
 						},
@@ -352,30 +352,30 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Optional: true,
 							},
 							"idle_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset. ves.io.schema.rules.uint32.lte: 3600000",
+								MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset.",
 								Optional: true,
 							},
 							"max_request_header_size": schema.Int64Attribute{
-								MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question. ves.io.schema.rules.uint32.lte: 96",
+								MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question.",
 								Optional: true,
 							},
 							"request_cookies_to_remove": schema.ListAttribute{
-								MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
 							"request_headers_to_remove": schema.ListAttribute{
-								MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
 							"response_cookies_to_remove": schema.ListAttribute{
-								MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
 								Optional: true,
 								ElementType: types.StringType,
 							},
 							"response_headers_to_remove": schema.ListAttribute{
-								MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -389,7 +389,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Optional: true,
 									},
 									"max_request_bytes": schema.Int64Attribute{
-										MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response. ves.io.schema.rules.uint32.lte: 10485760",
+										MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
 										Optional: true,
 									},
 								},
@@ -398,11 +398,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								MarkdownDescription: "Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding ...",
 								Attributes: map[string]schema.Attribute{
 									"content_length": schema.Int64Attribute{
-										MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30. ves.io.schema.rules.uint32.gte: 30",
+										MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30.",
 										Optional: true,
 									},
 									"content_type": schema.ListAttribute{
-										MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml' ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.min_bytes: 1 ves.io.schema.rules.repeated.max_items: 50 ves.io.schema.rules.repeated.uniqu...",
+										MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml'",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -426,11 +426,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"request_cookies_to_add": schema.ListNestedBlock{
-								MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Name. Name of the cookie in Cookie header.",
 											Optional: true,
 										},
 										"overwrite": schema.BoolAttribute{
@@ -438,7 +438,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
-											MarkdownDescription: "Value. Exclusive with [secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096",
+											MarkdownDescription: "Value. Value of the Cookie header.",
 											Optional: true,
 										},
 									},
@@ -450,7 +450,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								},
 							},
 							"request_headers_to_add": schema.ListNestedBlock{
-								MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
@@ -458,11 +458,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Name. Name of the HTTP header.",
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
-											MarkdownDescription: "Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096",
+											MarkdownDescription: "Value. Value of the HTTP header.",
 											Optional: true,
 										},
 									},
@@ -474,27 +474,27 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								},
 							},
 							"response_cookies_to_add": schema.ListNestedBlock{
-								MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"add_domain": schema.StringAttribute{
-											MarkdownDescription: "Add Domain. Exclusive with [ignore_domain] Add domain attribute ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Add Domain. Add domain attribute",
 											Optional: true,
 										},
 										"add_expiry": schema.StringAttribute{
-											MarkdownDescription: "Add expiry. Exclusive with [ignore_expiry] Add expiry attribute ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Add expiry. Add expiry attribute",
 											Optional: true,
 										},
 										"add_path": schema.StringAttribute{
-											MarkdownDescription: "Add path. Exclusive with [ignore_path] Add path attribute ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Add path. Add path attribute",
 											Optional: true,
 										},
 										"max_age_value": schema.Int64Attribute{
-											MarkdownDescription: "Add Max Age. Exclusive with [ignore_max_age] Add max age attribute ves.io.schema.rules.uint32.lte: 34560000",
+											MarkdownDescription: "Add Max Age. Add max age attribute",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. Name of the cookie in Cookie header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.cookie_name: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Name. Name of the cookie in Cookie header.",
 											Optional: true,
 										},
 										"overwrite": schema.BoolAttribute{
@@ -502,7 +502,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
-											MarkdownDescription: "Value. Exclusive with [ignore_value secret_value] Value of the Cookie header. ves.io.schema.rules.string.max_len: 8096",
+											MarkdownDescription: "Value. Value of the Cookie header.",
 											Optional: true,
 										},
 									},
@@ -559,7 +559,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								},
 							},
 							"response_headers_to_add": schema.ListNestedBlock{
-								MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
@@ -567,11 +567,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. Name of the HTTP header. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Name. Name of the HTTP header.",
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
-											MarkdownDescription: "Value. Exclusive with [secret_value] Value of the HTTP header. ves.io.schema.rules.string.max_len: 8096",
+											MarkdownDescription: "Value. Value of the HTTP header.",
 											Optional: true,
 										},
 									},
@@ -605,11 +605,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_where": schema.ListNestedBlock{
-						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"port": schema.Int64Attribute{
-									MarkdownDescription: "TCP Listen Port. Exclusive with [use_default_port] TCP port to Listen. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "TCP Listen Port. TCP port to Listen.",
 									Optional: true,
 								},
 							},
@@ -618,7 +618,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Site. This defines a reference to a CE site along with network type and an optional ip address where a load balancer could be advertised",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
 											Optional: true,
 										},
 										"network": schema.StringAttribute{
@@ -659,7 +659,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "Configuration for TLS interception. Configuration to enable TLS interception",
 				Attributes: map[string]schema.Attribute{
 					"trusted_ca_url": schema.StringAttribute{
-						MarkdownDescription: "Custom Root CA Certificate. Exclusive with [volterra_trusted_ca] Custom Root CA Certificate for validating upstream server certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate",
 						Optional: true,
 					},
 				},
@@ -668,7 +668,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "TLS Certificate. Handle to fetch certificate and key",
 						Attributes: map[string]schema.Attribute{
 							"certificate_url": schema.StringAttribute{
-								MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 								Optional: true,
 							},
 							"description": schema.StringAttribute{
@@ -681,7 +681,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 								Attributes: map[string]schema.Attribute{
 									"hash_algorithms": schema.ListAttribute{
-										MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -717,7 +717,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 						Blocks: map[string]schema.Block{
 							"interception_rules": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Interception Rules. List of ordered rules to enable or disable for TLS interception Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "TLS Interception Rules. List of ordered rules to enable or disable for TLS interception",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},

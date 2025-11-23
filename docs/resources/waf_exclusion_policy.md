@@ -2,12 +2,12 @@
 page_title: "f5xc_waf_exclusion_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Create a WAF exclusion policy
+  Manages WAF exclusion policy in F5 Distributed Cloud.
 ---
 
 # f5xc_waf_exclusion_policy (Resource)
 
-Create a WAF exclusion policy
+Manages WAF exclusion policy in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

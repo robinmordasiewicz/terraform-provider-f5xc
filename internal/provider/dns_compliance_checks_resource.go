@@ -49,7 +49,7 @@ func (r *DNSComplianceChecksResource) Metadata(ctx context.Context, req resource
 
 func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error.",
+		MarkdownDescription: "Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSComplianceChecks. Must be unique within the namespace.",
@@ -83,17 +83,17 @@ func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.S
 				},
 			},
 			"disallowed_query_type_list": schema.ListAttribute{
-				MarkdownDescription: "Disallowed Query Type Values. Disallowed Query Type Values ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Disallowed Query Type Values. Disallowed Query Type Values",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"disallowed_resource_record_type_list": schema.ListAttribute{
-				MarkdownDescription: "Disallowed Resource Record Types. Disallowed Resource Record Type List ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Disallowed Resource Record Types. Disallowed Resource Record Type List",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"domain_denylist": schema.ListAttribute{
-				MarkdownDescription: "Domain Deny list. List of domains to be denied by configuration object Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 30 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.etld_plus_one: true",
+				MarkdownDescription: "Domain Deny list. List of domains to be denied by configuration object",
 				Optional: true,
 				ElementType: types.StringType,
 			},

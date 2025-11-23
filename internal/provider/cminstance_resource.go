@@ -48,7 +48,7 @@ func (r *CminstanceResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create App type will create the configuration in namespace metadata.namespace",
+		MarkdownDescription: "Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cminstance. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"port": schema.Int64Attribute{
-				MarkdownDescription: "Port. Port of the Central Manager instance to connect to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+				MarkdownDescription: "Port. Port of the Central Manager instance to connect to",
 				Optional: true,
 			},
 			"username": schema.StringAttribute{
-				MarkdownDescription: "Username. Username for the Central Manager instance Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128 ves.io.schema.rules.string.min_len: 4",
+				MarkdownDescription: "Username. Username for the Central Manager instance",
 				Optional: true,
 			},
 		},
@@ -104,7 +104,7 @@ func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional: true,
 							},
 							"location": schema.StringAttribute{
-								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 								Optional: true,
 							},
 							"store_provider": schema.StringAttribute{
@@ -121,7 +121,7 @@ func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional: true,
 							},
 							"url": schema.StringAttribute{
-								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 								Optional: true,
 							},
 						},
@@ -133,7 +133,7 @@ func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 				Attributes: map[string]schema.Attribute{
 					"addr": schema.StringAttribute{
-						MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
 						Optional: true,
 					},
 				},
@@ -152,7 +152,7 @@ func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional: true,
 							},
 							"location": schema.StringAttribute{
-								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 								Optional: true,
 							},
 							"store_provider": schema.StringAttribute{
@@ -169,7 +169,7 @@ func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional: true,
 							},
 							"url": schema.StringAttribute{
-								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 								Optional: true,
 							},
 						},

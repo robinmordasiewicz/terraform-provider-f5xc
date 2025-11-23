@@ -42,7 +42,7 @@ func (d *CustomerSupportDataSource) Metadata(ctx context.Context, req datasource
 
 func (d *CustomerSupportDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new customer support ticket in our customer support provider system.",
+		MarkdownDescription: "Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

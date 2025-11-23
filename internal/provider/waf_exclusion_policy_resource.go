@@ -46,7 +46,7 @@ func (r *WAFExclusionPolicyResource) Metadata(ctx context.Context, req resource.
 
 func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a WAF exclusion policy",
+		MarkdownDescription: "Manages WAF exclusion policy in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the WAFExclusionPolicy. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 		},
 		Blocks: map[string]schema.Block{
 			"waf_exclusion_rules": schema.ListNestedBlock{
-				MarkdownDescription: "WAF Exclusion Rules. An ordered list of rules. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "WAF Exclusion Rules. An ordered list of rules.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"exact_value": schema.StringAttribute{
-							MarkdownDescription: "Exact Value. Exclusive with [any_domain suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "Exact Value. Exact domain name",
 							Optional: true,
 						},
 						"expiration_timestamp": schema.StringAttribute{
@@ -94,20 +94,20 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Optional: true,
 						},
 						"methods": schema.ListAttribute{
-							MarkdownDescription: "Methods. methods to be matched ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+							MarkdownDescription: "Methods. methods to be matched",
 							Optional: true,
 							ElementType: types.StringType,
 						},
 						"path_prefix": schema.StringAttribute{
-							MarkdownDescription: "Prefix. Exclusive with [any_path path_regex] Path prefix to match (e.g. the value / will match on all paths) ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256",
+							MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
 							Optional: true,
 						},
 						"path_regex": schema.StringAttribute{
-							MarkdownDescription: "Path Regex. Exclusive with [any_path path_prefix] Define the regex for the path. For example, the regex ^/.*$ will match on all paths ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.regex: true",
+							MarkdownDescription: "Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths",
 							Optional: true,
 						},
 						"suffix_value": schema.StringAttribute{
-							MarkdownDescription: "Suffix Value. Exclusive with [any_domain exact_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
 							Optional: true,
 						},
 					},
@@ -124,7 +124,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 							},
 							Blocks: map[string]schema.Block{
 								"exclude_attack_type_contexts": schema.ListNestedBlock{
-									MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"context": schema.StringAttribute{
@@ -132,7 +132,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 												Optional: true,
 											},
 											"context_name": schema.StringAttribute{
-												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*). ves.io.schema.rules.string.max_len: 128",
+												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
 												Optional: true,
 											},
 											"exclude_attack_type": schema.StringAttribute{
@@ -143,18 +143,18 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"exclude_bot_name_contexts": schema.ListNestedBlock{
-									MarkdownDescription: "Bot Names. Bot Names to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Bot Names. Bot Names to be excluded for the defined match criteria",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"bot_name": schema.StringAttribute{
-												MarkdownDescription: "Bot Name. Required: YES ves.io.schema.rules.message.required: true",
+												MarkdownDescription: "Bot Name.",
 												Optional: true,
 											},
 										},
 									},
 								},
 								"exclude_signature_contexts": schema.ListNestedBlock{
-									MarkdownDescription: "Signature IDs. Signature IDs to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 1024 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Signature IDs. Signature IDs to be excluded for the defined match criteria",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"context": schema.StringAttribute{
@@ -162,18 +162,18 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 												Optional: true,
 											},
 											"context_name": schema.StringAttribute{
-												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*). ves.io.schema.rules.string.max_len: 128",
+												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
 												Optional: true,
 											},
 											"signature_id": schema.Int64Attribute{
-												MarkdownDescription: "SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 299999999",
+												MarkdownDescription: "SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context.",
 												Optional: true,
 											},
 										},
 									},
 								},
 								"exclude_violation_contexts": schema.ListNestedBlock{
-									MarkdownDescription: "Violations. Violations to be excluded for the defined match criteria ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Violations. Violations to be excluded for the defined match criteria",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"context": schema.StringAttribute{
@@ -181,7 +181,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 												Optional: true,
 											},
 											"context_name": schema.StringAttribute{
-												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*). ves.io.schema.rules.string.max_len: 128",
+												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
 												Optional: true,
 											},
 											"exclude_violation": schema.StringAttribute{
@@ -197,11 +197,11 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},

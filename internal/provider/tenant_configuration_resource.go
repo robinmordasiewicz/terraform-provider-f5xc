@@ -46,7 +46,7 @@ func (r *TenantConfigurationResource) Metadata(ctx context.Context, req resource
 
 func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the tenant configuration specification",
+		MarkdownDescription: "Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TenantConfiguration. Must be unique within the namespace.",
@@ -85,7 +85,7 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 				MarkdownDescription: "BasicConfiguration.",
 				Attributes: map[string]schema.Attribute{
 					"display_name": schema.StringAttribute{
-						MarkdownDescription: "Display Name. Tenant display name in the login screen ves.io.schema.rules.string.k8s_label_value: true ves.io.schema.rules.string.max_len: 255",
+						MarkdownDescription: "Display Name. Tenant display name in the login screen",
 						Optional: true,
 					},
 				},
@@ -95,7 +95,7 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 				MarkdownDescription: "BruteForceDetectionSettings.",
 				Attributes: map[string]schema.Attribute{
 					"max_login_failures": schema.Int64Attribute{
-						MarkdownDescription: "Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes. ves.io.schema.rules.uint32.lte: 30",
+						MarkdownDescription: "Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes.",
 						Optional: true,
 					},
 				},
@@ -105,19 +105,19 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 				MarkdownDescription: "PasswordPolicy.",
 				Attributes: map[string]schema.Attribute{
 					"digits": schema.Int64Attribute{
-						MarkdownDescription: "Min Number Of Digits. The number of digits required to be in the password string. ves.io.schema.rules.uint32.lte: 16",
+						MarkdownDescription: "Min Number Of Digits. The number of digits required to be in the password string.",
 						Optional: true,
 					},
 					"expire_password": schema.Int64Attribute{
-						MarkdownDescription: "Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password. ves.io.schema.rules.uint32.lte: 1080",
+						MarkdownDescription: "Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password.",
 						Optional: true,
 					},
 					"lowercase_characters": schema.Int64Attribute{
-						MarkdownDescription: "Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string. ves.io.schema.rules.uint32.lte: 16",
+						MarkdownDescription: "Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string.",
 						Optional: true,
 					},
 					"minimum_length": schema.Int64Attribute{
-						MarkdownDescription: "Minimum Length. Minimum length of password. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 7",
+						MarkdownDescription: "Minimum Length. Minimum length of password.",
 						Optional: true,
 					},
 					"not_recently_used": schema.Int64Attribute{
@@ -129,11 +129,11 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 						Optional: true,
 					},
 					"special_characters": schema.Int64Attribute{
-						MarkdownDescription: "Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string. ves.io.schema.rules.uint32.lte: 16",
+						MarkdownDescription: "Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string.",
 						Optional: true,
 					},
 					"uppercase_characters": schema.Int64Attribute{
-						MarkdownDescription: "Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string. ves.io.schema.rules.uint32.lte: 16",
+						MarkdownDescription: "Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string.",
 						Optional: true,
 					},
 				},

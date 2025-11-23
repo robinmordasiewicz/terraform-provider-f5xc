@@ -47,7 +47,7 @@ func (r *ManagedTenantResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage.",
+		MarkdownDescription: "Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ManagedTenant. Must be unique within the namespace.",
@@ -81,17 +81,17 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"tenant_id": schema.StringAttribute{
-				MarkdownDescription: "Managed Tenant ID. Exclusive with [] Specify the Tenant ID of the existing tenant which needs to be managed. User can select Tenant ID from dropdown if managed tenant has already configured delegated access or manually input the Tenant ID if managed tenant configuration will happen in future. ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "Managed Tenant ID. Specify the Tenant ID of the existing tenant which needs to be managed. User can select Tenant ID from dropdown if managed tenant has already configured delegated access or manually input the Tenant ID if managed tenant configuration will happen in future.",
 				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
 			"groups": schema.ListNestedBlock{
-				MarkdownDescription: "Group Mapping. List of local user group association to user groups in the managed tenant specified in the tenant_choice. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Group Mapping. List of local user group association to user groups in the managed tenant specified in the tenant_choice.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"managed_tenant_groups": schema.ListAttribute{
-							MarkdownDescription: "Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.re...",
+							MarkdownDescription: "Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user.",
 							Optional: true,
 							ElementType: types.StringType,
 						},
@@ -101,15 +101,15 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},

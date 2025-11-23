@@ -46,7 +46,7 @@ func (r *UserIdentificationResource) Metadata(ctx context.Context, req resource.
 
 func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create user_identification creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the UserIdentification. Must be unique within the namespace.",
@@ -82,27 +82,27 @@ func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.Sc
 		},
 		Blocks: map[string]schema.Block{
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "User Identification Rules. An ordered list of rules that are evaluated sequentially against the input fields extracted from an API request in order to determine a user identifier. Evaluation of the rules is terminated once a user identifier has been extracted. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "User Identification Rules. An ordered list of rules that are evaluated sequentially against the input fields extracted from an API request in order to determine a user identifier. Evaluation of the rules is terminated once a user identifier has been extracted.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"cookie_name": schema.StringAttribute{
-							MarkdownDescription: "Cookie Name. Exclusive with [client_asn client_city client_country client_ip client_region http_header_name ip_and_http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ja4_tls_fingerprint jwt_claim_name none query_param_key tls_fingerprint] Use the HTTP cookie value for the given name as user identifier. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "Cookie Name. Use the HTTP cookie value for the given name as user identifier.",
 							Optional: true,
 						},
 						"http_header_name": schema.StringAttribute{
-							MarkdownDescription: "HTTP Header Name. Exclusive with [client_asn client_city client_country client_ip client_region cookie_name ip_and_http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ja4_tls_fingerprint jwt_claim_name none query_param_key tls_fingerprint] Use the HTTP header value for the given name as user identifier. ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "HTTP Header Name. Use the HTTP header value for the given name as user identifier.",
 							Optional: true,
 						},
 						"ip_and_http_header_name": schema.StringAttribute{
-							MarkdownDescription: "HTTP Header Name. Exclusive with [client_asn client_city client_country client_ip client_region cookie_name http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ja4_tls_fingerprint jwt_claim_name none query_param_key tls_fingerprint] Name of HTTP header from which the value should be extracted. ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "HTTP Header Name. Name of HTTP header from which the value should be extracted.",
 							Optional: true,
 						},
 						"jwt_claim_name": schema.StringAttribute{
-							MarkdownDescription: "JWT Claim Name. Exclusive with [client_asn client_city client_country client_ip client_region cookie_name http_header_name ip_and_http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ja4_tls_fingerprint none query_param_key tls_fingerprint] Use the JWT claim value as user identifier. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "JWT Claim Name. Use the JWT claim value as user identifier.",
 							Optional: true,
 						},
 						"query_param_key": schema.StringAttribute{
-							MarkdownDescription: "Query Parameter Key. Exclusive with [client_asn client_city client_country client_ip client_region cookie_name http_header_name ip_and_http_header_name ip_and_ja4_tls_fingerprint ip_and_tls_fingerprint ja4_tls_fingerprint jwt_claim_name none tls_fingerprint] Use the query parameter value for the given key as user identifier. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "Query Parameter Key. Use the query parameter value for the given key as user identifier.",
 							Optional: true,
 						},
 					},

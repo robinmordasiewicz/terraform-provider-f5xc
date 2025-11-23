@@ -2,12 +2,12 @@
 page_title: "f5xc_k8s_cluster_role Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Create k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace
+  Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_k8s_cluster_role (Data Source)
 
-Create k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace
+Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

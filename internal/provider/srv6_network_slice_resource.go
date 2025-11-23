@@ -50,7 +50,7 @@ func (r *Srv6NetworkSliceResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create srv6_network_slice creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Srv6NetworkSlice. Must be unique within the namespace.",
@@ -96,7 +96,7 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 			},
 			"sid_prefixes": schema.ListAttribute{
-				MarkdownDescription: "IPv6 Prefix for SID Allocation. A SID Locator from the prefix is allocated automatically for each node in each site. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.ipv6_prefix: true ves.io.schema.rules.repeated.items.string.max_ip_prefix_length: 32 ves.io.schema.rules.repeated.items.string.min_ip_prefix_length: 32 ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "IPv6 Prefix for SID Allocation. A SID Locator from the prefix is allocated automatically for each node in each site.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

@@ -46,7 +46,7 @@ func (r *AlertPolicyResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new Alert Policy Object",
+		MarkdownDescription: "Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AlertPolicy. Must be unique within the namespace.",
@@ -85,15 +85,15 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers",
 				Attributes: map[string]schema.Attribute{
 					"group_interval": schema.StringAttribute{
-						MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m' ves.io.schema.rules.string.max_time_interval: 10m ves.io.schema.rules.string.min_time_interval: 30s ves.io.schema.rules.string.time_interval: true",
+						MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'",
 						Optional: true,
 					},
 					"group_wait": schema.StringAttribute{
-						MarkdownDescription: "Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s' ves.io.schema.rules.string.max_time_interval: 5m ves.io.schema.rules.string.min_time_interval: 0s ves.io.schema.rules.string.time_interval: true",
+						MarkdownDescription: "Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'",
 						Optional: true,
 					},
 					"repeat_interval": schema.StringAttribute{
-						MarkdownDescription: "Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h' ves.io.schema.rules.string.max_time_interval: 10d ves.io.schema.rules.string.min_time_interval: 30m ves.io.schema.rules.string.time_interval: true",
+						MarkdownDescription: "Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'",
 						Optional: true,
 					},
 				},
@@ -102,7 +102,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Custom Group By. Specify list of custom labels to group/aggregate the alerts",
 						Attributes: map[string]schema.Attribute{
 							"labels": schema.ListAttribute{
-								MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$",
+								MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -121,7 +121,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 
 			},
 			"receivers": schema.ListNestedBlock{
-				MarkdownDescription: "Alert Receivers. list of Alert Receivers where the alerts will be sent Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4",
+				MarkdownDescription: "Alert Receivers. list of Alert Receivers where the alerts will be sent",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -149,7 +149,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"routes": schema.ListNestedBlock{
-				MarkdownDescription: "Policy Rules. Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16",
+				MarkdownDescription: "Policy Rules. Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"alertname": schema.StringAttribute{
@@ -157,7 +157,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional: true,
 						},
 						"alertname_regex": schema.StringAttribute{
-							MarkdownDescription: "Matching RegEx of Alertname. Exclusive with [alertname any custom group severity] Regular Expression match for the alertname",
+							MarkdownDescription: "Matching RegEx of Alertname. Regular Expression match for the alertname",
 							Optional: true,
 						},
 					},
@@ -171,17 +171,17 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 							Blocks: map[string]schema.Block{
 								"alertlabel": schema.SingleNestedBlock{
-									MarkdownDescription: "AlertLabel. AlertLabel to configure the alert policy rule ves.io.schema.rules.map.keys.string.max_len: 64 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.keys.string.pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$ ves.io.schema.rules.map.max_pairs: 3",
+									MarkdownDescription: "AlertLabel. AlertLabel to configure the alert policy rule",
 								},
 								"alertname": schema.SingleNestedBlock{
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Exclusive with [regex_match] Equality match value for the label",
+											MarkdownDescription: "Exact Match. Equality match value for the label",
 											Optional: true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Exclusive with [exact_match] Regular expression match value for the label",
+											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
 											Optional: true,
 										},
 									},
@@ -190,11 +190,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Exclusive with [regex_match] Equality match value for the label",
+											MarkdownDescription: "Exact Match. Equality match value for the label",
 											Optional: true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Exclusive with [exact_match] Regular expression match value for the label",
+											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
 											Optional: true,
 										},
 									},
@@ -203,11 +203,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Exclusive with [regex_match] Equality match value for the label",
+											MarkdownDescription: "Exact Match. Equality match value for the label",
 											Optional: true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Exclusive with [exact_match] Regular expression match value for the label",
+											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
 											Optional: true,
 										},
 									},
@@ -231,15 +231,15 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers",
 							Attributes: map[string]schema.Attribute{
 								"group_interval": schema.StringAttribute{
-									MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m' ves.io.schema.rules.string.max_time_interval: 10m ves.io.schema.rules.string.min_time_interval: 30s ves.io.schema.rules.string.time_interval: true",
+									MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'",
 									Optional: true,
 								},
 								"group_wait": schema.StringAttribute{
-									MarkdownDescription: "Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s' ves.io.schema.rules.string.max_time_interval: 5m ves.io.schema.rules.string.min_time_interval: 0s ves.io.schema.rules.string.time_interval: true",
+									MarkdownDescription: "Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'",
 									Optional: true,
 								},
 								"repeat_interval": schema.StringAttribute{
-									MarkdownDescription: "Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h' ves.io.schema.rules.string.max_time_interval: 10d ves.io.schema.rules.string.min_time_interval: 30m ves.io.schema.rules.string.time_interval: true",
+									MarkdownDescription: "Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'",
 									Optional: true,
 								},
 							},
@@ -248,7 +248,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Custom Group By. Specify list of custom labels to group/aggregate the alerts",
 									Attributes: map[string]schema.Attribute{
 										"labels": schema.ListAttribute{
-											MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$",
+											MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts",
 											Optional: true,
 											ElementType: types.StringType,
 										},

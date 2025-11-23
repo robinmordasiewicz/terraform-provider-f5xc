@@ -46,7 +46,7 @@ func (r *CloudCredentialsResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "API to create cloud_credentials object",
+		MarkdownDescription: "Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CloudCredentials. Must be unique within the namespace.",
@@ -85,19 +85,19 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: aws_assume_role, aws_secret_key, azure_client_secret, azure_pfx_certificate, gcp_cred_file] AWS Assume Role to Handle Delegated Access. AWS Assume Role to Handle Delegated Access",
 				Attributes: map[string]schema.Attribute{
 					"custom_external_id": schema.StringAttribute{
-						MarkdownDescription: "External ID is Custom ID. Exclusive with [external_id_is_optional external_id_is_tenant_id] External ID is Custom ID ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 2",
+						MarkdownDescription: "External ID is Custom ID. External ID is Custom ID",
 						Optional: true,
 					},
 					"duration_seconds": schema.Int64Attribute{
-						MarkdownDescription: "Role Session Duration Seconds. The duration, in seconds of the role session. ves.io.schema.rules.uint32.gte: 3600 ves.io.schema.rules.uint32.lte: 43200",
+						MarkdownDescription: "Role Session Duration Seconds. The duration, in seconds of the role session.",
 						Optional: true,
 					},
 					"role_arn": schema.StringAttribute{
-						MarkdownDescription: "IAM Role ARN. IAM Role ARN to assume the role Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 2048 ves.io.schema.rules.string.min_len: 20 ves.io.schema.rules.string.pattern: ^(arn:aws:iam::)([0-9]{12}:role/.*)$",
+						MarkdownDescription: "IAM Role ARN. IAM Role ARN to assume the role",
 						Optional: true,
 					},
 					"session_name": schema.StringAttribute{
-						MarkdownDescription: "Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 2*",
+						MarkdownDescription: "Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console",
 						Optional: true,
 					},
 				},
@@ -109,7 +109,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"session_tags": schema.SingleNestedBlock{
-						MarkdownDescription: "Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role ves.io.schema.rules.map.keys.string.max_len: 127 ves.io.schema.rules.map.max_pairs: 40 ves.io.schema.rules.map.values.string.max_len: 255",
+						MarkdownDescription: "Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role",
 					},
 				},
 
@@ -118,7 +118,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type",
 				Attributes: map[string]schema.Attribute{
 					"access_key": schema.StringAttribute{
-						MarkdownDescription: "Access Key ID. Access key ID for your AWS account Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128",
+						MarkdownDescription: "Access Key ID. Access key ID for your AWS account",
 						Optional: true,
 					},
 				},
@@ -136,7 +136,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -153,7 +153,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -167,15 +167,15 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Azure Client Secret. Azure Credentials Client Secret type",
 				Attributes: map[string]schema.Attribute{
 					"client_id": schema.StringAttribute{
-						MarkdownDescription: "Client ID. Client ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "Client ID. Client ID for your Azure service principal",
 						Optional: true,
 					},
 					"subscription_id": schema.StringAttribute{
-						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal",
 						Optional: true,
 					},
 					"tenant_id": schema.StringAttribute{
-						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal",
 						Optional: true,
 					},
 				},
@@ -193,7 +193,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -210,7 +210,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -224,19 +224,19 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Client Certificate. Azure Credentials Client Certificate type",
 				Attributes: map[string]schema.Attribute{
 					"certificate_url": schema.StringAttribute{
-						MarkdownDescription: "URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.uri_ref: true",
+						MarkdownDescription: "URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file",
 						Optional: true,
 					},
 					"client_id": schema.StringAttribute{
-						MarkdownDescription: "Client ID. Client ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "Client ID. Client ID for your Azure service principal",
 						Optional: true,
 					},
 					"subscription_id": schema.StringAttribute{
-						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal",
 						Optional: true,
 					},
 					"tenant_id": schema.StringAttribute{
-						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal",
 						Optional: true,
 					},
 				},
@@ -254,7 +254,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -271,7 +271,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -299,7 +299,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -316,7 +316,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},

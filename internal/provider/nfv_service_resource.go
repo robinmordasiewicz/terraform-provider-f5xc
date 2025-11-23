@@ -46,7 +46,7 @@ func (r *NFVServiceResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new NFV service with configured parameters",
+		MarkdownDescription: "Manages new NFV service with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NFVService. Must be unique within the namespace.",
@@ -91,7 +91,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "SSH based management. SSH based configuration",
 				Attributes: map[string]schema.Attribute{
 					"domain_suffix": schema.StringAttribute{
-						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form the hostname for ssh node management Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true",
+						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form the hostname for ssh node management",
 						Optional: true,
 					},
 				},
@@ -106,15 +106,15 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"node_ssh_ports": schema.ListNestedBlock{
-						MarkdownDescription: "Management Node SSH Port. Enter TCP port and node name per node Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 2",
+						MarkdownDescription: "Management Node SSH Port. Enter TCP port and node name per node",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"node_name": schema.StringAttribute{
-									MarkdownDescription: "Node Name. Node name will be used to match a particular node with the desired TCP port Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Node Name. Node name will be used to match a particular node with the desired TCP port",
 									Optional: true,
 								},
 								"ssh_port": schema.Int64Attribute{
-									MarkdownDescription: "SSH Port. Enter TCP port per node Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1024 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "SSH Port. Enter TCP port per node",
 									Optional: true,
 								},
 							},
@@ -127,11 +127,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "[OneOf: f5_big_ip_aws_service, palo_alto_fw_service] Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS",
 				Attributes: map[string]schema.Attribute{
 					"admin_username": schema.StringAttribute{
-						MarkdownDescription: "Admin Username. Admin Username for BIG-IP Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+						MarkdownDescription: "Admin Username. Admin Username for BIG-IP",
 						Optional: true,
 					},
 					"ssh_key": schema.StringAttribute{
-						MarkdownDescription: "Public SSH key. Public SSH key for accessing the Big IP nodes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Public SSH key. Public SSH key for accessing the Big IP nodes.",
 						Optional: true,
 					},
 				},
@@ -149,7 +149,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -166,7 +166,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -182,15 +182,15 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -201,7 +201,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Endpoint Service. Endpoint Service is a type of NFV service where the packets are destined to NFV and service modifies the destination with a new destination address",
 						Attributes: map[string]schema.Attribute{
 							"configured_vip": schema.StringAttribute{
-								MarkdownDescription: "Configured VIP. Exclusive with [automatic_vip] Enter IP address for the default VIP ves.io.schema.rules.string.ip: true ves.io.schema.rules.string.not_in: 0.0.0.0",
+								MarkdownDescription: "Configured VIP. Enter IP address for the default VIP",
 								Optional: true,
 							},
 						},
@@ -219,7 +219,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Port Range List. List of port ranges",
 								Attributes: map[string]schema.Attribute{
 									"ports": schema.ListAttribute{
-										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules.repeated.max_items: 128",
+										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -229,7 +229,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Port Range List. List of port ranges",
 								Attributes: map[string]schema.Attribute{
 									"ports": schema.ListAttribute{
-										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules.repeated.max_items: 128",
+										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -269,19 +269,19 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"nodes": schema.ListNestedBlock{
-						MarkdownDescription: "Service Nodes. Specify how and where the service nodes are spawned Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 2 ves.io.schema.rules.repeated.min_items: 1",
+						MarkdownDescription: "Service Nodes. Specify how and where the service nodes are spawned",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"aws_az_name": schema.StringAttribute{
-									MarkdownDescription: "AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^([a-z]{2})-([a-z0-9]{4,20})-([a-z0-9]{2})$",
+									MarkdownDescription: "AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site",
 									Optional: true,
 								},
 								"node_name": schema.StringAttribute{
-									MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
 									Optional: true,
 								},
 								"tunnel_prefix": schema.StringAttribute{
-									MarkdownDescription: "Tunnel IP Prefix. Exclusive with [automatic_prefix] Enter IP prefix for the tunnel, it has to be /30 ves.io.schema.rules.string.ipv4_prefix: true",
+									MarkdownDescription: "Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30",
 									Optional: true,
 								},
 							},
@@ -293,7 +293,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Exclusive with [subnet_param] Information about existing subnet ID ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.pattern: ^(subnet-)([a-z0-9]{8}|[a-z0-9]{17})$",
+											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
 											Optional: true,
 										},
 									},
@@ -310,7 +310,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"tags": schema.SingleNestedBlock{
-						MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. ves.io.schema.rules.map.keys.string.max_len: 127 ves.io.schema.rules.map.max_pairs: 40 ves.io.schema.rules.map.values.string.max_len: 255",
+						MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
 					},
 				},
 
@@ -319,11 +319,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "HTTPS based management. HTTPS based configuration",
 				Attributes: map[string]schema.Attribute{
 					"domain_suffix": schema.StringAttribute{
-						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form URL to access node management Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true",
+						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form URL to access node management",
 						Optional: true,
 					},
 					"https_port": schema.Int64Attribute{
-						MarkdownDescription: "HTTPS Port. Exclusive with [default_https_port] Enter TCP port number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "HTTPS Port. Enter TCP port number",
 						Optional: true,
 					},
 				},
@@ -337,15 +337,15 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -364,11 +364,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -419,7 +419,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -452,11 +452,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -507,7 +507,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -540,11 +540,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -595,7 +595,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -628,11 +628,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -683,7 +683,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -721,7 +721,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Optional: true,
 					},
 					"ssh_key": schema.StringAttribute{
-						MarkdownDescription: "Setup Authorized Public SSH key. Exclusive with [auto_setup] Setup Authorized Public SSH key. User will be able to ssh to the vmseries nodes using its corresponding ssh private key. ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Setup Authorized Public SSH key. Setup Authorized Public SSH key. User will be able to ssh to the vmseries nodes using its corresponding ssh private key.",
 						Optional: true,
 					},
 					"version": schema.StringAttribute{
@@ -734,7 +734,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "PAN VM Series Firewall Auto Setup. For auto-setup, ssh public and pvt keys are needed. Using the given config user, ssh and api access will be configured",
 						Attributes: map[string]schema.Attribute{
 							"admin_username": schema.StringAttribute{
-								MarkdownDescription: "Firewall Admin Username. Firewall Admin Username Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "Firewall Admin Username. Firewall Admin Username",
 								Optional: true,
 							},
 						},
@@ -756,7 +756,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "SSH key. SSH Key includes both public and private key",
 								Attributes: map[string]schema.Attribute{
 									"public_key": schema.StringAttribute{
-										MarkdownDescription: "Public SSH key. Authorized Public SSH key which will be programmed on the node Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "Public SSH key. Authorized Public SSH key which will be programmed on the node",
 										Optional: true,
 									},
 								},
@@ -772,15 +772,15 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -798,15 +798,15 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Panorama Server Type. Panorama Server Type",
 						Attributes: map[string]schema.Attribute{
 							"device_group_name": schema.StringAttribute{
-								MarkdownDescription: "Device Group Name. Device Group Name ves.io.schema.rules.string.max_len: 128",
+								MarkdownDescription: "Device Group Name. Device Group Name",
 								Optional: true,
 							},
 							"server": schema.StringAttribute{
-								MarkdownDescription: "Server Ipv4 Address. Panorama Server Address to which the firewall should connect to Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true",
+								MarkdownDescription: "Server Ipv4 Address. Panorama Server Address to which the firewall should connect to",
 								Optional: true,
 							},
 							"template_stack_name": schema.StringAttribute{
-								MarkdownDescription: "template stack name. Template Stack Name ves.io.schema.rules.string.max_len: 128",
+								MarkdownDescription: "template stack name. Template Stack Name",
 								Optional: true,
 							},
 						},
@@ -832,15 +832,15 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"nodes": schema.ListNestedBlock{
-								MarkdownDescription: "Palo Alto Networks AZ Nodes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 2 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Palo Alto Networks AZ Nodes.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"aws_az_name": schema.StringAttribute{
-											MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^([a-z]{2})-([a-z0-9]{4,20})-([a-z0-9]{2})$",
+											MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites",
 											Optional: true,
 										},
 										"node_name": schema.StringAttribute{
-											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
 											Optional: true,
 										},
 									},
@@ -857,7 +857,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"tags": schema.SingleNestedBlock{
-						MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. ves.io.schema.rules.map.keys.string.max_len: 127 ves.io.schema.rules.map.max_pairs: 40 ves.io.schema.rules.map.values.string.max_len: 255",
+						MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
 					},
 				},
 

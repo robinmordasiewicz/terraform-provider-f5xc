@@ -42,7 +42,7 @@ func (d *EnhancedFirewallPolicyDataSource) Metadata(ctx context.Context, req dat
 
 func (d *EnhancedFirewallPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of Enhanced Firewall Policy specification",
+		MarkdownDescription: "Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced firewall policy configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

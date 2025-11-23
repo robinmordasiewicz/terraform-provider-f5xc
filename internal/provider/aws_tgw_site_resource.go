@@ -46,7 +46,7 @@ func (r *AWSTGWSiteResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the AWS TGW site specification",
+		MarkdownDescription: "Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AWSTGWSite. Must be unique within the namespace.",
@@ -85,31 +85,31 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "AWS Service VPC and TGW. Setup AWS services VPC, transit gateway and site",
 				Attributes: map[string]schema.Attribute{
 					"aws_region": schema.StringAttribute{
-						MarkdownDescription: "AWS Region. AWS Region of your services vpc, where F5XC site will be deployed. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "AWS Region. AWS Region of your services vpc, where F5XC site will be deployed.",
 						Optional: true,
 					},
 					"disk_size": schema.Int64Attribute{
-						MarkdownDescription: "Node Disk Size. Node disk size for all node in the F5XC site. Unit is GiB ves.io.schema.rules.uint32.lte: 64000",
+						MarkdownDescription: "Node Disk Size. Node disk size for all node in the F5XC site. Unit is GiB",
 						Optional: true,
 					},
 					"instance_type": schema.StringAttribute{
-						MarkdownDescription: "AWS Instance Type for Node. Instance size based on the performance. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+						MarkdownDescription: "AWS Instance Type for Node. Instance size based on the performance.",
 						Optional: true,
 					},
 					"nodes_per_az": schema.Int64Attribute{
-						MarkdownDescription: "Desired Worker Nodes Per AZ. Exclusive with [no_worker_nodes total_nodes] Desired Worker Nodes Per AZ. Max limit is up to 21 ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 21",
+						MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21",
 						Optional: true,
 					},
 					"ssh_key": schema.StringAttribute{
-						MarkdownDescription: "Public SSH key. Public SSH key for accessing nodes of the site. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1",
+						MarkdownDescription: "Public SSH key. Public SSH key for accessing nodes of the site.",
 						Optional: true,
 					},
 					"total_nodes": schema.Int64Attribute{
-						MarkdownDescription: "Total Number of Worker Nodes for a Site. Exclusive with [no_worker_nodes nodes_per_az] Total number of worker nodes to be deployed across all AZ's used in the Site ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 61",
+						MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site",
 						Optional: true,
 					},
 					"vpc_id": schema.StringAttribute{
-						MarkdownDescription: "Existing VPC ID. Exclusive with [new_vpc] Existing VPC ID ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.pattern: ^(vpc-)([a-z0-9]{8}|[a-z0-9]{17})$",
+						MarkdownDescription: "Existing VPC ID. Existing VPC ID",
 						Optional: true,
 					},
 				},
@@ -127,7 +127,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -144,7 +144,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -155,25 +155,25 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
 					},
 					"az_nodes": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.num_items: 1,3",
+						MarkdownDescription: "Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"aws_az_name": schema.StringAttribute{
-									MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region.",
 									Optional: true,
 								},
 							},
@@ -182,7 +182,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Exclusive with [subnet_param] Information about existing subnet ID ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.pattern: ^(subnet-)([a-z0-9]{8}|[a-z0-9]{17})$",
+											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
 											Optional: true,
 										},
 									},
@@ -196,7 +196,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Exclusive with [subnet_param] Information about existing subnet ID ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.pattern: ^(subnet-)([a-z0-9]{8}|[a-z0-9]{17})$",
+											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
 											Optional: true,
 										},
 									},
@@ -213,7 +213,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Exclusive with [subnet_param] Information about existing subnet ID ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.pattern: ^(subnet-)([a-z0-9]{8}|[a-z0-9]{17})$",
+											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
 											Optional: true,
 										},
 									},
@@ -230,11 +230,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC",
 						Attributes: map[string]schema.Attribute{
 							"inside_security_group_id": schema.StringAttribute{
-								MarkdownDescription: "Inside Security Group ID. Security Group ID to be attached to SLI(Site Local Inside) Interface ves.io.schema.rules.string.max_len: 20 ves.io.schema.rules.string.pattern: ^(sg-)([a-z0-9]{8}|[a-z0-9]{17})$|^$",
+								MarkdownDescription: "Inside Security Group ID. Security Group ID to be attached to SLI(Site Local Inside) Interface",
 								Optional: true,
 							},
 							"outside_security_group_id": schema.StringAttribute{
-								MarkdownDescription: "Outside Security Group ID. Security Group ID to be attached to SLO(Site Local Outside) Interface ves.io.schema.rules.string.max_len: 20 ves.io.schema.rules.string.pattern: ^(sg-)([a-z0-9]{8}|[a-z0-9]{17})$|^$",
+								MarkdownDescription: "Outside Security Group ID. Security Group ID to be attached to SLO(Site Local Outside) Interface",
 								Optional: true,
 							},
 						},
@@ -249,15 +249,15 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Existing TGW Type. Information needed for existing TGW",
 						Attributes: map[string]schema.Attribute{
 							"tgw_asn": schema.Int64Attribute{
-								MarkdownDescription: "Enter TGW ASN. TGW ASN. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 65535",
+								MarkdownDescription: "Enter TGW ASN. TGW ASN.",
 								Optional: true,
 							},
 							"tgw_id": schema.StringAttribute{
-								MarkdownDescription: "Existing TGW ID. Existing TGW ID ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.pattern: ^(tgw-)([a-z0-9]{8}|[a-z0-9]{17})$",
+								MarkdownDescription: "Existing TGW ID. Existing TGW ID",
 								Optional: true,
 							},
 							"volterra_site_asn": schema.Int64Attribute{
-								MarkdownDescription: "Enter F5XC Site ASN. F5XC Site ASN. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 65535",
+								MarkdownDescription: "Enter F5XC Site ASN. F5XC Site ASN.",
 								Optional: true,
 							},
 						},
@@ -277,11 +277,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "TGW Assigned ASN Type. Information needed when ASNs are assigned by the user",
 								Attributes: map[string]schema.Attribute{
 									"tgw_asn": schema.Int64Attribute{
-										MarkdownDescription: "Enter TGW ASN. TGW ASN. Allowed range for 16-bit private ASNs include 64512 to 65534. ves.io.schema.rules.uint32.gt: 64512 ves.io.schema.rules.uint32.lte: 65534",
+										MarkdownDescription: "Enter TGW ASN. TGW ASN. Allowed range for 16-bit private ASNs include 64512 to 65534.",
 										Optional: true,
 									},
 									"volterra_site_asn": schema.Int64Attribute{
-										MarkdownDescription: "Enter F5XC Site ASN. F5XC Site ASN. ves.io.schema.rules.uint32.gt: 0 ves.io.schema.rules.uint32.lte: 65535",
+										MarkdownDescription: "Enter F5XC Site ASN. F5XC Site ASN.",
 										Optional: true,
 									},
 								},
@@ -292,11 +292,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "AWS VPC Parameters. Parameters to create new AWS VPC",
 						Attributes: map[string]schema.Attribute{
 							"name_tag": schema.StringAttribute{
-								MarkdownDescription: "Choose VPC Name. Exclusive with [autogenerate] Specify the VPC Name ves.io.schema.rules.string.max_len: 64",
+								MarkdownDescription: "Choose VPC Name. Specify the VPC Name",
 								Optional: true,
 							},
 							"primary_ipv4": schema.StringAttribute{
-								MarkdownDescription: "Primary IPv4 CIDR block. IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema.rules.string.max_ip_prefix_length: 28 ves.io.schema.rules.string.min_ip_prefix_length: 16",
+								MarkdownDescription: "Primary IPv4 CIDR block. IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block.",
 								Optional: true,
 							},
 						},
@@ -316,7 +316,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
 						Attributes: map[string]schema.Attribute{
 							"ipv4": schema.StringAttribute{
-								MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_prefix: true ves.io.schema.rules.string.max_ip_prefix_length: 28",
+								MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
 								Optional: true,
 							},
 						},
@@ -333,7 +333,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
-						MarkdownDescription: "Disable Node Local Services. ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Disable Node Local Services.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
@@ -361,11 +361,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
-						MarkdownDescription: "Latitude. Latitude of the site location ves.io.schema.rules.float.gte: -90.0 ves.io.schema.rules.float.lte: 90.0",
+						MarkdownDescription: "Latitude. Latitude of the site location",
 						Optional: true,
 					},
 					"longitude": schema.Int64Attribute{
-						MarkdownDescription: "Longitude. longitude of site location ves.io.schema.rules.float.gte: -180.0 ves.io.schema.rules.float.lte: 180.0",
+						MarkdownDescription: "Longitude. longitude of site location",
 						Optional: true,
 					},
 				},
@@ -375,11 +375,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site",
 				Attributes: map[string]schema.Attribute{
 					"inside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network",
 						Optional: true,
 					},
 					"outside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network",
 						Optional: true,
 					},
 				},
@@ -395,7 +395,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Direct Connect Configuration. Direct Connect Configuration",
 				Attributes: map[string]schema.Attribute{
 					"custom_asn": schema.Int64Attribute{
-						MarkdownDescription: "Custom ASN. Exclusive with [auto_asn] Custom Autonomous System Number ves.io.schema.rules.uint32.gte: 1",
+						MarkdownDescription: "Custom ASN. Custom Autonomous System Number",
 						Optional: true,
 					},
 				},
@@ -412,7 +412,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "CloudLink ADN Network Config.",
 								Attributes: map[string]schema.Attribute{
 									"cloudlink_network_name": schema.StringAttribute{
-										MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
 										Optional: true,
 									},
 								},
@@ -421,15 +421,15 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"vif_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Hosted VIF Config. List of Hosted VIF Config ves.io.schema.rules.repeated.max_items: 30 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "List of Hosted VIF Config. List of Hosted VIF Config",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"other_region": schema.StringAttribute{
-											MarkdownDescription: "Other Region. Exclusive with [same_as_site_region] Other Region",
+											MarkdownDescription: "Other Region. Other Region",
 											Optional: true,
 										},
 										"vif_id": schema.StringAttribute{
-											MarkdownDescription: "VIF ID. AWS Direct Connect VIF ID that needs to be connected to the site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^(dxvif-)([a-z0-9]{8}|[a-z0-9]{17})$",
+											MarkdownDescription: "VIF ID. AWS Direct Connect VIF ID that needs to be connected to the site",
 											Optional: true,
 										},
 									},
@@ -460,11 +460,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
-								MarkdownDescription: "Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000",
+								MarkdownDescription: "Node Batch Size Count.",
 								Optional: true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value). Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 900",
+								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
 								Optional: true,
 							},
 						},
@@ -484,15 +484,15 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -519,7 +519,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 				Attributes: map[string]schema.Attribute{
 					"operating_system_version": schema.StringAttribute{
-						MarkdownDescription: "Operating System Version. Exclusive with [default_os_version] Specify a OS version to be used e.g. 9.2024.6. ves.io.schema.rules.string.max_len: 20",
+						MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
 						Optional: true,
 					},
 				},
@@ -563,15 +563,15 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -589,7 +589,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
-						MarkdownDescription: "F5XC Software Version. Exclusive with [default_sw_version] Specify a F5XC Software Version to be used e.g. crt-20210329-1002. ves.io.schema.rules.string.max_len: 20",
+						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
 						Optional: true,
 					},
 				},
@@ -601,7 +601,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 
 			},
 			"tags": schema.SingleNestedBlock{
-				MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. ves.io.schema.rules.map.keys.string.max_len: 127 ves.io.schema.rules.map.max_pairs: 40 ves.io.schema.rules.map.values.string.max_len: 255",
+				MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
 			},
 			"tgw_security": schema.SingleNestedBlock{
 				MarkdownDescription: "TGW Security Configuration. Security Configuration for transit gateway",
@@ -614,19 +614,19 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"service_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Service Policies. A list of references to service_policy objects. ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Service Policies. A list of references to service_policy objects.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -640,19 +640,19 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -666,19 +666,19 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -692,19 +692,19 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -744,7 +744,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Custom Ports. List of Custom port",
 								Attributes: map[string]schema.Attribute{
 									"port_ranges": schema.StringAttribute{
-										MarkdownDescription: "Port Ranges. Port Ranges Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range_list: true",
+										MarkdownDescription: "Port Ranges. Port Ranges",
 										Optional: true,
 									},
 								},
@@ -772,7 +772,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Custom Ports. List of Custom port",
 								Attributes: map[string]schema.Attribute{
 									"port_ranges": schema.StringAttribute{
-										MarkdownDescription: "Port Ranges. Port Ranges Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range_list: true",
+										MarkdownDescription: "Port Ranges. Port Ranges",
 										Optional: true,
 									},
 								},
@@ -795,15 +795,15 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -812,15 +812,15 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -831,7 +831,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -853,11 +853,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "List of Static Routes. List of Static routes",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
 											Optional: true,
 										},
 									},
@@ -888,11 +888,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "List of Static Routes. List of Static routes",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Exclusive with [custom_static_route] Use simple static route for prefix pointing to single interface in the network ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
 											Optional: true,
 										},
 									},
@@ -920,11 +920,11 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"vpc_list": schema.ListNestedBlock{
-						MarkdownDescription: "VPC List. List of VPC attachments to transit gateway ves.io.schema.rules.repeated.max_items: 128",
+						MarkdownDescription: "VPC List. List of VPC attachments to transit gateway",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"vpc_id": schema.StringAttribute{
-									MarkdownDescription: "VPC ID. Information about existing VPC ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.pattern: ^(vpc-)([a-z0-9]{8}|[a-z0-9]{17})$",
+									MarkdownDescription: "VPC ID. Information about existing VPC",
 									Optional: true,
 								},
 							},

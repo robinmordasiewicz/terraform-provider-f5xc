@@ -2,12 +2,12 @@
 page_title: "f5xc_bigip_irule Data Source - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
-  Desired state for BIG-IP iRule Service
+  Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 ---
 
 # f5xc_bigip_irule (Data Source)
 
-Desired state for BIG-IP iRule Service
+Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

@@ -47,7 +47,7 @@ func (r *VoltshareAdminPolicyResource) Metadata(ctx context.Context, req resourc
 
 func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create voltshare_admin_policy creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the VoltshareAdminPolicy. Must be unique within the namespace.",
@@ -100,15 +100,15 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 						},
 						Blocks: map[string]schema.Block{
 							"custom_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of User Id(s). List of user id(s) ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "List of User Id(s). List of user id(s)",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"exact_value": schema.StringAttribute{
-											MarkdownDescription: "Exact User Id. Exclusive with [regex_pattern] exact_match contains user_id to match against. ves.io.schema.rules.string.email: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Exact User Id. exact_match contains user_id to match against.",
 											Optional: true,
 										},
 										"regex_pattern": schema.StringAttribute{
-											MarkdownDescription: "Regex For User Id. Exclusive with [exact_value] regex_values contains a regex pattern to match against. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Regex For User Id. regex_values contains a regex pattern to match against.",
 											Optional: true,
 										},
 									},
@@ -125,15 +125,15 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 						},
 						Blocks: map[string]schema.Block{
 							"custom_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of User Id(s). List of user id(s) ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "List of User Id(s). List of user id(s)",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"exact_value": schema.StringAttribute{
-											MarkdownDescription: "Exact User Id. Exclusive with [regex_pattern] exact_match contains user_id to match against. ves.io.schema.rules.string.email: true ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Exact User Id. exact_match contains user_id to match against.",
 											Optional: true,
 										},
 										"regex_pattern": schema.StringAttribute{
-											MarkdownDescription: "Regex For User Id. Exclusive with [exact_value] regex_values contains a regex pattern to match against. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Regex For User Id. regex_values contains a regex pattern to match against.",
 											Optional: true,
 										},
 									},
@@ -145,11 +145,11 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 
 			},
 			"user_restrictions": schema.ListNestedBlock{
-				MarkdownDescription: "Per Team Decryption Policy. user_restrictions contains per tenant/team list of allowed/disallowed users with whom a secret can be shared using F5XC VoltShare. ves.io.schema.rules.repeated.max_items: 16",
+				MarkdownDescription: "Per Team Decryption Policy. user_restrictions contains per tenant/team list of allowed/disallowed users with whom a secret can be shared using F5XC VoltShare.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Team/Tenant. Exclusive with [all_tenants individual_users] Team/Tenant for which this rule is valid. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "Team/Tenant. Team/Tenant for which this rule is valid.",
 							Optional: true,
 						},
 					},
@@ -174,7 +174,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 									},
 									Blocks: map[string]schema.Block{
 										"custom_list": schema.ListNestedBlock{
-											MarkdownDescription: "List of User Id(s). List of user id(s) ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "List of User Id(s). List of user id(s)",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -190,7 +190,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 									},
 									Blocks: map[string]schema.Block{
 										"custom_list": schema.ListNestedBlock{
-											MarkdownDescription: "List of User Id(s). List of user id(s) ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "List of User Id(s). List of user id(s)",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},

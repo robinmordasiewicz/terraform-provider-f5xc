@@ -42,7 +42,7 @@ func (d *NetworkConnectorDataSource) Metadata(ctx context.Context, req datasourc
 
 func (d *NetworkConnectorDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Network Connector is created by users in system namespace",
+		MarkdownDescription: "Manages a NetworkConnector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

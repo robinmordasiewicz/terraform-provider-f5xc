@@ -48,7 +48,7 @@ func (r *InfraprotectFirewallRuleResource) Metadata(ctx context.Context, req res
 
 func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a DDoS transit Firewall Rule",
+		MarkdownDescription: "Manages DDoS transit Firewall Rule in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectFirewallRule. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				},
 			},
 			"destination_prefix_single": schema.StringAttribute{
-				MarkdownDescription: "Prefix. Exclusive with [destination_prefix_all] Prefix ves.io.schema.rules.string.ip_prefix_globally_routable: true",
+				MarkdownDescription: "Prefix. Prefix",
 				Optional: true,
 			},
 			"source_prefix_single": schema.StringAttribute{
-				MarkdownDescription: "Prefix. Exclusive with [source_prefix_all] Prefix ves.io.schema.rules.string.ip_prefix_globally_routable: true",
+				MarkdownDescription: "Prefix. Prefix",
 				Optional: true,
 			},
 		},
@@ -213,11 +213,11 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 						Optional: true,
 					},
 					"destination_port_range": schema.StringAttribute{
-						MarkdownDescription: "Port Range. Exclusive with [destination_port_all] Port Range ves.io.schema.rules.string.port_range: true",
+						MarkdownDescription: "Port Range. Port Range",
 						Optional: true,
 					},
 					"source_port_range": schema.StringAttribute{
-						MarkdownDescription: "Port Range. Exclusive with [source_port_all] Port Range ves.io.schema.rules.string.port_range: true",
+						MarkdownDescription: "Port Range. Port Range",
 						Optional: true,
 					},
 				},
@@ -239,11 +239,11 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 						Optional: true,
 					},
 					"destination_port_range": schema.StringAttribute{
-						MarkdownDescription: "Port Range. Exclusive with [destination_port_all] Port Range ves.io.schema.rules.string.port_range: true",
+						MarkdownDescription: "Port Range. Port Range",
 						Optional: true,
 					},
 					"source_port_range": schema.StringAttribute{
-						MarkdownDescription: "Port Range. Exclusive with [source_port_all] Port Range ves.io.schema.rules.string.port_range: true",
+						MarkdownDescription: "Port Range. Port Range",
 						Optional: true,
 					},
 				},

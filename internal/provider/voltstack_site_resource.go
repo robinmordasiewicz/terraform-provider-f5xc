@@ -49,7 +49,7 @@ func (r *VoltstackSiteResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the App Stack site specification",
+		MarkdownDescription: "Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the VoltstackSite. Must be unique within the namespace.",
@@ -83,15 +83,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"address": schema.StringAttribute{
-				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude. ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
 				Optional: true,
 			},
 			"volterra_certified_hw": schema.StringAttribute{
-				MarkdownDescription: "Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+				MarkdownDescription: "Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site.",
 				Optional: true,
 			},
 			"worker_nodes": schema.ListAttribute{
-				MarkdownDescription: "Worker Nodes. Names of worker nodes ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Worker Nodes. Names of worker nodes",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -106,7 +106,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
-						MarkdownDescription: "Disable Node Local Services. ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Disable Node Local Services.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
@@ -136,24 +136,24 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"bond_devices": schema.ListNestedBlock{
-						MarkdownDescription: "Bond Devices. List of bond devices Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Bond Devices. List of bond devices",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"devices": schema.ListAttribute{
-									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
 									Optional: true,
 									ElementType: types.StringType,
 								},
 								"link_polling_interval": schema.Int64Attribute{
-									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 500 ves.io.schema.rules.uint32.lte: 5000",
+									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
 									Optional: true,
 								},
 								"link_up_delay": schema.Int64Attribute{
-									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 1000",
+									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0' Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
 									Optional: true,
 								},
 							},
@@ -165,7 +165,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
 									Attributes: map[string]schema.Attribute{
 										"rate": schema.Int64Attribute{
-											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 30",
+											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
 											Optional: true,
 										},
 									},
@@ -180,11 +180,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
-						MarkdownDescription: "Latitude. Latitude of the site location ves.io.schema.rules.float.gte: -90.0 ves.io.schema.rules.float.lte: 90.0",
+						MarkdownDescription: "Latitude. Latitude of the site location",
 						Optional: true,
 					},
 					"longitude": schema.Int64Attribute{
-						MarkdownDescription: "Longitude. longitude of site location ves.io.schema.rules.float.gte: -180.0 ves.io.schema.rules.float.lte: 180.0",
+						MarkdownDescription: "Longitude. longitude of site location",
 						Optional: true,
 					},
 				},
@@ -194,11 +194,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site",
 				Attributes: map[string]schema.Attribute{
 					"inside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network",
 						Optional: true,
 					},
 					"outside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network",
 						Optional: true,
 					},
 				},
@@ -208,27 +208,27 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "[OneOf: custom_network_config, default_network_config] VssNetworkConfiguration.",
 				Attributes: map[string]schema.Attribute{
 					"bgp_peer_address": schema.StringAttribute{
-						MarkdownDescription: "BGP Peer Address. Optional bgp peer address that can be used as parameter for BGP configuration when BGP is configured to fetch BGP peer address from site Object. This can be used to change peer address per site in fleet. ves.io.schema.rules.string.ip: true",
+						MarkdownDescription: "BGP Peer Address. Optional bgp peer address that can be used as parameter for BGP configuration when BGP is configured to fetch BGP peer address from site Object. This can be used to change peer address per site in fleet.",
 						Optional: true,
 					},
 					"bgp_router_id": schema.StringAttribute{
-						MarkdownDescription: "BGP Router ID. Optional bgp router id that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object. ves.io.schema.rules.string.ip: true",
+						MarkdownDescription: "BGP Router ID. Optional bgp router id that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object.",
 						Optional: true,
 					},
 					"outside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS V4 Server for Local Network. Optional DNS server V4 IP to be used for name resolution in local network ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "DNS V4 Server for Local Network. Optional DNS server V4 IP to be used for name resolution in local network",
 						Optional: true,
 					},
 					"outside_vip": schema.StringAttribute{
-						MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP for site local network. ves.io.schema.rules.string.ipv4: true",
+						MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP for site local network.",
 						Optional: true,
 					},
 					"site_to_site_tunnel_ip": schema.StringAttribute{
-						MarkdownDescription: "Site Mesh Group Connection Via Virtual Ip. Exclusive with [sm_connection_public_ip sm_connection_pvt_ip] Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating ipsec between two sites which are part of the site mesh group ves.io.schema.rules.string.ip: true",
+						MarkdownDescription: "Site Mesh Group Connection Via Virtual Ip. Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating ipsec between two sites which are part of the site mesh group",
 						Optional: true,
 					},
 					"tunnel_dead_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used. ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 180000",
+						MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
 						Optional: true,
 					},
 					"vip_vrrp_mode": schema.StringAttribute{
@@ -243,19 +243,19 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -269,19 +269,19 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -295,19 +295,19 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -333,7 +333,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -355,11 +355,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"interfaces": schema.ListNestedBlock{
-								MarkdownDescription: "List of Interface. Configure network interfaces for this App Stack site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "List of Interface. Configure network interfaces for this App Stack site",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Interface Description. Description for this Interface ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Interface Description. Description for this Interface",
 											Optional: true,
 										},
 									},
@@ -416,7 +416,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static Routes. List of static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Static Routes. List of static routes",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -429,7 +429,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -447,15 +447,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -478,7 +478,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static Routes. List of static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Static Routes. List of static routes",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -491,7 +491,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -532,20 +532,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"static_routes": schema.ListNestedBlock{
-								MarkdownDescription: "Static Routes. List of static routes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Static Routes. List of static routes",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"attrs": schema.ListAttribute{
-											MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"ip_address": schema.StringAttribute{
-											MarkdownDescription: "IP Address. Exclusive with [default_gateway node_interface] Traffic matching the ip prefixes is sent to this IP Address ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
 											Optional: true,
 										},
 										"ip_prefixes": schema.ListAttribute{
-											MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -568,7 +568,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
-								MarkdownDescription: "List of Storage Classes. List of custom storage classes ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "List of Storage Classes. List of custom storage classes",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"allow_volume_expansion": schema.BoolAttribute{
@@ -580,25 +580,25 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Storage Class Description. Description for this storage class ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Storage Class Description. Description for this storage class",
 											Optional: true,
 										},
 										"reclaim_policy": schema.StringAttribute{
-											MarkdownDescription: "Reclaim Policy. Reclaim Policy ves.io.schema.rules.string.max_len: 16",
+											MarkdownDescription: "Reclaim Policy. Reclaim Policy",
 											Optional: true,
 										},
 										"storage_class_name": schema.StringAttribute{
-											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
 											Optional: true,
 										},
 										"storage_device": schema.StringAttribute{
-											MarkdownDescription: "Storage Device. Storage device that this class will use. The Device name defined at previous step. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 64 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Storage Device. Storage device that this class will use. The Device name defined at previous step.",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"advanced_storage_parameters": schema.SingleNestedBlock{
-											MarkdownDescription: "Advanced Parameters. Map of parameter name and string value ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 64 ves.io.schema.rules.map.values.string.max_len: 128 ves.io.schema.rules.map.values.string.min_len: 1",
+											MarkdownDescription: "Advanced Parameters. Map of parameter name and string value",
 										},
 										"custom_storage": schema.SingleNestedBlock{
 											MarkdownDescription: "Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site.",
@@ -623,17 +623,17 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"storage_devices": schema.ListNestedBlock{
-								MarkdownDescription: "List of Storage Devices. List of custom storage devices ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "List of Storage Devices. List of custom storage devices",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"storage_device": schema.StringAttribute{
-											MarkdownDescription: "Storage Device. Storage device and device unit Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+											MarkdownDescription: "Storage Device. Storage device and device unit",
 											Optional: true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"advanced_advanced_parameters": schema.SingleNestedBlock{
-											MarkdownDescription: "Advanced Parameters. Map of parameter name and string value ves.io.schema.rules.map.keys.string.max_len: 128 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 64 ves.io.schema.rules.map.values.string.max_len: 128 ves.io.schema.rules.map.values.string.min_len: 1",
+											MarkdownDescription: "Advanced Parameters. Map of parameter name and string value",
 										},
 										"custom_storage": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -658,11 +658,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"storage_interfaces": schema.ListNestedBlock{
-								MarkdownDescription: "List of Interface. Configure storage interfaces for this App Stack site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "List of Interface. Configure storage interfaces for this App Stack site",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Interface Description. Description for this Interface ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Interface Description. Description for this Interface",
 											Optional: true,
 										},
 									},
@@ -713,11 +713,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Optional: true,
 					},
 					"server_address": schema.StringAttribute{
-						MarkdownDescription: "License Server Address. Set License Server Address ves.io.schema.rules.string.hostname_or_ip: true",
+						MarkdownDescription: "License Server Address. Set License Server Address",
 						Optional: true,
 					},
 					"server_port": schema.Int64Attribute{
-						MarkdownDescription: "License Server Port Number. Set License Server port number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "License Server Port Number. Set License Server port number",
 						Optional: true,
 					},
 				},
@@ -730,15 +730,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "[OneOf: k8s_cluster, no_k8s_cluster] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -756,11 +756,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
-								MarkdownDescription: "Node Batch Size Count. Exclusive with [] ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5000",
+								MarkdownDescription: "Node Batch Size Count.",
 								Optional: true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value). Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 900",
+								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
 								Optional: true,
 							},
 						},
@@ -785,13 +785,13 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "BGP Configuration. BGP configuration parameters",
 						Attributes: map[string]schema.Attribute{
 							"asn": schema.Int64Attribute{
-								MarkdownDescription: "ASN. Autonomous System Number Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1",
+								MarkdownDescription: "ASN. Autonomous System Number",
 								Optional: true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"peers": schema.ListNestedBlock{
-								MarkdownDescription: "Peers. BGP parameters for peer ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.unique_metadata_name: true",
+								MarkdownDescription: "Peers. BGP parameters for peer",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"label": schema.StringAttribute{
@@ -842,15 +842,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -860,15 +860,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"master_node_configuration": schema.ListNestedBlock{
-				MarkdownDescription: "Master Nodes. Configuration of master nodes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3",
+				MarkdownDescription: "Master Nodes. Configuration of master nodes",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. Names of master node Required: YES ves.io.schema.rules.message.required: true",
+							MarkdownDescription: "Name. Names of master node",
 							Optional: true,
 						},
 						"public_ip": schema.StringAttribute{
-							MarkdownDescription: "Public IP. IP Address of the master node. This ip will be used when other sites connect via Site Mesh Group ves.io.schema.rules.string.ipv4: true",
+							MarkdownDescription: "Public IP. IP Address of the master node. This ip will be used when other sites connect via Site Mesh Group",
 							Optional: true,
 						},
 					},
@@ -902,7 +902,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 				Attributes: map[string]schema.Attribute{
 					"operating_system_version": schema.StringAttribute{
-						MarkdownDescription: "Operating System Version. Exclusive with [default_os_version] Specify a OS version to be used e.g. 9.2024.6. ves.io.schema.rules.string.max_len: 20",
+						MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
 						Optional: true,
 					},
 				},
@@ -919,11 +919,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"sriov_interface": schema.ListNestedBlock{
-						MarkdownDescription: "Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"interface_name": schema.StringAttribute{
-									MarkdownDescription: "Name of physical interface. Name of SR-IOV physical interface Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "Name of physical interface. Name of SR-IOV physical interface",
 									Optional: true,
 								},
 								"number_of_vfio_vfs": schema.Int64Attribute{
@@ -931,7 +931,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Optional: true,
 								},
 								"number_of_vfs": schema.Int64Attribute{
-									MarkdownDescription: "Total number of virtual functions. Total number of virtual functions Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "Total number of virtual functions. Total number of virtual functions",
 									Optional: true,
 								},
 							},
@@ -944,7 +944,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
-						MarkdownDescription: "F5XC Software Version. Exclusive with [default_sw_version] Specify a F5XC Software Version to be used e.g. crt-20210329-1002. ves.io.schema.rules.string.max_len: 20",
+						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
 						Optional: true,
 					},
 				},
@@ -959,15 +959,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},

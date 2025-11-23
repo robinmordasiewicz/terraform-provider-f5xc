@@ -2,12 +2,12 @@
 page_title: "f5xc_report_config Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Report configuration is used to schedule report generation at a later point in time.
+  Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 ---
 
 # f5xc_report_config (Resource)
 
-Report configuration is used to schedule report generation at a later point in time.
+Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

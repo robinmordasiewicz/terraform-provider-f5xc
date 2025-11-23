@@ -49,7 +49,7 @@ func (r *BigIPIruleResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Desired state for BIG-IP iRule Service",
+		MarkdownDescription: "Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BigIPIrule. Must be unique within the namespace.",
@@ -83,11 +83,11 @@ func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"code": schema.StringAttribute{
-				MarkdownDescription: "iRule code. iRule code content, this content will be base64 encoded for preserving formating ves.io.schema.rules.string.max_bytes: 1048576 ves.io.schema.rules.string.min_bytes: 1",
+				MarkdownDescription: "iRule code. iRule code content, this content will be base64 encoded for preserving formating",
 				Optional: true,
 			},
 			"irule_name": schema.StringAttribute{
-				MarkdownDescription: "iRule name. iRule name ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "iRule name. iRule name",
 				Optional: true,
 			},
 			"source": schema.StringAttribute{

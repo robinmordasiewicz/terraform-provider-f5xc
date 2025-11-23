@@ -2,12 +2,12 @@
 page_title: "f5xc_data_type Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Create data_type creates a new object in the storage backend for metadata.namespace.
+  Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_data_type (Resource)
 
-Create data_type creates a new object in the storage backend for metadata.namespace.
+Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

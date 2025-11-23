@@ -2,12 +2,12 @@
 page_title: "f5xc_tunnel Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Create tunnel in a given namespace. If one already exist it will give a error.
+  Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_tunnel (Resource)
 
-Create tunnel in a given namespace. If one already exist it will give a error.
+Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

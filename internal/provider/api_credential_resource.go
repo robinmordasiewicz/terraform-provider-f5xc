@@ -50,7 +50,7 @@ func (r *APICredentialResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create request specification.",
+		MarkdownDescription: "Manages request specification. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APICredential. Must be unique within the namespace.",
@@ -84,7 +84,7 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"password": schema.StringAttribute{
-				MarkdownDescription: "Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain. Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain.",
 				Optional: true,
 			},
 			"type": schema.StringAttribute{

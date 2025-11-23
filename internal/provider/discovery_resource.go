@@ -47,7 +47,7 @@ func (r *DiscoveryResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "API to create discovery object for a site or virtual site in system namespace",
+		MarkdownDescription: "Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Discovery. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"cluster_id": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: cluster_id, no_cluster_id] Discovery cluster Identifier. Exclusive with [no_cluster_id] Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object. ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "[OneOf: cluster_id, no_cluster_id] Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object.",
 				Optional: true,
 			},
 		},
@@ -100,7 +100,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "REST API Config. Configuration details to access discovery service rest API.",
 								Attributes: map[string]schema.Attribute{
 									"api_server": schema.StringAttribute{
-										MarkdownDescription: "API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostport: true ves.io.schema.rules.string.max_len: 262",
+										MarkdownDescription: "API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair",
 										Optional: true,
 									},
 								},
@@ -114,7 +114,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "Hashicorp Consul Credentials. Authentication parameters to access Hashicorp Consul.",
 								Attributes: map[string]schema.Attribute{
 									"user_name": schema.StringAttribute{
-										MarkdownDescription: "User Name. username in consul ves.io.schema.rules.string.max_len: 64",
+										MarkdownDescription: "User Name. username in consul",
 										Optional: true,
 									},
 								},
@@ -156,7 +156,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "REST API Config. Configuration details to access discovery service rest API.",
 								Attributes: map[string]schema.Attribute{
 									"api_server": schema.StringAttribute{
-										MarkdownDescription: "API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostport: true ves.io.schema.rules.string.max_len: 262",
+										MarkdownDescription: "API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair",
 										Optional: true,
 									},
 								},
@@ -196,7 +196,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						Blocks: map[string]schema.Block{
 							"items": schema.ListNestedBlock{
-								MarkdownDescription: "Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"namespace": schema.StringAttribute{
@@ -204,7 +204,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 											Optional: true,
 										},
 										"namespace_regex": schema.StringAttribute{
-											MarkdownDescription: "K8S Namespaces. The regex here will be used to match K8s namespace(s). ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "K8S Namespaces. The regex here will be used to match K8s namespace(s).",
 											Optional: true,
 										},
 									},
@@ -228,7 +228,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										Optional: true,
 									},
 									"subdomain": schema.StringAttribute{
-										MarkdownDescription: "Subdomain. The DNS subdomain for which F5XC will respond to DNS queries. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+										MarkdownDescription: "Subdomain. The DNS subdomain for which F5XC will respond to DNS queries.",
 										Optional: true,
 									},
 								},
@@ -237,7 +237,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "K8SPublishType.",
 								Attributes: map[string]schema.Attribute{
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+										MarkdownDescription: "Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists.",
 										Optional: true,
 									},
 								},
@@ -274,7 +274,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -308,7 +308,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual network direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual network direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -352,7 +352,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual_site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{

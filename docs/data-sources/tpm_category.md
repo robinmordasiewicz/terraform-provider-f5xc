@@ -2,12 +2,12 @@
 page_title: "f5xc_tpm_category Data Source - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
-  Create a Category object, which is a grouping of APIKeys used for TPM provisioning
+  Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 ---
 
 # f5xc_tpm_category (Data Source)
 
-Create a Category object, which is a grouping of APIKeys used for TPM provisioning
+Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

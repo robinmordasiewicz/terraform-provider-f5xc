@@ -47,7 +47,7 @@ func (r *FilterSetResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create specification",
+		MarkdownDescription: "Manages a FilterSet resource in F5 Distributed Cloud for create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the FilterSet. Must be unique within the namespace.",
@@ -81,17 +81,17 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"context_key": schema.StringAttribute{
-				MarkdownDescription: "Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable",
 				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
 			"filter_fields": schema.ListNestedBlock{
-				MarkdownDescription: "Filter Fields. list of fields and their values selected by the user Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Filter Fields. list of fields and their values selected by the user",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"field_id": schema.StringAttribute{
-							MarkdownDescription: "Field ID. an identifier for the field that maps to some UI filter component Required: YES ves.io.schema.rules.message.required: true",
+							MarkdownDescription: "Field ID. an identifier for the field that maps to some UI filter component",
 							Optional: true,
 						},
 					},
@@ -100,7 +100,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 							MarkdownDescription: "Filter Date/Time Range Field. either an absolute time range or a relative time interval",
 							Attributes: map[string]schema.Attribute{
 								"relative": schema.StringAttribute{
-									MarkdownDescription: "Relative. Exclusive with [absolute] relative time duration",
+									MarkdownDescription: "Relative. relative time duration",
 									Optional: true,
 								},
 							},
@@ -109,11 +109,11 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 									MarkdownDescription: "Date Range. Date range is for selecting a date range",
 									Attributes: map[string]schema.Attribute{
 										"end_date": schema.StringAttribute{
-											MarkdownDescription: "End Date. Contains end date Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "End Date. Contains end date",
 											Optional: true,
 										},
 										"start_date": schema.StringAttribute{
-											MarkdownDescription: "Start Date. Contains start date Required: YES ves.io.schema.rules.message.required: true",
+											MarkdownDescription: "Start Date. Contains start date",
 											Optional: true,
 										},
 									},
@@ -124,7 +124,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 							MarkdownDescription: "Filter Expression Field.",
 							Attributes: map[string]schema.Attribute{
 								"expression": schema.StringAttribute{
-									MarkdownDescription: "Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values",
 									Optional: true,
 								},
 							},
@@ -133,7 +133,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 							MarkdownDescription: "Filter String Field.",
 							Attributes: map[string]schema.Attribute{
 								"field_values": schema.ListAttribute{
-									MarkdownDescription: "String Value(s). Required: YES ves.io.schema.rules.message.required: true",
+									MarkdownDescription: "String Value(s).",
 									Optional: true,
 									ElementType: types.StringType,
 								},

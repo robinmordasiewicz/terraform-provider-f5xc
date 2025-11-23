@@ -2,12 +2,12 @@
 page_title: "f5xc_irule Resource - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
-  Create iRule in a given namespace. If one already exists it will give an error.
+  Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
 # f5xc_irule (Resource)
 
-Create iRule in a given namespace. If one already exists it will give an error.
+Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

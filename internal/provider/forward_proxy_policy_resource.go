@@ -46,7 +46,7 @@ func (r *ForwardProxyPolicyResource) Metadata(ctx context.Context, req resource.
 
 func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Forward Proxy Policy specification",
+		MarkdownDescription: "Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy policy configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ForwardProxyPolicy. Must be unique within the namespace.",
@@ -99,20 +99,20 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"dest_list": schema.ListNestedBlock{
-						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ipv6_prefixes": schema.ListAttribute{
-									MarkdownDescription: "IPv6 Prefixes. Destination IPv6 prefixes. ves.io.schema.rules.repeated.items.string.ipv6_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "IPv6 Prefixes. Destination IPv6 prefixes.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
 								"port_ranges": schema.StringAttribute{
-									MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range_list: true",
+									MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional: true,
 								},
 								"prefixes": schema.ListAttribute{
-									MarkdownDescription: "IPv4 Prefixes. Destination IPv4 prefixes. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "IPv4 Prefixes. Destination IPv4 prefixes.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -120,31 +120,31 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"http_list": schema.ListNestedBlock{
-						MarkdownDescription: "HTTP URLs. URLs for HTTP connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Values. Exclusive with [regex_value suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Exact Values. Exact domain name",
 									Optional: true,
 								},
 								"path_exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Path. Exclusive with [any_path path_prefix_value path_regex_value] Exact Path to match. ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Exact Path. Exact Path to match.",
 									Optional: true,
 								},
 								"path_prefix_value": schema.StringAttribute{
-									MarkdownDescription: "Prefix of Path. Exclusive with [any_path path_exact_value path_regex_value] Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
 									Optional: true,
 								},
 								"path_regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex of Path. Exclusive with [any_path path_exact_value path_prefix_value] Regular Expression value for the Path to match ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
 									Optional: true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Exclusive with [exact_value suffix_value] Regular Expression value for the domain name ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
 									Optional: true,
 								},
 								"suffix_value": schema.StringAttribute{
-									MarkdownDescription: "Suffix Values. Exclusive with [exact_value regex_value] Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
 									Optional: true,
 								},
 							},
@@ -156,19 +156,19 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"tls_list": schema.ListNestedBlock{
-						MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Value. Exclusive with [regex_value suffix_value] Exact domain name. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Exact Value. Exact domain name.",
 									Optional: true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Exclusive with [exact_value suffix_value] Regular Expression value for the domain name ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
 									Optional: true,
 								},
 								"suffix_value": schema.StringAttribute{
-									MarkdownDescription: "Suffix Value. Exclusive with [exact_value regex_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
 									Optional: true,
 								},
 							},
@@ -195,20 +195,20 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"dest_list": schema.ListNestedBlock{
-						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ipv6_prefixes": schema.ListAttribute{
-									MarkdownDescription: "IPv6 Prefixes. Destination IPv6 prefixes. ves.io.schema.rules.repeated.items.string.ipv6_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "IPv6 Prefixes. Destination IPv6 prefixes.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
 								"port_ranges": schema.StringAttribute{
-									MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.port_range_list: true",
+									MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional: true,
 								},
 								"prefixes": schema.ListAttribute{
-									MarkdownDescription: "IPv4 Prefixes. Destination IPv4 prefixes. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "IPv4 Prefixes. Destination IPv4 prefixes.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -216,31 +216,31 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"http_list": schema.ListNestedBlock{
-						MarkdownDescription: "HTTP URLs. URLs for HTTP connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Values. Exclusive with [regex_value suffix_value] Exact domain name ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Exact Values. Exact domain name",
 									Optional: true,
 								},
 								"path_exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Path. Exclusive with [any_path path_prefix_value path_regex_value] Exact Path to match. ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Exact Path. Exact Path to match.",
 									Optional: true,
 								},
 								"path_prefix_value": schema.StringAttribute{
-									MarkdownDescription: "Prefix of Path. Exclusive with [any_path path_exact_value path_regex_value] Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
 									Optional: true,
 								},
 								"path_regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex of Path. Exclusive with [any_path path_exact_value path_prefix_value] Regular Expression value for the Path to match ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
 									Optional: true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Exclusive with [exact_value suffix_value] Regular Expression value for the domain name ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
 									Optional: true,
 								},
 								"suffix_value": schema.StringAttribute{
-									MarkdownDescription: "Suffix Values. Exclusive with [exact_value regex_value] Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
 									Optional: true,
 								},
 							},
@@ -252,19 +252,19 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"tls_list": schema.ListNestedBlock{
-						MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Value. Exclusive with [regex_value suffix_value] Exact domain name. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Exact Value. Exact domain name.",
 									Optional: true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Exclusive with [exact_value suffix_value] Regular Expression value for the domain name ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
 									Optional: true,
 								},
 								"suffix_value": schema.StringAttribute{
-									MarkdownDescription: "Suffix Value. Exclusive with [exact_value regex_value] Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
 									Optional: true,
 								},
 							},
@@ -280,15 +280,15 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -298,7 +298,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -311,7 +311,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
-						MarkdownDescription: "Custom Rule List. List of custom rules Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique_metadata_name: true",
+						MarkdownDescription: "Custom Rule List. List of custom rules",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
@@ -330,7 +330,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
-											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -340,15 +340,15 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -357,15 +357,15 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -374,7 +374,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -384,7 +384,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -396,7 +396,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 									Blocks: map[string]schema.Block{
 										"http_list": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP URLs. URLs for HTTP connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -407,15 +407,15 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -424,7 +424,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -434,11 +434,11 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -454,7 +454,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 											Optional: true,
 										},
 										"ports": schema.ListAttribute{
-											MarkdownDescription: "Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -464,7 +464,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -476,7 +476,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 									Blocks: map[string]schema.Block{
 										"tls_list": schema.ListNestedBlock{
-											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -487,7 +487,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "URL Category List Type. List of url categories",
 									Attributes: map[string]schema.Attribute{
 										"url_categories": schema.ListAttribute{
-											MarkdownDescription: "URL Categories. List of url categories to be selected Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "URL Categories. List of url categories to be selected",
 											Optional: true,
 											ElementType: types.StringType,
 										},

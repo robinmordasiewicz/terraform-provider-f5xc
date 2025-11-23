@@ -46,7 +46,7 @@ func (r *K8SClusterRoleBindingResource) Metadata(ctx context.Context, req resour
 
 func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace",
+		MarkdownDescription: "Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8SClusterRoleBinding. Must be unique within the namespace.",
@@ -85,30 +85,30 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
 
 			},
 			"subjects": schema.ListNestedBlock{
-				MarkdownDescription: "Subjects. List of subjects (user, group or service account) to which this role is bound Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Subjects. List of subjects (user, group or service account) to which this role is bound",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"group": schema.StringAttribute{
-							MarkdownDescription: "Group. Exclusive with [service_account user] Group id of the user group ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "Group. Group id of the user group",
 							Optional: true,
 						},
 						"user": schema.StringAttribute{
-							MarkdownDescription: "User. Exclusive with [group service_account] User id of the user ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+							MarkdownDescription: "User. User id of the user",
 							Optional: true,
 						},
 					},
@@ -117,11 +117,11 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 							MarkdownDescription: "ServiceAccountType.",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the service account Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Name. Name of the service account",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. Namespace of the service account Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64 ves.io.schema.rules.string.min_len: 1",
+									MarkdownDescription: "Namespace. Namespace of the service account",
 									Optional: true,
 								},
 							},

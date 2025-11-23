@@ -42,7 +42,7 @@ func (d *VoltshareAdminPolicyDataSource) Metadata(ctx context.Context, req datas
 
 func (d *VoltshareAdminPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create voltshare_admin_policy creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

@@ -2,12 +2,12 @@
 page_title: "f5xc_api_credential Data Source - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Create request specification.
+  Manages request specification. in F5 Distributed Cloud.
 ---
 
 # f5xc_api_credential (Data Source)
 
-Create request specification.
+Manages request specification. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

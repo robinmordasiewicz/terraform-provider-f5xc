@@ -48,7 +48,7 @@ func (r *InfraprotectDenyListRuleResource) Metadata(ctx context.Context, req res
 
 func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a DDoS transit Deny List Rule",
+		MarkdownDescription: "Manages DDoS transit Deny List Rule in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectDenyListRule. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 				},
 			},
 			"expiration_timestamp": schema.StringAttribute{
-				MarkdownDescription: "Expiration Time (UTC). Exclusive with [expiration_never one_day one_hour one_month one_year] This deny list rule will expire at the given timestamp and will be removed from the system afterwards",
+				MarkdownDescription: "Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards",
 				Optional: true,
 			},
 			"prefix": schema.StringAttribute{
-				MarkdownDescription: "Prefix. Prefix Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip_prefix_globally_routable: true",
+				MarkdownDescription: "Prefix. Prefix",
 				Optional: true,
 			},
 		},

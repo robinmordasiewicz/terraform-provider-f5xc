@@ -46,7 +46,7 @@ func (r *AppSettingResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create App setting configuration in namespace metadata.namespace",
+		MarkdownDescription: "Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AppSetting. Must be unique within the namespace.",
@@ -82,13 +82,13 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 		},
 		Blocks: map[string]schema.Block{
 			"app_type_settings": schema.ListNestedBlock{
-				MarkdownDescription: "Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+				MarkdownDescription: "Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
 					Blocks: map[string]schema.Block{
 						"app_type_ref": schema.ListNestedBlock{
-							MarkdownDescription: "AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+							MarkdownDescription: "AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"kind": schema.StringAttribute{
@@ -133,11 +133,11 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							Blocks: map[string]schema.Block{
 								"metric_selectors": schema.ListNestedBlock{
-									MarkdownDescription: "Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"metric": schema.ListAttribute{
-												MarkdownDescription: "Metrics. Choose one or more metrics to be included in the detection logic ves.io.schema.rules.repeated.unique: true",
+												MarkdownDescription: "Metrics. Choose one or more metrics to be included in the detection logic",
 												Optional: true,
 												ElementType: types.StringType,
 											},
@@ -165,7 +165,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Malicious User Detection Settings. Various factors about user activity are monitored and analysed to determine malicious users. These settings allow tuning those factors used by the system to detect malicious users.",
 									Attributes: map[string]schema.Attribute{
 										"cooling_off_period": schema.Int64Attribute{
-											MarkdownDescription: "Cooling off period. Exclusive with [] Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none. ves.io.schema.rules.uint32...",
+											MarkdownDescription: "Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none.",
 											Optional: true,
 										},
 									},

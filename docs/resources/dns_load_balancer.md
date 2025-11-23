@@ -2,12 +2,12 @@
 page_title: "f5xc_dns_load_balancer Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Create DNS Load Balancer in a given namespace. If one already exist it will give a error.
+  Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_dns_load_balancer (Resource)
 
-Create DNS Load Balancer in a given namespace. If one already exist it will give a error.
+Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

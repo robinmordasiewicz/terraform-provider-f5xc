@@ -2,12 +2,12 @@
 page_title: "f5xc_bgp Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  BGP object is the configuration for peering with external BGP servers. It is created by users in system namespace.
+  Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 ---
 
 # f5xc_bgp (Resource)
 
-BGP object is the configuration for peering with external BGP servers. It is created by users in system namespace.
+Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

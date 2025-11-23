@@ -46,7 +46,7 @@ func (r *AppTypeResource) Metadata(ctx context.Context, req resource.MetadataReq
 
 func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create App type will create the configuration in namespace metadata.namespace",
+		MarkdownDescription: "Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AppType. Must be unique within the namespace.",
@@ -93,7 +93,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "Discovered API Settings. x-example: '2' Configure Discovered API Settings.",
 						Attributes: map[string]schema.Attribute{
 							"purge_duration_for_inactive_discovered_apis": schema.Int64Attribute{
-								MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 7",
+								MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration.",
 								Optional: true,
 							},
 						},
@@ -105,7 +105,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 
 			},
 			"features": schema.ListNestedBlock{
-				MarkdownDescription: "Features. List of various AI/ML features enabled ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Features. List of various AI/ML features enabled",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"type": schema.StringAttribute{

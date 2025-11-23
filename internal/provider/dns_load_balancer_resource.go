@@ -47,7 +47,7 @@ func (r *DNSLoadBalancerResource) Metadata(ctx context.Context, req resource.Met
 
 func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create DNS Load Balancer in a given namespace. If one already exist it will give a error.",
+		MarkdownDescription: "Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSLoadBalancer. Must be unique within the namespace.",
@@ -90,15 +90,15 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -119,15 +119,15 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Response Cache Parameters.",
 						Attributes: map[string]schema.Attribute{
 							"cache_cidr_ipv4": schema.Int64Attribute{
-								MarkdownDescription: "Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 32",
+								MarkdownDescription: "Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients",
 								Optional: true,
 							},
 							"cache_cidr_ipv6": schema.Int64Attribute{
-								MarkdownDescription: "Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 128",
+								MarkdownDescription: "Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients",
 								Optional: true,
 							},
 							"cache_ttl": schema.Int64Attribute{
-								MarkdownDescription: "TTL. TTL for response cache ves.io.schema.rules.uint32.gte: 0",
+								MarkdownDescription: "TTL. TTL for response cache",
 								Optional: true,
 							},
 						},
@@ -141,11 +141,11 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
-						MarkdownDescription: "Load Balancing Rules. Rules to perform load balancing Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Load Balancing Rules. Rules to perform load balancing",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"score": schema.Int64Attribute{
-									MarkdownDescription: "Score. When multiple load balancing rules match a query, the one with the highest score is chosen ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 32767",
+									MarkdownDescription: "Score. When multiple load balancing rules match a query, the one with the highest score is chosen",
 									Optional: true,
 								},
 							},
@@ -154,7 +154,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
-											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -166,7 +166,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"asn_sets": schema.ListNestedBlock{
-											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4",
+											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -177,7 +177,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -187,15 +187,15 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -208,7 +208,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Optional: true,
 										},
 										"ip_prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -224,7 +224,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"prefix_sets": schema.ListNestedBlock{
-											MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4",
+											MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -235,15 +235,15 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},

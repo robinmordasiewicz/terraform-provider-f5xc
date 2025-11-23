@@ -47,7 +47,7 @@ func (r *APIDefinitionResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "x-required Create API Definition.",
+		MarkdownDescription: "Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APIDefinition. Must be unique within the namespace.",
@@ -81,14 +81,14 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"swagger_specs": schema.ListAttribute{
-				MarkdownDescription: "File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API. ves.io.schema.rules.repeated.items.string.max_bytes: 512 ves.io.schema.rules.repeated.items.string.pattern: /api/object_store/namespaces/([a-z]([-a-z0-9]*[a-z0-9])?)/stored_objects/swagger/(...",
+				MarkdownDescription: "File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 		},
 		Blocks: map[string]schema.Block{
 			"api_inventory_exclusion_list": schema.ListNestedBlock{
-				MarkdownDescription: "API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory. ves.io.schema.rules.repeated.max_items: 1000 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
@@ -96,7 +96,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 							Optional: true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.templated_http_path: true",
+							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
 							Optional: true,
 						},
 					},
@@ -104,7 +104,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"api_inventory_inclusion_list": schema.ListNestedBlock{
-				MarkdownDescription: "API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list. ves.io.schema.rules.repeated.max_items: 1000 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
@@ -112,7 +112,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 							Optional: true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.templated_http_path: true",
+							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
 							Optional: true,
 						},
 					},
@@ -123,7 +123,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "[OneOf: mixed_schema_origin, strict_schema_origin] Empty. This can be used for messages where no values are needed",
 			},
 			"non_api_endpoints": schema.ListNestedBlock{
-				MarkdownDescription: "API Discovery Exclusion List. List of Non-API Endpoints. ves.io.schema.rules.repeated.max_items: 1000 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "API Discovery Exclusion List. List of Non-API Endpoints.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
@@ -131,7 +131,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 							Optional: true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.templated_http_path: true",
+							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
 							Optional: true,
 						},
 					},

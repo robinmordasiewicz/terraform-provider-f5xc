@@ -2,12 +2,12 @@
 page_title: "f5xc_ike_phase2_profile Resource - terraform-provider-f5xc"
 subcategory: "VPN"
 description: |-
-  Shape of the IKE Phase2 profile specification
+  Manages a IKEPhase2Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.
 ---
 
 # f5xc_ike_phase2_profile (Resource)
 
-Shape of the IKE Phase2 profile specification
+Manages a IKEPhase2Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

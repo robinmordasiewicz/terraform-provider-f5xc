@@ -42,7 +42,7 @@ func (d *ContainerRegistryDataSource) Metadata(ctx context.Context, req datasour
 
 func (d *ContainerRegistryDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of Container Registry",
+		MarkdownDescription: "Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

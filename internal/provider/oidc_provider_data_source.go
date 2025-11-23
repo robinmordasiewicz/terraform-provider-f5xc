@@ -42,7 +42,7 @@ func (d *OidcProviderDataSource) Metadata(ctx context.Context, req datasource.Me
 
 func (d *OidcProviderDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "CustomCreateSpecType is the spec to create oidc provider",
+		MarkdownDescription: "Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

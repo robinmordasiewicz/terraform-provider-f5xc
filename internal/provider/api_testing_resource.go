@@ -47,7 +47,7 @@ func (r *APITestingResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a APITesting in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a APITesting resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APITesting. Must be unique within the namespace.",
@@ -81,31 +81,31 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"custom_header_value": schema.StringAttribute{
-				MarkdownDescription: "Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic ves.io.schema.rules.string.max_len: 128",
+				MarkdownDescription: "Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic",
 				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
 			"domains": schema.ListNestedBlock{
-				MarkdownDescription: "Testing Environments. Add and configure testing domains and credentials Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32",
+				MarkdownDescription: "Testing Environments. Add and configure testing domains and credentials",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"allow_destructive_methods": schema.BoolAttribute{
-							MarkdownDescription: "Run API tests for destructive methods (e.g., DELETE, PUT).. Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data",
+							MarkdownDescription: "Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data",
 							Optional: true,
 						},
 						"domain": schema.StringAttribute{
-							MarkdownDescription: "Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.vh_domain: true",
+							MarkdownDescription: "Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments.",
 							Optional: true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"credentials": schema.ListNestedBlock{
-							MarkdownDescription: "Credentials. Add credentials for API testing to use in the selected environment. Required: YES ves.io.schema.rules.message.required: true",
+							MarkdownDescription: "Credentials. Add credentials for API testing to use in the selected environment.",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"credential_name": schema.StringAttribute{
-										MarkdownDescription: "Name. Enter a unique name for the credentials used in API testing Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+										MarkdownDescription: "Name. Enter a unique name for the credentials used in API testing",
 										Optional: true,
 									},
 								},
@@ -117,7 +117,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Api Key.",
 										Attributes: map[string]schema.Attribute{
 											"key": schema.StringAttribute{
-												MarkdownDescription: "Key. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 128",
+												MarkdownDescription: "Key.",
 												Optional: true,
 											},
 										},
@@ -131,7 +131,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Basic Authentication.",
 										Attributes: map[string]schema.Attribute{
 											"user": schema.StringAttribute{
-												MarkdownDescription: "User. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 64",
+												MarkdownDescription: "User.",
 												Optional: true,
 											},
 										},
@@ -159,11 +159,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 												Optional: true,
 											},
 											"path": schema.StringAttribute{
-												MarkdownDescription: "Path. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 1024",
+												MarkdownDescription: "Path.",
 												Optional: true,
 											},
 											"token_response_key": schema.StringAttribute{
-												MarkdownDescription: "Token Response Key. Required: YES ves.io.schema.rules.message.required: true",
+												MarkdownDescription: "Token Response Key.",
 												Optional: true,
 											},
 										},

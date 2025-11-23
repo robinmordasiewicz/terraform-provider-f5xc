@@ -48,7 +48,7 @@ func (r *SecretPolicyResource) Metadata(ctx context.Context, req resource.Metada
 
 func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create secret_policy creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SecretPolicy. Must be unique within the namespace.",
@@ -97,7 +97,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
-						MarkdownDescription: "Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true",
+						MarkdownDescription: "Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -106,11 +106,11 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -123,7 +123,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 											Optional: true,
 										},
 										"client_name": schema.StringAttribute{
-											MarkdownDescription: "Client Name. Exclusive with [client_name_matcher client_selector] The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name ves.io.schema.rules.string.max_bytes: 256",
+											MarkdownDescription: "Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name",
 											Optional: true,
 										},
 									},

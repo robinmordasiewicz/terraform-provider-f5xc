@@ -2,12 +2,12 @@
 page_title: "f5xc_api_definition Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  x-required Create API Definition.
+  Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 ---
 
 # f5xc_api_definition (Resource)
 
-x-required Create API Definition.
+Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

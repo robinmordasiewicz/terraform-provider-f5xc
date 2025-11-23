@@ -42,7 +42,7 @@ func (d *SiteMeshGroupDataSource) Metadata(ctx context.Context, req datasource.M
 
 func (d *SiteMeshGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a Site Mesh Group in system namespace of user",
+		MarkdownDescription: "Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

@@ -51,7 +51,7 @@ func (r *EndpointResource) Metadata(ctx context.Context, req resource.MetadataRe
 
 func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create endpoint will create the object in the storage backend for namespace metadata.namespace",
+		MarkdownDescription: "Manages endpoint will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Endpoint. Must be unique within the namespace.",
@@ -85,19 +85,19 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"dns_name": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint Name. Exclusive with [dns_name_advanced ip service_info] Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 				Optional: true,
 			},
 			"health_check_port": schema.Int64Attribute{
-				MarkdownDescription: "Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port. ves.io.schema.rules.uint32.lte: 65535",
+				MarkdownDescription: "Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port.",
 				Optional: true,
 			},
 			"ip": schema.StringAttribute{
-				MarkdownDescription: "Endpoint IP Address. Exclusive with [dns_name dns_name_advanced service_info] Endpoint is reachable at the given ipv4/ipv6 address ves.io.schema.rules.string.ip: true",
+				MarkdownDescription: "Endpoint IP Address. Endpoint is reachable at the given ipv4/ipv6 address",
 				Optional: true,
 			},
 			"port": schema.Int64Attribute{
-				MarkdownDescription: "Port. Endpoint service is available on this port ves.io.schema.rules.uint32.lte: 65535",
+				MarkdownDescription: "Port. Endpoint service is available on this port",
 				Optional: true,
 			},
 			"protocol": schema.StringAttribute{
@@ -110,11 +110,11 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "DNS Name Advanced Type. Specifies name and TTL used for DNS resolution.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Endpoint DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256",
+						MarkdownDescription: "Endpoint DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 						Optional: true,
 					},
 					"refresh_interval": schema.Int64Attribute{
-						MarkdownDescription: "DNS Refresh Interval. Exclusive with [] Interval for DNS refresh in seconds. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 604800",
+						MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds.",
 						Optional: true,
 					},
 				},
@@ -128,7 +128,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						Optional: true,
 					},
 					"service_name": schema.StringAttribute{
-						MarkdownDescription: "Service Name. Exclusive with [service_selector] Name of the service to discover with an optional namespace and cluster identifier. The format is service_name.namespace_name:cluster_identifier for K8S and service_name:cluster_identifier for Consul Endpoint will be discovered in all discovery objects where the cluster identifier matches. If cluster identifier is not specified then discovery will be done in all discovery objects of the site. ves.io.schema.rules.string.max_bytes: 256",
+						MarkdownDescription: "Service Name. Name of the service to discover with an optional namespace and cluster identifier. The format is service_name.namespace_name:cluster_identifier for K8S and service_name:cluster_identifier for Consul Endpoint will be discovered in all discovery objects where the cluster identifier matches. If cluster identifier is not specified then discovery will be done in all discovery objects of the site.",
 						Optional: true,
 					},
 				},
@@ -137,7 +137,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 						Attributes: map[string]schema.Attribute{
 							"expressions": schema.ListAttribute{
-								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -158,7 +158,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
-								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -188,7 +188,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -222,7 +222,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual network direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual network direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -266,7 +266,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A virtual_site direct reference Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Reference. A virtual_site direct reference",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{

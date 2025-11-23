@@ -2,12 +2,12 @@
 page_title: "f5xc_trusted_ca_list Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Shape of the Root CA Certificate specification
+  Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.
 ---
 
 # f5xc_trusted_ca_list (Resource)
 
-Shape of the Root CA Certificate specification
+Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

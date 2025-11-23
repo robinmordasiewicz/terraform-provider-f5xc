@@ -46,7 +46,7 @@ func (r *RoleResource) Metadata(ctx context.Context, req resource.MetadataReques
 
 func (r *RoleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a role",
+		MarkdownDescription: "Manages role in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Role. Must be unique within the namespace.",

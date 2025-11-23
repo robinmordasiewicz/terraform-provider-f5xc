@@ -2,12 +2,12 @@
 page_title: "f5xc_rate_limiter_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Shape of the Rate Limiter Policy Create specification
+  Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 ---
 
 # f5xc_rate_limiter_policy (Data Source)
 
-Shape of the Rate Limiter Policy Create specification
+Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

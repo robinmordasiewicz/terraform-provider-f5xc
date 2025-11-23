@@ -42,7 +42,7 @@ func (d *WorkloadDataSource) Metadata(ctx context.Context, req datasource.Metada
 
 func (d *WorkloadDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of Workload",
+		MarkdownDescription: "Manages a Workload resource in F5 Distributed Cloud for workload configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

@@ -50,7 +50,7 @@ func (r *IKEPhase1ProfileResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the IKE Phase1 profile specification",
+		MarkdownDescription: "Manages a IKEPhase1Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IKEPhase1Profile. Must be unique within the namespace.",
@@ -84,22 +84,22 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"authentication_algos": schema.ListAttribute{
-				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"dh_group": schema.ListAttribute{
-				MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile. Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"encryption_algos": schema.ListAttribute{
-				MarkdownDescription: "Configure Encryption Algorithms. Choose one or more encryption algorithms. Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Configure Encryption Algorithms. Choose one or more encryption algorithms.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"prf": schema.ListAttribute{
-				MarkdownDescription: "PseudoRandomFunction. Select PseudoRandomFunction for IKE SA. Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "PseudoRandomFunction. Select PseudoRandomFunction for IKE SA.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -109,7 +109,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime] Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},
@@ -119,7 +119,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Minutes. Set IKE Key Lifetime in minutes",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 300",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},
@@ -132,7 +132,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Days. Set Duration in days",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 30",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},
@@ -142,7 +142,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},

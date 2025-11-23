@@ -2,12 +2,12 @@
 page_title: "f5xc_site_mesh_group Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Create a Site Mesh Group in system namespace of user
+  Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 ---
 
 # f5xc_site_mesh_group (Data Source)
 
-Create a Site Mesh Group in system namespace of user
+Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

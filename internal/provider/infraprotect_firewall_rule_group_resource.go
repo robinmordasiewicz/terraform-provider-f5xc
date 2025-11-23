@@ -47,7 +47,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Metadata(ctx context.Context, re
 
 func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Amends a DDoS transit Firewall Rule Group",
+		MarkdownDescription: "Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectFirewallRuleGroup. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req 
 				},
 			},
 			"firewall_rule_group_name": schema.StringAttribute{
-				MarkdownDescription: "Firewall Rule Group Name. Firewall Rule Group Name Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Firewall Rule Group Name. Firewall Rule Group Name",
 				Optional: true,
 			},
 		},

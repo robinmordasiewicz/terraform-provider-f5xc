@@ -42,7 +42,7 @@ func (d *SecretPolicyRuleDataSource) Metadata(ctx context.Context, req datasourc
 
 func (d *SecretPolicyRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create secret_policy_rule creates a new object in storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

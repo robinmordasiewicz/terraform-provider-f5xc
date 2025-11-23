@@ -50,7 +50,7 @@ func (r *PolicerResource) Metadata(ctx context.Context, req resource.MetadataReq
 
 func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a new policer with traffic rate limits",
+		MarkdownDescription: "Manages new policer with traffic rate limits in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Policer. Must be unique within the namespace.",
@@ -84,11 +84,11 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"burst_size": schema.Int64Attribute{
-				MarkdownDescription: "Burst Size(pps). The maximum size permitted for bursts of data. e.g. 10000 pps burst Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1",
+				MarkdownDescription: "Burst Size(pps). The maximum size permitted for bursts of data. e.g. 10000 pps burst",
 				Optional: true,
 			},
 			"committed_information_rate": schema.Int64Attribute{
-				MarkdownDescription: "Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 10000000",
+				MarkdownDescription: "Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps",
 				Optional: true,
 			},
 			"policer_mode": schema.StringAttribute{

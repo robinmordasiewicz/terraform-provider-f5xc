@@ -42,7 +42,7 @@ func (d *TokenDataSource) Metadata(ctx context.Context, req datasource.MetadataR
 
 func (d *TokenDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration.",
+		MarkdownDescription: "Manages new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

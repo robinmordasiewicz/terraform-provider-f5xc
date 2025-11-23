@@ -48,7 +48,7 @@ func (r *DNSLbPoolResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create DNS Load Balancer Pool in a given namespace. If one already exist it will give a error.",
+		MarkdownDescription: "Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSLbPool. Must be unique within the namespace.",
@@ -86,7 +86,7 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				Optional: true,
 			},
 			"ttl": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: ttl, use_rrset_ttl] TTL. Exclusive with [use_rrset_ttl] Custom TTL in seconds (default 30) for responses from this pool ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 2147483647",
+				MarkdownDescription: "[OneOf: ttl, use_rrset_ttl] TTL. Custom TTL in seconds (default 30) for responses from this pool",
 				Optional: true,
 			},
 		},
@@ -95,7 +95,7 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				MarkdownDescription: "[OneOf: a_pool, aaaa_pool, cname_pool, mx_pool, srv_pool] Pool for A Record.",
 				Attributes: map[string]schema.Attribute{
 					"max_answers": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 32",
+						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query",
 						Optional: true,
 					},
 				},
@@ -107,21 +107,21 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
 					},
 					"members": schema.ListNestedBlock{
-						MarkdownDescription: "Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Pool Members.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"disable": schema.BoolAttribute{
@@ -129,19 +129,19 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 									Optional: true,
 								},
 								"ip_endpoint": schema.StringAttribute{
-									MarkdownDescription: "Public IP. Public IP address Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true",
+									MarkdownDescription: "Public IP. Public IP address",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Pool member name ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Pool member name",
 									Optional: true,
 								},
 								"priority": schema.Int64Attribute{
-									MarkdownDescription: "Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 255",
+									MarkdownDescription: "Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority",
 									Optional: true,
 								},
 								"ratio": schema.Int64Attribute{
-									MarkdownDescription: "Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100",
+									MarkdownDescription: "Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member",
 									Optional: true,
 								},
 							},
@@ -154,13 +154,13 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				MarkdownDescription: "Pool for AAAA Record.",
 				Attributes: map[string]schema.Attribute{
 					"max_answers": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 32",
+						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query",
 						Optional: true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"members": schema.ListNestedBlock{
-						MarkdownDescription: "Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Pool Members.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"disable": schema.BoolAttribute{
@@ -168,19 +168,19 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 									Optional: true,
 								},
 								"ip_endpoint": schema.StringAttribute{
-									MarkdownDescription: "Public IP. Public IP address Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true",
+									MarkdownDescription: "Public IP. Public IP address",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Pool member name ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Pool member name",
 									Optional: true,
 								},
 								"priority": schema.Int64Attribute{
-									MarkdownDescription: "Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 255",
+									MarkdownDescription: "Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority",
 									Optional: true,
 								},
 								"ratio": schema.Int64Attribute{
-									MarkdownDescription: "Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100",
+									MarkdownDescription: "Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member",
 									Optional: true,
 								},
 							},
@@ -195,11 +195,11 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 				Blocks: map[string]schema.Block{
 					"members": schema.ListNestedBlock{
-						MarkdownDescription: "Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Pool Members.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"domain": schema.StringAttribute{
-									MarkdownDescription: "Domain. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true",
+									MarkdownDescription: "Domain.",
 									Optional: true,
 								},
 								"final_translation": schema.BoolAttribute{
@@ -207,11 +207,11 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Pool member name ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Pool member name",
 									Optional: true,
 								},
 								"ratio": schema.Int64Attribute{
-									MarkdownDescription: "Load Balancing Ratio. Ratio ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100",
+									MarkdownDescription: "Load Balancing Ratio. Ratio",
 									Optional: true,
 								},
 							},
@@ -224,29 +224,29 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				MarkdownDescription: "Pool for MX Record.",
 				Attributes: map[string]schema.Attribute{
 					"max_answers": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 32",
+						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query",
 						Optional: true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"members": schema.ListNestedBlock{
-						MarkdownDescription: "Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Pool Members.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"domain": schema.StringAttribute{
-									MarkdownDescription: "Domain. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true",
+									MarkdownDescription: "Domain.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Pool member name ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Pool member name",
 									Optional: true,
 								},
 								"priority": schema.Int64Attribute{
-									MarkdownDescription: "MX Record Priority. MX Record priority ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "MX Record Priority. MX Record priority",
 									Optional: true,
 								},
 								"ratio": schema.Int64Attribute{
-									MarkdownDescription: "Load Balancing Ratio. Load Balancing Ratio ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100",
+									MarkdownDescription: "Load Balancing Ratio. Load Balancing Ratio",
 									Optional: true,
 								},
 							},
@@ -259,13 +259,13 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				MarkdownDescription: "Pool for SRV Record.",
 				Attributes: map[string]schema.Attribute{
 					"max_answers": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 32",
+						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query",
 						Optional: true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"members": schema.ListNestedBlock{
-						MarkdownDescription: "Pool Members. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Pool Members.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"final_translation": schema.BoolAttribute{
@@ -273,27 +273,27 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Pool member name ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Name. Pool member name",
 									Optional: true,
 								},
 								"port": schema.Int64Attribute{
-									MarkdownDescription: "Port. Port on which the service can be found Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "Port. Port on which the service can be found",
 									Optional: true,
 								},
 								"priority": schema.Int64Attribute{
-									MarkdownDescription: "Priority. Priority of the target. A lower number indicates a higher preference. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "Priority. Priority of the target. A lower number indicates a higher preference.",
 									Optional: true,
 								},
 								"ratio": schema.Int64Attribute{
-									MarkdownDescription: "Load Balancing Ratio. Ratio ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 100",
+									MarkdownDescription: "Load Balancing Ratio. Ratio",
 									Optional: true,
 								},
 								"target": schema.StringAttribute{
-									MarkdownDescription: "Target. Domain name of the machine providing the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^[.]$|^([a-zA-Z0-9]{1}[a-zA-Z0-9_-]{0,62})(\\.[a-zA-Z0-9_]{1}[a-zA-Z0-9_-]{0,62})*?(\\.[a-zA-Z]{1}[a-zA-Z0-9]{0,62})\\.?$",
+									MarkdownDescription: "Target. Domain name of the machine providing the service",
 									Optional: true,
 								},
 								"weight": schema.Int64Attribute{
-									MarkdownDescription: "Weight. Weight of the target. A higher number indicates a higher preference. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 0 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "Weight. Weight of the target. A higher number indicates a higher preference.",
 									Optional: true,
 								},
 							},

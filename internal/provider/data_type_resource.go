@@ -49,7 +49,7 @@ func (r *DataTypeResource) Metadata(ctx context.Context, req resource.MetadataRe
 
 func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create data_type creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DataType. Must be unique within the namespace.",
@@ -83,7 +83,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"compliances": schema.ListAttribute{
-				MarkdownDescription: "Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 17 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -98,7 +98,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 		},
 		Blocks: map[string]schema.Block{
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
@@ -107,11 +107,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 							MarkdownDescription: "Rule Pattern Type. test",
 							Attributes: map[string]schema.Attribute{
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Value. Exclusive with [exact_values substring_value] Search for values matching this regular expression ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex Value. Search for values matching this regular expression",
 									Optional: true,
 								},
 								"substring_value": schema.StringAttribute{
-									MarkdownDescription: "Substring Search. Exclusive with [exact_values regex_value] Search for values that include this substring ves.io.schema.rules.string.max_bytes: 1024",
+									MarkdownDescription: "Substring Search. Search for values that include this substring",
 									Optional: true,
 								},
 							},
@@ -120,7 +120,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Exact Values. List of exact values to match.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. List of exact values to match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 1024 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Exact Values. List of exact values to match.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -137,11 +137,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Rule Pattern Type. test",
 									Attributes: map[string]schema.Attribute{
 										"regex_value": schema.StringAttribute{
-											MarkdownDescription: "Regex Value. Exclusive with [exact_values substring_value] Search for values matching this regular expression ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Regex Value. Search for values matching this regular expression",
 											Optional: true,
 										},
 										"substring_value": schema.StringAttribute{
-											MarkdownDescription: "Substring Search. Exclusive with [exact_values regex_value] Search for values that include this substring ves.io.schema.rules.string.max_bytes: 1024",
+											MarkdownDescription: "Substring Search. Search for values that include this substring",
 											Optional: true,
 										},
 									},
@@ -155,11 +155,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Rule Pattern Type. test",
 									Attributes: map[string]schema.Attribute{
 										"regex_value": schema.StringAttribute{
-											MarkdownDescription: "Regex Value. Exclusive with [exact_values substring_value] Search for values matching this regular expression ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.regex: true",
+											MarkdownDescription: "Regex Value. Search for values matching this regular expression",
 											Optional: true,
 										},
 										"substring_value": schema.StringAttribute{
-											MarkdownDescription: "Substring Search. Exclusive with [exact_values regex_value] Search for values that include this substring ves.io.schema.rules.string.max_bytes: 1024",
+											MarkdownDescription: "Substring Search. Search for values that include this substring",
 											Optional: true,
 										},
 									},
@@ -175,11 +175,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 							MarkdownDescription: "Rule Pattern Type. test",
 							Attributes: map[string]schema.Attribute{
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Value. Exclusive with [exact_values substring_value] Search for values matching this regular expression ves.io.schema.rules.string.max_bytes: 1024 ves.io.schema.rules.string.regex: true",
+									MarkdownDescription: "Regex Value. Search for values matching this regular expression",
 									Optional: true,
 								},
 								"substring_value": schema.StringAttribute{
-									MarkdownDescription: "Substring Search. Exclusive with [exact_values regex_value] Search for values that include this substring ves.io.schema.rules.string.max_bytes: 1024",
+									MarkdownDescription: "Substring Search. Search for values that include this substring",
 									Optional: true,
 								},
 							},
@@ -188,7 +188,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Exact Values. List of exact values to match.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. List of exact values to match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.max_bytes: 1024 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Exact Values. List of exact values to match.",
 											Optional: true,
 											ElementType: types.StringType,
 										},

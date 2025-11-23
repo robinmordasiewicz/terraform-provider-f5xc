@@ -46,7 +46,7 @@ func (r *ReportConfigResource) Metadata(ctx context.Context, req resource.Metada
 
 func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Report configuration is used to schedule report generation at a later point in time.",
+		MarkdownDescription: "Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ReportConfig. Must be unique within the namespace.",
@@ -87,19 +87,19 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 				Blocks: map[string]schema.Block{
 					"user_groups": schema.ListNestedBlock{
-						MarkdownDescription: "User Groups. Select one or more user groups, to which the report should be sent via email ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "User Groups. Select one or more user groups, to which the report should be sent via email",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -120,7 +120,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Report Frequency Daily. create report daily",
 						Attributes: map[string]schema.Attribute{
 							"report_generation_time": schema.StringAttribute{
-								MarkdownDescription: "Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: (((0[1-9])|(1[0-2])):([0-5])([0-9]):([0-5])([0-9])\\s?(A|P)M)",
+								MarkdownDescription: "Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set.",
 								Optional: true,
 							},
 						},
@@ -133,7 +133,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 								Optional: true,
 							},
 							"report_generation_time": schema.StringAttribute{
-								MarkdownDescription: "Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: (((0[1-9])|(1[0-2])):([0-5])([0-9]):([0-5])([0-9])\\s?(A|P)M)",
+								MarkdownDescription: "Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set.",
 								Optional: true,
 							},
 						},
@@ -142,7 +142,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Namespaces. namespaces",
 						Attributes: map[string]schema.Attribute{
 							"namespaces": schema.ListAttribute{
-								MarkdownDescription: "Namespaces. list of namespaces for which user wants to generate report Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 5 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "Namespaces. list of namespaces for which user wants to generate report",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -156,7 +156,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 								Optional: true,
 							},
 							"report_generation_time": schema.StringAttribute{
-								MarkdownDescription: "Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: (((0[1-9])|(1[0-2])):([0-5])([0-9]):([0-5])([0-9])\\s?(A|P)M)",
+								MarkdownDescription: "Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set.",
 								Optional: true,
 							},
 						},

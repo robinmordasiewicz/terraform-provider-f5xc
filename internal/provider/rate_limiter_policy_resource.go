@@ -47,7 +47,7 @@ func (r *RateLimiterPolicyResource) Metadata(ctx context.Context, req resource.M
 
 func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Rate Limiter Policy Create specification",
+		MarkdownDescription: "Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the RateLimiterPolicy. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"server_name": schema.StringAttribute{
-				MarkdownDescription: "Server Name. Exclusive with [any_server server_name_matcher server_selector] The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request. ves.io.schema.rules.string.max_bytes: 256",
+				MarkdownDescription: "Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request.",
 				Optional: true,
 			},
 		},
@@ -90,7 +90,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Empty. This can be used for messages where no values are needed",
 			},
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
@@ -99,11 +99,11 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -129,7 +129,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
-											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -141,7 +141,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 									Blocks: map[string]schema.Block{
 										"asn_sets": schema.ListNestedBlock{
-											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4",
+											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -155,7 +155,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Country Codes List. List of Country Codes to match against.",
 									Attributes: map[string]schema.Attribute{
 										"country_codes": schema.ListAttribute{
-											MarkdownDescription: "Country Codes List. List of Country Codes Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Country Codes List. List of Country Codes",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -169,15 +169,15 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -186,19 +186,19 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"regex_values": schema.ListAttribute{
-											MarkdownDescription: "Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.items.string.regex: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 									},
 								},
 								"headers": schema.ListNestedBlock{
-									MarkdownDescription: "A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+									MarkdownDescription: "A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"invert_matcher": schema.BoolAttribute{
@@ -206,7 +206,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 												Optional: true,
 											},
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Header Name. A case-insensitive HTTP header name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_header_field: true ves.io.schema.rules.string.max_bytes: 256",
+												MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
 												Optional: true,
 											},
 										},
@@ -231,7 +231,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 											Optional: true,
 										},
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Method List. List of methods values to match against. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Method List. List of methods values to match against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -247,7 +247,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 									Blocks: map[string]schema.Block{
 										"prefix_sets": schema.ListNestedBlock{
-											MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 4",
+											MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -262,7 +262,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 											Optional: true,
 										},
 										"ip_prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings. ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -272,7 +272,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									MarkdownDescription: "Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. A list of exact path values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.http_path: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Exact Values. A list of exact path values to match the input HTTP path against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -281,22 +281,22 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 											Optional: true,
 										},
 										"prefix_values": schema.ListAttribute{
-											MarkdownDescription: "Prefix Values. A list of path prefix values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.http_path: true ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Prefix Values. A list of path prefix values to match the input HTTP path against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"regex_values": schema.ListAttribute{
-											MarkdownDescription: "Regex Values. A list of regular expressions to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.items.string.regex: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Regex Values. A list of regular expressions to match the input HTTP path against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"suffix_values": schema.ListAttribute{
-											MarkdownDescription: "Suffix Values. A list of path suffix values to match the input HTTP path against. ves.io.schema.rules.repeated.items.string.max_bytes: 64 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Suffix Values. A list of path suffix values to match the input HTTP path against.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
 										"transformers": schema.ListAttribute{
-											MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. ves.io.schema.rules.repeated.max_items: 9 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -312,12 +312,12 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 				Attributes: map[string]schema.Attribute{
 					"exact_values": schema.ListAttribute{
-						MarkdownDescription: "Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"regex_values": schema.ListAttribute{
-						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.items.string.regex: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -328,7 +328,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 						Optional: true,
 						ElementType: types.StringType,
 					},

@@ -47,7 +47,7 @@ func (r *CertificateChainResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *CertificateChainResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Certificate Chain specification",
+		MarkdownDescription: "Manages a CertificateChain resource in F5 Distributed Cloud for certificate chain configuration for TLS.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CertificateChain. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *CertificateChainResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"certificate_url": schema.StringAttribute{
-				MarkdownDescription: "Certificates. Certificate chain is the list of intermediate certificates in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.intermediate_certificate_chain_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+				MarkdownDescription: "Certificates. Certificate chain is the list of intermediate certificates in PEM format including the PEM headers.",
 				Optional: true,
 			},
 		},

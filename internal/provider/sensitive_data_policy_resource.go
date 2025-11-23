@@ -48,7 +48,7 @@ func (r *SensitiveDataPolicyResource) Metadata(ctx context.Context, req resource
 
 func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create sensitive_data_policy creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SensitiveDataPolicy. Must be unique within the namespace.",
@@ -82,19 +82,19 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 				},
 			},
 			"compliances": schema.ListAttribute{
-				MarkdownDescription: "Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 17 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"disabled_predefined_data_types": schema.ListAttribute{
-				MarkdownDescription: "Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery ves.io.schema.rules.repeated.max_items: 100 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.max_len: 64",
+				MarkdownDescription: "Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 		},
 		Blocks: map[string]schema.Block{
 			"custom_data_types": schema.ListNestedBlock{
-				MarkdownDescription: "Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
@@ -103,15 +103,15 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},

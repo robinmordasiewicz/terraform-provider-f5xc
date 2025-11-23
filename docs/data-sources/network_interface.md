@@ -2,12 +2,12 @@
 page_title: "f5xc_network_interface Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Network interface represents configuration of a network device. It is created by users in system namespace.
+  Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 ---
 
 # f5xc_network_interface (Data Source)
 
-Network interface represents configuration of a network device. It is created by users in system namespace.
+Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

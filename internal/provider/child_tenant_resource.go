@@ -48,7 +48,7 @@ func (r *ChildTenantResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a child_tenant config instance. Name of the object is the name of the child tenant to be created.",
+		MarkdownDescription: "Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ChildTenant. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"company_name": schema.StringAttribute{
-				MarkdownDescription: "Company Name. Company name (enterprise only) ves.io.schema.rules.string.max_len: 256",
+				MarkdownDescription: "Company Name. Company name (enterprise only)",
 				Optional: true,
 			},
 			"domain": schema.StringAttribute{
-				MarkdownDescription: "Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 17 ves.io.schema.rules.string.min_len: 5 ves.io.schema.rules.string.ves_object_name: true",
+				MarkdownDescription: "Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io.",
 				Optional: true,
 			},
 		},
@@ -95,15 +95,15 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -159,19 +159,19 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Customer Info. Optional details for the new child tenant",
 				Attributes: map[string]schema.Attribute{
 					"additional_info": schema.StringAttribute{
-						MarkdownDescription: "Additional Info. Use this field for any additional information about the new child tenant ves.io.schema.rules.string.max_len: 1024",
+						MarkdownDescription: "Additional Info. Use this field for any additional information about the new child tenant",
 						Optional: true,
 					},
 					"email": schema.StringAttribute{
-						MarkdownDescription: "Email. ves.io.schema.rules.string.email: true",
+						MarkdownDescription: "Email.",
 						Optional: true,
 					},
 					"first_name": schema.StringAttribute{
-						MarkdownDescription: "First Name. ves.io.schema.rules.string.max_len: 128",
+						MarkdownDescription: "First Name.",
 						Optional: true,
 					},
 					"last_name": schema.StringAttribute{
-						MarkdownDescription: "Last Name. ves.io.schema.rules.string.max_len: 128",
+						MarkdownDescription: "Last Name.",
 						Optional: true,
 					},
 				},
@@ -181,15 +181,15 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},

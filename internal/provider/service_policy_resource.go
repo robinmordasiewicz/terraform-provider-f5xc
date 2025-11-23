@@ -47,7 +47,7 @@ func (r *ServicePolicyResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create service_policy creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ServicePolicy. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"server_name": schema.StringAttribute{
-				MarkdownDescription: "Server Name. Exclusive with [any_server server_name_matcher server_selector] The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name. ve...",
+				MarkdownDescription: "Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name.",
 				Optional: true,
 			},
 		},
@@ -93,17 +93,17 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria.",
 				Attributes: map[string]schema.Attribute{
 					"country_list": schema.ListAttribute{
-						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"tls_fingerprint_classes": schema.ListAttribute{
-						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"tls_fingerprint_values": schema.ListAttribute{
-						MarkdownDescription: "TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.items.string.len: 32 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -113,26 +113,26 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 						Attributes: map[string]schema.Attribute{
 							"as_numbers": schema.ListAttribute{
-								MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
 						},
 					},
 					"asn_set": schema.ListNestedBlock{
-						MarkdownDescription: "BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -148,19 +148,19 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"ip_prefix_set": schema.ListNestedBlock{
-						MarkdownDescription: "IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -170,7 +170,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
-								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -189,17 +189,17 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria.",
 				Attributes: map[string]schema.Attribute{
 					"country_list": schema.ListAttribute{
-						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. ves.io.schema.rules.repeated.items.enum.defined_only: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"tls_fingerprint_classes": schema.ListAttribute{
-						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"tls_fingerprint_values": schema.ListAttribute{
-						MarkdownDescription: "TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against. ves.io.schema.rules.repeated.items.string.len: 32 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -209,26 +209,26 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 						Attributes: map[string]schema.Attribute{
 							"as_numbers": schema.ListAttribute{
-								MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
 						},
 					},
 					"asn_set": schema.ListNestedBlock{
-						MarkdownDescription: "BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -244,19 +244,19 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"ip_prefix_set": schema.ListNestedBlock{
-						MarkdownDescription: "IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set ves.io.schema.rules.repeated.max_items: 4 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -266,7 +266,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
-								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -281,7 +281,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
-						MarkdownDescription: "Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.unique_metadata_name: true",
+						MarkdownDescription: "Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -290,11 +290,11 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -307,7 +307,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Optional: true,
 										},
 										"client_name": schema.StringAttribute{
-											MarkdownDescription: "Client Name. Exclusive with [any_client client_name_matcher client_selector ip_threat_category_list] The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name. ves.io.schema.rules.string.max_bytes: 256",
+											MarkdownDescription: "Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name.",
 											Optional: true,
 										},
 										"expiration_timestamp": schema.StringAttribute{
@@ -329,7 +329,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true.",
 										},
 										"arg_matchers": schema.ListNestedBlock{
-											MarkdownDescription: "Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -353,7 +353,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 										},
 										"cookie_matchers": schema.ListNestedBlock{
-											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -362,7 +362,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 										},
 										"headers": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -383,7 +383,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length.",
 										},
 										"jwt_claims": schema.ListNestedBlock{
-											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -401,7 +401,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true.",
 										},
 										"query_params": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. ves.io.schema.rules.repeated.max_items: 16",
+											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -433,12 +433,12 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 				Attributes: map[string]schema.Attribute{
 					"exact_values": schema.ListAttribute{
-						MarkdownDescription: "Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"regex_values": schema.ListAttribute{
-						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.items.string.regex: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -449,7 +449,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 						Optional: true,
 						ElementType: types.StringType,
 					},

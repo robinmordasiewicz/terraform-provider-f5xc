@@ -42,7 +42,7 @@ func (d *DataTypeDataSource) Metadata(ctx context.Context, req datasource.Metada
 
 func (d *DataTypeDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create data_type creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

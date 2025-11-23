@@ -51,7 +51,7 @@ func (r *HealthcheckResource) Metadata(ctx context.Context, req resource.Metadat
 
 func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Healthcheck object defines method to determine if the given Endpoint is healthy. Single Healthcheck object can be referred to by one or many Cluster objects.",
+		MarkdownDescription: "Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Healthcheck. Must be unique within the namespace.",
@@ -85,23 +85,23 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"healthy_threshold": schema.Int64Attribute{
-				MarkdownDescription: "Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+				MarkdownDescription: "Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy.",
 				Optional: true,
 			},
 			"interval": schema.Int64Attribute{
-				MarkdownDescription: "Interval. Time interval in seconds between two healthcheck requests. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+				MarkdownDescription: "Interval. Time interval in seconds between two healthcheck requests.",
 				Optional: true,
 			},
 			"jitter_percent": schema.Int64Attribute{
-				MarkdownDescription: "Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests. ves.io.schema.rules.uint32.ranges: 0,10-50",
+				MarkdownDescription: "Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests.",
 				Optional: true,
 			},
 			"timeout": schema.Int64Attribute{
-				MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 600",
+				MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 				Optional: true,
 			},
 			"unhealthy_threshold": schema.Int64Attribute{
-				MarkdownDescription: "Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for http health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 16",
+				MarkdownDescription: "Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for http health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately.",
 				Optional: true,
 			},
 		},
@@ -110,20 +110,20 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: http_health_check, tcp_health_check, udp_icmp_health_check] HTTP Health Check. Healthy if 'get' method on URL 'http(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request.",
 				Attributes: map[string]schema.Attribute{
 					"expected_status_codes": schema.ListAttribute{
-						MarkdownDescription: "Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'. ves.io.schema.rules.repeated.items.string.http_status_range: true ves.io.schema.rules.repeated.items.string.max_len: 10 ves.io.schema.rules.repeated.items.string.min_len: 3 ves.io.schema.r...",
+						MarkdownDescription: "Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"host_header": schema.StringAttribute{
-						MarkdownDescription: "Host Header Value. Exclusive with [use_origin_server_name] The value of the host header. ves.io.schema.rules.string.hostport: true ves.io.schema.rules.string.max_len: 262",
+						MarkdownDescription: "Host Header Value. The value of the host header.",
 						Optional: true,
 					},
 					"path": schema.StringAttribute{
-						MarkdownDescription: "Path. Specifies the HTTP path that will be requested during health checking. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.http_path: true ves.io.schema.rules.string.max_len: 2048",
+						MarkdownDescription: "Path. Specifies the HTTP path that will be requested during health checking.",
 						Optional: true,
 					},
 					"request_headers_to_remove": schema.ListAttribute{
-						MarkdownDescription: "Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers. ves.io.schema.rules.repeated.items.string.max_len: 256 ves.io.schema.rules.repeated.max_items: 16",
+						MarkdownDescription: "Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -134,7 +134,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 				Blocks: map[string]schema.Block{
 					"headers": schema.SingleNestedBlock{
-						MarkdownDescription: "Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. ves.io.schema.rules.map.keys.string.max_len: 256 ves.io.schema.rules.map.keys.string.min_len: 1 ves.io.schema.rules.map.max_pairs: 16 ves.io.schema.rules.map.values.string.max_len: 2048 ves.io.schema.rules.map.values.string.min_len: 1",
+						MarkdownDescription: "Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs.",
 					},
 					"use_origin_server_name": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -146,11 +146,11 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>",
 				Attributes: map[string]schema.Attribute{
 					"expected_response": schema.StringAttribute{
-						MarkdownDescription: "Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload. ves.io.schema.rules.string.hex: true ves.io.schema.rules.string.max_len: 2048",
+						MarkdownDescription: "Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
 						Optional: true,
 					},
 					"send_payload": schema.StringAttribute{
-						MarkdownDescription: "Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload. ves.io.schema.rules.string.hex: true ves.io.schema.rules.string.max_len: 2048",
+						MarkdownDescription: "Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
 						Optional: true,
 					},
 				},

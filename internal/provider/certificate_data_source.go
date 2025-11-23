@@ -42,7 +42,7 @@ func (d *CertificateDataSource) Metadata(ctx context.Context, req datasource.Met
 
 func (d *CertificateDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Certificate specification",
+		MarkdownDescription: "Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

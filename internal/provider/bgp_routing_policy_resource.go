@@ -46,7 +46,7 @@ func (r *BGPRoutingPolicyResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "BGP Routing Policy is a list of rules containing match criteria and action to be applied. These rules help contol routes which are imported or exported to BGP peers",
+		MarkdownDescription: "Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGPRoutingPolicy. Must be unique within the namespace.",
@@ -82,7 +82,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 		},
 		Blocks: map[string]schema.Block{
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+				MarkdownDescription: "Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
@@ -91,15 +91,15 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "BGP Route Action. Action to be enforced if the BGP route matches the rule.",
 							Attributes: map[string]schema.Attribute{
 								"as_path": schema.StringAttribute{
-									MarkdownDescription: "AS-path to prepend. Exclusive with [aggregate allow community deny local_preference metric] AS-Path Prepending is generally used to influence incoming traffic",
+									MarkdownDescription: "AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic",
 									Optional: true,
 								},
 								"local_preference": schema.Int64Attribute{
-									MarkdownDescription: "Local preference. Exclusive with [aggregate allow as_path community deny metric] BGP Local Preference is generally used to influence outgoing traffic",
+									MarkdownDescription: "Local preference. BGP Local Preference is generally used to influence outgoing traffic",
 									Optional: true,
 								},
 								"metric": schema.Int64Attribute{
-									MarkdownDescription: "MED/Metric. Exclusive with [aggregate allow as_path community deny local_preference] The Multi-Exit Discriminator metric to indicate the preferred path to AS",
+									MarkdownDescription: "MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS",
 									Optional: true,
 								},
 							},
@@ -114,7 +114,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "BGP Community list. List of BGP communities",
 									Attributes: map[string]schema.Attribute{
 										"community": schema.ListAttribute{
-											MarkdownDescription: "BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.pattern: ^[0-9]{1,5}:[0-9]{1,5}$",
+											MarkdownDescription: "BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -129,7 +129,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "BGP Route Match. Predicates which have to match information in route for action to be applied",
 							Attributes: map[string]schema.Attribute{
 								"as_path": schema.StringAttribute{
-									MarkdownDescription: "AS path to match. Exclusive with [community ip_prefixes] AS path can also be a regex, which will be matched against route information",
+									MarkdownDescription: "AS path to match. AS path can also be a regex, which will be matched against route information",
 									Optional: true,
 								},
 							},
@@ -138,7 +138,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "BGP Community list. List of BGP communities",
 									Attributes: map[string]schema.Attribute{
 										"community": schema.ListAttribute{
-											MarkdownDescription: "BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true ves.io.schema.rules.string.pattern: ^[0-9]{1,5}:[0-9]{1,5}$",
+											MarkdownDescription: "BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -150,7 +150,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"prefixes": schema.ListNestedBlock{
-											MarkdownDescription: "Prefix list. List of IP prefix Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 8 ves.io.schema.rules.repeated.min_items: 1",
+											MarkdownDescription: "Prefix list. List of IP prefix",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},

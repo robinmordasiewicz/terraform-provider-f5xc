@@ -46,7 +46,7 @@ func (r *NetworkConnectorResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Network Connector is created by users in system namespace",
+		MarkdownDescription: "Manages a NetworkConnector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkConnector. Must be unique within the namespace.",
@@ -88,20 +88,20 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and ip prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted ip-prefix-list and ports connectio...",
 				Attributes: map[string]schema.Attribute{
 					"connection_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) ves.io.schema.rules.uint32.lte: 600000",
+						MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds)",
 						Optional: true,
 					},
 					"max_connect_attempts": schema.Int64Attribute{
-						MarkdownDescription: "Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1. ves.io.schema.rules.uint32.lte: 8",
+						MarkdownDescription: "Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1.",
 						Optional: true,
 					},
 					"white_listed_ports": schema.ListAttribute{
-						MarkdownDescription: "TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port ves.io.schema.rules.repeated.items.uint32.lte: 65535 ves.io.schema.rules.repeated.max_items: 64",
+						MarkdownDescription: "TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"white_listed_prefixes": schema.ListAttribute{
-						MarkdownDescription: "IP Prefixes to Skip Protocol Parsing. Traffic to these destination ip prefixes is not subjected to protocol parsing Example 'tmate' server ip ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "IP Prefixes to Skip Protocol Parsing. Traffic to these destination ip prefixes is not subjected to protocol parsing Example 'tmate' server ip",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -114,7 +114,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Configuration for TLS interception. Configuration to enable TLS interception",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Custom Root CA Certificate. Exclusive with [volterra_trusted_ca] Custom Root CA Certificate for validating upstream server certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+								MarkdownDescription: "Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate",
 								Optional: true,
 							},
 						},
@@ -123,7 +123,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "TLS Certificate. Handle to fetch certificate and key",
 								Attributes: map[string]schema.Attribute{
 									"certificate_url": schema.StringAttribute{
-										MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 										Optional: true,
 									},
 									"description": schema.StringAttribute{
@@ -155,7 +155,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 								},
 								Blocks: map[string]schema.Block{
 									"interception_rules": schema.ListNestedBlock{
-										MarkdownDescription: "TLS Interception Rules. List of ordered rules to enable or disable for TLS interception Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+										MarkdownDescription: "TLS Interception Rules. List of ordered rules to enable or disable for TLS interception",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -182,15 +182,15 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -221,15 +221,15 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},

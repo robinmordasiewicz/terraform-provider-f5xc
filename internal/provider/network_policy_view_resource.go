@@ -46,7 +46,7 @@ func (r *NetworkPolicyViewResource) Metadata(ctx context.Context, req resource.M
 
 func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Network policy view specification",
+		MarkdownDescription: "Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy view configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkPolicyView. Must be unique within the namespace.",
@@ -82,7 +82,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 		},
 		Blocks: map[string]schema.Block{
 			"egress_rules": schema.ListNestedBlock{
-				MarkdownDescription: "Egress Rules. Ordered list of rules applied to connections from policy endpoints. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "Egress Rules. Ordered list of rules applied to connections from policy endpoints.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"action": schema.StringAttribute{
@@ -131,7 +131,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 							Blocks: map[string]schema.Block{
 								"ref": schema.ListNestedBlock{
-									MarkdownDescription: "Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1",
+									MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
@@ -163,7 +163,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name.",
 							Attributes: map[string]schema.Attribute{
 								"keys": schema.ListAttribute{
-									MarkdownDescription: "Keys. The list of label key names that have to match ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Keys. The list of label key names that have to match",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -173,7 +173,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 							Attributes: map[string]schema.Attribute{
 								"expressions": schema.ListAttribute{
-									MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+									MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -183,11 +183,11 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -199,7 +199,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 							Attributes: map[string]schema.Attribute{
 								"prefixes": schema.ListAttribute{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -209,7 +209,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Protocol and Port. Protocol and Port ranges",
 							Attributes: map[string]schema.Attribute{
 								"port_ranges": schema.ListAttribute{
-									MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -238,7 +238,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 						Attributes: map[string]schema.Attribute{
 							"expressions": schema.ListAttribute{
-								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -251,7 +251,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
-								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -261,7 +261,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 
 			},
 			"ingress_rules": schema.ListNestedBlock{
-				MarkdownDescription: "Ingress Rules. Ordered list of rules applied to connections to policy endpoints. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true",
+				MarkdownDescription: "Ingress Rules. Ordered list of rules applied to connections to policy endpoints.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"action": schema.StringAttribute{
@@ -310,7 +310,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 							Blocks: map[string]schema.Block{
 								"ref": schema.ListNestedBlock{
-									MarkdownDescription: "Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1",
+									MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
@@ -342,7 +342,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name.",
 							Attributes: map[string]schema.Attribute{
 								"keys": schema.ListAttribute{
-									MarkdownDescription: "Keys. The list of label key names that have to match ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "Keys. The list of label key names that have to match",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -352,7 +352,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 							Attributes: map[string]schema.Attribute{
 								"expressions": schema.ListAttribute{
-									MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+									MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -362,11 +362,11 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 									Optional: true,
 								},
 							},
@@ -378,7 +378,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 							Attributes: map[string]schema.Attribute{
 								"prefixes": schema.ListAttribute{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -388,7 +388,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Protocol and Port. Protocol and Port ranges",
 							Attributes: map[string]schema.Attribute{
 								"port_ranges": schema.ListAttribute{
-									MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules.repeated.max_items: 128",
+									MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
 									Optional: true,
 									ElementType: types.StringType,
 								},

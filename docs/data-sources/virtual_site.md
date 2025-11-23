@@ -2,12 +2,12 @@
 page_title: "f5xc_virtual_site Data Source - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Create a virtual site object in given namespace
+  Manages virtual site object in given namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_site (Data Source)
 
-Create a virtual site object in given namespace
+Manages virtual site object in given namespace in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

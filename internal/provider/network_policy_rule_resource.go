@@ -49,7 +49,7 @@ func (r *NetworkPolicyRuleResource) Metadata(ctx context.Context, req resource.M
 
 func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a network policy rule with configured parameters in specified namespace",
+		MarkdownDescription: "Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkPolicyRule. Must be unique within the namespace.",
@@ -87,7 +87,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				Optional: true,
 			},
 			"ports": schema.ListAttribute{
-				MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules.repeated.max_items: 128",
+				MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -113,7 +113,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 				Blocks: map[string]schema.Block{
 					"ref": schema.ListNestedBlock{
-						MarkdownDescription: "Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
@@ -146,7 +146,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name.",
 				Attributes: map[string]schema.Attribute{
 					"keys": schema.ListAttribute{
-						MarkdownDescription: "Keys. The list of label key names that have to match ves.io.schema.rules.repeated.items.string.max_len: 64 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Keys. The list of label key names that have to match",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -157,7 +157,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
-						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 256",
+						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -168,7 +168,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 						Optional: true,
 						ElementType: types.StringType,
 					},

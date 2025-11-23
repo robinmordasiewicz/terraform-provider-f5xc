@@ -46,7 +46,7 @@ func (r *Ike2Resource) Metadata(ctx context.Context, req resource.MetadataReques
 
 func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the IKE Phase2 profile specification",
+		MarkdownDescription: "Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Ike2. Must be unique within the namespace.",
@@ -99,7 +99,7 @@ func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime] Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},
@@ -109,7 +109,7 @@ func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				MarkdownDescription: "Minutes. Set IKE Key Lifetime in minutes",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 300",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},

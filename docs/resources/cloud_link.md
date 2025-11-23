@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_link Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Creates a new CloudLink with configured parameters
+  Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 ---
 
 # f5xc_cloud_link (Resource)
 
-Creates a new CloudLink with configured parameters
+Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

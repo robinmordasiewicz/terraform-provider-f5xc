@@ -47,7 +47,7 @@ func (r *BGPAsnSetResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *BGPAsnSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create bgp_asn_set creates a new object in the storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGPAsnSet. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *BGPAsnSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"as_numbers": schema.ListAttribute{
-				MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 256 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

@@ -2,12 +2,12 @@
 page_title: "f5xc_virtual_network Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Create virtual network in given namespace
+  Manages virtual network in given namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_network (Resource)
 
-Create virtual network in given namespace
+Manages virtual network in given namespace in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_usb_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Creates a new USB policy object
+  Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 ---
 
 # f5xc_usb_policy (Resource)
 
-Creates a new USB policy object
+Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

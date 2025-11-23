@@ -46,7 +46,7 @@ func (r *InfraprotectTunnelResource) Metadata(ctx context.Context, req resource.
 
 func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a DDoS transit tunnel",
+		MarkdownDescription: "Manages DDoS transit tunnel in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectTunnel. Must be unique within the namespace.",
@@ -85,7 +85,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "Bandwidth Speed Configuration. Bandwidth max allowed",
 				Attributes: map[string]schema.Attribute{
 					"bandwidth_max_mb": schema.Int64Attribute{
-						MarkdownDescription: "Bandwidth Max in MB. Bandwidth max allowed ves.io.schema.rules.uint32.lte: 9999",
+						MarkdownDescription: "Bandwidth Max in MB. Bandwidth max allowed",
 						Optional: true,
 					},
 				},
@@ -95,7 +95,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "BGP. BGP information associated with a DDoS transit tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"holddown_timer_seconds": schema.Int64Attribute{
-						MarkdownDescription: "Hold down Timer. BGP hold down timer, in seconds Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.uint32.gte: 30 ves.io.schema.rules.uint32.lte: 300",
+						MarkdownDescription: "Hold down Timer. BGP hold down timer, in seconds",
 						Optional: true,
 					},
 				},
@@ -104,15 +104,15 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -133,7 +133,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 										Optional: true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
 										Optional: true,
 									},
 									"store_provider": schema.StringAttribute{
@@ -150,7 +150,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 										Optional: true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.uri_ref: true",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 										Optional: true,
 									},
 								},
@@ -167,15 +167,15 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 						Optional: true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 						Optional: true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
 					},
 				},
@@ -185,7 +185,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "[OneOf: gre_ipv4, gre_ipv6, ip_in_ip, ipv6_to_ipv6] GRE IPv4 Tunnel. IPv4 Tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"customer_endpoint_ipv4": schema.StringAttribute{
-						MarkdownDescription: "Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_globally_routable: true",
+						MarkdownDescription: "Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel",
 						Optional: true,
 					},
 				},
@@ -215,7 +215,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "GRE IPv6 Tunnel. IPv6 Tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"customer_endpoint_ipv6": schema.StringAttribute{
-						MarkdownDescription: "Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv6_globally_routable: true",
+						MarkdownDescription: "Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel",
 						Optional: true,
 					},
 				},
@@ -233,7 +233,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "IP in IP Tunnel. IP in IP Tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"customer_endpoint_ipv4": schema.StringAttribute{
-						MarkdownDescription: "Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv4_globally_routable: true",
+						MarkdownDescription: "Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel",
 						Optional: true,
 					},
 				},
@@ -243,7 +243,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "IPv6 to IPv6 Tunnel. IPv6 to IPv6 Tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"customer_endpoint_ipv6": schema.StringAttribute{
-						MarkdownDescription: "Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ipv6_globally_routable: true",
+						MarkdownDescription: "Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel",
 						Optional: true,
 					},
 				},
@@ -253,7 +253,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "Location. Location of a DDoS transit tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Location Name. Destination tunnel Location. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+						MarkdownDescription: "Location Name. Destination tunnel Location.",
 						Optional: true,
 					},
 				},

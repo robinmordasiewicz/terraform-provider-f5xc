@@ -2,12 +2,12 @@
 page_title: "f5xc_contact Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Creates a new customer's contact detail record with us, including address and phone number.
+  Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
 ---
 
 # f5xc_contact (Data Source)
 
-Creates a new customer's contact detail record with us, including address and phone number.
+Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

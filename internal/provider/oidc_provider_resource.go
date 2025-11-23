@@ -47,7 +47,7 @@ func (r *OidcProviderResource) Metadata(ctx context.Context, req resource.Metada
 
 func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "CustomCreateSpecType is the spec to create oidc provider",
+		MarkdownDescription: "Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the OidcProvider. Must be unique within the namespace.",
@@ -90,7 +90,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				MarkdownDescription: "[OneOf: azure_oidc_spec_type, google_oidc_spec_type, oidc_v10_spec_type, okta_oidc_spec_type] Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider",
 				Attributes: map[string]schema.Attribute{
 					"authorization_url": schema.StringAttribute{
-						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application.",
 						Optional: true,
 					},
 					"backchannel_logout": schema.BoolAttribute{
@@ -98,15 +98,15 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"client_id": schema.StringAttribute{
-						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with azure provider. REQUIRED field Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with azure provider. REQUIRED field",
 						Optional: true,
 					},
 					"client_secret": schema.StringAttribute{
-						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with azure provider. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with azure provider.",
 						Optional: true,
 					},
 					"default_scopes": schema.StringAttribute{
-						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed.",
 						Optional: true,
 					},
 					"issuer": schema.StringAttribute{
@@ -126,7 +126,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"token_url": schema.StringAttribute{
-						MarkdownDescription: "Token URL. The token URL of your OIDC application. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Token URL. The token URL of your OIDC application.",
 						Optional: true,
 					},
 					"user_info_url": schema.StringAttribute{
@@ -140,11 +140,11 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				MarkdownDescription: "Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider",
 				Attributes: map[string]schema.Attribute{
 					"client_id": schema.StringAttribute{
-						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field",
 						Optional: true,
 					},
 					"client_secret": schema.StringAttribute{
-						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with google provider. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with google provider.",
 						Optional: true,
 					},
 					"hosted_domain": schema.StringAttribute{
@@ -162,7 +162,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"authorization_url": schema.StringAttribute{
-						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application.",
 						Optional: true,
 					},
 					"backchannel_logout": schema.BoolAttribute{
@@ -170,15 +170,15 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"client_id": schema.StringAttribute{
-						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with your identity/OIDC provider. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with your identity/OIDC provider.",
 						Optional: true,
 					},
 					"client_secret": schema.StringAttribute{
-						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with your identity/OIDC provider. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with your identity/OIDC provider.",
 						Optional: true,
 					},
 					"default_scopes": schema.StringAttribute{
-						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed.",
 						Optional: true,
 					},
 					"disable_user_info": schema.BoolAttribute{
@@ -218,7 +218,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"token_url": schema.StringAttribute{
-						MarkdownDescription: "Token URL. The token URL of your OIDC application. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Token URL. The token URL of your OIDC application.",
 						Optional: true,
 					},
 					"user_info_url": schema.StringAttribute{
@@ -236,7 +236,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				MarkdownDescription: "Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider",
 				Attributes: map[string]schema.Attribute{
 					"authorization_url": schema.StringAttribute{
-						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application.",
 						Optional: true,
 					},
 					"backchannel_logout": schema.BoolAttribute{
@@ -244,15 +244,15 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"client_id": schema.StringAttribute{
-						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with azure provider. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with azure provider.",
 						Optional: true,
 					},
 					"client_secret": schema.StringAttribute{
-						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with azure provider. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with azure provider.",
 						Optional: true,
 					},
 					"default_scopes": schema.StringAttribute{
-						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed. ves.io.schema.rules.string.max_bytes: 256 ves.io.schema.rules.string.not_empty: true",
+						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed.",
 						Optional: true,
 					},
 					"issuer": schema.StringAttribute{
@@ -272,7 +272,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"token_url": schema.StringAttribute{
-						MarkdownDescription: "Token URL. The token URL of your OIDC application. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Token URL. The token URL of your OIDC application.",
 						Optional: true,
 					},
 					"user_info_url": schema.StringAttribute{

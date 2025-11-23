@@ -46,7 +46,7 @@ func (r *APMResource) Metadata(ctx context.Context, req resource.MetadataRequest
 
 func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new APM as a service with configured parameters",
+		MarkdownDescription: "Manages new APM as a service with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APM. Must be unique within the namespace.",
@@ -90,11 +90,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						MarkdownDescription: "Virtual F5 BIG-IP APM configuration on AWS TGW Site. Virtual F5 BIG-IP configuration for AWS TGW Site using BIG-IP APM service",
 						Attributes: map[string]schema.Attribute{
 							"admin_username": schema.StringAttribute{
-								MarkdownDescription: "Admin Username. Admin Username for BIG-IP Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "Admin Username. Admin Username for BIG-IP",
 								Optional: true,
 							},
 							"ssh_key": schema.StringAttribute{
-								MarkdownDescription: "Public SSH key. Public SSH key for accessing the BIG-IP nodes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1",
+								MarkdownDescription: "Public SSH key. Public SSH key for accessing the BIG-IP nodes.",
 								Optional: true,
 							},
 						},
@@ -126,7 +126,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Endpoint Service. Endpoint Service is a type of service where the packets are destined to BIG-IP APM device and service modifies the destination with a new destination address",
 								Attributes: map[string]schema.Attribute{
 									"configured_vip": schema.StringAttribute{
-										MarkdownDescription: "Configured VIP. Exclusive with [automatic_vip] Enter IP address for the default VIP ves.io.schema.rules.string.ip: true ves.io.schema.rules.string.not_in: 0.0.0.0",
+										MarkdownDescription: "Configured VIP. Enter IP address for the default VIP",
 										Optional: true,
 									},
 								},
@@ -167,19 +167,19 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								},
 							},
 							"nodes": schema.ListNestedBlock{
-								MarkdownDescription: "Service Nodes. Specify how and where the service nodes are spawned Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 2 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Service Nodes. Specify how and where the service nodes are spawned",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"aws_az_name": schema.StringAttribute{
-											MarkdownDescription: "AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.pattern: ^([a-z]{2})-([a-z0-9]{4,20})-([a-z0-9]{2})$",
+											MarkdownDescription: "AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site",
 											Optional: true,
 										},
 										"node_name": schema.StringAttribute{
-											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
 											Optional: true,
 										},
 										"tunnel_prefix": schema.StringAttribute{
-											MarkdownDescription: "Tunnel IP Prefix. Exclusive with [automatic_prefix] Enter IP prefix for the tunnel, it has to be /30 ves.io.schema.rules.string.ipv4_prefix: true",
+											MarkdownDescription: "Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30",
 											Optional: true,
 										},
 									},
@@ -197,7 +197,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								},
 							},
 							"tags": schema.SingleNestedBlock{
-								MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. ves.io.schema.rules.map.keys.string.max_len: 127 ves.io.schema.rules.map.max_pairs: 5 ves.io.schema.rules.map.values.string.max_len: 255",
+								MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
 							},
 						},
 					},
@@ -226,15 +226,15 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						MarkdownDescription: "Virtual BIG-IP on App Stack bare metal. Virtual BIG-IP specification for App Stack bare metal",
 						Attributes: map[string]schema.Attribute{
 							"admin_username": schema.StringAttribute{
-								MarkdownDescription: "Admin Username. Admin Username for BIG-IP Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256",
+								MarkdownDescription: "Admin Username. Admin Username for BIG-IP",
 								Optional: true,
 							},
 							"public_download_url": schema.StringAttribute{
-								MarkdownDescription: "Image URL. Public URL where BIG-IP VE image (qcow2) is hosted Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.uri: true",
+								MarkdownDescription: "Image URL. Public URL where BIG-IP VE image (qcow2) is hosted",
 								Optional: true,
 							},
 							"ssh_key": schema.StringAttribute{
-								MarkdownDescription: "Public SSH key. Public SSH key for accessing the BIG-IP nodes. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 8192 ves.io.schema.rules.string.min_len: 1",
+								MarkdownDescription: "Public SSH key. Public SSH key for accessing the BIG-IP nodes.",
 								Optional: true,
 							},
 						},
@@ -256,15 +256,15 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -273,19 +273,19 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "License Server Details. Specification for BIG-IQ Instance, where and what",
 								Attributes: map[string]schema.Attribute{
 									"license_pool_name": schema.StringAttribute{
-										MarkdownDescription: "License Pool Name. Name of Utility Pool on BIG-IQ Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "License Pool Name. Name of Utility Pool on BIG-IQ",
 										Optional: true,
 									},
 									"license_server_ip": schema.StringAttribute{
-										MarkdownDescription: "License Server IP. IP Address from the TCP Load Balancer which is configured to communicate with License Server Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.ip: true ves.io.schema.rules.string.not_in: 0.0.0.0",
+										MarkdownDescription: "License Server IP. IP Address from the TCP Load Balancer which is configured to communicate with License Server",
 										Optional: true,
 									},
 									"sku_name": schema.StringAttribute{
-										MarkdownDescription: "Offering Name. License offering name aka SKU name Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "Offering Name. License offering name aka SKU name",
 										Optional: true,
 									},
 									"username": schema.StringAttribute{
-										MarkdownDescription: "User Name. User Name used to access BIG-IQ to activate the license Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+										MarkdownDescription: "User Name. User Name used to access BIG-IQ to activate the license",
 										Optional: true,
 									},
 								},
@@ -296,7 +296,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								},
 							},
 							"nodes": schema.ListNestedBlock{
-								MarkdownDescription: "Service Nodes. Specify how and where the service nodes are spawned Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "Service Nodes. Specify how and where the service nodes are spawned",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"bm_node_memory_size": schema.StringAttribute{
@@ -308,7 +308,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Optional: true,
 										},
 										"node_name": schema.StringAttribute{
-											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.min_len: 1",
+											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
 											Optional: true,
 										},
 									},
@@ -331,11 +331,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				MarkdownDescription: "HTTPS based management. HTTPS based configuration",
 				Attributes: map[string]schema.Attribute{
 					"domain_suffix": schema.StringAttribute{
-						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form URL to access node management Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.hostname: true",
+						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form URL to access node management",
 						Optional: true,
 					},
 					"https_port": schema.Int64Attribute{
-						MarkdownDescription: "HTTPS Port. Exclusive with [default_https_port] Enter TCP port number ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+						MarkdownDescription: "HTTPS Port. Enter TCP port number",
 						Optional: true,
 					},
 				},
@@ -349,15 +349,15 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 										Optional: true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 										Optional: true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
 									},
 								},
@@ -376,11 +376,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -431,7 +431,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -464,11 +464,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -519,7 +519,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -552,11 +552,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -607,7 +607,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},
@@ -640,11 +640,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.min_items: 1",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -695,7 +695,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
 										Optional: true,
 									},
 								},

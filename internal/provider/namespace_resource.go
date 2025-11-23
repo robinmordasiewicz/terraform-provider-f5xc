@@ -46,7 +46,7 @@ func (r *NamespaceResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *NamespaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Creates a new namespace. Name of the object is name of the name space.",
+		MarkdownDescription: "Manages new namespace. Name of the object is name of the name space. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Namespace. Must be unique within the namespace.",

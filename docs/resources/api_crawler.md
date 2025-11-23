@@ -2,12 +2,12 @@
 page_title: "f5xc_api_crawler Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a APICrawler in F5 Distributed Cloud.
+  Manages a APICrawler resource in F5 Distributed Cloud.
 ---
 
 # f5xc_api_crawler (Resource)
 
-Manages a APICrawler in F5 Distributed Cloud.
+Manages a APICrawler resource in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

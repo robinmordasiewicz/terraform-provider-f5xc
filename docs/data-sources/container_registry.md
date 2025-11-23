@@ -2,12 +2,12 @@
 page_title: "f5xc_container_registry Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Shape of Container Registry
+  Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.
 ---
 
 # f5xc_container_registry (Data Source)
 
-Shape of Container Registry
+Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

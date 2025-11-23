@@ -42,7 +42,7 @@ func (d *AppTypeDataSource) Metadata(ctx context.Context, req datasource.Metadat
 
 func (d *AppTypeDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create App type will create the configuration in namespace metadata.namespace",
+		MarkdownDescription: "Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

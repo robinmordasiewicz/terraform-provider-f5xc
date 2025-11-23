@@ -52,7 +52,7 @@ func (r *ClusterResource) Metadata(ctx context.Context, req resource.MetadataReq
 
 func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create cluster will create the object in the storage backend for namespace metadata.namespace",
+		MarkdownDescription: "Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cluster. Must be unique within the namespace.",
@@ -86,7 +86,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"connection_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds ves.io.schema.rules.uint32.lte: 600000",
+				MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds",
 				Optional: true,
 			},
 			"endpoint_selection": schema.StringAttribute{
@@ -98,7 +98,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 			},
 			"http_idle_timeout": schema.Int64Attribute{
-				MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes. ves.io.schema.rules.uint32.lte: 600000",
+				MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes.",
 				Optional: true,
 			},
 			"loadbalancer_algorithm": schema.StringAttribute{
@@ -106,7 +106,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 			},
 			"panic_threshold": schema.Int64Attribute{
-				MarkdownDescription: "Panic threshold. Exclusive with [no_panic_threshold] Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status. ves.io.schema.rules.uint32.lte: 100",
+				MarkdownDescription: "Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status.",
 				Optional: true,
 			},
 		},
@@ -118,11 +118,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly.",
 				Attributes: map[string]schema.Attribute{
 					"connection_limit": schema.Int64Attribute{
-						MarkdownDescription: "Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit. ves.io.schema.rules.uint32.lte: 32768",
+						MarkdownDescription: "Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit.",
 						Optional: true,
 					},
 					"max_requests": schema.Int64Attribute{
-						MarkdownDescription: "Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count. ves.io.schema.rules.uint32.lte: 32768",
+						MarkdownDescription: "Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count.",
 						Optional: true,
 					},
 					"pending_requests": schema.Int64Attribute{
@@ -134,14 +134,14 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						Optional: true,
 					},
 					"retries": schema.Int64Attribute{
-						MarkdownDescription: "Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count. ves.io.schema.rules.uint32.lte: 32768",
+						MarkdownDescription: "Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count.",
 						Optional: true,
 					},
 				},
 
 			},
 			"default_subset": schema.SingleNestedBlock{
-				MarkdownDescription: "Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists. ves.io.schema.rules.map.max_pairs: 32",
+				MarkdownDescription: "Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists.",
 			},
 			"disable_proxy_protocol": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2] Empty. This can be used for messages where no values are needed",
@@ -151,7 +151,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"keys": schema.ListAttribute{
-							MarkdownDescription: "Keys. List of keys that define a cluster subset class. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 16",
+							MarkdownDescription: "Keys. List of keys that define a cluster subset class.",
 							Optional: true,
 							ElementType: types.StringType,
 						},
@@ -160,7 +160,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"endpoints": schema.ListNestedBlock{
-				MarkdownDescription: "Endpoints. List of references to all endpoint objects that belong to this cluster. ves.io.schema.rules.repeated.max_items: 32",
+				MarkdownDescription: "Endpoints. List of references to all endpoint objects that belong to this cluster.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -188,7 +188,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"health_checks": schema.ListNestedBlock{
-				MarkdownDescription: "Health Checks. List of references to healthcheck object for this cluster. ves.io.schema.rules.repeated.max_items: 4",
+				MarkdownDescription: "Health Checks. List of references to healthcheck object for this cluster.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
@@ -259,23 +259,23 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i...",
 				Attributes: map[string]schema.Attribute{
 					"base_ejection_time": schema.Int64Attribute{
-						MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds. ves.io.schema.rules.uint32.lte: 1800000",
+						MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds.",
 						Optional: true,
 					},
 					"consecutive_5xx": schema.Int64Attribute{
-						MarkdownDescription: "Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to 5. ves.io.schema.rules.uint32.lte: 1024",
+						MarkdownDescription: "Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to 5.",
 						Optional: true,
 					},
 					"consecutive_gateway_failure": schema.Int64Attribute{
-						MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to 5. ves.io.schema.rules.uint3...",
+						MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to 5.",
 						Optional: true,
 					},
 					"interval": schema.Int64Attribute{
-						MarkdownDescription: "Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds. ves.io.schema.rules.uint32.lte: 600000",
+						MarkdownDescription: "Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds.",
 						Optional: true,
 					},
 					"max_ejection_percent": schema.Int64Attribute{
-						MarkdownDescription: "Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value. ves.io.schema.rules.uint32.lte: 100",
+						MarkdownDescription: "Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value.",
 						Optional: true,
 					},
 				},
@@ -291,11 +291,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "Upstream TLS Parameters. TLS configuration for upstream connections",
 				Attributes: map[string]schema.Attribute{
 					"max_session_keys": schema.Int64Attribute{
-						MarkdownDescription: "Max Session Keys Cached. Exclusive with [default_session_key_caching disable_session_key_caching] x-example:'25' Number of session keys that are cached. ves.io.schema.rules.uint32.gte: 2 ves.io.schema.rules.uint32.lte: 64",
+						MarkdownDescription: "Max Session Keys Cached. x-example:'25' Number of session keys that are cached.",
 						Optional: true,
 					},
 					"sni": schema.StringAttribute{
-						MarkdownDescription: "SNI Value. Exclusive with [disable_sni use_host_header_as_sni] SNI value to be used. ves.io.schema.rules.string.hostname: true ves.io.schema.rules.string.max_len: 256",
+						MarkdownDescription: "SNI Value. SNI value to be used.",
 						Optional: true,
 					},
 				},
@@ -319,7 +319,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 						Blocks: map[string]schema.Block{
 							"certificates": schema.ListNestedBlock{
-								MarkdownDescription: "Client Certificate. Client TLS Certificate required for mTLS authentication Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 1 ves.io.schema.rules.string.min_len: 1",
+								MarkdownDescription: "Client Certificate. Client TLS Certificate required for mTLS authentication",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
@@ -353,7 +353,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
 										Optional: true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
@@ -393,7 +393,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.certificate_url: true ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
@@ -425,7 +425,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 										Optional: true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Exclusive with [trusted_ca] Inline Root CA Certificate ves.io.schema.rules.string.max_bytes: 131072 ves.io.schema.rules.string.truststore_url: true",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
 										Optional: true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{

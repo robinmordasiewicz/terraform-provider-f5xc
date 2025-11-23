@@ -2,12 +2,12 @@
 page_title: "f5xc_udp_loadbalancer Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Shape of the UDP load balancer create specification
+  Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 ---
 
 # f5xc_udp_loadbalancer (Data Source)
 
-Shape of the UDP load balancer create specification
+Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

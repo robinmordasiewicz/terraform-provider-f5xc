@@ -47,7 +47,7 @@ func (r *TrustedCaListResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *TrustedCaListResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Root CA Certificate specification",
+		MarkdownDescription: "Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TrustedCaList. Must be unique within the namespace.",
@@ -81,7 +81,7 @@ func (r *TrustedCaListResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"trusted_ca_url": schema.StringAttribute{
-				MarkdownDescription: "Root CA Certificate. Trusted CA certificates for validating certificates ves.io.schema.rules.string.max_len: 512000 ves.io.schema.rules.string.truststore_url: true",
+				MarkdownDescription: "Root CA Certificate. Trusted CA certificates for validating certificates",
 				Optional: true,
 			},
 		},

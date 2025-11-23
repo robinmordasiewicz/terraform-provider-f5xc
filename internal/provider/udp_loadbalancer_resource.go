@@ -52,7 +52,7 @@ func (r *UDPLoadBalancerResource) Metadata(ctx context.Context, req resource.Met
 
 func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the UDP load balancer create specification",
+		MarkdownDescription: "Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the UDPLoadBalancer. Must be unique within the namespace.",
@@ -90,7 +90,7 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 			},
 			"domains": schema.ListAttribute{
-				MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to this load balancer. ves.io.schema.rules.repeated.items.string.hostname: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to this load balancer.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -99,15 +99,15 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 			},
 			"idle_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds. ves.io.schema.rules.uint32.lte: 30000",
+				MarkdownDescription: "Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds.",
 				Optional: true,
 			},
 			"listen_port": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: listen_port, port_ranges] Listen Port. Exclusive with [port_ranges] Listen Port for this load balancer ves.io.schema.rules.uint32.lte: 65535",
+				MarkdownDescription: "[OneOf: listen_port, port_ranges] Listen Port. Listen Port for this load balancer",
 				Optional: true,
 			},
 			"port_ranges": schema.StringAttribute{
-				MarkdownDescription: "Port Ranges. Exclusive with [listen_port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.max_ports: 64 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.unique_port_range_list: true",
+				MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 				Optional: true,
 			},
 		},
@@ -118,15 +118,15 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_where": schema.ListNestedBlock{
-						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32 ves.io.schema.rules.repeated.min_items: 1 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"port": schema.Int64Attribute{
-									MarkdownDescription: "Listen Port. Exclusive with [port_ranges use_default_port] Port to Listen. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 65535",
+									MarkdownDescription: "Listen Port. Port to Listen.",
 									Optional: true,
 								},
 								"port_ranges": schema.StringAttribute{
-									MarkdownDescription: "Listen Port Ranges. Exclusive with [port use_default_port] A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'. ves.io.schema.rules.string.max_len: 512 ves.io.schema.rules.string.max_ports: 64 ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.unique_port_range_list: true",
+									MarkdownDescription: "Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional: true,
 								},
 							},
@@ -145,7 +145,7 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Site. This defines a reference to a CE site along with network type and an optional ip address where a load balancer could be advertised",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
 											Optional: true,
 										},
 										"network": schema.StringAttribute{
@@ -166,11 +166,11 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Virtual Network. Parameters to advertise on a given virtual network",
 									Attributes: map[string]schema.Attribute{
 										"specific_v6_vip": schema.StringAttribute{
-											MarkdownDescription: "Specific V6 VIP. Exclusive with [default_v6_vip] Use given IPV6 address as VIP on virtual Network ves.io.schema.rules.string.ipv6: true",
+											MarkdownDescription: "Specific V6 VIP. Use given IPV6 address as VIP on virtual Network",
 											Optional: true,
 										},
 										"specific_vip": schema.StringAttribute{
-											MarkdownDescription: "Specific V4 VIP. Exclusive with [default_vip] Use given IPV4 address as VIP on virtual Network ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "Specific V4 VIP. Use given IPV4 address as VIP on virtual Network",
 											Optional: true,
 										},
 									},
@@ -204,7 +204,7 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Virtual Site with Specified VIP. This defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IP Address. Use given IP address as VIP on the site ves.io.schema.rules.string.ipv4: true",
+											MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
 											Optional: true,
 										},
 										"network": schema.StringAttribute{
@@ -246,15 +246,15 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 								Optional: true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 								Optional: true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
 							},
 						},
@@ -278,11 +278,11 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"origin_pools_weights": schema.ListNestedBlock{
-				MarkdownDescription: "Origin Pools. Origin pools with weights and priorities used for this load balancer. ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Origin Pools. Origin pools with weights and priorities used for this load balancer.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"priority": schema.Int64Attribute{
-							MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority. ves.io.schema.rules.uint32.lte: 32",
+							MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority.",
 							Optional: true,
 						},
 						"weight": schema.Int64Attribute{
@@ -295,15 +295,15 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},
@@ -315,15 +315,15 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 									Optional: true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 									Optional: true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
 								},
 							},

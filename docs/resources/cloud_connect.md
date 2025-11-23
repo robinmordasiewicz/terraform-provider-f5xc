@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_connect Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Shape of the Cloud Connect specification
+  Manages a CloudConnect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 ---
 
 # f5xc_cloud_connect (Resource)
 
-Shape of the Cloud Connect specification
+Manages a CloudConnect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

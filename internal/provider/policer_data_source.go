@@ -42,7 +42,7 @@ func (d *PolicerDataSource) Metadata(ctx context.Context, req datasource.Metadat
 
 func (d *PolicerDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a new policer with traffic rate limits",
+		MarkdownDescription: "Manages new policer with traffic rate limits in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

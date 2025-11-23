@@ -46,7 +46,7 @@ func (r *APICrawlerResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *APICrawlerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a APICrawler in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a APICrawler resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APICrawler. Must be unique within the namespace.",
@@ -82,11 +82,11 @@ func (r *APICrawlerResource) Schema(ctx context.Context, req resource.SchemaRequ
 		},
 		Blocks: map[string]schema.Block{
 			"domains": schema.ListNestedBlock{
-				MarkdownDescription: "API Crawler. API Crawler Configuration Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 32",
+				MarkdownDescription: "API Crawler. API Crawler Configuration",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"domain": schema.StringAttribute{
-							MarkdownDescription: "Domains to Crawl. Select the domain to execute API Crawling with given credentials. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_len: 256 ves.io.schema.rules.string.vh_domain: true",
+							MarkdownDescription: "Domains to Crawl. Select the domain to execute API Crawling with given credentials.",
 							Optional: true,
 						},
 					},
@@ -95,7 +95,7 @@ func (r *APICrawlerResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "Simple Login.",
 							Attributes: map[string]schema.Attribute{
 								"user": schema.StringAttribute{
-									MarkdownDescription: "User. Enter the username to assign credentials for the selected domain to crawl ves.io.schema.rules.string.max_len: 64",
+									MarkdownDescription: "User. Enter the username to assign credentials for the selected domain to crawl",
 									Optional: true,
 								},
 							},

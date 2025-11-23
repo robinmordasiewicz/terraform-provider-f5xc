@@ -46,7 +46,7 @@ func (r *ProtocolPolicerResource) Metadata(ctx context.Context, req resource.Met
 
 func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create a protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits",
+		MarkdownDescription: "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ProtocolPolicer. Must be unique within the namespace.",
@@ -82,13 +82,13 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 		},
 		Blocks: map[string]schema.Block{
 			"protocol_policer": schema.ListNestedBlock{
-				MarkdownDescription: "Protocol Policer. List of L4 protocol match condition and associated traffic rate limits ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+				MarkdownDescription: "Protocol Policer. List of L4 protocol match condition and associated traffic rate limits",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 					},
 					Blocks: map[string]schema.Block{
 						"policer": schema.ListNestedBlock{
-							MarkdownDescription: "Policer. Reference to policer object to apply traffic rate limits Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 1 ves.io.schema.rules.repeated.min_items: 1",
+							MarkdownDescription: "Policer. Reference to policer object to apply traffic rate limits",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"kind": schema.StringAttribute{

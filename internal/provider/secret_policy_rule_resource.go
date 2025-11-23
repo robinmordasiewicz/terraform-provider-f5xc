@@ -48,7 +48,7 @@ func (r *SecretPolicyRuleResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Create secret_policy_rule creates a new object in storage backend for metadata.namespace.",
+		MarkdownDescription: "Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SecretPolicyRule. Must be unique within the namespace.",
@@ -86,7 +86,7 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 			},
 			"client_name": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: client_name, client_name_matcher, client_selector] Client Name. Exclusive with [client_name_matcher client_selector] The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name ves.io.schema.rules.string.max_bytes: 256",
+				MarkdownDescription: "[OneOf: client_name, client_name_matcher, client_selector] Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name",
 				Optional: true,
 			},
 		},
@@ -95,12 +95,12 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 				Attributes: map[string]schema.Attribute{
 					"exact_values": schema.ListAttribute{
-						MarkdownDescription: "Exact Values. A list of exact values to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.max_items: 64 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"regex_values": schema.ListAttribute{
-						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against. ves.io.schema.rules.repeated.items.string.max_bytes: 256 ves.io.schema.rules.repeated.items.string.not_empty: true ves.io.schema.rules.repeated.items.string.regex: true ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -111,7 +111,7 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 						Optional: true,
 						ElementType: types.StringType,
 					},

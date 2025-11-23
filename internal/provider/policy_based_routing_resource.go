@@ -46,7 +46,7 @@ func (r *PolicyBasedRoutingResource) Metadata(ctx context.Context, req resource.
 
 func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the Network Policy based routing create specification",
+		MarkdownDescription: "Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the PolicyBasedRouting. Must be unique within the namespace.",
@@ -87,7 +87,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 				},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_pbr_rules": schema.ListNestedBlock{
-						MarkdownDescription: "L3/L4 routing rules. Network(L3/L4) routing policy rules. ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true",
+						MarkdownDescription: "L3/L4 routing rules. Network(L3/L4) routing policy rules.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 							},
@@ -99,19 +99,19 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 								},
 								"forwarding_class_list": schema.ListNestedBlock{
-									MarkdownDescription: "Forwarding Class. Ordered list of forwarding Class to be used if no rule match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.min_items: 1",
+									MarkdownDescription: "Forwarding Class. Ordered list of forwarding Class to be used if no rule match.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 												Optional: true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 												Optional: true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
 											},
 										},
@@ -123,7 +123,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 									Blocks: map[string]schema.Block{
 										"http_list": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP URLs. URLs for HTTP connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -134,15 +134,15 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 											Optional: true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 											Optional: true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
 										},
 									},
@@ -151,7 +151,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -161,11 +161,11 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -174,7 +174,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -186,7 +186,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 									Blocks: map[string]schema.Block{
 										"tls_list": schema.ListNestedBlock{
-											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections ves.io.schema.rules.repeated.max_items: 16 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -200,19 +200,19 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 
 			},
 			"forwarding_class_list": schema.ListNestedBlock{
-				MarkdownDescription: "Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.min_items: 1",
+				MarkdownDescription: "Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 							Optional: true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 							Optional: true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
 						},
 					},
@@ -231,18 +231,18 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar...",
 						Attributes: map[string]schema.Attribute{
 							"expressions": schema.ListAttribute{
-								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.items.string.k8s_label_selector: true ves.io.schema.rules.repeated.items.string.max_len: 4096 ves.io.schema.rules.repeated.items.string.min_len: 1 ves.io.schema.rules.repeated.max_items: 1",
+								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
 						},
 					},
 					"network_pbr_rules": schema.ListNestedBlock{
-						MarkdownDescription: "L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique_metadata_name: true",
+						MarkdownDescription: "L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
-									MarkdownDescription: "DNS Name to IP. Exclusive with [any ip_prefix_set prefix_list] Resolve hostname to get the IP ves.io.schema.rules.string.hostname: true",
+									MarkdownDescription: "DNS Name to IP. Resolve hostname to get the IP",
 									Optional: true,
 								},
 							},
@@ -270,19 +270,19 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"forwarding_class_list": schema.ListNestedBlock{
-									MarkdownDescription: "Forwarding Classes. Ordered list of forwarding Class to be used if rule match. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.repeated.max_items: 3 ves.io.schema.rules.repeated.min_items: 1",
+									MarkdownDescription: "Forwarding Classes. Ordered list of forwarding Class to be used if rule match.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.max_bytes: 128 ves.io.schema.rules.string.min_bytes: 1",
+												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
 												Optional: true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace. ves.io.schema.rules.string.max_bytes: 64",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
 												Optional: true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant. ves.io.schema.rules.string.max_bytes: 64",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
 											},
 										},
@@ -294,7 +294,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 									Blocks: map[string]schema.Block{
 										"ref": schema.ListNestedBlock{
-											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects. ves.io.schema.rules.repeated.max_items: 1",
+											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{},
 											},
@@ -305,11 +305,11 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description. ves.io.schema.rules.string.max_len: 256",
+											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format. Required: YES ves.io.schema.rules.message.required: true ves.io.schema.rules.string.min_len: 1 ves.io.schema.rules.string.ves_object_name: true",
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
 											Optional: true,
 										},
 									},
@@ -318,7 +318,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -328,7 +328,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Protocol and Port. Protocol and Port ranges",
 									Attributes: map[string]schema.Attribute{
 										"port_ranges": schema.ListAttribute{
-											MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 ves.io.schema.rules.repeated.items.string.port_range: true ves.io.schema.rules.repeated.max_items: 128",
+											MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -345,7 +345,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
-								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint ves.io.schema.rules.repeated.items.string.ipv4_prefix: true ves.io.schema.rules.repeated.max_items: 128 ves.io.schema.rules.repeated.unique: true",
+								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
 								Optional: true,
 								ElementType: types.StringType,
 							},

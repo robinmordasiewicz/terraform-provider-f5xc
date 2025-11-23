@@ -2,12 +2,12 @@
 page_title: "f5xc_api_testing Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  Manages a APITesting in F5 Distributed Cloud.
+  Manages a APITesting resource in F5 Distributed Cloud.
 ---
 
 # f5xc_api_testing (Resource)
 
-Manages a APITesting in F5 Distributed Cloud.
+Manages a APITesting resource in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 <a id="nestedblock--domains"></a>
 ### Domains
 
-`allow_destructive_methods` - (Optional) Run API tests for destructive methods (e.g., DELETE, PUT).. Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data (`Bool`).
+`allow_destructive_methods` - (Optional) Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data (`Bool`).
 
 `credentials` - (Optional) Credentials. Add credentials for API testing to use in the selected environment. See [Credentials](#nestedblock--domains--credentials) below.
 

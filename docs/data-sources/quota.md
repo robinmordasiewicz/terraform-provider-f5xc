@@ -2,12 +2,12 @@
 page_title: "f5xc_quota Data Source - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  Create quota creates a given object from storage backend for metadata.namespace.
+  Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_quota (Data Source)
 
-Create quota creates a given object from storage backend for metadata.namespace.
+Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

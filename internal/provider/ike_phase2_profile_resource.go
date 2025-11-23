@@ -48,7 +48,7 @@ func (r *IKEPhase2ProfileResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the IKE Phase2 profile specification",
+		MarkdownDescription: "Manages a IKEPhase2Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IKEPhase2Profile. Must be unique within the namespace.",
@@ -82,12 +82,12 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"authentication_algos": schema.ListAttribute{
-				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"encryption_algos": schema.ListAttribute{
-				MarkdownDescription: "Encryption Algorithms. Choose one or more encryption algorithms. Required: YES ves.io.schema.rules.message.required: true",
+				MarkdownDescription: "Encryption Algorithms. Choose one or more encryption algorithms.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -97,7 +97,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: dh_group_set, disable_pfs] Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile.",
 				Attributes: map[string]schema.Attribute{
 					"dh_groups": schema.ListAttribute{
-						MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. Required: YES ves.io.schema.rules.message.required: true",
+						MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -111,7 +111,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime] Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 1 ves.io.schema.rules.uint32.lte: 5",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},
@@ -121,7 +121,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Minutes. Set IKE Key Lifetime in minutes",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
-						MarkdownDescription: "Duration. ves.io.schema.rules.uint32.gte: 10 ves.io.schema.rules.uint32.lte: 300",
+						MarkdownDescription: "Duration.",
 						Optional: true,
 					},
 				},

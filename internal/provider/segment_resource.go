@@ -46,7 +46,7 @@ func (r *SegmentResource) Metadata(ctx context.Context, req resource.MetadataReq
 
 func (r *SegmentResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Shape of the segment specification",
+		MarkdownDescription: "Manages a Segment resource in F5 Distributed Cloud for segment configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Segment. Must be unique within the namespace.",

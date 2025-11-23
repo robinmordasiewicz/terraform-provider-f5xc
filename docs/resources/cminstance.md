@@ -32,18 +32,18 @@ resource "f5xc_cminstance" "example" {
   }
 
   # Resource-specific configuration
-    # Secret. SecretType is used in an object to indicate a sen...
-    api_token {
-      # Configure api_token settings
-    }
-    # Blindfold Secret. BlindfoldSecretInfoType specifies infor...
-    blindfold_secret_info {
-      # Configure blindfold_secret_info settings
-    }
-    # In-Clear Secret. ClearSecretInfoType specifies informatio...
-    clear_secret_info {
-      # Configure clear_secret_info settings
-    }
+  # Secret. SecretType is used in an object to indicate a sen...
+  api_token {
+    # Configure api_token settings
+  }
+  # Blindfold Secret. BlindfoldSecretInfoType specifies infor...
+  blindfold_secret_info {
+    # Configure blindfold_secret_info settings
+  }
+  # In-Clear Secret. ClearSecretInfoType specifies informatio...
+  clear_secret_info {
+    # Configure clear_secret_info settings
+  }
 }
 ```
 
@@ -52,29 +52,105 @@ resource "f5xc_cminstance" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Cminstance. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Cminstance will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`api_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Api Token](#api-token) below for details.
+
+`ip` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [Ip](#ip) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#password) below for details.
+
+`port` - (Optional) Port. Port of the Central Manager instance to connect to (`Number`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`username` - (Optional) Username. Username for the Central Manager instance (`String`).
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--api_token"></a>
 
+### Api Token
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--api_token--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--api_token--clear_secret_info) below.
+
 <a id="nestedblock--api_token--blindfold_secret_info"></a>
+
+### Api Token Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--api_token--clear_secret_info"></a>
 
+### Api Token Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--ip"></a>
+
+### Ip
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
 
 <a id="nestedblock--password"></a>
 
+### Password
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--password--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--password--clear_secret_info) below.
+
 <a id="nestedblock--password--blindfold_secret_info"></a>
+
+### Password Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--password--clear_secret_info"></a>
 
+### Password Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

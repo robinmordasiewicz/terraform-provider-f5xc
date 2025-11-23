@@ -32,18 +32,18 @@ resource "f5xc_cloud_connect" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: aws_tgw_site, azure_vnet_site] AWS TGW Site Type....
-    aws_tgw_site {
-      # Configure aws_tgw_site settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    cred {
-      # Configure cred settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    site {
-      # Configure site settings
-    }
+  # [OneOf: aws_tgw_site, azure_vnet_site] AWS TGW Site Type....
+  aws_tgw_site {
+    # Configure aws_tgw_site settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  cred {
+    # Configure cred settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  site {
+    # Configure site settings
+  }
 }
 ```
 
@@ -52,51 +52,177 @@ resource "f5xc_cloud_connect" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the CloudConnect. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the CloudConnect will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "aws_tgw_site, azure_vnet_site" must be set.
+
+`aws_tgw_site` - (Optional) AWS TGW Site Type. Cloud Connect AWS TGW Site Type. See [Aws Tgw Site](#aws-tgw-site) below for details.
+
+`azure_vnet_site` - (Optional) Azure VNET Site Type. Cloud Connect Azure VNET Site Type. See [Azure Vnet Site](#azure-vnet-site) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`segment` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Segment](#segment) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--aws_tgw_site"></a>
 
+### Aws Tgw Site
+
+`cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cred](#nestedblock--aws_tgw_site--cred) below.
+
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--aws_tgw_site--site) below.
+
+`vpc_attachments` - (Optional) VPC Attachments. See [Vpc Attachments](#nestedblock--aws_tgw_site--vpc_attachments) below.
+
 <a id="nestedblock--aws_tgw_site--cred"></a>
+
+### Aws Tgw Site Cred
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--aws_tgw_site--site"></a>
 
+### Aws Tgw Site Site
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--aws_tgw_site--vpc_attachments"></a>
+
+### Aws Tgw Site Vpc Attachments
+
+`vpc_list` - (Optional) VPC List. See [Vpc List](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list) below.
 
 <a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list"></a>
 
+### Aws Tgw Site Vpc Attachments Vpc List
+
+`custom_routing` - (Optional) AWS Route Table List. AWS Route Table List. See [Custom Routing](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--custom_routing) below.
+
+`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice. See [Default Route](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--default_route) below.
+
+`labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall. See [Labels](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--labels) below.
+
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--manual_routing) below.
+
+`vpc_id` - (Optional) VPC ID. Enter the VPC ID of the VPC to be attached (`String`).
+
 <a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--custom_routing"></a>
+
+### Aws Tgw Site Vpc Attachments Vpc List Custom Routing
 
 <a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--default_route"></a>
 
+### Aws Tgw Site Vpc Attachments Vpc List Default Route
+
 <a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--labels"></a>
+
+### Aws Tgw Site Vpc Attachments Vpc List Labels
 
 <a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--manual_routing"></a>
 
+### Aws Tgw Site Vpc Attachments Vpc List Manual Routing
+
 <a id="nestedblock--azure_vnet_site"></a>
+
+### Azure Vnet Site
+
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--azure_vnet_site--site) below.
+
+`vnet_attachments` - (Optional) VNET Attachments. See [Vnet Attachments](#nestedblock--azure_vnet_site--vnet_attachments) below.
 
 <a id="nestedblock--azure_vnet_site--site"></a>
 
+### Azure Vnet Site Site
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--azure_vnet_site--vnet_attachments"></a>
+
+### Azure Vnet Site Vnet Attachments
+
+`vnet_list` - (Optional) VNET List. See [Vnet List](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list) below.
 
 <a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list"></a>
 
+### Azure Vnet Site Vnet Attachments Vnet List
+
+`custom_routing` - (Optional) List Azure Route Table with Static Route. List Azure Route Table with Static Route. See [Custom Routing](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--custom_routing) below.
+
+`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice. See [Default Route](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--default_route) below.
+
+`labels` - (Optional) Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies. See [Labels](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--labels) below.
+
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--manual_routing) below.
+
+`subscription_id` - (Optional) Subscription ID. Enter the Subscription ID of the VNET to be attached (`String`).
+
+`vnet_id` - (Optional) VNET ID. Enter the vnet ID of the VNET to be attached in format /<resource-group-name>/<vnet-name> (`String`).
+
 <a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--custom_routing"></a>
+
+### Azure Vnet Site Vnet Attachments Vnet List Custom Routing
 
 <a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--default_route"></a>
 
+### Azure Vnet Site Vnet Attachments Vnet List Default Route
+
 <a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--labels"></a>
+
+### Azure Vnet Site Vnet Attachments Vnet List Labels
 
 <a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--manual_routing"></a>
 
+### Azure Vnet Site Vnet Attachments Vnet List Manual Routing
+
 <a id="nestedblock--segment"></a>
 
+### Segment
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

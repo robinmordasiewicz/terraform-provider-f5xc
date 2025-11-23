@@ -32,18 +32,18 @@ resource "f5xc_endpoint" "example" {
   }
 
   # Resource-specific configuration
-    # DNS Name Advanced Type. Specifies name and TTL used for D...
-    dns_name_advanced {
-      # Configure dns_name_advanced settings
-    }
-    # Service Info Type. Specifies whether endpoint service is ...
-    service_info {
-      # Configure service_info settings
-    }
-    # Label Selector. This type can be used to establish a 'sel...
-    service_selector {
-      # Configure service_selector settings
-    }
+  # DNS Name Advanced Type. Specifies name and TTL used for D...
+  dns_name_advanced {
+    # Configure dns_name_advanced settings
+  }
+  # Service Info Type. Specifies whether endpoint service is ...
+  service_info {
+    # Configure service_info settings
+  }
+  # Label Selector. This type can be used to establish a 'sel...
+  service_selector {
+    # Configure service_selector settings
+  }
 }
 ```
 
@@ -52,49 +52,197 @@ resource "f5xc_endpoint" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Endpoint. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Endpoint will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "dns_name, dns_name_advanced, ip, service_info" must be set.
+
+`dns_name` - (Optional) Endpoint Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`dns_name_advanced` - (Optional) DNS Name Advanced Type. Specifies name and TTL used for DNS resolution. See [Dns Name Advanced](#dns-name-advanced) below for details.
+
+`health_check_port` - (Optional) Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port (`Number`).
+
+`ip` - (Optional) Endpoint IP Address. Endpoint is reachable at the given ipv4/ipv6 address (`String`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`port` - (Optional) Port. Endpoint service is available on this port (`Number`).
+
+`protocol` - (Optional) Protocol. Endpoint protocol. Default is TCP. Both TCP and UDP protocols are supported (`String`).
+
+`service_info` - (Optional) Service Info Type. Specifies whether endpoint service is discovered by name or labels. See [Service Info](#service-info) below for details.
+
+`snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#snat-pool) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`where` - (Optional) Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using fol.... See [Where](#where) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--dns_name_advanced"></a>
 
+### Dns Name Advanced
+
+`name` - (Optional) Endpoint DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds (`Number`).
+
 <a id="nestedblock--service_info"></a>
+
+### Service Info
+
+`discovery_type` - (Optional) Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic ... (`String`).
+
+`service_name` - (Optional) Service Name. Name of the service to discover with an optional namespace and cluster identifier. The format is service_name (`String`).
+
+`service_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Service Selector](#nestedblock--service_info--service_selector) below.
 
 <a id="nestedblock--service_info--service_selector"></a>
 
+### Service Info Service Selector
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
 <a id="nestedblock--snat_pool"></a>
+
+### Snat Pool
+
+`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#nestedblock--snat_pool--no_snat_pool) below.
+
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#nestedblock--snat_pool--snat_pool) below.
 
 <a id="nestedblock--snat_pool--no_snat_pool"></a>
 
+### Snat Pool No Snat Pool
+
 <a id="nestedblock--snat_pool--snat_pool"></a>
+
+### Snat Pool Snat Pool
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
 <a id="nestedblock--where"></a>
+
+### Where
+
+`site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#nestedblock--where--site) below.
+
+`virtual_network` - (Optional) Network Reference. This specifies a direct reference to a network configuration object. See [Virtual Network](#nestedblock--where--virtual_network) below.
+
+`virtual_site` - (Optional) Virtual Site. A reference to virtual_site object. See [Virtual Site](#nestedblock--where--virtual_site) below.
 
 <a id="nestedblock--where--site"></a>
 
+### Where Site
+
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet Vip](#nestedblock--where--site--disable_internet_vip) below.
+
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet Vip](#nestedblock--where--site--enable_internet_vip) below.
+
+`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
+
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
+
 <a id="nestedblock--where--site--disable_internet_vip"></a>
+
+### Where Site Disable Internet Vip
 
 <a id="nestedblock--where--site--enable_internet_vip"></a>
 
+### Where Site Enable Internet Vip
+
 <a id="nestedblock--where--site--ref"></a>
+
+### Where Site Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--where--virtual_network"></a>
 
+### Where Virtual Network
+
+`ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#nestedblock--where--virtual_network--ref) below.
+
 <a id="nestedblock--where--virtual_network--ref"></a>
+
+### Where Virtual Network Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--where--virtual_site"></a>
 
+### Where Virtual Site
+
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet Vip](#nestedblock--where--virtual_site--disable_internet_vip) below.
+
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet Vip](#nestedblock--where--virtual_site--enable_internet_vip) below.
+
+`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
+
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
+
 <a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
+
+### Where Virtual Site Disable Internet Vip
 
 <a id="nestedblock--where--virtual_site--enable_internet_vip"></a>
 
+### Where Virtual Site Enable Internet Vip
+
 <a id="nestedblock--where--virtual_site--ref"></a>
+
+### Where Virtual Site Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 ## Import
 

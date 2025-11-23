@@ -214,6 +214,33 @@ func main() {
 			}
 		}
 	}
+
+	// Process index.md for markdown compliance
+	if err := transformIndexDoc("docs/index.md"); err != nil {
+		fmt.Fprintf(os.Stderr, "Error transforming docs/index.md: %v\n", err)
+	} else {
+		fmt.Printf("Transformed: docs/index.md\n")
+	}
+}
+
+// transformIndexDoc fixes markdown issues in the provider index documentation
+func transformIndexDoc(filePath string) error {
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		return err
+	}
+
+	text := string(content)
+
+	// Fix bare URLs by wrapping them in backticks (MD034 compliance)
+	// Match URLs that are not already in backticks, links, or angle brackets
+	bareURLRegex := regexp.MustCompile(`(\s)(https?://[^\s\)\]\x60<>]+)([.\s])`)
+	text = bareURLRegex.ReplaceAllString(text, "$1`$2`$3")
+
+	// Normalize multiple blank lines
+	text = normalizeBlankLines(text)
+
+	return os.WriteFile(filePath, []byte(text), 0644)
 }
 
 func transformDoc(filePath string) error {
@@ -488,7 +515,30 @@ func transformDoc(filePath string) error {
 
 	// Normalize multiple consecutive blank lines to single blank lines
 	result := normalizeBlankLines(output.String())
+
+	// Final pass: fix any remaining bare URLs not in backticks (MD034 compliance)
+	result = fixBareURLs(result)
+
 	return os.WriteFile(filePath, []byte(result), 0644)
+}
+
+// fixBareURLs wraps bare URLs in backticks for MD034 compliance
+func fixBareURLs(content string) string {
+	// Fix incomplete backtick patterns where URL has opening backtick but no closing one
+	// Pattern: `https://... (no closing backtick before space or end)
+	incompleteBacktickRegex := regexp.MustCompile("`(https?://[^`\\s]+)(\\s)")
+	content = incompleteBacktickRegex.ReplaceAllString(content, "`$1`$2")
+
+	// Match URLs not already wrapped in backticks, angle brackets, or parentheses (markdown links)
+	// This handles URLs that appear mid-line or at specific positions
+	bareURLRegex := regexp.MustCompile("([^`\\(<])\\b(https?://[^\\s\\)\\]`<>]+)")
+	content = bareURLRegex.ReplaceAllString(content, "$1`$2`")
+
+	// Also fix www. patterns
+	wwwRegex := regexp.MustCompile("([^`\\(<])\\b(www\\.[^\\s\\)\\]`<>]+)")
+	content = wwwRegex.ReplaceAllString(content, "$1`$2`")
+
+	return content
 }
 
 // normalizeBlankLines removes multiple consecutive blank lines
@@ -519,6 +569,21 @@ func cleanDescription(desc, attrPath string) string {
 	// Remove "Exclusive with [xxx]" patterns
 	exclusiveRegex := regexp.MustCompile(`\s*Exclusive with\s*\[[^\]]*\]\s*`)
 	desc = exclusiveRegex.ReplaceAllString(desc, " ")
+
+	// Fix bare URLs by wrapping in backticks (MD034 compliance)
+	// Match URLs not already in backticks
+	bareURLRegex := regexp.MustCompile(`(^|[^` + "`" + `])(https?://[^\s\)\]\x60<>]+)`)
+	desc = bareURLRegex.ReplaceAllString(desc, "$1`$2`")
+
+	// Fix patterns like www.foo.com that look like URLs
+	wwwRegex := regexp.MustCompile(`(^|[^` + "`" + `])(www\.[^\s\)\]\x60<>]+)`)
+	desc = wwwRegex.ReplaceAllString(desc, "$1`$2`")
+
+	// Escape false-positive reference link patterns (MD052 compliance)
+	// Patterns like [+][country code] or [0-9][smhd] look like markdown reference links but aren't
+	// Escape them by adding backslash before the second opening bracket
+	falsePosRefRegex := regexp.MustCompile(`(\[[^\]]+\])(\[[^\]]+\])`)
+	desc = falsePosRefRegex.ReplaceAllString(desc, "$1\\$2")
 
 	// Clean up whitespace
 	desc = strings.TrimSpace(desc)

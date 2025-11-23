@@ -32,18 +32,18 @@ resource "f5xc_ike2" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: dh_group_set, disable_pfs] Diffie Hellman Groups....
-    dh_group_set {
-      # Configure dh_group_set settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    disable_pfs {
-      # Configure disable_pfs settings
-    }
-    # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
-    ike_keylifetime_hours {
-      # Configure ike_keylifetime_hours settings
-    }
+  # [OneOf: dh_group_set, disable_pfs] Diffie Hellman Groups....
+  dh_group_set {
+    # Configure dh_group_set settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  disable_pfs {
+    # Configure disable_pfs settings
+  }
+  # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
+  ike_keylifetime_hours {
+    # Configure ike_keylifetime_hours settings
+  }
 }
 ```
 
@@ -52,25 +52,77 @@ resource "f5xc_ike2" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Ike2. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Ike2 will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "dh_group_set, disable_pfs" must be set.
+
+`dh_group_set` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. See [Dh Group Set](#dh-group-set) below for details.
+
+`disable_pfs` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Pfs](#disable-pfs) below for details.
+
+> **Note:** One of the arguments from this list "ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime" must be set.
+
+`ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
+
+`ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--dh_group_set"></a>
 
+### Dh Group Set
+
+`dh_groups` - (Optional) Diffie Hellman Groups (`List`).
+
 <a id="nestedblock--disable_pfs"></a>
+
+### Disable Pfs
 
 <a id="nestedblock--ike_keylifetime_hours"></a>
 
+### Ike Keylifetime Hours
+
+`duration` - (Optional) Duration (`Number`).
+
 <a id="nestedblock--ike_keylifetime_minutes"></a>
+
+### Ike Keylifetime Minutes
+
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
 <a id="nestedblock--use_default_keylifetime"></a>
+
+### Use Default Keylifetime
 
 ## Import
 

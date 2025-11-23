@@ -32,14 +32,14 @@ resource "f5xc_sensitive_data_policy" "example" {
   }
 
   # Resource-specific configuration
-    # Defined Custom Sensitive Data Types. Select your custom d...
-    custom_data_types {
-      # Configure custom_data_types settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    custom_data_type_ref {
-      # Configure custom_data_type_ref settings
-    }
+  # Defined Custom Sensitive Data Types. Select your custom d...
+  custom_data_types {
+    # Configure custom_data_types settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  custom_data_type_ref {
+    # Configure custom_data_type_ref settings
+  }
 }
 ```
 
@@ -48,19 +48,59 @@ resource "f5xc_sensitive_data_policy" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the SensitiveDataPolicy. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the SensitiveDataPolicy will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`compliances` - (Optional) Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery (`List`).
+
+`custom_data_types` - (Optional) Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery. See [Custom Data Types](#custom-data-types) below for details.
+
+`disabled_predefined_data_types` - (Optional) Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery (`List`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--custom_data_types"></a>
 
+### Custom Data Types
+
+`custom_data_type_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Data Type Ref](#nestedblock--custom_data_types--custom_data_type_ref) below.
+
 <a id="nestedblock--custom_data_types--custom_data_type_ref"></a>
 
+### Custom Data Types Custom Data Type Ref
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

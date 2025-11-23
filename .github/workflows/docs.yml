@@ -50,6 +50,10 @@ jobs:
         run: |
           tfplugindocs generate
 
+      - name: Transform documentation for markdown compliance
+        run: |
+          go run tools/transform-docs.go
+
       - name: Check for changes
         id: changes
         run: |
@@ -79,6 +83,6 @@ jobs:
       - name: Fail if docs are out of date on PR
         if: steps.changes.outputs.changed == 'true' && github.event_name == 'pull_request'
         run: |
-          echo "::error::Provider documentation is out of date. Please run 'go generate ./...' or 'tfplugindocs generate' locally and commit the changes."
+          echo "::error::Provider documentation is out of date. Please run 'tfplugindocs generate && go run tools/transform-docs.go' locally and commit the changes."
           git diff docs/
           exit 1

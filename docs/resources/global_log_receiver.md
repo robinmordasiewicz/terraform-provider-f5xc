@@ -32,18 +32,18 @@ resource "f5xc_global_log_receiver" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: audit_logs, dns_logs, request_logs, security_even...
-    audit_logs {
-      # Configure audit_logs settings
-    }
-    # [OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiv...
-    aws_cloud_watch_receiver {
-      # Configure aws_cloud_watch_receiver settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    aws_cred {
-      # Configure aws_cred settings
-    }
+  # [OneOf: audit_logs, dns_logs, request_logs, security_even...
+  audit_logs {
+    # Configure audit_logs settings
+  }
+  # [OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiv...
+  aws_cloud_watch_receiver {
+    # Configure aws_cloud_watch_receiver settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  aws_cred {
+    # Configure aws_cred settings
+  }
 }
 ```
 
@@ -52,379 +52,1329 @@ resource "f5xc_global_log_receiver" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the GlobalLogReceiver. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the GlobalLogReceiver will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "audit_logs, dns_logs, request_logs, security_events" must be set.
+
+`audit_logs` - (Optional) Empty. This can be used for messages where no values are needed. See [Audit Logs](#audit-logs) below for details.
+
+> **Note:** One of the arguments from this list "aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver" must be set.
+
+`aws_cloud_watch_receiver` - (Optional) AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver. See [Aws Cloud Watch Receiver](#aws-cloud-watch-receiver) below for details.
+
+`azure_event_hubs_receiver` - (Optional) Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver. See [Azure Event Hubs Receiver](#azure-event-hubs-receiver) below for details.
+
+`azure_receiver` - (Optional) Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver. See [Azure Receiver](#azure-receiver) below for details.
+
+`datadog_receiver` - (Optional) Datadog Configuration. Configuration for Datadog endpoint. See [Datadog Receiver](#datadog-receiver) below for details.
+
+`dns_logs` - (Optional) Empty. This can be used for messages where no values are needed. See [Dns Logs](#dns-logs) below for details.
+
+`gcp_bucket_receiver` - (Optional) GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver. See [Gcp Bucket Receiver](#gcp-bucket-receiver) below for details.
+
+`http_receiver` - (Optional) HTTP Configuration. Configuration for HTTP endpoint. See [Http Receiver](#http-receiver) below for details.
+
+`kafka_receiver` - (Optional) Kafka Configuration. Kafka Configuration for Global Log Receiver. See [Kafka Receiver](#kafka-receiver) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`new_relic_receiver` - (Optional) NewRelic Configuration. Configuration for NewRelic endpoint. See [New Relic Receiver](#new-relic-receiver) below for details.
+
+> **Note:** One of the arguments from this list "ns_all, ns_current, ns_list" must be set.
+
+`ns_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Ns All](#ns-all) below for details.
+
+`ns_current` - (Optional) Empty. This can be used for messages where no values are needed. See [Ns Current](#ns-current) below for details.
+
+`ns_list` - (Optional) Namespace List. Namespace List. See [Ns List](#ns-list) below for details.
+
+`qradar_receiver` - (Optional) IBM QRadar Configuration. Configuration for IBM QRadar endpoint. See [Qradar Receiver](#qradar-receiver) below for details.
+
+`request_logs` - (Optional) Empty. This can be used for messages where no values are needed. See [Request Logs](#request-logs) below for details.
+
+`s3_receiver` - (Optional) S3 Configuration. S3 Configuration for Global Log Receiver. See [S3 Receiver](#s3-receiver) below for details.
+
+`security_events` - (Optional) Empty. This can be used for messages where no values are needed. See [Security Events](#security-events) below for details.
+
+`splunk_receiver` - (Optional) Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint. See [Splunk Receiver](#splunk-receiver) below for details.
+
+`sumo_logic_receiver` - (Optional) SumoLogic Configuration. Configuration for SumoLogic endpoint. See [Sumo Logic Receiver](#sumo-logic-receiver) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--audit_logs"></a>
 
+### Audit Logs
+
 <a id="nestedblock--aws_cloud_watch_receiver"></a>
+
+### Aws Cloud Watch Receiver
+
+`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Aws Cred](#nestedblock--aws_cloud_watch_receiver--aws_cred) below.
+
+`aws_region` - (Optional) AWS Region. AWS Region Name (`String`).
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--aws_cloud_watch_receiver--batch) below.
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--aws_cloud_watch_receiver--compression) below.
+
+`group_name` - (Optional) Group Name. The group name of the target Cloudwatch Logs stream (`String`).
+
+`stream_name` - (Optional) Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time (`String`).
 
 <a id="nestedblock--aws_cloud_watch_receiver--aws_cred"></a>
 
+### Aws Cloud Watch Receiver Aws Cred
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--aws_cloud_watch_receiver--batch"></a>
+
+### Aws Cloud Watch Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--aws_cloud_watch_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--aws_cloud_watch_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--aws_cloud_watch_receiver--batch--timeout_seconds_default) below.
 
 <a id="nestedblock--aws_cloud_watch_receiver--batch--max_bytes_disabled"></a>
 
+### Aws Cloud Watch Receiver Batch Max Bytes Disabled
+
 <a id="nestedblock--aws_cloud_watch_receiver--batch--max_events_disabled"></a>
+
+### Aws Cloud Watch Receiver Batch Max Events Disabled
 
 <a id="nestedblock--aws_cloud_watch_receiver--batch--timeout_seconds_default"></a>
 
+### Aws Cloud Watch Receiver Batch Timeout Seconds Default
+
 <a id="nestedblock--aws_cloud_watch_receiver--compression"></a>
+
+### Aws Cloud Watch Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--aws_cloud_watch_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--aws_cloud_watch_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--aws_cloud_watch_receiver--compression--compression_none) below.
 
 <a id="nestedblock--aws_cloud_watch_receiver--compression--compression_default"></a>
 
+### Aws Cloud Watch Receiver Compression Compression Default
+
 <a id="nestedblock--aws_cloud_watch_receiver--compression--compression_gzip"></a>
+
+### Aws Cloud Watch Receiver Compression Compression Gzip
 
 <a id="nestedblock--aws_cloud_watch_receiver--compression--compression_none"></a>
 
+### Aws Cloud Watch Receiver Compression Compression None
+
 <a id="nestedblock--azure_event_hubs_receiver"></a>
+
+### Azure Event Hubs Receiver
+
+`connection_string` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Connection String](#nestedblock--azure_event_hubs_receiver--connection_string) below.
+
+`instance` - (Optional) Event Hubs Instance. Event Hubs Instance name into which logs should be stored (`String`).
+
+`namespace` - (Optional) Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored (`String`).
 
 <a id="nestedblock--azure_event_hubs_receiver--connection_string"></a>
 
+### Azure Event Hubs Receiver Connection String
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--azure_event_hubs_receiver--connection_string--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--azure_event_hubs_receiver--connection_string--clear_secret_info) below.
+
 <a id="nestedblock--azure_event_hubs_receiver--connection_string--blindfold_secret_info"></a>
+
+### Azure Event Hubs Receiver Connection String Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--azure_event_hubs_receiver--connection_string--clear_secret_info"></a>
 
+### Azure Event Hubs Receiver Connection String Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--azure_receiver"></a>
+
+### Azure Receiver
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--azure_receiver--batch) below.
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--azure_receiver--compression) below.
+
+`connection_string` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Connection String](#nestedblock--azure_receiver--connection_string) below.
+
+`container_name` - (Optional) Container Name. Container Name is the name of the container into which logs should be stored (`String`).
+
+`filename_options` - (Optional) Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file. See [Filename Options](#nestedblock--azure_receiver--filename_options) below.
 
 <a id="nestedblock--azure_receiver--batch"></a>
 
+### Azure Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--azure_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--azure_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--azure_receiver--batch--timeout_seconds_default) below.
+
 <a id="nestedblock--azure_receiver--batch--max_bytes_disabled"></a>
+
+### Azure Receiver Batch Max Bytes Disabled
 
 <a id="nestedblock--azure_receiver--batch--max_events_disabled"></a>
 
+### Azure Receiver Batch Max Events Disabled
+
 <a id="nestedblock--azure_receiver--batch--timeout_seconds_default"></a>
+
+### Azure Receiver Batch Timeout Seconds Default
 
 <a id="nestedblock--azure_receiver--compression"></a>
 
+### Azure Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--azure_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--azure_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--azure_receiver--compression--compression_none) below.
+
 <a id="nestedblock--azure_receiver--compression--compression_default"></a>
+
+### Azure Receiver Compression Compression Default
 
 <a id="nestedblock--azure_receiver--compression--compression_gzip"></a>
 
+### Azure Receiver Compression Compression Gzip
+
 <a id="nestedblock--azure_receiver--compression--compression_none"></a>
+
+### Azure Receiver Compression Compression None
 
 <a id="nestedblock--azure_receiver--connection_string"></a>
 
+### Azure Receiver Connection String
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--azure_receiver--connection_string--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--azure_receiver--connection_string--clear_secret_info) below.
+
 <a id="nestedblock--azure_receiver--connection_string--blindfold_secret_info"></a>
+
+### Azure Receiver Connection String Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--azure_receiver--connection_string--clear_secret_info"></a>
 
+### Azure Receiver Connection String Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--azure_receiver--filename_options"></a>
+
+### Azure Receiver Filename Options
+
+`custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i` (`String`).
+
+`log_type_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [Log Type Folder](#nestedblock--azure_receiver--filename_options--log_type_folder) below.
+
+`no_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [No Folder](#nestedblock--azure_receiver--filename_options--no_folder) below.
 
 <a id="nestedblock--azure_receiver--filename_options--log_type_folder"></a>
 
+### Azure Receiver Filename Options Log Type Folder
+
 <a id="nestedblock--azure_receiver--filename_options--no_folder"></a>
+
+### Azure Receiver Filename Options No Folder
 
 <a id="nestedblock--datadog_receiver"></a>
 
+### Datadog Receiver
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--datadog_receiver--batch) below.
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--datadog_receiver--compression) below.
+
+`datadog_api_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Datadog Api Key](#nestedblock--datadog_receiver--datadog_api_key) below.
+
+`endpoint` - (Optional) Datadog Endpoint. Datadog Endpoint, example: `example.com:9000` (`String`).
+
+`no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--datadog_receiver--no_tls) below.
+
+`site` - (Optional) Datadog Site. Datadog Site, example: `datadoghq.com` (`String`).
+
+`use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use Tls](#nestedblock--datadog_receiver--use_tls) below.
+
 <a id="nestedblock--datadog_receiver--batch"></a>
+
+### Datadog Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--datadog_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--datadog_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--datadog_receiver--batch--timeout_seconds_default) below.
 
 <a id="nestedblock--datadog_receiver--batch--max_bytes_disabled"></a>
 
+### Datadog Receiver Batch Max Bytes Disabled
+
 <a id="nestedblock--datadog_receiver--batch--max_events_disabled"></a>
+
+### Datadog Receiver Batch Max Events Disabled
 
 <a id="nestedblock--datadog_receiver--batch--timeout_seconds_default"></a>
 
+### Datadog Receiver Batch Timeout Seconds Default
+
 <a id="nestedblock--datadog_receiver--compression"></a>
+
+### Datadog Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--datadog_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--datadog_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--datadog_receiver--compression--compression_none) below.
 
 <a id="nestedblock--datadog_receiver--compression--compression_default"></a>
 
+### Datadog Receiver Compression Compression Default
+
 <a id="nestedblock--datadog_receiver--compression--compression_gzip"></a>
+
+### Datadog Receiver Compression Compression Gzip
 
 <a id="nestedblock--datadog_receiver--compression--compression_none"></a>
 
+### Datadog Receiver Compression Compression None
+
 <a id="nestedblock--datadog_receiver--datadog_api_key"></a>
+
+### Datadog Receiver Datadog Api Key
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--datadog_receiver--datadog_api_key--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--datadog_receiver--datadog_api_key--clear_secret_info) below.
 
 <a id="nestedblock--datadog_receiver--datadog_api_key--blindfold_secret_info"></a>
 
+### Datadog Receiver Datadog Api Key Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
 <a id="nestedblock--datadog_receiver--datadog_api_key--clear_secret_info"></a>
+
+### Datadog Receiver Datadog Api Key Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
 
 <a id="nestedblock--datadog_receiver--no_tls"></a>
 
+### Datadog Receiver No Tls
+
 <a id="nestedblock--datadog_receiver--use_tls"></a>
+
+### Datadog Receiver Use Tls
+
+`disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Certificate](#nestedblock--datadog_receiver--use_tls--disable_verify_certificate) below.
+
+`disable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Hostname](#nestedblock--datadog_receiver--use_tls--disable_verify_hostname) below.
+
+`enable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Certificate](#nestedblock--datadog_receiver--use_tls--enable_verify_certificate) below.
+
+`enable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Hostname](#nestedblock--datadog_receiver--use_tls--enable_verify_hostname) below.
+
+`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Mtls Disabled](#nestedblock--datadog_receiver--use_tls--mtls_disabled) below.
+
+`mtls_enable` - (Optional) mTLS Client Config. mTLS Client config allows configuration of mtls client options. See [Mtls Enable](#nestedblock--datadog_receiver--use_tls--mtls_enable) below.
+
+`no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--datadog_receiver--use_tls--no_ca) below.
+
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 <a id="nestedblock--datadog_receiver--use_tls--disable_verify_certificate"></a>
 
+### Datadog Receiver Use Tls Disable Verify Certificate
+
 <a id="nestedblock--datadog_receiver--use_tls--disable_verify_hostname"></a>
+
+### Datadog Receiver Use Tls Disable Verify Hostname
 
 <a id="nestedblock--datadog_receiver--use_tls--enable_verify_certificate"></a>
 
+### Datadog Receiver Use Tls Enable Verify Certificate
+
 <a id="nestedblock--datadog_receiver--use_tls--enable_verify_hostname"></a>
+
+### Datadog Receiver Use Tls Enable Verify Hostname
 
 <a id="nestedblock--datadog_receiver--use_tls--mtls_disabled"></a>
 
+### Datadog Receiver Use Tls Mtls Disabled
+
 <a id="nestedblock--datadog_receiver--use_tls--mtls_enable"></a>
+
+### Datadog Receiver Use Tls Mtls Enable
+
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
+
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--datadog_receiver--use_tls--mtls_enable--key_url) below.
 
 <a id="nestedblock--datadog_receiver--use_tls--mtls_enable--key_url"></a>
 
+### Datadog Receiver Use Tls Mtls Enable Key Url
+
 <a id="nestedblock--datadog_receiver--use_tls--no_ca"></a>
+
+### Datadog Receiver Use Tls No Ca
 
 <a id="nestedblock--dns_logs"></a>
 
+### Dns Logs
+
 <a id="nestedblock--gcp_bucket_receiver"></a>
+
+### Gcp Bucket Receiver
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--gcp_bucket_receiver--batch) below.
+
+`bucket` - (Optional) GCP Bucket Name. GCP Bucket Name (`String`).
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--gcp_bucket_receiver--compression) below.
+
+`filename_options` - (Optional) Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file. See [Filename Options](#nestedblock--gcp_bucket_receiver--filename_options) below.
+
+`gcp_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Gcp Cred](#nestedblock--gcp_bucket_receiver--gcp_cred) below.
 
 <a id="nestedblock--gcp_bucket_receiver--batch"></a>
 
+### Gcp Bucket Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--gcp_bucket_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--gcp_bucket_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--gcp_bucket_receiver--batch--timeout_seconds_default) below.
+
 <a id="nestedblock--gcp_bucket_receiver--batch--max_bytes_disabled"></a>
+
+### Gcp Bucket Receiver Batch Max Bytes Disabled
 
 <a id="nestedblock--gcp_bucket_receiver--batch--max_events_disabled"></a>
 
+### Gcp Bucket Receiver Batch Max Events Disabled
+
 <a id="nestedblock--gcp_bucket_receiver--batch--timeout_seconds_default"></a>
+
+### Gcp Bucket Receiver Batch Timeout Seconds Default
 
 <a id="nestedblock--gcp_bucket_receiver--compression"></a>
 
+### Gcp Bucket Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--gcp_bucket_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--gcp_bucket_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--gcp_bucket_receiver--compression--compression_none) below.
+
 <a id="nestedblock--gcp_bucket_receiver--compression--compression_default"></a>
+
+### Gcp Bucket Receiver Compression Compression Default
 
 <a id="nestedblock--gcp_bucket_receiver--compression--compression_gzip"></a>
 
+### Gcp Bucket Receiver Compression Compression Gzip
+
 <a id="nestedblock--gcp_bucket_receiver--compression--compression_none"></a>
+
+### Gcp Bucket Receiver Compression Compression None
 
 <a id="nestedblock--gcp_bucket_receiver--filename_options"></a>
 
+### Gcp Bucket Receiver Filename Options
+
+`custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i` (`String`).
+
+`log_type_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [Log Type Folder](#nestedblock--gcp_bucket_receiver--filename_options--log_type_folder) below.
+
+`no_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [No Folder](#nestedblock--gcp_bucket_receiver--filename_options--no_folder) below.
+
 <a id="nestedblock--gcp_bucket_receiver--filename_options--log_type_folder"></a>
+
+### Gcp Bucket Receiver Filename Options Log Type Folder
 
 <a id="nestedblock--gcp_bucket_receiver--filename_options--no_folder"></a>
 
+### Gcp Bucket Receiver Filename Options No Folder
+
 <a id="nestedblock--gcp_bucket_receiver--gcp_cred"></a>
+
+### Gcp Bucket Receiver Gcp Cred
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--http_receiver"></a>
 
+### Http Receiver
+
+`auth_basic` - (Optional) Basic Authentication Credentials. Authentication parameters to access HTPP Log Receiver Endpoint. See [Auth Basic](#nestedblock--http_receiver--auth_basic) below.
+
+`auth_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Auth None](#nestedblock--http_receiver--auth_none) below.
+
+`auth_token` - (Optional) Access Token. Authentication Token for access. See [Auth Token](#nestedblock--http_receiver--auth_token) below.
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--http_receiver--batch) below.
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--http_receiver--compression) below.
+
+`no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--http_receiver--no_tls) below.
+
+`uri` - (Optional) HTTP Uri. HTTP Uri is the Uri of the HTTP endpoint to send logs to, example: `http://example.com:9000/logs` (`String`).
+
+`use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use Tls](#nestedblock--http_receiver--use_tls) below.
+
 <a id="nestedblock--http_receiver--auth_basic"></a>
+
+### Http Receiver Auth Basic
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--http_receiver--auth_basic--password) below.
+
+`user_name` - (Optional) User Name. HTTP Basic Auth User Name (`String`).
 
 <a id="nestedblock--http_receiver--auth_basic--password"></a>
 
+### Http Receiver Auth Basic Password
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--http_receiver--auth_basic--password--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--http_receiver--auth_basic--password--clear_secret_info) below.
+
 <a id="nestedblock--http_receiver--auth_basic--password--blindfold_secret_info"></a>
+
+### Http Receiver Auth Basic Password Blindfold Secret Info
 
 <a id="nestedblock--http_receiver--auth_basic--password--clear_secret_info"></a>
 
+### Http Receiver Auth Basic Password Clear Secret Info
+
 <a id="nestedblock--http_receiver--auth_none"></a>
+
+### Http Receiver Auth None
 
 <a id="nestedblock--http_receiver--auth_token"></a>
 
+### Http Receiver Auth Token
+
+`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#nestedblock--http_receiver--auth_token--token) below.
+
 <a id="nestedblock--http_receiver--auth_token--token"></a>
+
+### Http Receiver Auth Token Token
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--http_receiver--auth_token--token--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--http_receiver--auth_token--token--clear_secret_info) below.
 
 <a id="nestedblock--http_receiver--auth_token--token--blindfold_secret_info"></a>
 
+### Http Receiver Auth Token Token Blindfold Secret Info
+
 <a id="nestedblock--http_receiver--auth_token--token--clear_secret_info"></a>
+
+### Http Receiver Auth Token Token Clear Secret Info
 
 <a id="nestedblock--http_receiver--batch"></a>
 
+### Http Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--http_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--http_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--http_receiver--batch--timeout_seconds_default) below.
+
 <a id="nestedblock--http_receiver--batch--max_bytes_disabled"></a>
+
+### Http Receiver Batch Max Bytes Disabled
 
 <a id="nestedblock--http_receiver--batch--max_events_disabled"></a>
 
+### Http Receiver Batch Max Events Disabled
+
 <a id="nestedblock--http_receiver--batch--timeout_seconds_default"></a>
+
+### Http Receiver Batch Timeout Seconds Default
 
 <a id="nestedblock--http_receiver--compression"></a>
 
+### Http Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--http_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--http_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--http_receiver--compression--compression_none) below.
+
 <a id="nestedblock--http_receiver--compression--compression_default"></a>
+
+### Http Receiver Compression Compression Default
 
 <a id="nestedblock--http_receiver--compression--compression_gzip"></a>
 
+### Http Receiver Compression Compression Gzip
+
 <a id="nestedblock--http_receiver--compression--compression_none"></a>
+
+### Http Receiver Compression Compression None
 
 <a id="nestedblock--http_receiver--no_tls"></a>
 
+### Http Receiver No Tls
+
 <a id="nestedblock--http_receiver--use_tls"></a>
+
+### Http Receiver Use Tls
+
+`disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Certificate](#nestedblock--http_receiver--use_tls--disable_verify_certificate) below.
+
+`disable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Hostname](#nestedblock--http_receiver--use_tls--disable_verify_hostname) below.
+
+`enable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Certificate](#nestedblock--http_receiver--use_tls--enable_verify_certificate) below.
+
+`enable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Hostname](#nestedblock--http_receiver--use_tls--enable_verify_hostname) below.
+
+`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Mtls Disabled](#nestedblock--http_receiver--use_tls--mtls_disabled) below.
+
+`mtls_enable` - (Optional) mTLS Client Config. mTLS Client config allows configuration of mtls client options. See [Mtls Enable](#nestedblock--http_receiver--use_tls--mtls_enable) below.
+
+`no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--http_receiver--use_tls--no_ca) below.
+
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 <a id="nestedblock--http_receiver--use_tls--disable_verify_certificate"></a>
 
+### Http Receiver Use Tls Disable Verify Certificate
+
 <a id="nestedblock--http_receiver--use_tls--disable_verify_hostname"></a>
+
+### Http Receiver Use Tls Disable Verify Hostname
 
 <a id="nestedblock--http_receiver--use_tls--enable_verify_certificate"></a>
 
+### Http Receiver Use Tls Enable Verify Certificate
+
 <a id="nestedblock--http_receiver--use_tls--enable_verify_hostname"></a>
+
+### Http Receiver Use Tls Enable Verify Hostname
 
 <a id="nestedblock--http_receiver--use_tls--mtls_disabled"></a>
 
+### Http Receiver Use Tls Mtls Disabled
+
 <a id="nestedblock--http_receiver--use_tls--mtls_enable"></a>
+
+### Http Receiver Use Tls Mtls Enable
+
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
+
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--http_receiver--use_tls--mtls_enable--key_url) below.
 
 <a id="nestedblock--http_receiver--use_tls--mtls_enable--key_url"></a>
 
+### Http Receiver Use Tls Mtls Enable Key Url
+
 <a id="nestedblock--http_receiver--use_tls--no_ca"></a>
+
+### Http Receiver Use Tls No Ca
 
 <a id="nestedblock--kafka_receiver"></a>
 
+### Kafka Receiver
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--kafka_receiver--batch) below.
+
+`bootstrap_servers` - (Optional) Kafka Bootstrap Servers List. List of host:port pairs of the Kafka brokers (`List`).
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--kafka_receiver--compression) below.
+
+`kafka_topic` - (Optional) Kafka Topic. The Kafka topic name to write events to (`String`).
+
+`no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--kafka_receiver--no_tls) below.
+
+`use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use Tls](#nestedblock--kafka_receiver--use_tls) below.
+
 <a id="nestedblock--kafka_receiver--batch"></a>
+
+### Kafka Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--kafka_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--kafka_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--kafka_receiver--batch--timeout_seconds_default) below.
 
 <a id="nestedblock--kafka_receiver--batch--max_bytes_disabled"></a>
 
+### Kafka Receiver Batch Max Bytes Disabled
+
 <a id="nestedblock--kafka_receiver--batch--max_events_disabled"></a>
+
+### Kafka Receiver Batch Max Events Disabled
 
 <a id="nestedblock--kafka_receiver--batch--timeout_seconds_default"></a>
 
+### Kafka Receiver Batch Timeout Seconds Default
+
 <a id="nestedblock--kafka_receiver--compression"></a>
+
+### Kafka Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--kafka_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--kafka_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--kafka_receiver--compression--compression_none) below.
 
 <a id="nestedblock--kafka_receiver--compression--compression_default"></a>
 
+### Kafka Receiver Compression Compression Default
+
 <a id="nestedblock--kafka_receiver--compression--compression_gzip"></a>
+
+### Kafka Receiver Compression Compression Gzip
 
 <a id="nestedblock--kafka_receiver--compression--compression_none"></a>
 
+### Kafka Receiver Compression Compression None
+
 <a id="nestedblock--kafka_receiver--no_tls"></a>
+
+### Kafka Receiver No Tls
 
 <a id="nestedblock--kafka_receiver--use_tls"></a>
 
+### Kafka Receiver Use Tls
+
+`disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Certificate](#nestedblock--kafka_receiver--use_tls--disable_verify_certificate) below.
+
+`disable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Hostname](#nestedblock--kafka_receiver--use_tls--disable_verify_hostname) below.
+
+`enable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Certificate](#nestedblock--kafka_receiver--use_tls--enable_verify_certificate) below.
+
+`enable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Hostname](#nestedblock--kafka_receiver--use_tls--enable_verify_hostname) below.
+
+`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Mtls Disabled](#nestedblock--kafka_receiver--use_tls--mtls_disabled) below.
+
+`mtls_enable` - (Optional) mTLS Client Config. mTLS Client config allows configuration of mtls client options. See [Mtls Enable](#nestedblock--kafka_receiver--use_tls--mtls_enable) below.
+
+`no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--kafka_receiver--use_tls--no_ca) below.
+
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
+
 <a id="nestedblock--kafka_receiver--use_tls--disable_verify_certificate"></a>
+
+### Kafka Receiver Use Tls Disable Verify Certificate
 
 <a id="nestedblock--kafka_receiver--use_tls--disable_verify_hostname"></a>
 
+### Kafka Receiver Use Tls Disable Verify Hostname
+
 <a id="nestedblock--kafka_receiver--use_tls--enable_verify_certificate"></a>
+
+### Kafka Receiver Use Tls Enable Verify Certificate
 
 <a id="nestedblock--kafka_receiver--use_tls--enable_verify_hostname"></a>
 
+### Kafka Receiver Use Tls Enable Verify Hostname
+
 <a id="nestedblock--kafka_receiver--use_tls--mtls_disabled"></a>
+
+### Kafka Receiver Use Tls Mtls Disabled
 
 <a id="nestedblock--kafka_receiver--use_tls--mtls_enable"></a>
 
+### Kafka Receiver Use Tls Mtls Enable
+
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
+
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--kafka_receiver--use_tls--mtls_enable--key_url) below.
+
 <a id="nestedblock--kafka_receiver--use_tls--mtls_enable--key_url"></a>
+
+### Kafka Receiver Use Tls Mtls Enable Key Url
 
 <a id="nestedblock--kafka_receiver--use_tls--no_ca"></a>
 
+### Kafka Receiver Use Tls No Ca
+
 <a id="nestedblock--new_relic_receiver"></a>
+
+### New Relic Receiver
+
+`api_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Api Key](#nestedblock--new_relic_receiver--api_key) below.
+
+`eu` - (Optional) Empty. This can be used for messages where no values are needed. See [Eu](#nestedblock--new_relic_receiver--eu) below.
+
+`us` - (Optional) Empty. This can be used for messages where no values are needed. See [Us](#nestedblock--new_relic_receiver--us) below.
 
 <a id="nestedblock--new_relic_receiver--api_key"></a>
 
+### New Relic Receiver Api Key
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--new_relic_receiver--api_key--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--new_relic_receiver--api_key--clear_secret_info) below.
+
 <a id="nestedblock--new_relic_receiver--api_key--blindfold_secret_info"></a>
+
+### New Relic Receiver Api Key Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--new_relic_receiver--api_key--clear_secret_info"></a>
 
+### New Relic Receiver Api Key Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--new_relic_receiver--eu"></a>
+
+### New Relic Receiver Eu
 
 <a id="nestedblock--new_relic_receiver--us"></a>
 
+### New Relic Receiver Us
+
 <a id="nestedblock--ns_all"></a>
+
+### Ns All
 
 <a id="nestedblock--ns_current"></a>
 
+### Ns Current
+
 <a id="nestedblock--ns_list"></a>
+
+### Ns List
+
+`namespaces` - (Optional) namespaces. List of namespaces to stream logs for (`List`).
 
 <a id="nestedblock--qradar_receiver"></a>
 
+### Qradar Receiver
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--qradar_receiver--batch) below.
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--qradar_receiver--compression) below.
+
+`no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--qradar_receiver--no_tls) below.
+
+`uri` - (Optional) Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, example: `http://example.com:9000` (`String`).
+
+`use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use Tls](#nestedblock--qradar_receiver--use_tls) below.
+
 <a id="nestedblock--qradar_receiver--batch"></a>
+
+### Qradar Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--qradar_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--qradar_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--qradar_receiver--batch--timeout_seconds_default) below.
 
 <a id="nestedblock--qradar_receiver--batch--max_bytes_disabled"></a>
 
+### Qradar Receiver Batch Max Bytes Disabled
+
 <a id="nestedblock--qradar_receiver--batch--max_events_disabled"></a>
+
+### Qradar Receiver Batch Max Events Disabled
 
 <a id="nestedblock--qradar_receiver--batch--timeout_seconds_default"></a>
 
+### Qradar Receiver Batch Timeout Seconds Default
+
 <a id="nestedblock--qradar_receiver--compression"></a>
+
+### Qradar Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--qradar_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--qradar_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--qradar_receiver--compression--compression_none) below.
 
 <a id="nestedblock--qradar_receiver--compression--compression_default"></a>
 
+### Qradar Receiver Compression Compression Default
+
 <a id="nestedblock--qradar_receiver--compression--compression_gzip"></a>
+
+### Qradar Receiver Compression Compression Gzip
 
 <a id="nestedblock--qradar_receiver--compression--compression_none"></a>
 
+### Qradar Receiver Compression Compression None
+
 <a id="nestedblock--qradar_receiver--no_tls"></a>
+
+### Qradar Receiver No Tls
 
 <a id="nestedblock--qradar_receiver--use_tls"></a>
 
+### Qradar Receiver Use Tls
+
+`disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Certificate](#nestedblock--qradar_receiver--use_tls--disable_verify_certificate) below.
+
+`disable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Hostname](#nestedblock--qradar_receiver--use_tls--disable_verify_hostname) below.
+
+`enable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Certificate](#nestedblock--qradar_receiver--use_tls--enable_verify_certificate) below.
+
+`enable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Hostname](#nestedblock--qradar_receiver--use_tls--enable_verify_hostname) below.
+
+`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Mtls Disabled](#nestedblock--qradar_receiver--use_tls--mtls_disabled) below.
+
+`mtls_enable` - (Optional) mTLS Client Config. mTLS Client config allows configuration of mtls client options. See [Mtls Enable](#nestedblock--qradar_receiver--use_tls--mtls_enable) below.
+
+`no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--qradar_receiver--use_tls--no_ca) below.
+
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
+
 <a id="nestedblock--qradar_receiver--use_tls--disable_verify_certificate"></a>
+
+### Qradar Receiver Use Tls Disable Verify Certificate
 
 <a id="nestedblock--qradar_receiver--use_tls--disable_verify_hostname"></a>
 
+### Qradar Receiver Use Tls Disable Verify Hostname
+
 <a id="nestedblock--qradar_receiver--use_tls--enable_verify_certificate"></a>
+
+### Qradar Receiver Use Tls Enable Verify Certificate
 
 <a id="nestedblock--qradar_receiver--use_tls--enable_verify_hostname"></a>
 
+### Qradar Receiver Use Tls Enable Verify Hostname
+
 <a id="nestedblock--qradar_receiver--use_tls--mtls_disabled"></a>
+
+### Qradar Receiver Use Tls Mtls Disabled
 
 <a id="nestedblock--qradar_receiver--use_tls--mtls_enable"></a>
 
+### Qradar Receiver Use Tls Mtls Enable
+
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
+
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--qradar_receiver--use_tls--mtls_enable--key_url) below.
+
 <a id="nestedblock--qradar_receiver--use_tls--mtls_enable--key_url"></a>
+
+### Qradar Receiver Use Tls Mtls Enable Key Url
 
 <a id="nestedblock--qradar_receiver--use_tls--no_ca"></a>
 
+### Qradar Receiver Use Tls No Ca
+
 <a id="nestedblock--request_logs"></a>
+
+### Request Logs
 
 <a id="nestedblock--s3_receiver"></a>
 
+### S3 Receiver
+
+`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Aws Cred](#nestedblock--s3_receiver--aws_cred) below.
+
+`aws_region` - (Optional) AWS Region. AWS Region Name (`String`).
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--s3_receiver--batch) below.
+
+`bucket` - (Optional) S3 Bucket Name. S3 Bucket Name (`String`).
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--s3_receiver--compression) below.
+
+`filename_options` - (Optional) Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file. See [Filename Options](#nestedblock--s3_receiver--filename_options) below.
+
 <a id="nestedblock--s3_receiver--aws_cred"></a>
+
+### S3 Receiver Aws Cred
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--s3_receiver--batch"></a>
 
+### S3 Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--s3_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--s3_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--s3_receiver--batch--timeout_seconds_default) below.
+
 <a id="nestedblock--s3_receiver--batch--max_bytes_disabled"></a>
+
+### S3 Receiver Batch Max Bytes Disabled
 
 <a id="nestedblock--s3_receiver--batch--max_events_disabled"></a>
 
+### S3 Receiver Batch Max Events Disabled
+
 <a id="nestedblock--s3_receiver--batch--timeout_seconds_default"></a>
+
+### S3 Receiver Batch Timeout Seconds Default
 
 <a id="nestedblock--s3_receiver--compression"></a>
 
+### S3 Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--s3_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--s3_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--s3_receiver--compression--compression_none) below.
+
 <a id="nestedblock--s3_receiver--compression--compression_default"></a>
+
+### S3 Receiver Compression Compression Default
 
 <a id="nestedblock--s3_receiver--compression--compression_gzip"></a>
 
+### S3 Receiver Compression Compression Gzip
+
 <a id="nestedblock--s3_receiver--compression--compression_none"></a>
+
+### S3 Receiver Compression Compression None
 
 <a id="nestedblock--s3_receiver--filename_options"></a>
 
+### S3 Receiver Filename Options
+
+`custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i` (`String`).
+
+`log_type_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [Log Type Folder](#nestedblock--s3_receiver--filename_options--log_type_folder) below.
+
+`no_folder` - (Optional) Empty. This can be used for messages where no values are needed. See [No Folder](#nestedblock--s3_receiver--filename_options--no_folder) below.
+
 <a id="nestedblock--s3_receiver--filename_options--log_type_folder"></a>
+
+### S3 Receiver Filename Options Log Type Folder
 
 <a id="nestedblock--s3_receiver--filename_options--no_folder"></a>
 
+### S3 Receiver Filename Options No Folder
+
 <a id="nestedblock--security_events"></a>
+
+### Security Events
 
 <a id="nestedblock--splunk_receiver"></a>
 
+### Splunk Receiver
+
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#nestedblock--splunk_receiver--batch) below.
+
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#nestedblock--splunk_receiver--compression) below.
+
+`endpoint` - (Optional) Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `https://http-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`) (`String`).
+
+`no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#nestedblock--splunk_receiver--no_tls) below.
+
+`splunk_hec_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Splunk Hec Token](#nestedblock--splunk_receiver--splunk_hec_token) below.
+
+`use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use Tls](#nestedblock--splunk_receiver--use_tls) below.
+
 <a id="nestedblock--splunk_receiver--batch"></a>
+
+### Splunk Receiver Batch
+
+`max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
+
+`max_bytes_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Bytes Disabled](#nestedblock--splunk_receiver--batch--max_bytes_disabled) below.
+
+`max_events` - (Optional) Max Events. Send batch to endpoint after this many log messages are in the batch (`Number`).
+
+`max_events_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Events Disabled](#nestedblock--splunk_receiver--batch--max_events_disabled) below.
+
+`timeout_seconds` - (Optional) Timeout Seconds. Send batch to the endpoint after this many seconds (`String`).
+
+`timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Timeout Seconds Default](#nestedblock--splunk_receiver--batch--timeout_seconds_default) below.
 
 <a id="nestedblock--splunk_receiver--batch--max_bytes_disabled"></a>
 
+### Splunk Receiver Batch Max Bytes Disabled
+
 <a id="nestedblock--splunk_receiver--batch--max_events_disabled"></a>
+
+### Splunk Receiver Batch Max Events Disabled
 
 <a id="nestedblock--splunk_receiver--batch--timeout_seconds_default"></a>
 
+### Splunk Receiver Batch Timeout Seconds Default
+
 <a id="nestedblock--splunk_receiver--compression"></a>
+
+### Splunk Receiver Compression
+
+`compression_default` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Default](#nestedblock--splunk_receiver--compression--compression_default) below.
+
+`compression_gzip` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression Gzip](#nestedblock--splunk_receiver--compression--compression_gzip) below.
+
+`compression_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Compression None](#nestedblock--splunk_receiver--compression--compression_none) below.
 
 <a id="nestedblock--splunk_receiver--compression--compression_default"></a>
 
+### Splunk Receiver Compression Compression Default
+
 <a id="nestedblock--splunk_receiver--compression--compression_gzip"></a>
+
+### Splunk Receiver Compression Compression Gzip
 
 <a id="nestedblock--splunk_receiver--compression--compression_none"></a>
 
+### Splunk Receiver Compression Compression None
+
 <a id="nestedblock--splunk_receiver--no_tls"></a>
+
+### Splunk Receiver No Tls
 
 <a id="nestedblock--splunk_receiver--splunk_hec_token"></a>
 
+### Splunk Receiver Splunk Hec Token
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--splunk_receiver--splunk_hec_token--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--splunk_receiver--splunk_hec_token--clear_secret_info) below.
+
 <a id="nestedblock--splunk_receiver--splunk_hec_token--blindfold_secret_info"></a>
+
+### Splunk Receiver Splunk Hec Token Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--splunk_receiver--splunk_hec_token--clear_secret_info"></a>
 
+### Splunk Receiver Splunk Hec Token Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--splunk_receiver--use_tls"></a>
+
+### Splunk Receiver Use Tls
+
+`disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Certificate](#nestedblock--splunk_receiver--use_tls--disable_verify_certificate) below.
+
+`disable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Verify Hostname](#nestedblock--splunk_receiver--use_tls--disable_verify_hostname) below.
+
+`enable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Certificate](#nestedblock--splunk_receiver--use_tls--enable_verify_certificate) below.
+
+`enable_verify_hostname` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Verify Hostname](#nestedblock--splunk_receiver--use_tls--enable_verify_hostname) below.
+
+`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Mtls Disabled](#nestedblock--splunk_receiver--use_tls--mtls_disabled) below.
+
+`mtls_enable` - (Optional) mTLS Client Config. mTLS Client config allows configuration of mtls client options. See [Mtls Enable](#nestedblock--splunk_receiver--use_tls--mtls_enable) below.
+
+`no_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [No Ca](#nestedblock--splunk_receiver--use_tls--no_ca) below.
+
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
 <a id="nestedblock--splunk_receiver--use_tls--disable_verify_certificate"></a>
 
+### Splunk Receiver Use Tls Disable Verify Certificate
+
 <a id="nestedblock--splunk_receiver--use_tls--disable_verify_hostname"></a>
+
+### Splunk Receiver Use Tls Disable Verify Hostname
 
 <a id="nestedblock--splunk_receiver--use_tls--enable_verify_certificate"></a>
 
+### Splunk Receiver Use Tls Enable Verify Certificate
+
 <a id="nestedblock--splunk_receiver--use_tls--enable_verify_hostname"></a>
+
+### Splunk Receiver Use Tls Enable Verify Hostname
 
 <a id="nestedblock--splunk_receiver--use_tls--mtls_disabled"></a>
 
+### Splunk Receiver Use Tls Mtls Disabled
+
 <a id="nestedblock--splunk_receiver--use_tls--mtls_enable"></a>
+
+### Splunk Receiver Use Tls Mtls Enable
+
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
+
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--splunk_receiver--use_tls--mtls_enable--key_url) below.
 
 <a id="nestedblock--splunk_receiver--use_tls--mtls_enable--key_url"></a>
 
+### Splunk Receiver Use Tls Mtls Enable Key Url
+
 <a id="nestedblock--splunk_receiver--use_tls--no_ca"></a>
+
+### Splunk Receiver Use Tls No Ca
 
 <a id="nestedblock--sumo_logic_receiver"></a>
 
+### Sumo Logic Receiver
+
+`url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Url](#nestedblock--sumo_logic_receiver--url) below.
+
 <a id="nestedblock--sumo_logic_receiver--url"></a>
+
+### Sumo Logic Receiver Url
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--sumo_logic_receiver--url--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--sumo_logic_receiver--url--clear_secret_info) below.
 
 <a id="nestedblock--sumo_logic_receiver--url--blindfold_secret_info"></a>
 
+### Sumo Logic Receiver Url Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
 <a id="nestedblock--sumo_logic_receiver--url--clear_secret_info"></a>
 
+### Sumo Logic Receiver Url Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

@@ -34,6 +34,18 @@ data "f5xc_subnet" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Subnet (`String`).
+
+`namespace` - (Required) Namespace where the Subnet exists (`String`).
+
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
+
+`annotations` - (Optional) Annotations applied to this resource (`Map`).
+
+`description` - (Optional) Description of the Subnet (`String`).
+
+`id` - (Optional) Unique identifier for the resource (`String`).
+
+`labels` - (Optional) Labels applied to this resource (`Map`).

@@ -34,10 +34,10 @@ resource "f5xc_log_receiver" "example" {
   # Log Receiver configuration
   # HTTP receiver example
   http_receiver {
-    uri = "https://logs.example.com/ingest"
+    uri = "`https://logs.example.com/ingest"`
     batch {
-      max_bytes   = 1048576
-      max_events  = 100
+      max_bytes       = 1048576
+      max_events      = 100
       timeout_seconds = 5
     }
     no_tls_verify_hostname {}
@@ -51,37 +51,121 @@ resource "f5xc_log_receiver" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the LogReceiver. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the LogReceiver will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`site_local` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local](#site-local) below for details.
+
+`syslog` - (Optional) Syslog Server Configuration. Configuration for syslog server. See [Syslog](#syslog) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--site_local"></a>
 
+### Site Local
+
 <a id="nestedblock--syslog"></a>
+
+### Syslog
+
+`syslog_rfc5424` - (Optional) Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length (`Number`).
+
+`tcp_server` - (Optional) TCP Server name and Port Number. Name and port number for a TCP server. See [Tcp Server](#nestedblock--syslog--tcp_server) below.
+
+`tls_server` - (Optional) Client TLS Config. TLS config for client of discovery service. See [Tls Server](#nestedblock--syslog--tls_server) below.
+
+`udp_server` - (Optional) UDP Server Name and Port Number. Name and port number for a UDP server. See [Udp Server](#nestedblock--syslog--udp_server) below.
 
 <a id="nestedblock--syslog--tcp_server"></a>
 
+### Syslog Tcp Server
+
+`port` - (Optional) Port Number. Port number used for communication (`Number`).
+
+`server_name` - (Optional) Server name. Server name is fully qualified domain name or IP address of the server (`String`).
+
 <a id="nestedblock--syslog--tls_server"></a>
+
+### Syslog Tls Server
+
+`default_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Https Port](#nestedblock--syslog--tls_server--default_https_port) below.
+
+`default_syslog_tls_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Syslog Tls Port](#nestedblock--syslog--tls_server--default_syslog_tls_port) below.
+
+`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Mtls Disabled](#nestedblock--syslog--tls_server--mtls_disabled) below.
+
+`mtls_enable` - (Optional) mTLS Client Config. TLS config for client. See [Mtls Enable](#nestedblock--syslog--tls_server--mtls_enable) below.
+
+`port` - (Optional) TCP Port Number. Custom port number used for communication (`Number`).
+
+`server_name` - (Optional) SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against (`String`).
+
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
+
+`volterra_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Ca](#nestedblock--syslog--tls_server--volterra_ca) below.
 
 <a id="nestedblock--syslog--tls_server--default_https_port"></a>
 
+### Syslog Tls Server Default Https Port
+
 <a id="nestedblock--syslog--tls_server--default_syslog_tls_port"></a>
+
+### Syslog Tls Server Default Syslog Tls Port
 
 <a id="nestedblock--syslog--tls_server--mtls_disabled"></a>
 
+### Syslog Tls Server Mtls Disabled
+
 <a id="nestedblock--syslog--tls_server--mtls_enable"></a>
+
+### Syslog Tls Server Mtls Enable
+
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
+
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key Url](#nestedblock--syslog--tls_server--mtls_enable--key_url) below.
 
 <a id="nestedblock--syslog--tls_server--mtls_enable--key_url"></a>
 
+### Syslog Tls Server Mtls Enable Key Url
+
 <a id="nestedblock--syslog--tls_server--volterra_ca"></a>
+
+### Syslog Tls Server Volterra Ca
 
 <a id="nestedblock--syslog--udp_server"></a>
 
+### Syslog Udp Server
+
+`port` - (Optional) Port Number. Port number used for communication (`Number`).
+
+`server_name` - (Optional) Server name. Server name is fully qualified domain name or IP address of the server (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

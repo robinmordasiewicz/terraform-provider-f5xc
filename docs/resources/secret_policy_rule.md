@@ -32,14 +32,14 @@ resource "f5xc_secret_policy_rule" "example" {
   }
 
   # Resource-specific configuration
-    # Matcher. A matcher specifies multiple criteria for matchi...
-    client_name_matcher {
-      # Configure client_name_matcher settings
-    }
-    # Label Selector. This type can be used to establish a 'sel...
-    client_selector {
-      # Configure client_selector settings
-    }
+  # Matcher. A matcher specifies multiple criteria for matchi...
+  client_name_matcher {
+    # Configure client_name_matcher settings
+  }
+  # Label Selector. This type can be used to establish a 'sel...
+  client_selector {
+    # Configure client_selector settings
+  }
 }
 ```
 
@@ -48,19 +48,61 @@ resource "f5xc_secret_policy_rule" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the SecretPolicyRule. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the SecretPolicyRule will be created (`String`).
+
 The following arguments are optional:
+
+`action` - (Optional) Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward (`String`).
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "client_name, client_name_matcher, client_selector" must be set.
+
+`client_name` - (Optional) Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate (`String`).
+
+`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Client Name Matcher](#client-name-matcher) below for details.
+
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Client Selector](#client-selector) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--client_name_matcher"></a>
 
+### Client Name Matcher
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
 <a id="nestedblock--client_selector"></a>
 
+### Client Selector
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

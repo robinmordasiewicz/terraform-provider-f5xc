@@ -32,18 +32,18 @@ resource "f5xc_virtual_host" "example" {
   }
 
   # Resource-specific configuration
-    # Advertise Policies. Advertise Policy allows you to define...
-    advertise_policies {
-      # Configure advertise_policies settings
-    }
-    # [OneOf: authentication, no_authentication] Authentication...
-    authentication {
-      # Configure authentication settings
-    }
-    # Reference to Authentication Object. Reference to Authenti...
-    auth_config {
-      # Configure auth_config settings
-    }
+  # Advertise Policies. Advertise Policy allows you to define...
+  advertise_policies {
+    # Configure advertise_policies settings
+  }
+  # [OneOf: authentication, no_authentication] Authentication...
+  authentication {
+    # Configure authentication settings
+  }
+  # Reference to Authentication Object. Reference to Authenti...
+  auth_config {
+    # Configure auth_config settings
+  }
 }
 ```
 
@@ -52,227 +52,981 @@ resource "f5xc_virtual_host" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the VirtualHost. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the VirtualHost will be created (`String`).
+
 The following arguments are optional:
+
+`add_location` - (Optional) Add Location. x-example: true Appends header x-volterra-location = <re-site-name> in responses. This configuration is ignored on CE sites (`Bool`).
+
+`advertise_policies` - (Optional) Advertise Policies. Advertise Policy allows you to define networks or sites where you want a VIP for this virtual host to be advertised. See [Advertise Policies](#advertise-policies) below for details.
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "append_server_name, default_header, pass_through, server_name" must be set.
+
+`append_server_name` - (Optional) Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed (`String`).
+
+> **Note:** One of the arguments from this list "authentication, no_authentication" must be set.
+
+`authentication` - (Optional) Authentication Details. Authentication related information. This allows to configure the URL to redirect after the authentication Authentication Object Reference, configuration of cookie params etc. See [Authentication](#authentication) below for details.
+
+`buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. See [Buffer Policy](#buffer-policy) below for details.
+
+> **Note:** One of the arguments from this list "captcha_challenge, js_challenge, no_challenge" must be set.
+
+`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. See [Captcha Challenge](#captcha-challenge) below for details.
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#coalescing-options) below for details.
+
+`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. See [Compression Params](#compression-params) below for details.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests (`Number`).
+
+`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. See [Cors Policy](#cors-policy) below for details.
+
+`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination. See [Csrf Policy](#csrf-policy) below for details.
+
+`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom http pages for each error code. See [Custom Errors](#custom-errors) below for details.
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header](#default-header) below for details.
+
+> **Note:** One of the arguments from this list "default_loadbalancer, non_default_loadbalancer" must be set.
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Loadbalancer](#default-loadbalancer) below for details.
+
+`disable_default_error_pages` - (Optional) Disable default error pages. An option to specify whether to disable using default F5XC error pages (`Bool`).
+
+`disable_dns_resolve` - (Optional) Disable DNS resolution. Disable DNS resolution for domains specified in the virtual host When the virtual host is configured as Dynamive Resolve Proxy (DRP), disable DNS resolution for domains conf... (`Bool`).
+
+> **Note:** One of the arguments from this list "disable_path_normalize, enable_path_normalize" must be set.
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Path Normalize](#disable-path-normalize) below for details.
+
+`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1 (`List`).
+
+`dynamic_reverse_proxy` - (Optional) Dynamic Reverse Proxy Type. In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. See [Dynamic Reverse Proxy](#dynamic-reverse-proxy) below for details.
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Path Normalize](#enable-path-normalize) below for details.
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [Http Protocol Options](#http-protocol-options) below for details.
+
+`idle_timeout` - (Optional) Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity (`Number`).
+
+`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. See [Js Challenge](#js-challenge) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`max_request_header_size` - (Optional) Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB (`Number`).
+
+`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authentication](#no-authentication) below for details.
+
+`no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed. See [Non Default Loadbalancer](#non-default-loadbalancer) below for details.
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed. See [Pass Through](#pass-through) below for details.
+
+`proxy` - (Optional) Type of Proxy. ProxyType tells the type of proxy to install for the virtual host (`String`).
+
+`rate_limiter_allowed_prefixes` - (Optional) Rate Limiter Allowed Prefixes. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. See [Rate Limiter Allowed Prefixes](#rate-limiter-allowed-prefixes) below for details.
+
+`request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. See [Request Cookies To Add](#request-cookies-to-add) below for details.
+
+`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream (`List`).
+
+`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied. See [Request Headers To Add](#request-headers-to-add) below for details.
+
+`request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
+
+`response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. See [Response Cookies To Add](#response-cookies-to-add) below for details.
+
+`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed (`List`).
+
+`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied. See [Response Headers To Add](#response-headers-to-add) below for details.
+
+`response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
+
+`retry_policy` - (Optional) Retry Policy. Retry policy configuration for route destination. See [Retry Policy](#retry-policy) below for details.
+
+`routes` - (Optional) Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. See [Routes](#routes) below for details.
+
+`sensitive_data_policy` - (Optional) Sensitive Data Discovery. References to sensitive_data_policy objects. See [Sensitive Data Policy](#sensitive-data-policy) below for details.
+
+`server_name` - (Optional) Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header (`String`).
+
+`slow_ddos_mitigation` - (Optional) Slow DDoS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users. See [Slow Ddos Mitigation](#slow-ddos-mitigation) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+> **Note:** One of the arguments from this list "tls_cert_params, tls_parameters" must be set.
+
+`tls_cert_params` - (Optional) Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store. See [Tls Cert Params](#tls-cert-params) below for details.
+
+`tls_parameters` - (Optional) Downstream TLS Parameters. TLS configuration for downstream connections. See [Tls Parameters](#tls-parameters) below for details.
+
+`user_identification` - (Optional) User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. See [User Identification](#user-identification) below for details.
+
+`waf_type` - (Optional) WAF Instance. WAF instance will be pointing to an app_firewall object. See [Waf Type](#waf-type) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--advertise_policies"></a>
 
+### Advertise Policies
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--authentication"></a>
+
+### Authentication
+
+`auth_config` - (Optional) Reference to Authentication Object. Reference to Authentication Config Object. See [Auth Config](#nestedblock--authentication--auth_config) below.
+
+`cookie_params` - (Optional) Cookie Parameters. Specifies different cookie related config parameters for authentication. See [Cookie Params](#nestedblock--authentication--cookie_params) below.
+
+`redirect_dynamic` - (Optional) Empty. This can be used for messages where no values are needed. See [Redirect Dynamic](#nestedblock--authentication--redirect_dynamic) below.
+
+`redirect_url` - (Optional) Configure Redirect URL. user can provide a url for e.g `https://abc.xyz.com` where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider (`String`).
+
+`use_auth_object_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Auth Object Config](#nestedblock--authentication--use_auth_object_config) below.
 
 <a id="nestedblock--authentication--auth_config"></a>
 
+### Authentication Auth Config
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--authentication--cookie_params"></a>
+
+### Authentication Cookie Params
+
+`auth_hmac` - (Optional) HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid. See [Auth Hmac](#nestedblock--authentication--cookie_params--auth_hmac) below.
+
+`cookie_expiry` - (Optional) Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie (`Number`).
+
+`cookie_refresh_interval` - (Optional) Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce re-login (`Number`).
+
+`kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object. See [Kms Key Hmac](#nestedblock--authentication--cookie_params--kms_key_hmac) below.
+
+`session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
 
 <a id="nestedblock--authentication--cookie_params--auth_hmac"></a>
 
+### Authentication Cookie Params Auth Hmac
+
+`prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Prim Key](#nestedblock--authentication--cookie_params--auth_hmac--prim_key) below.
+
+`prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time (`String`).
+
+`sec_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Sec Key](#nestedblock--authentication--cookie_params--auth_hmac--sec_key) below.
+
+`sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time (`String`).
+
 <a id="nestedblock--authentication--cookie_params--auth_hmac--prim_key"></a>
+
+### Authentication Cookie Params Auth Hmac Prim Key
 
 <a id="nestedblock--authentication--cookie_params--auth_hmac--sec_key"></a>
 
+### Authentication Cookie Params Auth Hmac Sec Key
+
 <a id="nestedblock--authentication--cookie_params--kms_key_hmac"></a>
+
+### Authentication Cookie Params Kms Key Hmac
 
 <a id="nestedblock--authentication--redirect_dynamic"></a>
 
+### Authentication Redirect Dynamic
+
 <a id="nestedblock--authentication--use_auth_object_config"></a>
+
+### Authentication Use Auth Object Config
 
 <a id="nestedblock--buffer_policy"></a>
 
+### Buffer Policy
+
+`disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
+
+`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
+
 <a id="nestedblock--captcha_challenge"></a>
+
+### Captcha Challenge
+
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
+
+`custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
 
 <a id="nestedblock--coalescing_options"></a>
 
+### Coalescing Options
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Coalescing](#nestedblock--coalescing_options--default_coalescing) below.
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed. See [Strict Coalescing](#nestedblock--coalescing_options--strict_coalescing) below.
+
 <a id="nestedblock--coalescing_options--default_coalescing"></a>
+
+### Coalescing Options Default Coalescing
 
 <a id="nestedblock--coalescing_options--strict_coalescing"></a>
 
+### Coalescing Options Strict Coalescing
+
 <a id="nestedblock--compression_params"></a>
+
+### Compression Params
+
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
+
+`content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascri... (`List`).
+
+`disable_on_etag_header` - (Optional) Disable On Etag Header. If true, disables compression when the response contains an etag header (`Bool`).
+
+`remove_accept_encoding_header` - (Optional) Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter (`Bool`).
 
 <a id="nestedblock--cors_policy"></a>
 
+### Cors Policy
+
+`allow_credentials` - (Optional) Allow Credentials. Specifies whether the resource allows credentials (`Bool`).
+
+`allow_headers` - (Optional) Allow Headers. Specifies the content for the access-control-allow-headers header (`String`).
+
+`allow_methods` - (Optional) Allow Methods. Specifies the content for the access-control-allow-methods header (`String`).
+
+`allow_origin` - (Optional) Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
+
+`allow_origin_regex` - (Optional) Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
+
+`disabled` - (Optional) Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route (`Bool`).
+
+`expose_headers` - (Optional) Expose Headers. Specifies the content for the access-control-expose-headers header (`String`).
+
+`maximum_age` - (Optional) Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching (`Number`).
+
 <a id="nestedblock--csrf_policy"></a>
+
+### Csrf Policy
+
+`all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed. See [All Load Balancer Domains](#nestedblock--csrf_policy--all_load_balancer_domains) below.
+
+`custom_domain_list` - (Optional) Domain name list. List of domain names used for Host header matching. See [Custom Domain List](#nestedblock--csrf_policy--custom_domain_list) below.
+
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#nestedblock--csrf_policy--disabled) below.
 
 <a id="nestedblock--csrf_policy--all_load_balancer_domains"></a>
 
+### Csrf Policy All Load Balancer Domains
+
 <a id="nestedblock--csrf_policy--custom_domain_list"></a>
+
+### Csrf Policy Custom Domain List
+
+`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form (`List`).
 
 <a id="nestedblock--csrf_policy--disabled"></a>
 
+### Csrf Policy Disabled
+
 <a id="nestedblock--custom_errors"></a>
+
+### Custom Errors
 
 <a id="nestedblock--default_header"></a>
 
+### Default Header
+
 <a id="nestedblock--default_loadbalancer"></a>
+
+### Default Loadbalancer
 
 <a id="nestedblock--disable_path_normalize"></a>
 
+### Disable Path Normalize
+
 <a id="nestedblock--dynamic_reverse_proxy"></a>
+
+### Dynamic Reverse Proxy
+
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
+
+`resolution_network` - (Optional) Resolution Network. Reference to virtual network where the endpoint is resolved. Reference is valid only when the network type is VIRTUAL_NETWORK_PER_SITE or VIRTUAL_NETWORK_GLOBAL. See [Resolution Network](#nestedblock--dynamic_reverse_proxy--resolution_network) below.
+
+`resolution_network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
+
+`resolve_endpoint_dynamically` - (Optional) Dynamic Endpoint Resolution. x-example : true In this mode of proxy, virtual host will resolve the destination endpoint dynamically (`Bool`).
 
 <a id="nestedblock--dynamic_reverse_proxy--resolution_network"></a>
 
+### Dynamic Reverse Proxy Resolution Network
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--enable_path_normalize"></a>
+
+### Enable Path Normalize
 
 <a id="nestedblock--http_protocol_options"></a>
 
+### Http Protocol Options
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [Http Protocol Enable V1 Only](#nestedblock--http_protocol_options--http_protocol_enable_v1_only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed. See [Http Protocol Enable V1 V2](#nestedblock--http_protocol_options--http_protocol_enable_v1_v2) below.
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed. See [Http Protocol Enable V2 Only](#nestedblock--http_protocol_options--http_protocol_enable_v2_only) below.
+
 <a id="nestedblock--http_protocol_options--http_protocol_enable_v1_only"></a>
+
+### Http Protocol Options Http Protocol Enable V1 Only
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation) below.
 
 <a id="nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation"></a>
 
+### Http Protocol Options Http Protocol Enable V1 Only Header Transformation
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header Transformation](#nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation--default_header_transformation) below.
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Legacy Header Transformation](#nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation--legacy_header_transformation) below.
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Preserve Case Header Transformation](#nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation--preserve_case_header_transformation) below.
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Proper Case Header Transformation](#nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation--proper_case_header_transformation) below.
+
 <a id="nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation--default_header_transformation"></a>
+
+### Http Protocol Options Http Protocol Enable V1 Only Header Transformation Default Header Transformation
 
 <a id="nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation--legacy_header_transformation"></a>
 
+### Http Protocol Options Http Protocol Enable V1 Only Header Transformation Legacy Header Transformation
+
 <a id="nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation--preserve_case_header_transformation"></a>
+
+### Http Protocol Options Http Protocol Enable V1 Only Header Transformation Preserve Case Header Transformation
 
 <a id="nestedblock--http_protocol_options--http_protocol_enable_v1_only--header_transformation--proper_case_header_transformation"></a>
 
+### Http Protocol Options Http Protocol Enable V1 Only Header Transformation Proper Case Header Transformation
+
 <a id="nestedblock--http_protocol_options--http_protocol_enable_v1_v2"></a>
+
+### Http Protocol Options Http Protocol Enable V1 V2
 
 <a id="nestedblock--http_protocol_options--http_protocol_enable_v2_only"></a>
 
+### Http Protocol Options Http Protocol Enable V2 Only
+
 <a id="nestedblock--js_challenge"></a>
+
+### Js Challenge
+
+`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
+
+`custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format (`String`).
+
+`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
 <a id="nestedblock--no_authentication"></a>
 
+### No Authentication
+
 <a id="nestedblock--no_challenge"></a>
+
+### No Challenge
 
 <a id="nestedblock--non_default_loadbalancer"></a>
 
+### Non Default Loadbalancer
+
 <a id="nestedblock--pass_through"></a>
+
+### Pass Through
 
 <a id="nestedblock--rate_limiter_allowed_prefixes"></a>
 
+### Rate Limiter Allowed Prefixes
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--request_cookies_to_add"></a>
+
+### Request Cookies To Add
+
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--request_cookies_to_add--secret_value) below.
+
+`value` - (Optional) Value. Value of the Cookie header (`String`).
 
 <a id="nestedblock--request_cookies_to_add--secret_value"></a>
 
+### Request Cookies To Add Secret Value
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--request_cookies_to_add--secret_value--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--request_cookies_to_add--secret_value--clear_secret_info) below.
+
 <a id="nestedblock--request_cookies_to_add--secret_value--blindfold_secret_info"></a>
+
+### Request Cookies To Add Secret Value Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--request_cookies_to_add--secret_value--clear_secret_info"></a>
 
+### Request Cookies To Add Secret Value Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--request_headers_to_add"></a>
+
+### Request Headers To Add
+
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+
+`name` - (Optional) Name. Name of the HTTP header (`String`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--request_headers_to_add--secret_value) below.
+
+`value` - (Optional) Value. Value of the HTTP header (`String`).
 
 <a id="nestedblock--request_headers_to_add--secret_value"></a>
 
+### Request Headers To Add Secret Value
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--request_headers_to_add--secret_value--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--request_headers_to_add--secret_value--clear_secret_info) below.
+
 <a id="nestedblock--request_headers_to_add--secret_value--blindfold_secret_info"></a>
+
+### Request Headers To Add Secret Value Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--request_headers_to_add--secret_value--clear_secret_info"></a>
 
+### Request Headers To Add Secret Value Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--response_cookies_to_add"></a>
+
+### Response Cookies To Add
+
+`add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
+
+`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
+
+`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#nestedblock--response_cookies_to_add--add_httponly) below.
+
+`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#nestedblock--response_cookies_to_add--add_partitioned) below.
+
+`add_path` - (Optional) Add path. Add path attribute (`String`).
+
+`add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#nestedblock--response_cookies_to_add--add_secure) below.
+
+`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Domain](#nestedblock--response_cookies_to_add--ignore_domain) below.
+
+`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Expiry](#nestedblock--response_cookies_to_add--ignore_expiry) below.
+
+`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Httponly](#nestedblock--response_cookies_to_add--ignore_httponly) below.
+
+`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Max Age](#nestedblock--response_cookies_to_add--ignore_max_age) below.
+
+`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Partitioned](#nestedblock--response_cookies_to_add--ignore_partitioned) below.
+
+`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Path](#nestedblock--response_cookies_to_add--ignore_path) below.
+
+`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Samesite](#nestedblock--response_cookies_to_add--ignore_samesite) below.
+
+`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Secure](#nestedblock--response_cookies_to_add--ignore_secure) below.
+
+`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Value](#nestedblock--response_cookies_to_add--ignore_value) below.
+
+`max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
+
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+
+`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Lax](#nestedblock--response_cookies_to_add--samesite_lax) below.
+
+`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite None](#nestedblock--response_cookies_to_add--samesite_none) below.
+
+`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Strict](#nestedblock--response_cookies_to_add--samesite_strict) below.
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--response_cookies_to_add--secret_value) below.
+
+`value` - (Optional) Value. Value of the Cookie header (`String`).
 
 <a id="nestedblock--response_cookies_to_add--add_httponly"></a>
 
+### Response Cookies To Add Add Httponly
+
 <a id="nestedblock--response_cookies_to_add--add_partitioned"></a>
+
+### Response Cookies To Add Add Partitioned
 
 <a id="nestedblock--response_cookies_to_add--add_secure"></a>
 
+### Response Cookies To Add Add Secure
+
 <a id="nestedblock--response_cookies_to_add--ignore_domain"></a>
+
+### Response Cookies To Add Ignore Domain
 
 <a id="nestedblock--response_cookies_to_add--ignore_expiry"></a>
 
+### Response Cookies To Add Ignore Expiry
+
 <a id="nestedblock--response_cookies_to_add--ignore_httponly"></a>
+
+### Response Cookies To Add Ignore Httponly
 
 <a id="nestedblock--response_cookies_to_add--ignore_max_age"></a>
 
+### Response Cookies To Add Ignore Max Age
+
 <a id="nestedblock--response_cookies_to_add--ignore_partitioned"></a>
+
+### Response Cookies To Add Ignore Partitioned
 
 <a id="nestedblock--response_cookies_to_add--ignore_path"></a>
 
+### Response Cookies To Add Ignore Path
+
 <a id="nestedblock--response_cookies_to_add--ignore_samesite"></a>
+
+### Response Cookies To Add Ignore Samesite
 
 <a id="nestedblock--response_cookies_to_add--ignore_secure"></a>
 
+### Response Cookies To Add Ignore Secure
+
 <a id="nestedblock--response_cookies_to_add--ignore_value"></a>
+
+### Response Cookies To Add Ignore Value
 
 <a id="nestedblock--response_cookies_to_add--samesite_lax"></a>
 
+### Response Cookies To Add Samesite Lax
+
 <a id="nestedblock--response_cookies_to_add--samesite_none"></a>
+
+### Response Cookies To Add Samesite None
 
 <a id="nestedblock--response_cookies_to_add--samesite_strict"></a>
 
+### Response Cookies To Add Samesite Strict
+
 <a id="nestedblock--response_cookies_to_add--secret_value"></a>
+
+### Response Cookies To Add Secret Value
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--response_cookies_to_add--secret_value--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--response_cookies_to_add--secret_value--clear_secret_info) below.
 
 <a id="nestedblock--response_cookies_to_add--secret_value--blindfold_secret_info"></a>
 
+### Response Cookies To Add Secret Value Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
 <a id="nestedblock--response_cookies_to_add--secret_value--clear_secret_info"></a>
+
+### Response Cookies To Add Secret Value Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
 
 <a id="nestedblock--response_headers_to_add"></a>
 
+### Response Headers To Add
+
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+
+`name` - (Optional) Name. Name of the HTTP header (`String`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--response_headers_to_add--secret_value) below.
+
+`value` - (Optional) Value. Value of the HTTP header (`String`).
+
 <a id="nestedblock--response_headers_to_add--secret_value"></a>
+
+### Response Headers To Add Secret Value
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--response_headers_to_add--secret_value--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--response_headers_to_add--secret_value--clear_secret_info) below.
 
 <a id="nestedblock--response_headers_to_add--secret_value--blindfold_secret_info"></a>
 
+### Response Headers To Add Secret Value Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
 <a id="nestedblock--response_headers_to_add--secret_value--clear_secret_info"></a>
+
+### Response Headers To Add Secret Value Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
 
 <a id="nestedblock--retry_policy"></a>
 
+### Retry Policy
+
+`back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#nestedblock--retry_policy--back_off) below.
+
+`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry (`Number`).
+
+`per_try_timeout` - (Optional) Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds (`Number`).
+
+`retriable_status_codes` - (Optional) Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on (`List`).
+
+`retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements (`List`).
+
 <a id="nestedblock--retry_policy--back_off"></a>
+
+### Retry Policy Back Off
+
+`base_interval` - (Optional) Base Retry Interval. Specifies the base interval between retries in milliseconds (`Number`).
+
+`max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set (`Number`).
 
 <a id="nestedblock--routes"></a>
 
+### Routes
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--sensitive_data_policy"></a>
+
+### Sensitive Data Policy
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--slow_ddos_mitigation"></a>
 
+### Slow Ddos Mitigation
+
+`disable_request_timeout` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Request Timeout](#nestedblock--slow_ddos_mitigation--disable_request_timeout) below.
+
+`request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds (`Number`).
+
+`request_timeout` - (Optional) Custom Timeout (`Number`).
+
 <a id="nestedblock--slow_ddos_mitigation--disable_request_timeout"></a>
+
+### Slow Ddos Mitigation Disable Request Timeout
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
 <a id="nestedblock--tls_cert_params"></a>
+
+### Tls Cert Params
+
+`certificates` - (Optional) Certificates. Set of certificates. See [Certificates](#nestedblock--tls_cert_params--certificates) below.
+
+`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_E... (`List`).
+
+`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Optional](#nestedblock--tls_cert_params--client_certificate_optional) below.
+
+`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Required](#nestedblock--tls_cert_params--client_certificate_required) below.
+
+`maximum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3` (`String`).
+
+`minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3` (`String`).
+
+`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [No Client Certificate](#nestedblock--tls_cert_params--no_client_certificate) below.
+
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#nestedblock--tls_cert_params--validation_params) below.
+
+`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
 
 <a id="nestedblock--tls_cert_params--certificates"></a>
 
+### Tls Cert Params Certificates
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--tls_cert_params--client_certificate_optional"></a>
+
+### Tls Cert Params Client Certificate Optional
 
 <a id="nestedblock--tls_cert_params--client_certificate_required"></a>
 
+### Tls Cert Params Client Certificate Required
+
 <a id="nestedblock--tls_cert_params--no_client_certificate"></a>
+
+### Tls Cert Params No Client Certificate
 
 <a id="nestedblock--tls_cert_params--validation_params"></a>
 
+### Tls Cert Params Validation Params
+
+`skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
+
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca](#nestedblock--tls_cert_params--validation_params--trusted_ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
+
+`verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate (`List`).
+
 <a id="nestedblock--tls_cert_params--validation_params--trusted_ca"></a>
+
+### Tls Cert Params Validation Params Trusted Ca
+
+`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca List](#nestedblock--tls_cert_params--validation_params--trusted_ca--trusted_ca_list) below.
 
 <a id="nestedblock--tls_cert_params--validation_params--trusted_ca--trusted_ca_list"></a>
 
+### Tls Cert Params Validation Params Trusted Ca Trusted Ca List
+
 <a id="nestedblock--tls_parameters"></a>
+
+### Tls Parameters
+
+`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Optional](#nestedblock--tls_parameters--client_certificate_optional) below.
+
+`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Required](#nestedblock--tls_parameters--client_certificate_required) below.
+
+`common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#nestedblock--tls_parameters--common_params) below.
+
+`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [No Client Certificate](#nestedblock--tls_parameters--no_client_certificate) below.
+
+`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
 
 <a id="nestedblock--tls_parameters--client_certificate_optional"></a>
 
+### Tls Parameters Client Certificate Optional
+
 <a id="nestedblock--tls_parameters--client_certificate_required"></a>
+
+### Tls Parameters Client Certificate Required
 
 <a id="nestedblock--tls_parameters--common_params"></a>
 
+### Tls Parameters Common Params
+
+`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_E... (`List`).
+
+`maximum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3` (`String`).
+
+`minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3` (`String`).
+
+`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates. See [Tls Certificates](#nestedblock--tls_parameters--common_params--tls_certificates) below.
+
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#nestedblock--tls_parameters--common_params--validation_params) below.
+
 <a id="nestedblock--tls_parameters--common_params--tls_certificates"></a>
+
+### Tls Parameters Common Params Tls Certificates
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ocsp Stapling](#nestedblock--tls_parameters--common_params--tls_certificates--disable_ocsp_stapling) below.
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--tls_parameters--common_params--tls_certificates--private_key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--tls_parameters--common_params--tls_certificates--use_system_defaults) below.
 
 <a id="nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms"></a>
 
+### Tls Parameters Common Params Tls Certificates Custom Hash Algorithms
+
 <a id="nestedblock--tls_parameters--common_params--tls_certificates--disable_ocsp_stapling"></a>
+
+### Tls Parameters Common Params Tls Certificates Disable Ocsp Stapling
 
 <a id="nestedblock--tls_parameters--common_params--tls_certificates--private_key"></a>
 
+### Tls Parameters Common Params Tls Certificates Private Key
+
 <a id="nestedblock--tls_parameters--common_params--tls_certificates--use_system_defaults"></a>
+
+### Tls Parameters Common Params Tls Certificates Use System Defaults
 
 <a id="nestedblock--tls_parameters--common_params--validation_params"></a>
 
+### Tls Parameters Common Params Validation Params
+
+`skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
+
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted Ca](#nestedblock--tls_parameters--common_params--validation_params--trusted_ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
+
+`verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate (`List`).
+
 <a id="nestedblock--tls_parameters--common_params--validation_params--trusted_ca"></a>
+
+### Tls Parameters Common Params Validation Params Trusted Ca
 
 <a id="nestedblock--tls_parameters--no_client_certificate"></a>
 
+### Tls Parameters No Client Certificate
+
 <a id="nestedblock--user_identification"></a>
+
+### User Identification
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--waf_type"></a>
 
+### Waf Type
+
+`app_firewall` - (Optional) App Firewall Reference. A list of references to the app_firewall configuration objects. See [App Firewall](#nestedblock--waf_type--app_firewall) below.
+
+`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Waf](#nestedblock--waf_type--disable_waf) below.
+
+`inherit_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherit Waf](#nestedblock--waf_type--inherit_waf) below.
+
 <a id="nestedblock--waf_type--app_firewall"></a>
+
+### Waf Type App Firewall
+
+`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object. See [App Firewall](#nestedblock--waf_type--app_firewall--app_firewall) below.
 
 <a id="nestedblock--waf_type--app_firewall--app_firewall"></a>
 
+### Waf Type App Firewall App Firewall
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--waf_type--disable_waf"></a>
 
+### Waf Type Disable Waf
+
 <a id="nestedblock--waf_type--inherit_waf"></a>
+
+### Waf Type Inherit Waf
 
 ## Import
 

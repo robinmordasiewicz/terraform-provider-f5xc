@@ -32,18 +32,18 @@ resource "f5xc_tenant_profile" "example" {
   }
 
   # Resource-specific configuration
-    # Child Tenant Groups. List of user groups to be created on...
-    ct_groups {
-      # Configure ct_groups settings
-    }
-    # Namespace Roles. [x-example: 'monitor, system:monitor-rol...
-    namespace_roles {
-      # Configure namespace_roles settings
-    }
-    # File. Contains file data
-    favicon {
-      # Configure favicon settings
-    }
+  # Child Tenant Groups. List of user groups to be created on...
+  ct_groups {
+    # Configure ct_groups settings
+  }
+  # Namespace Roles. [x-example: 'monitor, system:monitor-rol...
+  namespace_roles {
+    # Configure namespace_roles settings
+  }
+  # File. Contains file data
+  favicon {
+    # Configure favicon settings
+  }
 }
 ```
 
@@ -52,29 +52,103 @@ resource "f5xc_tenant_profile" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the TenantProfile. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the TenantProfile will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`ct_groups` - (Optional) Child Tenant Groups. List of user groups to be created on child tenant. See [Ct Groups](#ct-groups) below for details.
+
+`enable_support_access` - (Optional) Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support (`Bool`).
+
+`favicon` - (Optional) File. Contains file data. See [Favicon](#favicon) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`logo` - (Optional) File. Contains file data. See [Logo](#logo) below for details.
+
+`plan` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Plan](#plan) below for details.
+
+`support_email` - (Optional) Support Email. Support Email address for child tenant (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--ct_groups"></a>
 
+### Ct Groups
+
+`name` - (Optional) Name. Name of the child tenant user group (`String`).
+
+`namespace_roles` - (Optional) Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant. See [Namespace Roles](#nestedblock--ct_groups--namespace_roles) below.
+
 <a id="nestedblock--ct_groups--namespace_roles"></a>
+
+### Ct Groups Namespace Roles
+
+`namespace` - (Optional) Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces (`String`).
+
+`role` - (Optional) Role. User role that users in the newly created group will inherit (`String`).
 
 <a id="nestedblock--favicon"></a>
 
+### Favicon
+
+`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [Aws S3](#nestedblock--favicon--aws_s3) below.
+
+`content` - (Optional) Content. Content of the file (`String`).
+
+`content_type` - (Optional) Content Type. Content type of the file (MIME type) (`String`).
+
 <a id="nestedblock--favicon--aws_s3"></a>
+
+### Favicon Aws S3
 
 <a id="nestedblock--logo"></a>
 
+### Logo
+
+`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [Aws S3](#nestedblock--logo--aws_s3) below.
+
+`content` - (Optional) Content. Content of the file (`String`).
+
+`content_type` - (Optional) Content Type. Content type of the file (MIME type) (`String`).
+
 <a id="nestedblock--logo--aws_s3"></a>
+
+### Logo Aws S3
 
 <a id="nestedblock--plan"></a>
 
+### Plan
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

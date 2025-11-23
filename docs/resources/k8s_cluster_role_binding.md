@@ -32,18 +32,18 @@ resource "f5xc_k8s_cluster_role_binding" "example" {
   }
 
   # Resource-specific configuration
-    # Object reference. This type establishes a direct referenc...
-    k8s_cluster_role {
-      # Configure k8s_cluster_role settings
-    }
-    # Subjects. List of subjects (user, group or service accoun...
-    subjects {
-      # Configure subjects settings
-    }
-    # ServiceAccountType.
-    service_account {
-      # Configure service_account settings
-    }
+  # Object reference. This type establishes a direct referenc...
+  k8s_cluster_role {
+    # Configure k8s_cluster_role settings
+  }
+  # Subjects. List of subjects (user, group or service accoun...
+  subjects {
+    # Configure subjects settings
+  }
+  # ServiceAccountType.
+  service_account {
+    # Configure service_account settings
+  }
 }
 ```
 
@@ -52,21 +52,69 @@ resource "f5xc_k8s_cluster_role_binding" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the K8SClusterRoleBinding. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the K8SClusterRoleBinding will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`k8s_cluster_role` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster Role](#k8s-cluster-role) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`subjects` - (Optional) Subjects. List of subjects (user, group or service account) to which this role is bound. See [Subjects](#subjects) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--k8s_cluster_role"></a>
 
+### K8s Cluster Role
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--subjects"></a>
+
+### Subjects
+
+`group` - (Optional) Group. Group id of the user group (`String`).
+
+`service_account` - (Optional) ServiceAccountType. See [Service Account](#nestedblock--subjects--service_account) below.
+
+`user` - (Optional) User. User id of the user (`String`).
 
 <a id="nestedblock--subjects--service_account"></a>
 
+### Subjects Service Account
+
+`name` - (Optional) Name. Name of the service account (`String`).
+
+`namespace` - (Optional) Namespace. Namespace of the service account (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

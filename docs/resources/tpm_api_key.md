@@ -32,10 +32,10 @@ resource "f5xc_tpm_api_key" "example" {
   }
 
   # Resource-specific configuration
-    # TPM Category. APIKey needs a reference to an existing TPM...
-    category_ref {
-      # Configure category_ref settings
-    }
+  # TPM Category. APIKey needs a reference to an existing TPM...
+  category_ref {
+    # Configure category_ref settings
+  }
 }
 ```
 
@@ -44,17 +44,55 @@ resource "f5xc_tpm_api_key" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the TpmAPIKey. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the TpmAPIKey will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`category_ref` - (Optional) TPM Category. APIKey needs a reference to an existing TPM category object TPM category is used for grouping customer owned APIKeys and manage them as one entity. See [Category Ref](#category-ref) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`need_mtls` - (Optional) Need mTLS. is mTLS required when using this APIKey? (`Bool`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--category_ref"></a>
 
+### Category Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

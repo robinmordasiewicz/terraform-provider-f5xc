@@ -54,125 +54,433 @@ resource "f5xc_service_policy" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the ServicePolicy. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the ServicePolicy will be created (`String`).
+
 The following arguments are optional:
+
+> **Note:** One of the arguments from this list "allow_all_requests, allow_list, deny_all_requests, deny_list, rule_list" must be set.
+
+`allow_all_requests` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Requests](#allow-all-requests) below for details.
+
+`allow_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Allow List](#allow-list) below for details.
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "any_server, server_name, server_name_matcher, server_selector" must be set.
+
+`any_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Server](#any-server) below for details.
+
+`deny_all_requests` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Requests](#deny-all-requests) below for details.
+
+`deny_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Deny List](#deny-list) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`rule_list` - (Optional) Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm. See [Rule List](#rule-list) below for details.
+
+`server_name` - (Optional) Server Name. The expected name of the server to which the request API is directed (`String`).
+
+`server_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Server Name Matcher](#server-name-matcher) below for details.
+
+`server_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Server Selector](#server-selector) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--allow_all_requests"></a>
 
+### Allow All Requests
+
 <a id="nestedblock--allow_list"></a>
+
+### Allow List
+
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. See [Asn List](#nestedblock--allow_list--asn_list) below.
+
+`asn_set` - (Optional) BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. See [Asn Set](#nestedblock--allow_list--asn_set) below.
+
+`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB (`List`).
+
+`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Allow](#nestedblock--allow_list--default_action_allow) below.
+
+`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Deny](#nestedblock--allow_list--default_action_deny) below.
+
+`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#nestedblock--allow_list--default_action_next_policy) below.
+
+`ip_prefix_set` - (Optional) IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set. See [Ip Prefix Set](#nestedblock--allow_list--ip_prefix_set) below.
+
+`prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#nestedblock--allow_list--prefix_list) below.
+
+`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`tls_fingerprint_values` - (Optional) TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
 <a id="nestedblock--allow_list--asn_list"></a>
 
+### Allow List Asn List
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy (`List`).
+
 <a id="nestedblock--allow_list--asn_set"></a>
+
+### Allow List Asn Set
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--allow_list--default_action_allow"></a>
 
+### Allow List Default Action Allow
+
 <a id="nestedblock--allow_list--default_action_deny"></a>
+
+### Allow List Default Action Deny
 
 <a id="nestedblock--allow_list--default_action_next_policy"></a>
 
+### Allow List Default Action Next Policy
+
 <a id="nestedblock--allow_list--ip_prefix_set"></a>
+
+### Allow List Ip Prefix Set
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--allow_list--prefix_list"></a>
 
+### Allow List Prefix List
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
+
 <a id="nestedblock--any_server"></a>
+
+### Any Server
 
 <a id="nestedblock--deny_all_requests"></a>
 
+### Deny All Requests
+
 <a id="nestedblock--deny_list"></a>
+
+### Deny List
+
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. See [Asn List](#nestedblock--deny_list--asn_list) below.
+
+`asn_set` - (Optional) BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. See [Asn Set](#nestedblock--deny_list--asn_set) below.
+
+`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB (`List`).
+
+`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Allow](#nestedblock--deny_list--default_action_allow) below.
+
+`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Deny](#nestedblock--deny_list--default_action_deny) below.
+
+`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#nestedblock--deny_list--default_action_next_policy) below.
+
+`ip_prefix_set` - (Optional) IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set. See [Ip Prefix Set](#nestedblock--deny_list--ip_prefix_set) below.
+
+`prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#nestedblock--deny_list--prefix_list) below.
+
+`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`tls_fingerprint_values` - (Optional) TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
 <a id="nestedblock--deny_list--asn_list"></a>
 
+### Deny List Asn List
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy (`List`).
+
 <a id="nestedblock--deny_list--asn_set"></a>
+
+### Deny List Asn Set
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--deny_list--default_action_allow"></a>
 
+### Deny List Default Action Allow
+
 <a id="nestedblock--deny_list--default_action_deny"></a>
+
+### Deny List Default Action Deny
 
 <a id="nestedblock--deny_list--default_action_next_policy"></a>
 
+### Deny List Default Action Next Policy
+
 <a id="nestedblock--deny_list--ip_prefix_set"></a>
+
+### Deny List Ip Prefix Set
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--deny_list--prefix_list"></a>
 
+### Deny List Prefix List
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
+
 <a id="nestedblock--rule_list"></a>
+
+### Rule List
+
+`rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. See [Rules](#nestedblock--rule_list--rules) below.
 
 <a id="nestedblock--rule_list--rules"></a>
 
+### Rule List Rules
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--rule_list--rules--metadata) below.
+
+`spec` - (Optional) Specification. Shape of service_policy_rule in the storage backend. See [Spec](#nestedblock--rule_list--rules--spec) below.
+
 <a id="nestedblock--rule_list--rules--metadata"></a>
+
+### Rule List Rules Metadata
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--rule_list--rules--spec"></a>
 
+### Rule List Rules Spec
+
+`action` - (Optional) Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward (`String`).
+
+`any_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Asn](#nestedblock--rule_list--rules--spec--any_asn) below.
+
+`any_client` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Client](#nestedblock--rule_list--rules--spec--any_client) below.
+
+`any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Ip](#nestedblock--rule_list--rules--spec--any_ip) below.
+
+`api_group_matcher` - (Optional) String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. See [Api Group Matcher](#nestedblock--rule_list--rules--spec--api_group_matcher) below.
+
+`arg_matchers` - (Optional) Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. See [Arg Matchers](#nestedblock--rule_list--rules--spec--arg_matchers) below.
+
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. See [Asn List](#nestedblock--rule_list--rules--spec--asn_list) below.
+
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--rule_list--rules--spec--asn_matcher) below.
+
+`body_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Body Matcher](#nestedblock--rule_list--rules--spec--body_matcher) below.
+
+`bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing. See [Bot Action](#nestedblock--rule_list--rules--spec--bot_action) below.
+
+`client_name` - (Optional) Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name (`String`).
+
+`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Client Name Matcher](#nestedblock--rule_list--rules--spec--client_name_matcher) below.
+
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Client Selector](#nestedblock--rule_list--rules--spec--client_selector) below.
+
+`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. See [Cookie Matchers](#nestedblock--rule_list--rules--spec--cookie_matchers) below.
+
+`domain_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Domain Matcher](#nestedblock--rule_list--rules--spec--domain_matcher) below.
+
+`expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired (`String`).
+
+`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. See [Headers](#nestedblock--rule_list--rules--spec--headers) below.
+
+`http_method` - (Optional) HTTP Method Matcher. A http method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. See [Http Method](#nestedblock--rule_list--rules--spec--http_method) below.
+
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [Ip Matcher](#nestedblock--rule_list--rules--spec--ip_matcher) below.
+
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [Ip Prefix List](#nestedblock--rule_list--rules--spec--ip_prefix_list) below.
+
+`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of ip threat categories. See [Ip Threat Category List](#nestedblock--rule_list--rules--spec--ip_threat_category_list) below.
+
+`ja4_tls_fingerprint` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 Tls Fingerprint](#nestedblock--rule_list--rules--spec--ja4_tls_fingerprint) below.
+
+`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. See [Jwt Claims](#nestedblock--rule_list--rules--spec--jwt_claims) below.
+
+`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. See [Label Matcher](#nestedblock--rule_list--rules--spec--label_matcher) below.
+
+`mum_action` - (Optional) Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing. See [Mum Action](#nestedblock--rule_list--rules--spec--mum_action) below.
+
+`path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. See [Path](#nestedblock--rule_list--rules--spec--path) below.
+
+`port_matcher` - (Optional) Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. See [Port Matcher](#nestedblock--rule_list--rules--spec--port_matcher) below.
+
+`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. See [Query Params](#nestedblock--rule_list--rules--spec--query_params) below.
+
+`request_constraints` - (Optional) Request Constraints. See [Request Constraints](#nestedblock--rule_list--rules--spec--request_constraints) below.
+
+`segment_policy` - (Optional) Configure Segments. Configure source and destination segment for policy. See [Segment Policy](#nestedblock--rule_list--rules--spec--segment_policy) below.
+
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. See [Tls Fingerprint Matcher](#nestedblock--rule_list--rules--spec--tls_fingerprint_matcher) below.
+
+`user_identity_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [User Identity Matcher](#nestedblock--rule_list--rules--spec--user_identity_matcher) below.
+
+`waf_action` - (Optional) App Firewall Action. Modify App Firewall behavior for a matching request. See [Waf Action](#nestedblock--rule_list--rules--spec--waf_action) below.
+
 <a id="nestedblock--rule_list--rules--spec--any_asn"></a>
+
+### Rule List Rules Spec Any Asn
 
 <a id="nestedblock--rule_list--rules--spec--any_client"></a>
 
+### Rule List Rules Spec Any Client
+
 <a id="nestedblock--rule_list--rules--spec--any_ip"></a>
+
+### Rule List Rules Spec Any Ip
 
 <a id="nestedblock--rule_list--rules--spec--api_group_matcher"></a>
 
+### Rule List Rules Spec Api Group Matcher
+
 <a id="nestedblock--rule_list--rules--spec--arg_matchers"></a>
+
+### Rule List Rules Spec Arg Matchers
 
 <a id="nestedblock--rule_list--rules--spec--asn_list"></a>
 
+### Rule List Rules Spec Asn List
+
 <a id="nestedblock--rule_list--rules--spec--asn_matcher"></a>
+
+### Rule List Rules Spec Asn Matcher
 
 <a id="nestedblock--rule_list--rules--spec--body_matcher"></a>
 
+### Rule List Rules Spec Body Matcher
+
 <a id="nestedblock--rule_list--rules--spec--bot_action"></a>
+
+### Rule List Rules Spec Bot Action
 
 <a id="nestedblock--rule_list--rules--spec--client_name_matcher"></a>
 
+### Rule List Rules Spec Client Name Matcher
+
 <a id="nestedblock--rule_list--rules--spec--client_selector"></a>
+
+### Rule List Rules Spec Client Selector
 
 <a id="nestedblock--rule_list--rules--spec--cookie_matchers"></a>
 
+### Rule List Rules Spec Cookie Matchers
+
 <a id="nestedblock--rule_list--rules--spec--domain_matcher"></a>
+
+### Rule List Rules Spec Domain Matcher
 
 <a id="nestedblock--rule_list--rules--spec--headers"></a>
 
+### Rule List Rules Spec Headers
+
 <a id="nestedblock--rule_list--rules--spec--http_method"></a>
+
+### Rule List Rules Spec Http Method
 
 <a id="nestedblock--rule_list--rules--spec--ip_matcher"></a>
 
+### Rule List Rules Spec Ip Matcher
+
 <a id="nestedblock--rule_list--rules--spec--ip_prefix_list"></a>
+
+### Rule List Rules Spec Ip Prefix List
 
 <a id="nestedblock--rule_list--rules--spec--ip_threat_category_list"></a>
 
+### Rule List Rules Spec Ip Threat Category List
+
 <a id="nestedblock--rule_list--rules--spec--ja4_tls_fingerprint"></a>
+
+### Rule List Rules Spec Ja4 Tls Fingerprint
 
 <a id="nestedblock--rule_list--rules--spec--jwt_claims"></a>
 
+### Rule List Rules Spec Jwt Claims
+
 <a id="nestedblock--rule_list--rules--spec--label_matcher"></a>
+
+### Rule List Rules Spec Label Matcher
 
 <a id="nestedblock--rule_list--rules--spec--mum_action"></a>
 
+### Rule List Rules Spec Mum Action
+
 <a id="nestedblock--rule_list--rules--spec--path"></a>
+
+### Rule List Rules Spec Path
 
 <a id="nestedblock--rule_list--rules--spec--port_matcher"></a>
 
+### Rule List Rules Spec Port Matcher
+
 <a id="nestedblock--rule_list--rules--spec--query_params"></a>
+
+### Rule List Rules Spec Query Params
 
 <a id="nestedblock--rule_list--rules--spec--request_constraints"></a>
 
+### Rule List Rules Spec Request Constraints
+
 <a id="nestedblock--rule_list--rules--spec--segment_policy"></a>
+
+### Rule List Rules Spec Segment Policy
 
 <a id="nestedblock--rule_list--rules--spec--tls_fingerprint_matcher"></a>
 
+### Rule List Rules Spec Tls Fingerprint Matcher
+
 <a id="nestedblock--rule_list--rules--spec--user_identity_matcher"></a>
+
+### Rule List Rules Spec User Identity Matcher
 
 <a id="nestedblock--rule_list--rules--spec--waf_action"></a>
 
+### Rule List Rules Spec Waf Action
+
 <a id="nestedblock--server_name_matcher"></a>
+
+### Server Name Matcher
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--server_selector"></a>
 
+### Server Selector
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

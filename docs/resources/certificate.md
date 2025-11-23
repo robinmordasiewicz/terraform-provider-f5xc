@@ -46,29 +46,101 @@ resource "f5xc_certificate" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Certificate. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Certificate will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`certificate_chain` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Certificate Chain](#certificate-chain) below for details.
+
+`certificate_url` - (Optional) Certificate. Certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+> **Note:** One of the arguments from this list "custom_hash_algorithms, disable_ocsp_stapling, use_system_defaults" must be set.
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ocsp Stapling](#disable-ocsp-stapling) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#private-key) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#use-system-defaults) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--certificate_chain"></a>
 
+### Certificate Chain
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--custom_hash_algorithms"></a>
+
+### Custom Hash Algorithms
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used (`List`).
 
 <a id="nestedblock--disable_ocsp_stapling"></a>
 
+### Disable Ocsp Stapling
+
 <a id="nestedblock--private_key"></a>
+
+### Private Key
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--private_key--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--private_key--clear_secret_info) below.
 
 <a id="nestedblock--private_key--blindfold_secret_info"></a>
 
+### Private Key Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
 <a id="nestedblock--private_key--clear_secret_info"></a>
+
+### Private Key Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
 <a id="nestedblock--use_system_defaults"></a>
+
+### Use System Defaults
 
 ## Import
 

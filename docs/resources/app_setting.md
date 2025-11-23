@@ -32,18 +32,18 @@ resource "f5xc_app_setting" "example" {
   }
 
   # Resource-specific configuration
-    # Customize AppType For This Namespace. List of settings to...
-    app_type_settings {
-      # Configure app_type_settings settings
-    }
-    # AppType. The AppType of App instance in current Namespace...
-    app_type_ref {
-      # Configure app_type_ref settings
-    }
-    # API Discovery. Settings specifying how API Discovery will...
-    business_logic_markup_setting {
-      # Configure business_logic_markup_setting settings
-    }
+  # Customize AppType For This Namespace. List of settings to...
+  app_type_settings {
+    # Configure app_type_settings settings
+  }
+  # AppType. The AppType of App instance in current Namespace...
+  app_type_ref {
+    # Configure app_type_ref settings
+  }
+  # API Discovery. Settings specifying how API Discovery will...
+  business_logic_markup_setting {
+    # Configure business_logic_markup_setting settings
+  }
 }
 ```
 
@@ -52,73 +52,227 @@ resource "f5xc_app_setting" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the AppSetting. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the AppSetting will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`app_type_settings` - (Optional) Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace. See [App Type Settings](#app-type-settings) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--app_type_settings"></a>
 
+### App Type Settings
+
+`app_type_ref` - (Optional) AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data. See [App Type Ref](#nestedblock--app_type_settings--app_type_ref) below.
+
+`business_logic_markup_setting` - (Optional) API Discovery. Settings specifying how API Discovery will be performed. See [Business Logic Markup Setting](#nestedblock--app_type_settings--business_logic_markup_setting) below.
+
+`timeseries_analyses_setting` - (Optional) DDoS Settings. Configuration for DDoS Detection. See [Timeseries Analyses Setting](#nestedblock--app_type_settings--timeseries_analyses_setting) below.
+
+`user_behavior_analysis_setting` - (Optional) User Behavior Analysis Setting. Configuration for user behavior analysis. See [User Behavior Analysis Setting](#nestedblock--app_type_settings--user_behavior_analysis_setting) below.
+
 <a id="nestedblock--app_type_settings--app_type_ref"></a>
+
+### App Type Settings App Type Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--app_type_settings--business_logic_markup_setting"></a>
 
+### App Type Settings Business Logic Markup Setting
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--app_type_settings--business_logic_markup_setting--disable) below.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--app_type_settings--business_logic_markup_setting--enable) below.
+
 <a id="nestedblock--app_type_settings--business_logic_markup_setting--disable"></a>
+
+### App Type Settings Business Logic Markup Setting Disable
 
 <a id="nestedblock--app_type_settings--business_logic_markup_setting--enable"></a>
 
+### App Type Settings Business Logic Markup Setting Enable
+
 <a id="nestedblock--app_type_settings--timeseries_analyses_setting"></a>
+
+### App Type Settings Timeseries Analyses Setting
+
+`metric_selectors` - (Optional) Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic. See [Metric Selectors](#nestedblock--app_type_settings--timeseries_analyses_setting--metric_selectors) below.
 
 <a id="nestedblock--app_type_settings--timeseries_analyses_setting--metric_selectors"></a>
 
+### App Type Settings Timeseries Analyses Setting Metric Selectors
+
+`metric` - (Optional) Metrics. Choose one or more metrics to be included in the detection logic (`List`).
+
+`metrics_source` - (Optional) Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations (`String`).
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting"></a>
+
+### App Type Settings User Behavior Analysis Setting
+
+`disable_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Detection](#nestedblock--app_type_settings--user_behavior_analysis_setting--disable_detection) below.
+
+`disable_learning` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Learning](#nestedblock--app_type_settings--user_behavior_analysis_setting--disable_learning) below.
+
+`enable_detection` - (Optional) Malicious User Detection Settings. Various factors about user activity are monitored and analysed to determine malicious users. See [Enable Detection](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection) below.
+
+`enable_learning` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Learning](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_learning) below.
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--disable_detection"></a>
 
+### App Type Settings User Behavior Analysis Setting Disable Detection
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--disable_learning"></a>
+
+### App Type Settings User Behavior Analysis Setting Disable Learning
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection
+
+`bola_detection_automatic` - (Optional) Empty. This can be used for messages where no values are needed. See [Bola Detection Automatic](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--bola_detection_automatic) below.
+
+`cooling_off_period` - (Optional) Cooling off period. Malicious user detection assigns a threat level to each user based on their activity (`Number`).
+
+`exclude_bola_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Bola Detection](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_bola_detection) below.
+
+`exclude_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Bot Defense Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_bot_defense_activity) below.
+
+`exclude_failed_login_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Failed Login Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_failed_login_activity) below.
+
+`exclude_forbidden_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Forbidden Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_forbidden_activity) below.
+
+`exclude_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Ip Reputation](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_ip_reputation) below.
+
+`exclude_non_existent_url_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Non Existent Url Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_non_existent_url_activity) below.
+
+`exclude_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Rate Limit](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_rate_limit) below.
+
+`exclude_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Waf Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_waf_activity) below.
+
+`include_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Include Bot Defense Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_bot_defense_activity) below.
+
+`include_failed_login_activity` - (Optional) Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. See [Include Failed Login Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_failed_login_activity) below.
+
+`include_forbidden_activity` - (Optional) Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. See [Include Forbidden Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_forbidden_activity) below.
+
+`include_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed. See [Include Ip Reputation](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_ip_reputation) below.
+
+`include_non_existent_url_activity_automatic` - (Optional) Non-existent URL Automatic Activity Settings. See [Include Non Existent Url Activity Automatic](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_non_existent_url_activity_automatic) below.
+
+`include_non_existent_url_activity_custom` - (Optional) Non-existent URL Custom Activity Setting. See [Include Non Existent Url Activity Custom](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_non_existent_url_activity_custom) below.
+
+`include_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed. See [Include Rate Limit](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_rate_limit) below.
+
+`include_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Include Waf Activity](#nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_waf_activity) below.
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--bola_detection_automatic"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Bola Detection Automatic
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_bola_detection"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Bola Detection
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_bot_defense_activity"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Bot Defense Activity
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_failed_login_activity"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Failed Login Activity
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_forbidden_activity"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Forbidden Activity
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_ip_reputation"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Ip Reputation
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_non_existent_url_activity"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Non Existent Url Activity
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_rate_limit"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Rate Limit
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--exclude_waf_activity"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Waf Activity
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_bot_defense_activity"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection Include Bot Defense Activity
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_failed_login_activity"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Include Failed Login Activity
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_forbidden_activity"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection Include Forbidden Activity
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_ip_reputation"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Include Ip Reputation
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_non_existent_url_activity_automatic"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent Url Activity Automatic
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_non_existent_url_activity_custom"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent Url Activity Custom
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_rate_limit"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Detection Include Rate Limit
+
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_detection--include_waf_activity"></a>
+
+### App Type Settings User Behavior Analysis Setting Enable Detection Include Waf Activity
 
 <a id="nestedblock--app_type_settings--user_behavior_analysis_setting--enable_learning"></a>
 
+### App Type Settings User Behavior Analysis Setting Enable Learning
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

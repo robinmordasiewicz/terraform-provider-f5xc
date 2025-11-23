@@ -32,18 +32,18 @@ resource "f5xc_ike1" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
-    ike_keylifetime_hours {
-      # Configure ike_keylifetime_hours settings
-    }
-    # Minutes. Set IKE Key Lifetime in minutes
-    ike_keylifetime_minutes {
-      # Configure ike_keylifetime_minutes settings
-    }
-    # [OneOf: reauth_disabled, reauth_timeout_days, reauth_time...
-    reauth_disabled {
-      # Configure reauth_disabled settings
-    }
+  # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
+  ike_keylifetime_hours {
+    # Configure ike_keylifetime_hours settings
+  }
+  # Minutes. Set IKE Key Lifetime in minutes
+  ike_keylifetime_minutes {
+    # Configure ike_keylifetime_minutes settings
+  }
+  # [OneOf: reauth_disabled, reauth_timeout_days, reauth_time...
+  reauth_disabled {
+    # Configure reauth_disabled settings
+  }
 }
 ```
 
@@ -52,27 +52,85 @@ resource "f5xc_ike1" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Ike1. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Ike1 will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime" must be set.
+
+`ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
+
+`ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "reauth_disabled, reauth_timeout_days, reauth_timeout_hours" must be set.
+
+`reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Reauth Disabled](#reauth-disabled) below for details.
+
+`reauth_timeout_days` - (Optional) Days. Set Duration in days. See [Reauth Timeout Days](#reauth-timeout-days) below for details.
+
+`reauth_timeout_hours` - (Optional) Hours. Input Hours. See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--ike_keylifetime_hours"></a>
 
+### Ike Keylifetime Hours
+
+`duration` - (Optional) Duration (`Number`).
+
 <a id="nestedblock--ike_keylifetime_minutes"></a>
+
+### Ike Keylifetime Minutes
+
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--reauth_disabled"></a>
 
+### Reauth Disabled
+
 <a id="nestedblock--reauth_timeout_days"></a>
+
+### Reauth Timeout Days
+
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--reauth_timeout_hours"></a>
 
+### Reauth Timeout Hours
+
+`duration` - (Optional) Duration (`Number`).
+
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
 <a id="nestedblock--use_default_keylifetime"></a>
+
+### Use Default Keylifetime
 
 ## Import
 

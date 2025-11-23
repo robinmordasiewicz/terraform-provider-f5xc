@@ -32,10 +32,10 @@ resource "f5xc_allowed_tenant" "example" {
   }
 
   # Resource-specific configuration
-    # Allowed Groups. List of references to allowed user_group ...
-    allowed_groups {
-      # Configure allowed_groups settings
-    }
+  # Allowed Groups. List of references to allowed user_group ...
+  allowed_groups {
+    # Configure allowed_groups settings
+  }
 }
 ```
 
@@ -44,17 +44,51 @@ resource "f5xc_allowed_tenant" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the AllowedTenant. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the AllowedTenant will be created (`String`).
+
 The following arguments are optional:
+
+`allowed_groups` - (Optional) Allowed Groups. List of references to allowed user_group objects for access in to tenant. Admin can use this to control API access by users from from original tenant into an allowed tenant. See [Allowed Groups](#allowed-groups) below for details.
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`tenant_id` - (Optional) Allowed Tenant ID. Specify the Tenant ID of the Original Tenant which is allowed to manage. NOTE: this is the name of the tenant configuration obj. not UID (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--allowed_groups"></a>
 
+### Allowed Groups
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

@@ -32,14 +32,14 @@ resource "f5xc_managed_tenant" "example" {
   }
 
   # Resource-specific configuration
-    # Group Mapping. List of local user group association to us...
-    groups {
-      # Configure groups settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    group {
-      # Configure group settings
-    }
+  # Group Mapping. List of local user group association to us...
+  groups {
+    # Configure groups settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  group {
+    # Configure group settings
+  }
 }
 ```
 
@@ -48,19 +48,59 @@ resource "f5xc_managed_tenant" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the ManagedTenant. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the ManagedTenant will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`groups` - (Optional) Group Mapping. List of local user group association to user groups in the managed tenant specified in the tenant_choice. See [Groups](#groups) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`tenant_id` - (Optional) Managed Tenant ID. Specify the Tenant ID of the existing tenant which needs to be managed (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--groups"></a>
 
+### Groups
+
+`group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Group](#nestedblock--groups--group) below.
+
+`managed_tenant_groups` - (Optional) Managed Tenant Groups. List of group names in managed tenant (MT) (`List`).
+
 <a id="nestedblock--groups--group"></a>
 
+### Groups Group
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

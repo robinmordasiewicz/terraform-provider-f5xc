@@ -32,18 +32,18 @@ resource "f5xc_child_tenant" "example" {
   }
 
   # Resource-specific configuration
-    # Object reference. This type establishes a direct referenc...
-    child_tenant_manager {
-      # Configure child_tenant_manager settings
-    }
-    # Contact. Instance of one single contact that can be used ...
-    contact_detail {
-      # Configure contact_detail settings
-    }
-    # Customer Info. Optional details for the new child tenant
-    customer_info {
-      # Configure customer_info settings
-    }
+  # Object reference. This type establishes a direct referenc...
+  child_tenant_manager {
+    # Configure child_tenant_manager settings
+  }
+  # Contact. Instance of one single contact that can be used ...
+  contact_detail {
+    # Configure contact_detail settings
+  }
+  # Customer Info. Optional details for the new child tenant
+  customer_info {
+    # Configure customer_info settings
+  }
 }
 ```
 
@@ -52,23 +52,105 @@ resource "f5xc_child_tenant" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the ChildTenant. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the ChildTenant will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`child_tenant_manager` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Child Tenant Manager](#child-tenant-manager) below for details.
+
+`company_name` - (Optional) Company Name. Company name (enterprise only) (`String`).
+
+`contact_detail` - (Optional) Contact. Instance of one single contact that can be used to communicate with customers. See [Contact Detail](#contact-detail) below for details.
+
+`customer_info` - (Optional) Customer Info. Optional details for the new child tenant. See [Customer Info](#customer-info) below for details.
+
+`domain` - (Optional) Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io (`String`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`tenant_profile` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Tenant Profile](#tenant-profile) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--child_tenant_manager"></a>
 
+### Child Tenant Manager
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--contact_detail"></a>
+
+### Contact Detail
+
+`address1` - (Optional) Address Line 1 (`String`).
+
+`address2` - (Optional) Address Line 2 (`String`).
+
+`city` - (Optional) City (`String`).
+
+`contact_type` - (Optional) Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a paymen... (`String`).
+
+`country` - (Optional) Country (`String`).
+
+`county` - (Optional) County (`String`).
+
+`phone_number` - (Optional) Phone Number (`String`).
+
+`state` - (Optional) State (`String`).
+
+`state_code` - (Optional) State Code (`String`).
+
+`zip_code` - (Optional) ZIP code (`String`).
 
 <a id="nestedblock--customer_info"></a>
 
+### Customer Info
+
+`additional_info` - (Optional) Additional Info. Use this field for any additional information about the new child tenant (`String`).
+
+`email` - (Optional) Email (`String`).
+
+`first_name` - (Optional) First Name (`String`).
+
+`last_name` - (Optional) Last Name (`String`).
+
 <a id="nestedblock--tenant_profile"></a>
 
+### Tenant Profile
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

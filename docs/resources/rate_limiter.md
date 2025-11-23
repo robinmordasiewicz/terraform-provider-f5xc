@@ -32,8 +32,8 @@ resource "f5xc_rate_limiter" "example" {
   }
 
   # Rate Limiter configuration
-  total_number  = 100
-  unit         = "MINUTE"
+  total_number     = 100
+  unit             = "MINUTE"
   burst_multiplier = 10
 }
 ```
@@ -43,33 +43,115 @@ resource "f5xc_rate_limiter" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the RateLimiter. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the RateLimiter will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`limits` - (Optional) Rate Limit Values. A list of RateLimitValues that specifies the total number of allowed requests for each specified period. See [Limits](#limits) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`user_identification` - (Optional) User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. See [User Identification](#user-identification) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--limits"></a>
 
+### Limits
+
+`action_block` - (Optional) Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold. See [Action Block](#nestedblock--limits--action_block) below.
+
+`burst_multiplier` - (Optional) Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate (`Number`).
+
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#nestedblock--limits--disabled) below.
+
+`leaky_bucket` - (Optional) Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5. See [Leaky Bucket](#nestedblock--limits--leaky_bucket) below.
+
+`period_multiplier` - (Optional) Periods. This setting, combined with Per Period units, provides a duration (`Number`).
+
+`token_bucket` - (Optional) Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits. See [Token Bucket](#nestedblock--limits--token_bucket) below.
+
+`total_number` - (Optional) Number Of Requests. The total number of allowed requests per rate-limiting period (`Number`).
+
+`unit` - (Optional) Rate Limit Period Unit. Unit for the period per which the rate limit is applied (`String`).
+
 <a id="nestedblock--limits--action_block"></a>
+
+### Limits Action Block
+
+`hours` - (Optional) Hours. Input Duration Hours. See [Hours](#nestedblock--limits--action_block--hours) below.
+
+`minutes` - (Optional) Minutes. Input Duration Minutes. See [Minutes](#nestedblock--limits--action_block--minutes) below.
+
+`seconds` - (Optional) Seconds. Input Duration Seconds. See [Seconds](#nestedblock--limits--action_block--seconds) below.
 
 <a id="nestedblock--limits--action_block--hours"></a>
 
+### Limits Action Block Hours
+
+`duration` - (Optional) Duration (`Number`).
+
 <a id="nestedblock--limits--action_block--minutes"></a>
+
+### Limits Action Block Minutes
+
+`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--limits--action_block--seconds"></a>
 
+### Limits Action Block Seconds
+
+`duration` - (Optional) Duration (`Number`).
+
 <a id="nestedblock--limits--disabled"></a>
+
+### Limits Disabled
 
 <a id="nestedblock--limits--leaky_bucket"></a>
 
+### Limits Leaky Bucket
+
 <a id="nestedblock--limits--token_bucket"></a>
+
+### Limits Token Bucket
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
 <a id="nestedblock--user_identification"></a>
+
+### User Identification
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 ## Import
 

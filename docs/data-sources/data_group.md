@@ -34,6 +34,18 @@ data "f5xc_data_group" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the DataGroup (`String`).
+
+`namespace` - (Required) Namespace where the DataGroup exists (`String`).
+
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
+
+`annotations` - (Optional) Annotations applied to this resource (`Map`).
+
+`description` - (Optional) Description of the DataGroup (`String`).
+
+`id` - (Optional) Unique identifier for the resource (`String`).
+
+`labels` - (Optional) Labels applied to this resource (`Map`).

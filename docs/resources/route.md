@@ -56,175 +56,673 @@ resource "f5xc_route" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Route. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Route will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`routes` - (Optional) Routes. List of routes to match for incoming request. See [Routes](#routes) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--routes"></a>
 
+### Routes
+
+`bot_defense_javascript_injection` - (Optional) Bot Defense Javascript Injection Configuration for inline deployments. Bot Defense Javascript Injection Configuration for inline bot defense deployments. See [Bot Defense Javascript Injection](#nestedblock--routes--bot_defense_javascript_injection) below.
+
+`disable_location_add` - (Optional) Disable Location Addition. disables append of x-volterra-location = <re-site-name> at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites (`Bool`).
+
+`inherited_bot_defense_javascript_injection` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherited Bot Defense Javascript Injection](#nestedblock--routes--inherited_bot_defense_javascript_injection) below.
+
+`inherited_waf_exclusion` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherited Waf Exclusion](#nestedblock--routes--inherited_waf_exclusion) below.
+
+`match` - (Optional) Match. route match condition. See [Match](#nestedblock--routes--match) below.
+
+`request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. See [Request Cookies To Add](#nestedblock--routes--request_cookies_to_add) below.
+
+`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream (`List`).
+
+`request_headers_to_add` - (Optional) Request Headers to Add. Headers are key-value pairs to be added to HTTP requests being sent towards upstream. See [Request Headers To Add](#nestedblock--routes--request_headers_to_add) below.
+
+`request_headers_to_remove` - (Optional) Request Headers to Remove. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
+
+`response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. See [Response Cookies To Add](#nestedblock--routes--response_cookies_to_add) below.
+
+`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed (`List`).
+
+`response_headers_to_add` - (Optional) Response Headers to Add. Headers are key-value pairs to be added to HTTP response being sent towards downstream. See [Response Headers To Add](#nestedblock--routes--response_headers_to_add) below.
+
+`response_headers_to_remove` - (Optional) Response Headers to Remove. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
+
+`route_destination` - (Optional) Destination List. List of destination to choose if the route is match. See [Route Destination](#nestedblock--routes--route_destination) below.
+
+`route_direct_response` - (Optional) Direct Response. Send this direct response in case of route match action is direct response. See [Route Direct Response](#nestedblock--routes--route_direct_response) below.
+
+`route_redirect` - (Optional) Redirect. route redirect parameters when match action is redirect. See [Route Redirect](#nestedblock--routes--route_redirect) below.
+
+`service_policy` - (Optional) Service Policy Configuration. ServicePolicy configuration details at route level. See [Service Policy](#nestedblock--routes--service_policy) below.
+
+`waf_exclusion_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Waf Exclusion Policy](#nestedblock--routes--waf_exclusion_policy) below.
+
+`waf_type` - (Optional) WAF Instance. WAF instance will be pointing to an app_firewall object. See [Waf Type](#nestedblock--routes--waf_type) below.
+
 <a id="nestedblock--routes--bot_defense_javascript_injection"></a>
+
+### Routes Bot Defense Javascript Injection
+
+`javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag (`String`).
+
+`javascript_tags` - (Optional) JavaScript Tags. Select Add item to configure your javascript tag. If adding both Bot Adv and Fraud, the Bot Javascript should be added first. See [Javascript Tags](#nestedblock--routes--bot_defense_javascript_injection--javascript_tags) below.
 
 <a id="nestedblock--routes--bot_defense_javascript_injection--javascript_tags"></a>
 
+### Routes Bot Defense Javascript Injection Javascript Tags
+
+`javascript_url` - (Optional) URL. Please enter the full URL (include domain and path), or relative path (`String`).
+
+`tag_attributes` - (Optional) Tag Attributes. Add the tag attributes you want to include in your Javascript tag. See [Tag Attributes](#nestedblock--routes--bot_defense_javascript_injection--javascript_tags--tag_attributes) below.
+
 <a id="nestedblock--routes--bot_defense_javascript_injection--javascript_tags--tag_attributes"></a>
+
+### Routes Bot Defense Javascript Injection Javascript Tags Tag Attributes
 
 <a id="nestedblock--routes--inherited_bot_defense_javascript_injection"></a>
 
+### Routes Inherited Bot Defense Javascript Injection
+
 <a id="nestedblock--routes--inherited_waf_exclusion"></a>
+
+### Routes Inherited Waf Exclusion
 
 <a id="nestedblock--routes--match"></a>
 
+### Routes Match
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#nestedblock--routes--match--headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#nestedblock--routes--match--incoming_port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#nestedblock--routes--match--path) below.
+
+`query_params` - (Optional) Query Parameters. List of (key, value) query parameters. See [Query Params](#nestedblock--routes--match--query_params) below.
+
 <a id="nestedblock--routes--match--headers"></a>
+
+### Routes Match Headers
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
 <a id="nestedblock--routes--match--incoming_port"></a>
 
+### Routes Match Incoming Port
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--routes--match--incoming_port--no_port_match) below.
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
 <a id="nestedblock--routes--match--incoming_port--no_port_match"></a>
+
+### Routes Match Incoming Port No Port Match
 
 <a id="nestedblock--routes--match--path"></a>
 
+### Routes Match Path
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
 <a id="nestedblock--routes--match--query_params"></a>
+
+### Routes Match Query Params
+
+`exact` - (Optional) Exact. Exact match value for the query parameter key (`String`).
+
+`key` - (Optional) Key. Query parameter key In the above example, assignee_username is the key (`String`).
+
+`regex` - (Optional) Regex. Regex match value for the query parameter key (`String`).
 
 <a id="nestedblock--routes--request_cookies_to_add"></a>
 
+### Routes Request Cookies To Add
+
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--routes--request_cookies_to_add--secret_value) below.
+
+`value` - (Optional) Value. Value of the Cookie header (`String`).
+
 <a id="nestedblock--routes--request_cookies_to_add--secret_value"></a>
+
+### Routes Request Cookies To Add Secret Value
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--routes--request_cookies_to_add--secret_value--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--routes--request_cookies_to_add--secret_value--clear_secret_info) below.
 
 <a id="nestedblock--routes--request_cookies_to_add--secret_value--blindfold_secret_info"></a>
 
+### Routes Request Cookies To Add Secret Value Blindfold Secret Info
+
 <a id="nestedblock--routes--request_cookies_to_add--secret_value--clear_secret_info"></a>
+
+### Routes Request Cookies To Add Secret Value Clear Secret Info
 
 <a id="nestedblock--routes--request_headers_to_add"></a>
 
+### Routes Request Headers To Add
+
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+
+`name` - (Optional) Name. Name of the HTTP header (`String`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--routes--request_headers_to_add--secret_value) below.
+
+`value` - (Optional) Value. Value of the HTTP header (`String`).
+
 <a id="nestedblock--routes--request_headers_to_add--secret_value"></a>
+
+### Routes Request Headers To Add Secret Value
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--routes--request_headers_to_add--secret_value--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--routes--request_headers_to_add--secret_value--clear_secret_info) below.
 
 <a id="nestedblock--routes--request_headers_to_add--secret_value--blindfold_secret_info"></a>
 
+### Routes Request Headers To Add Secret Value Blindfold Secret Info
+
 <a id="nestedblock--routes--request_headers_to_add--secret_value--clear_secret_info"></a>
+
+### Routes Request Headers To Add Secret Value Clear Secret Info
 
 <a id="nestedblock--routes--response_cookies_to_add"></a>
 
+### Routes Response Cookies To Add
+
+`add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
+
+`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
+
+`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#nestedblock--routes--response_cookies_to_add--add_httponly) below.
+
+`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#nestedblock--routes--response_cookies_to_add--add_partitioned) below.
+
+`add_path` - (Optional) Add path. Add path attribute (`String`).
+
+`add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#nestedblock--routes--response_cookies_to_add--add_secure) below.
+
+`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Domain](#nestedblock--routes--response_cookies_to_add--ignore_domain) below.
+
+`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Expiry](#nestedblock--routes--response_cookies_to_add--ignore_expiry) below.
+
+`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Httponly](#nestedblock--routes--response_cookies_to_add--ignore_httponly) below.
+
+`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Max Age](#nestedblock--routes--response_cookies_to_add--ignore_max_age) below.
+
+`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Partitioned](#nestedblock--routes--response_cookies_to_add--ignore_partitioned) below.
+
+`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Path](#nestedblock--routes--response_cookies_to_add--ignore_path) below.
+
+`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Samesite](#nestedblock--routes--response_cookies_to_add--ignore_samesite) below.
+
+`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Secure](#nestedblock--routes--response_cookies_to_add--ignore_secure) below.
+
+`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Value](#nestedblock--routes--response_cookies_to_add--ignore_value) below.
+
+`max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
+
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+
+`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Lax](#nestedblock--routes--response_cookies_to_add--samesite_lax) below.
+
+`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite None](#nestedblock--routes--response_cookies_to_add--samesite_none) below.
+
+`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Strict](#nestedblock--routes--response_cookies_to_add--samesite_strict) below.
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--routes--response_cookies_to_add--secret_value) below.
+
+`value` - (Optional) Value. Value of the Cookie header (`String`).
+
 <a id="nestedblock--routes--response_cookies_to_add--add_httponly"></a>
+
+### Routes Response Cookies To Add Add Httponly
 
 <a id="nestedblock--routes--response_cookies_to_add--add_partitioned"></a>
 
+### Routes Response Cookies To Add Add Partitioned
+
 <a id="nestedblock--routes--response_cookies_to_add--add_secure"></a>
+
+### Routes Response Cookies To Add Add Secure
 
 <a id="nestedblock--routes--response_cookies_to_add--ignore_domain"></a>
 
+### Routes Response Cookies To Add Ignore Domain
+
 <a id="nestedblock--routes--response_cookies_to_add--ignore_expiry"></a>
+
+### Routes Response Cookies To Add Ignore Expiry
 
 <a id="nestedblock--routes--response_cookies_to_add--ignore_httponly"></a>
 
+### Routes Response Cookies To Add Ignore Httponly
+
 <a id="nestedblock--routes--response_cookies_to_add--ignore_max_age"></a>
+
+### Routes Response Cookies To Add Ignore Max Age
 
 <a id="nestedblock--routes--response_cookies_to_add--ignore_partitioned"></a>
 
+### Routes Response Cookies To Add Ignore Partitioned
+
 <a id="nestedblock--routes--response_cookies_to_add--ignore_path"></a>
+
+### Routes Response Cookies To Add Ignore Path
 
 <a id="nestedblock--routes--response_cookies_to_add--ignore_samesite"></a>
 
+### Routes Response Cookies To Add Ignore Samesite
+
 <a id="nestedblock--routes--response_cookies_to_add--ignore_secure"></a>
+
+### Routes Response Cookies To Add Ignore Secure
 
 <a id="nestedblock--routes--response_cookies_to_add--ignore_value"></a>
 
+### Routes Response Cookies To Add Ignore Value
+
 <a id="nestedblock--routes--response_cookies_to_add--samesite_lax"></a>
+
+### Routes Response Cookies To Add Samesite Lax
 
 <a id="nestedblock--routes--response_cookies_to_add--samesite_none"></a>
 
+### Routes Response Cookies To Add Samesite None
+
 <a id="nestedblock--routes--response_cookies_to_add--samesite_strict"></a>
+
+### Routes Response Cookies To Add Samesite Strict
 
 <a id="nestedblock--routes--response_cookies_to_add--secret_value"></a>
 
+### Routes Response Cookies To Add Secret Value
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--routes--response_cookies_to_add--secret_value--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--routes--response_cookies_to_add--secret_value--clear_secret_info) below.
+
 <a id="nestedblock--routes--response_cookies_to_add--secret_value--blindfold_secret_info"></a>
+
+### Routes Response Cookies To Add Secret Value Blindfold Secret Info
 
 <a id="nestedblock--routes--response_cookies_to_add--secret_value--clear_secret_info"></a>
 
+### Routes Response Cookies To Add Secret Value Clear Secret Info
+
 <a id="nestedblock--routes--response_headers_to_add"></a>
+
+### Routes Response Headers To Add
+
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+
+`name` - (Optional) Name. Name of the HTTP header (`String`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#nestedblock--routes--response_headers_to_add--secret_value) below.
+
+`value` - (Optional) Value. Value of the HTTP header (`String`).
 
 <a id="nestedblock--routes--response_headers_to_add--secret_value"></a>
 
+### Routes Response Headers To Add Secret Value
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--routes--response_headers_to_add--secret_value--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--routes--response_headers_to_add--secret_value--clear_secret_info) below.
+
 <a id="nestedblock--routes--response_headers_to_add--secret_value--blindfold_secret_info"></a>
+
+### Routes Response Headers To Add Secret Value Blindfold Secret Info
 
 <a id="nestedblock--routes--response_headers_to_add--secret_value--clear_secret_info"></a>
 
+### Routes Response Headers To Add Secret Value Clear Secret Info
+
 <a id="nestedblock--routes--route_destination"></a>
+
+### Routes Route Destination
+
+`auto_host_rewrite` - (Optional) Automatic Host Rewrite. Indicates that during forwarding, the host header will be swapped with the hostname of the upstream host chosen by the cluster (`Bool`).
+
+`buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. See [Buffer Policy](#nestedblock--routes--route_destination--buffer_policy) below.
+
+`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. See [Cors Policy](#nestedblock--routes--route_destination--cors_policy) below.
+
+`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination. See [Csrf Policy](#nestedblock--routes--route_destination--csrf_policy) below.
+
+`destinations` - (Optional) Destination Origin pools (clusters). When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. See [Destinations](#nestedblock--routes--route_destination--destinations) below.
+
+`do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Retract Cluster](#nestedblock--routes--route_destination--do_not_retract_cluster) below.
+
+`endpoint_subsets` - (Optional) Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. See [Endpoint Subsets](#nestedblock--routes--route_destination--endpoint_subsets) below.
+
+`hash_policy` - (Optional) Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request. See [Hash Policy](#nestedblock--routes--route_destination--hash_policy) below.
+
+`host_rewrite` - (Optional) Host Rewrite. Indicates that during forwarding, the host header will be swapped with this value (`String`).
+
+`mirror_policy` - (Optional) Mirror Policy. MirrorPolicy is used for shadowing traffic from one cluster to another. See [Mirror Policy](#nestedblock--routes--route_destination--mirror_policy) below.
+
+`prefix_rewrite` - (Optional) Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value (`String`).
+
+`priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request (`String`).
+
+`query_params` - (Optional) Query Parameters. Handling of incoming query parameters in simple route. See [Query Params](#nestedblock--routes--route_destination--query_params) below.
+
+`regex_rewrite` - (Optional) Regex Match Rewrite. RegexMatchRewrite describes how to match a string and then produce a new string using a regular expression and a substitution string. See [Regex Rewrite](#nestedblock--routes--route_destination--regex_rewrite) below.
+
+`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Retract Cluster](#nestedblock--routes--route_destination--retract_cluster) below.
+
+`retry_policy` - (Optional) Retry Policy. Retry policy configuration for route destination. See [Retry Policy](#nestedblock--routes--route_destination--retry_policy) below.
+
+`spdy_config` - (Optional) SPDY Configuration. Request headers of such upgrade looks like below 'connection', 'Upgrade' 'upgrade', 'SPDY/3. See [Spdy Config](#nestedblock--routes--route_destination--spdy_config) below.
+
+`timeout` - (Optional) Timeout. Specifies the timeout for the route in milliseconds. This timeout includes all retries (`Number`).
+
+`web_socket_config` - (Optional) Websocket Configuration. Configuration to allow Websocket Request headers of such upgrade looks like below 'connection', 'Upgrade' 'upgrade', 'websocket' With configuration to allow websocket upgra.... See [Web Socket Config](#nestedblock--routes--route_destination--web_socket_config) below.
 
 <a id="nestedblock--routes--route_destination--buffer_policy"></a>
 
+### Routes Route Destination Buffer Policy
+
+`disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
+
+`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
+
 <a id="nestedblock--routes--route_destination--cors_policy"></a>
+
+### Routes Route Destination Cors Policy
+
+`allow_credentials` - (Optional) Allow Credentials. Specifies whether the resource allows credentials (`Bool`).
+
+`allow_headers` - (Optional) Allow Headers. Specifies the content for the access-control-allow-headers header (`String`).
+
+`allow_methods` - (Optional) Allow Methods. Specifies the content for the access-control-allow-methods header (`String`).
+
+`allow_origin` - (Optional) Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
+
+`allow_origin_regex` - (Optional) Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
+
+`disabled` - (Optional) Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route (`Bool`).
+
+`expose_headers` - (Optional) Expose Headers. Specifies the content for the access-control-expose-headers header (`String`).
+
+`maximum_age` - (Optional) Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching (`Number`).
 
 <a id="nestedblock--routes--route_destination--csrf_policy"></a>
 
+### Routes Route Destination Csrf Policy
+
+`all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed. See [All Load Balancer Domains](#nestedblock--routes--route_destination--csrf_policy--all_load_balancer_domains) below.
+
+`custom_domain_list` - (Optional) Domain name list. List of domain names used for Host header matching. See [Custom Domain List](#nestedblock--routes--route_destination--csrf_policy--custom_domain_list) below.
+
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#nestedblock--routes--route_destination--csrf_policy--disabled) below.
+
 <a id="nestedblock--routes--route_destination--csrf_policy--all_load_balancer_domains"></a>
+
+### Routes Route Destination Csrf Policy All Load Balancer Domains
 
 <a id="nestedblock--routes--route_destination--csrf_policy--custom_domain_list"></a>
 
+### Routes Route Destination Csrf Policy Custom Domain List
+
 <a id="nestedblock--routes--route_destination--csrf_policy--disabled"></a>
+
+### Routes Route Destination Csrf Policy Disabled
 
 <a id="nestedblock--routes--route_destination--destinations"></a>
 
+### Routes Route Destination Destinations
+
+`cluster` - (Optional) Cluster. Indicates the upstream cluster to which the request should be sent. If the cluster does not exist ServiceUnavailable response will be sent. See [Cluster](#nestedblock--routes--route_destination--destinations--cluster) below.
+
+`endpoint_subsets` - (Optional) Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. See [Endpoint Subsets](#nestedblock--routes--route_destination--destinations--endpoint_subsets) below.
+
+`priority` - (Optional) Priority. Priority of this cluster, valid only with multiple destinations are configured (`Number`).
+
+`weight` - (Optional) Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight (`Number`).
+
 <a id="nestedblock--routes--route_destination--destinations--cluster"></a>
+
+### Routes Route Destination Destinations Cluster
 
 <a id="nestedblock--routes--route_destination--destinations--endpoint_subsets"></a>
 
+### Routes Route Destination Destinations Endpoint Subsets
+
 <a id="nestedblock--routes--route_destination--do_not_retract_cluster"></a>
+
+### Routes Route Destination Do Not Retract Cluster
 
 <a id="nestedblock--routes--route_destination--endpoint_subsets"></a>
 
+### Routes Route Destination Endpoint Subsets
+
 <a id="nestedblock--routes--route_destination--hash_policy"></a>
+
+### Routes Route Destination Hash Policy
+
+`cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. See [Cookie](#nestedblock--routes--route_destination--hash_policy--cookie) below.
+
+`header_name` - (Optional) Header Name. The name or key of the request header that will be used to obtain the hash key (`String`).
+
+`source_ip` - (Optional) Source IP. Hash based on source IP address (`Bool`).
+
+`terminal` - (Optional) Terminal. Specify if its a terminal policy (`Bool`).
 
 <a id="nestedblock--routes--route_destination--hash_policy--cookie"></a>
 
+### Routes Route Destination Hash Policy Cookie
+
 <a id="nestedblock--routes--route_destination--mirror_policy"></a>
+
+### Routes Route Destination Mirror Policy
+
+`cluster` - (Optional) Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present. See [Cluster](#nestedblock--routes--route_destination--mirror_policy--cluster) below.
+
+`percent` - (Optional) Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests. See [Percent](#nestedblock--routes--route_destination--mirror_policy--percent) below.
 
 <a id="nestedblock--routes--route_destination--mirror_policy--cluster"></a>
 
+### Routes Route Destination Mirror Policy Cluster
+
 <a id="nestedblock--routes--route_destination--mirror_policy--percent"></a>
+
+### Routes Route Destination Mirror Policy Percent
 
 <a id="nestedblock--routes--route_destination--query_params"></a>
 
+### Routes Route Destination Query Params
+
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Remove All Params](#nestedblock--routes--route_destination--query_params--remove_all_params) below.
+
+`replace_params` - (Optional) Replace All Parameters (`String`).
+
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Retain All Params](#nestedblock--routes--route_destination--query_params--retain_all_params) below.
+
 <a id="nestedblock--routes--route_destination--query_params--remove_all_params"></a>
+
+### Routes Route Destination Query Params Remove All Params
 
 <a id="nestedblock--routes--route_destination--query_params--retain_all_params"></a>
 
+### Routes Route Destination Query Params Retain All Params
+
 <a id="nestedblock--routes--route_destination--regex_rewrite"></a>
+
+### Routes Route Destination Regex Rewrite
+
+`pattern` - (Optional) Pattern. The regular expression used to find portions of a string that should be replaced (`String`).
+
+`substitution` - (Optional) Substitution. The string that should be substituted into matching portions of the subject string during a substitution operation to produce a new string (`String`).
 
 <a id="nestedblock--routes--route_destination--retract_cluster"></a>
 
+### Routes Route Destination Retract Cluster
+
 <a id="nestedblock--routes--route_destination--retry_policy"></a>
+
+### Routes Route Destination Retry Policy
+
+`back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#nestedblock--routes--route_destination--retry_policy--back_off) below.
+
+`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry (`Number`).
+
+`per_try_timeout` - (Optional) Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds (`Number`).
+
+`retriable_status_codes` - (Optional) Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on (`List`).
+
+`retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements (`List`).
 
 <a id="nestedblock--routes--route_destination--retry_policy--back_off"></a>
 
+### Routes Route Destination Retry Policy Back Off
+
 <a id="nestedblock--routes--route_destination--spdy_config"></a>
+
+### Routes Route Destination Spdy Config
+
+`use_spdy` - (Optional) Use SPDY. Specifies that the HTTP client connection to this route is allowed to upgrade to a SPDY connection (`Bool`).
 
 <a id="nestedblock--routes--route_destination--web_socket_config"></a>
 
+### Routes Route Destination Web Socket Config
+
+`use_websocket` - (Optional) Use Websocket. Specifies that the HTTP client connection to this route is allowed to upgrade to a WebSocket connection (`Bool`).
+
 <a id="nestedblock--routes--route_direct_response"></a>
+
+### Routes Route Direct Response
+
+`response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g (`String`).
+
+`response_code` - (Optional) Response Code. response code to send (`Number`).
 
 <a id="nestedblock--routes--route_redirect"></a>
 
+### Routes Route Redirect
+
+`host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
+
+`path_redirect` - (Optional) Path. swap path part of incoming URL in redirect URL (`String`).
+
+`prefix_rewrite` - (Optional) Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request (`String`).
+
+`proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done (`String`).
+
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Remove All Params](#nestedblock--routes--route_redirect--remove_all_params) below.
+
+`replace_params` - (Optional) Replace All Parameters (`String`).
+
+`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
+
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Retain All Params](#nestedblock--routes--route_redirect--retain_all_params) below.
+
 <a id="nestedblock--routes--route_redirect--remove_all_params"></a>
+
+### Routes Route Redirect Remove All Params
 
 <a id="nestedblock--routes--route_redirect--retain_all_params"></a>
 
+### Routes Route Redirect Retain All Params
+
 <a id="nestedblock--routes--service_policy"></a>
+
+### Routes Service Policy
+
+`disable` - (Optional) Disable. disable service policy at route level, if it is configured at virtual-host level (`Bool`).
 
 <a id="nestedblock--routes--waf_exclusion_policy"></a>
 
+### Routes Waf Exclusion Policy
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--routes--waf_type"></a>
+
+### Routes Waf Type
+
+`app_firewall` - (Optional) App Firewall Reference. A list of references to the app_firewall configuration objects. See [App Firewall](#nestedblock--routes--waf_type--app_firewall) below.
+
+`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Waf](#nestedblock--routes--waf_type--disable_waf) below.
+
+`inherit_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherit Waf](#nestedblock--routes--waf_type--inherit_waf) below.
 
 <a id="nestedblock--routes--waf_type--app_firewall"></a>
 
+### Routes Waf Type App Firewall
+
+`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object. See [App Firewall](#nestedblock--routes--waf_type--app_firewall--app_firewall) below.
+
 <a id="nestedblock--routes--waf_type--app_firewall--app_firewall"></a>
+
+### Routes Waf Type App Firewall App Firewall
 
 <a id="nestedblock--routes--waf_type--disable_waf"></a>
 
+### Routes Waf Type Disable Waf
+
 <a id="nestedblock--routes--waf_type--inherit_waf"></a>
 
+### Routes Waf Type Inherit Waf
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

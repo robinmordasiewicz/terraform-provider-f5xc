@@ -161,7 +161,7 @@ func (c *Client) doRequest(ctx context.Context, method, path string, body interf
 		}
 
 		respBody, err := io.ReadAll(resp.Body)
-		resp.Body.Close()
+		_ = resp.Body.Close() // Error intentionally ignored - body already read, cleanup only
 		if err != nil {
 			return nil, f5xcerrors.WrapError(err, "response", "read")
 		}

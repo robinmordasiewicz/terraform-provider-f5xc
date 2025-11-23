@@ -1,23 +1,23 @@
 # golangci-lint configuration
 # https://golangci-lint.run/usage/configuration/
-# Compatible with golangci-lint v1.x
+# Compatible with golangci-lint v2.x
+version: "2"
 
 run:
   timeout: 5m
 
 linters:
-  disable-all: true
+  default: none
   enable:
     - errcheck
     - govet
     - ineffassign
     - staticcheck
     - unused
-
-issues:
-  exclude-dirs:
-    - tools
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - errcheck
+  exclusions:
+    paths:
+      - tools
+    rules:
+      - path: _test\.go
+        linters:
+          - errcheck

@@ -32,18 +32,18 @@ resource "f5xc_k8s_pod_security_admission" "example" {
   }
 
   # Resource-specific configuration
-    # K8s Pod Security Admission.
-    pod_security_admission_specs {
-      # Configure pod_security_admission_specs settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    audit {
-      # Configure audit settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    baseline {
-      # Configure baseline settings
-    }
+  # K8s Pod Security Admission.
+  pod_security_admission_specs {
+    # Configure pod_security_admission_specs settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  audit {
+    # Configure audit settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  baseline {
+    # Configure baseline settings
+  }
 }
 ```
 
@@ -52,29 +52,79 @@ resource "f5xc_k8s_pod_security_admission" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the K8SPodSecurityAdmission. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the K8SPodSecurityAdmission will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`pod_security_admission_specs` - (Optional) K8s Pod Security Admission. See [Pod Security Admission Specs](#pod-security-admission-specs) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--pod_security_admission_specs"></a>
 
+### Pod Security Admission Specs
+
+`audit` - (Optional) Empty. This can be used for messages where no values are needed. See [Audit](#nestedblock--pod_security_admission_specs--audit) below.
+
+`baseline` - (Optional) Empty. This can be used for messages where no values are needed. See [Baseline](#nestedblock--pod_security_admission_specs--baseline) below.
+
+`enforce` - (Optional) Empty. This can be used for messages where no values are needed. See [Enforce](#nestedblock--pod_security_admission_specs--enforce) below.
+
+`privileged` - (Optional) Empty. This can be used for messages where no values are needed. See [Privileged](#nestedblock--pod_security_admission_specs--privileged) below.
+
+`restricted` - (Optional) Empty. This can be used for messages where no values are needed. See [Restricted](#nestedblock--pod_security_admission_specs--restricted) below.
+
+`warn` - (Optional) Empty. This can be used for messages where no values are needed. See [Warn](#nestedblock--pod_security_admission_specs--warn) below.
+
 <a id="nestedblock--pod_security_admission_specs--audit"></a>
+
+### Pod Security Admission Specs Audit
 
 <a id="nestedblock--pod_security_admission_specs--baseline"></a>
 
+### Pod Security Admission Specs Baseline
+
 <a id="nestedblock--pod_security_admission_specs--enforce"></a>
+
+### Pod Security Admission Specs Enforce
 
 <a id="nestedblock--pod_security_admission_specs--privileged"></a>
 
+### Pod Security Admission Specs Privileged
+
 <a id="nestedblock--pod_security_admission_specs--restricted"></a>
+
+### Pod Security Admission Specs Restricted
 
 <a id="nestedblock--pod_security_admission_specs--warn"></a>
 
+### Pod Security Admission Specs Warn
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

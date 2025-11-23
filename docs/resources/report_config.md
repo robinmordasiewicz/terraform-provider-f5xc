@@ -32,18 +32,18 @@ resource "f5xc_report_config" "example" {
   }
 
   # Resource-specific configuration
-    # Report recipients. Report recipients
-    report_recipients {
-      # Configure report_recipients settings
-    }
-    # User Groups. Select one or more user groups, to which the...
-    user_groups {
-      # Configure user_groups settings
-    }
-    # Report Type Waap. Report Type Waap
-    waap {
-      # Configure waap settings
-    }
+  # Report recipients. Report recipients
+  report_recipients {
+    # Configure report_recipients settings
+  }
+  # User Groups. Select one or more user groups, to which the...
+  user_groups {
+    # Configure user_groups settings
+  }
+  # Report Type Waap. Report Type Waap
+  waap {
+    # Configure waap settings
+  }
 }
 ```
 
@@ -52,31 +52,103 @@ resource "f5xc_report_config" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the ReportConfig. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the ReportConfig will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`report_recipients` - (Optional) Report recipients. Report recipients. See [Report Recipients](#report-recipients) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`waap` - (Optional) Report Type Waap. Report Type Waap. See [Waap](#waap) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--report_recipients"></a>
 
+### Report Recipients
+
+`user_groups` - (Optional) User Groups. Select one or more user groups, to which the report should be sent via email. See [User Groups](#nestedblock--report_recipients--user_groups) below.
+
 <a id="nestedblock--report_recipients--user_groups"></a>
+
+### Report Recipients User Groups
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
 <a id="nestedblock--waap"></a>
+
+### Waap
+
+`current_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Current Namespace](#nestedblock--waap--current_namespace) below.
+
+`daily` - (Optional) Report Frequency Daily. create report daily. See [Daily](#nestedblock--waap--daily) below.
+
+`monthly` - (Optional) Report Frequency Monthly. create report monthly. See [Monthly](#nestedblock--waap--monthly) below.
+
+`namespaces` - (Optional) Namespaces. namespaces. See [Namespaces](#nestedblock--waap--namespaces) below.
+
+`weekly` - (Optional) Report Frequency Weekly. create report weekly. See [Weekly](#nestedblock--waap--weekly) below.
 
 <a id="nestedblock--waap--current_namespace"></a>
 
+### Waap Current Namespace
+
 <a id="nestedblock--waap--daily"></a>
+
+### Waap Daily
+
+`report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
 <a id="nestedblock--waap--monthly"></a>
 
+### Waap Monthly
+
+`date` - (Optional) Report Generation Date. report generation date Indicates field not being set Create report on Last day of month (`String`).
+
+`report_generation_time` - (Optional) Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
+
 <a id="nestedblock--waap--namespaces"></a>
 
+### Waap Namespaces
+
+`namespaces` - (Optional) Namespaces. list of namespaces for which user wants to generate report (`List`).
+
 <a id="nestedblock--waap--weekly"></a>
+
+### Waap Weekly
+
+`day` - (Optional) Report Generation Weekday. report generation weekday Indicates field not being set (`String`).
+
+`report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
 ## Import
 

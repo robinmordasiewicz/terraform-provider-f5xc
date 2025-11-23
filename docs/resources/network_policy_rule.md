@@ -32,18 +32,18 @@ resource "f5xc_network_policy_rule" "example" {
   }
 
   # Resource-specific configuration
-    # Network Policy Rule Advanced Action. Network Policy Rule ...
-    advanced_action {
-      # Configure advanced_action settings
-    }
-    # [OneOf: ip_prefix_set, prefix, prefix_selector] IP Prefix...
-    ip_prefix_set {
-      # Configure ip_prefix_set settings
-    }
-    # Reference. A list of references to ip_prefix_set objects.
-    ref {
-      # Configure ref settings
-    }
+  # Network Policy Rule Advanced Action. Network Policy Rule ...
+  advanced_action {
+    # Configure advanced_action settings
+  }
+  # [OneOf: ip_prefix_set, prefix, prefix_selector] IP Prefix...
+  ip_prefix_set {
+    # Configure ip_prefix_set settings
+  }
+  # Reference. A list of references to ip_prefix_set objects.
+  ref {
+    # Configure ref settings
+  }
 }
 ```
 
@@ -52,27 +52,99 @@ resource "f5xc_network_policy_rule" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the NetworkPolicyRule. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the NetworkPolicyRule will be created (`String`).
+
 The following arguments are optional:
+
+`action` - (Optional) Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match (`String`).
+
+`advanced_action` - (Optional) Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction. See [Advanced Action](#advanced-action) below for details.
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "ip_prefix_set, prefix, prefix_selector" must be set.
+
+`ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [Ip Prefix Set](#ip-prefix-set) below for details.
+
+`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. See [Label Matcher](#label-matcher) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`ports` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
+
+`prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#prefix) below for details.
+
+`prefix_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Prefix Selector](#prefix-selector) below for details.
+
+`protocol` - (Optional) Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--advanced_action"></a>
 
+### Advanced Action
+
+`action` - (Optional) Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAc... (`String`).
+
 <a id="nestedblock--ip_prefix_set"></a>
+
+### Ip Prefix Set
+
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--ip_prefix_set--ref) below.
 
 <a id="nestedblock--ip_prefix_set--ref"></a>
 
+### Ip Prefix Set Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--label_matcher"></a>
+
+### Label Matcher
+
+`keys` - (Optional) Keys. The list of label key names that have to match (`List`).
 
 <a id="nestedblock--prefix"></a>
 
+### Prefix
+
+`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
+
 <a id="nestedblock--prefix_selector"></a>
 
+### Prefix Selector
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

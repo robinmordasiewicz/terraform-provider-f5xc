@@ -46,7 +46,7 @@ resource "f5xc_azure_vnet_site" "example" {
   # VNET configuration
   vnet {
     new_vnet {
-      name       = "f5xc-vnet"
+      name         = "f5xc-vnet"
       primary_ipv4 = "10.0.0.0/16"
     }
   }
@@ -82,533 +82,1847 @@ resource "f5xc_azure_vnet_site" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the AzureVNETSite. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the AzureVNETSite will be created (`String`).
+
 The following arguments are optional:
+
+`address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
+
+`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
+
+> **Note:** One of the arguments from this list "alternate_region, azure_region" must be set.
+
+`alternate_region` - (Optional) Alternate Azure Region Name. Name of the azure region which does not support availability zones (`String`).
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Azure Cred](#azure-cred) below for details.
+
+`azure_region` - (Optional) Recommended Azure Region Name. Name of the azure region which supports availability zones (`String`).
+
+> **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
+
+`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Block All Services](#block-all-services) below for details.
+
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+
+`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
+
+`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom Dns](#custom-dns) below for details.
+
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+
+`disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
+
+> **Note:** One of the arguments from this list "ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar" must be set.
+
+`ingress_egress_gw` - (Optional) Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+
+`ingress_egress_gw_ar` - (Optional) Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones. See [Ingress Egress Gw Ar](#ingress-egress-gw-ar) below for details.
+
+`ingress_gw` - (Optional) Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region. See [Ingress Gw](#ingress-gw) below for details.
+
+`ingress_gw_ar` - (Optional) Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site. See [Ingress Gw Ar](#ingress-gw-ar) below for details.
+
+`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
+
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
+
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+
+`machine_type` - (Optional) Azure Machine Type for Node. Select Instance size based on performance needed (`String`).
+
+> **Note:** One of the arguments from this list "no_worker_nodes, nodes_per_az, total_nodes" must be set.
+
+`no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Worker Nodes](#no-worker-nodes) below for details.
+
+`nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
+
+`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global C.... See [Offline Survivability Mode](#offline-survivability-mode) below for details.
+
+`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [Os](#os) below for details.
+
+`resource_group` - (Optional) Resource Group. Azure resource group for resources that will be created (`String`).
+
+`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the site (`String`).
+
+`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
+
+`tags` - (Optional) Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console. See [Tags](#tags) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
+
+`vnet` - (Optional) Azure Vnet choice. This defines choice about Azure Vnet for a view. See [Vnet](#vnet) below for details.
+
+`voltstack_cluster` - (Optional) Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes. See [Voltstack Cluster](#voltstack-cluster) below for details.
+
+`voltstack_cluster_ar` - (Optional) Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes. See [Voltstack Cluster Ar](#voltstack-cluster-ar) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--admin_password"></a>
 
+### Admin Password
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--admin_password--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--admin_password--clear_secret_info) below.
+
 <a id="nestedblock--admin_password--blindfold_secret_info"></a>
+
+### Admin Password Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--admin_password--clear_secret_info"></a>
 
+### Admin Password Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--azure_cred"></a>
+
+### Azure Cred
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--block_all_services"></a>
 
+### Block All Services
+
 <a id="nestedblock--blocked_services"></a>
+
+### Blocked Services
+
+`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
 
 <a id="nestedblock--blocked_services--blocked_sevice"></a>
 
+### Blocked Services Blocked Sevice
+
+`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [Dns](#nestedblock--blocked_services--blocked_sevice--dns) below.
+
+`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
+
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [Ssh](#nestedblock--blocked_services--blocked_sevice--ssh) below.
+
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#nestedblock--blocked_services--blocked_sevice--web_user_interface) below.
+
 <a id="nestedblock--blocked_services--blocked_sevice--dns"></a>
+
+### Blocked Services Blocked Sevice Dns
 
 <a id="nestedblock--blocked_services--blocked_sevice--ssh"></a>
 
+### Blocked Services Blocked Sevice Ssh
+
 <a id="nestedblock--blocked_services--blocked_sevice--web_user_interface"></a>
+
+### Blocked Services Blocked Sevice Web User Interface
 
 <a id="nestedblock--coordinates"></a>
 
+### Coordinates
+
+`latitude` - (Optional) Latitude. Latitude of the site location (`Number`).
+
+`longitude` - (Optional) Longitude. longitude of site location (`Number`).
+
 <a id="nestedblock--custom_dns"></a>
+
+### Custom Dns
+
+`inside_nameserver` - (Optional) DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network (`String`).
+
+`outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
 
 <a id="nestedblock--default_blocked_services"></a>
 
+### Default Blocked Services
+
 <a id="nestedblock--ingress_egress_gw"></a>
+
+### Ingress Egress Gw
+
+`accelerated_networking` - (Optional) Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen. See [Accelerated Networking](#nestedblock--ingress_egress_gw--accelerated_networking) below.
+
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option .... See [Active Enhanced Firewall Policies](#nestedblock--ingress_egress_gw--active_enhanced_firewall_policies) below.
+
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#nestedblock--ingress_egress_gw--active_forward_proxy_policies) below.
+
+`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--ingress_egress_gw--active_network_policies) below.
+
+`az_nodes` - (Optional) Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. See [Az Nodes](#nestedblock--ingress_egress_gw--az_nodes) below.
+
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
+
+`dc_cluster_group_inside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside Vn](#nestedblock--ingress_egress_gw--dc_cluster_group_inside_vn) below.
+
+`dc_cluster_group_outside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Outside Vn](#nestedblock--ingress_egress_gw--dc_cluster_group_outside_vn) below.
+
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#nestedblock--ingress_egress_gw--forward_proxy_allow_all) below.
+
+`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#nestedblock--ingress_egress_gw--global_network_list) below.
+
+`hub` - (Optional) Hub VNet type. Hub VNet type. See [Hub](#nestedblock--ingress_egress_gw--hub) below.
+
+`inside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Inside Static Routes](#nestedblock--ingress_egress_gw--inside_static_routes) below.
+
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--ingress_egress_gw--no_dc_cluster_group) below.
+
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#nestedblock--ingress_egress_gw--no_forward_proxy) below.
+
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#nestedblock--ingress_egress_gw--no_global_network) below.
+
+`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#nestedblock--ingress_egress_gw--no_inside_static_routes) below.
+
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#nestedblock--ingress_egress_gw--no_network_policy) below.
+
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#nestedblock--ingress_egress_gw--no_outside_static_routes) below.
+
+`not_hub` - (Optional) Empty. This can be used for messages where no values are needed. See [Not Hub](#nestedblock--ingress_egress_gw--not_hub) below.
+
+`outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#nestedblock--ingress_egress_gw--outside_static_routes) below.
+
+`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#nestedblock--ingress_egress_gw--performance_enhancement_mode) below.
+
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public Ip](#nestedblock--ingress_egress_gw--sm_connection_public_ip) below.
+
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt Ip](#nestedblock--ingress_egress_gw--sm_connection_pvt_ip) below.
 
 <a id="nestedblock--ingress_egress_gw--accelerated_networking"></a>
 
+### Ingress Egress Gw Accelerated Networking
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--ingress_egress_gw--accelerated_networking--disable) below.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--ingress_egress_gw--accelerated_networking--enable) below.
+
 <a id="nestedblock--ingress_egress_gw--accelerated_networking--disable"></a>
+
+### Ingress Egress Gw Accelerated Networking Disable
 
 <a id="nestedblock--ingress_egress_gw--accelerated_networking--enable"></a>
 
+### Ingress Egress Gw Accelerated Networking Enable
+
 <a id="nestedblock--ingress_egress_gw--active_enhanced_firewall_policies"></a>
+
+### Ingress Egress Gw Active Enhanced Firewall Policies
+
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--ingress_egress_gw--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 
+### Ingress Egress Gw Active Enhanced Firewall Policies Enhanced Firewall Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw--active_forward_proxy_policies"></a>
+
+### Ingress Egress Gw Active Forward Proxy Policies
+
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--ingress_egress_gw--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_forward_proxy_policies--forward_proxy_policies"></a>
 
+### Ingress Egress Gw Active Forward Proxy Policies Forward Proxy Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw--active_network_policies"></a>
+
+### Ingress Egress Gw Active Network Policies
+
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--ingress_egress_gw--active_network_policies--network_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_network_policies--network_policies"></a>
 
+### Ingress Egress Gw Active Network Policies Network Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw--az_nodes"></a>
+
+### Ingress Egress Gw Az Nodes
+
+`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input (`String`).
+
+`inside_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Inside Subnet](#nestedblock--ingress_egress_gw--az_nodes--inside_subnet) below.
+
+`outside_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Outside Subnet](#nestedblock--ingress_egress_gw--az_nodes--outside_subnet) below.
 
 <a id="nestedblock--ingress_egress_gw--az_nodes--inside_subnet"></a>
 
+### Ingress Egress Gw Az Nodes Inside Subnet
+
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#nestedblock--ingress_egress_gw--az_nodes--inside_subnet--subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--ingress_egress_gw--az_nodes--inside_subnet--subnet_param) below.
+
 <a id="nestedblock--ingress_egress_gw--az_nodes--inside_subnet--subnet"></a>
+
+### Ingress Egress Gw Az Nodes Inside Subnet Subnet
 
 <a id="nestedblock--ingress_egress_gw--az_nodes--inside_subnet--subnet_param"></a>
 
+### Ingress Egress Gw Az Nodes Inside Subnet Subnet Param
+
 <a id="nestedblock--ingress_egress_gw--az_nodes--outside_subnet"></a>
+
+### Ingress Egress Gw Az Nodes Outside Subnet
+
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#nestedblock--ingress_egress_gw--az_nodes--outside_subnet--subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--ingress_egress_gw--az_nodes--outside_subnet--subnet_param) below.
 
 <a id="nestedblock--ingress_egress_gw--az_nodes--outside_subnet--subnet"></a>
 
+### Ingress Egress Gw Az Nodes Outside Subnet Subnet
+
 <a id="nestedblock--ingress_egress_gw--az_nodes--outside_subnet--subnet_param"></a>
+
+### Ingress Egress Gw Az Nodes Outside Subnet Subnet Param
 
 <a id="nestedblock--ingress_egress_gw--dc_cluster_group_inside_vn"></a>
 
+### Ingress Egress Gw Dc Cluster Group Inside Vn
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw--dc_cluster_group_outside_vn"></a>
+
+### Ingress Egress Gw Dc Cluster Group Outside Vn
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw--forward_proxy_allow_all"></a>
 
+### Ingress Egress Gw Forward Proxy Allow All
+
 <a id="nestedblock--ingress_egress_gw--global_network_list"></a>
+
+### Ingress Egress Gw Global Network List
+
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--ingress_egress_gw--global_network_list--global_network_connections) below.
 
 <a id="nestedblock--ingress_egress_gw--global_network_list--global_network_connections"></a>
 
+### Ingress Egress Gw Global Network List Global Network Connections
+
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global Dr](#nestedblock--ingress_egress_gw--global_network_list--global_network_connections--sli_to_global_dr) below.
+
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global Dr](#nestedblock--ingress_egress_gw--global_network_list--global_network_connections--slo_to_global_dr) below.
+
 <a id="nestedblock--ingress_egress_gw--global_network_list--global_network_connections--sli_to_global_dr"></a>
+
+### Ingress Egress Gw Global Network List Global Network Connections Sli To Global Dr
 
 <a id="nestedblock--ingress_egress_gw--global_network_list--global_network_connections--slo_to_global_dr"></a>
 
+### Ingress Egress Gw Global Network List Global Network Connections Slo To Global Dr
+
 <a id="nestedblock--ingress_egress_gw--hub"></a>
+
+### Ingress Egress Gw Hub
+
+`express_route_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Express Route Disabled](#nestedblock--ingress_egress_gw--hub--express_route_disabled) below.
+
+`express_route_enabled` - (Optional) Express Route Configuration. Express Route Configuration. See [Express Route Enabled](#nestedblock--ingress_egress_gw--hub--express_route_enabled) below.
+
+`spoke_vnets` - (Optional) Spoke VNet Peering (Legacy). Spoke VNet Peering. See [Spoke Vnets](#nestedblock--ingress_egress_gw--hub--spoke_vnets) below.
 
 <a id="nestedblock--ingress_egress_gw--hub--express_route_disabled"></a>
 
+### Ingress Egress Gw Hub Express Route Disabled
+
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled"></a>
+
+### Ingress Egress Gw Hub Express Route Enabled
+
+`advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise To Route Server](#nestedblock--ingress_egress_gw--hub--express_route_enabled--advertise_to_route_server) below.
+
+`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#nestedblock--ingress_egress_gw--hub--express_route_enabled--auto_asn) below.
+
+`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site. See [Connections](#nestedblock--ingress_egress_gw--hub--express_route_enabled--connections) below.
+
+`custom_asn` - (Optional) Custom ASN. Set custom ASN for F5XC Site (`Number`).
+
+`do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise To Route Server](#nestedblock--ingress_egress_gw--hub--express_route_enabled--do_not_advertise_to_route_server) below.
+
+`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Gateway Subnet](#nestedblock--ingress_egress_gw--hub--express_route_enabled--gateway_subnet) below.
+
+`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Route Server Subnet](#nestedblock--ingress_egress_gw--hub--express_route_enabled--route_server_subnet) below.
+
+`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Express Route](#nestedblock--ingress_egress_gw--hub--express_route_enabled--site_registration_over_express_route) below.
+
+`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Registration Over Internet](#nestedblock--ingress_egress_gw--hub--express_route_enabled--site_registration_over_internet) below.
+
+`sku_ergw1az` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Ergw1az](#nestedblock--ingress_egress_gw--hub--express_route_enabled--sku_ergw1az) below.
+
+`sku_ergw2az` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Ergw2az](#nestedblock--ingress_egress_gw--hub--express_route_enabled--sku_ergw2az) below.
+
+`sku_high_perf` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku High Perf](#nestedblock--ingress_egress_gw--hub--express_route_enabled--sku_high_perf) below.
+
+`sku_standard` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Standard](#nestedblock--ingress_egress_gw--hub--express_route_enabled--sku_standard) below.
 
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--advertise_to_route_server"></a>
 
+### Ingress Egress Gw Hub Express Route Enabled Advertise To Route Server
+
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--auto_asn"></a>
+
+### Ingress Egress Gw Hub Express Route Enabled Auto Asn
 
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--connections"></a>
 
+### Ingress Egress Gw Hub Express Route Enabled Connections
+
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--do_not_advertise_to_route_server"></a>
+
+### Ingress Egress Gw Hub Express Route Enabled Do Not Advertise To Route Server
 
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--gateway_subnet"></a>
 
+### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet
+
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--route_server_subnet"></a>
+
+### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet
 
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--site_registration_over_express_route"></a>
 
+### Ingress Egress Gw Hub Express Route Enabled Site Registration Over Express Route
+
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--site_registration_over_internet"></a>
+
+### Ingress Egress Gw Hub Express Route Enabled Site Registration Over Internet
 
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--sku_ergw1az"></a>
 
+### Ingress Egress Gw Hub Express Route Enabled Sku Ergw1az
+
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--sku_ergw2az"></a>
+
+### Ingress Egress Gw Hub Express Route Enabled Sku Ergw2az
 
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--sku_high_perf"></a>
 
+### Ingress Egress Gw Hub Express Route Enabled Sku High Perf
+
 <a id="nestedblock--ingress_egress_gw--hub--express_route_enabled--sku_standard"></a>
+
+### Ingress Egress Gw Hub Express Route Enabled Sku Standard
 
 <a id="nestedblock--ingress_egress_gw--hub--spoke_vnets"></a>
 
+### Ingress Egress Gw Hub Spoke Vnets
+
+`auto` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto](#nestedblock--ingress_egress_gw--hub--spoke_vnets--auto) below.
+
+`labels` - (Optional) Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared.... See [Labels](#nestedblock--ingress_egress_gw--hub--spoke_vnets--labels) below.
+
+`manual` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual](#nestedblock--ingress_egress_gw--hub--spoke_vnets--manual) below.
+
+`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet. See [Vnet](#nestedblock--ingress_egress_gw--hub--spoke_vnets--vnet) below.
+
 <a id="nestedblock--ingress_egress_gw--hub--spoke_vnets--auto"></a>
+
+### Ingress Egress Gw Hub Spoke Vnets Auto
 
 <a id="nestedblock--ingress_egress_gw--hub--spoke_vnets--labels"></a>
 
+### Ingress Egress Gw Hub Spoke Vnets Labels
+
 <a id="nestedblock--ingress_egress_gw--hub--spoke_vnets--manual"></a>
+
+### Ingress Egress Gw Hub Spoke Vnets Manual
 
 <a id="nestedblock--ingress_egress_gw--hub--spoke_vnets--vnet"></a>
 
+### Ingress Egress Gw Hub Spoke Vnets Vnet
+
 <a id="nestedblock--ingress_egress_gw--inside_static_routes"></a>
+
+### Ingress Egress Gw Inside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw--inside_static_routes--static_route_list) below.
 
 <a id="nestedblock--ingress_egress_gw--inside_static_routes--static_route_list"></a>
 
+### Ingress Egress Gw Inside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw--inside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
 <a id="nestedblock--ingress_egress_gw--inside_static_routes--static_route_list--custom_static_route"></a>
+
+### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route
 
 <a id="nestedblock--ingress_egress_gw--no_dc_cluster_group"></a>
 
+### Ingress Egress Gw No Dc Cluster Group
+
 <a id="nestedblock--ingress_egress_gw--no_forward_proxy"></a>
+
+### Ingress Egress Gw No Forward Proxy
 
 <a id="nestedblock--ingress_egress_gw--no_global_network"></a>
 
+### Ingress Egress Gw No Global Network
+
 <a id="nestedblock--ingress_egress_gw--no_inside_static_routes"></a>
+
+### Ingress Egress Gw No Inside Static Routes
 
 <a id="nestedblock--ingress_egress_gw--no_network_policy"></a>
 
+### Ingress Egress Gw No Network Policy
+
 <a id="nestedblock--ingress_egress_gw--no_outside_static_routes"></a>
+
+### Ingress Egress Gw No Outside Static Routes
 
 <a id="nestedblock--ingress_egress_gw--not_hub"></a>
 
+### Ingress Egress Gw Not Hub
+
 <a id="nestedblock--ingress_egress_gw--outside_static_routes"></a>
+
+### Ingress Egress Gw Outside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw--outside_static_routes--static_route_list) below.
 
 <a id="nestedblock--ingress_egress_gw--outside_static_routes--static_route_list"></a>
 
+### Ingress Egress Gw Outside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw--outside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
 <a id="nestedblock--ingress_egress_gw--outside_static_routes--static_route_list--custom_static_route"></a>
+
+### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route
 
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode"></a>
 
+### Ingress Egress Gw Performance Enhancement Mode
+
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced) below.
+
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l7_enhanced) below.
+
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
+
+### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
+
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
+
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
 
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
 
+### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
+
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
+
+### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
 
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
 
+### Ingress Egress Gw Performance Enhancement Mode Perf Mode L7 Enhanced
+
 <a id="nestedblock--ingress_egress_gw--sm_connection_public_ip"></a>
+
+### Ingress Egress Gw Sm Connection Public Ip
 
 <a id="nestedblock--ingress_egress_gw--sm_connection_pvt_ip"></a>
 
+### Ingress Egress Gw Sm Connection Pvt Ip
+
 <a id="nestedblock--ingress_egress_gw_ar"></a>
+
+### Ingress Egress Gw Ar
+
+`accelerated_networking` - (Optional) Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen. See [Accelerated Networking](#nestedblock--ingress_egress_gw_ar--accelerated_networking) below.
+
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option .... See [Active Enhanced Firewall Policies](#nestedblock--ingress_egress_gw_ar--active_enhanced_firewall_policies) below.
+
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#nestedblock--ingress_egress_gw_ar--active_forward_proxy_policies) below.
+
+`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--ingress_egress_gw_ar--active_network_policies) below.
+
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
+
+`dc_cluster_group_inside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside Vn](#nestedblock--ingress_egress_gw_ar--dc_cluster_group_inside_vn) below.
+
+`dc_cluster_group_outside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Outside Vn](#nestedblock--ingress_egress_gw_ar--dc_cluster_group_outside_vn) below.
+
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#nestedblock--ingress_egress_gw_ar--forward_proxy_allow_all) below.
+
+`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#nestedblock--ingress_egress_gw_ar--global_network_list) below.
+
+`hub` - (Optional) Hub VNet type. Hub VNet type. See [Hub](#nestedblock--ingress_egress_gw_ar--hub) below.
+
+`inside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Inside Static Routes](#nestedblock--ingress_egress_gw_ar--inside_static_routes) below.
+
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--ingress_egress_gw_ar--no_dc_cluster_group) below.
+
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#nestedblock--ingress_egress_gw_ar--no_forward_proxy) below.
+
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#nestedblock--ingress_egress_gw_ar--no_global_network) below.
+
+`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#nestedblock--ingress_egress_gw_ar--no_inside_static_routes) below.
+
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#nestedblock--ingress_egress_gw_ar--no_network_policy) below.
+
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#nestedblock--ingress_egress_gw_ar--no_outside_static_routes) below.
+
+`node` - (Optional) Two Interface Node. Parameters for creating two interface Node in one AZ. See [Node](#nestedblock--ingress_egress_gw_ar--node) below.
+
+`not_hub` - (Optional) Empty. This can be used for messages where no values are needed. See [Not Hub](#nestedblock--ingress_egress_gw_ar--not_hub) below.
+
+`outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#nestedblock--ingress_egress_gw_ar--outside_static_routes) below.
+
+`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#nestedblock--ingress_egress_gw_ar--performance_enhancement_mode) below.
+
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public Ip](#nestedblock--ingress_egress_gw_ar--sm_connection_public_ip) below.
+
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt Ip](#nestedblock--ingress_egress_gw_ar--sm_connection_pvt_ip) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--accelerated_networking"></a>
 
+### Ingress Egress Gw Ar Accelerated Networking
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--ingress_egress_gw_ar--accelerated_networking--disable) below.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--ingress_egress_gw_ar--accelerated_networking--enable) below.
+
 <a id="nestedblock--ingress_egress_gw_ar--accelerated_networking--disable"></a>
+
+### Ingress Egress Gw Ar Accelerated Networking Disable
 
 <a id="nestedblock--ingress_egress_gw_ar--accelerated_networking--enable"></a>
 
+### Ingress Egress Gw Ar Accelerated Networking Enable
+
 <a id="nestedblock--ingress_egress_gw_ar--active_enhanced_firewall_policies"></a>
+
+### Ingress Egress Gw Ar Active Enhanced Firewall Policies
+
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--ingress_egress_gw_ar--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 
+### Ingress Egress Gw Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw_ar--active_forward_proxy_policies"></a>
+
+### Ingress Egress Gw Ar Active Forward Proxy Policies
+
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--ingress_egress_gw_ar--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--active_forward_proxy_policies--forward_proxy_policies"></a>
 
+### Ingress Egress Gw Ar Active Forward Proxy Policies Forward Proxy Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw_ar--active_network_policies"></a>
+
+### Ingress Egress Gw Ar Active Network Policies
+
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--ingress_egress_gw_ar--active_network_policies--network_policies) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--active_network_policies--network_policies"></a>
 
+### Ingress Egress Gw Ar Active Network Policies Network Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw_ar--dc_cluster_group_inside_vn"></a>
+
+### Ingress Egress Gw Ar Dc Cluster Group Inside Vn
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--dc_cluster_group_outside_vn"></a>
 
+### Ingress Egress Gw Ar Dc Cluster Group Outside Vn
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw_ar--forward_proxy_allow_all"></a>
+
+### Ingress Egress Gw Ar Forward Proxy Allow All
 
 <a id="nestedblock--ingress_egress_gw_ar--global_network_list"></a>
 
+### Ingress Egress Gw Ar Global Network List
+
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections) below.
+
 <a id="nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections"></a>
+
+### Ingress Egress Gw Ar Global Network List Global Network Connections
+
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global Dr](#nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections--sli_to_global_dr) below.
+
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global Dr](#nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections--slo_to_global_dr) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections--sli_to_global_dr"></a>
 
+### Ingress Egress Gw Ar Global Network List Global Network Connections Sli To Global Dr
+
 <a id="nestedblock--ingress_egress_gw_ar--global_network_list--global_network_connections--slo_to_global_dr"></a>
+
+### Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global Dr
 
 <a id="nestedblock--ingress_egress_gw_ar--hub"></a>
 
+### Ingress Egress Gw Ar Hub
+
+`express_route_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Express Route Disabled](#nestedblock--ingress_egress_gw_ar--hub--express_route_disabled) below.
+
+`express_route_enabled` - (Optional) Express Route Configuration. Express Route Configuration. See [Express Route Enabled](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled) below.
+
+`spoke_vnets` - (Optional) Spoke VNet Peering (Legacy). Spoke VNet Peering. See [Spoke Vnets](#nestedblock--ingress_egress_gw_ar--hub--spoke_vnets) below.
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_disabled"></a>
+
+### Ingress Egress Gw Ar Hub Express Route Disabled
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled"></a>
 
+### Ingress Egress Gw Ar Hub Express Route Enabled
+
+`advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise To Route Server](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--advertise_to_route_server) below.
+
+`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--auto_asn) below.
+
+`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site. See [Connections](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--connections) below.
+
+`custom_asn` - (Optional) Custom ASN. Set custom ASN for F5XC Site (`Number`).
+
+`do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise To Route Server](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--do_not_advertise_to_route_server) below.
+
+`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Gateway Subnet](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--gateway_subnet) below.
+
+`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Route Server Subnet](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--route_server_subnet) below.
+
+`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Express Route](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--site_registration_over_express_route) below.
+
+`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Registration Over Internet](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--site_registration_over_internet) below.
+
+`sku_ergw1az` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Ergw1az](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--sku_ergw1az) below.
+
+`sku_ergw2az` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Ergw2az](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--sku_ergw2az) below.
+
+`sku_high_perf` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku High Perf](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--sku_high_perf) below.
+
+`sku_standard` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Standard](#nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--sku_standard) below.
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--advertise_to_route_server"></a>
+
+### Ingress Egress Gw Ar Hub Express Route Enabled Advertise To Route Server
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--auto_asn"></a>
 
+### Ingress Egress Gw Ar Hub Express Route Enabled Auto Asn
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--connections"></a>
+
+### Ingress Egress Gw Ar Hub Express Route Enabled Connections
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--do_not_advertise_to_route_server"></a>
 
+### Ingress Egress Gw Ar Hub Express Route Enabled Do Not Advertise To Route Server
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--gateway_subnet"></a>
+
+### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--route_server_subnet"></a>
 
+### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--site_registration_over_express_route"></a>
+
+### Ingress Egress Gw Ar Hub Express Route Enabled Site Registration Over Express Route
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--site_registration_over_internet"></a>
 
+### Ingress Egress Gw Ar Hub Express Route Enabled Site Registration Over Internet
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--sku_ergw1az"></a>
+
+### Ingress Egress Gw Ar Hub Express Route Enabled Sku Ergw1az
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--sku_ergw2az"></a>
 
+### Ingress Egress Gw Ar Hub Express Route Enabled Sku Ergw2az
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--sku_high_perf"></a>
+
+### Ingress Egress Gw Ar Hub Express Route Enabled Sku High Perf
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--express_route_enabled--sku_standard"></a>
 
+### Ingress Egress Gw Ar Hub Express Route Enabled Sku Standard
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--spoke_vnets"></a>
+
+### Ingress Egress Gw Ar Hub Spoke Vnets
+
+`auto` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto](#nestedblock--ingress_egress_gw_ar--hub--spoke_vnets--auto) below.
+
+`labels` - (Optional) Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared.... See [Labels](#nestedblock--ingress_egress_gw_ar--hub--spoke_vnets--labels) below.
+
+`manual` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual](#nestedblock--ingress_egress_gw_ar--hub--spoke_vnets--manual) below.
+
+`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet. See [Vnet](#nestedblock--ingress_egress_gw_ar--hub--spoke_vnets--vnet) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--spoke_vnets--auto"></a>
 
+### Ingress Egress Gw Ar Hub Spoke Vnets Auto
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--spoke_vnets--labels"></a>
+
+### Ingress Egress Gw Ar Hub Spoke Vnets Labels
 
 <a id="nestedblock--ingress_egress_gw_ar--hub--spoke_vnets--manual"></a>
 
+### Ingress Egress Gw Ar Hub Spoke Vnets Manual
+
 <a id="nestedblock--ingress_egress_gw_ar--hub--spoke_vnets--vnet"></a>
+
+### Ingress Egress Gw Ar Hub Spoke Vnets Vnet
 
 <a id="nestedblock--ingress_egress_gw_ar--inside_static_routes"></a>
 
+### Ingress Egress Gw Ar Inside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list) below.
+
 <a id="nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list"></a>
+
+### Ingress Egress Gw Ar Inside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--ingress_egress_gw_ar--inside_static_routes--static_route_list--custom_static_route"></a>
 
+### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route
+
 <a id="nestedblock--ingress_egress_gw_ar--no_dc_cluster_group"></a>
+
+### Ingress Egress Gw Ar No Dc Cluster Group
 
 <a id="nestedblock--ingress_egress_gw_ar--no_forward_proxy"></a>
 
+### Ingress Egress Gw Ar No Forward Proxy
+
 <a id="nestedblock--ingress_egress_gw_ar--no_global_network"></a>
+
+### Ingress Egress Gw Ar No Global Network
 
 <a id="nestedblock--ingress_egress_gw_ar--no_inside_static_routes"></a>
 
+### Ingress Egress Gw Ar No Inside Static Routes
+
 <a id="nestedblock--ingress_egress_gw_ar--no_network_policy"></a>
+
+### Ingress Egress Gw Ar No Network Policy
 
 <a id="nestedblock--ingress_egress_gw_ar--no_outside_static_routes"></a>
 
+### Ingress Egress Gw Ar No Outside Static Routes
+
 <a id="nestedblock--ingress_egress_gw_ar--node"></a>
+
+### Ingress Egress Gw Ar Node
+
+`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set (`Number`).
+
+`inside_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Inside Subnet](#nestedblock--ingress_egress_gw_ar--node--inside_subnet) below.
+
+`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
+
+`outside_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Outside Subnet](#nestedblock--ingress_egress_gw_ar--node--outside_subnet) below.
+
+`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set (`Number`).
 
 <a id="nestedblock--ingress_egress_gw_ar--node--inside_subnet"></a>
 
+### Ingress Egress Gw Ar Node Inside Subnet
+
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#nestedblock--ingress_egress_gw_ar--node--inside_subnet--subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--ingress_egress_gw_ar--node--inside_subnet--subnet_param) below.
+
 <a id="nestedblock--ingress_egress_gw_ar--node--inside_subnet--subnet"></a>
+
+### Ingress Egress Gw Ar Node Inside Subnet Subnet
 
 <a id="nestedblock--ingress_egress_gw_ar--node--inside_subnet--subnet_param"></a>
 
+### Ingress Egress Gw Ar Node Inside Subnet Subnet Param
+
 <a id="nestedblock--ingress_egress_gw_ar--node--outside_subnet"></a>
+
+### Ingress Egress Gw Ar Node Outside Subnet
+
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#nestedblock--ingress_egress_gw_ar--node--outside_subnet--subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--ingress_egress_gw_ar--node--outside_subnet--subnet_param) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--node--outside_subnet--subnet"></a>
 
+### Ingress Egress Gw Ar Node Outside Subnet Subnet
+
 <a id="nestedblock--ingress_egress_gw_ar--node--outside_subnet--subnet_param"></a>
+
+### Ingress Egress Gw Ar Node Outside Subnet Subnet Param
 
 <a id="nestedblock--ingress_egress_gw_ar--not_hub"></a>
 
+### Ingress Egress Gw Ar Not Hub
+
 <a id="nestedblock--ingress_egress_gw_ar--outside_static_routes"></a>
+
+### Ingress Egress Gw Ar Outside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list"></a>
 
+### Ingress Egress Gw Ar Outside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
 <a id="nestedblock--ingress_egress_gw_ar--outside_static_routes--static_route_list--custom_static_route"></a>
+
+### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route
 
 <a id="nestedblock--ingress_egress_gw_ar--performance_enhancement_mode"></a>
 
+### Ingress Egress Gw Ar Performance Enhancement Mode
+
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--ingress_egress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced) below.
+
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--ingress_egress_gw_ar--performance_enhancement_mode--perf_mode_l7_enhanced) below.
+
 <a id="nestedblock--ingress_egress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
+
+### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
+
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--ingress_egress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
+
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--ingress_egress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
 
 <a id="nestedblock--ingress_egress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
 
+### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
+
 <a id="nestedblock--ingress_egress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
+
+### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
 
 <a id="nestedblock--ingress_egress_gw_ar--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
 
+### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L7 Enhanced
+
 <a id="nestedblock--ingress_egress_gw_ar--sm_connection_public_ip"></a>
+
+### Ingress Egress Gw Ar Sm Connection Public Ip
 
 <a id="nestedblock--ingress_egress_gw_ar--sm_connection_pvt_ip"></a>
 
+### Ingress Egress Gw Ar Sm Connection Pvt Ip
+
 <a id="nestedblock--ingress_gw"></a>
+
+### Ingress Gw
+
+`accelerated_networking` - (Optional) Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen. See [Accelerated Networking](#nestedblock--ingress_gw--accelerated_networking) below.
+
+`az_nodes` - (Optional) Ingress Gateway (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. See [Az Nodes](#nestedblock--ingress_gw--az_nodes) below.
+
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
+
+`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#nestedblock--ingress_gw--performance_enhancement_mode) below.
 
 <a id="nestedblock--ingress_gw--accelerated_networking"></a>
 
+### Ingress Gw Accelerated Networking
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--ingress_gw--accelerated_networking--disable) below.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--ingress_gw--accelerated_networking--enable) below.
+
 <a id="nestedblock--ingress_gw--accelerated_networking--disable"></a>
+
+### Ingress Gw Accelerated Networking Disable
 
 <a id="nestedblock--ingress_gw--accelerated_networking--enable"></a>
 
+### Ingress Gw Accelerated Networking Enable
+
 <a id="nestedblock--ingress_gw--az_nodes"></a>
+
+### Ingress Gw Az Nodes
+
+`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input (`String`).
+
+`local_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Local Subnet](#nestedblock--ingress_gw--az_nodes--local_subnet) below.
 
 <a id="nestedblock--ingress_gw--az_nodes--local_subnet"></a>
 
+### Ingress Gw Az Nodes Local Subnet
+
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#nestedblock--ingress_gw--az_nodes--local_subnet--subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--ingress_gw--az_nodes--local_subnet--subnet_param) below.
+
 <a id="nestedblock--ingress_gw--az_nodes--local_subnet--subnet"></a>
+
+### Ingress Gw Az Nodes Local Subnet Subnet
 
 <a id="nestedblock--ingress_gw--az_nodes--local_subnet--subnet_param"></a>
 
+### Ingress Gw Az Nodes Local Subnet Subnet Param
+
 <a id="nestedblock--ingress_gw--performance_enhancement_mode"></a>
+
+### Ingress Gw Performance Enhancement Mode
+
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced) below.
+
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l7_enhanced) below.
 
 <a id="nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
 
+### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
+
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
+
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
+
 <a id="nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
+
+### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
 
 <a id="nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
 
+### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
+
 <a id="nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
+
+### Ingress Gw Performance Enhancement Mode Perf Mode L7 Enhanced
 
 <a id="nestedblock--ingress_gw_ar"></a>
 
+### Ingress Gw Ar
+
+`accelerated_networking` - (Optional) Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen. See [Accelerated Networking](#nestedblock--ingress_gw_ar--accelerated_networking) below.
+
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
+
+`node` - (Optional) Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region. See [Node](#nestedblock--ingress_gw_ar--node) below.
+
+`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#nestedblock--ingress_gw_ar--performance_enhancement_mode) below.
+
 <a id="nestedblock--ingress_gw_ar--accelerated_networking"></a>
+
+### Ingress Gw Ar Accelerated Networking
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--ingress_gw_ar--accelerated_networking--disable) below.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--ingress_gw_ar--accelerated_networking--enable) below.
 
 <a id="nestedblock--ingress_gw_ar--accelerated_networking--disable"></a>
 
+### Ingress Gw Ar Accelerated Networking Disable
+
 <a id="nestedblock--ingress_gw_ar--accelerated_networking--enable"></a>
+
+### Ingress Gw Ar Accelerated Networking Enable
 
 <a id="nestedblock--ingress_gw_ar--node"></a>
 
+### Ingress Gw Ar Node
+
+`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set (`Number`).
+
+`local_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Local Subnet](#nestedblock--ingress_gw_ar--node--local_subnet) below.
+
+`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
+
+`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set (`Number`).
+
 <a id="nestedblock--ingress_gw_ar--node--local_subnet"></a>
+
+### Ingress Gw Ar Node Local Subnet
+
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#nestedblock--ingress_gw_ar--node--local_subnet--subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--ingress_gw_ar--node--local_subnet--subnet_param) below.
 
 <a id="nestedblock--ingress_gw_ar--node--local_subnet--subnet"></a>
 
+### Ingress Gw Ar Node Local Subnet Subnet
+
 <a id="nestedblock--ingress_gw_ar--node--local_subnet--subnet_param"></a>
+
+### Ingress Gw Ar Node Local Subnet Subnet Param
 
 <a id="nestedblock--ingress_gw_ar--performance_enhancement_mode"></a>
 
+### Ingress Gw Ar Performance Enhancement Mode
+
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--ingress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced) below.
+
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--ingress_gw_ar--performance_enhancement_mode--perf_mode_l7_enhanced) below.
+
 <a id="nestedblock--ingress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
+
+### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
+
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--ingress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
+
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--ingress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
 
 <a id="nestedblock--ingress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
 
+### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
+
 <a id="nestedblock--ingress_gw_ar--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
+
+### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
 
 <a id="nestedblock--ingress_gw_ar--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
 
+### Ingress Gw Ar Performance Enhancement Mode Perf Mode L7 Enhanced
+
 <a id="nestedblock--kubernetes_upgrade_drain"></a>
+
+### Kubernetes Upgrade Drain
+
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain) below.
+
+`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain) below.
 
 <a id="nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain"></a>
 
+### Kubernetes Upgrade Drain Disable Upgrade Drain
+
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain"></a>
+
+### Kubernetes Upgrade Drain Enable Upgrade Drain
+
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
+
+`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
+
+`drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes (`Number`).
+
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode) below.
 
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode"></a>
 
+### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
+
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode"></a>
+
+### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
 
 <a id="nestedblock--log_receiver"></a>
 
+### Log Receiver
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--logs_streaming_disabled"></a>
+
+### Logs Streaming Disabled
 
 <a id="nestedblock--no_worker_nodes"></a>
 
+### No Worker Nodes
+
 <a id="nestedblock--offline_survivability_mode"></a>
+
+### Offline Survivability Mode
+
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#nestedblock--offline_survivability_mode--enable_offline_survivability_mode) below.
+
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#nestedblock--offline_survivability_mode--no_offline_survivability_mode) below.
 
 <a id="nestedblock--offline_survivability_mode--enable_offline_survivability_mode"></a>
 
+### Offline Survivability Mode Enable Offline Survivability Mode
+
 <a id="nestedblock--offline_survivability_mode--no_offline_survivability_mode"></a>
+
+### Offline Survivability Mode No Offline Survivability Mode
 
 <a id="nestedblock--os"></a>
 
+### Os
+
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Os Version](#nestedblock--os--default_os_version) below.
+
+`operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
+
 <a id="nestedblock--os--default_os_version"></a>
+
+### Os Default Os Version
 
 <a id="nestedblock--sw"></a>
 
+### Sw
+
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--sw--default_sw_version) below.
+
+`volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
+
 <a id="nestedblock--sw--default_sw_version"></a>
+
+### Sw Default Sw Version
 
 <a id="nestedblock--tags"></a>
 
+### Tags
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 <a id="nestedblock--vnet"></a>
 
+### Vnet
+
+`existing_vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet. See [Existing Vnet](#nestedblock--vnet--existing_vnet) below.
+
+`new_vnet` - (Optional) Azure Vnet Parameters. Parameters to create a new Azure Vnet. See [New Vnet](#nestedblock--vnet--new_vnet) below.
+
 <a id="nestedblock--vnet--existing_vnet"></a>
+
+### Vnet Existing Vnet
+
+`f5_orchestrated_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 Orchestrated Routing](#nestedblock--vnet--existing_vnet--f5_orchestrated_routing) below.
+
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#nestedblock--vnet--existing_vnet--manual_routing) below.
+
+`resource_group` - (Optional) Existing Vnet Resource Group. Resource group of existing Vnet (`String`).
+
+`vnet_name` - (Optional) Existing Vnet Name. Name of existing Vnet (`String`).
 
 <a id="nestedblock--vnet--existing_vnet--f5_orchestrated_routing"></a>
 
+### Vnet Existing Vnet F5 Orchestrated Routing
+
 <a id="nestedblock--vnet--existing_vnet--manual_routing"></a>
+
+### Vnet Existing Vnet Manual Routing
 
 <a id="nestedblock--vnet--new_vnet"></a>
 
+### Vnet New Vnet
+
+`autogenerate` - (Optional) Empty. This can be used for messages where no values are needed. See [Autogenerate](#nestedblock--vnet--new_vnet--autogenerate) below.
+
+`name` - (Optional) Choose Vnet Name. Specify the Vnet Name (`String`).
+
+`primary_ipv4` - (Optional) IPv4 CIDR block. IPv4 CIDR block for this Vnet. It has to be private address space (`String`).
+
 <a id="nestedblock--vnet--new_vnet--autogenerate"></a>
+
+### Vnet New Vnet Autogenerate
 
 <a id="nestedblock--voltstack_cluster"></a>
 
+### Voltstack Cluster
+
+`accelerated_networking` - (Optional) Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen. See [Accelerated Networking](#nestedblock--voltstack_cluster--accelerated_networking) below.
+
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option .... See [Active Enhanced Firewall Policies](#nestedblock--voltstack_cluster--active_enhanced_firewall_policies) below.
+
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#nestedblock--voltstack_cluster--active_forward_proxy_policies) below.
+
+`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--voltstack_cluster--active_network_policies) below.
+
+`az_nodes` - (Optional) App Stack Cluster (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. See [Az Nodes](#nestedblock--voltstack_cluster--az_nodes) below.
+
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
+
+`dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#nestedblock--voltstack_cluster--dc_cluster_group) below.
+
+`default_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage](#nestedblock--voltstack_cluster--default_storage) below.
+
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#nestedblock--voltstack_cluster--forward_proxy_allow_all) below.
+
+`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#nestedblock--voltstack_cluster--global_network_list) below.
+
+`k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#nestedblock--voltstack_cluster--k8s_cluster) below.
+
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--voltstack_cluster--no_dc_cluster_group) below.
+
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#nestedblock--voltstack_cluster--no_forward_proxy) below.
+
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#nestedblock--voltstack_cluster--no_global_network) below.
+
+`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#nestedblock--voltstack_cluster--no_k8s_cluster) below.
+
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#nestedblock--voltstack_cluster--no_network_policy) below.
+
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#nestedblock--voltstack_cluster--no_outside_static_routes) below.
+
+`outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#nestedblock--voltstack_cluster--outside_static_routes) below.
+
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public Ip](#nestedblock--voltstack_cluster--sm_connection_public_ip) below.
+
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt Ip](#nestedblock--voltstack_cluster--sm_connection_pvt_ip) below.
+
+`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this site. See [Storage Class List](#nestedblock--voltstack_cluster--storage_class_list) below.
+
 <a id="nestedblock--voltstack_cluster--accelerated_networking"></a>
+
+### Voltstack Cluster Accelerated Networking
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--voltstack_cluster--accelerated_networking--disable) below.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--voltstack_cluster--accelerated_networking--enable) below.
 
 <a id="nestedblock--voltstack_cluster--accelerated_networking--disable"></a>
 
+### Voltstack Cluster Accelerated Networking Disable
+
 <a id="nestedblock--voltstack_cluster--accelerated_networking--enable"></a>
+
+### Voltstack Cluster Accelerated Networking Enable
 
 <a id="nestedblock--voltstack_cluster--active_enhanced_firewall_policies"></a>
 
+### Voltstack Cluster Active Enhanced Firewall Policies
+
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--voltstack_cluster--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+
 <a id="nestedblock--voltstack_cluster--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
+
+### Voltstack Cluster Active Enhanced Firewall Policies Enhanced Firewall Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--active_forward_proxy_policies"></a>
 
+### Voltstack Cluster Active Forward Proxy Policies
+
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--voltstack_cluster--active_forward_proxy_policies--forward_proxy_policies) below.
+
 <a id="nestedblock--voltstack_cluster--active_forward_proxy_policies--forward_proxy_policies"></a>
+
+### Voltstack Cluster Active Forward Proxy Policies Forward Proxy Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--active_network_policies"></a>
 
+### Voltstack Cluster Active Network Policies
+
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--voltstack_cluster--active_network_policies--network_policies) below.
+
 <a id="nestedblock--voltstack_cluster--active_network_policies--network_policies"></a>
+
+### Voltstack Cluster Active Network Policies Network Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--az_nodes"></a>
 
+### Voltstack Cluster Az Nodes
+
+`azure_az` - (Optional) Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input (`String`).
+
+`local_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Local Subnet](#nestedblock--voltstack_cluster--az_nodes--local_subnet) below.
+
 <a id="nestedblock--voltstack_cluster--az_nodes--local_subnet"></a>
+
+### Voltstack Cluster Az Nodes Local Subnet
+
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#nestedblock--voltstack_cluster--az_nodes--local_subnet--subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--voltstack_cluster--az_nodes--local_subnet--subnet_param) below.
 
 <a id="nestedblock--voltstack_cluster--az_nodes--local_subnet--subnet"></a>
 
+### Voltstack Cluster Az Nodes Local Subnet Subnet
+
 <a id="nestedblock--voltstack_cluster--az_nodes--local_subnet--subnet_param"></a>
+
+### Voltstack Cluster Az Nodes Local Subnet Subnet Param
 
 <a id="nestedblock--voltstack_cluster--dc_cluster_group"></a>
 
+### Voltstack Cluster Dc Cluster Group
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster--default_storage"></a>
+
+### Voltstack Cluster Default Storage
 
 <a id="nestedblock--voltstack_cluster--forward_proxy_allow_all"></a>
 
+### Voltstack Cluster Forward Proxy Allow All
+
 <a id="nestedblock--voltstack_cluster--global_network_list"></a>
+
+### Voltstack Cluster Global Network List
+
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--voltstack_cluster--global_network_list--global_network_connections) below.
 
 <a id="nestedblock--voltstack_cluster--global_network_list--global_network_connections"></a>
 
+### Voltstack Cluster Global Network List Global Network Connections
+
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global Dr](#nestedblock--voltstack_cluster--global_network_list--global_network_connections--sli_to_global_dr) below.
+
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global Dr](#nestedblock--voltstack_cluster--global_network_list--global_network_connections--slo_to_global_dr) below.
+
 <a id="nestedblock--voltstack_cluster--global_network_list--global_network_connections--sli_to_global_dr"></a>
+
+### Voltstack Cluster Global Network List Global Network Connections Sli To Global Dr
 
 <a id="nestedblock--voltstack_cluster--global_network_list--global_network_connections--slo_to_global_dr"></a>
 
+### Voltstack Cluster Global Network List Global Network Connections Slo To Global Dr
+
 <a id="nestedblock--voltstack_cluster--k8s_cluster"></a>
+
+### Voltstack Cluster K8s Cluster
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--no_dc_cluster_group"></a>
 
+### Voltstack Cluster No Dc Cluster Group
+
 <a id="nestedblock--voltstack_cluster--no_forward_proxy"></a>
+
+### Voltstack Cluster No Forward Proxy
 
 <a id="nestedblock--voltstack_cluster--no_global_network"></a>
 
+### Voltstack Cluster No Global Network
+
 <a id="nestedblock--voltstack_cluster--no_k8s_cluster"></a>
+
+### Voltstack Cluster No K8s Cluster
 
 <a id="nestedblock--voltstack_cluster--no_network_policy"></a>
 
+### Voltstack Cluster No Network Policy
+
 <a id="nestedblock--voltstack_cluster--no_outside_static_routes"></a>
+
+### Voltstack Cluster No Outside Static Routes
 
 <a id="nestedblock--voltstack_cluster--outside_static_routes"></a>
 
+### Voltstack Cluster Outside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--voltstack_cluster--outside_static_routes--static_route_list) below.
+
 <a id="nestedblock--voltstack_cluster--outside_static_routes--static_route_list"></a>
+
+### Voltstack Cluster Outside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--voltstack_cluster--outside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--voltstack_cluster--outside_static_routes--static_route_list--custom_static_route"></a>
 
+### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route
+
 <a id="nestedblock--voltstack_cluster--sm_connection_public_ip"></a>
+
+### Voltstack Cluster Sm Connection Public Ip
 
 <a id="nestedblock--voltstack_cluster--sm_connection_pvt_ip"></a>
 
+### Voltstack Cluster Sm Connection Pvt Ip
+
 <a id="nestedblock--voltstack_cluster--storage_class_list"></a>
+
+### Voltstack Cluster Storage Class List
+
+`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#nestedblock--voltstack_cluster--storage_class_list--storage_classes) below.
 
 <a id="nestedblock--voltstack_cluster--storage_class_list--storage_classes"></a>
 
+### Voltstack Cluster Storage Class List Storage Classes
+
+`default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
+
+`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
+
 <a id="nestedblock--voltstack_cluster_ar"></a>
+
+### Voltstack Cluster Ar
+
+`accelerated_networking` - (Optional) Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen. See [Accelerated Networking](#nestedblock--voltstack_cluster_ar--accelerated_networking) below.
+
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option .... See [Active Enhanced Firewall Policies](#nestedblock--voltstack_cluster_ar--active_enhanced_firewall_policies) below.
+
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#nestedblock--voltstack_cluster_ar--active_forward_proxy_policies) below.
+
+`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--voltstack_cluster_ar--active_network_policies) below.
+
+`azure_certified_hw` - (Optional) Azure Certified Hardware. Name for Azure certified hardware (`String`).
+
+`dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#nestedblock--voltstack_cluster_ar--dc_cluster_group) below.
+
+`default_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage](#nestedblock--voltstack_cluster_ar--default_storage) below.
+
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#nestedblock--voltstack_cluster_ar--forward_proxy_allow_all) below.
+
+`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#nestedblock--voltstack_cluster_ar--global_network_list) below.
+
+`k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#nestedblock--voltstack_cluster_ar--k8s_cluster) below.
+
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--voltstack_cluster_ar--no_dc_cluster_group) below.
+
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#nestedblock--voltstack_cluster_ar--no_forward_proxy) below.
+
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#nestedblock--voltstack_cluster_ar--no_global_network) below.
+
+`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#nestedblock--voltstack_cluster_ar--no_k8s_cluster) below.
+
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#nestedblock--voltstack_cluster_ar--no_network_policy) below.
+
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#nestedblock--voltstack_cluster_ar--no_outside_static_routes) below.
+
+`node` - (Optional) Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region. See [Node](#nestedblock--voltstack_cluster_ar--node) below.
+
+`outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#nestedblock--voltstack_cluster_ar--outside_static_routes) below.
+
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public Ip](#nestedblock--voltstack_cluster_ar--sm_connection_public_ip) below.
+
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt Ip](#nestedblock--voltstack_cluster_ar--sm_connection_pvt_ip) below.
+
+`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this site. See [Storage Class List](#nestedblock--voltstack_cluster_ar--storage_class_list) below.
 
 <a id="nestedblock--voltstack_cluster_ar--accelerated_networking"></a>
 
+### Voltstack Cluster Ar Accelerated Networking
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--voltstack_cluster_ar--accelerated_networking--disable) below.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--voltstack_cluster_ar--accelerated_networking--enable) below.
+
 <a id="nestedblock--voltstack_cluster_ar--accelerated_networking--disable"></a>
+
+### Voltstack Cluster Ar Accelerated Networking Disable
 
 <a id="nestedblock--voltstack_cluster_ar--accelerated_networking--enable"></a>
 
+### Voltstack Cluster Ar Accelerated Networking Enable
+
 <a id="nestedblock--voltstack_cluster_ar--active_enhanced_firewall_policies"></a>
+
+### Voltstack Cluster Ar Active Enhanced Firewall Policies
+
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--voltstack_cluster_ar--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--voltstack_cluster_ar--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 
+### Voltstack Cluster Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster_ar--active_forward_proxy_policies"></a>
+
+### Voltstack Cluster Ar Active Forward Proxy Policies
+
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--voltstack_cluster_ar--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--voltstack_cluster_ar--active_forward_proxy_policies--forward_proxy_policies"></a>
 
+### Voltstack Cluster Ar Active Forward Proxy Policies Forward Proxy Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster_ar--active_network_policies"></a>
+
+### Voltstack Cluster Ar Active Network Policies
+
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--voltstack_cluster_ar--active_network_policies--network_policies) below.
 
 <a id="nestedblock--voltstack_cluster_ar--active_network_policies--network_policies"></a>
 
+### Voltstack Cluster Ar Active Network Policies Network Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster_ar--dc_cluster_group"></a>
+
+### Voltstack Cluster Ar Dc Cluster Group
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster_ar--default_storage"></a>
 
+### Voltstack Cluster Ar Default Storage
+
 <a id="nestedblock--voltstack_cluster_ar--forward_proxy_allow_all"></a>
+
+### Voltstack Cluster Ar Forward Proxy Allow All
 
 <a id="nestedblock--voltstack_cluster_ar--global_network_list"></a>
 
+### Voltstack Cluster Ar Global Network List
+
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections) below.
+
 <a id="nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections"></a>
+
+### Voltstack Cluster Ar Global Network List Global Network Connections
+
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global Dr](#nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections--sli_to_global_dr) below.
+
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global Dr](#nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections--slo_to_global_dr) below.
 
 <a id="nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections--sli_to_global_dr"></a>
 
+### Voltstack Cluster Ar Global Network List Global Network Connections Sli To Global Dr
+
 <a id="nestedblock--voltstack_cluster_ar--global_network_list--global_network_connections--slo_to_global_dr"></a>
+
+### Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global Dr
 
 <a id="nestedblock--voltstack_cluster_ar--k8s_cluster"></a>
 
+### Voltstack Cluster Ar K8s Cluster
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster_ar--no_dc_cluster_group"></a>
+
+### Voltstack Cluster Ar No Dc Cluster Group
 
 <a id="nestedblock--voltstack_cluster_ar--no_forward_proxy"></a>
 
+### Voltstack Cluster Ar No Forward Proxy
+
 <a id="nestedblock--voltstack_cluster_ar--no_global_network"></a>
+
+### Voltstack Cluster Ar No Global Network
 
 <a id="nestedblock--voltstack_cluster_ar--no_k8s_cluster"></a>
 
+### Voltstack Cluster Ar No K8s Cluster
+
 <a id="nestedblock--voltstack_cluster_ar--no_network_policy"></a>
+
+### Voltstack Cluster Ar No Network Policy
 
 <a id="nestedblock--voltstack_cluster_ar--no_outside_static_routes"></a>
 
+### Voltstack Cluster Ar No Outside Static Routes
+
 <a id="nestedblock--voltstack_cluster_ar--node"></a>
+
+### Voltstack Cluster Ar Node
+
+`fault_domain` - (Optional) Number of fault domains. Namuber of fault domains to be used while creating the availability set (`Number`).
+
+`local_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Local Subnet](#nestedblock--voltstack_cluster_ar--node--local_subnet) below.
+
+`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
+
+`update_domain` - (Optional) Number of update domains. Namuber of update domains to be used while creating the availability set (`Number`).
 
 <a id="nestedblock--voltstack_cluster_ar--node--local_subnet"></a>
 
+### Voltstack Cluster Ar Node Local Subnet
+
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#nestedblock--voltstack_cluster_ar--node--local_subnet--subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--voltstack_cluster_ar--node--local_subnet--subnet_param) below.
+
 <a id="nestedblock--voltstack_cluster_ar--node--local_subnet--subnet"></a>
+
+### Voltstack Cluster Ar Node Local Subnet Subnet
 
 <a id="nestedblock--voltstack_cluster_ar--node--local_subnet--subnet_param"></a>
 
+### Voltstack Cluster Ar Node Local Subnet Subnet Param
+
 <a id="nestedblock--voltstack_cluster_ar--outside_static_routes"></a>
+
+### Voltstack Cluster Ar Outside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list) below.
 
 <a id="nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list"></a>
 
+### Voltstack Cluster Ar Outside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
 <a id="nestedblock--voltstack_cluster_ar--outside_static_routes--static_route_list--custom_static_route"></a>
+
+### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route
 
 <a id="nestedblock--voltstack_cluster_ar--sm_connection_public_ip"></a>
 
+### Voltstack Cluster Ar Sm Connection Public Ip
+
 <a id="nestedblock--voltstack_cluster_ar--sm_connection_pvt_ip"></a>
+
+### Voltstack Cluster Ar Sm Connection Pvt Ip
 
 <a id="nestedblock--voltstack_cluster_ar--storage_class_list"></a>
 
+### Voltstack Cluster Ar Storage Class List
+
+`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#nestedblock--voltstack_cluster_ar--storage_class_list--storage_classes) below.
+
 <a id="nestedblock--voltstack_cluster_ar--storage_class_list--storage_classes"></a>
+
+### Voltstack Cluster Ar Storage Class List Storage Classes
+
+`default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
+
+`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
 
 ## Import
 

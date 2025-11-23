@@ -37,7 +37,7 @@ resource "f5xc_malicious_user_mitigation" "example" {
     threat_level = "HIGH"
     mitigation_action {
       block {
-        body = "Access denied"
+        body   = "Access denied"
         status = "403"
       }
     }
@@ -50,35 +50,97 @@ resource "f5xc_malicious_user_mitigation" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the MaliciousUserMitigation. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the MaliciousUserMitigation will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`mitigation_type` - (Optional) Malicious User Mitigation Settings. Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. See [Mitigation Type](#mitigation-type) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--mitigation_type"></a>
 
+### Mitigation Type
+
+`rules` - (Optional) Rules. Define the threat levels and the corresponding mitigation actions to be taken. See [Rules](#nestedblock--mitigation_type--rules) below.
+
 <a id="nestedblock--mitigation_type--rules"></a>
+
+### Mitigation Type Rules
+
+`mitigation_action` - (Optional) Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user. See [Mitigation Action](#nestedblock--mitigation_type--rules--mitigation_action) below.
+
+`threat_level` - (Optional) Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation. See [Threat Level](#nestedblock--mitigation_type--rules--threat_level) below.
 
 <a id="nestedblock--mitigation_type--rules--mitigation_action"></a>
 
+### Mitigation Type Rules Mitigation Action
+
+`block_temporarily` - (Optional) Empty. This can be used for messages where no values are needed. See [Block Temporarily](#nestedblock--mitigation_type--rules--mitigation_action--block_temporarily) below.
+
+`captcha_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Captcha Challenge](#nestedblock--mitigation_type--rules--mitigation_action--captcha_challenge) below.
+
+`javascript_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Javascript Challenge](#nestedblock--mitigation_type--rules--mitigation_action--javascript_challenge) below.
+
 <a id="nestedblock--mitigation_type--rules--mitigation_action--block_temporarily"></a>
+
+### Mitigation Type Rules Mitigation Action Block Temporarily
 
 <a id="nestedblock--mitigation_type--rules--mitigation_action--captcha_challenge"></a>
 
+### Mitigation Type Rules Mitigation Action Captcha Challenge
+
 <a id="nestedblock--mitigation_type--rules--mitigation_action--javascript_challenge"></a>
+
+### Mitigation Type Rules Mitigation Action Javascript Challenge
 
 <a id="nestedblock--mitigation_type--rules--threat_level"></a>
 
+### Mitigation Type Rules Threat Level
+
+`high` - (Optional) Empty. This can be used for messages where no values are needed. See [High](#nestedblock--mitigation_type--rules--threat_level--high) below.
+
+`low` - (Optional) Empty. This can be used for messages where no values are needed. See [Low](#nestedblock--mitigation_type--rules--threat_level--low) below.
+
+`medium` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium](#nestedblock--mitigation_type--rules--threat_level--medium) below.
+
 <a id="nestedblock--mitigation_type--rules--threat_level--high"></a>
+
+### Mitigation Type Rules Threat Level High
 
 <a id="nestedblock--mitigation_type--rules--threat_level--low"></a>
 
+### Mitigation Type Rules Threat Level Low
+
 <a id="nestedblock--mitigation_type--rules--threat_level--medium"></a>
 
+### Mitigation Type Rules Threat Level Medium
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

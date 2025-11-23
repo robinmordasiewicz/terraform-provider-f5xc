@@ -81,271 +81,997 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the GCPVPCSite. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the GCPVPCSite will be created (`String`).
+
 The following arguments are optional:
+
+`address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
+
+`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
+
+`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Block All Services](#block-all-services) below for details.
+
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+
+`cloud_credentials` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Credentials](#cloud-credentials) below for details.
+
+`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
+
+`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom Dns](#custom-dns) below for details.
+
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+
+`disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
+
+`gcp_labels` - (Optional) GCP Labels. GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console. See [Gcp Labels](#gcp-labels) below for details.
+
+`gcp_region` - (Optional) GCP Region. Name for GCP Region (`String`).
+
+> **Note:** One of the arguments from this list "ingress_egress_gw, ingress_gw, voltstack_cluster" must be set.
+
+`ingress_egress_gw` - (Optional) GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+
+`ingress_gw` - (Optional) GCP Ingress Gateway. Single interface GCP ingress site. See [Ingress Gw](#ingress-gw) below for details.
+
+`instance_type` - (Optional) GCP Instance Type for Node. Select Instance size based on performance needed (`String`).
+
+`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
+
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
+
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+
+`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global C.... See [Offline Survivability Mode](#offline-survivability-mode) below for details.
+
+`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [Os](#os) below for details.
+
+> **Note:** One of the arguments from this list "private_connect_disabled, private_connectivity" must be set.
+
+`private_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Private Connect Disabled](#private-connect-disabled) below for details.
+
+`private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration. See [Private Connectivity](#private-connectivity) below for details.
+
+`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the site (`String`).
+
+`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`voltstack_cluster` - (Optional) GCP App Stack Cluster. App Stack cluster of single interface GCP site. See [Voltstack Cluster](#voltstack-cluster) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--admin_password"></a>
 
+### Admin Password
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--admin_password--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--admin_password--clear_secret_info) below.
+
 <a id="nestedblock--admin_password--blindfold_secret_info"></a>
+
+### Admin Password Blindfold Secret Info
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--admin_password--clear_secret_info"></a>
 
+### Admin Password Clear Secret Info
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
+
 <a id="nestedblock--block_all_services"></a>
+
+### Block All Services
 
 <a id="nestedblock--blocked_services"></a>
 
+### Blocked Services
+
+`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
+
 <a id="nestedblock--blocked_services--blocked_sevice"></a>
+
+### Blocked Services Blocked Sevice
+
+`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [Dns](#nestedblock--blocked_services--blocked_sevice--dns) below.
+
+`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
+
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [Ssh](#nestedblock--blocked_services--blocked_sevice--ssh) below.
+
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#nestedblock--blocked_services--blocked_sevice--web_user_interface) below.
 
 <a id="nestedblock--blocked_services--blocked_sevice--dns"></a>
 
+### Blocked Services Blocked Sevice Dns
+
 <a id="nestedblock--blocked_services--blocked_sevice--ssh"></a>
+
+### Blocked Services Blocked Sevice Ssh
 
 <a id="nestedblock--blocked_services--blocked_sevice--web_user_interface"></a>
 
+### Blocked Services Blocked Sevice Web User Interface
+
 <a id="nestedblock--cloud_credentials"></a>
+
+### Cloud Credentials
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--coordinates"></a>
 
+### Coordinates
+
+`latitude` - (Optional) Latitude. Latitude of the site location (`Number`).
+
+`longitude` - (Optional) Longitude. longitude of site location (`Number`).
+
 <a id="nestedblock--custom_dns"></a>
+
+### Custom Dns
+
+`inside_nameserver` - (Optional) DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network (`String`).
+
+`outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
 
 <a id="nestedblock--default_blocked_services"></a>
 
+### Default Blocked Services
+
 <a id="nestedblock--gcp_labels"></a>
+
+### Gcp Labels
 
 <a id="nestedblock--ingress_egress_gw"></a>
 
+### Ingress Egress Gw
+
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option .... See [Active Enhanced Firewall Policies](#nestedblock--ingress_egress_gw--active_enhanced_firewall_policies) below.
+
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#nestedblock--ingress_egress_gw--active_forward_proxy_policies) below.
+
+`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--ingress_egress_gw--active_network_policies) below.
+
+`dc_cluster_group_inside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside Vn](#nestedblock--ingress_egress_gw--dc_cluster_group_inside_vn) below.
+
+`dc_cluster_group_outside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Outside Vn](#nestedblock--ingress_egress_gw--dc_cluster_group_outside_vn) below.
+
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#nestedblock--ingress_egress_gw--forward_proxy_allow_all) below.
+
+`gcp_certified_hw` - (Optional) GCP Certified Hardware. Name for GCP certified hardware (`String`).
+
+`gcp_zone_names` - (Optional) GCP zone names. x-required List of zones when instances will be created, needs to match with region selected (`List`).
+
+`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#nestedblock--ingress_egress_gw--global_network_list) below.
+
+`inside_network` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Inside Network](#nestedblock--ingress_egress_gw--inside_network) below.
+
+`inside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Inside Static Routes](#nestedblock--ingress_egress_gw--inside_static_routes) below.
+
+`inside_subnet` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Inside Subnet](#nestedblock--ingress_egress_gw--inside_subnet) below.
+
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--ingress_egress_gw--no_dc_cluster_group) below.
+
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#nestedblock--ingress_egress_gw--no_forward_proxy) below.
+
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#nestedblock--ingress_egress_gw--no_global_network) below.
+
+`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#nestedblock--ingress_egress_gw--no_inside_static_routes) below.
+
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#nestedblock--ingress_egress_gw--no_network_policy) below.
+
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#nestedblock--ingress_egress_gw--no_outside_static_routes) below.
+
+`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
+
+`outside_network` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Outside Network](#nestedblock--ingress_egress_gw--outside_network) below.
+
+`outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#nestedblock--ingress_egress_gw--outside_static_routes) below.
+
+`outside_subnet` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Outside Subnet](#nestedblock--ingress_egress_gw--outside_subnet) below.
+
+`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#nestedblock--ingress_egress_gw--performance_enhancement_mode) below.
+
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public Ip](#nestedblock--ingress_egress_gw--sm_connection_public_ip) below.
+
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt Ip](#nestedblock--ingress_egress_gw--sm_connection_pvt_ip) below.
+
 <a id="nestedblock--ingress_egress_gw--active_enhanced_firewall_policies"></a>
+
+### Ingress Egress Gw Active Enhanced Firewall Policies
+
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--ingress_egress_gw--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 
+### Ingress Egress Gw Active Enhanced Firewall Policies Enhanced Firewall Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw--active_forward_proxy_policies"></a>
+
+### Ingress Egress Gw Active Forward Proxy Policies
+
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--ingress_egress_gw--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_forward_proxy_policies--forward_proxy_policies"></a>
 
+### Ingress Egress Gw Active Forward Proxy Policies Forward Proxy Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw--active_network_policies"></a>
+
+### Ingress Egress Gw Active Network Policies
+
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--ingress_egress_gw--active_network_policies--network_policies) below.
 
 <a id="nestedblock--ingress_egress_gw--active_network_policies--network_policies"></a>
 
+### Ingress Egress Gw Active Network Policies Network Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw--dc_cluster_group_inside_vn"></a>
+
+### Ingress Egress Gw Dc Cluster Group Inside Vn
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ingress_egress_gw--dc_cluster_group_outside_vn"></a>
 
+### Ingress Egress Gw Dc Cluster Group Outside Vn
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--ingress_egress_gw--forward_proxy_allow_all"></a>
+
+### Ingress Egress Gw Forward Proxy Allow All
 
 <a id="nestedblock--ingress_egress_gw--global_network_list"></a>
 
+### Ingress Egress Gw Global Network List
+
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--ingress_egress_gw--global_network_list--global_network_connections) below.
+
 <a id="nestedblock--ingress_egress_gw--global_network_list--global_network_connections"></a>
+
+### Ingress Egress Gw Global Network List Global Network Connections
+
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global Dr](#nestedblock--ingress_egress_gw--global_network_list--global_network_connections--sli_to_global_dr) below.
+
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global Dr](#nestedblock--ingress_egress_gw--global_network_list--global_network_connections--slo_to_global_dr) below.
 
 <a id="nestedblock--ingress_egress_gw--global_network_list--global_network_connections--sli_to_global_dr"></a>
 
+### Ingress Egress Gw Global Network List Global Network Connections Sli To Global Dr
+
 <a id="nestedblock--ingress_egress_gw--global_network_list--global_network_connections--slo_to_global_dr"></a>
+
+### Ingress Egress Gw Global Network List Global Network Connections Slo To Global Dr
 
 <a id="nestedblock--ingress_egress_gw--inside_network"></a>
 
+### Ingress Egress Gw Inside Network
+
+`existing_network` - (Optional) GCP existing VPC network Type. Name of existing VPC network. See [Existing Network](#nestedblock--ingress_egress_gw--inside_network--existing_network) below.
+
+`new_network` - (Optional) GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network. See [New Network](#nestedblock--ingress_egress_gw--inside_network--new_network) below.
+
+`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name. See [New Network Autogenerate](#nestedblock--ingress_egress_gw--inside_network--new_network_autogenerate) below.
+
 <a id="nestedblock--ingress_egress_gw--inside_network--existing_network"></a>
+
+### Ingress Egress Gw Inside Network Existing Network
+
+`name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
 
 <a id="nestedblock--ingress_egress_gw--inside_network--new_network"></a>
 
+### Ingress Egress Gw Inside Network New Network
+
+`name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
+
 <a id="nestedblock--ingress_egress_gw--inside_network--new_network_autogenerate"></a>
+
+### Ingress Egress Gw Inside Network New Network Autogenerate
 
 <a id="nestedblock--ingress_egress_gw--inside_static_routes"></a>
 
+### Ingress Egress Gw Inside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw--inside_static_routes--static_route_list) below.
+
 <a id="nestedblock--ingress_egress_gw--inside_static_routes--static_route_list"></a>
+
+### Ingress Egress Gw Inside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw--inside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--ingress_egress_gw--inside_static_routes--static_route_list--custom_static_route"></a>
 
+### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route
+
 <a id="nestedblock--ingress_egress_gw--inside_subnet"></a>
+
+### Ingress Egress Gw Inside Subnet
+
+`existing_subnet` - (Optional) GCP existing subnet Type. Name of existing gcp subnet. See [Existing Subnet](#nestedblock--ingress_egress_gw--inside_subnet--existing_subnet) below.
+
+`new_subnet` - (Optional) GCP subnet parameters Type. Parameters for gcp subnet. See [New Subnet](#nestedblock--ingress_egress_gw--inside_subnet--new_subnet) below.
 
 <a id="nestedblock--ingress_egress_gw--inside_subnet--existing_subnet"></a>
 
+### Ingress Egress Gw Inside Subnet Existing Subnet
+
+`subnet_name` - (Optional) VPC Subnet Name. Name of your subnet in VPC network (`String`).
+
 <a id="nestedblock--ingress_egress_gw--inside_subnet--new_subnet"></a>
+
+### Ingress Egress Gw Inside Subnet New Subnet
+
+`primary_ipv4` - (Optional) IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space (`String`).
+
+`subnet_name` - (Optional) VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty (`String`).
 
 <a id="nestedblock--ingress_egress_gw--no_dc_cluster_group"></a>
 
+### Ingress Egress Gw No Dc Cluster Group
+
 <a id="nestedblock--ingress_egress_gw--no_forward_proxy"></a>
+
+### Ingress Egress Gw No Forward Proxy
 
 <a id="nestedblock--ingress_egress_gw--no_global_network"></a>
 
+### Ingress Egress Gw No Global Network
+
 <a id="nestedblock--ingress_egress_gw--no_inside_static_routes"></a>
+
+### Ingress Egress Gw No Inside Static Routes
 
 <a id="nestedblock--ingress_egress_gw--no_network_policy"></a>
 
+### Ingress Egress Gw No Network Policy
+
 <a id="nestedblock--ingress_egress_gw--no_outside_static_routes"></a>
+
+### Ingress Egress Gw No Outside Static Routes
 
 <a id="nestedblock--ingress_egress_gw--outside_network"></a>
 
+### Ingress Egress Gw Outside Network
+
+`existing_network` - (Optional) GCP existing VPC network Type. Name of existing VPC network. See [Existing Network](#nestedblock--ingress_egress_gw--outside_network--existing_network) below.
+
+`new_network` - (Optional) GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network. See [New Network](#nestedblock--ingress_egress_gw--outside_network--new_network) below.
+
+`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name. See [New Network Autogenerate](#nestedblock--ingress_egress_gw--outside_network--new_network_autogenerate) below.
+
 <a id="nestedblock--ingress_egress_gw--outside_network--existing_network"></a>
+
+### Ingress Egress Gw Outside Network Existing Network
+
+`name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
 
 <a id="nestedblock--ingress_egress_gw--outside_network--new_network"></a>
 
+### Ingress Egress Gw Outside Network New Network
+
+`name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
+
 <a id="nestedblock--ingress_egress_gw--outside_network--new_network_autogenerate"></a>
+
+### Ingress Egress Gw Outside Network New Network Autogenerate
 
 <a id="nestedblock--ingress_egress_gw--outside_static_routes"></a>
 
+### Ingress Egress Gw Outside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--ingress_egress_gw--outside_static_routes--static_route_list) below.
+
 <a id="nestedblock--ingress_egress_gw--outside_static_routes--static_route_list"></a>
+
+### Ingress Egress Gw Outside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--ingress_egress_gw--outside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
 <a id="nestedblock--ingress_egress_gw--outside_static_routes--static_route_list--custom_static_route"></a>
 
+### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route
+
 <a id="nestedblock--ingress_egress_gw--outside_subnet"></a>
+
+### Ingress Egress Gw Outside Subnet
+
+`existing_subnet` - (Optional) GCP existing subnet Type. Name of existing gcp subnet. See [Existing Subnet](#nestedblock--ingress_egress_gw--outside_subnet--existing_subnet) below.
+
+`new_subnet` - (Optional) GCP subnet parameters Type. Parameters for gcp subnet. See [New Subnet](#nestedblock--ingress_egress_gw--outside_subnet--new_subnet) below.
 
 <a id="nestedblock--ingress_egress_gw--outside_subnet--existing_subnet"></a>
 
+### Ingress Egress Gw Outside Subnet Existing Subnet
+
+`subnet_name` - (Optional) VPC Subnet Name. Name of your subnet in VPC network (`String`).
+
 <a id="nestedblock--ingress_egress_gw--outside_subnet--new_subnet"></a>
+
+### Ingress Egress Gw Outside Subnet New Subnet
+
+`primary_ipv4` - (Optional) IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space (`String`).
+
+`subnet_name` - (Optional) VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty (`String`).
 
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode"></a>
 
+### Ingress Egress Gw Performance Enhancement Mode
+
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced) below.
+
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l7_enhanced) below.
+
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
+
+### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
+
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
+
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
 
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
 
+### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
+
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
+
+### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
 
 <a id="nestedblock--ingress_egress_gw--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
 
+### Ingress Egress Gw Performance Enhancement Mode Perf Mode L7 Enhanced
+
 <a id="nestedblock--ingress_egress_gw--sm_connection_public_ip"></a>
+
+### Ingress Egress Gw Sm Connection Public Ip
 
 <a id="nestedblock--ingress_egress_gw--sm_connection_pvt_ip"></a>
 
+### Ingress Egress Gw Sm Connection Pvt Ip
+
 <a id="nestedblock--ingress_gw"></a>
+
+### Ingress Gw
+
+`gcp_certified_hw` - (Optional) GCP Certified Hardware. Name for GCP certified hardware (`String`).
+
+`gcp_zone_names` - (Optional) GCP zone names. x-required List of zones when instances will be created, needs to match with region selected (`List`).
+
+`local_network` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Local Network](#nestedblock--ingress_gw--local_network) below.
+
+`local_subnet` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Local Subnet](#nestedblock--ingress_gw--local_subnet) below.
+
+`node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
+
+`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#nestedblock--ingress_gw--performance_enhancement_mode) below.
 
 <a id="nestedblock--ingress_gw--local_network"></a>
 
+### Ingress Gw Local Network
+
+`existing_network` - (Optional) GCP existing VPC network Type. Name of existing VPC network. See [Existing Network](#nestedblock--ingress_gw--local_network--existing_network) below.
+
+`new_network` - (Optional) GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network. See [New Network](#nestedblock--ingress_gw--local_network--new_network) below.
+
+`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name. See [New Network Autogenerate](#nestedblock--ingress_gw--local_network--new_network_autogenerate) below.
+
 <a id="nestedblock--ingress_gw--local_network--existing_network"></a>
+
+### Ingress Gw Local Network Existing Network
+
+`name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
 
 <a id="nestedblock--ingress_gw--local_network--new_network"></a>
 
+### Ingress Gw Local Network New Network
+
+`name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
+
 <a id="nestedblock--ingress_gw--local_network--new_network_autogenerate"></a>
+
+### Ingress Gw Local Network New Network Autogenerate
 
 <a id="nestedblock--ingress_gw--local_subnet"></a>
 
+### Ingress Gw Local Subnet
+
+`existing_subnet` - (Optional) GCP existing subnet Type. Name of existing gcp subnet. See [Existing Subnet](#nestedblock--ingress_gw--local_subnet--existing_subnet) below.
+
+`new_subnet` - (Optional) GCP subnet parameters Type. Parameters for gcp subnet. See [New Subnet](#nestedblock--ingress_gw--local_subnet--new_subnet) below.
+
 <a id="nestedblock--ingress_gw--local_subnet--existing_subnet"></a>
+
+### Ingress Gw Local Subnet Existing Subnet
+
+`subnet_name` - (Optional) VPC Subnet Name. Name of your subnet in VPC network (`String`).
 
 <a id="nestedblock--ingress_gw--local_subnet--new_subnet"></a>
 
+### Ingress Gw Local Subnet New Subnet
+
+`primary_ipv4` - (Optional) IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space (`String`).
+
+`subnet_name` - (Optional) VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty (`String`).
+
 <a id="nestedblock--ingress_gw--performance_enhancement_mode"></a>
+
+### Ingress Gw Performance Enhancement Mode
+
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced) below.
+
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l7_enhanced) below.
 
 <a id="nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
 
+### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
+
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
+
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
+
 <a id="nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
+
+### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
 
 <a id="nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
 
+### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
+
 <a id="nestedblock--ingress_gw--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
+
+### Ingress Gw Performance Enhancement Mode Perf Mode L7 Enhanced
 
 <a id="nestedblock--kubernetes_upgrade_drain"></a>
 
+### Kubernetes Upgrade Drain
+
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain) below.
+
+`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain) below.
+
 <a id="nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain"></a>
+
+### Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain"></a>
 
+### Kubernetes Upgrade Drain Enable Upgrade Drain
+
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
+
+`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
+
+`drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes (`Number`).
+
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode) below.
+
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode"></a>
+
+### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
 
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode"></a>
 
+### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
+
 <a id="nestedblock--log_receiver"></a>
+
+### Log Receiver
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--logs_streaming_disabled"></a>
 
+### Logs Streaming Disabled
+
 <a id="nestedblock--offline_survivability_mode"></a>
+
+### Offline Survivability Mode
+
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#nestedblock--offline_survivability_mode--enable_offline_survivability_mode) below.
+
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#nestedblock--offline_survivability_mode--no_offline_survivability_mode) below.
 
 <a id="nestedblock--offline_survivability_mode--enable_offline_survivability_mode"></a>
 
+### Offline Survivability Mode Enable Offline Survivability Mode
+
 <a id="nestedblock--offline_survivability_mode--no_offline_survivability_mode"></a>
+
+### Offline Survivability Mode No Offline Survivability Mode
 
 <a id="nestedblock--os"></a>
 
+### Os
+
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Os Version](#nestedblock--os--default_os_version) below.
+
+`operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
+
 <a id="nestedblock--os--default_os_version"></a>
+
+### Os Default Os Version
 
 <a id="nestedblock--private_connect_disabled"></a>
 
+### Private Connect Disabled
+
 <a id="nestedblock--private_connectivity"></a>
+
+### Private Connectivity
+
+`cloud_link` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Link](#nestedblock--private_connectivity--cloud_link) below.
+
+`inside` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside](#nestedblock--private_connectivity--inside) below.
+
+`outside` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside](#nestedblock--private_connectivity--outside) below.
 
 <a id="nestedblock--private_connectivity--cloud_link"></a>
 
+### Private Connectivity Cloud Link
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--private_connectivity--inside"></a>
+
+### Private Connectivity Inside
 
 <a id="nestedblock--private_connectivity--outside"></a>
 
+### Private Connectivity Outside
+
 <a id="nestedblock--sw"></a>
+
+### Sw
+
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--sw--default_sw_version) below.
+
+`volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
 
 <a id="nestedblock--sw--default_sw_version"></a>
 
+### Sw Default Sw Version
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 <a id="nestedblock--voltstack_cluster"></a>
 
+### Voltstack Cluster
+
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option .... See [Active Enhanced Firewall Policies](#nestedblock--voltstack_cluster--active_enhanced_firewall_policies) below.
+
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#nestedblock--voltstack_cluster--active_forward_proxy_policies) below.
+
+`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--voltstack_cluster--active_network_policies) below.
+
+`dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#nestedblock--voltstack_cluster--dc_cluster_group) below.
+
+`default_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage](#nestedblock--voltstack_cluster--default_storage) below.
+
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#nestedblock--voltstack_cluster--forward_proxy_allow_all) below.
+
+`gcp_certified_hw` - (Optional) GCP Certified Hardware. Name for GCP certified hardware (`String`).
+
+`gcp_zone_names` - (Optional) GCP zone names. x-required List of zones when instances will be created, needs to match with region selected (`List`).
+
+`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#nestedblock--voltstack_cluster--global_network_list) below.
+
+`k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#nestedblock--voltstack_cluster--k8s_cluster) below.
+
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--voltstack_cluster--no_dc_cluster_group) below.
+
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#nestedblock--voltstack_cluster--no_forward_proxy) below.
+
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#nestedblock--voltstack_cluster--no_global_network) below.
+
+`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#nestedblock--voltstack_cluster--no_k8s_cluster) below.
+
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#nestedblock--voltstack_cluster--no_network_policy) below.
+
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#nestedblock--voltstack_cluster--no_outside_static_routes) below.
+
+`node_number` - (Optional) Number of main Nodes. Number of main nodes to create, either 1 or 3 (`Number`).
+
+`outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#nestedblock--voltstack_cluster--outside_static_routes) below.
+
+`site_local_network` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Site Local Network](#nestedblock--voltstack_cluster--site_local_network) below.
+
+`site_local_subnet` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Site Local Subnet](#nestedblock--voltstack_cluster--site_local_subnet) below.
+
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public Ip](#nestedblock--voltstack_cluster--sm_connection_public_ip) below.
+
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt Ip](#nestedblock--voltstack_cluster--sm_connection_pvt_ip) below.
+
+`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this site. See [Storage Class List](#nestedblock--voltstack_cluster--storage_class_list) below.
+
 <a id="nestedblock--voltstack_cluster--active_enhanced_firewall_policies"></a>
+
+### Voltstack Cluster Active Enhanced Firewall Policies
+
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--voltstack_cluster--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--voltstack_cluster--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 
+### Voltstack Cluster Active Enhanced Firewall Policies Enhanced Firewall Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster--active_forward_proxy_policies"></a>
+
+### Voltstack Cluster Active Forward Proxy Policies
+
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--voltstack_cluster--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--voltstack_cluster--active_forward_proxy_policies--forward_proxy_policies"></a>
 
+### Voltstack Cluster Active Forward Proxy Policies Forward Proxy Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster--active_network_policies"></a>
+
+### Voltstack Cluster Active Network Policies
+
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--voltstack_cluster--active_network_policies--network_policies) below.
 
 <a id="nestedblock--voltstack_cluster--active_network_policies--network_policies"></a>
 
+### Voltstack Cluster Active Network Policies Network Policies
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster--dc_cluster_group"></a>
+
+### Voltstack Cluster Dc Cluster Group
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--voltstack_cluster--default_storage"></a>
 
+### Voltstack Cluster Default Storage
+
 <a id="nestedblock--voltstack_cluster--forward_proxy_allow_all"></a>
+
+### Voltstack Cluster Forward Proxy Allow All
 
 <a id="nestedblock--voltstack_cluster--global_network_list"></a>
 
+### Voltstack Cluster Global Network List
+
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--voltstack_cluster--global_network_list--global_network_connections) below.
+
 <a id="nestedblock--voltstack_cluster--global_network_list--global_network_connections"></a>
+
+### Voltstack Cluster Global Network List Global Network Connections
+
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global Dr](#nestedblock--voltstack_cluster--global_network_list--global_network_connections--sli_to_global_dr) below.
+
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global Dr](#nestedblock--voltstack_cluster--global_network_list--global_network_connections--slo_to_global_dr) below.
 
 <a id="nestedblock--voltstack_cluster--global_network_list--global_network_connections--sli_to_global_dr"></a>
 
+### Voltstack Cluster Global Network List Global Network Connections Sli To Global Dr
+
 <a id="nestedblock--voltstack_cluster--global_network_list--global_network_connections--slo_to_global_dr"></a>
+
+### Voltstack Cluster Global Network List Global Network Connections Slo To Global Dr
 
 <a id="nestedblock--voltstack_cluster--k8s_cluster"></a>
 
+### Voltstack Cluster K8s Cluster
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--voltstack_cluster--no_dc_cluster_group"></a>
+
+### Voltstack Cluster No Dc Cluster Group
 
 <a id="nestedblock--voltstack_cluster--no_forward_proxy"></a>
 
+### Voltstack Cluster No Forward Proxy
+
 <a id="nestedblock--voltstack_cluster--no_global_network"></a>
+
+### Voltstack Cluster No Global Network
 
 <a id="nestedblock--voltstack_cluster--no_k8s_cluster"></a>
 
+### Voltstack Cluster No K8s Cluster
+
 <a id="nestedblock--voltstack_cluster--no_network_policy"></a>
+
+### Voltstack Cluster No Network Policy
 
 <a id="nestedblock--voltstack_cluster--no_outside_static_routes"></a>
 
+### Voltstack Cluster No Outside Static Routes
+
 <a id="nestedblock--voltstack_cluster--outside_static_routes"></a>
+
+### Voltstack Cluster Outside Static Routes
+
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--voltstack_cluster--outside_static_routes--static_route_list) below.
 
 <a id="nestedblock--voltstack_cluster--outside_static_routes--static_route_list"></a>
 
+### Voltstack Cluster Outside Static Routes Static Route List
+
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--voltstack_cluster--outside_static_routes--static_route_list--custom_static_route) below.
+
+`simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
 <a id="nestedblock--voltstack_cluster--outside_static_routes--static_route_list--custom_static_route"></a>
+
+### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route
 
 <a id="nestedblock--voltstack_cluster--site_local_network"></a>
 
+### Voltstack Cluster Site Local Network
+
+`existing_network` - (Optional) GCP existing VPC network Type. Name of existing VPC network. See [Existing Network](#nestedblock--voltstack_cluster--site_local_network--existing_network) below.
+
+`new_network` - (Optional) GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network. See [New Network](#nestedblock--voltstack_cluster--site_local_network--new_network) below.
+
+`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name. See [New Network Autogenerate](#nestedblock--voltstack_cluster--site_local_network--new_network_autogenerate) below.
+
 <a id="nestedblock--voltstack_cluster--site_local_network--existing_network"></a>
+
+### Voltstack Cluster Site Local Network Existing Network
+
+`name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
 
 <a id="nestedblock--voltstack_cluster--site_local_network--new_network"></a>
 
+### Voltstack Cluster Site Local Network New Network
+
+`name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
+
 <a id="nestedblock--voltstack_cluster--site_local_network--new_network_autogenerate"></a>
+
+### Voltstack Cluster Site Local Network New Network Autogenerate
 
 <a id="nestedblock--voltstack_cluster--site_local_subnet"></a>
 
+### Voltstack Cluster Site Local Subnet
+
+`existing_subnet` - (Optional) GCP existing subnet Type. Name of existing gcp subnet. See [Existing Subnet](#nestedblock--voltstack_cluster--site_local_subnet--existing_subnet) below.
+
+`new_subnet` - (Optional) GCP subnet parameters Type. Parameters for gcp subnet. See [New Subnet](#nestedblock--voltstack_cluster--site_local_subnet--new_subnet) below.
+
 <a id="nestedblock--voltstack_cluster--site_local_subnet--existing_subnet"></a>
+
+### Voltstack Cluster Site Local Subnet Existing Subnet
+
+`subnet_name` - (Optional) VPC Subnet Name. Name of your subnet in VPC network (`String`).
 
 <a id="nestedblock--voltstack_cluster--site_local_subnet--new_subnet"></a>
 
+### Voltstack Cluster Site Local Subnet New Subnet
+
+`primary_ipv4` - (Optional) IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space (`String`).
+
+`subnet_name` - (Optional) VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty (`String`).
+
 <a id="nestedblock--voltstack_cluster--sm_connection_public_ip"></a>
+
+### Voltstack Cluster Sm Connection Public Ip
 
 <a id="nestedblock--voltstack_cluster--sm_connection_pvt_ip"></a>
 
+### Voltstack Cluster Sm Connection Pvt Ip
+
 <a id="nestedblock--voltstack_cluster--storage_class_list"></a>
 
+### Voltstack Cluster Storage Class List
+
+`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#nestedblock--voltstack_cluster--storage_class_list--storage_classes) below.
+
 <a id="nestedblock--voltstack_cluster--storage_class_list--storage_classes"></a>
+
+### Voltstack Cluster Storage Class List Storage Classes
+
+`default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
+
+`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
 
 ## Import
 

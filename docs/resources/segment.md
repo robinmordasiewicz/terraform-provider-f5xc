@@ -32,14 +32,14 @@ resource "f5xc_segment" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: disable, enable] Empty. This can be used for mess...
-    disable {
-      # Configure disable settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    enable {
-      # Configure enable settings
-    }
+  # [OneOf: disable, enable] Empty. This can be used for mess...
+  disable {
+    # Configure disable settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  enable {
+    # Configure enable settings
+  }
 }
 ```
 
@@ -48,19 +48,51 @@ resource "f5xc_segment" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Segment. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Segment will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "disable, enable" must be set.
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#disable) below for details.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#enable) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--disable"></a>
 
+### Disable
+
 <a id="nestedblock--enable"></a>
 
+### Enable
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

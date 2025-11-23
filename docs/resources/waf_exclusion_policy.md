@@ -32,18 +32,18 @@ resource "f5xc_waf_exclusion_policy" "example" {
   }
 
   # Resource-specific configuration
-    # WAF Exclusion Rules. An ordered list of rules.
-    waf_exclusion_rules {
-      # Configure waf_exclusion_rules settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    any_domain {
-      # Configure any_domain settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    any_path {
-      # Configure any_path settings
-    }
+  # WAF Exclusion Rules. An ordered list of rules.
+  waf_exclusion_rules {
+    # Configure waf_exclusion_rules settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  any_domain {
+    # Configure any_domain settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  any_path {
+    # Configure any_path settings
+  }
 }
 ```
 
@@ -52,35 +52,133 @@ resource "f5xc_waf_exclusion_policy" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the WAFExclusionPolicy. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the WAFExclusionPolicy will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`waf_exclusion_rules` - (Optional) WAF Exclusion Rules. An ordered list of rules. See [Waf Exclusion Rules](#waf-exclusion-rules) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
 <a id="nestedblock--waf_exclusion_rules"></a>
+
+### Waf Exclusion Rules
+
+`any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#nestedblock--waf_exclusion_rules--any_domain) below.
+
+`any_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Path](#nestedblock--waf_exclusion_rules--any_path) below.
+
+`app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria. See [App Firewall Detection Control](#nestedblock--waf_exclusion_rules--app_firewall_detection_control) below.
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired (`String`).
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--waf_exclusion_rules--metadata) below.
+
+`methods` - (Optional) Methods. methods to be matched (`List`).
+
+`path_prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`path_regex` - (Optional) Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+
+`waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Waf Skip Processing](#nestedblock--waf_exclusion_rules--waf_skip_processing) below.
 
 <a id="nestedblock--waf_exclusion_rules--any_domain"></a>
 
+### Waf Exclusion Rules Any Domain
+
 <a id="nestedblock--waf_exclusion_rules--any_path"></a>
+
+### Waf Exclusion Rules Any Path
 
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control"></a>
 
+### Waf Exclusion Rules App Firewall Detection Control
+
+`exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria. See [Exclude Attack Type Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_attack_type_contexts) below.
+
+`exclude_bot_name_contexts` - (Optional) Bot Names. Bot Names to be excluded for the defined match criteria. See [Exclude Bot Name Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_bot_name_contexts) below.
+
+`exclude_signature_contexts` - (Optional) Signature IDs. Signature IDs to be excluded for the defined match criteria. See [Exclude Signature Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_signature_contexts) below.
+
+`exclude_violation_contexts` - (Optional) Violations. Violations to be excluded for the defined match criteria. See [Exclude Violation Contexts](#nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_violation_contexts) below.
+
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_attack_type_contexts"></a>
+
+### Waf Exclusion Rules App Firewall Detection Control Exclude Attack Type Contexts
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check (`String`).
+
+`exclude_attack_type` - (Optional) Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK... (`String`).
 
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_bot_name_contexts"></a>
 
+### Waf Exclusion Rules App Firewall Detection Control Exclude Bot Name Contexts
+
+`bot_name` - (Optional) Bot Name (`String`).
+
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_signature_contexts"></a>
+
+### Waf Exclusion Rules App Firewall Detection Control Exclude Signature Contexts
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check (`String`).
+
+`signature_id` - (Optional) SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context (`Number`).
 
 <a id="nestedblock--waf_exclusion_rules--app_firewall_detection_control--exclude_violation_contexts"></a>
 
+### Waf Exclusion Rules App Firewall Detection Control Exclude Violation Contexts
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check (`String`).
+
+`exclude_violation` - (Optional) App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_... (`String`).
+
 <a id="nestedblock--waf_exclusion_rules--metadata"></a>
 
+### Waf Exclusion Rules Metadata
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
 <a id="nestedblock--waf_exclusion_rules--waf_skip_processing"></a>
+
+### Waf Exclusion Rules Waf Skip Processing
 
 ## Import
 

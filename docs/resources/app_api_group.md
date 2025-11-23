@@ -32,18 +32,18 @@ resource "f5xc_app_api_group" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: bigip_virtual_server, cdn_loadbalancer, http_load...
-    bigip_virtual_server {
-      # Configure bigip_virtual_server settings
-    }
-    # API Group Scope CDN Loadbalancer. Set the scope of the AP...
-    cdn_loadbalancer {
-      # Configure cdn_loadbalancer settings
-    }
-    # API Group Elements. List of API group elements with metho...
-    elements {
-      # Configure elements settings
-    }
+  # [OneOf: bigip_virtual_server, cdn_loadbalancer, http_load...
+  bigip_virtual_server {
+    # Configure bigip_virtual_server settings
+  }
+  # API Group Scope CDN Loadbalancer. Set the scope of the AP...
+  cdn_loadbalancer {
+    # Configure cdn_loadbalancer settings
+  }
+  # API Group Elements. List of API group elements with metho...
+  elements {
+    # Configure elements settings
+  }
 }
 ```
 
@@ -52,29 +52,103 @@ resource "f5xc_app_api_group" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the AppAPIGroup. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the AppAPIGroup will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "bigip_virtual_server, cdn_loadbalancer, http_loadbalancer" must be set.
+
+`bigip_virtual_server` - (Optional) API Group Scope BIGIP Virtual Server. Set the scope of the API Group to a specific BIGIP Virtual Server. See [Bigip Virtual Server](#bigip-virtual-server) below for details.
+
+`cdn_loadbalancer` - (Optional) API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer. See [Cdn Loadbalancer](#cdn-loadbalancer) below for details.
+
+`elements` - (Optional) API Group Elements. List of API group elements with methods and path regex for matching requests. See [Elements](#elements) below for details.
+
+`http_loadbalancer` - (Optional) API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer. See [Http Loadbalancer](#http-loadbalancer) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--bigip_virtual_server"></a>
 
+### Bigip Virtual Server
+
+`bigip_virtual_server` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Bigip Virtual Server](#nestedblock--bigip_virtual_server--bigip_virtual_server) below.
+
 <a id="nestedblock--bigip_virtual_server--bigip_virtual_server"></a>
+
+### Bigip Virtual Server Bigip Virtual Server
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--cdn_loadbalancer"></a>
 
+### Cdn Loadbalancer
+
+`cdn_loadbalancer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cdn Loadbalancer](#nestedblock--cdn_loadbalancer--cdn_loadbalancer) below.
+
 <a id="nestedblock--cdn_loadbalancer--cdn_loadbalancer"></a>
+
+### Cdn Loadbalancer Cdn Loadbalancer
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--elements"></a>
 
+### Elements
+
+`methods` - (Optional) HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list (`List`).
+
+`path_regex` - (Optional) Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex (`String`).
+
 <a id="nestedblock--http_loadbalancer"></a>
+
+### Http Loadbalancer
+
+`http_loadbalancer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Http Loadbalancer](#nestedblock--http_loadbalancer--http_loadbalancer) below.
 
 <a id="nestedblock--http_loadbalancer--http_loadbalancer"></a>
 
+### Http Loadbalancer Http Loadbalancer
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

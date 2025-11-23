@@ -32,18 +32,18 @@ resource "f5xc_voltshare_admin_policy" "example" {
   }
 
   # Resource-specific configuration
-    # User Matcher. user_matcher contains contains the allow/de...
-    author_restrictions {
-      # Configure author_restrictions settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    allow_all {
-      # Configure allow_all settings
-    }
-    # Custom List. Custom List contains user customized list of...
-    allow_list {
-      # Configure allow_list settings
-    }
+  # User Matcher. user_matcher contains contains the allow/de...
+  author_restrictions {
+    # Configure author_restrictions settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  allow_all {
+    # Configure allow_all settings
+  }
+  # Custom List. Custom List contains user customized list of...
+  allow_list {
+    # Configure allow_list settings
+  }
 }
 ```
 
@@ -52,49 +52,151 @@ resource "f5xc_voltshare_admin_policy" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the VoltshareAdminPolicy. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the VoltshareAdminPolicy will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`author_restrictions` - (Optional) User Matcher. user_matcher contains contains the allow/deny list of users/authors. See [Author Restrictions](#author-restrictions) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`max_validity_duration` - (Optional) Maximum Duration for Validity. max_validity_duration contains the maximum amount of time a secret from any users from this team/tenant is valid (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`user_restrictions` - (Optional) Per Team Decryption Policy. user_restrictions contains per tenant/team list of allowed/disallowed users with whom a secret can be shared using F5XC VoltShare. See [User Restrictions](#user-restrictions) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--author_restrictions"></a>
 
+### Author Restrictions
+
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#nestedblock--author_restrictions--allow_all) below.
+
+`allow_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Allow List](#nestedblock--author_restrictions--allow_list) below.
+
+`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#nestedblock--author_restrictions--deny_all) below.
+
+`deny_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Deny List](#nestedblock--author_restrictions--deny_list) below.
+
 <a id="nestedblock--author_restrictions--allow_all"></a>
+
+### Author Restrictions Allow All
 
 <a id="nestedblock--author_restrictions--allow_list"></a>
 
+### Author Restrictions Allow List
+
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--author_restrictions--allow_list--custom_list) below.
+
 <a id="nestedblock--author_restrictions--allow_list--custom_list"></a>
+
+### Author Restrictions Allow List Custom List
+
+`exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
+
+`regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
 
 <a id="nestedblock--author_restrictions--deny_all"></a>
 
+### Author Restrictions Deny All
+
 <a id="nestedblock--author_restrictions--deny_list"></a>
+
+### Author Restrictions Deny List
+
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--author_restrictions--deny_list--custom_list) below.
 
 <a id="nestedblock--author_restrictions--deny_list--custom_list"></a>
 
+### Author Restrictions Deny List Custom List
+
+`exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
+
+`regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 <a id="nestedblock--user_restrictions"></a>
 
+### User Restrictions
+
+`all_tenants` - (Optional) Empty. This can be used for messages where no values are needed. See [All Tenants](#nestedblock--user_restrictions--all_tenants) below.
+
+`individual_users` - (Optional) Empty. This can be used for messages where no values are needed. See [Individual Users](#nestedblock--user_restrictions--individual_users) below.
+
+`tenant` - (Optional) Team/Tenant. Team/Tenant for which this rule is valid (`String`).
+
+`user_restrictions` - (Optional) User Matcher. user_matcher contains contains the allow/deny list of users/authors. See [User Restrictions](#nestedblock--user_restrictions--user_restrictions) below.
+
 <a id="nestedblock--user_restrictions--all_tenants"></a>
+
+### User Restrictions All Tenants
 
 <a id="nestedblock--user_restrictions--individual_users"></a>
 
+### User Restrictions Individual Users
+
 <a id="nestedblock--user_restrictions--user_restrictions"></a>
+
+### User Restrictions User Restrictions
+
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#nestedblock--user_restrictions--user_restrictions--allow_all) below.
+
+`allow_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Allow List](#nestedblock--user_restrictions--user_restrictions--allow_list) below.
+
+`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#nestedblock--user_restrictions--user_restrictions--deny_all) below.
+
+`deny_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Deny List](#nestedblock--user_restrictions--user_restrictions--deny_list) below.
 
 <a id="nestedblock--user_restrictions--user_restrictions--allow_all"></a>
 
+### User Restrictions User Restrictions Allow All
+
 <a id="nestedblock--user_restrictions--user_restrictions--allow_list"></a>
+
+### User Restrictions User Restrictions Allow List
+
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--user_restrictions--user_restrictions--allow_list--custom_list) below.
 
 <a id="nestedblock--user_restrictions--user_restrictions--allow_list--custom_list"></a>
 
+### User Restrictions User Restrictions Allow List Custom List
+
 <a id="nestedblock--user_restrictions--user_restrictions--deny_all"></a>
+
+### User Restrictions User Restrictions Deny All
 
 <a id="nestedblock--user_restrictions--user_restrictions--deny_list"></a>
 
+### User Restrictions User Restrictions Deny List
+
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--user_restrictions--user_restrictions--deny_list--custom_list) below.
+
 <a id="nestedblock--user_restrictions--user_restrictions--deny_list--custom_list"></a>
+
+### User Restrictions User Restrictions Deny List Custom List
 
 ## Import
 

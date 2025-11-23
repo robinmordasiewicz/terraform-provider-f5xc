@@ -32,18 +32,18 @@ resource "f5xc_customer_support" "example" {
   }
 
   # Resource-specific configuration
-    # Comments. Comments are all public comments on an issue. T...
-    comments {
-      # Configure comments settings
-    }
-    # Attachments details. Information about any attachments (s...
-    attachments_info {
-      # Configure attachments_info settings
-    }
-    # Ticket which this one relates to. Optional reference to a...
-    relates_to {
-      # Configure relates_to settings
-    }
+  # Comments. Comments are all public comments on an issue. T...
+  comments {
+    # Configure comments settings
+  }
+  # Attachments details. Information about any attachments (s...
+  attachments_info {
+    # Configure attachments_info settings
+  }
+  # Ticket which this one relates to. Optional reference to a...
+  relates_to {
+    # Configure relates_to settings
+  }
 }
 ```
 
@@ -52,21 +52,109 @@ resource "f5xc_customer_support" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the CustomerSupport. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the CustomerSupport will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`category` - (Optional) Category. ticket area further narrows down the ticket - infrastructure, application, dashboards can be examples (`String`).
+
+`comments` - (Optional) Comments. Comments are all public comments on an issue. They're usually conversation between the support personnel and the customer. See [Comments](#comments) below for details.
+
+`description` - (Optional) Description. customer's description of the issue (free text) (`String`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`ongoing` - (Optional) Ongoing. Ongoing is a flag that indicates whether the issue is ongoing or not (`Bool`).
+
+`priority` - (Optional) Priority. Support ticket priority helps understand importance of the ticket and focus more on more critical issues (`String`).
+
+`product_data` - (Optional) Product Data. Product data is a free text field that can be used to describe the issue in more detail (`String`).
+
+`relates_to` - (Optional) Ticket which this one relates to. Optional reference to any original ticket in case the ticket being created is a followup. See [Relates To](#relates-to) below for details.
+
+`service` - (Optional) Support Service. Indicates the list of support service Unknown Support Service Account Protection Support Service Administration Support Service Application Traffic Insight Support Service Audit Lo... (`String`).
+
+`status` - (Optional) Support Ticket Status. State of the ticket so the customers know if the problem is being looked into Unknown or empty support ticket status Indicates a new ticket, waiting to be assigned to an agen... (`String`).
+
+`subject` - (Optional) Subject. subject of the ticket (`String`).
+
+`timeline` - (Optional) Timeline. Timeline is a free text field that can be used to describe the issue in more detail (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`topic` - (Optional) Support Topic. Support Topic indicates the list of topics for service tickets Unknown/empty priority ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST ACCOUNT_SUPPORT_TOPIC_ACCOUNT ACCOUNT_SUPPORT_TOPIC_BILLING... (`String`).
+
+`tp_id` - (Optional) Third Party ID. ID assigned to this ticket by our support provider (`String`).
+
+`type` - (Optional) Support Ticket. Several types of issues are supported, such as problems, questions. Unknown or empty ticket type Indicates a problem (e.g (`String`).
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--comments"></a>
 
+### Comments
+
+`attachment_ids` - (Optional) Attachment IDs. Third party id of any attachment related to this ticket comment (`List`).
+
+`attachments_info` - (Optional) Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have. See [Attachments Info](#nestedblock--comments--attachments_info) below.
+
+`author_email` - (Optional) Email. Email of the author of the comment (`String`).
+
+`author_name` - (Optional) Author. Author of the comment (as a name) (`String`).
+
+`created_at` - (Optional) At. Comment creation time (`String`).
+
+`html` - (Optional) Comment. Comment body as HTML (`String`).
+
+`plain_text` - (Optional) Comment. Comment body as plain text (`String`).
+
 <a id="nestedblock--comments--attachments_info"></a>
+
+### Comments Attachments Info
+
+`attachment` - (Optional) Attachment data. Any binary attachment (such as screenshots, plain text files, PDFs) encoded as base64 if used over HTTP (`String`).
+
+`content_type` - (Optional) Content type. Mime content type of the attachment. Helps the UI to properly display the data (`String`).
+
+`filename` - (Optional) Filename. Filename of the attachment as provided by the caller (`String`).
+
+`tp_id` - (Optional) 3rd party ID. Optional ID as assigned by the 3rd party actually storing the data (`String`).
 
 <a id="nestedblock--relates_to"></a>
 
+### Relates To
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

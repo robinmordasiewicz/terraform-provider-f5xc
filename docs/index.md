@@ -29,4 +29,4 @@ provider "f5xc" {
 ### Optional
 
 - `api_token` (String, Sensitive) F5 Distributed Cloud API Token. Can also be set via F5XC_API_TOKEN environment variable.
-- `api_url` (String) F5 Distributed Cloud API URL. Defaults to `https://console.ves.volterra.io/api`. Can also be set via F5XC_API_URL environment variable.
+- `api_url` (String) F5 Distributed Cloud API URL. Defaults to https://console.ves.volterra.io/api. Can also be set via F5XC_API_URL environment variable.

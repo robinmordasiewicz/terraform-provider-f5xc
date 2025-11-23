@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,13 +37,13 @@ type APICredentialResource struct {
 type APICredentialResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
+	Labels types.Map `tfsdk:"labels"`
 	Password types.String `tfsdk:"password"`
 	Type types.String `tfsdk:"type"`
 	VirtualK8SName types.String `tfsdk:"virtual_k8s_name"`
 	VirtualK8SNamespace types.String `tfsdk:"virtual_k8s_namespace"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *APICredentialResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -58,6 +60,9 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the APICredential will be created.",
@@ -65,30 +70,26 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"password": schema.StringAttribute{
 				MarkdownDescription: "Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain.",
 				Optional: true,
 			},
 			"type": schema.StringAttribute{
-				MarkdownDescription: "Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using ...",
+				MarkdownDescription: "Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using ... Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`.",
 				Optional: true,
 			},
 			"virtual_k8s_name": schema.StringAttribute{
@@ -98,6 +99,13 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 			"virtual_k8s_namespace": schema.StringAttribute{
 				MarkdownDescription: "vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG.",
 				Optional: true,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{

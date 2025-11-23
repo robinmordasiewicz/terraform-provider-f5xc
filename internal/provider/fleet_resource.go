@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,13 +37,13 @@ type FleetResource struct {
 type FleetResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	EnableDefaultFleetConfigDownload types.Bool `tfsdk:"enable_default_fleet_config_download"`
 	FleetLabel types.String `tfsdk:"fleet_label"`
+	Labels types.Map `tfsdk:"labels"`
 	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
 	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *FleetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -58,6 +60,9 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Fleet will be created.",
@@ -65,23 +70,14 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
 			},
 			"enable_default_fleet_config_download": schema.BoolAttribute{
 				MarkdownDescription: "Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and gpu config",
@@ -91,6 +87,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet",
 				Optional: true,
 			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
 			"operating_system_version": schema.StringAttribute{
 				MarkdownDescription: "Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config.",
 				Optional: true,
@@ -98,6 +99,13 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			"volterra_software_version": schema.StringAttribute{
 				MarkdownDescription: "Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config.",
 				Optional: true,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -109,7 +117,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"network_type": schema.StringAttribute{
-							MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+							MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 							Optional: true,
 						},
 					},
@@ -235,7 +243,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Optional: true,
 								},
 								"owner": schema.StringAttribute{
-									MarkdownDescription: "Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM.",
+									MarkdownDescription: "Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`.",
 									Optional: true,
 								},
 							},
@@ -244,7 +252,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Network Device Type. Represents physical network interface. The 'interface' reference points to a Network Interface object. Attributes such as Labels, MTU from Network Interface must be applied to the device. Device mapping to nodes A fleet can have many devices and nodes in VER customer edge site can have many interfaces. An interface in node inherits configuration from a device by matching, - device_name in Network Interface for the device - device name for physical-interface in the node",
 									Attributes: map[string]schema.Attribute{
 										"use": schema.StringAttribute{
-											MarkdownDescription: "Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network.",
+											MarkdownDescription: "Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network. Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`.",
 											Optional: true,
 										},
 									},
@@ -276,7 +284,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "vGPU Configuration. Licensing configuration for NVIDIA vGPU",
 				Attributes: map[string]schema.Attribute{
 					"feature_type": schema.StringAttribute{
-						MarkdownDescription: "Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server",
+						MarkdownDescription: "Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server. Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`.",
 						Optional: true,
 					},
 					"server_address": schema.StringAttribute{
@@ -849,7 +857,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
 									Attributes: map[string]schema.Attribute{
 										"type": schema.StringAttribute{
-											MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network.",
+											MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`.",
 											Optional: true,
 										},
 									},

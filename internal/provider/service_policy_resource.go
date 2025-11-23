@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,10 +37,10 @@ type ServicePolicyResource struct {
 type ServicePolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
+	Labels types.Map `tfsdk:"labels"`
 	ServerName types.String `tfsdk:"server_name"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *ServicePolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -55,6 +57,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ServicePolicy will be created.",
@@ -62,16 +67,23 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"server_name": schema.StringAttribute{
+				MarkdownDescription: "Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name.",
 				Optional: true,
-				ElementType: types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -79,10 +91,6 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"server_name": schema.StringAttribute{
-				MarkdownDescription: "Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name.",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -303,7 +311,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 									MarkdownDescription: "Specification. Shape of service_policy_rule in the storage backend.",
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
-											MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY D...",
+											MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY D... Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`.",
 											Optional: true,
 										},
 										"client_name": schema.StringAttribute{

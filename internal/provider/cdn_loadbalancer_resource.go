@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,10 +37,10 @@ type CDNLoadBalancerResource struct {
 type CDNLoadBalancerResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	Domains types.List `tfsdk:"domains"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *CDNLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -55,6 +57,9 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CDNLoadBalancer will be created.",
@@ -62,14 +67,22 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"domains": schema.ListAttribute{
+				MarkdownDescription: "Domains. A list of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain]",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -79,11 +92,6 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"domains": schema.ListAttribute{
-				MarkdownDescription: "Domains. A list of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain]",
-				Optional: true,
-				ElementType: types.StringType,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -192,7 +200,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Optional: true,
 										},
 										"unit": schema.StringAttribute{
-											MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days",
+											MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`.",
 											Optional: true,
 										},
 									},
@@ -400,7 +408,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Optional: true,
 										},
 										"unit": schema.StringAttribute{
-											MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days",
+											MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`.",
 											Optional: true,
 										},
 									},
@@ -738,7 +746,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "Bot Defense. This defines various configuration options for Bot Defense Policy.",
 				Attributes: map[string]schema.Attribute{
 					"regional_endpoint": schema.StringAttribute{
-						MarkdownDescription: "Bot Defense Region. Defines a selection for Bot Defense region - AUTO: AUTO Automatic selection based on client IP address - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region",
+						MarkdownDescription: "Bot Defense Region. Defines a selection for Bot Defense region - AUTO: AUTO Automatic selection based on client IP address - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `AUTO`, `US`, `EU`, `ASIA`.",
 						Optional: true,
 					},
 					"timeout": schema.Int64Attribute{
@@ -757,7 +765,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Bot Defense Policy. This defines various configuration options for Bot Defense policy.",
 						Attributes: map[string]schema.Attribute{
 							"javascript_mode": schema.StringAttribute{
-								MarkdownDescription: "Web Client JavaScript Mode. Web Client JavaScript Mode. Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is cacheable Bot Defense JavaScript for telemetry collection is requested synchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested synchronously, and it is cacheable",
+								MarkdownDescription: "Web Client JavaScript Mode. Web Client JavaScript Mode. Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is cacheable Bot Defense JavaScript for telemetry collection is requested synchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested synchronously, and it is cacheable. Possible values are `ASYNC_JS_NO_CACHING`, `ASYNC_JS_CACHING`, `SYNC_JS_NO_CACHING`, `SYNC_JS_CACHING`.",
 								Optional: true,
 							},
 							"js_download_path": schema.StringAttribute{
@@ -776,7 +784,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								MarkdownDescription: "Insert Bot Defense JavaScript in All Pages. Insert Bot Defense JavaScript in all pages",
 								Attributes: map[string]schema.Attribute{
 									"javascript_location": schema.StringAttribute{
-										MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag",
+										MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`.",
 										Optional: true,
 									},
 								},
@@ -785,7 +793,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								MarkdownDescription: "Insert JavaScript in All Pages with the Exceptions. Insert Bot Defense JavaScript in all pages with the exceptions",
 								Attributes: map[string]schema.Attribute{
 									"javascript_location": schema.StringAttribute{
-										MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag",
+										MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`.",
 										Optional: true,
 									},
 								},
@@ -837,7 +845,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											ElementType: types.StringType,
 										},
 										"protocol": schema.StringAttribute{
-											MarkdownDescription: "URL Scheme. SchemeType is used to indicate URL scheme. - BOTH: BOTH URL scheme for https:// or http://. - HTTP: HTTP URL scheme http:// only. - HTTPS: HTTPS URL scheme https:// only.",
+											MarkdownDescription: "URL Scheme. SchemeType is used to indicate URL scheme. - BOTH: BOTH URL scheme for https:// or http://. - HTTP: HTTP URL scheme http:// only. - HTTPS: HTTPS URL scheme https:// only. Possible values are `BOTH`, `HTTP`, `HTTPS`.",
 											Optional: true,
 										},
 									},
@@ -2304,7 +2312,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Optional: true,
 							},
 							"unit": schema.StringAttribute{
-								MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days",
+								MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`.",
 								Optional: true,
 							},
 						},

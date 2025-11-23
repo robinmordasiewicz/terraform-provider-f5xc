@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,11 @@ type BotDefenseAppInfrastructureResource struct {
 type BotDefenseAppInfrastructureResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	EnvironmentType types.String `tfsdk:"environment_type"`
+	Labels types.Map `tfsdk:"labels"`
 	TrafficType types.String `tfsdk:"traffic_type"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *BotDefenseAppInfrastructureResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -56,6 +58,9 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the BotDefenseAppInfrastructure will be created.",
@@ -63,16 +68,27 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"environment_type": schema.StringAttribute{
+				MarkdownDescription: "Environment Type. Environment Type Production environment Testing environment. Possible values are `PRODUCTION`, `TESTING`.",
+				Optional: true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"traffic_type": schema.StringAttribute{
+				MarkdownDescription: "Traffic Type. Traffic Type Web traffic Mobile traffic. Possible values are `WEB`, `MOBILE`.",
 				Optional: true,
-				ElementType: types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -80,14 +96,6 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"environment_type": schema.StringAttribute{
-				MarkdownDescription: "Environment Type. Environment Type Production environment Testing environment",
-				Optional: true,
-			},
-			"traffic_type": schema.StringAttribute{
-				MarkdownDescription: "Traffic Type. Traffic Type Web traffic Mobile traffic",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -99,7 +107,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 						Optional: true,
 					},
 					"region": schema.StringAttribute{
-						MarkdownDescription: "Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region",
+						MarkdownDescription: "Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`.",
 						Optional: true,
 					},
 				},
@@ -113,7 +121,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 									Optional: true,
 								},
 								"location": schema.StringAttribute{
-									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2...",
+									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2... Possible values include `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, and others.",
 									Optional: true,
 								},
 							},
@@ -132,7 +140,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 									Optional: true,
 								},
 								"location": schema.StringAttribute{
-									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2...",
+									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2... Possible values include `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, and others.",
 									Optional: true,
 								},
 							},
@@ -149,7 +157,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 						Optional: true,
 					},
 					"region": schema.StringAttribute{
-						MarkdownDescription: "Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region",
+						MarkdownDescription: "Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`.",
 						Optional: true,
 					},
 				},
@@ -163,7 +171,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 									Optional: true,
 								},
 								"location": schema.StringAttribute{
-									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2...",
+									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2... Possible values include `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, and others.",
 									Optional: true,
 								},
 							},
@@ -182,7 +190,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 									Optional: true,
 								},
 								"location": schema.StringAttribute{
-									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2...",
+									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2... Possible values include `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, and others.",
 									Optional: true,
 								},
 							},

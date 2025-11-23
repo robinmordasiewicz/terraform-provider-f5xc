@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,12 +37,12 @@ type WorkloadFlavorResource struct {
 type WorkloadFlavorResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	EphemeralStorage types.String `tfsdk:"ephemeral_storage"`
+	Labels types.Map `tfsdk:"labels"`
 	Memory types.String `tfsdk:"memory"`
 	Vcpus types.Int64 `tfsdk:"vcpus"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *WorkloadFlavorResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -57,6 +59,9 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the WorkloadFlavor will be created.",
@@ -64,27 +69,23 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
 			"ephemeral_storage": schema.StringAttribute{
 				MarkdownDescription: "Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
 				Optional: true,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"memory": schema.StringAttribute{
 				MarkdownDescription: "Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor.",
@@ -93,6 +94,13 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 			"vcpus": schema.Int64Attribute{
 				MarkdownDescription: "vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
 				Optional: true,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{

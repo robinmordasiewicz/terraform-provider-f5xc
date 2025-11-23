@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,8 +37,8 @@ type NFVServiceResource struct {
 type NFVServiceResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 }
 
@@ -54,6 +56,9 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NFVService will be created.",
@@ -61,14 +66,17 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -717,7 +725,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration",
 				Attributes: map[string]schema.Attribute{
 					"instance_type": schema.StringAttribute{
-						MarkdownDescription: "Palo Alto Networks VM-Series Instance Typ. - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE: m4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE: m5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE: m5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE: m5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE: m5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE: m5.12xlarge - PALO_ALTO_...",
+						MarkdownDescription: "Palo Alto Networks VM-Series Instance Typ. - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE: m4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE: m5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE: m5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE: m5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE: m5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE: m5.12xlarge - PALO_ALTO_... Possible values include `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE`, and others.",
 						Optional: true,
 					},
 					"ssh_key": schema.StringAttribute{

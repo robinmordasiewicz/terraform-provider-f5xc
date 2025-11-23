@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,11 @@ type SecretPolicyResource struct {
 type SecretPolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
-	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	AllowF5xc types.Bool `tfsdk:"allow_f5xc"`
+	Annotations types.Map `tfsdk:"annotations"`
 	DecryptCacheTimeout types.String `tfsdk:"decrypt_cache_timeout"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *SecretPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -56,6 +58,9 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the SecretPolicy will be created.",
@@ -63,14 +68,25 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+			"allow_f5xc": schema.BoolAttribute{
+				MarkdownDescription: "Allow F5XC. if allow_f5xc is set to true, it allows relevant F5XC infrastructure services to decrypt the secret encrypted using this policy.",
 				Optional: true,
-				ElementType: types.StringType,
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"decrypt_cache_timeout": schema.StringAttribute{
+				MarkdownDescription: "Decrypt Cache Timeout. decrypt_cache_timeout contains the amount of time a decrypted secret is cached in wingman. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)",
+				Optional: true,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -80,14 +96,6 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"allow_f5xc": schema.BoolAttribute{
-				MarkdownDescription: "Allow F5XC. if allow_f5xc is set to true, it allows relevant F5XC infrastructure services to decrypt the secret encrypted using this policy.",
-				Optional: true,
-			},
-			"decrypt_cache_timeout": schema.StringAttribute{
-				MarkdownDescription: "Decrypt Cache Timeout. decrypt_cache_timeout contains the amount of time a decrypted secret is cached in wingman. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -119,7 +127,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 									MarkdownDescription: "Global Specifications. A secret_policy_rule object consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from client certificate. A rule is considered to match if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a rule is matched, the action specified for the rule is enforced for that request. A secret_policy_r...",
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
-											MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY D...",
+											MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY D... Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`.",
 											Optional: true,
 										},
 										"client_name": schema.StringAttribute{

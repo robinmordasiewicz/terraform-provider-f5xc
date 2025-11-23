@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,19 +37,19 @@ type ContactResource struct {
 type ContactResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
-	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	Address1 types.String `tfsdk:"address1"`
 	Address2 types.String `tfsdk:"address2"`
+	Annotations types.Map `tfsdk:"annotations"`
 	City types.String `tfsdk:"city"`
 	ContactType types.String `tfsdk:"contact_type"`
 	Country types.String `tfsdk:"country"`
 	County types.String `tfsdk:"county"`
+	Labels types.Map `tfsdk:"labels"`
 	PhoneNumber types.String `tfsdk:"phone_number"`
 	State types.String `tfsdk:"state"`
 	StateCode types.String `tfsdk:"state_code"`
 	ZipCode types.String `tfsdk:"zip_code"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *ContactResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -64,6 +66,9 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Contact will be created.",
@@ -71,22 +76,8 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
-			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
 				},
 			},
 			"address1": schema.StringAttribute{
@@ -97,12 +88,17 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "Address Line 2.",
 				Optional: true,
 			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
 			"city": schema.StringAttribute{
 				MarkdownDescription: "City.",
 				Optional: true,
 			},
 			"contact_type": schema.StringAttribute{
-				MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)",
+				MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`.",
 				Optional: true,
 			},
 			"country": schema.StringAttribute{
@@ -112,6 +108,11 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 			"county": schema.StringAttribute{
 				MarkdownDescription: "County.",
 				Optional: true,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"phone_number": schema.StringAttribute{
 				MarkdownDescription: "Phone Number.",
@@ -128,6 +129,13 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 			"zip_code": schema.StringAttribute{
 				MarkdownDescription: "ZIP code.",
 				Optional: true,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{

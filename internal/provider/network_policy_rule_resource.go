@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,12 +37,12 @@ type NetworkPolicyRuleResource struct {
 type NetworkPolicyRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
-	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	Action types.String `tfsdk:"action"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Labels types.Map `tfsdk:"labels"`
 	Ports types.List `tfsdk:"ports"`
 	Protocol types.String `tfsdk:"protocol"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *NetworkPolicyRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -57,6 +59,9 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NetworkPolicyRule will be created.",
@@ -64,27 +69,23 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+			"action": schema.StringAttribute{
+				MarkdownDescription: "Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match. Possible values are `DENY`, `ALLOW`.",
 				Optional: true,
-				ElementType: types.StringType,
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
-			"action": schema.StringAttribute{
-				MarkdownDescription: "Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match",
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
+				ElementType: types.StringType,
 			},
 			"ports": schema.ListAttribute{
 				MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
@@ -95,13 +96,20 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
 				Optional: true,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 		},
 		Blocks: map[string]schema.Block{
 			"advanced_action": schema.SingleNestedBlock{
 				MarkdownDescription: "Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction",
 				Attributes: map[string]schema.Attribute{
 					"action": schema.StringAttribute{
-						MarkdownDescription: "Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule",
+						MarkdownDescription: "Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`.",
 						Optional: true,
 					},
 				},

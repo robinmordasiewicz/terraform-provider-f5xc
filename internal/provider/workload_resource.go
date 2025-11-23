@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,8 +37,8 @@ type WorkloadResource struct {
 type WorkloadResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 }
 
@@ -54,6 +56,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Workload will be created.",
@@ -61,14 +66,17 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -127,7 +135,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									ElementType: types.StringType,
 								},
 								"flavor": schema.StringAttribute{
-									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory",
+									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`.",
 									Optional: true,
 								},
 								"init_container": schema.BoolAttribute{
@@ -168,7 +176,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:...",
+											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`.",
 											Optional: true,
 										},
 									},
@@ -479,7 +487,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									ElementType: types.StringType,
 								},
 								"flavor": schema.StringAttribute{
-									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory",
+									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`.",
 									Optional: true,
 								},
 								"init_container": schema.BoolAttribute{
@@ -520,7 +528,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:...",
+											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`.",
 											Optional: true,
 										},
 									},
@@ -778,7 +786,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								ElementType: types.StringType,
 							},
 							"flavor": schema.StringAttribute{
-								MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory",
+								MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`.",
 								Optional: true,
 							},
 							"init_container": schema.BoolAttribute{
@@ -819,7 +827,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										Optional: true,
 									},
 									"pull_policy": schema.StringAttribute{
-										MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:...",
+										MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`.",
 										Optional: true,
 									},
 								},
@@ -1054,7 +1062,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									ElementType: types.StringType,
 								},
 								"flavor": schema.StringAttribute{
-									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory",
+									MarkdownDescription: "Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`.",
 									Optional: true,
 								},
 								"init_container": schema.BoolAttribute{
@@ -1095,7 +1103,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:...",
+											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`.",
 											Optional: true,
 										},
 									},

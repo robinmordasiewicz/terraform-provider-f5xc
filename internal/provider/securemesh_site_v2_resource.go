@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,11 @@ type SecuremeshSiteV2Resource struct {
 type SecuremeshSiteV2ResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
+	Labels types.Map `tfsdk:"labels"`
 	TunnelDeadTimeout types.Int64 `tfsdk:"tunnel_dead_timeout"`
 	TunnelType types.String `tfsdk:"tunnel_type"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *SecuremeshSiteV2Resource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -56,6 +58,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the SecuremeshSiteV2 will be created.",
@@ -63,16 +68,27 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"tunnel_dead_timeout": schema.Int64Attribute{
+				MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
 				Optional: true,
-				ElementType: types.StringType,
+			},
+			"tunnel_type": schema.StringAttribute{
+				MarkdownDescription: "Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL. Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`.",
+				Optional: true,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -80,14 +96,6 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"tunnel_dead_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
-				Optional: true,
-			},
-			"tunnel_type": schema.StringAttribute{
-				MarkdownDescription: "Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -333,7 +341,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
-									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 									Optional: true,
 								},
 							},
@@ -642,7 +650,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality.",
 				Attributes: map[string]schema.Attribute{
 					"vip_vrrp_mode": schema.StringAttribute{
-						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode",
+						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`.",
 						Optional: true,
 					},
 				},

@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,10 +37,10 @@ type DiscoveryResource struct {
 type DiscoveryResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	ClusterID types.String `tfsdk:"cluster_id"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *DiscoveryResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -55,6 +57,9 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Discovery will be created.",
@@ -62,14 +67,21 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"cluster_id": schema.StringAttribute{
+				MarkdownDescription: "[OneOf: cluster_id, no_cluster_id] Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object.",
+				Optional: true,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -79,10 +91,6 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"cluster_id": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: cluster_id, no_cluster_id] Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object.",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -224,7 +232,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "K8SDelegationType.",
 								Attributes: map[string]schema.Attribute{
 									"dns_mode": schema.StringAttribute{
-										MarkdownDescription: "DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-dns KubeDNS: External K8s cluster is running kube-dns",
+										MarkdownDescription: "DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-dns KubeDNS: External K8s cluster is running kube-dns. Possible values are `CORE_DNS`, `KUBE_DNS`.",
 										Optional: true,
 									},
 									"subdomain": schema.StringAttribute{
@@ -262,7 +270,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						MarkdownDescription: "Site Reference. This specifies a direct reference to a site configuration object",
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
-								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 								Optional: true,
 							},
 						},
@@ -340,7 +348,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						MarkdownDescription: "Virtual Site. A reference to virtual_site object",
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
-								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 								Optional: true,
 							},
 						},

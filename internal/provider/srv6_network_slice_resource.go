@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,13 +37,13 @@ type Srv6NetworkSliceResource struct {
 type Srv6NetworkSliceResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	ConnectToAccessNetworks types.Bool `tfsdk:"connect_to_access_networks"`
 	ConnectToEnterpriseNetworks types.Bool `tfsdk:"connect_to_enterprise_networks"`
 	ConnectToInternet types.Bool `tfsdk:"connect_to_internet"`
+	Labels types.Map `tfsdk:"labels"`
 	SidPrefixes types.List `tfsdk:"sid_prefixes"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *Srv6NetworkSliceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -58,6 +60,9 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Srv6NetworkSlice will be created.",
@@ -65,23 +70,14 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
 			},
 			"connect_to_access_networks": schema.BoolAttribute{
 				MarkdownDescription: "Connect To Access Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding access networks by importing route targets specified in the virtual network.",
@@ -95,10 +91,22 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Connect To Internet. Connect all SRv6 Virtual Networks in this slice to the Internet by importing route targets specified in the virtual network.",
 				Optional: true,
 			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
 			"sid_prefixes": schema.ListAttribute{
 				MarkdownDescription: "IPv6 Prefix for SID Allocation. A SID Locator from the prefix is allocated automatically for each node in each site.",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{

@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,8 +37,8 @@ type AppFirewallResource struct {
 type AppFirewallResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 }
 
@@ -54,6 +56,9 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AppFirewall will be created.",
@@ -61,14 +66,17 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -85,15 +93,15 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: ai_risk_based_blocking, default_detection_settings, detection_settings] Risk-Based Blocking (Powered by AI) - Preview. All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode.",
 				Attributes: map[string]schema.Attribute{
 					"high_risk_action": schema.StringAttribute{
-						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only",
+						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`.",
 						Optional: true,
 					},
 					"low_risk_action": schema.StringAttribute{
-						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only",
+						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`.",
 						Optional: true,
 					},
 					"medium_risk_action": schema.StringAttribute{
-						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only",
+						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`.",
 						Optional: true,
 					},
 				},
@@ -124,7 +132,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional: true,
 					},
 					"response_code": schema.StringAttribute{
-						MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code U...",
+						MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code U... Possible values include `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, and others.",
 						Optional: true,
 					},
 				},
@@ -134,15 +142,15 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: bot_protection_setting, default_bot_setting] Bot Protection. Configuration of WAF Bot Protection",
 				Attributes: map[string]schema.Attribute{
 					"good_bot_action": schema.StringAttribute{
-						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection",
+						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
 						Optional: true,
 					},
 					"malicious_bot_action": schema.StringAttribute{
-						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection",
+						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
 						Optional: true,
 					},
 					"suspicious_bot_action": schema.StringAttribute{
-						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection",
+						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
 						Optional: true,
 					},
 				},
@@ -210,15 +218,15 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Bot Protection. Configuration of WAF Bot Protection",
 						Attributes: map[string]schema.Attribute{
 							"good_bot_action": schema.StringAttribute{
-								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection",
+								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
 								Optional: true,
 							},
 							"malicious_bot_action": schema.StringAttribute{
-								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection",
+								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
 								Optional: true,
 							},
 							"suspicious_bot_action": schema.StringAttribute{
-								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection",
+								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
 								Optional: true,
 							},
 						},

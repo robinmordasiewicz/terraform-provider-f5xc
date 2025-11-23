@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,12 +37,12 @@ type VoltstackSiteResource struct {
 type VoltstackSiteResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
-	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	Address types.String `tfsdk:"address"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Labels types.Map `tfsdk:"labels"`
 	VolterraCertifiedHw types.String `tfsdk:"volterra_certified_hw"`
 	WorkerNodes types.List `tfsdk:"worker_nodes"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *VoltstackSiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -57,6 +59,9 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the VoltstackSite will be created.",
@@ -64,27 +69,23 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+			"address": schema.StringAttribute{
+				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
 				Optional: true,
-				ElementType: types.StringType,
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
-			"address": schema.StringAttribute{
-				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
+				ElementType: types.StringType,
 			},
 			"volterra_certified_hw": schema.StringAttribute{
 				MarkdownDescription: "Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site.",
@@ -94,6 +95,13 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Worker Nodes. Names of worker nodes",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -110,7 +118,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
-									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 									Optional: true,
 								},
 							},
@@ -232,7 +240,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Optional: true,
 					},
 					"vip_vrrp_mode": schema.StringAttribute{
-						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode",
+						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`.",
 						Optional: true,
 					},
 				},
@@ -709,7 +717,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "vGPU Configuration. Licensing configuration for NVIDIA vGPU",
 				Attributes: map[string]schema.Attribute{
 					"feature_type": schema.StringAttribute{
-						MarkdownDescription: "Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server",
+						MarkdownDescription: "Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server. Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`.",
 						Optional: true,
 					},
 					"server_address": schema.StringAttribute{

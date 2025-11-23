@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,12 +37,12 @@ type ForwardingClassResource struct {
 type ForwardingClassResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	InterfaceGroup types.String `tfsdk:"interface_group"`
+	Labels types.Map `tfsdk:"labels"`
 	QueueIDToUse types.String `tfsdk:"queue_id_to_use"`
 	TosValue types.Int64 `tfsdk:"tos_value"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *ForwardingClassResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -57,6 +59,9 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ForwardingClass will be created.",
@@ -64,16 +69,31 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"interface_group": schema.StringAttribute{
+				MarkdownDescription: "Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`.",
+				Optional: true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"queue_id_to_use": schema.StringAttribute{
+				MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`.",
 				Optional: true,
-				ElementType: types.StringType,
+			},
+			"tos_value": schema.Int64Attribute{
+				MarkdownDescription: "TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low",
+				Optional: true,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -82,29 +102,17 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"interface_group": schema.StringAttribute{
-				MarkdownDescription: "Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3",
-				Optional: true,
-			},
-			"queue_id_to_use": schema.StringAttribute{
-				MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended.",
-				Optional: true,
-			},
-			"tos_value": schema.Int64Attribute{
-				MarkdownDescription: "TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low",
-				Optional: true,
-			},
 		},
 		Blocks: map[string]schema.Block{
 			"dscp": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: dscp, no_marking, tos_value] DSCP Marking setting. DSCP marking setting as per RFC 2475",
 				Attributes: map[string]schema.Attribute{
 					"drop_precedence": schema.StringAttribute{
-						MarkdownDescription: "DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer",
+						MarkdownDescription: "DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer. Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`.",
 						Optional: true,
 					},
 					"dscp_class": schema.StringAttribute{
-						MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended.",
+						MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`.",
 						Optional: true,
 					},
 				},

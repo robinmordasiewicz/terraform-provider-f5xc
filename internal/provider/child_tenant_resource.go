@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,11 @@ type ChildTenantResource struct {
 type ChildTenantResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	CompanyName types.String `tfsdk:"company_name"`
 	Domain types.String `tfsdk:"domain"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *ChildTenantResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -56,6 +58,9 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ChildTenant will be created.",
@@ -63,14 +68,25 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"company_name": schema.StringAttribute{
+				MarkdownDescription: "Company Name. Company name (enterprise only)",
+				Optional: true,
+			},
+			"domain": schema.StringAttribute{
+				MarkdownDescription: "Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io.",
+				Optional: true,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -80,14 +96,6 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"company_name": schema.StringAttribute{
-				MarkdownDescription: "Company Name. Company name (enterprise only)",
-				Optional: true,
-			},
-			"domain": schema.StringAttribute{
-				MarkdownDescription: "Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io.",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -125,7 +133,7 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional: true,
 					},
 					"contact_type": schema.StringAttribute{
-						MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)",
+						MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`.",
 						Optional: true,
 					},
 					"country": schema.StringAttribute{

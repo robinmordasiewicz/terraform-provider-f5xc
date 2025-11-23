@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,11 @@ type DNSLbPoolResource struct {
 type DNSLbPoolResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
+	Labels types.Map `tfsdk:"labels"`
 	LoadBalancingMode types.String `tfsdk:"load_balancing_mode"`
 	Ttl types.Int64 `tfsdk:"ttl"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *DNSLbPoolResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -56,6 +58,9 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the DNSLbPool will be created.",
@@ -63,16 +68,27 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"load_balancing_mode": schema.StringAttribute{
+				MarkdownDescription: "LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to sen... Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`.",
 				Optional: true,
-				ElementType: types.StringType,
+			},
+			"ttl": schema.Int64Attribute{
+				MarkdownDescription: "[OneOf: ttl, use_rrset_ttl] TTL. Custom TTL in seconds (default 30) for responses from this pool",
+				Optional: true,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -80,14 +96,6 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"load_balancing_mode": schema.StringAttribute{
-				MarkdownDescription: "LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to sen...",
-				Optional: true,
-			},
-			"ttl": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: ttl, use_rrset_ttl] TTL. Custom TTL in seconds (default 30) for responses from this pool",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{

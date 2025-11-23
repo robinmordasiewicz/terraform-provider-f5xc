@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,8 +37,8 @@ type ReportConfigResource struct {
 type ReportConfigResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 }
 
@@ -54,6 +56,9 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ReportConfig will be created.",
@@ -61,14 +66,17 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -129,7 +137,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Report Frequency Monthly. create report monthly",
 						Attributes: map[string]schema.Attribute{
 							"date": schema.StringAttribute{
-								MarkdownDescription: "Report Generation Date. report generation date Indicates field not being set Create report on Last day of month",
+								MarkdownDescription: "Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values include `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, and others.",
 								Optional: true,
 							},
 							"report_generation_time": schema.StringAttribute{
@@ -152,7 +160,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Report Frequency Weekly. create report weekly",
 						Attributes: map[string]schema.Attribute{
 							"day": schema.StringAttribute{
-								MarkdownDescription: "Report Generation Weekday. report generation weekday Indicates field not being set",
+								MarkdownDescription: "Report Generation Weekday. report generation weekday Indicates field not being set. Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`.",
 								Optional: true,
 							},
 							"report_generation_time": schema.StringAttribute{

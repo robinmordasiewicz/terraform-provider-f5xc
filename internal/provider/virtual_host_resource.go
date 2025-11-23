@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,16 +37,15 @@ type VirtualHostResource struct {
 type VirtualHostResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
-	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	AddLocation types.Bool `tfsdk:"add_location"`
+	Annotations types.Map `tfsdk:"annotations"`
 	AppendServerName types.String `tfsdk:"append_server_name"`
 	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
 	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
 	DisableDNSResolve types.Bool `tfsdk:"disable_dns_resolve"`
 	Domains types.List `tfsdk:"domains"`
 	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
+	Labels types.Map `tfsdk:"labels"`
 	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
 	Proxy types.String `tfsdk:"proxy"`
 	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
@@ -52,6 +53,7 @@ type VirtualHostResourceModel struct {
 	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
 	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
 	ServerName types.String `tfsdk:"server_name"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *VirtualHostResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -68,6 +70,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the VirtualHost will be created.",
@@ -75,27 +80,18 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
-			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
 				},
 			},
 			"add_location": schema.BoolAttribute{
 				MarkdownDescription: "Add Location. x-example: true Appends header x-volterra-location = <re-site-name> in responses. This configuration is ignored on CE sites.",
 				Optional: true,
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"append_server_name": schema.StringAttribute{
 				MarkdownDescription: "[OneOf: append_server_name, default_header, pass_through, server_name] Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed.",
@@ -122,12 +118,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity. Idle timeout and Proxy Type: HTTP_PROXY, HTTPS_PROXY: Idle timer is started when the first byte is received on the connection. Each time an encode/decode event for headers or data is processed for the stream, the timer will be reset. If the timeout fires, the stream is terminated with a 504 (Gateway Timeout) error code if no upstream re...",
 				Optional: true,
 			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
 			"max_request_header_size": schema.Int64Attribute{
 				MarkdownDescription: "Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response. The max configurable limit is 96 KiB, based on current implementation constraints. Note: a. This configuration parameter is applicable only for HTTP_PROXY and HTTPS_PROXY b. When multiple HTTP_PROXY virtual hosts share the same advertise policy, the effective 'maximu...",
 				Optional: true,
 			},
 			"proxy": schema.StringAttribute{
-				MarkdownDescription: "Type of Proxy. ProxyType tells the type of proxy to install for the virtual host. Only the following combination of VirtualHosts within same AdvertisePolicy is permitted (None of them should have '*' in domains when used with other VirtualHosts in same AdvertisePolicy) 1. Multiple TCP_PROXY_WITH_SNI and multiple HTTPS_PROXY 2. Multiple HTTP_PROXY 3. Multiple HTTPS_PROXY 4. Multiple TCP_PROXY_WITH_SNI HTTPS_PROXY without TLS parameters is not permitted HTTP_PROXY/HTTPS_PROXY/TCP_PROXY_WITH_SNI...",
+				MarkdownDescription: "Type of Proxy. ProxyType tells the type of proxy to install for the virtual host. Only the following combination of VirtualHosts within same AdvertisePolicy is permitted (None of them should have '*' in domains when used with other VirtualHosts in same AdvertisePolicy) 1. Multiple TCP_PROXY_WITH_SNI and multiple HTTPS_PROXY 2. Multiple HTTP_PROXY 3. Multiple HTTPS_PROXY 4. Multiple TCP_PROXY_WITH_SNI HTTPS_PROXY without TLS parameters is not permitted HTTP_PROXY/HTTPS_PROXY/TCP_PROXY_WITH_SNI... Possible values are `UDP_PROXY`, `SMA_PROXY`, `DNS_PROXY`, `ZTNA_PROXY`, `UZTNA_PROXY`.",
 				Optional: true,
 			},
 			"request_cookies_to_remove": schema.ListAttribute{
@@ -153,6 +154,13 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 			"server_name": schema.StringAttribute{
 				MarkdownDescription: "Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header",
 				Optional: true,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -421,7 +429,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional: true,
 					},
 					"resolution_network_type": schema.StringAttribute{
-						MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+						MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 						Optional: true,
 					},
 					"resolve_endpoint_dynamically": schema.BoolAttribute{
@@ -981,11 +989,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						ElementType: types.StringType,
 					},
 					"maximum_protocol_version": schema.StringAttribute{
-						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version.",
+						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`.",
 						Optional: true,
 					},
 					"minimum_protocol_version": schema.StringAttribute{
-						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version.",
+						MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`.",
 						Optional: true,
 					},
 					"xfcc_header_elements": schema.ListAttribute{
@@ -1092,11 +1100,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 								ElementType: types.StringType,
 							},
 							"maximum_protocol_version": schema.StringAttribute{
-								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version.",
+								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`.",
 								Optional: true,
 							},
 							"minimum_protocol_version": schema.StringAttribute{
-								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version.",
+								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`.",
 								Optional: true,
 							},
 						},

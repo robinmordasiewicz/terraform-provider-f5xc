@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,11 @@ type AddressAllocatorResource struct {
 type AddressAllocatorResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
-	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	AddressPool types.List `tfsdk:"address_pool"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Labels types.Map `tfsdk:"labels"`
 	Mode types.String `tfsdk:"mode"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *AddressAllocatorResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -56,6 +58,9 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AddressAllocator will be created.",
@@ -63,9 +68,12 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+			"address_pool": schema.ListAttribute{
+				MarkdownDescription: "Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -74,21 +82,21 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"mode": schema.StringAttribute{
+				MarkdownDescription: "Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node. Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`.",
+				Optional: true,
+			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"address_pool": schema.ListAttribute{
-				MarkdownDescription: "Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients.",
-				Optional: true,
-				ElementType: types.StringType,
-			},
-			"mode": schema.StringAttribute{
-				MarkdownDescription: "Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -104,7 +112,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"local_interface_address_type": schema.StringAttribute{
-						MarkdownDescription: "Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local inte...",
+						MarkdownDescription: "Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local inte... Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`.",
 						Optional: true,
 					},
 				},

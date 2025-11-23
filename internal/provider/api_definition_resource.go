@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,10 +37,10 @@ type APIDefinitionResource struct {
 type APIDefinitionResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
+	Labels types.Map `tfsdk:"labels"`
 	SwaggerSpecs types.List `tfsdk:"swagger_specs"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *APIDefinitionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -55,6 +57,9 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the APIDefinition will be created.",
@@ -62,14 +67,22 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"swagger_specs": schema.ListAttribute{
+				MarkdownDescription: "File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -80,11 +93,6 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"swagger_specs": schema.ListAttribute{
-				MarkdownDescription: "File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API.",
-				Optional: true,
-				ElementType: types.StringType,
-			},
 		},
 		Blocks: map[string]schema.Block{
 			"api_inventory_exclusion_list": schema.ListNestedBlock{
@@ -92,7 +100,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
-							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method",
+							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values include `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, and others.",
 							Optional: true,
 						},
 						"path": schema.StringAttribute{
@@ -108,7 +116,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
-							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method",
+							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values include `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, and others.",
 							Optional: true,
 						},
 						"path": schema.StringAttribute{
@@ -127,7 +135,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
-							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method",
+							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values include `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, and others.",
 							Optional: true,
 						},
 						"path": schema.StringAttribute{

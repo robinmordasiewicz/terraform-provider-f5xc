@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,10 @@ type CustomerSupportResource struct {
 type CustomerSupportResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	Category types.String `tfsdk:"category"`
 	Description types.String `tfsdk:"description"`
+	Labels types.Map `tfsdk:"labels"`
 	Ongoing types.Bool `tfsdk:"ongoing"`
 	Priority types.String `tfsdk:"priority"`
 	ProductData types.String `tfsdk:"product_data"`
@@ -50,6 +51,7 @@ type CustomerSupportResourceModel struct {
 	Topic types.String `tfsdk:"topic"`
 	TpID types.String `tfsdk:"tp_id"`
 	Type types.String `tfsdk:"type"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *CustomerSupportResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -66,6 +68,9 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CustomerSupport will be created.",
@@ -73,23 +78,14 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
 			},
 			"category": schema.StringAttribute{
 				MarkdownDescription: "Category. ticket area further narrows down the ticket - infrastructure, application, dashboards can be examples.",
@@ -99,12 +95,17 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "Description. customer's description of the issue (free text)",
 				Optional: true,
 			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
 			"ongoing": schema.BoolAttribute{
 				MarkdownDescription: "Ongoing. Ongoing is a flag that indicates whether the issue is ongoing or not.",
 				Optional: true,
 			},
 			"priority": schema.StringAttribute{
-				MarkdownDescription: "Priority. Support ticket priority helps understand importance of the ticket and focus more on more critical issues. Unknown/empty priority Normal priority issue High priority issue Urgent priority issue",
+				MarkdownDescription: "Priority. Support ticket priority helps understand importance of the ticket and focus more on more critical issues. Unknown/empty priority Normal priority issue High priority issue Urgent priority issue. Possible values are `PRIORITY_UNKNOWN`, `PRIORITY_NORMAL`, `PRIORITY_HIGH`, `PRIORITY_URGENT`.",
 				Optional: true,
 			},
 			"product_data": schema.StringAttribute{
@@ -112,11 +113,11 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 			},
 			"service": schema.StringAttribute{
-				MarkdownDescription: "Support Service. Indicates the list of support service Unknown Support Service Account Protection Support Service Administration Support Service Application Traffic Insight Support Service Audit Logs & Alerts Support Service Authentication Intelligence Support Service Billing Support Service Client Side Defense Support Service Cloud & Edge Sites Support Service deprecated: use SS_MULTI_CLOUD_NETWORK_CONNECT instead DDOS & Transit Support Service Deprecated: use SS_ROUTED_DDOS instead Distribu...",
+				MarkdownDescription: "Support Service. Indicates the list of support service Unknown Support Service Account Protection Support Service Administration Support Service Application Traffic Insight Support Service Audit Logs & Alerts Support Service Authentication Intelligence Support Service Billing Support Service Client Side Defense Support Service Cloud & Edge Sites Support Service deprecated: use SS_MULTI_CLOUD_NETWORK_CONNECT instead DDOS & Transit Support Service Deprecated: use SS_ROUTED_DDOS instead Distribu... Possible values include `SS_UNKNOWN`, `SS_ACCOUNT_PROTECTION`, `SS_ADMINISTRATION`, `SS_APPLICATION_TRAFFIC_INSIGHT`, `SS_AUDIT_LOGS_AND_ALERTS`, `SS_AUTHENTICATION_INTELLIGENCE`, `SS_BILLING`, `SS_CLIENT_SIDE_DEFENSE`, `SS_CLOUD_AND_EDGE_SITES`, `SS_DDOS_AND_TRANSIT_SERVICES`, and others.",
 				Optional: true,
 			},
 			"status": schema.StringAttribute{
-				MarkdownDescription: "Support Ticket Status. State of the ticket so the customers know if the problem is being looked into Unknown or empty support ticket status Indicates a new ticket, waiting to be assigned to an agent Indicates an open issues, actively being looked into Indicates a pending issue, an open issue not actively being looked into Indicates on issue that on-hold, waiting for more information Indicates a solved issue, waiting for customer's confirmation Indicates a closed issue, resolved and customer a...",
+				MarkdownDescription: "Support Ticket Status. State of the ticket so the customers know if the problem is being looked into Unknown or empty support ticket status Indicates a new ticket, waiting to be assigned to an agent Indicates an open issues, actively being looked into Indicates a pending issue, an open issue not actively being looked into Indicates on issue that on-hold, waiting for more information Indicates a solved issue, waiting for customer's confirmation Indicates a closed issue, resolved and customer a... Possible values are `STATUS_UNKNOWN`, `STATUS_NEW`, `STATUS_OPEN`, `STATUS_PENDING`, `STATUS_ONHOLD`, `STATUS_SOLVED`, `STATUS_CLOSED`, `STATUS_FAILED`.",
 				Optional: true,
 			},
 			"subject": schema.StringAttribute{
@@ -128,7 +129,7 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 			},
 			"topic": schema.StringAttribute{
-				MarkdownDescription: "Support Topic. Support Topic indicates the list of topics for service tickets Unknown/empty priority ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST ACCOUNT_SUPPORT_TOPIC_ACCOUNT ACCOUNT_SUPPORT_TOPIC_BILLING ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE ACCOUNT_SUPPORT_TOPIC_RMA ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION ACCOUNT_SUPPORT_TOPIC_OTHERS TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE TEC...",
+				MarkdownDescription: "Support Topic. Support Topic indicates the list of topics for service tickets Unknown/empty priority ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST ACCOUNT_SUPPORT_TOPIC_ACCOUNT ACCOUNT_SUPPORT_TOPIC_BILLING ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE ACCOUNT_SUPPORT_TOPIC_RMA ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION ACCOUNT_SUPPORT_TOPIC_OTHERS TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE TEC... Possible values include `TOPIC_UNKNOWN`, `ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST`, `ACCOUNT_SUPPORT_TOPIC_ACCOUNT`, `ACCOUNT_SUPPORT_TOPIC_BILLING`, `ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE`, `ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP`, `ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE`, `ACCOUNT_SUPPORT_TOPIC_RMA`, `ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION`, `ACCOUNT_SUPPORT_TOPIC_OTHERS`, and others.",
 				Optional: true,
 			},
 			"tp_id": schema.StringAttribute{
@@ -136,8 +137,15 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 			},
 			"type": schema.StringAttribute{
-				MarkdownDescription: "Support Ticket. Several types of issues are supported, such as problems, questions. Unknown or empty ticket type Indicates a problem (e.g. misconfiguration) Indicates a task (a request to do something) Indicates a question (billing, services related) Indicates an incident (something is not working) Indicates a technical support ticket Indicates an account support ticket Indicates an Incident support ticket",
+				MarkdownDescription: "Support Ticket. Several types of issues are supported, such as problems, questions. Unknown or empty ticket type Indicates a problem (e.g. misconfiguration) Indicates a task (a request to do something) Indicates a question (billing, services related) Indicates an incident (something is not working) Indicates a technical support ticket Indicates an account support ticket Indicates an Incident support ticket. Possible values are `TYPE_UNKNOWN`, `TYPE_PROBLEM`, `TYPE_TASK`, `TYPE_QUESTION`, `TYPE_INCIDENT`, `TYPE_TECHNICAL_SUPPORT`, `TYPE_ACCOUNT_SUPPORT`, `TYPE_INCIDENT_SUPPORT`.",
 				Optional: true,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{

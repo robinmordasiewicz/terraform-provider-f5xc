@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,11 @@ type InfraprotectDenyListRuleResource struct {
 type InfraprotectDenyListRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
+	Labels types.Map `tfsdk:"labels"`
 	Prefix types.String `tfsdk:"prefix"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *InfraprotectDenyListRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -56,6 +58,9 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the InfraprotectDenyListRule will be created.",
@@ -63,16 +68,27 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"expiration_timestamp": schema.StringAttribute{
+				MarkdownDescription: "Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards",
+				Optional: true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"prefix": schema.StringAttribute{
+				MarkdownDescription: "Prefix. Prefix",
 				Optional: true,
-				ElementType: types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -80,14 +96,6 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"expiration_timestamp": schema.StringAttribute{
-				MarkdownDescription: "Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards",
-				Optional: true,
-			},
-			"prefix": schema.StringAttribute{
-				MarkdownDescription: "Prefix. Prefix",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{

@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,11 +37,11 @@ type TenantProfileResource struct {
 type TenantProfileResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	EnableSupportAccess types.Bool `tfsdk:"enable_support_access"`
+	Labels types.Map `tfsdk:"labels"`
 	SupportEmail types.String `tfsdk:"support_email"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *TenantProfileResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -56,6 +58,9 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the TenantProfile will be created.",
@@ -63,16 +68,27 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"enable_support_access": schema.BoolAttribute{
+				MarkdownDescription: "Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support.",
+				Optional: true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"support_email": schema.StringAttribute{
+				MarkdownDescription: "Support Email. Support Email address for child tenant",
 				Optional: true,
-				ElementType: types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -80,14 +96,6 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"enable_support_access": schema.BoolAttribute{
-				MarkdownDescription: "Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support.",
-				Optional: true,
-			},
-			"support_email": schema.StringAttribute{
-				MarkdownDescription: "Support Email. Support Email address for child tenant",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{

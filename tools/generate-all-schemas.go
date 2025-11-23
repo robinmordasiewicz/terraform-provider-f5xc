@@ -1500,10 +1500,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -1560,6 +1562,15 @@ func (r *{{.TitleCase}}Resource) Schema(ctx context.Context, req resource.Schema
 {{- else if eq .PlanModifier "UseStateForUnknown"}}
 					stringplanmodifier.UseStateForUnknown(),
 {{- end}}
+				},
+{{- end}}
+{{- if eq .TfsdkTag "name"}}
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
+{{- else if eq .TfsdkTag "namespace"}}
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
 				},
 {{- end}}
 			},

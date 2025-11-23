@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,10 +37,10 @@ type TpmCategoryResource struct {
 type TpmCategoryResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
+	Labels types.Map `tfsdk:"labels"`
 	TpmAllowList types.List `tfsdk:"tpm_allow_list"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *TpmCategoryResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -55,6 +57,9 @@ func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the TpmCategory will be created.",
@@ -62,14 +67,22 @@ func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"tpm_allow_list": schema.ListAttribute{
+				MarkdownDescription: "list of allowed TPM EK Certificates. A TPM manufacturer is typically identified by its EK certificate. TPMAdmin can configure a allow-list of EK certificates for a given category When a TPM provision request is called, TPMAuthority verifies that EK certificate provided in provision matches one the EK certificate on this allow-list Allow list of TPM EK Certificates",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -79,11 +92,6 @@ func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"tpm_allow_list": schema.ListAttribute{
-				MarkdownDescription: "list of allowed TPM EK Certificates. A TPM manufacturer is typically identified by its EK certificate. TPMAdmin can configure a allow-list of EK certificates for a given category When a TPM provision request is called, TPMAuthority verifies that EK certificate provided in provision matches one the EK certificate on this allow-list Allow list of TPM EK Certificates",
-				Optional: true,
-				ElementType: types.StringType,
 			},
 		},
 		Blocks: map[string]schema.Block{

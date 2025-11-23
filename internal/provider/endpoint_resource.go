@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,14 +37,14 @@ type EndpointResource struct {
 type EndpointResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	DNSName types.String `tfsdk:"dns_name"`
 	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
 	IP types.String `tfsdk:"ip"`
+	Labels types.Map `tfsdk:"labels"`
 	Port types.Int64 `tfsdk:"port"`
 	Protocol types.String `tfsdk:"protocol"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *EndpointResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -59,6 +61,9 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Endpoint will be created.",
@@ -66,23 +71,14 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
 			},
 			"dns_name": schema.StringAttribute{
 				MarkdownDescription: "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
@@ -96,6 +92,11 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "Endpoint IP Address. Endpoint is reachable at the given ipv4/ipv6 address",
 				Optional: true,
 			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
 			"port": schema.Int64Attribute{
 				MarkdownDescription: "Port. Endpoint service is available on this port",
 				Optional: true,
@@ -103,6 +104,13 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 			"protocol": schema.StringAttribute{
 				MarkdownDescription: "Protocol. Endpoint protocol. Default is TCP. Both TCP and UDP protocols are supported",
 				Optional: true,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -124,7 +132,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "Service Info Type. Specifies whether endpoint service is discovered by name or labels",
 				Attributes: map[string]schema.Attribute{
 					"discovery_type": schema.StringAttribute{
-						MarkdownDescription: "Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic BIG-IP Clusters Discover for Third Party Application",
+						MarkdownDescription: "Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic BIG-IP Clusters Discover for Third Party Application. Possible values are `INVALID_DISCOVERY`, `K8S`, `CONSUL`, `CLASSIC_BIGIP`, `THIRD_PARTY`.",
 						Optional: true,
 					},
 					"service_name": schema.StringAttribute{
@@ -176,7 +184,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Site Reference. This specifies a direct reference to a site configuration object",
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
-								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 								Optional: true,
 							},
 						},
@@ -254,7 +262,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Virtual Site. A reference to virtual_site object",
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
-								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 								Optional: true,
 							},
 						},

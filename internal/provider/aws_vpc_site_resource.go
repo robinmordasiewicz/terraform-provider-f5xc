@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,16 +37,16 @@ type AWSVPCSiteResource struct {
 type AWSVPCSiteResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
-	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	Address types.String `tfsdk:"address"`
+	Annotations types.Map `tfsdk:"annotations"`
 	AWSRegion types.String `tfsdk:"aws_region"`
 	DiskSize types.Int64 `tfsdk:"disk_size"`
 	InstanceType types.String `tfsdk:"instance_type"`
+	Labels types.Map `tfsdk:"labels"`
 	NodesPerAz types.Int64 `tfsdk:"nodes_per_az"`
 	SSHKey types.String `tfsdk:"ssh_key"`
 	TotalNodes types.Int64 `tfsdk:"total_nodes"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *AWSVPCSiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -61,6 +63,9 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AWSVPCSite will be created.",
@@ -68,27 +73,18 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
-			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
 				},
 			},
 			"address": schema.StringAttribute{
 				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
 				Optional: true,
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"aws_region": schema.StringAttribute{
 				MarkdownDescription: "AWS Region. Name for AWS Region.",
@@ -102,6 +98,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "AWS Instance Type for Node. Select Instance size based on performance needed",
 				Optional: true,
 			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
 			"nodes_per_az": schema.Int64Attribute{
 				MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21",
 				Optional: true,
@@ -113,6 +114,13 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 			"total_nodes": schema.Int64Attribute{
 				MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site",
 				Optional: true,
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -185,7 +193,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
-									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site...",
+									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others.",
 									Optional: true,
 								},
 							},

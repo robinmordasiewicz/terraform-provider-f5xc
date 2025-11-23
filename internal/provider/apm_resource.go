@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,8 +37,8 @@ type APMResource struct {
 type APMResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 }
 
@@ -54,6 +56,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the APM will be created.",
@@ -61,14 +66,17 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
-			},
-			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
-				Optional: true,
-				ElementType: types.StringType,
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"labels": schema.MapAttribute{
+				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -300,11 +308,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"bm_node_memory_size": schema.StringAttribute{
-											MarkdownDescription: "Bare Metal ServiceNode Memory Size. Enum to define amount of memory to be assigned to the node - BM_8_GB_MEMORY: 8 GB - BM_16_GB_MEMORY: 16 GB - BM_32_GB_MEMORY: 32 GB",
+											MarkdownDescription: "Bare Metal ServiceNode Memory Size. Enum to define amount of memory to be assigned to the node - BM_8_GB_MEMORY: 8 GB - BM_16_GB_MEMORY: 16 GB - BM_32_GB_MEMORY: 32 GB. Possible values are `BM_8_GB_MEMORY`, `BM_16_GB_MEMORY`, `BM_32_GB_MEMORY`.",
 											Optional: true,
 										},
 										"bm_virtual_cpu_count": schema.StringAttribute{
-											MarkdownDescription: "Bare Metal ServiceNode Virtual CPU Count. Enum to define number of virtual CPU's to be assigned to the node - BM_4_VCPU: 4 virtual CPUs - BM_8_VCPU: 8 virtual CPUs",
+											MarkdownDescription: "Bare Metal ServiceNode Virtual CPU Count. Enum to define number of virtual CPU's to be assigned to the node - BM_4_VCPU: 4 virtual CPUs - BM_8_VCPU: 8 virtual CPUs. Possible values are `BM_4_VCPU`, `BM_8_VCPU`.",
 											Optional: true,
 										},
 										"node_name": schema.StringAttribute{

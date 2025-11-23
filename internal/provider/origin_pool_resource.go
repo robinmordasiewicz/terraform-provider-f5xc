@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,13 +37,13 @@ type OriginPoolResource struct {
 type OriginPoolResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
 	EndpointSelection types.String `tfsdk:"endpoint_selection"`
 	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
+	Labels types.Map `tfsdk:"labels"`
 	LoadBalancerAlgorithm types.String `tfsdk:"loadbalancer_algorithm"`
 	Port types.Int64 `tfsdk:"port"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *OriginPoolResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -58,6 +60,9 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the OriginPool will be created.",
@@ -65,16 +70,35 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"endpoint_selection": schema.StringAttribute{
+				MarkdownDescription: "Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`.",
+				Optional: true,
+			},
+			"health_check_port": schema.Int64Attribute{
+				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Port used for performing health check",
+				Optional: true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"loadbalancer_algorithm": schema.StringAttribute{
+				MarkdownDescription: "Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy im... Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`.",
 				Optional: true,
-				ElementType: types.StringType,
+			},
+			"port": schema.Int64Attribute{
+				MarkdownDescription: "Port. Endpoint service is available on this port",
+				Optional: true,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -82,22 +106,6 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"endpoint_selection": schema.StringAttribute{
-				MarkdownDescription: "Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered.",
-				Optional: true,
-			},
-			"health_check_port": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Port used for performing health check",
-				Optional: true,
-			},
-			"loadbalancer_algorithm": schema.StringAttribute{
-				MarkdownDescription: "Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy im...",
-				Optional: true,
-			},
-			"port": schema.Int64Attribute{
-				MarkdownDescription: "Port. Endpoint service is available on this port",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -137,7 +145,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional: true,
 							},
 							"priority": schema.StringAttribute{
-								MarkdownDescription: "Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism",
+								MarkdownDescription: "Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism. Possible values are `DEFAULT`, `HIGH`.",
 								Optional: true,
 							},
 							"retries": schema.Int64Attribute{
@@ -389,7 +397,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "K8s Service Name on given Sites. Specify origin server with K8s service name and site information",
 							Attributes: map[string]schema.Attribute{
 								"protocol": schema.StringAttribute{
-									MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP",
+									MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`.",
 									Optional: true,
 								},
 								"service_name": schema.StringAttribute{
@@ -703,11 +711,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 										ElementType: types.StringType,
 									},
 									"max_version": schema.StringAttribute{
-										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version.",
+										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`.",
 										Optional: true,
 									},
 									"min_version": schema.StringAttribute{
-										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version.",
+										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`.",
 										Optional: true,
 									},
 								},

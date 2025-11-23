@@ -12,10 +12,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
 var (
@@ -35,10 +37,10 @@ type OidcProviderResource struct {
 type OidcProviderResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Labels types.Map `tfsdk:"labels"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ID types.String `tfsdk:"id"`
+	Labels types.Map `tfsdk:"labels"`
 	ProviderType types.String `tfsdk:"provider_type"`
+	ID types.String `tfsdk:"id"`
 }
 
 func (r *OidcProviderResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -55,6 +57,9 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NameValidator(),
+				},
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the OidcProvider will be created.",
@@ -62,16 +67,23 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+				Validators: []validator.String{
+					validators.NamespaceValidator(),
+				},
+			},
+			"annotations": schema.MapAttribute{
+				MarkdownDescription: "Annotations to apply to this resource.",
+				Optional: true,
+				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels to apply to this resource.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+			"provider_type": schema.StringAttribute{
+				MarkdownDescription: "Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC. Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`.",
 				Optional: true,
-				ElementType: types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
@@ -79,10 +91,6 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
-			},
-			"provider_type": schema.StringAttribute{
-				MarkdownDescription: "Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC",
-				Optional: true,
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -122,7 +130,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"prompt": schema.StringAttribute{
-						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the En...",
+						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the En... Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
 						Optional: true,
 					},
 					"token_url": schema.StringAttribute{
@@ -214,7 +222,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"prompt": schema.StringAttribute{
-						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the En...",
+						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the En... Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
 						Optional: true,
 					},
 					"token_url": schema.StringAttribute{
@@ -268,7 +276,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"prompt": schema.StringAttribute{
-						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the En...",
+						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the En... Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
 						Optional: true,
 					},
 					"token_url": schema.StringAttribute{

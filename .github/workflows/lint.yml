@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+      - openapi-update
+      - auto-generate/**
   pull_request:
     branches:
       - main

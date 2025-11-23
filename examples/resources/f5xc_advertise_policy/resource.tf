@@ -16,16 +16,16 @@ resource "f5xc_advertise_policy" "example" {
   }
 
   # Resource-specific configuration
-    # Public IP. Optional. Public VIP to advertise This field i...
-    public_ip {
-      # Configure public_ip settings
-    }
-    # Downstream TLS Parameters. TLS configuration for downstre...
-    tls_parameters {
-      # Configure tls_parameters settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    client_certificate_optional {
-      # Configure client_certificate_optional settings
-    }
+  # Public IP. Optional. Public VIP to advertise This field i...
+  public_ip {
+    # Configure public_ip settings
+  }
+  # Downstream TLS Parameters. TLS configuration for downstre...
+  tls_parameters {
+    # Configure tls_parameters settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  client_certificate_optional {
+    # Configure client_certificate_optional settings
+  }
 }

@@ -16,16 +16,16 @@ resource "f5xc_k8s_pod_security_policy" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: psp_spec, yaml] Pod Security Policy Specification...
-    psp_spec {
-      # Configure psp_spec settings
-    }
-    # Capability List. List of capabilities that docker contain...
-    allowed_capabilities {
-      # Configure allowed_capabilities settings
-    }
-    # Allowed Host Paths. Restrict list of host paths, default ...
-    allowed_host_paths {
-      # Configure allowed_host_paths settings
-    }
+  # [OneOf: psp_spec, yaml] Pod Security Policy Specification...
+  psp_spec {
+    # Configure psp_spec settings
+  }
+  # Capability List. List of capabilities that docker contain...
+  allowed_capabilities {
+    # Configure allowed_capabilities settings
+  }
+  # Allowed Host Paths. Restrict list of host paths, default ...
+  allowed_host_paths {
+    # Configure allowed_host_paths settings
+  }
 }

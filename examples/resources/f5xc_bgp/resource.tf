@@ -23,7 +23,7 @@ resource "f5xc_bgp" "example" {
       name = "upstream-peer"
     }
     spec {
-      peer_asn = 65000
+      peer_asn     = 65000
       peer_address = "192.168.1.2"
     }
   }

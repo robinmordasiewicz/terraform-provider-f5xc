@@ -16,16 +16,16 @@ resource "f5xc_oidc_provider" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: azure_oidc_spec_type, google_oidc_spec_type, oidc...
-    azure_oidc_spec_type {
-      # Configure azure_oidc_spec_type settings
-    }
-    # Google OIDC Spec Type. GoogleOIDCSpecType specifies the a...
-    google_oidc_spec_type {
-      # Configure google_oidc_spec_type settings
-    }
-    # OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies ...
-    oidc_v10_spec_type {
-      # Configure oidc_v10_spec_type settings
-    }
+  # [OneOf: azure_oidc_spec_type, google_oidc_spec_type, oidc...
+  azure_oidc_spec_type {
+    # Configure azure_oidc_spec_type settings
+  }
+  # Google OIDC Spec Type. GoogleOIDCSpecType specifies the a...
+  google_oidc_spec_type {
+    # Configure google_oidc_spec_type settings
+  }
+  # OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies ...
+  oidc_v10_spec_type {
+    # Configure oidc_v10_spec_type settings
+  }
 }

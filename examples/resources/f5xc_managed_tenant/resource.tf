@@ -16,12 +16,12 @@ resource "f5xc_managed_tenant" "example" {
   }
 
   # Resource-specific configuration
-    # Group Mapping. List of local user group association to us...
-    groups {
-      # Configure groups settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    group {
-      # Configure group settings
-    }
+  # Group Mapping. List of local user group association to us...
+  groups {
+    # Configure groups settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  group {
+    # Configure group settings
+  }
 }

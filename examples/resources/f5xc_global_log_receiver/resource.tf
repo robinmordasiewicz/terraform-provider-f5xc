@@ -16,16 +16,16 @@ resource "f5xc_global_log_receiver" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: audit_logs, dns_logs, request_logs, security_even...
-    audit_logs {
-      # Configure audit_logs settings
-    }
-    # [OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiv...
-    aws_cloud_watch_receiver {
-      # Configure aws_cloud_watch_receiver settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    aws_cred {
-      # Configure aws_cred settings
-    }
+  # [OneOf: audit_logs, dns_logs, request_logs, security_even...
+  audit_logs {
+    # Configure audit_logs settings
+  }
+  # [OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiv...
+  aws_cloud_watch_receiver {
+    # Configure aws_cloud_watch_receiver settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  aws_cred {
+    # Configure aws_cred settings
+  }
 }

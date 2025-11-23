@@ -16,16 +16,16 @@ resource "f5xc_forwarding_class" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: dscp, no_marking, tos_value] DSCP Marking setting...
-    dscp {
-      # Configure dscp settings
-    }
-    # [OneOf: dscp_based_queue, queue_id_to_use] Empty. This ca...
-    dscp_based_queue {
-      # Configure dscp_based_queue settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    no_marking {
-      # Configure no_marking settings
-    }
+  # [OneOf: dscp, no_marking, tos_value] DSCP Marking setting...
+  dscp {
+    # Configure dscp settings
+  }
+  # [OneOf: dscp_based_queue, queue_id_to_use] Empty. This ca...
+  dscp_based_queue {
+    # Configure dscp_based_queue settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  no_marking {
+    # Configure no_marking settings
+  }
 }

@@ -16,8 +16,8 @@ resource "f5xc_tpm_category" "example" {
   }
 
   # Resource-specific configuration
-    # TPM Manager reference. Reference to TPM Manager
-    tpm_manager_ref {
-      # Configure tpm_manager_ref settings
-    }
+  # TPM Manager reference. Reference to TPM Manager
+  tpm_manager_ref {
+    # Configure tpm_manager_ref settings
+  }
 }

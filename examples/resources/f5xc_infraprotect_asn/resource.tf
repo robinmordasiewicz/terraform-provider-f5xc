@@ -16,12 +16,12 @@ resource "f5xc_infraprotect_asn" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: bgp_session_disabled, bgp_session_enabled] Empty....
-    bgp_session_disabled {
-      # Configure bgp_session_disabled settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    bgp_session_enabled {
-      # Configure bgp_session_enabled settings
-    }
+  # [OneOf: bgp_session_disabled, bgp_session_enabled] Empty....
+  bgp_session_disabled {
+    # Configure bgp_session_disabled settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  bgp_session_enabled {
+    # Configure bgp_session_enabled settings
+  }
 }

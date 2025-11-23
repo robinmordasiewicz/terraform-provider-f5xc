@@ -71,8 +71,10 @@ RESOURCES=(
 
 # Function to generate a single resource
 generate_resource() {
-    local resource_name=$1
-    local spec_file=$(find $SPEC_DIR -name "*.$resource_name.ves-swagger.json" | head -1)
+    local resource_name
+    local spec_file
+    resource_name=$1
+    spec_file=$(find "$SPEC_DIR" -name "*.$resource_name.ves-swagger.json" | head -1)
 
     if [ -z "$spec_file" ]; then
         echo "  ⚠️  Spec file not found for: $resource_name"
@@ -228,7 +230,8 @@ func (r *RESOURCE_NAMEResource) ImportState(ctx context.Context, req resource.Im
 RESOURCE_EOF
 
     # Replace placeholders
-    local title_case=$(echo $resource_name | sed -r 's/(^|_)([a-z])/\U\2/g' | sed 's/_//g')
+    local title_case
+    title_case=$(echo "$resource_name" | sed -r 's/(^|_)([a-z])/\U\2/g' | sed 's/_//g')
     sed -i '' "s/RESOURCE_NAME/$title_case/g" "$PROVIDER_DIR/${resource_name}_resource.go"
     sed -i '' "s/RESOURCE_NAME_LOWER/$resource_name/g" "$PROVIDER_DIR/${resource_name}_resource.go"
 

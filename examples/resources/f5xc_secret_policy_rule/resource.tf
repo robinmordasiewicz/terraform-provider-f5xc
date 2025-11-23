@@ -16,12 +16,12 @@ resource "f5xc_secret_policy_rule" "example" {
   }
 
   # Resource-specific configuration
-    # Matcher. A matcher specifies multiple criteria for matchi...
-    client_name_matcher {
-      # Configure client_name_matcher settings
-    }
-    # Label Selector. This type can be used to establish a 'sel...
-    client_selector {
-      # Configure client_selector settings
-    }
+  # Matcher. A matcher specifies multiple criteria for matchi...
+  client_name_matcher {
+    # Configure client_name_matcher settings
+  }
+  # Label Selector. This type can be used to establish a 'sel...
+  client_selector {
+    # Configure client_selector settings
+  }
 }

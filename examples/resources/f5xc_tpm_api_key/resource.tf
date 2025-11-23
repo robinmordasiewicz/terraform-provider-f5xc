@@ -16,8 +16,8 @@ resource "f5xc_tpm_api_key" "example" {
   }
 
   # Resource-specific configuration
-    # TPM Category. APIKey needs a reference to an existing TPM...
-    category_ref {
-      # Configure category_ref settings
-    }
+  # TPM Category. APIKey needs a reference to an existing TPM...
+  category_ref {
+    # Configure category_ref settings
+  }
 }

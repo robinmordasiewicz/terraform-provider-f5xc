@@ -16,16 +16,16 @@ resource "f5xc_fast_acl_rule" "example" {
   }
 
   # Resource-specific configuration
-    # Action. FastAclRuleAction specifies possible action to be...
-    action {
-      # Configure action settings
-    }
-    # Policer Reference. Reference to policer object
-    policer_action {
-      # Configure policer_action settings
-    }
-    # Reference. A policer direct reference
-    ref {
-      # Configure ref settings
-    }
+  # Action. FastAclRuleAction specifies possible action to be...
+  action {
+    # Configure action settings
+  }
+  # Policer Reference. Reference to policer object
+  policer_action {
+    # Configure policer_action settings
+  }
+  # Reference. A policer direct reference
+  ref {
+    # Configure ref settings
+  }
 }

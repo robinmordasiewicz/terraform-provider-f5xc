@@ -132,12 +132,10 @@ func CheckResourceDestroyed(resourceType string) resource.TestCheckFunc {
 			}
 
 			// In a real implementation, you would make an API call here
-			// to verify the resource no longer exists
-			if rs.Primary.ID != "" {
-				// Note: This should be replaced with actual API check
-				// For now, we assume if the resource is in the destroyed state,
-				// Terraform has already verified it doesn't exist
-			}
+			// to verify the resource no longer exists.
+			// For now, we assume if the resource is in the destroyed state,
+			// Terraform has already verified it doesn't exist.
+			_ = rs.Primary.ID // Placeholder for future API verification
 		}
 		return nil
 	}

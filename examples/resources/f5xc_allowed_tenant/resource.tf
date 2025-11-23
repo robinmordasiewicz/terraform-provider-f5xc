@@ -16,8 +16,8 @@ resource "f5xc_allowed_tenant" "example" {
   }
 
   # Resource-specific configuration
-    # Allowed Groups. List of references to allowed user_group ...
-    allowed_groups {
-      # Configure allowed_groups settings
-    }
+  # Allowed Groups. List of references to allowed user_group ...
+  allowed_groups {
+    # Configure allowed_groups settings
+  }
 }

@@ -16,16 +16,16 @@ resource "f5xc_data_group" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: address_records, integer_records, string_records]...
-    address_records {
-      # Configure address_records settings
-    }
-    # Address records.
-    records {
-      # Configure records settings
-    }
-    # Integer record List. Data group with integer record List
-    integer_records {
-      # Configure integer_records settings
-    }
+  # [OneOf: address_records, integer_records, string_records]...
+  address_records {
+    # Configure address_records settings
+  }
+  # Address records.
+  records {
+    # Configure records settings
+  }
+  # Integer record List. Data group with integer record List
+  integer_records {
+    # Configure integer_records settings
+  }
 }

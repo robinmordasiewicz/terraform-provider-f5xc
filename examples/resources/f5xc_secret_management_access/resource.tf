@@ -16,16 +16,16 @@ resource "f5xc_secret_management_access" "example" {
   }
 
   # Resource-specific configuration
-    # Host Access Information. HostAccessInfoType contains the ...
-    access_info {
-      # Configure access_info settings
-    }
-    # Rest Authentication Parameters. Authentication parameters...
-    rest_auth_info {
-      # Configure rest_auth_info settings
-    }
-    # BasicAuth Authentication Parameters. AuthnTypeBasicAuth i...
-    basic_auth {
-      # Configure basic_auth settings
-    }
+  # Host Access Information. HostAccessInfoType contains the ...
+  access_info {
+    # Configure access_info settings
+  }
+  # Rest Authentication Parameters. Authentication parameters...
+  rest_auth_info {
+    # Configure rest_auth_info settings
+  }
+  # BasicAuth Authentication Parameters. AuthnTypeBasicAuth i...
+  basic_auth {
+    # Configure basic_auth settings
+  }
 }

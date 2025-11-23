@@ -16,16 +16,16 @@ resource "f5xc_addon_subscription" "example" {
   }
 
   # Resource-specific configuration
-    # Object reference. This type establishes a direct referenc...
-    addon_service {
-      # Configure addon_service settings
-    }
-    # Notification Preference. NotificationPreference preferenc...
-    notification_preference {
-      # Configure notification_preference settings
-    }
-    # Addon Subscription Associated Emails. Addon Subscription ...
-    emails {
-      # Configure emails settings
-    }
+  # Object reference. This type establishes a direct referenc...
+  addon_service {
+    # Configure addon_service settings
+  }
+  # Notification Preference. NotificationPreference preferenc...
+  notification_preference {
+    # Configure notification_preference settings
+  }
+  # Addon Subscription Associated Emails. Addon Subscription ...
+  emails {
+    # Configure emails settings
+  }
 }

@@ -16,8 +16,8 @@ resource "f5xc_usb_policy" "example" {
   }
 
   # Resource-specific configuration
-    # Allowed USB devices. List of allowed USB devices
-    allowed_devices {
-      # Configure allowed_devices settings
-    }
+  # Allowed USB devices. List of allowed USB devices
+  allowed_devices {
+    # Configure allowed_devices settings
+  }
 }

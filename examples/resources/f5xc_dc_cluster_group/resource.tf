@@ -16,16 +16,16 @@ resource "f5xc_dc_cluster_group" "example" {
   }
 
   # Resource-specific configuration
-    # DC Cluster Group Mesh Type. Details of DC Cluster Group M...
-    type {
-      # Configure type settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    control_and_data_plane_mesh {
-      # Configure control_and_data_plane_mesh settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    data_plane_mesh {
-      # Configure data_plane_mesh settings
-    }
+  # DC Cluster Group Mesh Type. Details of DC Cluster Group M...
+  type {
+    # Configure type settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  control_and_data_plane_mesh {
+    # Configure control_and_data_plane_mesh settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  data_plane_mesh {
+    # Configure data_plane_mesh settings
+  }
 }

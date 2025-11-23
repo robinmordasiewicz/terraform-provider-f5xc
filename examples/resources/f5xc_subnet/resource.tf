@@ -16,16 +16,16 @@ resource "f5xc_subnet" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: connect_to_layer2, connect_to_slo, isolated_nw] S...
-    connect_to_layer2 {
-      # Configure connect_to_layer2 settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    layer2_intf_ref {
-      # Configure layer2_intf_ref settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    connect_to_slo {
-      # Configure connect_to_slo settings
-    }
+  # [OneOf: connect_to_layer2, connect_to_slo, isolated_nw] S...
+  connect_to_layer2 {
+    # Configure connect_to_layer2 settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  layer2_intf_ref {
+    # Configure layer2_intf_ref settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  connect_to_slo {
+    # Configure connect_to_slo settings
+  }
 }

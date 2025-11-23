@@ -16,16 +16,16 @@ resource "f5xc_network_interface" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: dedicated_interface, dedicated_management_interfa...
-    dedicated_interface {
-      # Configure dedicated_interface settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    cluster {
-      # Configure cluster settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    is_primary {
-      # Configure is_primary settings
-    }
+  # [OneOf: dedicated_interface, dedicated_management_interfa...
+  dedicated_interface {
+    # Configure dedicated_interface settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  cluster {
+    # Configure cluster settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  is_primary {
+    # Configure is_primary settings
+  }
 }

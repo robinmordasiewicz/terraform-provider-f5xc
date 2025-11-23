@@ -16,16 +16,16 @@ resource "f5xc_policy_based_routing" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: forward_proxy_pbr, network_pbr] L3/L4 routing rul...
-    forward_proxy_pbr {
-      # Configure forward_proxy_pbr settings
-    }
-    # L3/L4 routing rules. Network(L3/L4) routing policy rules.
-    forward_proxy_pbr_rules {
-      # Configure forward_proxy_pbr_rules settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    all_destinations {
-      # Configure all_destinations settings
-    }
+  # [OneOf: forward_proxy_pbr, network_pbr] L3/L4 routing rul...
+  forward_proxy_pbr {
+    # Configure forward_proxy_pbr settings
+  }
+  # L3/L4 routing rules. Network(L3/L4) routing policy rules.
+  forward_proxy_pbr_rules {
+    # Configure forward_proxy_pbr_rules settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  all_destinations {
+    # Configure all_destinations settings
+  }
 }

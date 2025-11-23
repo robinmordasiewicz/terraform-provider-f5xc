@@ -16,8 +16,8 @@ resource "f5xc_cloud_elastic_ip" "example" {
   }
 
   # Resource-specific configuration
-    # Site Reference. Site to which this cloud elastic ip objec...
-    site_ref {
-      # Configure site_ref settings
-    }
+  # Site Reference. Site to which this cloud elastic ip objec...
+  site_ref {
+    # Configure site_ref settings
+  }
 }

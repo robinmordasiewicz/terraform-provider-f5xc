@@ -16,16 +16,16 @@ resource "f5xc_apm" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: aws_site_type_choice, baremetal_site_type_choice]...
-    aws_site_type_choice {
-      # Configure aws_site_type_choice settings
-    }
-    # Virtual F5 BIG-IP APM configuration on AWS TGW Site. Virt...
-    apm_aws_site {
-      # Configure apm_aws_site settings
-    }
-    # Secret. SecretType is used in an object to indicate a sen...
-    admin_password {
-      # Configure admin_password settings
-    }
+  # [OneOf: aws_site_type_choice, baremetal_site_type_choice]...
+  aws_site_type_choice {
+    # Configure aws_site_type_choice settings
+  }
+  # Virtual F5 BIG-IP APM configuration on AWS TGW Site. Virt...
+  apm_aws_site {
+    # Configure apm_aws_site settings
+  }
+  # Secret. SecretType is used in an object to indicate a sen...
+  admin_password {
+    # Configure admin_password settings
+  }
 }

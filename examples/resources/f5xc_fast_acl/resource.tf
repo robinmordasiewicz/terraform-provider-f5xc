@@ -16,16 +16,16 @@ resource "f5xc_fast_acl" "example" {
   }
 
   # Resource-specific configuration
-    # Object reference. This type establishes a direct referenc...
-    protocol_policer {
-      # Configure protocol_policer settings
-    }
-    # [OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL defin...
-    re_acl {
-      # Configure re_acl settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    all_public_vips {
-      # Configure all_public_vips settings
-    }
+  # Object reference. This type establishes a direct referenc...
+  protocol_policer {
+    # Configure protocol_policer settings
+  }
+  # [OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL defin...
+  re_acl {
+    # Configure re_acl settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  all_public_vips {
+    # Configure all_public_vips settings
+  }
 }

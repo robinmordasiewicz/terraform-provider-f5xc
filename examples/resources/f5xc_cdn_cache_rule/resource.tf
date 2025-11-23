@@ -16,16 +16,16 @@ resource "f5xc_cdn_cache_rule" "example" {
   }
 
   # Resource-specific configuration
-    # Cache Rule. This defines a CDN Cache Rule
-    cache_rules {
-      # Configure cache_rules settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    cache_bypass {
-      # Configure cache_bypass settings
-    }
-    # Cache Action Options. List of options for Cache Action
-    eligible_for_cache {
-      # Configure eligible_for_cache settings
-    }
+  # Cache Rule. This defines a CDN Cache Rule
+  cache_rules {
+    # Configure cache_rules settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  cache_bypass {
+    # Configure cache_bypass settings
+  }
+  # Cache Action Options. List of options for Cache Action
+  eligible_for_cache {
+    # Configure eligible_for_cache settings
+  }
 }

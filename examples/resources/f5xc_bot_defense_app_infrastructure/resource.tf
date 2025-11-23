@@ -16,16 +16,16 @@ resource "f5xc_bot_defense_app_infrastructure" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: cloud_hosted, data_center_hosted] F5 Hosted. Infr...
-    cloud_hosted {
-      # Configure cloud_hosted settings
-    }
-    # Egress. Egress
-    egress {
-      # Configure egress settings
-    }
-    # Ingress. Ingress
-    ingress {
-      # Configure ingress settings
-    }
+  # [OneOf: cloud_hosted, data_center_hosted] F5 Hosted. Infr...
+  cloud_hosted {
+    # Configure cloud_hosted settings
+  }
+  # Egress. Egress
+  egress {
+    # Configure egress settings
+  }
+  # Ingress. Ingress
+  ingress {
+    # Configure ingress settings
+  }
 }

@@ -16,16 +16,16 @@ resource "f5xc_k8s_cluster_role" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: k8s_cluster_role_selector, policy_rule_list, yaml...
-    k8s_cluster_role_selector {
-      # Configure k8s_cluster_role_selector settings
-    }
-    # Policy Rule List. List of rules for role permissions
-    policy_rule_list {
-      # Configure policy_rule_list settings
-    }
-    # Policy Rules. List of rules for role permissions
-    policy_rule {
-      # Configure policy_rule settings
-    }
+  # [OneOf: k8s_cluster_role_selector, policy_rule_list, yaml...
+  k8s_cluster_role_selector {
+    # Configure k8s_cluster_role_selector settings
+  }
+  # Policy Rule List. List of rules for role permissions
+  policy_rule_list {
+    # Configure policy_rule_list settings
+  }
+  # Policy Rules. List of rules for role permissions
+  policy_rule {
+    # Configure policy_rule settings
+  }
 }

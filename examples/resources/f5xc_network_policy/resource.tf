@@ -26,7 +26,7 @@ resource "f5xc_network_policy" "example" {
     }
     spec {
       action = "ALLOW"
-      any   = {}
+      any    = {}
     }
   }
 
@@ -36,7 +36,7 @@ resource "f5xc_network_policy" "example" {
     }
     spec {
       action = "ALLOW"
-      any   = {}
+      any    = {}
     }
   }
 }

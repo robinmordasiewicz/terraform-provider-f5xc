@@ -16,16 +16,16 @@ resource "f5xc_cloud_connect" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: aws_tgw_site, azure_vnet_site] AWS TGW Site Type....
-    aws_tgw_site {
-      # Configure aws_tgw_site settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    cred {
-      # Configure cred settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    site {
-      # Configure site settings
-    }
+  # [OneOf: aws_tgw_site, azure_vnet_site] AWS TGW Site Type....
+  aws_tgw_site {
+    # Configure aws_tgw_site settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  cred {
+    # Configure cred settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  site {
+    # Configure site settings
+  }
 }

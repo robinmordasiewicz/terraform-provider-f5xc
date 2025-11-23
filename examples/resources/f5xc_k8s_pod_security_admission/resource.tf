@@ -16,16 +16,16 @@ resource "f5xc_k8s_pod_security_admission" "example" {
   }
 
   # Resource-specific configuration
-    # K8s Pod Security Admission.
-    pod_security_admission_specs {
-      # Configure pod_security_admission_specs settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    audit {
-      # Configure audit settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    baseline {
-      # Configure baseline settings
-    }
+  # K8s Pod Security Admission.
+  pod_security_admission_specs {
+    # Configure pod_security_admission_specs settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  audit {
+    # Configure audit settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  baseline {
+    # Configure baseline settings
+  }
 }

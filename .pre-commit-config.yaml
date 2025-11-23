@@ -1,0 +1,137 @@
+# Pre-commit hooks configuration for Terraform Provider
+# IMPORTANT: These hooks are configured for VALIDATION ONLY (no auto-fixing)
+# Generated files (markdown, docs) must be fixed by updating the generators
+#
+# Install: pre-commit install
+# Run all: pre-commit run --all-files
+# Update:  pre-commit autoupdate
+
+default_stages: [pre-commit]
+fail_fast: false
+
+repos:
+  # =============================================================================
+  # General file checks - validate file formats and common issues
+  # =============================================================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      # Whitespace and line ending validation (check-only for markdown)
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+        exclude: ^(docs/|\.terraform/)
+
+      - id: end-of-file-fixer
+        exclude: ^(docs/|\.terraform/)
+
+      - id: mixed-line-ending
+        args: [--fix=no]  # Check only, don't fix
+
+      # File format validation
+      - id: check-yaml
+        args: [--unsafe]  # Allow custom tags
+        exclude: ^\.terraform/
+
+      - id: check-json
+
+      - id: check-toml
+
+      # Security and safety checks
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+
+      - id: check-merge-conflict
+
+      - id: detect-private-key
+
+      - id: check-executables-have-shebangs
+
+      - id: check-shebang-scripts-are-executable
+
+      - id: check-symlinks
+
+      - id: destroyed-symlinks
+
+  # =============================================================================
+  # Go language checks - golangci-lint (validation only, no --fix)
+  # =============================================================================
+  - repo: local
+    hooks:
+      - id: golangci-lint
+        name: golangci-lint
+        entry: golangci-lint run --timeout=5m
+        language: system
+        types: [go]
+        pass_filenames: false
+
+  # =============================================================================
+  # Terraform example files validation
+  # =============================================================================
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.104.0
+    hooks:
+      # Format check only (no auto-fix)
+      - id: terraform_fmt
+        args:
+          - --args=-check
+          - --args=-diff
+        files: ^examples/
+
+      # Note: terraform_validate is not included because it requires the provider
+      # to be published to a registry. Validation is performed in CI instead.
+
+  # =============================================================================
+  # Shell script validation
+  # =============================================================================
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        args: [--severity=warning]
+
+  # =============================================================================
+  # Secrets detection - prevent accidental credential commits
+  # =============================================================================
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: [--baseline, .secrets.baseline]
+        exclude: |
+          (?x)^(
+            go\.sum|
+            \.terraform/|
+            \.terraform\.lock\.hcl
+          )$
+
+  # =============================================================================
+  # Go module tidiness check
+  # =============================================================================
+  - repo: local
+    hooks:
+      - id: go-mod-tidy-check
+        name: go mod tidy check
+        entry: bash -c 'go mod tidy && git diff --exit-code go.mod go.sum'
+        language: system
+        files: (go\.mod|go\.sum)$
+        pass_filenames: false
+
+      - id: go-build-check
+        name: go build check
+        entry: go build -v .
+        language: system
+        files: \.go$
+        pass_filenames: false
+
+      - id: go-vet-check
+        name: go vet check
+        entry: go vet ./...
+        language: system
+        files: \.go$
+        pass_filenames: false
+
+# =============================================================================
+# CI Configuration
+# =============================================================================
+# For CI pipelines, run: pre-commit run --all-files
+# This ensures all files are checked, not just staged changes

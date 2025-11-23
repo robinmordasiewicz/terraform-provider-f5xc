@@ -16,16 +16,16 @@ resource "f5xc_bgp_routing_policy" "example" {
   }
 
   # Resource-specific configuration
-    # Rules. A BGP Routing policy is composed of one or more ru...
-    rules {
-      # Configure rules settings
-    }
-    # BGP Route Action. Action to be enforced if the BGP route ...
-    action {
-      # Configure action settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    aggregate {
-      # Configure aggregate settings
-    }
+  # Rules. A BGP Routing policy is composed of one or more ru...
+  rules {
+    # Configure rules settings
+  }
+  # BGP Route Action. Action to be enforced if the BGP route ...
+  action {
+    # Configure action settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  aggregate {
+    # Configure aggregate settings
+  }
 }

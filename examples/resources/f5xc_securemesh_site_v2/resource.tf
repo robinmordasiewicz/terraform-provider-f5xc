@@ -16,16 +16,16 @@ resource "f5xc_securemesh_site_v2" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: active_enhanced_firewall_policies, no_network_pol...
-    active_enhanced_firewall_policies {
-      # Configure active_enhanced_firewall_policies settings
-    }
-    # Enhanced Firewall Policy. Ordered List of Enhanced Firewa...
-    enhanced_firewall_policies {
-      # Configure enhanced_firewall_policies settings
-    }
-    # [OneOf: active_forward_proxy_policies, no_forward_proxy] ...
-    active_forward_proxy_policies {
-      # Configure active_forward_proxy_policies settings
-    }
+  # [OneOf: active_enhanced_firewall_policies, no_network_pol...
+  active_enhanced_firewall_policies {
+    # Configure active_enhanced_firewall_policies settings
+  }
+  # Enhanced Firewall Policy. Ordered List of Enhanced Firewa...
+  enhanced_firewall_policies {
+    # Configure enhanced_firewall_policies settings
+  }
+  # [OneOf: active_forward_proxy_policies, no_forward_proxy] ...
+  active_forward_proxy_policies {
+    # Configure active_forward_proxy_policies settings
+  }
 }

@@ -16,16 +16,16 @@ resource "f5xc_cloud_link" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: aws, gcp] Amazon Web Services(AWS) CloudLink Prov...
-    aws {
-      # Configure aws settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    aws_cred {
-      # Configure aws_cred settings
-    }
-    # Bring Your Own Connections. List of Bring You Own Connection
-    byoc {
-      # Configure byoc settings
-    }
+  # [OneOf: aws, gcp] Amazon Web Services(AWS) CloudLink Prov...
+  aws {
+    # Configure aws settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  aws_cred {
+    # Configure aws_cred settings
+  }
+  # Bring Your Own Connections. List of Bring You Own Connection
+  byoc {
+    # Configure byoc settings
+  }
 }

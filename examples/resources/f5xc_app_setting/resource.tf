@@ -16,16 +16,16 @@ resource "f5xc_app_setting" "example" {
   }
 
   # Resource-specific configuration
-    # Customize AppType For This Namespace. List of settings to...
-    app_type_settings {
-      # Configure app_type_settings settings
-    }
-    # AppType. The AppType of App instance in current Namespace...
-    app_type_ref {
-      # Configure app_type_ref settings
-    }
-    # API Discovery. Settings specifying how API Discovery will...
-    business_logic_markup_setting {
-      # Configure business_logic_markup_setting settings
-    }
+  # Customize AppType For This Namespace. List of settings to...
+  app_type_settings {
+    # Configure app_type_settings settings
+  }
+  # AppType. The AppType of App instance in current Namespace...
+  app_type_ref {
+    # Configure app_type_ref settings
+  }
+  # API Discovery. Settings specifying how API Discovery will...
+  business_logic_markup_setting {
+    # Configure business_logic_markup_setting settings
+  }
 }

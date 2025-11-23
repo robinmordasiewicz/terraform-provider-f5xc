@@ -16,16 +16,16 @@ resource "f5xc_network_firewall" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: active_enhanced_firewall_policies, active_network...
-    active_enhanced_firewall_policies {
-      # Configure active_enhanced_firewall_policies settings
-    }
-    # Enhanced Firewall Policy. Ordered List of Enhanced Firewa...
-    enhanced_firewall_policies {
-      # Configure enhanced_firewall_policies settings
-    }
-    # [OneOf: active_fast_acls, disable_fast_acl] Active Fast A...
-    active_fast_acls {
-      # Configure active_fast_acls settings
-    }
+  # [OneOf: active_enhanced_firewall_policies, active_network...
+  active_enhanced_firewall_policies {
+    # Configure active_enhanced_firewall_policies settings
+  }
+  # Enhanced Firewall Policy. Ordered List of Enhanced Firewa...
+  enhanced_firewall_policies {
+    # Configure enhanced_firewall_policies settings
+  }
+  # [OneOf: active_fast_acls, disable_fast_acl] Active Fast A...
+  active_fast_acls {
+    # Configure active_fast_acls settings
+  }
 }

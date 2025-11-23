@@ -12,6 +12,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // ErrorCode represents specific error types for better handling
@@ -217,7 +219,8 @@ func NewConfigurationError(message string) *F5XCError {
 
 // AddError adds a structured error to diagnostics
 func AddError(diags *diag.Diagnostics, err *F5XCError) {
-	summary := fmt.Sprintf("%s Error", strings.Title(string(err.Code)))
+	caser := cases.Title(language.English)
+	summary := fmt.Sprintf("%s Error", caser.String(string(err.Code)))
 	diags.AddError(summary, err.Error())
 }
 

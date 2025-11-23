@@ -16,16 +16,16 @@ resource "f5xc_endpoint" "example" {
   }
 
   # Resource-specific configuration
-    # DNS Name Advanced Type. Specifies name and TTL used for D...
-    dns_name_advanced {
-      # Configure dns_name_advanced settings
-    }
-    # Service Info Type. Specifies whether endpoint service is ...
-    service_info {
-      # Configure service_info settings
-    }
-    # Label Selector. This type can be used to establish a 'sel...
-    service_selector {
-      # Configure service_selector settings
-    }
+  # DNS Name Advanced Type. Specifies name and TTL used for D...
+  dns_name_advanced {
+    # Configure dns_name_advanced settings
+  }
+  # Service Info Type. Specifies whether endpoint service is ...
+  service_info {
+    # Configure service_info settings
+  }
+  # Label Selector. This type can be used to establish a 'sel...
+  service_selector {
+    # Configure service_selector settings
+  }
 }

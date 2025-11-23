@@ -16,16 +16,16 @@ resource "f5xc_api_testing" "example" {
   }
 
   # Resource-specific configuration
-    # Testing Environments. Add and configure testing domains a...
-    domains {
-      # Configure domains settings
-    }
-    # Credentials. Add credentials for API testing to use in th...
-    credentials {
-      # Configure credentials settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    admin {
-      # Configure admin settings
-    }
+  # Testing Environments. Add and configure testing domains a...
+  domains {
+    # Configure domains settings
+  }
+  # Credentials. Add credentials for API testing to use in th...
+  credentials {
+    # Configure credentials settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  admin {
+    # Configure admin settings
+  }
 }

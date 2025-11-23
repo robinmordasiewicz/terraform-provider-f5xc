@@ -16,8 +16,8 @@ resource "f5xc_api_discovery" "example" {
   }
 
   # Resource-specific configuration
-    # Custom Authentication Types. Select your custom authentic...
-    custom_auth_types {
-      # Configure custom_auth_types settings
-    }
+  # Custom Authentication Types. Select your custom authentic...
+  custom_auth_types {
+    # Configure custom_auth_types settings
+  }
 }

@@ -16,16 +16,16 @@ resource "f5xc_nat_policy" "example" {
   }
 
   # Resource-specific configuration
-    # Rule. List of rules to apply under the NAT Policy. Rule t...
-    rules {
-      # Configure rules settings
-    }
-    # Action. Action to apply on the packet if the NAT rule is ...
-    action {
-      # Configure action settings
-    }
-    # Dynamic Pool. Dynamic Pool Configuration
-    dynamic {
-      # Configure dynamic settings
-    }
+  # Rule. List of rules to apply under the NAT Policy. Rule t...
+  rules {
+    # Configure rules settings
+  }
+  # Action. Action to apply on the packet if the NAT rule is ...
+  action {
+    # Configure action settings
+  }
+  # Dynamic Pool. Dynamic Pool Configuration
+  dynamic {
+    # Configure dynamic settings
+  }
 }

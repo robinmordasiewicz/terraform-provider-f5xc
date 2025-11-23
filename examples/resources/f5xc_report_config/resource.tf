@@ -16,16 +16,16 @@ resource "f5xc_report_config" "example" {
   }
 
   # Resource-specific configuration
-    # Report recipients. Report recipients
-    report_recipients {
-      # Configure report_recipients settings
-    }
-    # User Groups. Select one or more user groups, to which the...
-    user_groups {
-      # Configure user_groups settings
-    }
-    # Report Type Waap. Report Type Waap
-    waap {
-      # Configure waap settings
-    }
+  # Report recipients. Report recipients
+  report_recipients {
+    # Configure report_recipients settings
+  }
+  # User Groups. Select one or more user groups, to which the...
+  user_groups {
+    # Configure user_groups settings
+  }
+  # Report Type Waap. Report Type Waap
+  waap {
+    # Configure waap settings
+  }
 }

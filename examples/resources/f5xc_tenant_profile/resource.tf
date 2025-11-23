@@ -16,16 +16,16 @@ resource "f5xc_tenant_profile" "example" {
   }
 
   # Resource-specific configuration
-    # Child Tenant Groups. List of user groups to be created on...
-    ct_groups {
-      # Configure ct_groups settings
-    }
-    # Namespace Roles. [x-example: 'monitor, system:monitor-rol...
-    namespace_roles {
-      # Configure namespace_roles settings
-    }
-    # File. Contains file data
-    favicon {
-      # Configure favicon settings
-    }
+  # Child Tenant Groups. List of user groups to be created on...
+  ct_groups {
+    # Configure ct_groups settings
+  }
+  # Namespace Roles. [x-example: 'monitor, system:monitor-rol...
+  namespace_roles {
+    # Configure namespace_roles settings
+  }
+  # File. Contains file data
+  favicon {
+    # Configure favicon settings
+  }
 }

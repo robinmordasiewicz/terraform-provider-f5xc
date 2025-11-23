@@ -16,16 +16,16 @@ resource "f5xc_ike1" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
-    ike_keylifetime_hours {
-      # Configure ike_keylifetime_hours settings
-    }
-    # Minutes. Set IKE Key Lifetime in minutes
-    ike_keylifetime_minutes {
-      # Configure ike_keylifetime_minutes settings
-    }
-    # [OneOf: reauth_disabled, reauth_timeout_days, reauth_time...
-    reauth_disabled {
-      # Configure reauth_disabled settings
-    }
+  # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
+  ike_keylifetime_hours {
+    # Configure ike_keylifetime_hours settings
+  }
+  # Minutes. Set IKE Key Lifetime in minutes
+  ike_keylifetime_minutes {
+    # Configure ike_keylifetime_minutes settings
+  }
+  # [OneOf: reauth_disabled, reauth_timeout_days, reauth_time...
+  reauth_disabled {
+    # Configure reauth_disabled settings
+  }
 }

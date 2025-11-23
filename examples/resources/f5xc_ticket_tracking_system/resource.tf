@@ -16,12 +16,12 @@ resource "f5xc_ticket_tracking_system" "example" {
   }
 
   # Resource-specific configuration
-    # Jira Configuration Type.
-    jira_config {
-      # Configure jira_config settings
-    }
-    # JIRA Ad-hoc REST API Configuration Type. v3 API Basic Aut...
-    adhoc_rest_api {
-      # Configure adhoc_rest_api settings
-    }
+  # Jira Configuration Type.
+  jira_config {
+    # Configure jira_config settings
+  }
+  # JIRA Ad-hoc REST API Configuration Type. v3 API Basic Aut...
+  adhoc_rest_api {
+    # Configure adhoc_rest_api settings
+  }
 }

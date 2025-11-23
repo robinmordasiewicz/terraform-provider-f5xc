@@ -9,7 +9,8 @@ CLIENT_FILE="/tmp/terraform-provider-f5xc/internal/client/client.go"
 PROVIDER_DIR="/tmp/terraform-provider-f5xc/internal/provider"
 
 # Extract resource names from generated files
-RESOURCES=$(ls -1 $PROVIDER_DIR/*_resource.go | grep -v namespace | grep -v http_loadbalancer | grep -v origin_pool | xargs basename -a | sed 's/_resource.go//')
+# Using find instead of ls | grep to avoid SC2010
+RESOURCES=$(find "$PROVIDER_DIR" -name '*_resource.go' -type f ! -name 'namespace_resource.go' ! -name 'http_loadbalancer_resource.go' ! -name 'origin_pool_resource.go' -exec basename {} \; | sed 's/_resource.go//')
 
 echo "🔨 Adding Client Types for Generated Resources"
 echo "=============================================="

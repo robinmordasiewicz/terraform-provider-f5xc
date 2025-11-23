@@ -16,16 +16,16 @@ resource "f5xc_code_base_integration" "example" {
   }
 
   # Resource-specific configuration
-    # Integration Data. Choose your code base (e.g. GitHub, Git...
-    code_base_integration {
-      # Configure code_base_integration settings
-    }
-    # Azure Repos Integration.
-    azure_repos {
-      # Configure azure_repos settings
-    }
-    # Secret. SecretType is used in an object to indicate a sen...
-    access_token {
-      # Configure access_token settings
-    }
+  # Integration Data. Choose your code base (e.g. GitHub, Git...
+  code_base_integration {
+    # Configure code_base_integration settings
+  }
+  # Azure Repos Integration.
+  azure_repos {
+    # Configure azure_repos settings
+  }
+  # Secret. SecretType is used in an object to indicate a sen...
+  access_token {
+    # Configure access_token settings
+  }
 }

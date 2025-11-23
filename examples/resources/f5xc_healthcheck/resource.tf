@@ -18,9 +18,9 @@ resource "f5xc_healthcheck" "example" {
   # Health Check specific configuration
   http_health_check {
     use_origin_server_name {}
-    path                   = "/health"
-    use_http2              = false
-    expected_status_codes  = ["200"]
+    path                  = "/health"
+    use_http2             = false
+    expected_status_codes = ["200"]
   }
 
   healthy_threshold   = 3

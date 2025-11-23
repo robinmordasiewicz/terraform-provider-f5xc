@@ -16,16 +16,16 @@ resource "f5xc_app_api_group" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: bigip_virtual_server, cdn_loadbalancer, http_load...
-    bigip_virtual_server {
-      # Configure bigip_virtual_server settings
-    }
-    # API Group Scope CDN Loadbalancer. Set the scope of the AP...
-    cdn_loadbalancer {
-      # Configure cdn_loadbalancer settings
-    }
-    # API Group Elements. List of API group elements with metho...
-    elements {
-      # Configure elements settings
-    }
+  # [OneOf: bigip_virtual_server, cdn_loadbalancer, http_load...
+  bigip_virtual_server {
+    # Configure bigip_virtual_server settings
+  }
+  # API Group Scope CDN Loadbalancer. Set the scope of the AP...
+  cdn_loadbalancer {
+    # Configure cdn_loadbalancer settings
+  }
+  # API Group Elements. List of API group elements with metho...
+  elements {
+    # Configure elements settings
+  }
 }

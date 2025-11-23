@@ -30,7 +30,7 @@ resource "f5xc_azure_vnet_site" "example" {
   # VNET configuration
   vnet {
     new_vnet {
-      name       = "f5xc-vnet"
+      name         = "f5xc-vnet"
       primary_ipv4 = "10.0.0.0/16"
     }
   }

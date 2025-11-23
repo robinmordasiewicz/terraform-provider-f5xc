@@ -8,6 +8,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
 	"sort"
@@ -68,6 +69,12 @@ func main() {
 		if err := os.WriteFile(exampleFile, []byte(example), 0644); err != nil {
 			fmt.Fprintf(os.Stderr, "Error writing %s: %v\n", exampleFile, err)
 			continue
+		}
+
+		// Run terraform fmt to ensure proper formatting
+		cmd := exec.Command("terraform", "fmt", exampleFile)
+		if err := cmd.Run(); err != nil {
+			fmt.Fprintf(os.Stderr, "Warning: terraform fmt failed for %s: %v\n", exampleFile, err)
 		}
 
 		fmt.Printf("Generated: %s\n", exampleFile)
@@ -1014,7 +1021,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		// Generic blocks based on schema
 		if len(schema.Blocks) > 0 {
 			sb.WriteString("\n  # Resource-specific configuration\n")
-			addGenericBlocks(sb, schema.Blocks, 1, 2)
+			addGenericBlocks(sb, schema.Blocks, 1, 1)
 		}
 	}
 }

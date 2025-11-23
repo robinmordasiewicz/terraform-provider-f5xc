@@ -16,16 +16,16 @@ resource "f5xc_cluster" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: auto_http_config, http1_config, http2_options] Em...
-    auto_http_config {
-      # Configure auto_http_config settings
-    }
-    # Circuit Breaker. CircuitBreaker provides a mechanism for ...
-    circuit_breaker {
-      # Configure circuit_breaker settings
-    }
-    # Default Subset. List of key-value pairs that define defau...
-    default_subset {
-      # Configure default_subset settings
-    }
+  # [OneOf: auto_http_config, http1_config, http2_options] Em...
+  auto_http_config {
+    # Configure auto_http_config settings
+  }
+  # Circuit Breaker. CircuitBreaker provides a mechanism for ...
+  circuit_breaker {
+    # Configure circuit_breaker settings
+  }
+  # Default Subset. List of key-value pairs that define defau...
+  default_subset {
+    # Configure default_subset settings
+  }
 }

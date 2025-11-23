@@ -16,16 +16,16 @@ resource "f5xc_dns_lb_health_check" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: http_health_check, https_health_check, icmp_healt...
-    http_health_check {
-      # Configure http_health_check settings
-    }
-    # HTTP Health Check.
-    https_health_check {
-      # Configure https_health_check settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    icmp_health_check {
-      # Configure icmp_health_check settings
-    }
+  # [OneOf: http_health_check, https_health_check, icmp_healt...
+  http_health_check {
+    # Configure http_health_check settings
+  }
+  # HTTP Health Check.
+  https_health_check {
+    # Configure https_health_check settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  icmp_health_check {
+    # Configure icmp_health_check settings
+  }
 }

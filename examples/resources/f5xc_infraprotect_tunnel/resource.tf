@@ -16,16 +16,16 @@ resource "f5xc_infraprotect_tunnel" "example" {
   }
 
   # Resource-specific configuration
-    # Bandwidth Speed Configuration. Bandwidth max allowed
-    bandwidth {
-      # Configure bandwidth settings
-    }
-    # BGP. BGP information associated with a DDoS transit tunnel.
-    bgp_information {
-      # Configure bgp_information settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    asn {
-      # Configure asn settings
-    }
+  # Bandwidth Speed Configuration. Bandwidth max allowed
+  bandwidth {
+    # Configure bandwidth settings
+  }
+  # BGP. BGP information associated with a DDoS transit tunnel.
+  bgp_information {
+    # Configure bgp_information settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  asn {
+    # Configure asn settings
+  }
 }

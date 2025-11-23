@@ -16,16 +16,16 @@ resource "f5xc_infraprotect_deny_list_rule" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: expiration_never, expiration_timestamp, one_day, ...
-    expiration_never {
-      # Configure expiration_never settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    one_day {
-      # Configure one_day settings
-    }
-    # Empty. This can be used for messages where no values are ...
-    one_hour {
-      # Configure one_hour settings
-    }
+  # [OneOf: expiration_never, expiration_timestamp, one_day, ...
+  expiration_never {
+    # Configure expiration_never settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  one_day {
+    # Configure one_day settings
+  }
+  # Empty. This can be used for messages where no values are ...
+  one_hour {
+    # Configure one_hour settings
+  }
 }

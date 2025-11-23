@@ -16,16 +16,16 @@ resource "f5xc_registration" "example" {
   }
 
   # Resource-specific configuration
-    # Infra Information. InfraMetadata stores information about...
-    infra {
-      # Configure infra settings
-    }
-    # Os Info. OsInfo holds information about host OS and HW
-    hw_info {
-      # Configure hw_info settings
-    }
-    # Bios Data. BIOS information.
-    bios {
-      # Configure bios settings
-    }
+  # Infra Information. InfraMetadata stores information about...
+  infra {
+    # Configure infra settings
+  }
+  # Os Info. OsInfo holds information about host OS and HW
+  hw_info {
+    # Configure hw_info settings
+  }
+  # Bios Data. BIOS information.
+  bios {
+    # Configure bios settings
+  }
 }

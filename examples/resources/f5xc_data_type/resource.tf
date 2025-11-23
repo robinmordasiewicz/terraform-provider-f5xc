@@ -16,16 +16,16 @@ resource "f5xc_data_type" "example" {
   }
 
   # Resource-specific configuration
-    # Data Type Rules. Configure key/value or regex match rules...
-    rules {
-      # Configure rules settings
-    }
-    # Rule Pattern Type. test
-    key_pattern {
-      # Configure key_pattern settings
-    }
-    # Exact Values. List of exact values to match.
-    exact_values {
-      # Configure exact_values settings
-    }
+  # Data Type Rules. Configure key/value or regex match rules...
+  rules {
+    # Configure rules settings
+  }
+  # Rule Pattern Type. test
+  key_pattern {
+    # Configure key_pattern settings
+  }
+  # Exact Values. List of exact values to match.
+  exact_values {
+    # Configure exact_values settings
+  }
 }

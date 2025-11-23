@@ -16,16 +16,16 @@ resource "f5xc_virtual_host" "example" {
   }
 
   # Resource-specific configuration
-    # Advertise Policies. Advertise Policy allows you to define...
-    advertise_policies {
-      # Configure advertise_policies settings
-    }
-    # [OneOf: authentication, no_authentication] Authentication...
-    authentication {
-      # Configure authentication settings
-    }
-    # Reference to Authentication Object. Reference to Authenti...
-    auth_config {
-      # Configure auth_config settings
-    }
+  # Advertise Policies. Advertise Policy allows you to define...
+  advertise_policies {
+    # Configure advertise_policies settings
+  }
+  # [OneOf: authentication, no_authentication] Authentication...
+  authentication {
+    # Configure authentication settings
+  }
+  # Reference to Authentication Object. Reference to Authenti...
+  auth_config {
+    # Configure auth_config settings
+  }
 }

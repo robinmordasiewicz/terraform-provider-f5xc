@@ -16,12 +16,12 @@ resource "f5xc_rate_limiter_policy" "example" {
   }
 
   # Resource-specific configuration
-    # [OneOf: any_server, server_name, server_name_matcher, ser...
-    any_server {
-      # Configure any_server settings
-    }
-    # Rules. A list of RateLimiterRules that are evaluated sequ...
-    rules {
-      # Configure rules settings
-    }
+  # [OneOf: any_server, server_name, server_name_matcher, ser...
+  any_server {
+    # Configure any_server settings
+  }
+  # Rules. A list of RateLimiterRules that are evaluated sequ...
+  rules {
+    # Configure rules settings
+  }
 }

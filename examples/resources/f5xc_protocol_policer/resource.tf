@@ -16,16 +16,16 @@ resource "f5xc_protocol_policer" "example" {
   }
 
   # Resource-specific configuration
-    # Protocol Policer. List of L4 protocol match condition and...
-    protocol_policer {
-      # Configure protocol_policer settings
-    }
-    # Policer. Reference to policer object to apply traffic rat...
-    policer {
-      # Configure policer settings
-    }
-    # Protocol Type. Protocol and protocol specific flags to be...
-    protocol {
-      # Configure protocol settings
-    }
+  # Protocol Policer. List of L4 protocol match condition and...
+  protocol_policer {
+    # Configure protocol_policer settings
+  }
+  # Policer. Reference to policer object to apply traffic rat...
+  policer {
+    # Configure policer settings
+  }
+  # Protocol Type. Protocol and protocol specific flags to be...
+  protocol {
+    # Configure protocol settings
+  }
 }

@@ -16,16 +16,16 @@ resource "f5xc_network_policy_rule" "example" {
   }
 
   # Resource-specific configuration
-    # Network Policy Rule Advanced Action. Network Policy Rule ...
-    advanced_action {
-      # Configure advanced_action settings
-    }
-    # [OneOf: ip_prefix_set, prefix, prefix_selector] IP Prefix...
-    ip_prefix_set {
-      # Configure ip_prefix_set settings
-    }
-    # Reference. A list of references to ip_prefix_set objects.
-    ref {
-      # Configure ref settings
-    }
+  # Network Policy Rule Advanced Action. Network Policy Rule ...
+  advanced_action {
+    # Configure advanced_action settings
+  }
+  # [OneOf: ip_prefix_set, prefix, prefix_selector] IP Prefix...
+  ip_prefix_set {
+    # Configure ip_prefix_set settings
+  }
+  # Reference. A list of references to ip_prefix_set objects.
+  ref {
+    # Configure ref settings
+  }
 }

@@ -16,16 +16,16 @@ resource "f5xc_child_tenant_manager" "example" {
   }
 
   # Resource-specific configuration
-    # Group Mapping. The Group Mapping field is used to associa...
-    group_assignments {
-      # Configure group_assignments settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    group {
-      # Configure group settings
-    }
-    # Object reference. This type establishes a direct referenc...
-    tenant_owner_group {
-      # Configure tenant_owner_group settings
-    }
+  # Group Mapping. The Group Mapping field is used to associa...
+  group_assignments {
+    # Configure group_assignments settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  group {
+    # Configure group settings
+  }
+  # Object reference. This type establishes a direct referenc...
+  tenant_owner_group {
+    # Configure tenant_owner_group settings
+  }
 }

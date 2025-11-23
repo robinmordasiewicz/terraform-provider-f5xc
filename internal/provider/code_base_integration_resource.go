@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,14 +18,23 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
+	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
+// Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                = &CodeBaseIntegrationResource{}
-	_ resource.ResourceWithConfigure   = &CodeBaseIntegrationResource{}
-	_ resource.ResourceWithImportState = &CodeBaseIntegrationResource{}
+	_ resource.Resource                   = &CodeBaseIntegrationResource{}
+	_ resource.ResourceWithConfigure      = &CodeBaseIntegrationResource{}
+	_ resource.ResourceWithImportState    = &CodeBaseIntegrationResource{}
+	_ resource.ResourceWithModifyPlan     = &CodeBaseIntegrationResource{}
+	_ resource.ResourceWithUpgradeState   = &CodeBaseIntegrationResource{}
+	_ resource.ResourceWithValidateConfig = &CodeBaseIntegrationResource{}
 )
+
+// code_base_integrationSchemaVersion is the schema version for state upgrades
+const code_base_integrationSchemaVersion int64 = 1
 
 func NewCodeBaseIntegrationResource() resource.Resource {
 	return &CodeBaseIntegrationResource{}
@@ -40,6 +50,7 @@ type CodeBaseIntegrationResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *CodeBaseIntegrationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -48,6 +59,7 @@ func (r *CodeBaseIntegrationResource) Metadata(ctx context.Context, req resource
 
 func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Version:             code_base_integrationSchemaVersion,
 		MarkdownDescription: "Manages integration details in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -89,6 +101,12 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 			},
 		},
 		Blocks: map[string]schema.Block{
+			"timeouts": timeouts.Block(ctx, timeouts.Opts{
+				Create: true,
+				Read:   true,
+				Update: true,
+				Delete: true,
+			}),
 			"code_base_integration": schema.SingleNestedBlock{
 				MarkdownDescription: "Integration Data. Choose your code base (e.g. GitHub, GitLab, Bitbucket, Azure) and provide credentials and connection details",
 				Attributes: map[string]schema.Attribute{
@@ -285,11 +303,88 @@ func (r *CodeBaseIntegrationResource) Configure(ctx context.Context, req resourc
 	if !ok {
 		resp.Diagnostics.AddError(
 			"Unexpected Resource Configure Type",
-			fmt.Sprintf("Expected *client.Client, got: %T", req.ProviderData),
+			fmt.Sprintf("Expected *client.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
 		)
 		return
 	}
 	r.client = client
+}
+
+// ValidateConfig implements resource.ResourceWithValidateConfig
+func (r *CodeBaseIntegrationResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data CodeBaseIntegrationResourceModel
+	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+}
+
+// ModifyPlan implements resource.ResourceWithModifyPlan
+func (r *CodeBaseIntegrationResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+	if req.Plan.Raw.IsNull() {
+		resp.Diagnostics.AddWarning(
+			"Resource Destruction",
+			"This will permanently delete the code_base_integration from F5 Distributed Cloud.",
+		)
+		return
+	}
+
+	if req.State.Raw.IsNull() {
+		var plan CodeBaseIntegrationResourceModel
+		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+
+		if plan.Name.IsUnknown() {
+			resp.Diagnostics.AddWarning(
+				"Unknown Resource Name",
+				"The resource name is not yet known. This may affect planning for dependent resources.",
+			)
+		}
+	}
+}
+
+// UpgradeState implements resource.ResourceWithUpgradeState
+func (r *CodeBaseIntegrationResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+	return map[int64]resource.StateUpgrader{
+		0: {
+			PriorSchema: &schema.Schema{
+				Attributes: map[string]schema.Attribute{
+					"name":        schema.StringAttribute{Required: true},
+					"namespace":   schema.StringAttribute{Required: true},
+					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"id":          schema.StringAttribute{Computed: true},
+				},
+			},
+			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
+				var priorState struct {
+					Name        types.String `tfsdk:"name"`
+					Namespace   types.String `tfsdk:"namespace"`
+					Annotations types.Map    `tfsdk:"annotations"`
+					Labels      types.Map    `tfsdk:"labels"`
+					ID          types.String `tfsdk:"id"`
+				}
+
+				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
+				if resp.Diagnostics.HasError() {
+					return
+				}
+
+				upgradedState := CodeBaseIntegrationResourceModel{
+					Name:        priorState.Name,
+					Namespace:   priorState.Namespace,
+					Annotations: priorState.Annotations,
+					Labels:      priorState.Labels,
+					ID:          priorState.ID,
+					Timeouts:    timeouts.Value{},
+				}
+
+				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
+			},
+		},
+	}
 }
 
 func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -298,6 +393,20 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	createTimeout, diags := data.Timeouts.Create(ctx, inttimeouts.DefaultCreate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, createTimeout)
+	defer cancel()
+
+	tflog.Debug(ctx, "Creating code_base_integration", map[string]interface{}{
+		"name":      data.Name.ValueString(),
+		"namespace": data.Namespace.ValueString(),
+	})
 
 	apiResource := &client.CodeBaseIntegration{
 		Metadata: client.Metadata{
@@ -332,6 +441,11 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(created.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	tflog.Trace(ctx, "created CodeBaseIntegration resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -343,10 +457,29 @@ func (r *CodeBaseIntegrationResource) Read(ctx context.Context, req resource.Rea
 		return
 	}
 
+	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, readTimeout)
+	defer cancel()
+
+	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
+	resp.Diagnostics.Append(psDiags...)
+
 	apiResource, err := r.client.GetCodeBaseIntegration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CodeBaseIntegration: %s", err))
 		return
+	}
+
+	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
+		resp.Diagnostics.AddWarning(
+			"Resource Drift Detected",
+			"The code_base_integration may have been recreated outside of Terraform.",
+		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -373,6 +506,10 @@ func (r *CodeBaseIntegrationResource) Read(ctx context.Context, req resource.Rea
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
+	psd = privatestate.NewPrivateStateData()
+	psd.SetUID(apiResource.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -382,6 +519,15 @@ func (r *CodeBaseIntegrationResource) Update(ctx context.Context, req resource.U
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	updateTimeout, diags := data.Timeouts.Update(ctx, inttimeouts.DefaultUpdate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
+	defer cancel()
 
 	apiResource := &client.CodeBaseIntegration{
 		Metadata: client.Metadata{
@@ -416,6 +562,11 @@ func (r *CodeBaseIntegrationResource) Update(ctx context.Context, req resource.U
 	}
 
 	data.ID = types.StringValue(updated.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(updated.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -425,6 +576,15 @@ func (r *CodeBaseIntegrationResource) Delete(ctx context.Context, req resource.D
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	deleteTimeout, diags := data.Timeouts.Delete(ctx, inttimeouts.DefaultDelete)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
+	defer cancel()
 
 	err := r.client.DeleteCodeBaseIntegration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {

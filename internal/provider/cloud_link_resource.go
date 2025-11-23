@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,14 +18,23 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
+	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
+// Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                = &CloudLinkResource{}
-	_ resource.ResourceWithConfigure   = &CloudLinkResource{}
-	_ resource.ResourceWithImportState = &CloudLinkResource{}
+	_ resource.Resource                   = &CloudLinkResource{}
+	_ resource.ResourceWithConfigure      = &CloudLinkResource{}
+	_ resource.ResourceWithImportState    = &CloudLinkResource{}
+	_ resource.ResourceWithModifyPlan     = &CloudLinkResource{}
+	_ resource.ResourceWithUpgradeState   = &CloudLinkResource{}
+	_ resource.ResourceWithValidateConfig = &CloudLinkResource{}
 )
+
+// cloud_linkSchemaVersion is the schema version for state upgrades
+const cloud_linkSchemaVersion int64 = 1
 
 func NewCloudLinkResource() resource.Resource {
 	return &CloudLinkResource{}
@@ -40,6 +50,7 @@ type CloudLinkResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *CloudLinkResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -48,6 +59,7 @@ func (r *CloudLinkResource) Metadata(ctx context.Context, req resource.MetadataR
 
 func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Version:             cloud_linkSchemaVersion,
 		MarkdownDescription: "Manages new CloudLink with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -89,6 +101,12 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 		},
 		Blocks: map[string]schema.Block{
+			"timeouts": timeouts.Block(ctx, timeouts.Opts{
+				Create: true,
+				Read:   true,
+				Update: true,
+				Delete: true,
+			}),
 			"aws": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: aws, gcp] Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider",
 				Attributes: map[string]schema.Attribute{
@@ -257,11 +275,88 @@ func (r *CloudLinkResource) Configure(ctx context.Context, req resource.Configur
 	if !ok {
 		resp.Diagnostics.AddError(
 			"Unexpected Resource Configure Type",
-			fmt.Sprintf("Expected *client.Client, got: %T", req.ProviderData),
+			fmt.Sprintf("Expected *client.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
 		)
 		return
 	}
 	r.client = client
+}
+
+// ValidateConfig implements resource.ResourceWithValidateConfig
+func (r *CloudLinkResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data CloudLinkResourceModel
+	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+}
+
+// ModifyPlan implements resource.ResourceWithModifyPlan
+func (r *CloudLinkResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+	if req.Plan.Raw.IsNull() {
+		resp.Diagnostics.AddWarning(
+			"Resource Destruction",
+			"This will permanently delete the cloud_link from F5 Distributed Cloud.",
+		)
+		return
+	}
+
+	if req.State.Raw.IsNull() {
+		var plan CloudLinkResourceModel
+		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+
+		if plan.Name.IsUnknown() {
+			resp.Diagnostics.AddWarning(
+				"Unknown Resource Name",
+				"The resource name is not yet known. This may affect planning for dependent resources.",
+			)
+		}
+	}
+}
+
+// UpgradeState implements resource.ResourceWithUpgradeState
+func (r *CloudLinkResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+	return map[int64]resource.StateUpgrader{
+		0: {
+			PriorSchema: &schema.Schema{
+				Attributes: map[string]schema.Attribute{
+					"name":        schema.StringAttribute{Required: true},
+					"namespace":   schema.StringAttribute{Required: true},
+					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"id":          schema.StringAttribute{Computed: true},
+				},
+			},
+			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
+				var priorState struct {
+					Name        types.String `tfsdk:"name"`
+					Namespace   types.String `tfsdk:"namespace"`
+					Annotations types.Map    `tfsdk:"annotations"`
+					Labels      types.Map    `tfsdk:"labels"`
+					ID          types.String `tfsdk:"id"`
+				}
+
+				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
+				if resp.Diagnostics.HasError() {
+					return
+				}
+
+				upgradedState := CloudLinkResourceModel{
+					Name:        priorState.Name,
+					Namespace:   priorState.Namespace,
+					Annotations: priorState.Annotations,
+					Labels:      priorState.Labels,
+					ID:          priorState.ID,
+					Timeouts:    timeouts.Value{},
+				}
+
+				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
+			},
+		},
+	}
 }
 
 func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -270,6 +365,20 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	createTimeout, diags := data.Timeouts.Create(ctx, inttimeouts.DefaultCreate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, createTimeout)
+	defer cancel()
+
+	tflog.Debug(ctx, "Creating cloud_link", map[string]interface{}{
+		"name":      data.Name.ValueString(),
+		"namespace": data.Namespace.ValueString(),
+	})
 
 	apiResource := &client.CloudLink{
 		Metadata: client.Metadata{
@@ -304,6 +413,11 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(created.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	tflog.Trace(ctx, "created CloudLink resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -315,10 +429,29 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 		return
 	}
 
+	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, readTimeout)
+	defer cancel()
+
+	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
+	resp.Diagnostics.Append(psDiags...)
+
 	apiResource, err := r.client.GetCloudLink(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CloudLink: %s", err))
 		return
+	}
+
+	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
+		resp.Diagnostics.AddWarning(
+			"Resource Drift Detected",
+			"The cloud_link may have been recreated outside of Terraform.",
+		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -345,6 +478,10 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
+	psd = privatestate.NewPrivateStateData()
+	psd.SetUID(apiResource.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -354,6 +491,15 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	updateTimeout, diags := data.Timeouts.Update(ctx, inttimeouts.DefaultUpdate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
+	defer cancel()
 
 	apiResource := &client.CloudLink{
 		Metadata: client.Metadata{
@@ -388,6 +534,11 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 
 	data.ID = types.StringValue(updated.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(updated.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -397,6 +548,15 @@ func (r *CloudLinkResource) Delete(ctx context.Context, req resource.DeleteReque
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	deleteTimeout, diags := data.Timeouts.Delete(ctx, inttimeouts.DefaultDelete)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
+	defer cancel()
 
 	err := r.client.DeleteCloudLink(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {

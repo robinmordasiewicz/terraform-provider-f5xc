@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,14 +18,23 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
+	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
+// Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                = &APIDefinitionResource{}
-	_ resource.ResourceWithConfigure   = &APIDefinitionResource{}
-	_ resource.ResourceWithImportState = &APIDefinitionResource{}
+	_ resource.Resource                   = &APIDefinitionResource{}
+	_ resource.ResourceWithConfigure      = &APIDefinitionResource{}
+	_ resource.ResourceWithImportState    = &APIDefinitionResource{}
+	_ resource.ResourceWithModifyPlan     = &APIDefinitionResource{}
+	_ resource.ResourceWithUpgradeState   = &APIDefinitionResource{}
+	_ resource.ResourceWithValidateConfig = &APIDefinitionResource{}
 )
+
+// api_definitionSchemaVersion is the schema version for state upgrades
+const api_definitionSchemaVersion int64 = 1
 
 func NewAPIDefinitionResource() resource.Resource {
 	return &APIDefinitionResource{}
@@ -41,6 +51,7 @@ type APIDefinitionResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	SwaggerSpecs types.List `tfsdk:"swagger_specs"`
 	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *APIDefinitionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -49,6 +60,7 @@ func (r *APIDefinitionResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Version:             api_definitionSchemaVersion,
 		MarkdownDescription: "Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -95,6 +107,12 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 		},
 		Blocks: map[string]schema.Block{
+			"timeouts": timeouts.Block(ctx, timeouts.Opts{
+				Create: true,
+				Read:   true,
+				Update: true,
+				Delete: true,
+			}),
 			"api_inventory_exclusion_list": schema.ListNestedBlock{
 				MarkdownDescription: "API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory.",
 				NestedObject: schema.NestedBlockObject{
@@ -161,11 +179,88 @@ func (r *APIDefinitionResource) Configure(ctx context.Context, req resource.Conf
 	if !ok {
 		resp.Diagnostics.AddError(
 			"Unexpected Resource Configure Type",
-			fmt.Sprintf("Expected *client.Client, got: %T", req.ProviderData),
+			fmt.Sprintf("Expected *client.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
 		)
 		return
 	}
 	r.client = client
+}
+
+// ValidateConfig implements resource.ResourceWithValidateConfig
+func (r *APIDefinitionResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data APIDefinitionResourceModel
+	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+}
+
+// ModifyPlan implements resource.ResourceWithModifyPlan
+func (r *APIDefinitionResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+	if req.Plan.Raw.IsNull() {
+		resp.Diagnostics.AddWarning(
+			"Resource Destruction",
+			"This will permanently delete the api_definition from F5 Distributed Cloud.",
+		)
+		return
+	}
+
+	if req.State.Raw.IsNull() {
+		var plan APIDefinitionResourceModel
+		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+
+		if plan.Name.IsUnknown() {
+			resp.Diagnostics.AddWarning(
+				"Unknown Resource Name",
+				"The resource name is not yet known. This may affect planning for dependent resources.",
+			)
+		}
+	}
+}
+
+// UpgradeState implements resource.ResourceWithUpgradeState
+func (r *APIDefinitionResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+	return map[int64]resource.StateUpgrader{
+		0: {
+			PriorSchema: &schema.Schema{
+				Attributes: map[string]schema.Attribute{
+					"name":        schema.StringAttribute{Required: true},
+					"namespace":   schema.StringAttribute{Required: true},
+					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"id":          schema.StringAttribute{Computed: true},
+				},
+			},
+			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
+				var priorState struct {
+					Name        types.String `tfsdk:"name"`
+					Namespace   types.String `tfsdk:"namespace"`
+					Annotations types.Map    `tfsdk:"annotations"`
+					Labels      types.Map    `tfsdk:"labels"`
+					ID          types.String `tfsdk:"id"`
+				}
+
+				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
+				if resp.Diagnostics.HasError() {
+					return
+				}
+
+				upgradedState := APIDefinitionResourceModel{
+					Name:        priorState.Name,
+					Namespace:   priorState.Namespace,
+					Annotations: priorState.Annotations,
+					Labels:      priorState.Labels,
+					ID:          priorState.ID,
+					Timeouts:    timeouts.Value{},
+				}
+
+				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
+			},
+		},
+	}
 }
 
 func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -174,6 +269,20 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	createTimeout, diags := data.Timeouts.Create(ctx, inttimeouts.DefaultCreate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, createTimeout)
+	defer cancel()
+
+	tflog.Debug(ctx, "Creating api_definition", map[string]interface{}{
+		"name":      data.Name.ValueString(),
+		"namespace": data.Namespace.ValueString(),
+	})
 
 	apiResource := &client.APIDefinition{
 		Metadata: client.Metadata{
@@ -208,6 +317,11 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(created.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	tflog.Trace(ctx, "created APIDefinition resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -219,10 +333,29 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 		return
 	}
 
+	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, readTimeout)
+	defer cancel()
+
+	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
+	resp.Diagnostics.Append(psDiags...)
+
 	apiResource, err := r.client.GetAPIDefinition(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read APIDefinition: %s", err))
 		return
+	}
+
+	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
+		resp.Diagnostics.AddWarning(
+			"Resource Drift Detected",
+			"The api_definition may have been recreated outside of Terraform.",
+		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -249,6 +382,10 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
+	psd = privatestate.NewPrivateStateData()
+	psd.SetUID(apiResource.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -258,6 +395,15 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	updateTimeout, diags := data.Timeouts.Update(ctx, inttimeouts.DefaultUpdate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
+	defer cancel()
 
 	apiResource := &client.APIDefinition{
 		Metadata: client.Metadata{
@@ -292,6 +438,11 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 	}
 
 	data.ID = types.StringValue(updated.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(updated.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -301,6 +452,15 @@ func (r *APIDefinitionResource) Delete(ctx context.Context, req resource.DeleteR
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	deleteTimeout, diags := data.Timeouts.Delete(ctx, inttimeouts.DefaultDelete)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
+	defer cancel()
 
 	err := r.client.DeleteAPIDefinition(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {

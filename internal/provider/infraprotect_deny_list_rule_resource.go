@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,14 +18,23 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
+	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
+// Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                = &InfraprotectDenyListRuleResource{}
-	_ resource.ResourceWithConfigure   = &InfraprotectDenyListRuleResource{}
-	_ resource.ResourceWithImportState = &InfraprotectDenyListRuleResource{}
+	_ resource.Resource                   = &InfraprotectDenyListRuleResource{}
+	_ resource.ResourceWithConfigure      = &InfraprotectDenyListRuleResource{}
+	_ resource.ResourceWithImportState    = &InfraprotectDenyListRuleResource{}
+	_ resource.ResourceWithModifyPlan     = &InfraprotectDenyListRuleResource{}
+	_ resource.ResourceWithUpgradeState   = &InfraprotectDenyListRuleResource{}
+	_ resource.ResourceWithValidateConfig = &InfraprotectDenyListRuleResource{}
 )
+
+// infraprotect_deny_list_ruleSchemaVersion is the schema version for state upgrades
+const infraprotect_deny_list_ruleSchemaVersion int64 = 1
 
 func NewInfraprotectDenyListRuleResource() resource.Resource {
 	return &InfraprotectDenyListRuleResource{}
@@ -42,6 +52,7 @@ type InfraprotectDenyListRuleResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	Prefix types.String `tfsdk:"prefix"`
 	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *InfraprotectDenyListRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -50,6 +61,7 @@ func (r *InfraprotectDenyListRuleResource) Metadata(ctx context.Context, req res
 
 func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Version:             infraprotect_deny_list_ruleSchemaVersion,
 		MarkdownDescription: "Manages DDoS transit Deny List Rule in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -99,6 +111,12 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 			},
 		},
 		Blocks: map[string]schema.Block{
+			"timeouts": timeouts.Block(ctx, timeouts.Opts{
+				Create: true,
+				Read:   true,
+				Update: true,
+				Delete: true,
+			}),
 			"expiration_never": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: expiration_never, expiration_timestamp, one_day, one_hour, one_month, one_year] Empty. This can be used for messages where no values are needed",
 			},
@@ -126,11 +144,88 @@ func (r *InfraprotectDenyListRuleResource) Configure(ctx context.Context, req re
 	if !ok {
 		resp.Diagnostics.AddError(
 			"Unexpected Resource Configure Type",
-			fmt.Sprintf("Expected *client.Client, got: %T", req.ProviderData),
+			fmt.Sprintf("Expected *client.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
 		)
 		return
 	}
 	r.client = client
+}
+
+// ValidateConfig implements resource.ResourceWithValidateConfig
+func (r *InfraprotectDenyListRuleResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data InfraprotectDenyListRuleResourceModel
+	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+}
+
+// ModifyPlan implements resource.ResourceWithModifyPlan
+func (r *InfraprotectDenyListRuleResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+	if req.Plan.Raw.IsNull() {
+		resp.Diagnostics.AddWarning(
+			"Resource Destruction",
+			"This will permanently delete the infraprotect_deny_list_rule from F5 Distributed Cloud.",
+		)
+		return
+	}
+
+	if req.State.Raw.IsNull() {
+		var plan InfraprotectDenyListRuleResourceModel
+		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+
+		if plan.Name.IsUnknown() {
+			resp.Diagnostics.AddWarning(
+				"Unknown Resource Name",
+				"The resource name is not yet known. This may affect planning for dependent resources.",
+			)
+		}
+	}
+}
+
+// UpgradeState implements resource.ResourceWithUpgradeState
+func (r *InfraprotectDenyListRuleResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+	return map[int64]resource.StateUpgrader{
+		0: {
+			PriorSchema: &schema.Schema{
+				Attributes: map[string]schema.Attribute{
+					"name":        schema.StringAttribute{Required: true},
+					"namespace":   schema.StringAttribute{Required: true},
+					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"id":          schema.StringAttribute{Computed: true},
+				},
+			},
+			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
+				var priorState struct {
+					Name        types.String `tfsdk:"name"`
+					Namespace   types.String `tfsdk:"namespace"`
+					Annotations types.Map    `tfsdk:"annotations"`
+					Labels      types.Map    `tfsdk:"labels"`
+					ID          types.String `tfsdk:"id"`
+				}
+
+				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
+				if resp.Diagnostics.HasError() {
+					return
+				}
+
+				upgradedState := InfraprotectDenyListRuleResourceModel{
+					Name:        priorState.Name,
+					Namespace:   priorState.Namespace,
+					Annotations: priorState.Annotations,
+					Labels:      priorState.Labels,
+					ID:          priorState.ID,
+					Timeouts:    timeouts.Value{},
+				}
+
+				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
+			},
+		},
+	}
 }
 
 func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -139,6 +234,20 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	createTimeout, diags := data.Timeouts.Create(ctx, inttimeouts.DefaultCreate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, createTimeout)
+	defer cancel()
+
+	tflog.Debug(ctx, "Creating infraprotect_deny_list_rule", map[string]interface{}{
+		"name":      data.Name.ValueString(),
+		"namespace": data.Namespace.ValueString(),
+	})
 
 	apiResource := &client.InfraprotectDenyListRule{
 		Metadata: client.Metadata{
@@ -173,6 +282,11 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(created.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	tflog.Trace(ctx, "created InfraprotectDenyListRule resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -184,10 +298,29 @@ func (r *InfraprotectDenyListRuleResource) Read(ctx context.Context, req resourc
 		return
 	}
 
+	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, readTimeout)
+	defer cancel()
+
+	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
+	resp.Diagnostics.Append(psDiags...)
+
 	apiResource, err := r.client.GetInfraprotectDenyListRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read InfraprotectDenyListRule: %s", err))
 		return
+	}
+
+	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
+		resp.Diagnostics.AddWarning(
+			"Resource Drift Detected",
+			"The infraprotect_deny_list_rule may have been recreated outside of Terraform.",
+		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -214,6 +347,10 @@ func (r *InfraprotectDenyListRuleResource) Read(ctx context.Context, req resourc
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
+	psd = privatestate.NewPrivateStateData()
+	psd.SetUID(apiResource.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -223,6 +360,15 @@ func (r *InfraprotectDenyListRuleResource) Update(ctx context.Context, req resou
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	updateTimeout, diags := data.Timeouts.Update(ctx, inttimeouts.DefaultUpdate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
+	defer cancel()
 
 	apiResource := &client.InfraprotectDenyListRule{
 		Metadata: client.Metadata{
@@ -257,6 +403,11 @@ func (r *InfraprotectDenyListRuleResource) Update(ctx context.Context, req resou
 	}
 
 	data.ID = types.StringValue(updated.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(updated.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -266,6 +417,15 @@ func (r *InfraprotectDenyListRuleResource) Delete(ctx context.Context, req resou
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	deleteTimeout, diags := data.Timeouts.Delete(ctx, inttimeouts.DefaultDelete)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
+	defer cancel()
 
 	err := r.client.DeleteInfraprotectDenyListRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {

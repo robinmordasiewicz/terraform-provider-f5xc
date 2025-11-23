@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,14 +18,23 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
+	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
 
+// Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                = &HTTPLoadBalancerResource{}
-	_ resource.ResourceWithConfigure   = &HTTPLoadBalancerResource{}
-	_ resource.ResourceWithImportState = &HTTPLoadBalancerResource{}
+	_ resource.Resource                   = &HTTPLoadBalancerResource{}
+	_ resource.ResourceWithConfigure      = &HTTPLoadBalancerResource{}
+	_ resource.ResourceWithImportState    = &HTTPLoadBalancerResource{}
+	_ resource.ResourceWithModifyPlan     = &HTTPLoadBalancerResource{}
+	_ resource.ResourceWithUpgradeState   = &HTTPLoadBalancerResource{}
+	_ resource.ResourceWithValidateConfig = &HTTPLoadBalancerResource{}
 )
+
+// http_loadbalancerSchemaVersion is the schema version for state upgrades
+const http_loadbalancerSchemaVersion int64 = 1
 
 func NewHTTPLoadBalancerResource() resource.Resource {
 	return &HTTPLoadBalancerResource{}
@@ -42,6 +52,7 @@ type HTTPLoadBalancerResourceModel struct {
 	Domains types.List `tfsdk:"domains"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *HTTPLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -50,6 +61,7 @@ func (r *HTTPLoadBalancerResource) Metadata(ctx context.Context, req resource.Me
 
 func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Version:             http_loadbalancerSchemaVersion,
 		MarkdownDescription: "Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -100,6 +112,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 			},
 		},
 		Blocks: map[string]schema.Block{
+			"timeouts": timeouts.Block(ctx, timeouts.Opts{
+				Create: true,
+				Read:   true,
+				Update: true,
+				Delete: true,
+			}),
 			"active_service_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_service_policies, no_service_policies, service_policies_from_namespace] Service Policy List. List of service policies.",
 				Attributes: map[string]schema.Attribute{
@@ -5317,11 +5335,88 @@ func (r *HTTPLoadBalancerResource) Configure(ctx context.Context, req resource.C
 	if !ok {
 		resp.Diagnostics.AddError(
 			"Unexpected Resource Configure Type",
-			fmt.Sprintf("Expected *client.Client, got: %T", req.ProviderData),
+			fmt.Sprintf("Expected *client.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
 		)
 		return
 	}
 	r.client = client
+}
+
+// ValidateConfig implements resource.ResourceWithValidateConfig
+func (r *HTTPLoadBalancerResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data HTTPLoadBalancerResourceModel
+	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+}
+
+// ModifyPlan implements resource.ResourceWithModifyPlan
+func (r *HTTPLoadBalancerResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+	if req.Plan.Raw.IsNull() {
+		resp.Diagnostics.AddWarning(
+			"Resource Destruction",
+			"This will permanently delete the http_loadbalancer from F5 Distributed Cloud.",
+		)
+		return
+	}
+
+	if req.State.Raw.IsNull() {
+		var plan HTTPLoadBalancerResourceModel
+		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+
+		if plan.Name.IsUnknown() {
+			resp.Diagnostics.AddWarning(
+				"Unknown Resource Name",
+				"The resource name is not yet known. This may affect planning for dependent resources.",
+			)
+		}
+	}
+}
+
+// UpgradeState implements resource.ResourceWithUpgradeState
+func (r *HTTPLoadBalancerResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
+	return map[int64]resource.StateUpgrader{
+		0: {
+			PriorSchema: &schema.Schema{
+				Attributes: map[string]schema.Attribute{
+					"name":        schema.StringAttribute{Required: true},
+					"namespace":   schema.StringAttribute{Required: true},
+					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
+					"id":          schema.StringAttribute{Computed: true},
+				},
+			},
+			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
+				var priorState struct {
+					Name        types.String `tfsdk:"name"`
+					Namespace   types.String `tfsdk:"namespace"`
+					Annotations types.Map    `tfsdk:"annotations"`
+					Labels      types.Map    `tfsdk:"labels"`
+					ID          types.String `tfsdk:"id"`
+				}
+
+				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
+				if resp.Diagnostics.HasError() {
+					return
+				}
+
+				upgradedState := HTTPLoadBalancerResourceModel{
+					Name:        priorState.Name,
+					Namespace:   priorState.Namespace,
+					Annotations: priorState.Annotations,
+					Labels:      priorState.Labels,
+					ID:          priorState.ID,
+					Timeouts:    timeouts.Value{},
+				}
+
+				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
+			},
+		},
+	}
 }
 
 func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -5330,6 +5425,20 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	createTimeout, diags := data.Timeouts.Create(ctx, inttimeouts.DefaultCreate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, createTimeout)
+	defer cancel()
+
+	tflog.Debug(ctx, "Creating http_loadbalancer", map[string]interface{}{
+		"name":      data.Name.ValueString(),
+		"namespace": data.Namespace.ValueString(),
+	})
 
 	apiResource := &client.HTTPLoadBalancer{
 		Metadata: client.Metadata{
@@ -5364,6 +5473,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(created.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	tflog.Trace(ctx, "created HTTPLoadBalancer resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -5375,10 +5489,29 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		return
 	}
 
+	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, readTimeout)
+	defer cancel()
+
+	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
+	resp.Diagnostics.Append(psDiags...)
+
 	apiResource, err := r.client.GetHTTPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read HTTPLoadBalancer: %s", err))
 		return
+	}
+
+	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
+		resp.Diagnostics.AddWarning(
+			"Resource Drift Detected",
+			"The http_loadbalancer may have been recreated outside of Terraform.",
+		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -5405,6 +5538,10 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
+	psd = privatestate.NewPrivateStateData()
+	psd.SetUID(apiResource.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -5414,6 +5551,15 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	updateTimeout, diags := data.Timeouts.Update(ctx, inttimeouts.DefaultUpdate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
+	defer cancel()
 
 	apiResource := &client.HTTPLoadBalancer{
 		Metadata: client.Metadata{
@@ -5448,6 +5594,11 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 
 	data.ID = types.StringValue(updated.Metadata.Name)
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetUID(updated.Metadata.UID)
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
@@ -5457,6 +5608,15 @@ func (r *HTTPLoadBalancerResource) Delete(ctx context.Context, req resource.Dele
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	deleteTimeout, diags := data.Timeouts.Delete(ctx, inttimeouts.DefaultDelete)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
+	defer cancel()
 
 	err := r.client.DeleteHTTPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {

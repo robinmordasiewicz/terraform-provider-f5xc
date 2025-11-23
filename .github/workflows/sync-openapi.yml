@@ -112,6 +112,13 @@ jobs:
           go run tools/generate-all-schemas.go --spec-dir=${{ env.SPEC_DIR }}
           echo "✅ Provider code regenerated"
 
+      - name: Regenerate API documentation
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+        run: |
+          echo "📚 Regenerating API documentation..."
+          go run tools/generate-api-docs.go --spec-dir=${{ env.SPEC_DIR }}
+          echo "✅ API documentation regenerated"
+
       - name: Run go mod tidy
         if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
         run: go mod tidy

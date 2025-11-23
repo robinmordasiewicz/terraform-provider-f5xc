@@ -19,10 +19,11 @@ permissions:
 
 env:
   ISSUE_TITLE: "OpenAPI Spec Update Available"
-  PR_TITLE: "Update F5 Distributed Cloud OpenAPI spec"
+  PR_TITLE: "Update F5 Distributed Cloud OpenAPI spec and regenerate provider"
+  SPEC_DIR: docs/specifications/api
 
 jobs:
-  sync-openapi:
+  sync-and-generate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -32,9 +33,9 @@ jobs:
 
       - name: Download and extract OpenAPI spec
         run: |
-          mkdir -p docs/specifications/api
+          mkdir -p ${{ env.SPEC_DIR }}
           curl -sL -o openapi.zip "https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip"
-          unzip -o openapi.zip -d docs/specifications/api
+          unzip -o openapi.zip -d ${{ env.SPEC_DIR }}
           rm openapi.zip
 
       - name: Check for existing open PR
@@ -58,14 +59,14 @@ jobs:
             return 'false';
           result-encoding: string
 
-      - name: Check for changes
+      - name: Check for spec changes
         if: steps.existing_pr.outputs.result == 'false'
-        id: changes
+        id: spec_changes
         run: |
           git add -A
           if git diff --cached --quiet; then
             echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No changes detected"
+            echo "No changes detected in OpenAPI specs"
           else
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "Changes detected in OpenAPI spec"
@@ -73,22 +74,22 @@ jobs:
           fi
 
       - name: Get current date
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true'
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
         id: date
         run: echo "date=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true'
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Validate OpenAPI spec
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true'
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
         run: |
           npm install -g @apidevtools/swagger-cli
           echo "Validating OpenAPI specifications..."
-          for file in $(find docs/specifications/api -type f \( -name "*.yaml" -o -name "*.yml" -o -name "*.json" \)); do
+          for file in $(find ${{ env.SPEC_DIR }} -type f \( -name "*.yaml" -o -name "*.yml" -o -name "*.json" \)); do
             if grep -q -E "(openapi|swagger).*['\"]?[0-9]+\.[0-9]+" "$file" 2>/dev/null; then
               echo "Validating: $file"
               swagger-cli validate "$file"
@@ -97,22 +98,63 @@ jobs:
           done
           echo "✅ All OpenAPI specs validated successfully"
 
-      - name: Create branch and commit changes
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true'
+      - name: Set up Go
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Regenerate provider from new specs
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+        run: |
+          echo "🔨 Regenerating provider code from updated specs..."
+          go run tools/generate-all-schemas.go --spec-dir=${{ env.SPEC_DIR }}
+          echo "✅ Provider code regenerated"
+
+      - name: Run go mod tidy
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+        run: go mod tidy
+
+      - name: Build to verify
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+        run: |
+          echo "🔨 Building provider to verify..."
+          go build -v .
+          echo "✅ Build successful"
+
+      - name: Run tests
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+        run: |
+          echo "🧪 Running tests..."
+          go test -v ./internal/...
+          echo "✅ Tests passed"
+
+      - name: Create branch and commit all changes
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b openapi-update
           git add -A
-          git commit -m "Update F5 Distributed Cloud OpenAPI spec
+          git commit -m "feat: Update OpenAPI specs and regenerate provider
 
-          Automated update from https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
+          Automated update from F5 Distributed Cloud OpenAPI specifications.
 
-          Updated: ${{ steps.date.outputs.date }}"
+          Changes:
+          - Updated OpenAPI specs from https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
+          - Regenerated provider resources and data sources
+          - Updated client types for API compatibility
+
+          Updated: ${{ steps.date.outputs.date }}
+
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+          Co-Authored-By: Claude <noreply@anthropic.com>"
           git push --force origin openapi-update
 
       - name: Find or create issue
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true'
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
         id: issue
         uses: actions/github-script@v7
         with:
@@ -139,7 +181,7 @@ jobs:
                 issue_number: existingIssue.number,
                 body: `## Update Detected - ${{ steps.date.outputs.date }}
 
-            A new update to the OpenAPI specification has been detected.
+            A new update to the OpenAPI specification has been detected and provider code regenerated.
 
             **Branch:** \`openapi-update\`
             **Detected:** ${{ steps.date.outputs.date }}
@@ -157,7 +199,7 @@ jobs:
               title: issueTitle,
               body: `## F5 Distributed Cloud OpenAPI Spec Update
 
-            This issue tracks updates to the F5 Distributed Cloud OpenAPI specification.
+            This issue tracks updates to the F5 Distributed Cloud OpenAPI specification and provider regeneration.
 
             **Source:** https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
 
@@ -179,7 +221,7 @@ jobs:
             return issue.data.number;
 
       - name: Create Pull Request
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true'
+        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
         id: create_pr
         uses: actions/github-script@v7
         with:
@@ -193,7 +235,7 @@ jobs:
               base: 'main',
               body: `## Summary
 
-            This PR contains an automated update to the F5 Distributed Cloud OpenAPI specification.
+            This PR contains an automated update to the F5 Distributed Cloud OpenAPI specification and regenerated provider code.
 
             **Source:** https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
             **Detected:** ${{ steps.date.outputs.date }}
@@ -201,48 +243,21 @@ jobs:
 
             ## Changes
 
-            The OpenAPI spec file has been updated to the latest version from F5.
+            - Updated OpenAPI specs to latest version from F5
+            - Regenerated provider resources and data sources
+            - Updated client types for API compatibility
+
+            ## Verification
+
+            - ✅ OpenAPI specs validated
+            - ✅ Provider code regenerated
+            - ✅ Build passes
+            - ✅ Tests pass
 
             ---
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
             *Closes #${{ steps.issue.outputs.result }} when merged*`
             });
             console.log(`Created PR #${pr.data.number}`);
             return pr.data.number;
-
-      - name: Merge Pull Request
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true'
-        id: merge_pr
-        run: |
-          if gh pr merge ${{ steps.create_pr.outputs.result }} --merge --admin; then
-            echo "merged=true" >> $GITHUB_OUTPUT
-            echo "✅ PR #${{ steps.create_pr.outputs.result }} merged successfully"
-          else
-            echo "merged=false" >> $GITHUB_OUTPUT
-            echo "⚠️ PR #${{ steps.create_pr.outputs.result }} could not be auto-merged (may need manual review)"
-          fi
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-      - name: Close tracking issue
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true' && steps.merge_pr.outputs.merged == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const issueNumber = ${{ steps.issue.outputs.result }};
-            await github.rest.issues.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issueNumber,
-              state: 'closed',
-              state_reason: 'completed'
-            });
-            console.log(`Closed issue #${issueNumber}`);
-
-      - name: Trigger provider code generation
-        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true' && steps.merge_pr.outputs.merged == 'true'
-        run: |
-          echo "🔄 Triggering provider code generation workflow..."
-          gh workflow run generate.yml
-          echo "✅ Provider generation workflow triggered"
-        env:
-          GH_TOKEN: ${{ github.token }}

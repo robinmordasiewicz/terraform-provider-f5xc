@@ -11,17 +11,28 @@ on:
   pull_request:
     branches:
       - main
+  # Trigger when automation workflows complete to run checks on their PRs
+  workflow_run:
+    workflows: ["Sync F5 Distributed Cloud OpenAPI Spec", "Generate Provider Code"]
+    types: [completed]
 
 permissions:
   contents: read
+  statuses: write
+  checks: write
 
 jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+    # Skip if workflow_run triggered by a failed workflow
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          # For workflow_run, checkout the branch from the triggering workflow
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
       - name: Set up Go
         uses: actions/setup-go@v6
@@ -43,9 +54,14 @@ jobs:
   golangci-lint:
     name: Lint
     runs-on: ubuntu-latest
+    # Skip if workflow_run triggered by a failed workflow
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          # For workflow_run, checkout the branch from the triggering workflow
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
       - name: Set up Go
         uses: actions/setup-go@v6

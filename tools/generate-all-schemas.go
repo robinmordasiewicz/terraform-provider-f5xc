@@ -124,7 +124,7 @@ func main() {
 		specDir = os.Getenv("F5XC_SPEC_DIR")
 	}
 	if specDir == "" {
-		specDir = "/tmp"
+		specDir = "docs/specifications/api"
 	}
 
 	fmt.Println("🔨 F5XC Terraform Provider - Batch Schema Generator")

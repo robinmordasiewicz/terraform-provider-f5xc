@@ -237,3 +237,12 @@ jobs:
               state_reason: 'completed'
             });
             console.log(`Closed issue #${issueNumber}`);
+
+      - name: Trigger provider code generation
+        if: steps.existing_pr.outputs.result == 'false' && steps.changes.outputs.changed == 'true' && steps.merge_pr.outputs.merged == 'true'
+        run: |
+          echo "🔄 Triggering provider code generation workflow..."
+          gh workflow run generate.yml
+          echo "✅ Provider generation workflow triggered"
+        env:
+          GH_TOKEN: ${{ github.token }}

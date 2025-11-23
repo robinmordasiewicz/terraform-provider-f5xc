@@ -3,162 +3,35 @@
 name: Generate Provider Code
 
 on:
-  # Manual trigger with spec URL input
+  # Trigger when OpenAPI specs are updated in the repository
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/specifications/api/**'
+
+  # Manual trigger with options
   workflow_dispatch:
     inputs:
-      spec_base_url:
-        description: 'Base URL for OpenAPI specs (e.g., https://docs.cloud.f5.com/api/)'
-        required: false
-        default: ''
       force_regenerate:
         description: 'Force regeneration even if no spec changes detected'
         required: false
         default: 'false'
         type: boolean
 
-  # Scheduled run to check for API changes (weekly)
-  schedule:
-    - cron: '0 0 * * 0'  # Every Sunday at midnight UTC
+  # Allow other workflows to trigger this one
+  workflow_call:
 
 permissions:
   contents: write
   pull-requests: write
 
 env:
-  SPEC_DIR: /tmp/f5xc-specs
+  SPEC_DIR: docs/specifications/api
 
 jobs:
-  download-specs:
-    name: Download OpenAPI Specs
-    runs-on: ubuntu-latest
-    outputs:
-      specs_changed: ${{ steps.check-changes.outputs.changed }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Create spec directory
-        run: mkdir -p ${{ env.SPEC_DIR }}
-
-      - name: Download F5 XC OpenAPI specs
-        id: download
-        run: |
-          echo "📥 Discovering and downloading F5 XC OpenAPI specifications..."
-
-          # Dynamic API discovery: Extract API names from existing provider files
-          # This ensures we always have the current set of APIs
-          # New APIs will be discovered when F5 publishes new swagger files
-
-          # Method 1: Derive from existing generated resource files (idempotent baseline)
-          APIS=()
-          if [ -d "internal/provider" ]; then
-            for file in internal/provider/*_resource.go; do
-              if [ -f "$file" ]; then
-                # Extract API name from filename (e.g., http_loadbalancer_resource.go -> http_loadbalancer)
-                basename=$(basename "$file" _resource.go)
-                if [ "$basename" != "provider" ]; then
-                  APIS+=("$basename")
-                fi
-              fi
-            done
-          fi
-
-          # Method 2: Try to discover new APIs by probing common patterns
-          # This allows automatic discovery of new F5 APIs
-          DISCOVERY_PREFIXES=(
-            "addon" "address" "advertise" "alert" "allowed" "api" "apm" "app"
-            "authentication" "aws" "azure" "bgp" "bigip" "bot" "cdn" "certificate"
-            "child" "cloud" "cluster" "cminstance" "code" "contact" "container"
-            "crl" "customer" "data" "dc" "discovery" "dns" "endpoint" "enhanced"
-            "external" "fast" "filter" "fleet" "forwarding" "forward" "gcp" "geo"
-            "global" "healthcheck" "http" "ike" "infraprotect" "ip" "irule" "k8s"
-            "log" "malicious" "managed" "namespace" "nat" "network" "nfv" "oidc"
-            "origin" "policer" "policy" "protocol" "proxy" "quota" "rate"
-            "registration" "report" "role" "route" "secret" "securemesh" "segment"
-            "sensitive" "service" "site" "srv6" "subnet" "tcp" "tenant" "ticket"
-            "token" "tpm" "trusted" "tunnel" "udp" "usb" "user" "virtual"
-            "voltshare" "voltstack" "waf" "workload"
-          )
-
-          echo "📋 Found ${#APIS[@]} APIs from existing provider files"
-
-          # Download specs from docs.cloud.f5.com
-          DOWNLOAD_COUNT=0
-          DISCOVERED_NEW=0
-
-          # First, download all known APIs
-          for api in "${APIS[@]}"; do
-            SPEC_URL="https://docs.cloud.f5.com/api/docs-cloud-f5-com.${api}.ves-swagger.json"
-            SPEC_FILE="${{ env.SPEC_DIR }}/docs-cloud-f5-com.${api}.ves-swagger.json"
-
-            if curl -sf -o "${SPEC_FILE}" "${SPEC_URL}" 2>/dev/null; then
-              DOWNLOAD_COUNT=$((DOWNLOAD_COUNT + 1))
-              echo "✅ Downloaded: ${api}"
-            else
-              echo "⏭️  Not found: ${api}"
-            fi
-          done
-
-          # Try to discover new APIs by probing the API index
-          # F5 publishes an index of available swagger files
-          INDEX_URL="https://docs.cloud.f5.com/api/"
-          echo ""
-          echo "🔍 Checking for new APIs..."
-
-          # Fetch the API index page and extract swagger file names
-          if curl -sf "${INDEX_URL}" 2>/dev/null | grep -oE 'docs-cloud-f5-com\.[a-z0-9_]+\.ves-swagger\.json' | sort -u > /tmp/api_index.txt; then
-            while read -r swagger_file; do
-              # Extract API name from swagger filename
-              api_name=$(echo "$swagger_file" | sed 's/docs-cloud-f5-com\.\(.*\)\.ves-swagger\.json/\1/')
-              SPEC_FILE="${{ env.SPEC_DIR }}/${swagger_file}"
-
-              # Skip if already downloaded
-              if [ -f "${SPEC_FILE}" ]; then
-                continue
-              fi
-
-              # Download newly discovered API
-              SPEC_URL="https://docs.cloud.f5.com/api/${swagger_file}"
-              if curl -sf -o "${SPEC_FILE}" "${SPEC_URL}" 2>/dev/null; then
-                DOWNLOAD_COUNT=$((DOWNLOAD_COUNT + 1))
-                DISCOVERED_NEW=$((DISCOVERED_NEW + 1))
-                echo "🆕 Discovered new API: ${api_name}"
-              fi
-            done < /tmp/api_index.txt
-          fi
-
-          echo ""
-          echo "📊 Downloaded ${DOWNLOAD_COUNT} OpenAPI specifications"
-          if [ ${DISCOVERED_NEW} -gt 0 ]; then
-            echo "🎉 Discovered ${DISCOVERED_NEW} new APIs!"
-          fi
-          echo "download_count=${DOWNLOAD_COUNT}" >> $GITHUB_OUTPUT
-          echo "new_apis=${DISCOVERED_NEW}" >> $GITHUB_OUTPUT
-
-      - name: Check for spec changes
-        id: check-changes
-        run: |
-          # Compare downloaded specs with any cached versions
-          # For now, always assume specs changed if download succeeded
-          if [ "${{ steps.download.outputs.download_count }}" -gt "0" ]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
-          else
-            echo "changed=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Upload specs artifact
-        uses: actions/upload-artifact@v5
-        with:
-          name: openapi-specs
-          path: ${{ env.SPEC_DIR }}
-          retention-days: 1
-
   generate:
     name: Generate Provider Code
-    needs: download-specs
-    if: needs.download-specs.outputs.specs_changed == 'true' || github.event.inputs.force_regenerate == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -166,33 +39,45 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download specs artifact
-        uses: actions/download-artifact@v5
-        with:
-          name: openapi-specs
-          path: ${{ env.SPEC_DIR }}
+      - name: Verify specs exist
+        id: verify-specs
+        run: |
+          SPEC_COUNT=$(find ${{ env.SPEC_DIR }} -name "*.json" -type f 2>/dev/null | wc -l)
+          echo "📁 Found ${SPEC_COUNT} OpenAPI spec files in ${{ env.SPEC_DIR }}"
+          if [ "$SPEC_COUNT" -eq "0" ]; then
+            echo "⚠️ No spec files found - skipping generation"
+            echo "has_specs=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_specs=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: Set up Go
+        if: steps.verify-specs.outputs.has_specs == 'true'
         uses: actions/setup-go@v6
         with:
           go-version-file: 'go.mod'
           cache: true
 
       - name: Run code generator
+        if: steps.verify-specs.outputs.has_specs == 'true'
         run: |
           echo "🔨 Running code generator..."
           go run tools/generate-all-schemas.go --spec-dir=${{ env.SPEC_DIR }}
 
       - name: Run go mod tidy
+        if: steps.verify-specs.outputs.has_specs == 'true'
         run: go mod tidy
 
       - name: Build to verify
+        if: steps.verify-specs.outputs.has_specs == 'true'
         run: go build -v .
 
       - name: Run tests
+        if: steps.verify-specs.outputs.has_specs == 'true'
         run: go test -v ./internal/...
 
       - name: Check for changes
+        if: steps.verify-specs.outputs.has_specs == 'true'
         id: git-changes
         run: |
           git add -A
@@ -206,7 +91,7 @@ jobs:
           fi
 
       - name: Create Pull Request
-        if: steps.git-changes.outputs.has_changes == 'true'
+        if: steps.verify-specs.outputs.has_specs == 'true' && steps.git-changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

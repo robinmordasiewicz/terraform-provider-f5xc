@@ -51,93 +51,25 @@ resource "f5xc_healthcheck" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the Healthcheck. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the Healthcheck will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy (`Number`).
-
-> **Note:** One of the arguments from this list "http_health_check, tcp_health_check, udp_icmp_health_check" must be set.
-
-`http_health_check` - (Optional) HTTP Health Check. Healthy if 'get' method on URL 'http(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request. See [Http Health Check](#http-health-check) below for details.
-
-`interval` - (Optional) Interval. Time interval in seconds between two healthcheck requests (`Number`).
-
-`jitter_percent` - (Optional) Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests (`Number`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`tcp_health_check` - (Optional) TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>. See [Tcp Health Check](#tcp-health-check) below for details.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`udp_icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [Udp Icmp Health Check](#udp-icmp-health-check) below for details.
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy (`Number`).
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--http_health_check"></a>
 
-### Http Health Check
-
-`expected_status_codes` - (Optional) Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly (`List`).
-
-`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. See [Headers](#nestedblock--http_health_check--headers) below.
-
-`host_header` - (Optional) Host Header Value. The value of the host header (`String`).
-
-`path` - (Optional) Path. Specifies the HTTP path that will be requested during health checking (`String`).
-
-`request_headers_to_remove` - (Optional) Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers (`List`).
-
-`use_http2` - (Optional) Use HTTP2. If set, health checks will be made using http/2 (`Bool`).
-
-`use_origin_server_name` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Origin Server Name](#nestedblock--http_health_check--use_origin_server_name) below.
-
 <a id="nestedblock--http_health_check--headers"></a>
-
-### Http Health Check Headers
 
 <a id="nestedblock--http_health_check--use_origin_server_name"></a>
 
-### Http Health Check Use Origin Server Name
-
 <a id="nestedblock--tcp_health_check"></a>
-
-### Tcp Health Check
-
-`expected_response` - (Optional) Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload (`String`).
-
-`send_payload` - (Optional) Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload (`String`).
 
 <a id="nestedblock--timeouts"></a>
 
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
 <a id="nestedblock--udp_icmp_health_check"></a>
-
-### Udp Icmp Health Check
 
 ## Import
 

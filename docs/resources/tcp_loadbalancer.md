@@ -61,665 +61,187 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the TCPLoadBalancer. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the TCPLoadBalancer will be created (`String`).
-
 The following arguments are optional:
-
-> **Note:** One of the arguments from this list "active_service_policies, no_service_policies, service_policies_from_namespace" must be set.
-
-`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
-
-> **Note:** One of the arguments from this list "advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise" must be set.
-
-`advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
-
-`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
-
-`advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Public Default Vip](#advertise-on-public-default-vip) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "default_lb_with_sni, no_sni, sni" must be set.
-
-`default_lb_with_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Lb With Sni](#default-lb-with-sni) below for details.
-
-`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by Volterra. This requires the domain to be delegated to F5XC using the Delegated Domain feature (`Bool`).
-
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
-
-> **Note:** One of the arguments from this list "do_not_retract_cluster, retract_cluster" must be set.
-
-`do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Retract Cluster](#do-not-retract-cluster) below for details.
-
-`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2 (`List`).
-
-> **Note:** One of the arguments from this list "hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness" must be set.
-
-`hash_policy_choice_least_active` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Least Active](#hash-policy-choice-least-active) below for details.
-
-`hash_policy_choice_random` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Random](#hash-policy-choice-random) below for details.
-
-`hash_policy_choice_round_robin` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Round Robin](#hash-policy-choice-round-robin) below for details.
-
-`hash_policy_choice_source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Source Ip Stickiness](#hash-policy-choice-source-ip-stickiness) below for details.
-
-`idle_timeout` - (Optional) Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds (`Number`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "listen_port, port_ranges" must be set.
-
-`listen_port` - (Optional) Listen Port. Listen Port for this load balancer (`Number`).
-
-`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Service Policies](#no-service-policies) below for details.
-
-`no_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [No Sni](#no-sni) below for details.
-
-`origin_pools_weights` - (Optional) Origin Pools. Origin pools and weights used for this load balancer. See [Origin Pools Weights](#origin-pools-weights) below for details.
-
-`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
-
-`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Retract Cluster](#retract-cluster) below for details.
-
-`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Service Policies From Namespace](#service-policies-from-namespace) below for details.
-
-`sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Sni](#sni) below for details.
-
-> **Note:** One of the arguments from this list "tcp, tls_tcp, tls_tcp_auto_cert" must be set.
-
-`tcp` - (Optional) Empty. This can be used for messages where no values are needed. See [Tcp](#tcp) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`tls_tcp` - (Optional) BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates. See [Tls Tcp](#tls-tcp) below for details.
-
-`tls_tcp_auto_cert` - (Optional) TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates. See [Tls Tcp Auto Cert](#tls-tcp-auto-cert) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--active_service_policies"></a>
 
-### Active Service Policies
-
-`policies` - (Optional) Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. See [Policies](#nestedblock--active_service_policies--policies) below.
-
 <a id="nestedblock--active_service_policies--policies"></a>
-
-### Active Service Policies Policies
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--advertise_custom"></a>
 
-### Advertise Custom
-
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--advertise_custom--advertise_where) below.
-
 <a id="nestedblock--advertise_custom--advertise_where"></a>
-
-### Advertise Custom Advertise Where
-
-`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#nestedblock--advertise_custom--advertise_where--advertise_on_public) below.
-
-`port` - (Optional) Listen Port. Port to Listen (`Number`).
-
-`port_ranges` - (Optional) Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
-
-`site` - (Optional) Site. This defines a reference to a CE site along with network type and an optional ip address where a load balancer could be advertised. See [Site](#nestedblock--advertise_custom--advertise_where--site) below.
-
-`use_default_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Port](#nestedblock--advertise_custom--advertise_where--use_default_port) below.
-
-`virtual_network` - (Optional) Virtual Network. Parameters to advertise on a given virtual network. See [Virtual Network](#nestedblock--advertise_custom--advertise_where--virtual_network) below.
-
-`virtual_site` - (Optional) Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised. See [Virtual Site](#nestedblock--advertise_custom--advertise_where--virtual_site) below.
-
-`virtual_site_with_vip` - (Optional) Virtual Site with Specified VIP. This defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised. See [Virtual Site With Vip](#nestedblock--advertise_custom--advertise_where--virtual_site_with_vip) below.
-
-`vk8s_service` - (Optional) vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network. See [Vk8s Service](#nestedblock--advertise_custom--advertise_where--vk8s_service) below.
 
 <a id="nestedblock--advertise_custom--advertise_where--advertise_on_public"></a>
 
-### Advertise Custom Advertise Where Advertise On Public
-
-`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public Ip](#nestedblock--advertise_custom--advertise_where--advertise_on_public--public_ip) below.
-
 <a id="nestedblock--advertise_custom--advertise_where--advertise_on_public--public_ip"></a>
-
-### Advertise Custom Advertise Where Advertise On Public Public Ip
 
 <a id="nestedblock--advertise_custom--advertise_where--site"></a>
 
-### Advertise Custom Advertise Where Site
-
-`ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
-
-`network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks (`String`).
-
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--advertise_custom--advertise_where--site--site) below.
-
 <a id="nestedblock--advertise_custom--advertise_where--site--site"></a>
-
-### Advertise Custom Advertise Where Site Site
 
 <a id="nestedblock--advertise_custom--advertise_where--use_default_port"></a>
 
-### Advertise Custom Advertise Where Use Default Port
-
 <a id="nestedblock--advertise_custom--advertise_where--virtual_network"></a>
-
-### Advertise Custom Advertise Where Virtual Network
-
-`default_v6_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default V6 Vip](#nestedblock--advertise_custom--advertise_where--virtual_network--default_v6_vip) below.
-
-`default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Vip](#nestedblock--advertise_custom--advertise_where--virtual_network--default_vip) below.
-
-`specific_v6_vip` - (Optional) Specific V6 VIP. Use given IPV6 address as VIP on virtual Network (`String`).
-
-`specific_vip` - (Optional) Specific V4 VIP. Use given IPV4 address as VIP on virtual Network (`String`).
-
-`virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#nestedblock--advertise_custom--advertise_where--virtual_network--virtual_network) below.
 
 <a id="nestedblock--advertise_custom--advertise_where--virtual_network--default_v6_vip"></a>
 
-### Advertise Custom Advertise Where Virtual Network Default V6 Vip
-
 <a id="nestedblock--advertise_custom--advertise_where--virtual_network--default_vip"></a>
-
-### Advertise Custom Advertise Where Virtual Network Default Vip
 
 <a id="nestedblock--advertise_custom--advertise_where--virtual_network--virtual_network"></a>
 
-### Advertise Custom Advertise Where Virtual Network Virtual Network
-
 <a id="nestedblock--advertise_custom--advertise_where--virtual_site"></a>
-
-### Advertise Custom Advertise Where Virtual Site
-
-`network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks (`String`).
-
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--advertise_custom--advertise_where--virtual_site--virtual_site) below.
 
 <a id="nestedblock--advertise_custom--advertise_where--virtual_site--virtual_site"></a>
 
-### Advertise Custom Advertise Where Virtual Site Virtual Site
-
 <a id="nestedblock--advertise_custom--advertise_where--virtual_site_with_vip"></a>
-
-### Advertise Custom Advertise Where Virtual Site With Vip
-
-`ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
-
-`network` - (Optional) Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks (`String`).
-
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--advertise_custom--advertise_where--virtual_site_with_vip--virtual_site) below.
 
 <a id="nestedblock--advertise_custom--advertise_where--virtual_site_with_vip--virtual_site"></a>
 
-### Advertise Custom Advertise Where Virtual Site With Vip Virtual Site
-
 <a id="nestedblock--advertise_custom--advertise_where--vk8s_service"></a>
-
-### Advertise Custom Advertise Where Vk8s Service
-
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--advertise_custom--advertise_where--vk8s_service--site) below.
-
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--advertise_custom--advertise_where--vk8s_service--virtual_site) below.
 
 <a id="nestedblock--advertise_custom--advertise_where--vk8s_service--site"></a>
 
-### Advertise Custom Advertise Where Vk8s Service Site
-
 <a id="nestedblock--advertise_custom--advertise_where--vk8s_service--virtual_site"></a>
-
-### Advertise Custom Advertise Where Vk8s Service Virtual Site
 
 <a id="nestedblock--advertise_on_public"></a>
 
-### Advertise On Public
-
-`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public Ip](#nestedblock--advertise_on_public--public_ip) below.
-
 <a id="nestedblock--advertise_on_public--public_ip"></a>
-
-### Advertise On Public Public Ip
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--advertise_on_public_default_vip"></a>
 
-### Advertise On Public Default Vip
-
 <a id="nestedblock--default_lb_with_sni"></a>
-
-### Default Lb With Sni
 
 <a id="nestedblock--do_not_advertise"></a>
 
-### Do Not Advertise
-
 <a id="nestedblock--do_not_retract_cluster"></a>
-
-### Do Not Retract Cluster
 
 <a id="nestedblock--hash_policy_choice_least_active"></a>
 
-### Hash Policy Choice Least Active
-
 <a id="nestedblock--hash_policy_choice_random"></a>
-
-### Hash Policy Choice Random
 
 <a id="nestedblock--hash_policy_choice_round_robin"></a>
 
-### Hash Policy Choice Round Robin
-
 <a id="nestedblock--hash_policy_choice_source_ip_stickiness"></a>
-
-### Hash Policy Choice Source Ip Stickiness
 
 <a id="nestedblock--no_service_policies"></a>
 
-### No Service Policies
-
 <a id="nestedblock--no_sni"></a>
-
-### No Sni
 
 <a id="nestedblock--origin_pools_weights"></a>
 
-### Origin Pools Weights
-
-`cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#nestedblock--origin_pools_weights--cluster) below.
-
-`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. See [Endpoint Subsets](#nestedblock--origin_pools_weights--endpoint_subsets) below.
-
-`pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--origin_pools_weights--pool) below.
-
-`priority` - (Optional) Priority. Priority of this origin pool, valid only with multiple origin pools (`Number`).
-
-`weight` - (Optional) Weight. Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool (`Number`).
-
 <a id="nestedblock--origin_pools_weights--cluster"></a>
-
-### Origin Pools Weights Cluster
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--origin_pools_weights--endpoint_subsets"></a>
 
-### Origin Pools Weights Endpoint Subsets
-
 <a id="nestedblock--origin_pools_weights--pool"></a>
-
-### Origin Pools Weights Pool
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--retract_cluster"></a>
 
-### Retract Cluster
-
 <a id="nestedblock--service_policies_from_namespace"></a>
-
-### Service Policies From Namespace
 
 <a id="nestedblock--sni"></a>
 
-### Sni
-
 <a id="nestedblock--tcp"></a>
-
-### Tcp
 
 <a id="nestedblock--timeouts"></a>
 
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
 <a id="nestedblock--tls_tcp"></a>
-
-### Tls Tcp
-
-`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [Tls Cert Params](#nestedblock--tls_tcp--tls_cert_params) below.
-
-`tls_parameters` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [Tls Parameters](#nestedblock--tls_tcp--tls_parameters) below.
 
 <a id="nestedblock--tls_tcp--tls_cert_params"></a>
 
-### Tls Tcp Tls Cert Params
-
-`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#nestedblock--tls_tcp--tls_cert_params--certificates) below.
-
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--tls_tcp--tls_cert_params--no_mtls) below.
-
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--tls_tcp--tls_cert_params--tls_config) below.
-
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use Mtls](#nestedblock--tls_tcp--tls_cert_params--use_mtls) below.
-
 <a id="nestedblock--tls_tcp--tls_cert_params--certificates"></a>
-
-### Tls Tcp Tls Cert Params Certificates
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--tls_tcp--tls_cert_params--no_mtls"></a>
 
-### Tls Tcp Tls Cert Params No Mtls
-
 <a id="nestedblock--tls_tcp--tls_cert_params--tls_config"></a>
-
-### Tls Tcp Tls Cert Params Tls Config
-
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#nestedblock--tls_tcp--tls_cert_params--tls_config--custom_security) below.
-
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#nestedblock--tls_tcp--tls_cert_params--tls_config--default_security) below.
-
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#nestedblock--tls_tcp--tls_cert_params--tls_config--low_security) below.
-
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#nestedblock--tls_tcp--tls_cert_params--tls_config--medium_security) below.
 
 <a id="nestedblock--tls_tcp--tls_cert_params--tls_config--custom_security"></a>
 
-### Tls Tcp Tls Cert Params Tls Config Custom Security
-
 <a id="nestedblock--tls_tcp--tls_cert_params--tls_config--default_security"></a>
-
-### Tls Tcp Tls Cert Params Tls Config Default Security
 
 <a id="nestedblock--tls_tcp--tls_cert_params--tls_config--low_security"></a>
 
-### Tls Tcp Tls Cert Params Tls Config Low Security
-
 <a id="nestedblock--tls_tcp--tls_cert_params--tls_config--medium_security"></a>
-
-### Tls Tcp Tls Cert Params Tls Config Medium Security
 
 <a id="nestedblock--tls_tcp--tls_cert_params--use_mtls"></a>
 
-### Tls Tcp Tls Cert Params Use Mtls
-
-`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it (`Bool`).
-
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Crl](#nestedblock--tls_tcp--tls_cert_params--use_mtls--crl) below.
-
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No Crl](#nestedblock--tls_tcp--tls_cert_params--use_mtls--no_crl) below.
-
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--tls_tcp--tls_cert_params--use_mtls--trusted_ca) below.
-
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
-
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--tls_tcp--tls_cert_params--use_mtls--xfcc_disabled) below.
-
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#nestedblock--tls_tcp--tls_cert_params--use_mtls--xfcc_options) below.
-
 <a id="nestedblock--tls_tcp--tls_cert_params--use_mtls--crl"></a>
-
-### Tls Tcp Tls Cert Params Use Mtls Crl
 
 <a id="nestedblock--tls_tcp--tls_cert_params--use_mtls--no_crl"></a>
 
-### Tls Tcp Tls Cert Params Use Mtls No Crl
-
 <a id="nestedblock--tls_tcp--tls_cert_params--use_mtls--trusted_ca"></a>
-
-### Tls Tcp Tls Cert Params Use Mtls Trusted Ca
 
 <a id="nestedblock--tls_tcp--tls_cert_params--use_mtls--xfcc_disabled"></a>
 
-### Tls Tcp Tls Cert Params Use Mtls Xfcc Disabled
-
 <a id="nestedblock--tls_tcp--tls_cert_params--use_mtls--xfcc_options"></a>
-
-### Tls Tcp Tls Cert Params Use Mtls Xfcc Options
 
 <a id="nestedblock--tls_tcp--tls_parameters"></a>
 
-### Tls Tcp Tls Parameters
-
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--tls_tcp--tls_parameters--no_mtls) below.
-
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--tls_tcp--tls_parameters--tls_certificates) below.
-
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--tls_tcp--tls_parameters--tls_config) below.
-
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use Mtls](#nestedblock--tls_tcp--tls_parameters--use_mtls) below.
-
 <a id="nestedblock--tls_tcp--tls_parameters--no_mtls"></a>
-
-### Tls Tcp Tls Parameters No Mtls
 
 <a id="nestedblock--tls_tcp--tls_parameters--tls_certificates"></a>
 
-### Tls Tcp Tls Parameters Tls Certificates
-
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
-
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_tcp--tls_parameters--tls_certificates--custom_hash_algorithms) below.
-
-`description` - (Optional) Description. Description for the certificate (`String`).
-
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ocsp Stapling](#nestedblock--tls_tcp--tls_parameters--tls_certificates--disable_ocsp_stapling) below.
-
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--tls_tcp--tls_parameters--tls_certificates--private_key) below.
-
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--tls_tcp--tls_parameters--tls_certificates--use_system_defaults) below.
-
 <a id="nestedblock--tls_tcp--tls_parameters--tls_certificates--custom_hash_algorithms"></a>
-
-### Tls Tcp Tls Parameters Tls Certificates Custom Hash Algorithms
 
 <a id="nestedblock--tls_tcp--tls_parameters--tls_certificates--disable_ocsp_stapling"></a>
 
-### Tls Tcp Tls Parameters Tls Certificates Disable Ocsp Stapling
-
 <a id="nestedblock--tls_tcp--tls_parameters--tls_certificates--private_key"></a>
-
-### Tls Tcp Tls Parameters Tls Certificates Private Key
 
 <a id="nestedblock--tls_tcp--tls_parameters--tls_certificates--use_system_defaults"></a>
 
-### Tls Tcp Tls Parameters Tls Certificates Use System Defaults
-
 <a id="nestedblock--tls_tcp--tls_parameters--tls_config"></a>
-
-### Tls Tcp Tls Parameters Tls Config
-
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#nestedblock--tls_tcp--tls_parameters--tls_config--custom_security) below.
-
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#nestedblock--tls_tcp--tls_parameters--tls_config--default_security) below.
-
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#nestedblock--tls_tcp--tls_parameters--tls_config--low_security) below.
-
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#nestedblock--tls_tcp--tls_parameters--tls_config--medium_security) below.
 
 <a id="nestedblock--tls_tcp--tls_parameters--tls_config--custom_security"></a>
 
-### Tls Tcp Tls Parameters Tls Config Custom Security
-
 <a id="nestedblock--tls_tcp--tls_parameters--tls_config--default_security"></a>
-
-### Tls Tcp Tls Parameters Tls Config Default Security
 
 <a id="nestedblock--tls_tcp--tls_parameters--tls_config--low_security"></a>
 
-### Tls Tcp Tls Parameters Tls Config Low Security
-
 <a id="nestedblock--tls_tcp--tls_parameters--tls_config--medium_security"></a>
-
-### Tls Tcp Tls Parameters Tls Config Medium Security
 
 <a id="nestedblock--tls_tcp--tls_parameters--use_mtls"></a>
 
-### Tls Tcp Tls Parameters Use Mtls
-
-`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it (`Bool`).
-
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Crl](#nestedblock--tls_tcp--tls_parameters--use_mtls--crl) below.
-
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No Crl](#nestedblock--tls_tcp--tls_parameters--use_mtls--no_crl) below.
-
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--tls_tcp--tls_parameters--use_mtls--trusted_ca) below.
-
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
-
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--tls_tcp--tls_parameters--use_mtls--xfcc_disabled) below.
-
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#nestedblock--tls_tcp--tls_parameters--use_mtls--xfcc_options) below.
-
 <a id="nestedblock--tls_tcp--tls_parameters--use_mtls--crl"></a>
-
-### Tls Tcp Tls Parameters Use Mtls Crl
 
 <a id="nestedblock--tls_tcp--tls_parameters--use_mtls--no_crl"></a>
 
-### Tls Tcp Tls Parameters Use Mtls No Crl
-
 <a id="nestedblock--tls_tcp--tls_parameters--use_mtls--trusted_ca"></a>
-
-### Tls Tcp Tls Parameters Use Mtls Trusted Ca
 
 <a id="nestedblock--tls_tcp--tls_parameters--use_mtls--xfcc_disabled"></a>
 
-### Tls Tcp Tls Parameters Use Mtls Xfcc Disabled
-
 <a id="nestedblock--tls_tcp--tls_parameters--use_mtls--xfcc_options"></a>
-
-### Tls Tcp Tls Parameters Use Mtls Xfcc Options
 
 <a id="nestedblock--tls_tcp_auto_cert"></a>
 
-### Tls Tcp Auto Cert
-
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--tls_tcp_auto_cert--no_mtls) below.
-
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--tls_tcp_auto_cert--tls_config) below.
-
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use Mtls](#nestedblock--tls_tcp_auto_cert--use_mtls) below.
-
 <a id="nestedblock--tls_tcp_auto_cert--no_mtls"></a>
-
-### Tls Tcp Auto Cert No Mtls
 
 <a id="nestedblock--tls_tcp_auto_cert--tls_config"></a>
 
-### Tls Tcp Auto Cert Tls Config
-
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#nestedblock--tls_tcp_auto_cert--tls_config--custom_security) below.
-
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#nestedblock--tls_tcp_auto_cert--tls_config--default_security) below.
-
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#nestedblock--tls_tcp_auto_cert--tls_config--low_security) below.
-
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#nestedblock--tls_tcp_auto_cert--tls_config--medium_security) below.
-
 <a id="nestedblock--tls_tcp_auto_cert--tls_config--custom_security"></a>
-
-### Tls Tcp Auto Cert Tls Config Custom Security
-
-`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
-
-`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3` (`String`).
-
-`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3` (`String`).
 
 <a id="nestedblock--tls_tcp_auto_cert--tls_config--default_security"></a>
 
-### Tls Tcp Auto Cert Tls Config Default Security
-
 <a id="nestedblock--tls_tcp_auto_cert--tls_config--low_security"></a>
-
-### Tls Tcp Auto Cert Tls Config Low Security
 
 <a id="nestedblock--tls_tcp_auto_cert--tls_config--medium_security"></a>
 
-### Tls Tcp Auto Cert Tls Config Medium Security
-
 <a id="nestedblock--tls_tcp_auto_cert--use_mtls"></a>
-
-### Tls Tcp Auto Cert Use Mtls
-
-`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it (`Bool`).
-
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Crl](#nestedblock--tls_tcp_auto_cert--use_mtls--crl) below.
-
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No Crl](#nestedblock--tls_tcp_auto_cert--use_mtls--no_crl) below.
-
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--tls_tcp_auto_cert--use_mtls--trusted_ca) below.
-
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
-
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--tls_tcp_auto_cert--use_mtls--xfcc_disabled) below.
-
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#nestedblock--tls_tcp_auto_cert--use_mtls--xfcc_options) below.
 
 <a id="nestedblock--tls_tcp_auto_cert--use_mtls--crl"></a>
 
-### Tls Tcp Auto Cert Use Mtls Crl
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--tls_tcp_auto_cert--use_mtls--no_crl"></a>
-
-### Tls Tcp Auto Cert Use Mtls No Crl
 
 <a id="nestedblock--tls_tcp_auto_cert--use_mtls--trusted_ca"></a>
 
-### Tls Tcp Auto Cert Use Mtls Trusted Ca
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--tls_tcp_auto_cert--use_mtls--xfcc_disabled"></a>
 
-### Tls Tcp Auto Cert Use Mtls Xfcc Disabled
-
 <a id="nestedblock--tls_tcp_auto_cert--use_mtls--xfcc_options"></a>
-
-### Tls Tcp Auto Cert Use Mtls Xfcc Options
-
-`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`List`).
 
 ## Import
 

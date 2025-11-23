@@ -52,75 +52,23 @@ resource "f5xc_addon_subscription" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the AddonSubscription. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the AddonSubscription will be created (`String`).
-
 The following arguments are optional:
-
-`addon_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Addon Service](#addon-service) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`notification_preference` - (Optional) Notification Preference. NotificationPreference preference for receiving addon subscription notifications. See [Notification Preference](#notification-preference) below for details.
-
-`status` - (Optional) Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement (`String`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--addon_service"></a>
 
-### Addon Service
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--notification_preference"></a>
-
-### Notification Preference
-
-`emails` - (Optional) Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription. See [Emails](#nestedblock--notification_preference--emails) below.
-
-`support_ticket_id` - (Optional) Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription. See [Support Ticket Id](#nestedblock--notification_preference--support_ticket_id) below.
 
 <a id="nestedblock--notification_preference--emails"></a>
 
-### Notification Preference Emails
-
-`email_ids` - (Optional) Emails. Email ids associated with the Addon Subscription (`List`).
-
 <a id="nestedblock--notification_preference--support_ticket_id"></a>
 
-### Notification Preference Support Ticket Id
-
-`subscription_ticket_id` - (Optional) Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription (`String`).
-
-`unsubscription_ticket_id` - (Optional) Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

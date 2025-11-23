@@ -34,18 +34,6 @@ data "f5xc_secret_policy" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the SecretPolicy (`String`).
-
-`namespace` - (Required) Namespace where the SecretPolicy exists (`String`).
-
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
-
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
-
-`description` - (Optional) Description of the SecretPolicy (`String`).
-
-`id` - (Optional) Unique identifier for the resource (`String`).
-
-`labels` - (Optional) Labels applied to this resource (`Map`).

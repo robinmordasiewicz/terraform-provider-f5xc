@@ -52,113 +52,35 @@ resource "f5xc_subnet" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the Subnet. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the Subnet will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "connect_to_layer2, connect_to_slo, isolated_nw" must be set.
-
-`connect_to_layer2` - (Optional) Subnet connection to Layer2 Interface. See [Connect To Layer2](#connect-to-layer2) below for details.
-
-`connect_to_slo` - (Optional) Empty. This can be used for messages where no values are needed. See [Connect To Slo](#connect-to-slo) below for details.
-
-`isolated_nw` - (Optional) Empty. This can be used for messages where no values are needed. See [Isolated Nw](#isolated-nw) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`site_subnet_params` - (Optional) Site Subnet Parameters. Configure subnet parameters per site. See [Site Subnet Params](#site-subnet-params) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--connect_to_layer2"></a>
 
-### Connect To Layer2
-
-`layer2_intf_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Layer2 Intf Ref](#nestedblock--connect_to_layer2--layer2_intf_ref) below.
-
 <a id="nestedblock--connect_to_layer2--layer2_intf_ref"></a>
-
-### Connect To Layer2 Layer2 Intf Ref
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--connect_to_slo"></a>
 
-### Connect To Slo
-
 <a id="nestedblock--isolated_nw"></a>
-
-### Isolated Nw
 
 <a id="nestedblock--site_subnet_params"></a>
 
-### Site Subnet Params
-
-`dhcp` - (Optional) Empty. This can be used for messages where no values are needed. See [Dhcp](#nestedblock--site_subnet_params--dhcp) below.
-
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--site_subnet_params--site) below.
-
-`static_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Static Ip](#nestedblock--site_subnet_params--static_ip) below.
-
-`subnet_dhcp_server_params` - (Optional) Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface. See [Subnet Dhcp Server Params](#nestedblock--site_subnet_params--subnet_dhcp_server_params) below.
-
 <a id="nestedblock--site_subnet_params--dhcp"></a>
-
-### Site Subnet Params Dhcp
 
 <a id="nestedblock--site_subnet_params--site"></a>
 
-### Site Subnet Params Site
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--site_subnet_params--static_ip"></a>
-
-### Site Subnet Params Static Ip
 
 <a id="nestedblock--site_subnet_params--subnet_dhcp_server_params"></a>
 
-### Site Subnet Params Subnet Dhcp Server Params
-
-`dhcp_networks` - (Optional) Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses. See [Dhcp Networks](#nestedblock--site_subnet_params--subnet_dhcp_server_params--dhcp_networks) below.
-
 <a id="nestedblock--site_subnet_params--subnet_dhcp_server_params--dhcp_networks"></a>
 
-### Site Subnet Params Subnet Dhcp Server Params Dhcp Networks
-
-`network_prefix` - (Optional) Network Prefix. Network prefix for subnet (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

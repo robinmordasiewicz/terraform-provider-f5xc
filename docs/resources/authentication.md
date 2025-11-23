@@ -52,151 +52,43 @@ resource "f5xc_authentication" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the Authentication. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the Authentication will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`cookie_params` - (Optional) Cookie Parameters. Specifies different cookie related config parameters for authentication. See [Cookie Params](#cookie-params) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`oidc_auth` - (Optional) OIDCAuthType. See [Oidc Auth](#oidc-auth) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--cookie_params"></a>
 
-### Cookie Params
-
-`auth_hmac` - (Optional) HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid. See [Auth Hmac](#nestedblock--cookie_params--auth_hmac) below.
-
-`cookie_expiry` - (Optional) Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie (`Number`).
-
-`cookie_refresh_interval` - (Optional) Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce re-login (`Number`).
-
-`kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object. See [Kms Key Hmac](#nestedblock--cookie_params--kms_key_hmac) below.
-
-`session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
-
 <a id="nestedblock--cookie_params--auth_hmac"></a>
-
-### Cookie Params Auth Hmac
-
-`prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Prim Key](#nestedblock--cookie_params--auth_hmac--prim_key) below.
-
-`prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time (`String`).
-
-`sec_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Sec Key](#nestedblock--cookie_params--auth_hmac--sec_key) below.
-
-`sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time (`String`).
 
 <a id="nestedblock--cookie_params--auth_hmac--prim_key"></a>
 
-### Cookie Params Auth Hmac Prim Key
-
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--cookie_params--auth_hmac--prim_key--blindfold_secret_info) below.
-
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--cookie_params--auth_hmac--prim_key--clear_secret_info) below.
-
 <a id="nestedblock--cookie_params--auth_hmac--prim_key--blindfold_secret_info"></a>
-
-### Cookie Params Auth Hmac Prim Key Blindfold Secret Info
 
 <a id="nestedblock--cookie_params--auth_hmac--prim_key--clear_secret_info"></a>
 
-### Cookie Params Auth Hmac Prim Key Clear Secret Info
-
 <a id="nestedblock--cookie_params--auth_hmac--sec_key"></a>
-
-### Cookie Params Auth Hmac Sec Key
-
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--cookie_params--auth_hmac--sec_key--blindfold_secret_info) below.
-
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--cookie_params--auth_hmac--sec_key--clear_secret_info) below.
 
 <a id="nestedblock--cookie_params--auth_hmac--sec_key--blindfold_secret_info"></a>
 
-### Cookie Params Auth Hmac Sec Key Blindfold Secret Info
-
 <a id="nestedblock--cookie_params--auth_hmac--sec_key--clear_secret_info"></a>
-
-### Cookie Params Auth Hmac Sec Key Clear Secret Info
 
 <a id="nestedblock--cookie_params--kms_key_hmac"></a>
 
-### Cookie Params Kms Key Hmac
-
 <a id="nestedblock--oidc_auth"></a>
-
-### Oidc Auth
-
-`client_secret` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Client Secret](#nestedblock--oidc_auth--client_secret) below.
-
-`oidc_auth_params` - (Optional) OIDCAuthParams. See [Oidc Auth Params](#nestedblock--oidc_auth--oidc_auth_params) below.
-
-`oidc_client_id` - (Optional) OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server (`String`).
-
-`oidc_well_known_config_url` - (Optional) Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints (`String`).
 
 <a id="nestedblock--oidc_auth--client_secret"></a>
 
-### Oidc Auth Client Secret
-
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--oidc_auth--client_secret--blindfold_secret_info) below.
-
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--oidc_auth--client_secret--clear_secret_info) below.
-
 <a id="nestedblock--oidc_auth--client_secret--blindfold_secret_info"></a>
-
-### Oidc Auth Client Secret Blindfold Secret Info
-
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
-
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
-
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--oidc_auth--client_secret--clear_secret_info"></a>
 
-### Oidc Auth Client Secret Clear Secret Info
-
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
-
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
-
 <a id="nestedblock--oidc_auth--oidc_auth_params"></a>
 
-### Oidc Auth Oidc Auth Params
-
-`auth_endpoint_url` - (Optional) Authorization Endpoint. URL of the authorization server's authorization endpoint (`String`).
-
-`end_session_endpoint_url` - (Optional) Logout Endpoint. URL of the authorization server's Logout endpoint (`String`).
-
-`token_endpoint_url` - (Optional) Token Endpoint. URL of the authorization server's Token endpoint (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

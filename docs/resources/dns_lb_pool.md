@@ -52,187 +52,41 @@ resource "f5xc_dns_lb_pool" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the DNSLbPool. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the DNSLbPool will be created (`String`).
-
 The following arguments are optional:
-
-> **Note:** One of the arguments from this list "a_pool, aaaa_pool, cname_pool, mx_pool, srv_pool" must be set.
-
-`a_pool` - (Optional) Pool for A Record. See [A Pool](#a-pool) below for details.
-
-`aaaa_pool` - (Optional) Pool for AAAA Record. See [Aaaa Pool](#aaaa-pool) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`cname_pool` - (Optional) Pool for CNAME Record. See [Cname Pool](#cname-pool) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`load_balancing_mode` - (Optional) LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool (`String`).
-
-`mx_pool` - (Optional) Pool for MX Record. See [Mx Pool](#mx-pool) below for details.
-
-`srv_pool` - (Optional) Pool for SRV Record. See [Srv Pool](#srv-pool) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-> **Note:** One of the arguments from this list "ttl, use_rrset_ttl" must be set.
-
-`ttl` - (Optional) TTL. Custom TTL in seconds (default 30) for responses from this pool (`Number`).
-
-`use_rrset_ttl` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Rrset Ttl](#use-rrset-ttl) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--a_pool"></a>
 
-### A Pool
-
-`disable_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Health Check](#nestedblock--a_pool--disable_health_check) below.
-
-`health_check` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Health Check](#nestedblock--a_pool--health_check) below.
-
-`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
-
-`members` - (Optional) Pool Members. See [Members](#nestedblock--a_pool--members) below.
-
 <a id="nestedblock--a_pool--disable_health_check"></a>
-
-### A Pool Disable Health Check
 
 <a id="nestedblock--a_pool--health_check"></a>
 
-### A Pool Health Check
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--a_pool--members"></a>
-
-### A Pool Members
-
-`disable` - (Optional) Disable. A value of true will disable the pool-member (`Bool`).
-
-`ip_endpoint` - (Optional) Public IP. Public IP address (`String`).
-
-`name` - (Optional) Name. Pool member name (`String`).
-
-`priority` - (Optional) Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority (`Number`).
-
-`ratio` - (Optional) Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member (`Number`).
 
 <a id="nestedblock--aaaa_pool"></a>
 
-### Aaaa Pool
-
-`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
-
-`members` - (Optional) Pool Members. See [Members](#nestedblock--aaaa_pool--members) below.
-
 <a id="nestedblock--aaaa_pool--members"></a>
-
-### Aaaa Pool Members
-
-`disable` - (Optional) Disable. A value of true will disable the pool-member (`Bool`).
-
-`ip_endpoint` - (Optional) Public IP. Public IP address (`String`).
-
-`name` - (Optional) Name. Pool member name (`String`).
-
-`priority` - (Optional) Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority (`Number`).
-
-`ratio` - (Optional) Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member (`Number`).
 
 <a id="nestedblock--cname_pool"></a>
 
-### Cname Pool
-
-`members` - (Optional) Pool Members. See [Members](#nestedblock--cname_pool--members) below.
-
 <a id="nestedblock--cname_pool--members"></a>
-
-### Cname Pool Members
-
-`domain` - (Optional) Domain (`String`).
-
-`final_translation` - (Optional) Final Translation. If this flag is true, the CNAME record will not be translated further (`Bool`).
-
-`name` - (Optional) Name. Pool member name (`String`).
-
-`ratio` - (Optional) Load Balancing Ratio. Ratio (`Number`).
 
 <a id="nestedblock--mx_pool"></a>
 
-### Mx Pool
-
-`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
-
-`members` - (Optional) Pool Members. See [Members](#nestedblock--mx_pool--members) below.
-
 <a id="nestedblock--mx_pool--members"></a>
-
-### Mx Pool Members
-
-`domain` - (Optional) Domain (`String`).
-
-`name` - (Optional) Name. Pool member name (`String`).
-
-`priority` - (Optional) MX Record Priority. MX Record priority (`Number`).
-
-`ratio` - (Optional) Load Balancing Ratio. Load Balancing Ratio (`Number`).
 
 <a id="nestedblock--srv_pool"></a>
 
-### Srv Pool
-
-`max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
-
-`members` - (Optional) Pool Members. See [Members](#nestedblock--srv_pool--members) below.
-
 <a id="nestedblock--srv_pool--members"></a>
-
-### Srv Pool Members
-
-`final_translation` - (Optional) Final Translation. If this flag is true, the SRV record will not be translated further (`Bool`).
-
-`name` - (Optional) Name. Pool member name (`String`).
-
-`port` - (Optional) Port. Port on which the service can be found (`Number`).
-
-`priority` - (Optional) Priority. Priority of the target. A lower number indicates a higher preference (`Number`).
-
-`ratio` - (Optional) Load Balancing Ratio. Ratio (`Number`).
-
-`target` - (Optional) Target. Domain name of the machine providing the service (`String`).
-
-`weight` - (Optional) Weight. Weight of the target. A higher number indicates a higher preference (`Number`).
 
 <a id="nestedblock--timeouts"></a>
 
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
 <a id="nestedblock--use_rrset_ttl"></a>
-
-### Use Rrset Ttl
 
 ## Import
 

@@ -52,109 +52,35 @@ resource "f5xc_bgp_routing_policy" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the BGPRoutingPolicy. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the BGPRoutingPolicy will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`rules` - (Optional) Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom. See [Rules](#rules) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--rules"></a>
 
-### Rules
-
-`action` - (Optional) BGP Route Action. Action to be enforced if the BGP route matches the rule. See [Action](#nestedblock--rules--action) below.
-
-`match` - (Optional) BGP Route Match. Predicates which have to match information in route for action to be applied. See [Match](#nestedblock--rules--match) below.
-
 <a id="nestedblock--rules--action"></a>
-
-### Rules Action
-
-`aggregate` - (Optional) Empty. This can be used for messages where no values are needed. See [Aggregate](#nestedblock--rules--action--aggregate) below.
-
-`allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow](#nestedblock--rules--action--allow) below.
-
-`as_path` - (Optional) AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic (`String`).
-
-`community` - (Optional) BGP Community list. List of BGP communities. See [Community](#nestedblock--rules--action--community) below.
-
-`deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny](#nestedblock--rules--action--deny) below.
-
-`local_preference` - (Optional) Local preference. BGP Local Preference is generally used to influence outgoing traffic (`Number`).
-
-`metric` - (Optional) MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS (`Number`).
 
 <a id="nestedblock--rules--action--aggregate"></a>
 
-### Rules Action Aggregate
-
 <a id="nestedblock--rules--action--allow"></a>
-
-### Rules Action Allow
 
 <a id="nestedblock--rules--action--community"></a>
 
-### Rules Action Community
-
-`community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
-
 <a id="nestedblock--rules--action--deny"></a>
-
-### Rules Action Deny
 
 <a id="nestedblock--rules--match"></a>
 
-### Rules Match
-
-`as_path` - (Optional) AS path to match. AS path can also be a regex, which will be matched against route information (`String`).
-
-`community` - (Optional) BGP Community list. List of BGP communities. See [Community](#nestedblock--rules--match--community) below.
-
-`ip_prefixes` - (Optional) BGP Prefix List. List of IP prefix and prefix length range match condition. See [Ip Prefixes](#nestedblock--rules--match--ip_prefixes) below.
-
 <a id="nestedblock--rules--match--community"></a>
-
-### Rules Match Community
-
-`community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
 
 <a id="nestedblock--rules--match--ip_prefixes"></a>
 
-### Rules Match Ip Prefixes
-
-`prefixes` - (Optional) Prefix list. List of IP prefix. See [Prefixes](#nestedblock--rules--match--ip_prefixes--prefixes) below.
-
 <a id="nestedblock--rules--match--ip_prefixes--prefixes"></a>
 
-### Rules Match Ip Prefixes Prefixes
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

@@ -52,71 +52,25 @@ resource "f5xc_app_type" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the AppType. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the AppType will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`business_logic_markup_setting` - (Optional) API Discovery Settings. Settings specifying how API Discovery will be performed. See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
-
-`features` - (Optional) Features. List of various AI/ML features enabled. See [Features](#features) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--business_logic_markup_setting"></a>
 
-### Business Logic Markup Setting
-
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--business_logic_markup_setting--disable) below.
-
-`discovered_api_settings` - (Optional) Discovered API Settings. x-example: '2' Configure Discovered API Settings. See [Discovered Api Settings](#nestedblock--business_logic_markup_setting--discovered_api_settings) below.
-
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--business_logic_markup_setting--enable) below.
-
 <a id="nestedblock--business_logic_markup_setting--disable"></a>
-
-### Business Logic Markup Setting Disable
 
 <a id="nestedblock--business_logic_markup_setting--discovered_api_settings"></a>
 
-### Business Logic Markup Setting Discovered Api Settings
-
-`purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
-
 <a id="nestedblock--business_logic_markup_setting--enable"></a>
-
-### Business Logic Markup Setting Enable
 
 <a id="nestedblock--features"></a>
 
-### Features
-
-`type` - (Optional) AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

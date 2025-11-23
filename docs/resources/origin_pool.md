@@ -60,811 +60,229 @@ resource "f5xc_origin_pool" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the OriginPool. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the OriginPool will be created (`String`).
-
 The following arguments are optional:
-
-`advanced_options` - (Optional) Origin Pool Advanced Options. Configure Advanced options for origin pool. See [Advanced Options](#advanced-options) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "automatic_port, lb_port, port" must be set.
-
-`automatic_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic Port](#automatic-port) below for details.
-
-`endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints f... (`String`).
-
-> **Note:** One of the arguments from this list "health_check_port, same_as_endpoint_port" must be set.
-
-`health_check_port` - (Optional) Health check port. Port used for performing health check (`Number`).
-
-`healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects. See [Healthcheck](#healthcheck) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`lb_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Lb Port](#lb-port) below for details.
-
-`loadbalancer_algorithm` - (Optional) Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine... (`String`).
-
-> **Note:** One of the arguments from this list "no_tls, use_tls" must be set.
-
-`no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tls](#no-tls) below for details.
-
-`origin_servers` - (Optional) Origin Servers. List of origin servers in this pool. See [Origin Servers](#origin-servers) below for details.
-
-`port` - (Optional) Port. Endpoint service is available on this port (`Number`).
-
-`same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Endpoint Port](#same-as-endpoint-port) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`upstream_conn_pool_reuse_type` - (Optional) Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only. See [Upstream Conn Pool Reuse Type](#upstream-conn-pool-reuse-type) below for details.
-
-`use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters. See [Use Tls](#use-tls) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--advanced_options"></a>
 
-### Advanced Options
-
-`auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Http Config](#nestedblock--advanced_options--auto_http_config) below.
-
-`circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests .... See [Circuit Breaker](#nestedblock--advanced_options--circuit_breaker) below.
-
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds (`Number`).
-
-`default_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Circuit Breaker](#nestedblock--advanced_options--default_circuit_breaker) below.
-
-`disable_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Circuit Breaker](#nestedblock--advanced_options--disable_circuit_breaker) below.
-
-`disable_lb_source_ip_persistance` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Lb Source Ip Persistance](#nestedblock--advanced_options--disable_lb_source_ip_persistance) below.
-
-`disable_outlier_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Outlier Detection](#nestedblock--advanced_options--disable_outlier_detection) below.
-
-`disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Proxy Protocol](#nestedblock--advanced_options--disable_proxy_protocol) below.
-
-`disable_subsets` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Subsets](#nestedblock--advanced_options--disable_subsets) below.
-
-`enable_lb_source_ip_persistance` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Lb Source Ip Persistance](#nestedblock--advanced_options--enable_lb_source_ip_persistance) below.
-
-`enable_subsets` - (Optional) Origin Pool Subset Options. Configure subset options for origin pool. See [Enable Subsets](#nestedblock--advanced_options--enable_subsets) below.
-
-`http1_config` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections. See [Http1 Config](#nestedblock--advanced_options--http1_config) below.
-
-`http2_options` - (Optional) Http2 Protocol Options. Http2 Protocol options for upstream connections. See [Http2 Options](#nestedblock--advanced_options--http2_options) below.
-
-`http_idle_timeout` - (Optional) HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests (`Number`).
-
-`no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed. See [No Panic Threshold](#nestedblock--advanced_options--no_panic_threshold) below.
-
-`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them fr.... See [Outlier Detection](#nestedblock--advanced_options--outlier_detection) below.
-
-`panic_threshold` - (Optional) Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status (`Number`).
-
-`proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V1](#nestedblock--advanced_options--proxy_protocol_v1) below.
-
-`proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V2](#nestedblock--advanced_options--proxy_protocol_v2) below.
-
 <a id="nestedblock--advanced_options--auto_http_config"></a>
-
-### Advanced Options Auto Http Config
 
 <a id="nestedblock--advanced_options--circuit_breaker"></a>
 
-### Advanced Options Circuit Breaker
-
-`connection_limit` - (Optional) Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1 (`Number`).
-
-`max_requests` - (Optional) Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1 (`Number`).
-
-`pending_requests` - (Optional) Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection (`Number`).
-
-`priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request (`String`).
-
-`retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
-
 <a id="nestedblock--advanced_options--default_circuit_breaker"></a>
-
-### Advanced Options Default Circuit Breaker
 
 <a id="nestedblock--advanced_options--disable_circuit_breaker"></a>
 
-### Advanced Options Disable Circuit Breaker
-
 <a id="nestedblock--advanced_options--disable_lb_source_ip_persistance"></a>
-
-### Advanced Options Disable Lb Source Ip Persistance
 
 <a id="nestedblock--advanced_options--disable_outlier_detection"></a>
 
-### Advanced Options Disable Outlier Detection
-
 <a id="nestedblock--advanced_options--disable_proxy_protocol"></a>
-
-### Advanced Options Disable Proxy Protocol
 
 <a id="nestedblock--advanced_options--disable_subsets"></a>
 
-### Advanced Options Disable Subsets
-
 <a id="nestedblock--advanced_options--enable_lb_source_ip_persistance"></a>
-
-### Advanced Options Enable Lb Source Ip Persistance
 
 <a id="nestedblock--advanced_options--enable_subsets"></a>
 
-### Advanced Options Enable Subsets
-
-`any_endpoint` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Endpoint](#nestedblock--advanced_options--enable_subsets--any_endpoint) below.
-
-`default_subset` - (Optional) Origin Pool Default Subset. Default Subset definition. See [Default Subset](#nestedblock--advanced_options--enable_subsets--default_subset) below.
-
-`endpoint_subsets` - (Optional) Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class. See [Endpoint Subsets](#nestedblock--advanced_options--enable_subsets--endpoint_subsets) below.
-
-`fail_request` - (Optional) Empty. This can be used for messages where no values are needed. See [Fail Request](#nestedblock--advanced_options--enable_subsets--fail_request) below.
-
 <a id="nestedblock--advanced_options--enable_subsets--any_endpoint"></a>
-
-### Advanced Options Enable Subsets Any Endpoint
 
 <a id="nestedblock--advanced_options--enable_subsets--default_subset"></a>
 
-### Advanced Options Enable Subsets Default Subset
-
-`default_subset` - (Optional) Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists. See [Default Subset](#nestedblock--advanced_options--enable_subsets--default_subset--default_subset) below.
-
 <a id="nestedblock--advanced_options--enable_subsets--default_subset--default_subset"></a>
-
-### Advanced Options Enable Subsets Default Subset Default Subset
 
 <a id="nestedblock--advanced_options--enable_subsets--endpoint_subsets"></a>
 
-### Advanced Options Enable Subsets Endpoint Subsets
-
-`keys` - (Optional) Keys. List of keys that define a cluster subset class (`List`).
-
 <a id="nestedblock--advanced_options--enable_subsets--fail_request"></a>
-
-### Advanced Options Enable Subsets Fail Request
 
 <a id="nestedblock--advanced_options--http1_config"></a>
 
-### Advanced Options Http1 Config
-
-`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#nestedblock--advanced_options--http1_config--header_transformation) below.
-
 <a id="nestedblock--advanced_options--http1_config--header_transformation"></a>
-
-### Advanced Options Http1 Config Header Transformation
-
-`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header Transformation](#nestedblock--advanced_options--http1_config--header_transformation--default_header_transformation) below.
-
-`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Legacy Header Transformation](#nestedblock--advanced_options--http1_config--header_transformation--legacy_header_transformation) below.
-
-`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Preserve Case Header Transformation](#nestedblock--advanced_options--http1_config--header_transformation--preserve_case_header_transformation) below.
-
-`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Proper Case Header Transformation](#nestedblock--advanced_options--http1_config--header_transformation--proper_case_header_transformation) below.
 
 <a id="nestedblock--advanced_options--http1_config--header_transformation--default_header_transformation"></a>
 
-### Advanced Options Http1 Config Header Transformation Default Header Transformation
-
 <a id="nestedblock--advanced_options--http1_config--header_transformation--legacy_header_transformation"></a>
-
-### Advanced Options Http1 Config Header Transformation Legacy Header Transformation
 
 <a id="nestedblock--advanced_options--http1_config--header_transformation--preserve_case_header_transformation"></a>
 
-### Advanced Options Http1 Config Header Transformation Preserve Case Header Transformation
-
 <a id="nestedblock--advanced_options--http1_config--header_transformation--proper_case_header_transformation"></a>
-
-### Advanced Options Http1 Config Header Transformation Proper Case Header Transformation
 
 <a id="nestedblock--advanced_options--http2_options"></a>
 
-### Advanced Options Http2 Options
-
-`enabled` - (Optional) HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections (`Bool`).
-
 <a id="nestedblock--advanced_options--no_panic_threshold"></a>
-
-### Advanced Options No Panic Threshold
 
 <a id="nestedblock--advanced_options--outlier_detection"></a>
 
-### Advanced Options Outlier Detection
-
-`base_ejection_time` - (Optional) Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected (`Number`).
-
-`consecutive_5xx` - (Optional) Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected (`Number`).
-
-`consecutive_gateway_failure` - (Optional) Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected (`Number`).
-
-`interval` - (Optional) Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s (`Number`).
-
-`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
-
 <a id="nestedblock--advanced_options--proxy_protocol_v1"></a>
-
-### Advanced Options Proxy Protocol V1
 
 <a id="nestedblock--advanced_options--proxy_protocol_v2"></a>
 
-### Advanced Options Proxy Protocol V2
-
 <a id="nestedblock--automatic_port"></a>
-
-### Automatic Port
 
 <a id="nestedblock--healthcheck"></a>
 
-### Healthcheck
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--lb_port"></a>
-
-### Lb Port
 
 <a id="nestedblock--no_tls"></a>
 
-### No Tls
-
 <a id="nestedblock--origin_servers"></a>
-
-### Origin Servers
-
-`cbip_service` - (Optional) Discovered Classic BIG-IP Service Name. Specify origin server with Classic BIG-IP Service (Virtual Server). See [Cbip Service](#nestedblock--origin_servers--cbip_service) below.
-
-`consul_service` - (Optional) Consul Service Name on given Sites. Specify origin server with Hashi Corp Consul service name and site information. See [Consul Service](#nestedblock--origin_servers--consul_service) below.
-
-`custom_endpoint_object` - (Optional) Custom Endpoint Object for Origin Server. Specify origin server with a reference to endpoint object. See [Custom Endpoint Object](#nestedblock--origin_servers--custom_endpoint_object) below.
-
-`k8s_service` - (Optional) K8s Service Name on given Sites. Specify origin server with K8s service name and site information. See [K8s Service](#nestedblock--origin_servers--k8s_service) below.
-
-`labels` - (Optional) Origin Server Labels. Add Labels for this origin server, these labels can be used to form subset. See [Labels](#nestedblock--origin_servers--labels) below.
-
-`private_ip` - (Optional) IP address on given Sites. Specify origin server with private or public IP address and site information. See [Private Ip](#nestedblock--origin_servers--private_ip) below.
-
-`private_name` - (Optional) DNS Name on given Sites. Specify origin server with private or public DNS name and site information. See [Private Name](#nestedblock--origin_servers--private_name) below.
-
-`public_ip` - (Optional) Public IP. Specify origin server with public IP address. See [Public Ip](#nestedblock--origin_servers--public_ip) below.
-
-`public_name` - (Optional) Public DNS Name. Specify origin server with public DNS name. See [Public Name](#nestedblock--origin_servers--public_name) below.
-
-`vn_private_ip` - (Optional) IP address Virtual Network. Specify origin server with IP on Virtual Network. See [Vn Private Ip](#nestedblock--origin_servers--vn_private_ip) below.
-
-`vn_private_name` - (Optional) DNS Name on Virtual Network. Specify origin server with DNS name on Virtual Network. See [Vn Private Name](#nestedblock--origin_servers--vn_private_name) below.
 
 <a id="nestedblock--origin_servers--cbip_service"></a>
 
-### Origin Servers Cbip Service
-
-`service_name` - (Optional) Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin (`String`).
-
 <a id="nestedblock--origin_servers--consul_service"></a>
-
-### Origin Servers Consul Service
-
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--origin_servers--consul_service--inside_network) below.
-
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--origin_servers--consul_service--outside_network) below.
-
-`service_name` - (Optional) Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id (`String`).
-
-`site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#nestedblock--origin_servers--consul_service--site_locator) below.
-
-`snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#nestedblock--origin_servers--consul_service--snat_pool) below.
 
 <a id="nestedblock--origin_servers--consul_service--inside_network"></a>
 
-### Origin Servers Consul Service Inside Network
-
 <a id="nestedblock--origin_servers--consul_service--outside_network"></a>
-
-### Origin Servers Consul Service Outside Network
 
 <a id="nestedblock--origin_servers--consul_service--site_locator"></a>
 
-### Origin Servers Consul Service Site Locator
-
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--origin_servers--consul_service--site_locator--site) below.
-
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--origin_servers--consul_service--site_locator--virtual_site) below.
-
 <a id="nestedblock--origin_servers--consul_service--site_locator--site"></a>
-
-### Origin Servers Consul Service Site Locator Site
 
 <a id="nestedblock--origin_servers--consul_service--site_locator--virtual_site"></a>
 
-### Origin Servers Consul Service Site Locator Virtual Site
-
 <a id="nestedblock--origin_servers--consul_service--snat_pool"></a>
-
-### Origin Servers Consul Service Snat Pool
-
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#nestedblock--origin_servers--consul_service--snat_pool--no_snat_pool) below.
-
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#nestedblock--origin_servers--consul_service--snat_pool--snat_pool) below.
 
 <a id="nestedblock--origin_servers--consul_service--snat_pool--no_snat_pool"></a>
 
-### Origin Servers Consul Service Snat Pool No Snat Pool
-
 <a id="nestedblock--origin_servers--consul_service--snat_pool--snat_pool"></a>
-
-### Origin Servers Consul Service Snat Pool Snat Pool
 
 <a id="nestedblock--origin_servers--custom_endpoint_object"></a>
 
-### Origin Servers Custom Endpoint Object
-
-`endpoint` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Endpoint](#nestedblock--origin_servers--custom_endpoint_object--endpoint) below.
-
 <a id="nestedblock--origin_servers--custom_endpoint_object--endpoint"></a>
-
-### Origin Servers Custom Endpoint Object Endpoint
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--origin_servers--k8s_service"></a>
 
-### Origin Servers K8s Service
-
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--origin_servers--k8s_service--inside_network) below.
-
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--origin_servers--k8s_service--outside_network) below.
-
-`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP` (`String`).
-
-`service_name` - (Optional) Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename (`String`).
-
-`site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#nestedblock--origin_servers--k8s_service--site_locator) below.
-
-`snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#nestedblock--origin_servers--k8s_service--snat_pool) below.
-
-`vk8s_networks` - (Optional) Empty. This can be used for messages where no values are needed. See [Vk8s Networks](#nestedblock--origin_servers--k8s_service--vk8s_networks) below.
-
 <a id="nestedblock--origin_servers--k8s_service--inside_network"></a>
-
-### Origin Servers K8s Service Inside Network
 
 <a id="nestedblock--origin_servers--k8s_service--outside_network"></a>
 
-### Origin Servers K8s Service Outside Network
-
 <a id="nestedblock--origin_servers--k8s_service--site_locator"></a>
-
-### Origin Servers K8s Service Site Locator
-
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--origin_servers--k8s_service--site_locator--site) below.
-
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--origin_servers--k8s_service--site_locator--virtual_site) below.
 
 <a id="nestedblock--origin_servers--k8s_service--site_locator--site"></a>
 
-### Origin Servers K8s Service Site Locator Site
-
 <a id="nestedblock--origin_servers--k8s_service--site_locator--virtual_site"></a>
-
-### Origin Servers K8s Service Site Locator Virtual Site
 
 <a id="nestedblock--origin_servers--k8s_service--snat_pool"></a>
 
-### Origin Servers K8s Service Snat Pool
-
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#nestedblock--origin_servers--k8s_service--snat_pool--no_snat_pool) below.
-
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#nestedblock--origin_servers--k8s_service--snat_pool--snat_pool) below.
-
 <a id="nestedblock--origin_servers--k8s_service--snat_pool--no_snat_pool"></a>
-
-### Origin Servers K8s Service Snat Pool No Snat Pool
 
 <a id="nestedblock--origin_servers--k8s_service--snat_pool--snat_pool"></a>
 
-### Origin Servers K8s Service Snat Pool Snat Pool
-
 <a id="nestedblock--origin_servers--k8s_service--vk8s_networks"></a>
-
-### Origin Servers K8s Service Vk8s Networks
 
 <a id="nestedblock--origin_servers--labels"></a>
 
-### Origin Servers Labels
-
 <a id="nestedblock--origin_servers--private_ip"></a>
-
-### Origin Servers Private Ip
-
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--origin_servers--private_ip--inside_network) below.
-
-`ip` - (Optional) IP. Private IPV4 address (`String`).
-
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--origin_servers--private_ip--outside_network) below.
-
-`segment` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Segment](#nestedblock--origin_servers--private_ip--segment) below.
-
-`site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#nestedblock--origin_servers--private_ip--site_locator) below.
-
-`snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#nestedblock--origin_servers--private_ip--snat_pool) below.
 
 <a id="nestedblock--origin_servers--private_ip--inside_network"></a>
 
-### Origin Servers Private Ip Inside Network
-
 <a id="nestedblock--origin_servers--private_ip--outside_network"></a>
-
-### Origin Servers Private Ip Outside Network
 
 <a id="nestedblock--origin_servers--private_ip--segment"></a>
 
-### Origin Servers Private Ip Segment
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--origin_servers--private_ip--site_locator"></a>
-
-### Origin Servers Private Ip Site Locator
-
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--origin_servers--private_ip--site_locator--site) below.
-
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--origin_servers--private_ip--site_locator--virtual_site) below.
 
 <a id="nestedblock--origin_servers--private_ip--site_locator--site"></a>
 
-### Origin Servers Private Ip Site Locator Site
-
 <a id="nestedblock--origin_servers--private_ip--site_locator--virtual_site"></a>
-
-### Origin Servers Private Ip Site Locator Virtual Site
 
 <a id="nestedblock--origin_servers--private_ip--snat_pool"></a>
 
-### Origin Servers Private Ip Snat Pool
-
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#nestedblock--origin_servers--private_ip--snat_pool--no_snat_pool) below.
-
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#nestedblock--origin_servers--private_ip--snat_pool--snat_pool) below.
-
 <a id="nestedblock--origin_servers--private_ip--snat_pool--no_snat_pool"></a>
-
-### Origin Servers Private Ip Snat Pool No Snat Pool
 
 <a id="nestedblock--origin_servers--private_ip--snat_pool--snat_pool"></a>
 
-### Origin Servers Private Ip Snat Pool Snat Pool
-
 <a id="nestedblock--origin_servers--private_name"></a>
-
-### Origin Servers Private Name
-
-`dns_name` - (Optional) DNS Name. DNS Name (`String`).
-
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--origin_servers--private_name--inside_network) below.
-
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--origin_servers--private_name--outside_network) below.
-
-`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `https://datatracker.ietf.org/doc/html/rfc8767` (`Number`).
-
-`segment` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Segment](#nestedblock--origin_servers--private_name--segment) below.
-
-`site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#nestedblock--origin_servers--private_name--site_locator) below.
-
-`snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#nestedblock--origin_servers--private_name--snat_pool) below.
 
 <a id="nestedblock--origin_servers--private_name--inside_network"></a>
 
-### Origin Servers Private Name Inside Network
-
 <a id="nestedblock--origin_servers--private_name--outside_network"></a>
-
-### Origin Servers Private Name Outside Network
 
 <a id="nestedblock--origin_servers--private_name--segment"></a>
 
-### Origin Servers Private Name Segment
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--origin_servers--private_name--site_locator"></a>
-
-### Origin Servers Private Name Site Locator
-
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--origin_servers--private_name--site_locator--site) below.
-
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--origin_servers--private_name--site_locator--virtual_site) below.
 
 <a id="nestedblock--origin_servers--private_name--site_locator--site"></a>
 
-### Origin Servers Private Name Site Locator Site
-
 <a id="nestedblock--origin_servers--private_name--site_locator--virtual_site"></a>
-
-### Origin Servers Private Name Site Locator Virtual Site
 
 <a id="nestedblock--origin_servers--private_name--snat_pool"></a>
 
-### Origin Servers Private Name Snat Pool
-
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#nestedblock--origin_servers--private_name--snat_pool--no_snat_pool) below.
-
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#nestedblock--origin_servers--private_name--snat_pool--snat_pool) below.
-
 <a id="nestedblock--origin_servers--private_name--snat_pool--no_snat_pool"></a>
-
-### Origin Servers Private Name Snat Pool No Snat Pool
 
 <a id="nestedblock--origin_servers--private_name--snat_pool--snat_pool"></a>
 
-### Origin Servers Private Name Snat Pool Snat Pool
-
 <a id="nestedblock--origin_servers--public_ip"></a>
-
-### Origin Servers Public Ip
-
-`ip` - (Optional) Public IPV4. Public IPV4 address (`String`).
 
 <a id="nestedblock--origin_servers--public_name"></a>
 
-### Origin Servers Public Name
-
-`dns_name` - (Optional) DNS Name. DNS Name (`String`).
-
-`refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `https://datatracker.ietf.org/doc/html/rfc8767` (`Number`).
-
 <a id="nestedblock--origin_servers--vn_private_ip"></a>
-
-### Origin Servers Vn Private Ip
-
-`ip` - (Optional) IPV4. IPV4 address (`String`).
-
-`virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#nestedblock--origin_servers--vn_private_ip--virtual_network) below.
 
 <a id="nestedblock--origin_servers--vn_private_ip--virtual_network"></a>
 
-### Origin Servers Vn Private Ip Virtual Network
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--origin_servers--vn_private_name"></a>
-
-### Origin Servers Vn Private Name
-
-`dns_name` - (Optional) DNS Name. DNS Name (`String`).
-
-`private_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Private Network](#nestedblock--origin_servers--vn_private_name--private_network) below.
 
 <a id="nestedblock--origin_servers--vn_private_name--private_network"></a>
 
-### Origin Servers Vn Private Name Private Network
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--same_as_endpoint_port"></a>
-
-### Same As Endpoint Port
 
 <a id="nestedblock--timeouts"></a>
 
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
 <a id="nestedblock--upstream_conn_pool_reuse_type"></a>
-
-### Upstream Conn Pool Reuse Type
-
-`disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Conn Pool Reuse](#nestedblock--upstream_conn_pool_reuse_type--disable_conn_pool_reuse) below.
-
-`enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Conn Pool Reuse](#nestedblock--upstream_conn_pool_reuse_type--enable_conn_pool_reuse) below.
 
 <a id="nestedblock--upstream_conn_pool_reuse_type--disable_conn_pool_reuse"></a>
 
-### Upstream Conn Pool Reuse Type Disable Conn Pool Reuse
-
 <a id="nestedblock--upstream_conn_pool_reuse_type--enable_conn_pool_reuse"></a>
-
-### Upstream Conn Pool Reuse Type Enable Conn Pool Reuse
 
 <a id="nestedblock--use_tls"></a>
 
-### Use Tls
-
-`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Session Key Caching](#nestedblock--use_tls--default_session_key_caching) below.
-
-`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Session Key Caching](#nestedblock--use_tls--disable_session_key_caching) below.
-
-`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#nestedblock--use_tls--disable_sni) below.
-
-`max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
-
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--use_tls--no_mtls) below.
-
-`skip_server_verification` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Server Verification](#nestedblock--use_tls--skip_server_verification) below.
-
-`sni` - (Optional) SNI Value. SNI value to be used (`String`).
-
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--use_tls--tls_config) below.
-
-`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#nestedblock--use_tls--use_host_header_as_sni) below.
-
-`use_mtls` - (Optional) mTLS Certificate. mTLS Client Certificate. See [Use Mtls](#nestedblock--use_tls--use_mtls) below.
-
-`use_mtls_obj` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Use Mtls Obj](#nestedblock--use_tls--use_mtls_obj) below.
-
-`use_server_verification` - (Optional) TLS Validation Context for Origin Servers. Upstream TLS Validation Context. See [Use Server Verification](#nestedblock--use_tls--use_server_verification) below.
-
-`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Trusted Ca](#nestedblock--use_tls--volterra_trusted_ca) below.
-
 <a id="nestedblock--use_tls--default_session_key_caching"></a>
-
-### Use Tls Default Session Key Caching
 
 <a id="nestedblock--use_tls--disable_session_key_caching"></a>
 
-### Use Tls Disable Session Key Caching
-
 <a id="nestedblock--use_tls--disable_sni"></a>
-
-### Use Tls Disable Sni
 
 <a id="nestedblock--use_tls--no_mtls"></a>
 
-### Use Tls No Mtls
-
 <a id="nestedblock--use_tls--skip_server_verification"></a>
-
-### Use Tls Skip Server Verification
 
 <a id="nestedblock--use_tls--tls_config"></a>
 
-### Use Tls Tls Config
-
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#nestedblock--use_tls--tls_config--custom_security) below.
-
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#nestedblock--use_tls--tls_config--default_security) below.
-
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#nestedblock--use_tls--tls_config--low_security) below.
-
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#nestedblock--use_tls--tls_config--medium_security) below.
-
 <a id="nestedblock--use_tls--tls_config--custom_security"></a>
-
-### Use Tls Tls Config Custom Security
-
-`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
-
-`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3` (`String`).
-
-`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3` (`String`).
 
 <a id="nestedblock--use_tls--tls_config--default_security"></a>
 
-### Use Tls Tls Config Default Security
-
 <a id="nestedblock--use_tls--tls_config--low_security"></a>
-
-### Use Tls Tls Config Low Security
 
 <a id="nestedblock--use_tls--tls_config--medium_security"></a>
 
-### Use Tls Tls Config Medium Security
-
 <a id="nestedblock--use_tls--use_host_header_as_sni"></a>
-
-### Use Tls Use Host Header As Sni
 
 <a id="nestedblock--use_tls--use_mtls"></a>
 
-### Use Tls Use Mtls
-
-`tls_certificates` - (Optional) mTLS Client Certificate. mTLS Client Certificate. See [Tls Certificates](#nestedblock--use_tls--use_mtls--tls_certificates) below.
-
 <a id="nestedblock--use_tls--use_mtls--tls_certificates"></a>
-
-### Use Tls Use Mtls Tls Certificates
-
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
-
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--use_tls--use_mtls--tls_certificates--custom_hash_algorithms) below.
-
-`description` - (Optional) Description. Description for the certificate (`String`).
-
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ocsp Stapling](#nestedblock--use_tls--use_mtls--tls_certificates--disable_ocsp_stapling) below.
-
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--use_tls--use_mtls--tls_certificates--private_key) below.
-
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--use_tls--use_mtls--tls_certificates--use_system_defaults) below.
 
 <a id="nestedblock--use_tls--use_mtls--tls_certificates--custom_hash_algorithms"></a>
 
-### Use Tls Use Mtls Tls Certificates Custom Hash Algorithms
-
 <a id="nestedblock--use_tls--use_mtls--tls_certificates--disable_ocsp_stapling"></a>
-
-### Use Tls Use Mtls Tls Certificates Disable Ocsp Stapling
 
 <a id="nestedblock--use_tls--use_mtls--tls_certificates--private_key"></a>
 
-### Use Tls Use Mtls Tls Certificates Private Key
-
 <a id="nestedblock--use_tls--use_mtls--tls_certificates--use_system_defaults"></a>
-
-### Use Tls Use Mtls Tls Certificates Use System Defaults
 
 <a id="nestedblock--use_tls--use_mtls_obj"></a>
 
-### Use Tls Use Mtls Obj
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--use_tls--use_server_verification"></a>
-
-### Use Tls Use Server Verification
-
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--use_tls--use_server_verification--trusted_ca) below.
-
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate (`String`).
 
 <a id="nestedblock--use_tls--use_server_verification--trusted_ca"></a>
 
-### Use Tls Use Server Verification Trusted Ca
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--use_tls--volterra_trusted_ca"></a>
-
-### Use Tls Volterra Trusted Ca
 
 ## Import
 

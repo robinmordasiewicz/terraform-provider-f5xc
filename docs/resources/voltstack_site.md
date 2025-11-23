@@ -62,973 +62,275 @@ resource "f5xc_voltstack_site" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the VoltstackSite. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the VoltstackSite will be created (`String`).
-
 The following arguments are optional:
-
-`address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
-
-> **Note:** One of the arguments from this list "allow_all_usb, deny_all_usb, usb_policy" must be set.
-
-`allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Usb](#allow-all-usb) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "blocked_services, default_blocked_services" must be set.
-
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
-
-> **Note:** One of the arguments from this list "bond_device_list, no_bond_devices" must be set.
-
-`bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
-
-`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
-
-`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom Dns](#custom-dns) below for details.
-
-> **Note:** One of the arguments from this list "custom_network_config, default_network_config" must be set.
-
-`custom_network_config` - (Optional) VssNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
-
-> **Note:** One of the arguments from this list "custom_storage_config, default_storage_config" must be set.
-
-`custom_storage_config` - (Optional) VssStorageConfiguration. See [Custom Storage Config](#custom-storage-config) below for details.
-
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
-
-`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Network Config](#default-network-config) below for details.
-
-> **Note:** One of the arguments from this list "default_sriov_interface, sriov_interfaces" must be set.
-
-`default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sriov Interface](#default-sriov-interface) below for details.
-
-`default_storage_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Config](#default-storage-config) below for details.
-
-`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
-
-> **Note:** One of the arguments from this list "disable_gpu, enable_gpu, enable_vgpu" must be set.
-
-`disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Gpu](#disable-gpu) below for details.
-
-> **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
-
-`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vm](#disable-vm) below for details.
-
-`enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Gpu](#enable-gpu) below for details.
-
-`enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU. See [Enable Vgpu](#enable-vgpu) below for details.
-
-`enable_vm` - (Optional) VM Configuration. VMs support configuration. See [Enable Vm](#enable-vm) below for details.
-
-> **Note:** One of the arguments from this list "k8s_cluster, no_k8s_cluster" must be set.
-
-`k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#k8s-cluster) below for details.
-
-`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "local_control_plane, no_local_control_plane" must be set.
-
-`local_control_plane` - (Optional) Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc. See [Local Control Plane](#local-control-plane) below for details.
-
-> **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
-
-`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
-
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
-
-`master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes. See [Master Node Configuration](#master-node-configuration) below for details.
-
-`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
-
-`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#no-k8s-cluster) below for details.
-
-`no_local_control_plane` - (Optional) Empty. This can be used for messages where no values are needed. See [No Local Control Plane](#no-local-control-plane) below for details.
-
-`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global C.... See [Offline Survivability Mode](#offline-survivability-mode) below for details.
-
-`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [Os](#os) below for details.
-
-`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
-
-`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
-
-`volterra_certified_hw` - (Optional) Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site (`String`).
-
-`worker_nodes` - (Optional) Worker Nodes. Names of worker nodes (`List`).
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--allow_all_usb"></a>
 
-### Allow All Usb
-
 <a id="nestedblock--blocked_services"></a>
-
-### Blocked Services
-
-`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
 
 <a id="nestedblock--blocked_services--blocked_sevice"></a>
 
-### Blocked Services Blocked Sevice
-
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [Dns](#nestedblock--blocked_services--blocked_sevice--dns) below.
-
-`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network (`String`).
-
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [Ssh](#nestedblock--blocked_services--blocked_sevice--ssh) below.
-
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#nestedblock--blocked_services--blocked_sevice--web_user_interface) below.
-
 <a id="nestedblock--blocked_services--blocked_sevice--dns"></a>
-
-### Blocked Services Blocked Sevice Dns
 
 <a id="nestedblock--blocked_services--blocked_sevice--ssh"></a>
 
-### Blocked Services Blocked Sevice Ssh
-
 <a id="nestedblock--blocked_services--blocked_sevice--web_user_interface"></a>
-
-### Blocked Services Blocked Sevice Web User Interface
 
 <a id="nestedblock--bond_device_list"></a>
 
-### Bond Device List
-
-`bond_devices` - (Optional) Bond Devices. List of bond devices. See [Bond Devices](#nestedblock--bond_device_list--bond_devices) below.
-
 <a id="nestedblock--bond_device_list--bond_devices"></a>
-
-### Bond Device List Bond Devices
-
-`active_backup` - (Optional) Empty. This can be used for messages where no values are needed. See [Active Backup](#nestedblock--bond_device_list--bond_devices--active_backup) below.
-
-`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
-
-`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#nestedblock--bond_device_list--bond_devices--lacp) below.
-
-`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
-
-`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
-
-`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
 
 <a id="nestedblock--bond_device_list--bond_devices--active_backup"></a>
 
-### Bond Device List Bond Devices Active Backup
-
 <a id="nestedblock--bond_device_list--bond_devices--lacp"></a>
-
-### Bond Device List Bond Devices Lacp
-
-`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
 
 <a id="nestedblock--coordinates"></a>
 
-### Coordinates
-
-`latitude` - (Optional) Latitude. Latitude of the site location (`Number`).
-
-`longitude` - (Optional) Longitude. longitude of site location (`Number`).
-
 <a id="nestedblock--custom_dns"></a>
-
-### Custom Dns
-
-`inside_nameserver` - (Optional) DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network (`String`).
-
-`outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
 
 <a id="nestedblock--custom_network_config"></a>
 
-### Custom Network Config
-
-`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option .... See [Active Enhanced Firewall Policies](#nestedblock--custom_network_config--active_enhanced_firewall_policies) below.
-
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#nestedblock--custom_network_config--active_forward_proxy_policies) below.
-
-`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--custom_network_config--active_network_policies) below.
-
-`bgp_peer_address` - (Optional) BGP Peer Address. Optional bgp peer address that can be used as parameter for BGP configuration when BGP is configured to fetch BGP peer address from site Object (`String`).
-
-`bgp_router_id` - (Optional) BGP Router ID. Optional bgp router id that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object (`String`).
-
-`default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#nestedblock--custom_network_config--default_config) below.
-
-`default_interface_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Interface Config](#nestedblock--custom_network_config--default_interface_config) below.
-
-`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sli Config](#nestedblock--custom_network_config--default_sli_config) below.
-
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#nestedblock--custom_network_config--forward_proxy_allow_all) below.
-
-`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#nestedblock--custom_network_config--global_network_list) below.
-
-`interface_list` - (Optional) List of Interface. Configure network interfaces for this App Stack site. See [Interface List](#nestedblock--custom_network_config--interface_list) below.
-
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#nestedblock--custom_network_config--no_forward_proxy) below.
-
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#nestedblock--custom_network_config--no_global_network) below.
-
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#nestedblock--custom_network_config--no_network_policy) below.
-
-`outside_nameserver` - (Optional) DNS V4 Server for Local Network. Optional DNS server V4 IP to be used for name resolution in local network (`String`).
-
-`outside_vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP for site local network (`String`).
-
-`site_to_site_tunnel_ip` - (Optional) Site Mesh Group Connection Via Virtual Ip. Site Mesh Group Connection Via Virtual IP (`String`).
-
-`sli_config` - (Optional) Site Local Inside Network Configuration. Site local inside network configuration. See [Sli Config](#nestedblock--custom_network_config--sli_config) below.
-
-`slo_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Slo Config](#nestedblock--custom_network_config--slo_config) below.
-
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public Ip](#nestedblock--custom_network_config--sm_connection_public_ip) below.
-
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt Ip](#nestedblock--custom_network_config--sm_connection_pvt_ip) below.
-
-`tunnel_dead_timeout` - (Optional) Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used (`Number`).
-
-`vip_vrrp_mode` - (Optional) VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE` (`String`).
-
 <a id="nestedblock--custom_network_config--active_enhanced_firewall_policies"></a>
-
-### Custom Network Config Active Enhanced Firewall Policies
-
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--custom_network_config--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
 
 <a id="nestedblock--custom_network_config--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
 
-### Custom Network Config Active Enhanced Firewall Policies Enhanced Firewall Policies
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--custom_network_config--active_forward_proxy_policies"></a>
-
-### Custom Network Config Active Forward Proxy Policies
-
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--custom_network_config--active_forward_proxy_policies--forward_proxy_policies) below.
 
 <a id="nestedblock--custom_network_config--active_forward_proxy_policies--forward_proxy_policies"></a>
 
-### Custom Network Config Active Forward Proxy Policies Forward Proxy Policies
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--custom_network_config--active_network_policies"></a>
-
-### Custom Network Config Active Network Policies
-
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--custom_network_config--active_network_policies--network_policies) below.
 
 <a id="nestedblock--custom_network_config--active_network_policies--network_policies"></a>
 
-### Custom Network Config Active Network Policies Network Policies
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--custom_network_config--default_config"></a>
-
-### Custom Network Config Default Config
 
 <a id="nestedblock--custom_network_config--default_interface_config"></a>
 
-### Custom Network Config Default Interface Config
-
 <a id="nestedblock--custom_network_config--default_sli_config"></a>
-
-### Custom Network Config Default Sli Config
 
 <a id="nestedblock--custom_network_config--forward_proxy_allow_all"></a>
 
-### Custom Network Config Forward Proxy Allow All
-
 <a id="nestedblock--custom_network_config--global_network_list"></a>
-
-### Custom Network Config Global Network List
-
-`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--custom_network_config--global_network_list--global_network_connections) below.
 
 <a id="nestedblock--custom_network_config--global_network_list--global_network_connections"></a>
 
-### Custom Network Config Global Network List Global Network Connections
-
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global Dr](#nestedblock--custom_network_config--global_network_list--global_network_connections--sli_to_global_dr) below.
-
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global Dr](#nestedblock--custom_network_config--global_network_list--global_network_connections--slo_to_global_dr) below.
-
 <a id="nestedblock--custom_network_config--global_network_list--global_network_connections--sli_to_global_dr"></a>
-
-### Custom Network Config Global Network List Global Network Connections Sli To Global Dr
 
 <a id="nestedblock--custom_network_config--global_network_list--global_network_connections--slo_to_global_dr"></a>
 
-### Custom Network Config Global Network List Global Network Connections Slo To Global Dr
-
 <a id="nestedblock--custom_network_config--interface_list"></a>
-
-### Custom Network Config Interface List
-
-`interfaces` - (Optional) List of Interface. Configure network interfaces for this App Stack site. See [Interfaces](#nestedblock--custom_network_config--interface_list--interfaces) below.
 
 <a id="nestedblock--custom_network_config--interface_list--interfaces"></a>
 
-### Custom Network Config Interface List Interfaces
-
-`dc_cluster_group_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Dc Cluster Group Connectivity Interface Disabled](#nestedblock--custom_network_config--interface_list--interfaces--dc_cluster_group_connectivity_interface_disabled) below.
-
-`dc_cluster_group_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Dc Cluster Group Connectivity Interface Enabled](#nestedblock--custom_network_config--interface_list--interfaces--dc_cluster_group_connectivity_interface_enabled) below.
-
-`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration. See [Dedicated Interface](#nestedblock--custom_network_config--interface_list--interfaces--dedicated_interface) below.
-
-`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration. See [Dedicated Management Interface](#nestedblock--custom_network_config--interface_list--interfaces--dedicated_management_interface) below.
-
-`description` - (Optional) Interface Description. Description for this Interface (`String`).
-
-`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Ethernet Interface](#nestedblock--custom_network_config--interface_list--interfaces--ethernet_interface) below.
-
-`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy. See [Labels](#nestedblock--custom_network_config--interface_list--interfaces--labels) below.
-
-`tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration. See [Tunnel Interface](#nestedblock--custom_network_config--interface_list--interfaces--tunnel_interface) below.
-
 <a id="nestedblock--custom_network_config--interface_list--interfaces--dc_cluster_group_connectivity_interface_disabled"></a>
-
-### Custom Network Config Interface List Interfaces Dc Cluster Group Connectivity Interface Disabled
 
 <a id="nestedblock--custom_network_config--interface_list--interfaces--dc_cluster_group_connectivity_interface_enabled"></a>
 
-### Custom Network Config Interface List Interfaces Dc Cluster Group Connectivity Interface Enabled
-
 <a id="nestedblock--custom_network_config--interface_list--interfaces--dedicated_interface"></a>
-
-### Custom Network Config Interface List Interfaces Dedicated Interface
 
 <a id="nestedblock--custom_network_config--interface_list--interfaces--dedicated_management_interface"></a>
 
-### Custom Network Config Interface List Interfaces Dedicated Management Interface
-
 <a id="nestedblock--custom_network_config--interface_list--interfaces--ethernet_interface"></a>
-
-### Custom Network Config Interface List Interfaces Ethernet Interface
 
 <a id="nestedblock--custom_network_config--interface_list--interfaces--labels"></a>
 
-### Custom Network Config Interface List Interfaces Labels
-
 <a id="nestedblock--custom_network_config--interface_list--interfaces--tunnel_interface"></a>
-
-### Custom Network Config Interface List Interfaces Tunnel Interface
 
 <a id="nestedblock--custom_network_config--no_forward_proxy"></a>
 
-### Custom Network Config No Forward Proxy
-
 <a id="nestedblock--custom_network_config--no_global_network"></a>
-
-### Custom Network Config No Global Network
 
 <a id="nestedblock--custom_network_config--no_network_policy"></a>
 
-### Custom Network Config No Network Policy
-
 <a id="nestedblock--custom_network_config--sli_config"></a>
-
-### Custom Network Config Sli Config
-
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#nestedblock--custom_network_config--sli_config--no_static_routes) below.
-
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#nestedblock--custom_network_config--sli_config--no_v6_static_routes) below.
-
-`static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#nestedblock--custom_network_config--sli_config--static_routes) below.
-
-`static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#nestedblock--custom_network_config--sli_config--static_v6_routes) below.
 
 <a id="nestedblock--custom_network_config--sli_config--no_static_routes"></a>
 
-### Custom Network Config Sli Config No Static Routes
-
 <a id="nestedblock--custom_network_config--sli_config--no_v6_static_routes"></a>
-
-### Custom Network Config Sli Config No V6 Static Routes
 
 <a id="nestedblock--custom_network_config--sli_config--static_routes"></a>
 
-### Custom Network Config Sli Config Static Routes
-
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#nestedblock--custom_network_config--sli_config--static_routes--static_routes) below.
-
 <a id="nestedblock--custom_network_config--sli_config--static_routes--static_routes"></a>
-
-### Custom Network Config Sli Config Static Routes Static Routes
 
 <a id="nestedblock--custom_network_config--sli_config--static_v6_routes"></a>
 
-### Custom Network Config Sli Config Static V6 Routes
-
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#nestedblock--custom_network_config--sli_config--static_v6_routes--static_routes) below.
-
 <a id="nestedblock--custom_network_config--sli_config--static_v6_routes--static_routes"></a>
-
-### Custom Network Config Sli Config Static V6 Routes Static Routes
 
 <a id="nestedblock--custom_network_config--slo_config"></a>
 
-### Custom Network Config Slo Config
-
-`dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#nestedblock--custom_network_config--slo_config--dc_cluster_group) below.
-
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#nestedblock--custom_network_config--slo_config--labels) below.
-
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--custom_network_config--slo_config--no_dc_cluster_group) below.
-
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#nestedblock--custom_network_config--slo_config--no_static_routes) below.
-
-`no_static_v6_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static V6 Routes](#nestedblock--custom_network_config--slo_config--no_static_v6_routes) below.
-
-`static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#nestedblock--custom_network_config--slo_config--static_routes) below.
-
-`static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#nestedblock--custom_network_config--slo_config--static_v6_routes) below.
-
 <a id="nestedblock--custom_network_config--slo_config--dc_cluster_group"></a>
-
-### Custom Network Config Slo Config Dc Cluster Group
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--custom_network_config--slo_config--labels"></a>
 
-### Custom Network Config Slo Config Labels
-
 <a id="nestedblock--custom_network_config--slo_config--no_dc_cluster_group"></a>
-
-### Custom Network Config Slo Config No Dc Cluster Group
 
 <a id="nestedblock--custom_network_config--slo_config--no_static_routes"></a>
 
-### Custom Network Config Slo Config No Static Routes
-
 <a id="nestedblock--custom_network_config--slo_config--no_static_v6_routes"></a>
-
-### Custom Network Config Slo Config No Static V6 Routes
 
 <a id="nestedblock--custom_network_config--slo_config--static_routes"></a>
 
-### Custom Network Config Slo Config Static Routes
-
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#nestedblock--custom_network_config--slo_config--static_routes--static_routes) below.
-
 <a id="nestedblock--custom_network_config--slo_config--static_routes--static_routes"></a>
-
-### Custom Network Config Slo Config Static Routes Static Routes
 
 <a id="nestedblock--custom_network_config--slo_config--static_v6_routes"></a>
 
-### Custom Network Config Slo Config Static V6 Routes
-
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#nestedblock--custom_network_config--slo_config--static_v6_routes--static_routes) below.
-
 <a id="nestedblock--custom_network_config--slo_config--static_v6_routes--static_routes"></a>
-
-### Custom Network Config Slo Config Static V6 Routes Static Routes
 
 <a id="nestedblock--custom_network_config--sm_connection_public_ip"></a>
 
-### Custom Network Config Sm Connection Public Ip
-
 <a id="nestedblock--custom_network_config--sm_connection_pvt_ip"></a>
-
-### Custom Network Config Sm Connection Pvt Ip
 
 <a id="nestedblock--custom_storage_config"></a>
 
-### Custom Storage Config
-
-`default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Class](#nestedblock--custom_storage_config--default_storage_class) below.
-
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#nestedblock--custom_storage_config--no_static_routes) below.
-
-`no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Device](#nestedblock--custom_storage_config--no_storage_device) below.
-
-`no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Interfaces](#nestedblock--custom_storage_config--no_storage_interfaces) below.
-
-`static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#nestedblock--custom_storage_config--static_routes) below.
-
-`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Class List](#nestedblock--custom_storage_config--storage_class_list) below.
-
-`storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Device List](#nestedblock--custom_storage_config--storage_device_list) below.
-
-`storage_interface_list` - (Optional) List of Interface. Configure storage interfaces for this App Stack site. See [Storage Interface List](#nestedblock--custom_storage_config--storage_interface_list) below.
-
 <a id="nestedblock--custom_storage_config--default_storage_class"></a>
-
-### Custom Storage Config Default Storage Class
 
 <a id="nestedblock--custom_storage_config--no_static_routes"></a>
 
-### Custom Storage Config No Static Routes
-
 <a id="nestedblock--custom_storage_config--no_storage_device"></a>
-
-### Custom Storage Config No Storage Device
 
 <a id="nestedblock--custom_storage_config--no_storage_interfaces"></a>
 
-### Custom Storage Config No Storage Interfaces
-
 <a id="nestedblock--custom_storage_config--static_routes"></a>
-
-### Custom Storage Config Static Routes
-
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#nestedblock--custom_storage_config--static_routes--static_routes) below.
 
 <a id="nestedblock--custom_storage_config--static_routes--static_routes"></a>
 
-### Custom Storage Config Static Routes Static Routes
-
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
-
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#nestedblock--custom_storage_config--static_routes--static_routes--default_gateway) below.
-
-`ip_address` - (Optional) IP Address. Traffic matching the ip prefixes is sent to this IP Address (`String`).
-
-`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
-
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#nestedblock--custom_storage_config--static_routes--static_routes--node_interface) below.
-
 <a id="nestedblock--custom_storage_config--static_routes--static_routes--default_gateway"></a>
-
-### Custom Storage Config Static Routes Static Routes Default Gateway
 
 <a id="nestedblock--custom_storage_config--static_routes--static_routes--node_interface"></a>
 
-### Custom Storage Config Static Routes Static Routes Node Interface
-
 <a id="nestedblock--custom_storage_config--storage_class_list"></a>
-
-### Custom Storage Config Storage Class List
-
-`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#nestedblock--custom_storage_config--storage_class_list--storage_classes) below.
 
 <a id="nestedblock--custom_storage_config--storage_class_list--storage_classes"></a>
 
-### Custom Storage Config Storage Class List Storage Classes
-
-`advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Storage Parameters](#nestedblock--custom_storage_config--storage_class_list--storage_classes--advanced_storage_parameters) below.
-
-`allow_volume_expansion` - (Optional) Allow Volume Expansion. Allow volume expansion (`Bool`).
-
-`custom_storage` - (Optional) Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site. See [Custom Storage](#nestedblock--custom_storage_config--storage_class_list--storage_classes--custom_storage) below.
-
-`default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
-
-`description` - (Optional) Storage Class Description. Description for this storage class (`String`).
-
-`hpe_storage` - (Optional) HPE Storage. Storage class Device configuration for HPE Storage. See [Hpe Storage](#nestedblock--custom_storage_config--storage_class_list--storage_classes--hpe_storage) below.
-
-`netapp_trident` - (Optional) NetApp Trident Storage. Storage class Device configuration for NetApp Trident. See [Netapp Trident](#nestedblock--custom_storage_config--storage_class_list--storage_classes--netapp_trident) below.
-
-`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator. See [Pure Service Orchestrator](#nestedblock--custom_storage_config--storage_class_list--storage_classes--pure_service_orchestrator) below.
-
-`reclaim_policy` - (Optional) Reclaim Policy. Reclaim Policy (`String`).
-
-`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
-
-`storage_device` - (Optional) Storage Device. Storage device that this class will use. The Device name defined at previous step (`String`).
-
 <a id="nestedblock--custom_storage_config--storage_class_list--storage_classes--advanced_storage_parameters"></a>
-
-### Custom Storage Config Storage Class List Storage Classes Advanced Storage Parameters
 
 <a id="nestedblock--custom_storage_config--storage_class_list--storage_classes--custom_storage"></a>
 
-### Custom Storage Config Storage Class List Storage Classes Custom Storage
-
 <a id="nestedblock--custom_storage_config--storage_class_list--storage_classes--hpe_storage"></a>
-
-### Custom Storage Config Storage Class List Storage Classes Hpe Storage
 
 <a id="nestedblock--custom_storage_config--storage_class_list--storage_classes--netapp_trident"></a>
 
-### Custom Storage Config Storage Class List Storage Classes Netapp Trident
-
 <a id="nestedblock--custom_storage_config--storage_class_list--storage_classes--pure_service_orchestrator"></a>
-
-### Custom Storage Config Storage Class List Storage Classes Pure Service Orchestrator
 
 <a id="nestedblock--custom_storage_config--storage_device_list"></a>
 
-### Custom Storage Config Storage Device List
-
-`storage_devices` - (Optional) List of Storage Devices. List of custom storage devices. See [Storage Devices](#nestedblock--custom_storage_config--storage_device_list--storage_devices) below.
-
 <a id="nestedblock--custom_storage_config--storage_device_list--storage_devices"></a>
-
-### Custom Storage Config Storage Device List Storage Devices
-
-`advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Advanced Parameters](#nestedblock--custom_storage_config--storage_device_list--storage_devices--advanced_advanced_parameters) below.
-
-`custom_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Custom Storage](#nestedblock--custom_storage_config--storage_device_list--storage_devices--custom_storage) below.
-
-`hpe_storage` - (Optional) HPE Storage. Device configuration for HPE Storage. See [Hpe Storage](#nestedblock--custom_storage_config--storage_device_list--storage_devices--hpe_storage) below.
-
-`netapp_trident` - (Optional) NetApp Trident. Device configuration for NetApp Trident Storage. See [Netapp Trident](#nestedblock--custom_storage_config--storage_device_list--storage_devices--netapp_trident) below.
-
-`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator. See [Pure Service Orchestrator](#nestedblock--custom_storage_config--storage_device_list--storage_devices--pure_service_orchestrator) below.
-
-`storage_device` - (Optional) Storage Device. Storage device and device unit (`String`).
 
 <a id="nestedblock--custom_storage_config--storage_device_list--storage_devices--advanced_advanced_parameters"></a>
 
-### Custom Storage Config Storage Device List Storage Devices Advanced Advanced Parameters
-
 <a id="nestedblock--custom_storage_config--storage_device_list--storage_devices--custom_storage"></a>
-
-### Custom Storage Config Storage Device List Storage Devices Custom Storage
 
 <a id="nestedblock--custom_storage_config--storage_device_list--storage_devices--hpe_storage"></a>
 
-### Custom Storage Config Storage Device List Storage Devices Hpe Storage
-
 <a id="nestedblock--custom_storage_config--storage_device_list--storage_devices--netapp_trident"></a>
-
-### Custom Storage Config Storage Device List Storage Devices Netapp Trident
 
 <a id="nestedblock--custom_storage_config--storage_device_list--storage_devices--pure_service_orchestrator"></a>
 
-### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator
-
 <a id="nestedblock--custom_storage_config--storage_interface_list"></a>
-
-### Custom Storage Config Storage Interface List
-
-`storage_interfaces` - (Optional) List of Interface. Configure storage interfaces for this App Stack site. See [Storage Interfaces](#nestedblock--custom_storage_config--storage_interface_list--storage_interfaces) below.
 
 <a id="nestedblock--custom_storage_config--storage_interface_list--storage_interfaces"></a>
 
-### Custom Storage Config Storage Interface List Storage Interfaces
-
-`description` - (Optional) Interface Description. Description for this Interface (`String`).
-
-`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy. See [Labels](#nestedblock--custom_storage_config--storage_interface_list--storage_interfaces--labels) below.
-
-`storage_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Storage Interface](#nestedblock--custom_storage_config--storage_interface_list--storage_interfaces--storage_interface) below.
-
 <a id="nestedblock--custom_storage_config--storage_interface_list--storage_interfaces--labels"></a>
-
-### Custom Storage Config Storage Interface List Storage Interfaces Labels
 
 <a id="nestedblock--custom_storage_config--storage_interface_list--storage_interfaces--storage_interface"></a>
 
-### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface
-
 <a id="nestedblock--default_blocked_services"></a>
-
-### Default Blocked Services
 
 <a id="nestedblock--default_network_config"></a>
 
-### Default Network Config
-
 <a id="nestedblock--default_sriov_interface"></a>
-
-### Default Sriov Interface
 
 <a id="nestedblock--default_storage_config"></a>
 
-### Default Storage Config
-
 <a id="nestedblock--deny_all_usb"></a>
-
-### Deny All Usb
 
 <a id="nestedblock--disable_gpu"></a>
 
-### Disable Gpu
-
 <a id="nestedblock--disable_vm"></a>
-
-### Disable Vm
 
 <a id="nestedblock--enable_gpu"></a>
 
-### Enable Gpu
-
 <a id="nestedblock--enable_vgpu"></a>
-
-### Enable Vgpu
-
-`feature_type` - (Optional) Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server (`String`).
-
-`server_address` - (Optional) License Server Address. Set License Server Address (`String`).
-
-`server_port` - (Optional) License Server Port Number. Set License Server port number (`Number`).
 
 <a id="nestedblock--enable_vm"></a>
 
-### Enable Vm
-
 <a id="nestedblock--k8s_cluster"></a>
-
-### K8s Cluster
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--kubernetes_upgrade_drain"></a>
 
-### Kubernetes Upgrade Drain
-
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain) below.
-
-`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain) below.
-
 <a id="nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain"></a>
-
-### Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain"></a>
 
-### Kubernetes Upgrade Drain Enable Upgrade Drain
-
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
-
-`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
-
-`drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes (`Number`).
-
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode) below.
-
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
 
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode"></a>
 
-### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
-
 <a id="nestedblock--local_control_plane"></a>
-
-### Local Control Plane
-
-`bgp_config` - (Optional) BGP Configuration. BGP configuration parameters. See [Bgp Config](#nestedblock--local_control_plane--bgp_config) below.
-
-`inside_vn` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Vn](#nestedblock--local_control_plane--inside_vn) below.
-
-`outside_vn` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Vn](#nestedblock--local_control_plane--outside_vn) below.
 
 <a id="nestedblock--local_control_plane--bgp_config"></a>
 
-### Local Control Plane Bgp Config
-
-`asn` - (Optional) ASN. Autonomous System Number (`Number`).
-
-`peers` - (Optional) Peers. BGP parameters for peer. See [Peers](#nestedblock--local_control_plane--bgp_config--peers) below.
-
 <a id="nestedblock--local_control_plane--bgp_config--peers"></a>
-
-### Local Control Plane Bgp Config Peers
-
-`bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Bfd Disabled](#nestedblock--local_control_plane--bgp_config--peers--bfd_disabled) below.
-
-`bfd_enabled` - (Optional) BFD. BFD parameters. See [Bfd Enabled](#nestedblock--local_control_plane--bgp_config--peers--bfd_enabled) below.
-
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--local_control_plane--bgp_config--peers--disable) below.
-
-`external` - (Optional) External BGP Peer. External BGP Peer parameters. See [External](#nestedblock--local_control_plane--bgp_config--peers--external) below.
-
-`label` - (Optional) Label. Specify whether this peer should be (`String`).
-
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--local_control_plane--bgp_config--peers--metadata) below.
-
-`passive_mode_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Disabled](#nestedblock--local_control_plane--bgp_config--peers--passive_mode_disabled) below.
-
-`passive_mode_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Enabled](#nestedblock--local_control_plane--bgp_config--peers--passive_mode_enabled) below.
-
-`routing_policies` - (Optional) BGP Routing Policy. List of rules which can be applied on all or particular nodes. See [Routing Policies](#nestedblock--local_control_plane--bgp_config--peers--routing_policies) below.
 
 <a id="nestedblock--local_control_plane--bgp_config--peers--bfd_disabled"></a>
 
-### Local Control Plane Bgp Config Peers Bfd Disabled
-
 <a id="nestedblock--local_control_plane--bgp_config--peers--bfd_enabled"></a>
-
-### Local Control Plane Bgp Config Peers Bfd Enabled
 
 <a id="nestedblock--local_control_plane--bgp_config--peers--disable"></a>
 
-### Local Control Plane Bgp Config Peers Disable
-
 <a id="nestedblock--local_control_plane--bgp_config--peers--external"></a>
-
-### Local Control Plane Bgp Config Peers External
 
 <a id="nestedblock--local_control_plane--bgp_config--peers--metadata"></a>
 
-### Local Control Plane Bgp Config Peers Metadata
-
 <a id="nestedblock--local_control_plane--bgp_config--peers--passive_mode_disabled"></a>
-
-### Local Control Plane Bgp Config Peers Passive Mode Disabled
 
 <a id="nestedblock--local_control_plane--bgp_config--peers--passive_mode_enabled"></a>
 
-### Local Control Plane Bgp Config Peers Passive Mode Enabled
-
 <a id="nestedblock--local_control_plane--bgp_config--peers--routing_policies"></a>
-
-### Local Control Plane Bgp Config Peers Routing Policies
 
 <a id="nestedblock--local_control_plane--inside_vn"></a>
 
-### Local Control Plane Inside Vn
-
 <a id="nestedblock--local_control_plane--outside_vn"></a>
-
-### Local Control Plane Outside Vn
 
 <a id="nestedblock--log_receiver"></a>
 
-### Log Receiver
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--logs_streaming_disabled"></a>
-
-### Logs Streaming Disabled
 
 <a id="nestedblock--master_node_configuration"></a>
 
-### Master Node Configuration
-
-`name` - (Optional) Name. Names of master node (`String`).
-
-`public_ip` - (Optional) Public IP. IP Address of the master node. This ip will be used when other sites connect via Site Mesh Group (`String`).
-
 <a id="nestedblock--no_bond_devices"></a>
-
-### No Bond Devices
 
 <a id="nestedblock--no_k8s_cluster"></a>
 
-### No K8s Cluster
-
 <a id="nestedblock--no_local_control_plane"></a>
-
-### No Local Control Plane
 
 <a id="nestedblock--offline_survivability_mode"></a>
 
-### Offline Survivability Mode
-
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#nestedblock--offline_survivability_mode--enable_offline_survivability_mode) below.
-
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#nestedblock--offline_survivability_mode--no_offline_survivability_mode) below.
-
 <a id="nestedblock--offline_survivability_mode--enable_offline_survivability_mode"></a>
-
-### Offline Survivability Mode Enable Offline Survivability Mode
 
 <a id="nestedblock--offline_survivability_mode--no_offline_survivability_mode"></a>
 
-### Offline Survivability Mode No Offline Survivability Mode
-
 <a id="nestedblock--os"></a>
-
-### Os
-
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Os Version](#nestedblock--os--default_os_version) below.
-
-`operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
 
 <a id="nestedblock--os--default_os_version"></a>
 
-### Os Default Os Version
-
 <a id="nestedblock--sriov_interfaces"></a>
-
-### Sriov Interfaces
-
-`sriov_interface` - (Optional) Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration. See [Sriov Interface](#nestedblock--sriov_interfaces--sriov_interface) below.
 
 <a id="nestedblock--sriov_interfaces--sriov_interface"></a>
 
-### Sriov Interfaces Sriov Interface
-
-`interface_name` - (Optional) Name of physical interface. Name of SR-IOV physical interface (`String`).
-
-`number_of_vfio_vfs` - (Optional) Number of virtual functions reserved for vfio. Number of virtual functions reserved for VNFs and DPDK-based CNFs (`Number`).
-
-`number_of_vfs` - (Optional) Total number of virtual functions. Total number of virtual functions (`Number`).
-
 <a id="nestedblock--sw"></a>
-
-### Sw
-
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--sw--default_sw_version) below.
-
-`volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
 
 <a id="nestedblock--sw--default_sw_version"></a>
 
-### Sw Default Sw Version
-
 <a id="nestedblock--timeouts"></a>
 
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
 <a id="nestedblock--usb_policy"></a>
-
-### Usb Policy
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 ## Import
 

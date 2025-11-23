@@ -52,71 +52,25 @@ resource "f5xc_api_crawler" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the APICrawler. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the APICrawler will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`domains` - (Optional) API Crawler. API Crawler Configuration. See [Domains](#domains) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--domains"></a>
 
-### Domains
-
-`domain` - (Optional) Domains to Crawl. Select the domain to execute API Crawling with given credentials (`String`).
-
-`simple_login` - (Optional) Simple Login. See [Simple Login](#nestedblock--domains--simple_login) below.
-
 <a id="nestedblock--domains--simple_login"></a>
-
-### Domains Simple Login
-
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--domains--simple_login--password) below.
-
-`user` - (Optional) User. Enter the username to assign credentials for the selected domain to crawl (`String`).
 
 <a id="nestedblock--domains--simple_login--password"></a>
 
-### Domains Simple Login Password
-
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--domains--simple_login--password--blindfold_secret_info) below.
-
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--domains--simple_login--password--clear_secret_info) below.
-
 <a id="nestedblock--domains--simple_login--password--blindfold_secret_info"></a>
-
-### Domains Simple Login Password Blindfold Secret Info
 
 <a id="nestedblock--domains--simple_login--password--clear_secret_info"></a>
 
-### Domains Simple Login Password Clear Secret Info
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

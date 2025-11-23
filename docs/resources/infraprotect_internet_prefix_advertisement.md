@@ -52,63 +52,21 @@ resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the InfraprotectInternetPrefixAdvertisement. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the InfraprotectInternetPrefixAdvertisement will be created (`String`).
-
 The following arguments are optional:
-
-> **Note:** One of the arguments from this list "activation_announce, activation_withdraw" must be set.
-
-`activation_announce` - (Optional) Empty. This can be used for messages where no values are needed. See [Activation Announce](#activation-announce) below for details.
-
-`activation_withdraw` - (Optional) Empty. This can be used for messages where no values are needed. See [Activation Withdraw](#activation-withdraw) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "expiration_never, expiration_timestamp" must be set.
-
-`expiration_never` - (Optional) Empty. This can be used for messages where no values are needed. See [Expiration Never](#expiration-never) below for details.
-
-`expiration_timestamp` - (Optional) Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards (`String`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`prefix` - (Optional) Prefix. Advertisement Prefix Advertisement prefix lookup depending on type (`String`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--activation_announce"></a>
 
-### Activation Announce
-
 <a id="nestedblock--activation_withdraw"></a>
-
-### Activation Withdraw
 
 <a id="nestedblock--expiration_never"></a>
 
-### Expiration Never
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

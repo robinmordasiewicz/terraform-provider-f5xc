@@ -34,18 +34,6 @@ data "f5xc_network_connector" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the NetworkConnector (`String`).
-
-`namespace` - (Required) Namespace where the NetworkConnector exists (`String`).
-
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
-
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
-
-`description` - (Optional) Description of the NetworkConnector (`String`).
-
-`id` - (Optional) Unique identifier for the resource (`String`).
-
-`labels` - (Optional) Labels applied to this resource (`Map`).

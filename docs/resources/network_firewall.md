@@ -52,133 +52,37 @@ resource "f5xc_network_firewall" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the NetworkFirewall. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the NetworkFirewall will be created (`String`).
-
 The following arguments are optional:
-
-> **Note:** One of the arguments from this list "active_enhanced_firewall_policies, active_network_policies, disable_network_policy" must be set.
-
-`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option .... See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
-
-> **Note:** One of the arguments from this list "active_fast_acls, disable_fast_acl" must be set.
-
-`active_fast_acls` - (Optional) Active Fast ACL(s). List of Fast ACL(s). See [Active Fast Acls](#active-fast-acls) below for details.
-
-> **Note:** One of the arguments from this list "active_forward_proxy_policies, disable_forward_proxy_policy" must be set.
-
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-
-`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#active-network-policies) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`disable_fast_acl` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Fast Acl](#disable-fast-acl) below for details.
-
-`disable_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Forward Proxy Policy](#disable-forward-proxy-policy) below for details.
-
-`disable_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Network Policy](#disable-network-policy) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--active_enhanced_firewall_policies"></a>
 
-### Active Enhanced Firewall Policies
-
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
-
 <a id="nestedblock--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
-
-### Active Enhanced Firewall Policies Enhanced Firewall Policies
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--active_fast_acls"></a>
 
-### Active Fast Acls
-
-`fast_acls` - (Optional) Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall. See [Fast Acls](#nestedblock--active_fast_acls--fast_acls) below.
-
 <a id="nestedblock--active_fast_acls--fast_acls"></a>
-
-### Active Fast Acls Fast Acls
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--active_forward_proxy_policies"></a>
 
-### Active Forward Proxy Policies
-
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--active_forward_proxy_policies--forward_proxy_policies) below.
-
 <a id="nestedblock--active_forward_proxy_policies--forward_proxy_policies"></a>
-
-### Active Forward Proxy Policies Forward Proxy Policies
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--active_network_policies"></a>
 
-### Active Network Policies
-
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--active_network_policies--network_policies) below.
-
 <a id="nestedblock--active_network_policies--network_policies"></a>
-
-### Active Network Policies Network Policies
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--disable_fast_acl"></a>
 
-### Disable Fast Acl
-
 <a id="nestedblock--disable_forward_proxy_policy"></a>
-
-### Disable Forward Proxy Policy
 
 <a id="nestedblock--disable_network_policy"></a>
 
-### Disable Network Policy
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

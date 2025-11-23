@@ -57,1223 +57,345 @@ resource "f5xc_workload" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the Workload. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the Workload will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "job, service, simple_service, stateful_service" must be set.
-
-`job` - (Optional) Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc. See [Job](#job) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`service` - (Optional) ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. See [Service](#service) below for details.
-
-`simple_service` - (Optional) SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP. See [Simple Service](#simple-service) below for details.
-
-`stateful_service` - (Optional) StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. See [Stateful Service](#stateful-service) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--job"></a>
 
-### Job
-
-`configuration` - (Optional) Configuration Parameters. Configuration parameters of the workload. See [Configuration](#nestedblock--job--configuration) below.
-
-`containers` - (Optional) Containers. Containers to use for the job. See [Containers](#nestedblock--job--containers) below.
-
-`deploy_options` - (Optional) Deploy Options. Deploy Options are used to configure the workload deployment options. See [Deploy Options](#nestedblock--job--deploy_options) below.
-
-`num_replicas` - (Optional) Number of Replicas. Number of replicas of the batch job to spawn per site (`Number`).
-
-`volumes` - (Optional) Volumes. Volumes for the job. See [Volumes](#nestedblock--job--volumes) below.
-
 <a id="nestedblock--job--configuration"></a>
-
-### Job Configuration
-
-`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--job--configuration--parameters) below.
 
 <a id="nestedblock--job--configuration--parameters"></a>
 
-### Job Configuration Parameters
-
-`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#nestedblock--job--configuration--parameters--env_var) below.
-
-`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#nestedblock--job--configuration--parameters--file) below.
-
 <a id="nestedblock--job--configuration--parameters--env_var"></a>
-
-### Job Configuration Parameters Env Var
 
 <a id="nestedblock--job--configuration--parameters--file"></a>
 
-### Job Configuration Parameters File
-
 <a id="nestedblock--job--containers"></a>
-
-### Job Containers
-
-`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD (`List`).
-
-`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
-
-`custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#nestedblock--job--containers--custom_flavor) below.
-
-`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Flavor](#nestedblock--job--containers--default_flavor) below.
-
-`flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0 (`String`).
-
-`image` - (Optional) Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any. See [Image](#nestedblock--job--containers--image) below.
-
-`init_container` - (Optional) Initialization Container. Specialized container that runs before application container and runs to completion (`Bool`).
-
-`liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--job--containers--liveness_check) below.
-
-`name` - (Optional) Name. Name of the container (`String`).
-
-`readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--job--containers--readiness_check) below.
 
 <a id="nestedblock--job--containers--custom_flavor"></a>
 
-### Job Containers Custom Flavor
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--job--containers--default_flavor"></a>
-
-### Job Containers Default Flavor
 
 <a id="nestedblock--job--containers--image"></a>
 
-### Job Containers Image
-
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#nestedblock--job--containers--image--container_registry) below.
-
-`name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest (`String`).
-
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#nestedblock--job--containers--image--public) below.
-
-`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pul... (`String`).
-
 <a id="nestedblock--job--containers--image--container_registry"></a>
-
-### Job Containers Image Container Registry
 
 <a id="nestedblock--job--containers--image--public"></a>
 
-### Job Containers Image Public
-
 <a id="nestedblock--job--containers--liveness_check"></a>
-
-### Job Containers Liveness Check
-
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#nestedblock--job--containers--liveness_check--exec_health_check) below.
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy (`Number`).
-
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--job--containers--liveness_check--http_health_check) below.
-
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
-
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
-
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--job--containers--liveness_check--tcp_health_check) below.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
 
 <a id="nestedblock--job--containers--liveness_check--exec_health_check"></a>
 
-### Job Containers Liveness Check Exec Health Check
-
 <a id="nestedblock--job--containers--liveness_check--http_health_check"></a>
-
-### Job Containers Liveness Check Http Health Check
 
 <a id="nestedblock--job--containers--liveness_check--tcp_health_check"></a>
 
-### Job Containers Liveness Check Tcp Health Check
-
 <a id="nestedblock--job--containers--readiness_check"></a>
-
-### Job Containers Readiness Check
-
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#nestedblock--job--containers--readiness_check--exec_health_check) below.
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy (`Number`).
-
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--job--containers--readiness_check--http_health_check) below.
-
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
-
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
-
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--job--containers--readiness_check--tcp_health_check) below.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
 
 <a id="nestedblock--job--containers--readiness_check--exec_health_check"></a>
 
-### Job Containers Readiness Check Exec Health Check
-
 <a id="nestedblock--job--containers--readiness_check--http_health_check"></a>
-
-### Job Containers Readiness Check Http Health Check
 
 <a id="nestedblock--job--containers--readiness_check--tcp_health_check"></a>
 
-### Job Containers Readiness Check Tcp Health Check
-
 <a id="nestedblock--job--deploy_options"></a>
-
-### Job Deploy Options
-
-`all_res` - (Optional) Empty. This can be used for messages where no values are needed. See [All Res](#nestedblock--job--deploy_options--all_res) below.
-
-`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Virtual Sites](#nestedblock--job--deploy_options--default_virtual_sites) below.
-
-`deploy_ce_sites` - (Optional) Customer Sites. This defines a way to deploy a workload on specific Customer sites. See [Deploy Ce Sites](#nestedblock--job--deploy_options--deploy_ce_sites) below.
-
-`deploy_ce_virtual_sites` - (Optional) Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites. See [Deploy Ce Virtual Sites](#nestedblock--job--deploy_options--deploy_ce_virtual_sites) below.
-
-`deploy_re_sites` - (Optional) Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites. See [Deploy Re Sites](#nestedblock--job--deploy_options--deploy_re_sites) below.
-
-`deploy_re_virtual_sites` - (Optional) Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites. See [Deploy Re Virtual Sites](#nestedblock--job--deploy_options--deploy_re_virtual_sites) below.
 
 <a id="nestedblock--job--deploy_options--all_res"></a>
 
-### Job Deploy Options All Res
-
 <a id="nestedblock--job--deploy_options--default_virtual_sites"></a>
-
-### Job Deploy Options Default Virtual Sites
 
 <a id="nestedblock--job--deploy_options--deploy_ce_sites"></a>
 
-### Job Deploy Options Deploy Ce Sites
-
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#nestedblock--job--deploy_options--deploy_ce_sites--site) below.
-
 <a id="nestedblock--job--deploy_options--deploy_ce_sites--site"></a>
-
-### Job Deploy Options Deploy Ce Sites Site
 
 <a id="nestedblock--job--deploy_options--deploy_ce_virtual_sites"></a>
 
-### Job Deploy Options Deploy Ce Virtual Sites
-
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--job--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
-
 <a id="nestedblock--job--deploy_options--deploy_ce_virtual_sites--virtual_site"></a>
-
-### Job Deploy Options Deploy Ce Virtual Sites Virtual Site
 
 <a id="nestedblock--job--deploy_options--deploy_re_sites"></a>
 
-### Job Deploy Options Deploy Re Sites
-
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#nestedblock--job--deploy_options--deploy_re_sites--site) below.
-
 <a id="nestedblock--job--deploy_options--deploy_re_sites--site"></a>
-
-### Job Deploy Options Deploy Re Sites Site
 
 <a id="nestedblock--job--deploy_options--deploy_re_virtual_sites"></a>
 
-### Job Deploy Options Deploy Re Virtual Sites
-
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--job--deploy_options--deploy_re_virtual_sites--virtual_site) below.
-
 <a id="nestedblock--job--deploy_options--deploy_re_virtual_sites--virtual_site"></a>
-
-### Job Deploy Options Deploy Re Virtual Sites Virtual Site
 
 <a id="nestedblock--job--volumes"></a>
 
-### Job Volumes
-
-`empty_dir` - (Optional) Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload. See [Empty Dir](#nestedblock--job--volumes--empty_dir) below.
-
-`host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--job--volumes--host_path) below.
-
-`name` - (Optional) Name. Name of the volume (`String`).
-
-`persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--job--volumes--persistent_volume) below.
-
 <a id="nestedblock--job--volumes--empty_dir"></a>
-
-### Job Volumes Empty Dir
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--job--volumes--empty_dir--mount) below.
-
-`size_limit` - (Optional) Size Limit (in GiB) (`Number`).
 
 <a id="nestedblock--job--volumes--empty_dir--mount"></a>
 
-### Job Volumes Empty Dir Mount
-
 <a id="nestedblock--job--volumes--host_path"></a>
-
-### Job Volumes Host Path
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--job--volumes--host_path--mount) below.
-
-`path` - (Optional) Path. Path of the directory on the host (`String`).
 
 <a id="nestedblock--job--volumes--host_path--mount"></a>
 
-### Job Volumes Host Path Mount
-
 <a id="nestedblock--job--volumes--persistent_volume"></a>
-
-### Job Volumes Persistent Volume
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--job--volumes--persistent_volume--mount) below.
-
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#nestedblock--job--volumes--persistent_volume--storage) below.
 
 <a id="nestedblock--job--volumes--persistent_volume--mount"></a>
 
-### Job Volumes Persistent Volume Mount
-
 <a id="nestedblock--job--volumes--persistent_volume--storage"></a>
-
-### Job Volumes Persistent Volume Storage
 
 <a id="nestedblock--service"></a>
 
-### Service
-
-`advertise_options` - (Optional) Advertise Options. Advertise options are used to configure how and where to advertise the workload using load balancers. See [Advertise Options](#nestedblock--service--advertise_options) below.
-
-`configuration` - (Optional) Configuration Parameters. Configuration parameters of the workload. See [Configuration](#nestedblock--service--configuration) below.
-
-`containers` - (Optional) Containers. Containers to use for service. See [Containers](#nestedblock--service--containers) below.
-
-`deploy_options` - (Optional) Deploy Options. Deploy Options are used to configure the workload deployment options. See [Deploy Options](#nestedblock--service--deploy_options) below.
-
-`num_replicas` - (Optional) Number of Replicas. Number of replicas of service to spawn per site (`Number`).
-
-`scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed. See [Scale To Zero](#nestedblock--service--scale_to_zero) below.
-
-`volumes` - (Optional) Volumes. Volumes for the service. See [Volumes](#nestedblock--service--volumes) below.
-
 <a id="nestedblock--service--advertise_options"></a>
-
-### Service Advertise Options
-
-`advertise_custom` - (Optional) Advertise on specific sites. Advertise this workload via loadbalancer on specific sites. See [Advertise Custom](#nestedblock--service--advertise_options--advertise_custom) below.
-
-`advertise_in_cluster` - (Optional) Advertise In Cluster. Advertise the workload locally in-cluster. See [Advertise In Cluster](#nestedblock--service--advertise_options--advertise_in_cluster) below.
-
-`advertise_on_public` - (Optional) Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP. See [Advertise On Public](#nestedblock--service--advertise_options--advertise_on_public) below.
-
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#nestedblock--service--advertise_options--do_not_advertise) below.
 
 <a id="nestedblock--service--advertise_options--advertise_custom"></a>
 
-### Service Advertise Options Advertise Custom
-
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--service--advertise_options--advertise_custom--advertise_where) below.
-
-`ports` - (Optional) Ports. Ports to advertise. See [Ports](#nestedblock--service--advertise_options--advertise_custom--ports) below.
-
 <a id="nestedblock--service--advertise_options--advertise_custom--advertise_where"></a>
-
-### Service Advertise Options Advertise Custom Advertise Where
 
 <a id="nestedblock--service--advertise_options--advertise_custom--ports"></a>
 
-### Service Advertise Options Advertise Custom Ports
-
 <a id="nestedblock--service--advertise_options--advertise_in_cluster"></a>
-
-### Service Advertise Options Advertise In Cluster
-
-`multi_ports` - (Optional) Multiple Ports. Multiple ports. See [Multi Ports](#nestedblock--service--advertise_options--advertise_in_cluster--multi_ports) below.
-
-`port` - (Optional) Port. Single port. See [Port](#nestedblock--service--advertise_options--advertise_in_cluster--port) below.
 
 <a id="nestedblock--service--advertise_options--advertise_in_cluster--multi_ports"></a>
 
-### Service Advertise Options Advertise In Cluster Multi Ports
-
 <a id="nestedblock--service--advertise_options--advertise_in_cluster--port"></a>
-
-### Service Advertise Options Advertise In Cluster Port
 
 <a id="nestedblock--service--advertise_options--advertise_on_public"></a>
 
-### Service Advertise Options Advertise On Public
-
-`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports. See [Multi Ports](#nestedblock--service--advertise_options--advertise_on_public--multi_ports) below.
-
-`port` - (Optional) Advertise Port. Advertise single port. See [Port](#nestedblock--service--advertise_options--advertise_on_public--port) below.
-
 <a id="nestedblock--service--advertise_options--advertise_on_public--multi_ports"></a>
-
-### Service Advertise Options Advertise On Public Multi Ports
 
 <a id="nestedblock--service--advertise_options--advertise_on_public--port"></a>
 
-### Service Advertise Options Advertise On Public Port
-
 <a id="nestedblock--service--advertise_options--do_not_advertise"></a>
-
-### Service Advertise Options Do Not Advertise
 
 <a id="nestedblock--service--configuration"></a>
 
-### Service Configuration
-
-`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--service--configuration--parameters) below.
-
 <a id="nestedblock--service--configuration--parameters"></a>
-
-### Service Configuration Parameters
-
-`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#nestedblock--service--configuration--parameters--env_var) below.
-
-`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#nestedblock--service--configuration--parameters--file) below.
 
 <a id="nestedblock--service--configuration--parameters--env_var"></a>
 
-### Service Configuration Parameters Env Var
-
 <a id="nestedblock--service--configuration--parameters--file"></a>
-
-### Service Configuration Parameters File
 
 <a id="nestedblock--service--containers"></a>
 
-### Service Containers
-
-`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD (`List`).
-
-`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
-
-`custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#nestedblock--service--containers--custom_flavor) below.
-
-`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Flavor](#nestedblock--service--containers--default_flavor) below.
-
-`flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0 (`String`).
-
-`image` - (Optional) Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any. See [Image](#nestedblock--service--containers--image) below.
-
-`init_container` - (Optional) Initialization Container. Specialized container that runs before application container and runs to completion (`Bool`).
-
-`liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--service--containers--liveness_check) below.
-
-`name` - (Optional) Name. Name of the container (`String`).
-
-`readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--service--containers--readiness_check) below.
-
 <a id="nestedblock--service--containers--custom_flavor"></a>
-
-### Service Containers Custom Flavor
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--service--containers--default_flavor"></a>
 
-### Service Containers Default Flavor
-
 <a id="nestedblock--service--containers--image"></a>
-
-### Service Containers Image
-
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#nestedblock--service--containers--image--container_registry) below.
-
-`name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest (`String`).
-
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#nestedblock--service--containers--image--public) below.
-
-`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pul... (`String`).
 
 <a id="nestedblock--service--containers--image--container_registry"></a>
 
-### Service Containers Image Container Registry
-
 <a id="nestedblock--service--containers--image--public"></a>
-
-### Service Containers Image Public
 
 <a id="nestedblock--service--containers--liveness_check"></a>
 
-### Service Containers Liveness Check
-
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#nestedblock--service--containers--liveness_check--exec_health_check) below.
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy (`Number`).
-
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--service--containers--liveness_check--http_health_check) below.
-
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
-
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
-
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--service--containers--liveness_check--tcp_health_check) below.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
 <a id="nestedblock--service--containers--liveness_check--exec_health_check"></a>
-
-### Service Containers Liveness Check Exec Health Check
 
 <a id="nestedblock--service--containers--liveness_check--http_health_check"></a>
 
-### Service Containers Liveness Check Http Health Check
-
 <a id="nestedblock--service--containers--liveness_check--tcp_health_check"></a>
-
-### Service Containers Liveness Check Tcp Health Check
 
 <a id="nestedblock--service--containers--readiness_check"></a>
 
-### Service Containers Readiness Check
-
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#nestedblock--service--containers--readiness_check--exec_health_check) below.
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy (`Number`).
-
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--service--containers--readiness_check--http_health_check) below.
-
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
-
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
-
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--service--containers--readiness_check--tcp_health_check) below.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
 <a id="nestedblock--service--containers--readiness_check--exec_health_check"></a>
-
-### Service Containers Readiness Check Exec Health Check
 
 <a id="nestedblock--service--containers--readiness_check--http_health_check"></a>
 
-### Service Containers Readiness Check Http Health Check
-
 <a id="nestedblock--service--containers--readiness_check--tcp_health_check"></a>
-
-### Service Containers Readiness Check Tcp Health Check
 
 <a id="nestedblock--service--deploy_options"></a>
 
-### Service Deploy Options
-
-`all_res` - (Optional) Empty. This can be used for messages where no values are needed. See [All Res](#nestedblock--service--deploy_options--all_res) below.
-
-`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Virtual Sites](#nestedblock--service--deploy_options--default_virtual_sites) below.
-
-`deploy_ce_sites` - (Optional) Customer Sites. This defines a way to deploy a workload on specific Customer sites. See [Deploy Ce Sites](#nestedblock--service--deploy_options--deploy_ce_sites) below.
-
-`deploy_ce_virtual_sites` - (Optional) Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites. See [Deploy Ce Virtual Sites](#nestedblock--service--deploy_options--deploy_ce_virtual_sites) below.
-
-`deploy_re_sites` - (Optional) Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites. See [Deploy Re Sites](#nestedblock--service--deploy_options--deploy_re_sites) below.
-
-`deploy_re_virtual_sites` - (Optional) Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites. See [Deploy Re Virtual Sites](#nestedblock--service--deploy_options--deploy_re_virtual_sites) below.
-
 <a id="nestedblock--service--deploy_options--all_res"></a>
-
-### Service Deploy Options All Res
 
 <a id="nestedblock--service--deploy_options--default_virtual_sites"></a>
 
-### Service Deploy Options Default Virtual Sites
-
 <a id="nestedblock--service--deploy_options--deploy_ce_sites"></a>
-
-### Service Deploy Options Deploy Ce Sites
-
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#nestedblock--service--deploy_options--deploy_ce_sites--site) below.
 
 <a id="nestedblock--service--deploy_options--deploy_ce_sites--site"></a>
 
-### Service Deploy Options Deploy Ce Sites Site
-
 <a id="nestedblock--service--deploy_options--deploy_ce_virtual_sites"></a>
-
-### Service Deploy Options Deploy Ce Virtual Sites
-
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--service--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--service--deploy_options--deploy_ce_virtual_sites--virtual_site"></a>
 
-### Service Deploy Options Deploy Ce Virtual Sites Virtual Site
-
 <a id="nestedblock--service--deploy_options--deploy_re_sites"></a>
-
-### Service Deploy Options Deploy Re Sites
-
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#nestedblock--service--deploy_options--deploy_re_sites--site) below.
 
 <a id="nestedblock--service--deploy_options--deploy_re_sites--site"></a>
 
-### Service Deploy Options Deploy Re Sites Site
-
 <a id="nestedblock--service--deploy_options--deploy_re_virtual_sites"></a>
-
-### Service Deploy Options Deploy Re Virtual Sites
-
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--service--deploy_options--deploy_re_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--service--deploy_options--deploy_re_virtual_sites--virtual_site"></a>
 
-### Service Deploy Options Deploy Re Virtual Sites Virtual Site
-
 <a id="nestedblock--service--scale_to_zero"></a>
-
-### Service Scale To Zero
 
 <a id="nestedblock--service--volumes"></a>
 
-### Service Volumes
-
-`empty_dir` - (Optional) Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload. See [Empty Dir](#nestedblock--service--volumes--empty_dir) below.
-
-`host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--service--volumes--host_path) below.
-
-`name` - (Optional) Name. Name of the volume (`String`).
-
-`persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--service--volumes--persistent_volume) below.
-
 <a id="nestedblock--service--volumes--empty_dir"></a>
-
-### Service Volumes Empty Dir
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--service--volumes--empty_dir--mount) below.
-
-`size_limit` - (Optional) Size Limit (in GiB) (`Number`).
 
 <a id="nestedblock--service--volumes--empty_dir--mount"></a>
 
-### Service Volumes Empty Dir Mount
-
 <a id="nestedblock--service--volumes--host_path"></a>
-
-### Service Volumes Host Path
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--service--volumes--host_path--mount) below.
-
-`path` - (Optional) Path. Path of the directory on the host (`String`).
 
 <a id="nestedblock--service--volumes--host_path--mount"></a>
 
-### Service Volumes Host Path Mount
-
 <a id="nestedblock--service--volumes--persistent_volume"></a>
-
-### Service Volumes Persistent Volume
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--service--volumes--persistent_volume--mount) below.
-
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#nestedblock--service--volumes--persistent_volume--storage) below.
 
 <a id="nestedblock--service--volumes--persistent_volume--mount"></a>
 
-### Service Volumes Persistent Volume Mount
-
 <a id="nestedblock--service--volumes--persistent_volume--storage"></a>
-
-### Service Volumes Persistent Volume Storage
 
 <a id="nestedblock--simple_service"></a>
 
-### Simple Service
-
-`configuration` - (Optional) Configuration Parameters. Configuration parameters of the workload. See [Configuration](#nestedblock--simple_service--configuration) below.
-
-`container` - (Optional) Container Configuration. ContainerType configures the container information. See [Container](#nestedblock--simple_service--container) below.
-
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#nestedblock--simple_service--disabled) below.
-
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#nestedblock--simple_service--do_not_advertise) below.
-
-`enabled` - (Optional) Persistent Storage Volume. Persistent storage volume configuration for the workload. See [Enabled](#nestedblock--simple_service--enabled) below.
-
-`scale_to_zero` - (Optional) Scale Down to Zero. Scale down replicas of the service to zero (`Bool`).
-
-`simple_advertise` - (Optional) Advertise Options For Simple Service. Advertise options for Simple Service. See [Simple Advertise](#nestedblock--simple_service--simple_advertise) below.
-
 <a id="nestedblock--simple_service--configuration"></a>
-
-### Simple Service Configuration
-
-`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--simple_service--configuration--parameters) below.
 
 <a id="nestedblock--simple_service--configuration--parameters"></a>
 
-### Simple Service Configuration Parameters
-
-`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#nestedblock--simple_service--configuration--parameters--env_var) below.
-
-`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#nestedblock--simple_service--configuration--parameters--file) below.
-
 <a id="nestedblock--simple_service--configuration--parameters--env_var"></a>
-
-### Simple Service Configuration Parameters Env Var
 
 <a id="nestedblock--simple_service--configuration--parameters--file"></a>
 
-### Simple Service Configuration Parameters File
-
 <a id="nestedblock--simple_service--container"></a>
-
-### Simple Service Container
-
-`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD (`List`).
-
-`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
-
-`custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#nestedblock--simple_service--container--custom_flavor) below.
-
-`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Flavor](#nestedblock--simple_service--container--default_flavor) below.
-
-`flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0 (`String`).
-
-`image` - (Optional) Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any. See [Image](#nestedblock--simple_service--container--image) below.
-
-`init_container` - (Optional) Initialization Container. Specialized container that runs before application container and runs to completion (`Bool`).
-
-`liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--simple_service--container--liveness_check) below.
-
-`name` - (Optional) Name. Name of the container (`String`).
-
-`readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--simple_service--container--readiness_check) below.
 
 <a id="nestedblock--simple_service--container--custom_flavor"></a>
 
-### Simple Service Container Custom Flavor
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--simple_service--container--default_flavor"></a>
-
-### Simple Service Container Default Flavor
 
 <a id="nestedblock--simple_service--container--image"></a>
 
-### Simple Service Container Image
-
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#nestedblock--simple_service--container--image--container_registry) below.
-
-`name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest (`String`).
-
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#nestedblock--simple_service--container--image--public) below.
-
-`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pul... (`String`).
-
 <a id="nestedblock--simple_service--container--image--container_registry"></a>
-
-### Simple Service Container Image Container Registry
 
 <a id="nestedblock--simple_service--container--image--public"></a>
 
-### Simple Service Container Image Public
-
 <a id="nestedblock--simple_service--container--liveness_check"></a>
-
-### Simple Service Container Liveness Check
-
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#nestedblock--simple_service--container--liveness_check--exec_health_check) below.
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy (`Number`).
-
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--simple_service--container--liveness_check--http_health_check) below.
-
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
-
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
-
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--simple_service--container--liveness_check--tcp_health_check) below.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
 
 <a id="nestedblock--simple_service--container--liveness_check--exec_health_check"></a>
 
-### Simple Service Container Liveness Check Exec Health Check
-
 <a id="nestedblock--simple_service--container--liveness_check--http_health_check"></a>
-
-### Simple Service Container Liveness Check Http Health Check
 
 <a id="nestedblock--simple_service--container--liveness_check--tcp_health_check"></a>
 
-### Simple Service Container Liveness Check Tcp Health Check
-
 <a id="nestedblock--simple_service--container--readiness_check"></a>
-
-### Simple Service Container Readiness Check
-
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#nestedblock--simple_service--container--readiness_check--exec_health_check) below.
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy (`Number`).
-
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--simple_service--container--readiness_check--http_health_check) below.
-
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
-
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
-
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--simple_service--container--readiness_check--tcp_health_check) below.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
 
 <a id="nestedblock--simple_service--container--readiness_check--exec_health_check"></a>
 
-### Simple Service Container Readiness Check Exec Health Check
-
 <a id="nestedblock--simple_service--container--readiness_check--http_health_check"></a>
-
-### Simple Service Container Readiness Check Http Health Check
 
 <a id="nestedblock--simple_service--container--readiness_check--tcp_health_check"></a>
 
-### Simple Service Container Readiness Check Tcp Health Check
-
 <a id="nestedblock--simple_service--disabled"></a>
-
-### Simple Service Disabled
 
 <a id="nestedblock--simple_service--do_not_advertise"></a>
 
-### Simple Service Do Not Advertise
-
 <a id="nestedblock--simple_service--enabled"></a>
-
-### Simple Service Enabled
-
-`name` - (Optional) Name. Name of the volume (`String`).
-
-`persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--simple_service--enabled--persistent_volume) below.
 
 <a id="nestedblock--simple_service--enabled--persistent_volume"></a>
 
-### Simple Service Enabled Persistent Volume
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--simple_service--enabled--persistent_volume--mount) below.
-
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#nestedblock--simple_service--enabled--persistent_volume--storage) below.
-
 <a id="nestedblock--simple_service--enabled--persistent_volume--mount"></a>
-
-### Simple Service Enabled Persistent Volume Mount
 
 <a id="nestedblock--simple_service--enabled--persistent_volume--storage"></a>
 
-### Simple Service Enabled Persistent Volume Storage
-
 <a id="nestedblock--simple_service--simple_advertise"></a>
-
-### Simple Service Simple Advertise
-
-`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1 (`List`).
-
-`service_port` - (Optional) Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80 (`Number`).
 
 <a id="nestedblock--stateful_service"></a>
 
-### Stateful Service
-
-`advertise_options` - (Optional) Advertise Options. Advertise options are used to configure how and where to advertise the workload using load balancers. See [Advertise Options](#nestedblock--stateful_service--advertise_options) below.
-
-`configuration` - (Optional) Configuration Parameters. Configuration parameters of the workload. See [Configuration](#nestedblock--stateful_service--configuration) below.
-
-`containers` - (Optional) Containers. Containers to use for service. See [Containers](#nestedblock--stateful_service--containers) below.
-
-`deploy_options` - (Optional) Deploy Options. Deploy Options are used to configure the workload deployment options. See [Deploy Options](#nestedblock--stateful_service--deploy_options) below.
-
-`num_replicas` - (Optional) Number of Replicas. Number of replicas of service to spawn per site (`Number`).
-
-`persistent_volumes` - (Optional) Persistent Storage Configuration. Persistent storage configuration for the service. See [Persistent Volumes](#nestedblock--stateful_service--persistent_volumes) below.
-
-`scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed. See [Scale To Zero](#nestedblock--stateful_service--scale_to_zero) below.
-
-`volumes` - (Optional) Ephemeral Volumes. Ephemeral volumes for the service. See [Volumes](#nestedblock--stateful_service--volumes) below.
-
 <a id="nestedblock--stateful_service--advertise_options"></a>
-
-### Stateful Service Advertise Options
-
-`advertise_custom` - (Optional) Advertise on specific sites. Advertise this workload via loadbalancer on specific sites. See [Advertise Custom](#nestedblock--stateful_service--advertise_options--advertise_custom) below.
-
-`advertise_in_cluster` - (Optional) Advertise In Cluster. Advertise the workload locally in-cluster. See [Advertise In Cluster](#nestedblock--stateful_service--advertise_options--advertise_in_cluster) below.
-
-`advertise_on_public` - (Optional) Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP. See [Advertise On Public](#nestedblock--stateful_service--advertise_options--advertise_on_public) below.
-
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#nestedblock--stateful_service--advertise_options--do_not_advertise) below.
 
 <a id="nestedblock--stateful_service--advertise_options--advertise_custom"></a>
 
-### Stateful Service Advertise Options Advertise Custom
-
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--stateful_service--advertise_options--advertise_custom--advertise_where) below.
-
-`ports` - (Optional) Ports. Ports to advertise. See [Ports](#nestedblock--stateful_service--advertise_options--advertise_custom--ports) below.
-
 <a id="nestedblock--stateful_service--advertise_options--advertise_custom--advertise_where"></a>
-
-### Stateful Service Advertise Options Advertise Custom Advertise Where
 
 <a id="nestedblock--stateful_service--advertise_options--advertise_custom--ports"></a>
 
-### Stateful Service Advertise Options Advertise Custom Ports
-
 <a id="nestedblock--stateful_service--advertise_options--advertise_in_cluster"></a>
-
-### Stateful Service Advertise Options Advertise In Cluster
-
-`multi_ports` - (Optional) Multiple Ports. Multiple ports. See [Multi Ports](#nestedblock--stateful_service--advertise_options--advertise_in_cluster--multi_ports) below.
-
-`port` - (Optional) Port. Single port. See [Port](#nestedblock--stateful_service--advertise_options--advertise_in_cluster--port) below.
 
 <a id="nestedblock--stateful_service--advertise_options--advertise_in_cluster--multi_ports"></a>
 
-### Stateful Service Advertise Options Advertise In Cluster Multi Ports
-
 <a id="nestedblock--stateful_service--advertise_options--advertise_in_cluster--port"></a>
-
-### Stateful Service Advertise Options Advertise In Cluster Port
 
 <a id="nestedblock--stateful_service--advertise_options--advertise_on_public"></a>
 
-### Stateful Service Advertise Options Advertise On Public
-
-`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports. See [Multi Ports](#nestedblock--stateful_service--advertise_options--advertise_on_public--multi_ports) below.
-
-`port` - (Optional) Advertise Port. Advertise single port. See [Port](#nestedblock--stateful_service--advertise_options--advertise_on_public--port) below.
-
 <a id="nestedblock--stateful_service--advertise_options--advertise_on_public--multi_ports"></a>
-
-### Stateful Service Advertise Options Advertise On Public Multi Ports
 
 <a id="nestedblock--stateful_service--advertise_options--advertise_on_public--port"></a>
 
-### Stateful Service Advertise Options Advertise On Public Port
-
 <a id="nestedblock--stateful_service--advertise_options--do_not_advertise"></a>
-
-### Stateful Service Advertise Options Do Not Advertise
 
 <a id="nestedblock--stateful_service--configuration"></a>
 
-### Stateful Service Configuration
-
-`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--stateful_service--configuration--parameters) below.
-
 <a id="nestedblock--stateful_service--configuration--parameters"></a>
-
-### Stateful Service Configuration Parameters
-
-`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#nestedblock--stateful_service--configuration--parameters--env_var) below.
-
-`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#nestedblock--stateful_service--configuration--parameters--file) below.
 
 <a id="nestedblock--stateful_service--configuration--parameters--env_var"></a>
 
-### Stateful Service Configuration Parameters Env Var
-
 <a id="nestedblock--stateful_service--configuration--parameters--file"></a>
-
-### Stateful Service Configuration Parameters File
 
 <a id="nestedblock--stateful_service--containers"></a>
 
-### Stateful Service Containers
-
-`args` - (Optional) Arguments. Arguments to the entrypoint. Overrides the docker image's CMD (`List`).
-
-`command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
-
-`custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#nestedblock--stateful_service--containers--custom_flavor) below.
-
-`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Flavor](#nestedblock--stateful_service--containers--default_flavor) below.
-
-`flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0 (`String`).
-
-`image` - (Optional) Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any. See [Image](#nestedblock--stateful_service--containers--image) below.
-
-`init_container` - (Optional) Initialization Container. Specialized container that runs before application container and runs to completion (`Bool`).
-
-`liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--stateful_service--containers--liveness_check) below.
-
-`name` - (Optional) Name. Name of the container (`String`).
-
-`readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--stateful_service--containers--readiness_check) below.
-
 <a id="nestedblock--stateful_service--containers--custom_flavor"></a>
-
-### Stateful Service Containers Custom Flavor
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--stateful_service--containers--default_flavor"></a>
 
-### Stateful Service Containers Default Flavor
-
 <a id="nestedblock--stateful_service--containers--image"></a>
-
-### Stateful Service Containers Image
-
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#nestedblock--stateful_service--containers--image--container_registry) below.
-
-`name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest (`String`).
-
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#nestedblock--stateful_service--containers--image--public) below.
-
-`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pul... (`String`).
 
 <a id="nestedblock--stateful_service--containers--image--container_registry"></a>
 
-### Stateful Service Containers Image Container Registry
-
 <a id="nestedblock--stateful_service--containers--image--public"></a>
-
-### Stateful Service Containers Image Public
 
 <a id="nestedblock--stateful_service--containers--liveness_check"></a>
 
-### Stateful Service Containers Liveness Check
-
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#nestedblock--stateful_service--containers--liveness_check--exec_health_check) below.
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy (`Number`).
-
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--stateful_service--containers--liveness_check--http_health_check) below.
-
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
-
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
-
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--stateful_service--containers--liveness_check--tcp_health_check) below.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
 <a id="nestedblock--stateful_service--containers--liveness_check--exec_health_check"></a>
-
-### Stateful Service Containers Liveness Check Exec Health Check
 
 <a id="nestedblock--stateful_service--containers--liveness_check--http_health_check"></a>
 
-### Stateful Service Containers Liveness Check Http Health Check
-
 <a id="nestedblock--stateful_service--containers--liveness_check--tcp_health_check"></a>
-
-### Stateful Service Containers Liveness Check Tcp Health Check
 
 <a id="nestedblock--stateful_service--containers--readiness_check"></a>
 
-### Stateful Service Containers Readiness Check
-
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#nestedblock--stateful_service--containers--readiness_check--exec_health_check) below.
-
-`healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy (`Number`).
-
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [Http Health Check](#nestedblock--stateful_service--containers--readiness_check--http_health_check) below.
-
-`initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
-
-`interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
-
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [Tcp Health Check](#nestedblock--stateful_service--containers--readiness_check--tcp_health_check) below.
-
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response (`Number`).
-
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
 <a id="nestedblock--stateful_service--containers--readiness_check--exec_health_check"></a>
-
-### Stateful Service Containers Readiness Check Exec Health Check
 
 <a id="nestedblock--stateful_service--containers--readiness_check--http_health_check"></a>
 
-### Stateful Service Containers Readiness Check Http Health Check
-
 <a id="nestedblock--stateful_service--containers--readiness_check--tcp_health_check"></a>
-
-### Stateful Service Containers Readiness Check Tcp Health Check
 
 <a id="nestedblock--stateful_service--deploy_options"></a>
 
-### Stateful Service Deploy Options
-
-`all_res` - (Optional) Empty. This can be used for messages where no values are needed. See [All Res](#nestedblock--stateful_service--deploy_options--all_res) below.
-
-`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Virtual Sites](#nestedblock--stateful_service--deploy_options--default_virtual_sites) below.
-
-`deploy_ce_sites` - (Optional) Customer Sites. This defines a way to deploy a workload on specific Customer sites. See [Deploy Ce Sites](#nestedblock--stateful_service--deploy_options--deploy_ce_sites) below.
-
-`deploy_ce_virtual_sites` - (Optional) Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites. See [Deploy Ce Virtual Sites](#nestedblock--stateful_service--deploy_options--deploy_ce_virtual_sites) below.
-
-`deploy_re_sites` - (Optional) Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites. See [Deploy Re Sites](#nestedblock--stateful_service--deploy_options--deploy_re_sites) below.
-
-`deploy_re_virtual_sites` - (Optional) Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites. See [Deploy Re Virtual Sites](#nestedblock--stateful_service--deploy_options--deploy_re_virtual_sites) below.
-
 <a id="nestedblock--stateful_service--deploy_options--all_res"></a>
-
-### Stateful Service Deploy Options All Res
 
 <a id="nestedblock--stateful_service--deploy_options--default_virtual_sites"></a>
 
-### Stateful Service Deploy Options Default Virtual Sites
-
 <a id="nestedblock--stateful_service--deploy_options--deploy_ce_sites"></a>
-
-### Stateful Service Deploy Options Deploy Ce Sites
-
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#nestedblock--stateful_service--deploy_options--deploy_ce_sites--site) below.
 
 <a id="nestedblock--stateful_service--deploy_options--deploy_ce_sites--site"></a>
 
-### Stateful Service Deploy Options Deploy Ce Sites Site
-
 <a id="nestedblock--stateful_service--deploy_options--deploy_ce_virtual_sites"></a>
-
-### Stateful Service Deploy Options Deploy Ce Virtual Sites
-
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--stateful_service--deploy_options--deploy_ce_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--stateful_service--deploy_options--deploy_ce_virtual_sites--virtual_site"></a>
 
-### Stateful Service Deploy Options Deploy Ce Virtual Sites Virtual Site
-
 <a id="nestedblock--stateful_service--deploy_options--deploy_re_sites"></a>
-
-### Stateful Service Deploy Options Deploy Re Sites
-
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#nestedblock--stateful_service--deploy_options--deploy_re_sites--site) below.
 
 <a id="nestedblock--stateful_service--deploy_options--deploy_re_sites--site"></a>
 
-### Stateful Service Deploy Options Deploy Re Sites Site
-
 <a id="nestedblock--stateful_service--deploy_options--deploy_re_virtual_sites"></a>
-
-### Stateful Service Deploy Options Deploy Re Virtual Sites
-
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#nestedblock--stateful_service--deploy_options--deploy_re_virtual_sites--virtual_site) below.
 
 <a id="nestedblock--stateful_service--deploy_options--deploy_re_virtual_sites--virtual_site"></a>
 
-### Stateful Service Deploy Options Deploy Re Virtual Sites Virtual Site
-
 <a id="nestedblock--stateful_service--persistent_volumes"></a>
-
-### Stateful Service Persistent Volumes
-
-`name` - (Optional) Name. Name of the volume (`String`).
-
-`persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--stateful_service--persistent_volumes--persistent_volume) below.
 
 <a id="nestedblock--stateful_service--persistent_volumes--persistent_volume"></a>
 
-### Stateful Service Persistent Volumes Persistent Volume
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--stateful_service--persistent_volumes--persistent_volume--mount) below.
-
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#nestedblock--stateful_service--persistent_volumes--persistent_volume--storage) below.
-
 <a id="nestedblock--stateful_service--persistent_volumes--persistent_volume--mount"></a>
-
-### Stateful Service Persistent Volumes Persistent Volume Mount
 
 <a id="nestedblock--stateful_service--persistent_volumes--persistent_volume--storage"></a>
 
-### Stateful Service Persistent Volumes Persistent Volume Storage
-
 <a id="nestedblock--stateful_service--scale_to_zero"></a>
-
-### Stateful Service Scale To Zero
 
 <a id="nestedblock--stateful_service--volumes"></a>
 
-### Stateful Service Volumes
-
-`empty_dir` - (Optional) Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload. See [Empty Dir](#nestedblock--stateful_service--volumes--empty_dir) below.
-
-`host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--stateful_service--volumes--host_path) below.
-
-`name` - (Optional) Name. Name of the volume (`String`).
-
 <a id="nestedblock--stateful_service--volumes--empty_dir"></a>
-
-### Stateful Service Volumes Empty Dir
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--stateful_service--volumes--empty_dir--mount) below.
-
-`size_limit` - (Optional) Size Limit (in GiB) (`Number`).
 
 <a id="nestedblock--stateful_service--volumes--empty_dir--mount"></a>
 
-### Stateful Service Volumes Empty Dir Mount
-
 <a id="nestedblock--stateful_service--volumes--host_path"></a>
-
-### Stateful Service Volumes Host Path
-
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#nestedblock--stateful_service--volumes--host_path--mount) below.
-
-`path` - (Optional) Path. Path of the directory on the host (`String`).
 
 <a id="nestedblock--stateful_service--volumes--host_path--mount"></a>
 
-### Stateful Service Volumes Host Path Mount
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

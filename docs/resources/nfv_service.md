@@ -52,937 +52,277 @@ resource "f5xc_nfv_service" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the NFVService. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the NFVService will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "disable_https_management, https_management" must be set.
-
-`disable_https_management` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Https Management](#disable-https-management) below for details.
-
-> **Note:** One of the arguments from this list "disable_ssh_access, enabled_ssh_access" must be set.
-
-`disable_ssh_access` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ssh Access](#disable-ssh-access) below for details.
-
-`enabled_ssh_access` - (Optional) SSH based management. SSH based configuration. See [Enabled Ssh Access](#enabled-ssh-access) below for details.
-
-> **Note:** One of the arguments from this list "f5_big_ip_aws_service, palo_alto_fw_service" must be set.
-
-`f5_big_ip_aws_service` - (Optional) Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS. See [F5 Big Ip Aws Service](#f5-big-ip-aws-service) below for details.
-
-`https_management` - (Optional) HTTPS based management. HTTPS based configuration. See [Https Management](#https-management) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`palo_alto_fw_service` - (Optional) Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration. See [Palo Alto Fw Service](#palo-alto-fw-service) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--disable_https_management"></a>
 
-### Disable Https Management
-
 <a id="nestedblock--disable_ssh_access"></a>
-
-### Disable Ssh Access
 
 <a id="nestedblock--enabled_ssh_access"></a>
 
-### Enabled Ssh Access
-
-`advertise_on_sli` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Sli](#nestedblock--enabled_ssh_access--advertise_on_sli) below.
-
-`advertise_on_slo` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Slo](#nestedblock--enabled_ssh_access--advertise_on_slo) below.
-
-`advertise_on_slo_sli` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Slo Sli](#nestedblock--enabled_ssh_access--advertise_on_slo_sli) below.
-
-`domain_suffix` - (Optional) Domain Suffix. Domain suffix will be used along with node name to form the hostname for ssh node management (`String`).
-
-`node_ssh_ports` - (Optional) Management Node SSH Port. Enter TCP port and node name per node. See [Node Ssh Ports](#nestedblock--enabled_ssh_access--node_ssh_ports) below.
-
 <a id="nestedblock--enabled_ssh_access--advertise_on_sli"></a>
-
-### Enabled Ssh Access Advertise On Sli
 
 <a id="nestedblock--enabled_ssh_access--advertise_on_slo"></a>
 
-### Enabled Ssh Access Advertise On Slo
-
 <a id="nestedblock--enabled_ssh_access--advertise_on_slo_sli"></a>
-
-### Enabled Ssh Access Advertise On Slo Sli
 
 <a id="nestedblock--enabled_ssh_access--node_ssh_ports"></a>
 
-### Enabled Ssh Access Node Ssh Ports
-
-`node_name` - (Optional) Node Name. Node name will be used to match a particular node with the desired TCP port (`String`).
-
-`ssh_port` - (Optional) SSH Port. Enter TCP port per node (`Number`).
-
 <a id="nestedblock--f5_big_ip_aws_service"></a>
-
-### F5 Big Ip Aws Service
-
-`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#nestedblock--f5_big_ip_aws_service--admin_password) below.
-
-`admin_username` - (Optional) Admin Username. Admin Username for BIG-IP (`String`).
-
-`aws_tgw_site_params` - (Optional) BIG-IP AWS TGW Site. BIG-IP AWS TGW site specification. See [Aws Tgw Site Params](#nestedblock--f5_big_ip_aws_service--aws_tgw_site_params) below.
-
-`endpoint_service` - (Optional) Endpoint Service. Endpoint Service is a type of NFV service where the packets are destined to NFV and service modifies the destination with a new destination address. See [Endpoint Service](#nestedblock--f5_big_ip_aws_service--endpoint_service) below.
-
-`market_place_image` - (Optional) BIG-IP AWS Pay as You Go Image. BIG-IP AWS Pay as You Go Image Selection. See [Market Place Image](#nestedblock--f5_big_ip_aws_service--market_place_image) below.
-
-`nodes` - (Optional) Service Nodes. Specify how and where the service nodes are spawned. See [Nodes](#nestedblock--f5_big_ip_aws_service--nodes) below.
-
-`ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the Big IP nodes (`String`).
-
-`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. See [Tags](#nestedblock--f5_big_ip_aws_service--tags) below.
 
 <a id="nestedblock--f5_big_ip_aws_service--admin_password"></a>
 
-### F5 Big Ip Aws Service Admin Password
-
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--f5_big_ip_aws_service--admin_password--blindfold_secret_info) below.
-
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--f5_big_ip_aws_service--admin_password--clear_secret_info) below.
-
 <a id="nestedblock--f5_big_ip_aws_service--admin_password--blindfold_secret_info"></a>
-
-### F5 Big Ip Aws Service Admin Password Blindfold Secret Info
-
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
-
-`location` - (Optional) Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location (`String`).
-
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
 
 <a id="nestedblock--f5_big_ip_aws_service--admin_password--clear_secret_info"></a>
 
-### F5 Big Ip Aws Service Admin Password Clear Secret Info
-
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:/// (`String`).
-
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format (`String`).
-
 <a id="nestedblock--f5_big_ip_aws_service--aws_tgw_site_params"></a>
-
-### F5 Big Ip Aws Service Aws Tgw Site Params
-
-`aws_tgw_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Aws Tgw Site](#nestedblock--f5_big_ip_aws_service--aws_tgw_site_params--aws_tgw_site) below.
 
 <a id="nestedblock--f5_big_ip_aws_service--aws_tgw_site_params--aws_tgw_site"></a>
 
-### F5 Big Ip Aws Service Aws Tgw Site Params Aws Tgw Site
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service"></a>
-
-### F5 Big Ip Aws Service Endpoint Service
-
-`advertise_on_slo_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Slo Ip](#nestedblock--f5_big_ip_aws_service--endpoint_service--advertise_on_slo_ip) below.
-
-`advertise_on_slo_ip_external` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Slo Ip External](#nestedblock--f5_big_ip_aws_service--endpoint_service--advertise_on_slo_ip_external) below.
-
-`automatic_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic Vip](#nestedblock--f5_big_ip_aws_service--endpoint_service--automatic_vip) below.
-
-`configured_vip` - (Optional) Configured VIP. Enter IP address for the default VIP (`String`).
-
-`custom_tcp_ports` - (Optional) Port Range List. List of port ranges. See [Custom Tcp Ports](#nestedblock--f5_big_ip_aws_service--endpoint_service--custom_tcp_ports) below.
-
-`custom_udp_ports` - (Optional) Port Range List. List of port ranges. See [Custom Udp Ports](#nestedblock--f5_big_ip_aws_service--endpoint_service--custom_udp_ports) below.
-
-`default_tcp_ports` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Tcp Ports](#nestedblock--f5_big_ip_aws_service--endpoint_service--default_tcp_ports) below.
-
-`disable_advertise_on_slo_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Advertise On Slo Ip](#nestedblock--f5_big_ip_aws_service--endpoint_service--disable_advertise_on_slo_ip) below.
-
-`http_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Http Port](#nestedblock--f5_big_ip_aws_service--endpoint_service--http_port) below.
-
-`https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Https Port](#nestedblock--f5_big_ip_aws_service--endpoint_service--https_port) below.
-
-`no_tcp_ports` - (Optional) Empty. This can be used for messages where no values are needed. See [No Tcp Ports](#nestedblock--f5_big_ip_aws_service--endpoint_service--no_tcp_ports) below.
-
-`no_udp_ports` - (Optional) Empty. This can be used for messages where no values are needed. See [No Udp Ports](#nestedblock--f5_big_ip_aws_service--endpoint_service--no_udp_ports) below.
 
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--advertise_on_slo_ip"></a>
 
-### F5 Big Ip Aws Service Endpoint Service Advertise On Slo Ip
-
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--advertise_on_slo_ip_external"></a>
-
-### F5 Big Ip Aws Service Endpoint Service Advertise On Slo Ip External
 
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--automatic_vip"></a>
 
-### F5 Big Ip Aws Service Endpoint Service Automatic Vip
-
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--custom_tcp_ports"></a>
-
-### F5 Big Ip Aws Service Endpoint Service Custom Tcp Ports
-
-`ports` - (Optional) Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
 
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--custom_udp_ports"></a>
 
-### F5 Big Ip Aws Service Endpoint Service Custom Udp Ports
-
-`ports` - (Optional) Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
-
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--default_tcp_ports"></a>
-
-### F5 Big Ip Aws Service Endpoint Service Default Tcp Ports
 
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--disable_advertise_on_slo_ip"></a>
 
-### F5 Big Ip Aws Service Endpoint Service Disable Advertise On Slo Ip
-
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--http_port"></a>
-
-### F5 Big Ip Aws Service Endpoint Service Http Port
 
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--https_port"></a>
 
-### F5 Big Ip Aws Service Endpoint Service Https Port
-
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--no_tcp_ports"></a>
-
-### F5 Big Ip Aws Service Endpoint Service No Tcp Ports
 
 <a id="nestedblock--f5_big_ip_aws_service--endpoint_service--no_udp_ports"></a>
 
-### F5 Big Ip Aws Service Endpoint Service No Udp Ports
-
 <a id="nestedblock--f5_big_ip_aws_service--market_place_image"></a>
-
-### F5 Big Ip Aws Service Market Place Image
-
-`awafpay_g200_mbps` - (Optional) Empty. This can be used for messages where no values are needed. See [Awafpay G200 Mbps](#nestedblock--f5_big_ip_aws_service--market_place_image--awafpay_g200_mbps) below.
-
-`awafpay_g3_gbps` - (Optional) Empty. This can be used for messages where no values are needed. See [Awafpay G3 Gbps](#nestedblock--f5_big_ip_aws_service--market_place_image--awafpay_g3_gbps) below.
 
 <a id="nestedblock--f5_big_ip_aws_service--market_place_image--awafpay_g200_mbps"></a>
 
-### F5 Big Ip Aws Service Market Place Image Awafpay G200 Mbps
-
 <a id="nestedblock--f5_big_ip_aws_service--market_place_image--awafpay_g3_gbps"></a>
-
-### F5 Big Ip Aws Service Market Place Image Awafpay G3 Gbps
 
 <a id="nestedblock--f5_big_ip_aws_service--nodes"></a>
 
-### F5 Big Ip Aws Service Nodes
-
-`automatic_prefix` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic Prefix](#nestedblock--f5_big_ip_aws_service--nodes--automatic_prefix) below.
-
-`aws_az_name` - (Optional) AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site (`String`).
-
-`mgmt_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Mgmt Subnet](#nestedblock--f5_big_ip_aws_service--nodes--mgmt_subnet) below.
-
-`node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service (`String`).
-
-`reserved_mgmt_subnet` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Mgmt Subnet](#nestedblock--f5_big_ip_aws_service--nodes--reserved_mgmt_subnet) below.
-
-`tunnel_prefix` - (Optional) Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30 (`String`).
-
 <a id="nestedblock--f5_big_ip_aws_service--nodes--automatic_prefix"></a>
-
-### F5 Big Ip Aws Service Nodes Automatic Prefix
 
 <a id="nestedblock--f5_big_ip_aws_service--nodes--mgmt_subnet"></a>
 
-### F5 Big Ip Aws Service Nodes Mgmt Subnet
-
-`existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
-
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--f5_big_ip_aws_service--nodes--mgmt_subnet--subnet_param) below.
-
 <a id="nestedblock--f5_big_ip_aws_service--nodes--mgmt_subnet--subnet_param"></a>
-
-### F5 Big Ip Aws Service Nodes Mgmt Subnet Subnet Param
 
 <a id="nestedblock--f5_big_ip_aws_service--nodes--reserved_mgmt_subnet"></a>
 
-### F5 Big Ip Aws Service Nodes Reserved Mgmt Subnet
-
 <a id="nestedblock--f5_big_ip_aws_service--tags"></a>
-
-### F5 Big Ip Aws Service Tags
 
 <a id="nestedblock--https_management"></a>
 
-### Https Management
-
-`advertise_on_internet` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Internet](#nestedblock--https_management--advertise_on_internet) below.
-
-`advertise_on_internet_default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Internet Default Vip](#nestedblock--https_management--advertise_on_internet_default_vip) below.
-
-`advertise_on_sli_vip` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [Advertise On Sli Vip](#nestedblock--https_management--advertise_on_sli_vip) below.
-
-`advertise_on_slo_internet_vip` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [Advertise On Slo Internet Vip](#nestedblock--https_management--advertise_on_slo_internet_vip) below.
-
-`advertise_on_slo_sli` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [Advertise On Slo Sli](#nestedblock--https_management--advertise_on_slo_sli) below.
-
-`advertise_on_slo_vip` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [Advertise On Slo Vip](#nestedblock--https_management--advertise_on_slo_vip) below.
-
-`default_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Https Port](#nestedblock--https_management--default_https_port) below.
-
-`domain_suffix` - (Optional) Domain Suffix. Domain suffix will be used along with node name to form URL to access node management (`String`).
-
-`https_port` - (Optional) HTTPS Port. Enter TCP port number (`Number`).
-
 <a id="nestedblock--https_management--advertise_on_internet"></a>
-
-### Https Management Advertise On Internet
-
-`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public Ip](#nestedblock--https_management--advertise_on_internet--public_ip) below.
 
 <a id="nestedblock--https_management--advertise_on_internet--public_ip"></a>
 
-### Https Management Advertise On Internet Public Ip
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--https_management--advertise_on_internet_default_vip"></a>
-
-### Https Management Advertise On Internet Default Vip
 
 <a id="nestedblock--https_management--advertise_on_sli_vip"></a>
 
-### Https Management Advertise On Sli Vip
-
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https_management--advertise_on_sli_vip--no_mtls) below.
-
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https_management--advertise_on_sli_vip--tls_certificates) below.
-
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_management--advertise_on_sli_vip--tls_config) below.
-
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use Mtls](#nestedblock--https_management--advertise_on_sli_vip--use_mtls) below.
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--no_mtls"></a>
-
-### Https Management Advertise On Sli Vip No Mtls
 
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_certificates"></a>
 
-### Https Management Advertise On Sli Vip Tls Certificates
-
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
-
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https_management--advertise_on_sli_vip--tls_certificates--custom_hash_algorithms) below.
-
-`description` - (Optional) Description. Description for the certificate (`String`).
-
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ocsp Stapling](#nestedblock--https_management--advertise_on_sli_vip--tls_certificates--disable_ocsp_stapling) below.
-
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--https_management--advertise_on_sli_vip--tls_certificates--private_key) below.
-
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--https_management--advertise_on_sli_vip--tls_certificates--use_system_defaults) below.
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_certificates--custom_hash_algorithms"></a>
-
-### Https Management Advertise On Sli Vip Tls Certificates Custom Hash Algorithms
 
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_certificates--disable_ocsp_stapling"></a>
 
-### Https Management Advertise On Sli Vip Tls Certificates Disable Ocsp Stapling
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_certificates--private_key"></a>
-
-### Https Management Advertise On Sli Vip Tls Certificates Private Key
 
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_certificates--use_system_defaults"></a>
 
-### Https Management Advertise On Sli Vip Tls Certificates Use System Defaults
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_config"></a>
-
-### Https Management Advertise On Sli Vip Tls Config
-
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#nestedblock--https_management--advertise_on_sli_vip--tls_config--custom_security) below.
-
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#nestedblock--https_management--advertise_on_sli_vip--tls_config--default_security) below.
-
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#nestedblock--https_management--advertise_on_sli_vip--tls_config--low_security) below.
-
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#nestedblock--https_management--advertise_on_sli_vip--tls_config--medium_security) below.
 
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_config--custom_security"></a>
 
-### Https Management Advertise On Sli Vip Tls Config Custom Security
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_config--default_security"></a>
-
-### Https Management Advertise On Sli Vip Tls Config Default Security
 
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_config--low_security"></a>
 
-### Https Management Advertise On Sli Vip Tls Config Low Security
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--tls_config--medium_security"></a>
-
-### Https Management Advertise On Sli Vip Tls Config Medium Security
 
 <a id="nestedblock--https_management--advertise_on_sli_vip--use_mtls"></a>
 
-### Https Management Advertise On Sli Vip Use Mtls
-
-`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it (`Bool`).
-
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Crl](#nestedblock--https_management--advertise_on_sli_vip--use_mtls--crl) below.
-
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No Crl](#nestedblock--https_management--advertise_on_sli_vip--use_mtls--no_crl) below.
-
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_management--advertise_on_sli_vip--use_mtls--trusted_ca) below.
-
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
-
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_management--advertise_on_sli_vip--use_mtls--xfcc_disabled) below.
-
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#nestedblock--https_management--advertise_on_sli_vip--use_mtls--xfcc_options) below.
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--use_mtls--crl"></a>
-
-### Https Management Advertise On Sli Vip Use Mtls Crl
 
 <a id="nestedblock--https_management--advertise_on_sli_vip--use_mtls--no_crl"></a>
 
-### Https Management Advertise On Sli Vip Use Mtls No Crl
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--use_mtls--trusted_ca"></a>
-
-### Https Management Advertise On Sli Vip Use Mtls Trusted Ca
 
 <a id="nestedblock--https_management--advertise_on_sli_vip--use_mtls--xfcc_disabled"></a>
 
-### Https Management Advertise On Sli Vip Use Mtls Xfcc Disabled
-
 <a id="nestedblock--https_management--advertise_on_sli_vip--use_mtls--xfcc_options"></a>
-
-### Https Management Advertise On Sli Vip Use Mtls Xfcc Options
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip"></a>
 
-### Https Management Advertise On Slo Internet Vip
-
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https_management--advertise_on_slo_internet_vip--no_mtls) below.
-
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates) below.
-
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_config) below.
-
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use Mtls](#nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--no_mtls"></a>
-
-### Https Management Advertise On Slo Internet Vip No Mtls
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates"></a>
 
-### Https Management Advertise On Slo Internet Vip Tls Certificates
-
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
-
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--custom_hash_algorithms) below.
-
-`description` - (Optional) Description. Description for the certificate (`String`).
-
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ocsp Stapling](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--disable_ocsp_stapling) below.
-
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--private_key) below.
-
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--use_system_defaults) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--custom_hash_algorithms"></a>
-
-### Https Management Advertise On Slo Internet Vip Tls Certificates Custom Hash Algorithms
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--disable_ocsp_stapling"></a>
 
-### Https Management Advertise On Slo Internet Vip Tls Certificates Disable Ocsp Stapling
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--private_key"></a>
-
-### Https Management Advertise On Slo Internet Vip Tls Certificates Private Key
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_certificates--use_system_defaults"></a>
 
-### Https Management Advertise On Slo Internet Vip Tls Certificates Use System Defaults
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_config"></a>
-
-### Https Management Advertise On Slo Internet Vip Tls Config
-
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_config--custom_security) below.
-
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_config--default_security) below.
-
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_config--low_security) below.
-
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#nestedblock--https_management--advertise_on_slo_internet_vip--tls_config--medium_security) below.
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_config--custom_security"></a>
 
-### Https Management Advertise On Slo Internet Vip Tls Config Custom Security
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_config--default_security"></a>
-
-### Https Management Advertise On Slo Internet Vip Tls Config Default Security
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_config--low_security"></a>
 
-### Https Management Advertise On Slo Internet Vip Tls Config Low Security
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--tls_config--medium_security"></a>
-
-### Https Management Advertise On Slo Internet Vip Tls Config Medium Security
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls"></a>
 
-### Https Management Advertise On Slo Internet Vip Use Mtls
-
-`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it (`Bool`).
-
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Crl](#nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--crl) below.
-
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No Crl](#nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--no_crl) below.
-
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--trusted_ca) below.
-
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
-
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--xfcc_disabled) below.
-
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--xfcc_options) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--crl"></a>
-
-### Https Management Advertise On Slo Internet Vip Use Mtls Crl
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--no_crl"></a>
 
-### Https Management Advertise On Slo Internet Vip Use Mtls No Crl
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--trusted_ca"></a>
-
-### Https Management Advertise On Slo Internet Vip Use Mtls Trusted Ca
 
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--xfcc_disabled"></a>
 
-### Https Management Advertise On Slo Internet Vip Use Mtls Xfcc Disabled
-
 <a id="nestedblock--https_management--advertise_on_slo_internet_vip--use_mtls--xfcc_options"></a>
-
-### Https Management Advertise On Slo Internet Vip Use Mtls Xfcc Options
 
 <a id="nestedblock--https_management--advertise_on_slo_sli"></a>
 
-### Https Management Advertise On Slo Sli
-
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https_management--advertise_on_slo_sli--no_mtls) below.
-
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_sli--tls_certificates) below.
-
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_management--advertise_on_slo_sli--tls_config) below.
-
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use Mtls](#nestedblock--https_management--advertise_on_slo_sli--use_mtls) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--no_mtls"></a>
-
-### Https Management Advertise On Slo Sli No Mtls
 
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_certificates"></a>
 
-### Https Management Advertise On Slo Sli Tls Certificates
-
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
-
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https_management--advertise_on_slo_sli--tls_certificates--custom_hash_algorithms) below.
-
-`description` - (Optional) Description. Description for the certificate (`String`).
-
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ocsp Stapling](#nestedblock--https_management--advertise_on_slo_sli--tls_certificates--disable_ocsp_stapling) below.
-
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--https_management--advertise_on_slo_sli--tls_certificates--private_key) below.
-
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--https_management--advertise_on_slo_sli--tls_certificates--use_system_defaults) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_certificates--custom_hash_algorithms"></a>
-
-### Https Management Advertise On Slo Sli Tls Certificates Custom Hash Algorithms
 
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_certificates--disable_ocsp_stapling"></a>
 
-### Https Management Advertise On Slo Sli Tls Certificates Disable Ocsp Stapling
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_certificates--private_key"></a>
-
-### Https Management Advertise On Slo Sli Tls Certificates Private Key
 
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_certificates--use_system_defaults"></a>
 
-### Https Management Advertise On Slo Sli Tls Certificates Use System Defaults
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_config"></a>
-
-### Https Management Advertise On Slo Sli Tls Config
-
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#nestedblock--https_management--advertise_on_slo_sli--tls_config--custom_security) below.
-
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#nestedblock--https_management--advertise_on_slo_sli--tls_config--default_security) below.
-
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#nestedblock--https_management--advertise_on_slo_sli--tls_config--low_security) below.
-
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#nestedblock--https_management--advertise_on_slo_sli--tls_config--medium_security) below.
 
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_config--custom_security"></a>
 
-### Https Management Advertise On Slo Sli Tls Config Custom Security
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_config--default_security"></a>
-
-### Https Management Advertise On Slo Sli Tls Config Default Security
 
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_config--low_security"></a>
 
-### Https Management Advertise On Slo Sli Tls Config Low Security
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--tls_config--medium_security"></a>
-
-### Https Management Advertise On Slo Sli Tls Config Medium Security
 
 <a id="nestedblock--https_management--advertise_on_slo_sli--use_mtls"></a>
 
-### Https Management Advertise On Slo Sli Use Mtls
-
-`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it (`Bool`).
-
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Crl](#nestedblock--https_management--advertise_on_slo_sli--use_mtls--crl) below.
-
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No Crl](#nestedblock--https_management--advertise_on_slo_sli--use_mtls--no_crl) below.
-
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_management--advertise_on_slo_sli--use_mtls--trusted_ca) below.
-
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
-
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_management--advertise_on_slo_sli--use_mtls--xfcc_disabled) below.
-
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#nestedblock--https_management--advertise_on_slo_sli--use_mtls--xfcc_options) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--use_mtls--crl"></a>
-
-### Https Management Advertise On Slo Sli Use Mtls Crl
 
 <a id="nestedblock--https_management--advertise_on_slo_sli--use_mtls--no_crl"></a>
 
-### Https Management Advertise On Slo Sli Use Mtls No Crl
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--use_mtls--trusted_ca"></a>
-
-### Https Management Advertise On Slo Sli Use Mtls Trusted Ca
 
 <a id="nestedblock--https_management--advertise_on_slo_sli--use_mtls--xfcc_disabled"></a>
 
-### Https Management Advertise On Slo Sli Use Mtls Xfcc Disabled
-
 <a id="nestedblock--https_management--advertise_on_slo_sli--use_mtls--xfcc_options"></a>
-
-### Https Management Advertise On Slo Sli Use Mtls Xfcc Options
 
 <a id="nestedblock--https_management--advertise_on_slo_vip"></a>
 
-### Https Management Advertise On Slo Vip
-
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No Mtls](#nestedblock--https_management--advertise_on_slo_vip--no_mtls) below.
-
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [Tls Certificates](#nestedblock--https_management--advertise_on_slo_vip--tls_certificates) below.
-
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [Tls Config](#nestedblock--https_management--advertise_on_slo_vip--tls_config) below.
-
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use Mtls](#nestedblock--https_management--advertise_on_slo_vip--use_mtls) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--no_mtls"></a>
-
-### Https Management Advertise On Slo Vip No Mtls
 
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_certificates"></a>
 
-### Https Management Advertise On Slo Vip Tls Certificates
-
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
-
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https_management--advertise_on_slo_vip--tls_certificates--custom_hash_algorithms) below.
-
-`description` - (Optional) Description. Description for the certificate (`String`).
-
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Ocsp Stapling](#nestedblock--https_management--advertise_on_slo_vip--tls_certificates--disable_ocsp_stapling) below.
-
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--https_management--advertise_on_slo_vip--tls_certificates--private_key) below.
-
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--https_management--advertise_on_slo_vip--tls_certificates--use_system_defaults) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_certificates--custom_hash_algorithms"></a>
-
-### Https Management Advertise On Slo Vip Tls Certificates Custom Hash Algorithms
 
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_certificates--disable_ocsp_stapling"></a>
 
-### Https Management Advertise On Slo Vip Tls Certificates Disable Ocsp Stapling
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_certificates--private_key"></a>
-
-### Https Management Advertise On Slo Vip Tls Certificates Private Key
 
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_certificates--use_system_defaults"></a>
 
-### Https Management Advertise On Slo Vip Tls Certificates Use System Defaults
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_config"></a>
-
-### Https Management Advertise On Slo Vip Tls Config
-
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#nestedblock--https_management--advertise_on_slo_vip--tls_config--custom_security) below.
-
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#nestedblock--https_management--advertise_on_slo_vip--tls_config--default_security) below.
-
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#nestedblock--https_management--advertise_on_slo_vip--tls_config--low_security) below.
-
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#nestedblock--https_management--advertise_on_slo_vip--tls_config--medium_security) below.
 
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_config--custom_security"></a>
 
-### Https Management Advertise On Slo Vip Tls Config Custom Security
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_config--default_security"></a>
-
-### Https Management Advertise On Slo Vip Tls Config Default Security
 
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_config--low_security"></a>
 
-### Https Management Advertise On Slo Vip Tls Config Low Security
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--tls_config--medium_security"></a>
-
-### Https Management Advertise On Slo Vip Tls Config Medium Security
 
 <a id="nestedblock--https_management--advertise_on_slo_vip--use_mtls"></a>
 
-### Https Management Advertise On Slo Vip Use Mtls
-
-`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it (`Bool`).
-
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Crl](#nestedblock--https_management--advertise_on_slo_vip--use_mtls--crl) below.
-
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No Crl](#nestedblock--https_management--advertise_on_slo_vip--use_mtls--no_crl) below.
-
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted Ca](#nestedblock--https_management--advertise_on_slo_vip--use_mtls--trusted_ca) below.
-
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
-
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#nestedblock--https_management--advertise_on_slo_vip--use_mtls--xfcc_disabled) below.
-
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#nestedblock--https_management--advertise_on_slo_vip--use_mtls--xfcc_options) below.
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--use_mtls--crl"></a>
-
-### Https Management Advertise On Slo Vip Use Mtls Crl
 
 <a id="nestedblock--https_management--advertise_on_slo_vip--use_mtls--no_crl"></a>
 
-### Https Management Advertise On Slo Vip Use Mtls No Crl
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--use_mtls--trusted_ca"></a>
-
-### Https Management Advertise On Slo Vip Use Mtls Trusted Ca
 
 <a id="nestedblock--https_management--advertise_on_slo_vip--use_mtls--xfcc_disabled"></a>
 
-### Https Management Advertise On Slo Vip Use Mtls Xfcc Disabled
-
 <a id="nestedblock--https_management--advertise_on_slo_vip--use_mtls--xfcc_options"></a>
-
-### Https Management Advertise On Slo Vip Use Mtls Xfcc Options
 
 <a id="nestedblock--https_management--default_https_port"></a>
 
-### Https Management Default Https Port
-
 <a id="nestedblock--palo_alto_fw_service"></a>
-
-### Palo Alto Fw Service
-
-`auto_setup` - (Optional) PAN VM Series Firewall Auto Setup. For auto-setup, ssh public and pvt keys are needed. Using the given config user, ssh and api access will be configured. See [Auto Setup](#nestedblock--palo_alto_fw_service--auto_setup) below.
-
-`aws_tgw_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Aws Tgw Site](#nestedblock--palo_alto_fw_service--aws_tgw_site) below.
-
-`disable_panaroma` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Panaroma](#nestedblock--palo_alto_fw_service--disable_panaroma) below.
-
-`instance_type` - (Optional) Palo Alto Networks VM-Series Instance Typ. - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4 (`String`).
-
-`pan_ami_bundle1` - (Optional) Empty. This can be used for messages where no values are needed. See [Pan Ami Bundle1](#nestedblock--palo_alto_fw_service--pan_ami_bundle1) below.
-
-`pan_ami_bundle2` - (Optional) Empty. This can be used for messages where no values are needed. See [Pan Ami Bundle2](#nestedblock--palo_alto_fw_service--pan_ami_bundle2) below.
-
-`panorama_server` - (Optional) Panorama Server Type. Panorama Server Type. See [Panorama Server](#nestedblock--palo_alto_fw_service--panorama_server) below.
-
-`service_nodes` - (Optional) Palo Alto Networks Vm-Series AZ Nodes. See [Service Nodes](#nestedblock--palo_alto_fw_service--service_nodes) below.
-
-`ssh_key` - (Optional) Setup Authorized Public SSH key. Setup Authorized Public SSH key. User will be able to ssh to the vmseries nodes using its corresponding ssh private key (`String`).
-
-`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. See [Tags](#nestedblock--palo_alto_fw_service--tags) below.
-
-`version` - (Optional) PAN VM-Series version. PAN-OS version (`String`).
 
 <a id="nestedblock--palo_alto_fw_service--auto_setup"></a>
 
-### Palo Alto Fw Service Auto Setup
-
-`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#nestedblock--palo_alto_fw_service--auto_setup--admin_password) below.
-
-`admin_username` - (Optional) Firewall Admin Username. Firewall Admin Username (`String`).
-
-`manual_ssh_keys` - (Optional) SSH key. SSH Key includes both public and private key. See [Manual Ssh Keys](#nestedblock--palo_alto_fw_service--auto_setup--manual_ssh_keys) below.
-
 <a id="nestedblock--palo_alto_fw_service--auto_setup--admin_password"></a>
-
-### Palo Alto Fw Service Auto Setup Admin Password
-
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--palo_alto_fw_service--auto_setup--admin_password--blindfold_secret_info) below.
-
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--palo_alto_fw_service--auto_setup--admin_password--clear_secret_info) below.
 
 <a id="nestedblock--palo_alto_fw_service--auto_setup--admin_password--blindfold_secret_info"></a>
 
-### Palo Alto Fw Service Auto Setup Admin Password Blindfold Secret Info
-
 <a id="nestedblock--palo_alto_fw_service--auto_setup--admin_password--clear_secret_info"></a>
-
-### Palo Alto Fw Service Auto Setup Admin Password Clear Secret Info
 
 <a id="nestedblock--palo_alto_fw_service--auto_setup--manual_ssh_keys"></a>
 
-### Palo Alto Fw Service Auto Setup Manual Ssh Keys
-
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--palo_alto_fw_service--auto_setup--manual_ssh_keys--private_key) below.
-
-`public_key` - (Optional) Public SSH key. Authorized Public SSH key which will be programmed on the node (`String`).
-
 <a id="nestedblock--palo_alto_fw_service--auto_setup--manual_ssh_keys--private_key"></a>
-
-### Palo Alto Fw Service Auto Setup Manual Ssh Keys Private Key
 
 <a id="nestedblock--palo_alto_fw_service--aws_tgw_site"></a>
 
-### Palo Alto Fw Service Aws Tgw Site
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--palo_alto_fw_service--disable_panaroma"></a>
-
-### Palo Alto Fw Service Disable Panaroma
 
 <a id="nestedblock--palo_alto_fw_service--pan_ami_bundle1"></a>
 
-### Palo Alto Fw Service Pan Ami Bundle1
-
 <a id="nestedblock--palo_alto_fw_service--pan_ami_bundle2"></a>
-
-### Palo Alto Fw Service Pan Ami Bundle2
 
 <a id="nestedblock--palo_alto_fw_service--panorama_server"></a>
 
-### Palo Alto Fw Service Panorama Server
-
-`authorization_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Authorization Key](#nestedblock--palo_alto_fw_service--panorama_server--authorization_key) below.
-
-`device_group_name` - (Optional) Device Group Name. Device Group Name (`String`).
-
-`server` - (Optional) Server Ipv4 Address. Panorama Server Address to which the firewall should connect to (`String`).
-
-`template_stack_name` - (Optional) template stack name. Template Stack Name (`String`).
-
 <a id="nestedblock--palo_alto_fw_service--panorama_server--authorization_key"></a>
-
-### Palo Alto Fw Service Panorama Server Authorization Key
-
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--palo_alto_fw_service--panorama_server--authorization_key--blindfold_secret_info) below.
-
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--palo_alto_fw_service--panorama_server--authorization_key--clear_secret_info) below.
 
 <a id="nestedblock--palo_alto_fw_service--panorama_server--authorization_key--blindfold_secret_info"></a>
 
-### Palo Alto Fw Service Panorama Server Authorization Key Blindfold Secret Info
-
 <a id="nestedblock--palo_alto_fw_service--panorama_server--authorization_key--clear_secret_info"></a>
-
-### Palo Alto Fw Service Panorama Server Authorization Key Clear Secret Info
 
 <a id="nestedblock--palo_alto_fw_service--service_nodes"></a>
 
-### Palo Alto Fw Service Service Nodes
-
-`nodes` - (Optional) Palo Alto Networks AZ Nodes. See [Nodes](#nestedblock--palo_alto_fw_service--service_nodes--nodes) below.
-
 <a id="nestedblock--palo_alto_fw_service--service_nodes--nodes"></a>
-
-### Palo Alto Fw Service Service Nodes Nodes
-
-`aws_az_name` - (Optional) AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites (`String`).
-
-`mgmt_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Mgmt Subnet](#nestedblock--palo_alto_fw_service--service_nodes--nodes--mgmt_subnet) below.
-
-`node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service (`String`).
-
-`reserved_mgmt_subnet` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Mgmt Subnet](#nestedblock--palo_alto_fw_service--service_nodes--nodes--reserved_mgmt_subnet) below.
 
 <a id="nestedblock--palo_alto_fw_service--service_nodes--nodes--mgmt_subnet"></a>
 
-### Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet
-
 <a id="nestedblock--palo_alto_fw_service--service_nodes--nodes--reserved_mgmt_subnet"></a>
-
-### Palo Alto Fw Service Service Nodes Nodes Reserved Mgmt Subnet
 
 <a id="nestedblock--palo_alto_fw_service--tags"></a>
 
-### Palo Alto Fw Service Tags
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

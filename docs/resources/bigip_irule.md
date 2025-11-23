@@ -38,43 +38,15 @@ resource "f5xc_bigip_irule" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the BigIPIrule. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the BigIPIrule will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`code` - (Optional) iRule code. iRule code content, this content will be base64 encoded for preserving formating (`String`).
-
-`irule_name` - (Optional) iRule name. iRule name (`String`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`source` - (Optional) iRule source. iRule generation/updation source (`String`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

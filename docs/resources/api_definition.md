@@ -45,83 +45,25 @@ resource "f5xc_api_definition" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the APIDefinition. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the APIDefinition will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`api_inventory_exclusion_list` - (Optional) API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory. See [Api Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
-
-`api_inventory_inclusion_list` - (Optional) API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list. See [Api Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "mixed_schema_origin, strict_schema_origin" must be set.
-
-`mixed_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed. See [Mixed Schema Origin](#mixed-schema-origin) below for details.
-
-`non_api_endpoints` - (Optional) API Discovery Exclusion List. List of Non-API Endpoints. See [Non Api Endpoints](#non-api-endpoints) below for details.
-
-`strict_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed. See [Strict Schema Origin](#strict-schema-origin) below for details.
-
-`swagger_specs` - (Optional) File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2 (`List`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--api_inventory_exclusion_list"></a>
 
-### Api Inventory Exclusion List
-
-`method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
-
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
-
 <a id="nestedblock--api_inventory_inclusion_list"></a>
-
-### Api Inventory Inclusion List
-
-`method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
-
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
 <a id="nestedblock--mixed_schema_origin"></a>
 
-### Mixed Schema Origin
-
 <a id="nestedblock--non_api_endpoints"></a>
-
-### Non Api Endpoints
-
-`method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method (`String`).
-
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
 <a id="nestedblock--strict_schema_origin"></a>
 
-### Strict Schema Origin
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

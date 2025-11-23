@@ -34,18 +34,6 @@ data "f5xc_bot_defense_app_infrastructure" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the BotDefenseAppInfrastructure (`String`).
-
-`namespace` - (Required) Namespace where the BotDefenseAppInfrastructure exists (`String`).
-
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
-
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
-
-`description` - (Optional) Description of the BotDefenseAppInfrastructure (`String`).
-
-`id` - (Optional) Unique identifier for the resource (`String`).
-
-`labels` - (Optional) Labels applied to this resource (`Map`).

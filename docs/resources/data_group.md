@@ -52,75 +52,27 @@ resource "f5xc_data_group" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the DataGroup. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the DataGroup will be created (`String`).
-
 The following arguments are optional:
-
-> **Note:** One of the arguments from this list "address_records, integer_records, string_records" must be set.
-
-`address_records` - (Optional) Address Record. Data group with address record List. See [Address Records](#address-records) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`integer_records` - (Optional) Integer record List. Data group with integer record List. See [Integer Records](#integer-records) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`string_records` - (Optional) String record List. Data group with strings record List. See [String Records](#string-records) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--address_records"></a>
 
-### Address Records
-
-`records` - (Optional) Address records. See [Records](#nestedblock--address_records--records) below.
-
 <a id="nestedblock--address_records--records"></a>
-
-### Address Records Records
 
 <a id="nestedblock--integer_records"></a>
 
-### Integer Records
-
-`records` - (Optional) Integer records. See [Records](#nestedblock--integer_records--records) below.
-
 <a id="nestedblock--integer_records--records"></a>
-
-### Integer Records Records
 
 <a id="nestedblock--string_records"></a>
 
-### String Records
-
-`records` - (Optional) String records. See [Records](#nestedblock--string_records--records) below.
-
 <a id="nestedblock--string_records--records"></a>
 
-### String Records Records
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

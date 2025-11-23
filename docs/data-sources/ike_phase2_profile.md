@@ -34,18 +34,6 @@ data "f5xc_ike_phase2_profile" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the IKEPhase2Profile (`String`).
-
-`namespace` - (Required) Namespace where the IKEPhase2Profile exists (`String`).
-
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
-
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
-
-`description` - (Optional) Description of the IKEPhase2Profile (`String`).
-
-`id` - (Optional) Unique identifier for the resource (`String`).
-
-`labels` - (Optional) Labels applied to this resource (`Map`).

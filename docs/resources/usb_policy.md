@@ -44,55 +44,17 @@ resource "f5xc_usb_policy" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the UsbPolicy. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the UsbPolicy will be created (`String`).
-
 The following arguments are optional:
-
-`allowed_devices` - (Optional) Allowed USB devices. List of allowed USB devices. See [Allowed Devices](#allowed-devices) below for details.
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--allowed_devices"></a>
 
-### Allowed Devices
-
-`b_device_class` - (Optional) Class. The class of this device (`String`).
-
-`b_device_protocol` - (Optional) Protocol. The protocol (within the sub-class) of this device (`String`).
-
-`b_device_sub_class` - (Optional) Subclass. The sub-class (within the class) of this device (`String`).
-
-`i_serial` - (Optional) iSerialNumber. Index of Serial Number String Descriptor (`String`).
-
-`id_product` - (Optional) Product ID. Product ID (Assigned by Manufacturer) in hex (`String`).
-
-`id_vendor` - (Optional) Vendor ID. Vendor ID (Assigned by USB Org) in hex (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

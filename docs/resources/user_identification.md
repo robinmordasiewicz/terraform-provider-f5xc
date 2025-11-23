@@ -44,113 +44,37 @@ resource "f5xc_user_identification" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the UserIdentification. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the UserIdentification will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`rules` - (Optional) User Identification Rules. An ordered list of rules that are evaluated sequentially against the input fields extracted from an API request in order to determine a user identifier. See [Rules](#rules) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--rules"></a>
 
-### Rules
-
-`client_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Asn](#nestedblock--rules--client_asn) below.
-
-`client_city` - (Optional) Empty. This can be used for messages where no values are needed. See [Client City](#nestedblock--rules--client_city) below.
-
-`client_country` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Country](#nestedblock--rules--client_country) below.
-
-`client_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Ip](#nestedblock--rules--client_ip) below.
-
-`client_region` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Region](#nestedblock--rules--client_region) below.
-
-`cookie_name` - (Optional) Cookie Name. Use the HTTP cookie value for the given name as user identifier (`String`).
-
-`http_header_name` - (Optional) HTTP Header Name. Use the HTTP header value for the given name as user identifier (`String`).
-
-`ip_and_http_header_name` - (Optional) HTTP Header Name. Name of HTTP header from which the value should be extracted (`String`).
-
-`ip_and_ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Ip And Ja4 Tls Fingerprint](#nestedblock--rules--ip_and_ja4_tls_fingerprint) below.
-
-`ip_and_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Ip And Tls Fingerprint](#nestedblock--rules--ip_and_tls_fingerprint) below.
-
-`ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Ja4 Tls Fingerprint](#nestedblock--rules--ja4_tls_fingerprint) below.
-
-`jwt_claim_name` - (Optional) JWT Claim Name. Use the JWT claim value as user identifier (`String`).
-
-`none` - (Optional) Empty. This can be used for messages where no values are needed. See [None](#nestedblock--rules--none) below.
-
-`query_param_key` - (Optional) Query Parameter Key. Use the query parameter value for the given key as user identifier (`String`).
-
-`tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Tls Fingerprint](#nestedblock--rules--tls_fingerprint) below.
-
 <a id="nestedblock--rules--client_asn"></a>
-
-### Rules Client Asn
 
 <a id="nestedblock--rules--client_city"></a>
 
-### Rules Client City
-
 <a id="nestedblock--rules--client_country"></a>
-
-### Rules Client Country
 
 <a id="nestedblock--rules--client_ip"></a>
 
-### Rules Client Ip
-
 <a id="nestedblock--rules--client_region"></a>
-
-### Rules Client Region
 
 <a id="nestedblock--rules--ip_and_ja4_tls_fingerprint"></a>
 
-### Rules Ip And Ja4 Tls Fingerprint
-
 <a id="nestedblock--rules--ip_and_tls_fingerprint"></a>
-
-### Rules Ip And Tls Fingerprint
 
 <a id="nestedblock--rules--ja4_tls_fingerprint"></a>
 
-### Rules Ja4 Tls Fingerprint
-
 <a id="nestedblock--rules--none"></a>
-
-### Rules None
 
 <a id="nestedblock--rules--tls_fingerprint"></a>
 
-### Rules Tls Fingerprint
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

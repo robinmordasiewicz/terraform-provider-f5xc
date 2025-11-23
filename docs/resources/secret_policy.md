@@ -55,85 +55,27 @@ resource "f5xc_secret_policy" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the SecretPolicy. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the SecretPolicy will be created (`String`).
-
 The following arguments are optional:
-
-`allow_f5xc` - (Optional) Allow F5XC. if allow_f5xc is set to true, it allows relevant F5XC infrastructure services to decrypt the secret encrypted using this policy (`Bool`).
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`decrypt_cache_timeout` - (Optional) Decrypt Cache Timeout. decrypt_cache_timeout contains the amount of time a decrypted secret is cached in wingman (`String`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`rule_list` - (Optional) Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm. See [Rule List](#rule-list) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--rule_list"></a>
 
-### Rule List
-
-`rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. See [Rules](#nestedblock--rule_list--rules) below.
-
 <a id="nestedblock--rule_list--rules"></a>
-
-### Rule List Rules
-
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--rule_list--rules--metadata) below.
-
-`spec` - (Optional) Global Specifications. A secret_policy_rule object consists of an unordered list of predicates and an action. See [Spec](#nestedblock--rule_list--rules--spec) below.
 
 <a id="nestedblock--rule_list--rules--metadata"></a>
 
-### Rule List Rules Metadata
-
-`description` - (Optional) Description. Human readable description (`String`).
-
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
-
 <a id="nestedblock--rule_list--rules--spec"></a>
-
-### Rule List Rules Spec
-
-`action` - (Optional) Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward (`String`).
-
-`client_name` - (Optional) Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate (`String`).
-
-`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. See [Client Name Matcher](#nestedblock--rule_list--rules--spec--client_name_matcher) below.
-
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Client Selector](#nestedblock--rule_list--rules--spec--client_selector) below.
 
 <a id="nestedblock--rule_list--rules--spec--client_name_matcher"></a>
 
-### Rule List Rules Spec Client Name Matcher
-
 <a id="nestedblock--rule_list--rules--spec--client_selector"></a>
 
-### Rule List Rules Spec Client Selector
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

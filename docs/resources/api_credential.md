@@ -47,45 +47,15 @@ resource "f5xc_api_credential" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the APICredential. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the APICredential will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`password` - (Optional) Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system (`String`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`type` - (Optional) Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes ... (`String`).
-
-`virtual_k8s_name` - (Optional) vK8s Cluster. Name of virtual K8s cluster. Applicable for KUBE_CONFIG (`String`).
-
-`virtual_k8s_namespace` - (Optional) vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG (`String`).
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

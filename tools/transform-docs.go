@@ -14,6 +14,51 @@ import (
 	"strings"
 )
 
+// uppercaseAcronyms defines acronyms that should always be uppercase
+// Based on RFC 4949, IEEE standards, and industry style guides (Google, Microsoft, Apple)
+var uppercaseAcronyms = map[string]bool{
+	// Networking protocols
+	"DNS": true, "HTTP": true, "HTTPS": true, "TCP": true, "UDP": true,
+	"TLS": true, "SSL": true, "SSH": true, "FTP": true, "SFTP": true,
+	"SMTP": true, "IMAP": true, "POP": true, "LDAP": true, "DHCP": true,
+	"ARP": true, "ICMP": true, "SNMP": true, "NTP": true, "SIP": true,
+	"RTP": true, "RTSP": true, "QUIC": true, "IP": true, "GRPC": true,
+	// Web/API
+	"API": true, "URL": true, "URI": true, "REST": true, "SOAP": true,
+	"JSON": true, "XML": true, "HTML": true, "CSS": true, "CORS": true,
+	"CDN": true, "WAF": true, "JWT": true, "SAML": true,
+	// Network infrastructure
+	"VPN": true, "NAT": true, "VLAN": true, "BGP": true, "OSPF": true,
+	"QOS": true, "MTU": true, "TTL": true, "ACL": true, "CIDR": true,
+	"VIP": true, "LB": true, "HA": true, "DR": true,
+	// Security
+	"PKI": true, "CA": true, "CSR": true, "CRL": true, "OCSP": true,
+	"PEM": true, "AES": true, "RSA": true, "SHA": true, "MD5": true,
+	"HMAC": true, "MFA": true, "SSO": true, "RBAC": true, "IAM": true,
+	"DDOS": true, "DOS": true, "XSS": true, "CSRF": true, "SQL": true,
+	// Cloud/Infrastructure
+	"AWS": true, "GCP": true, "CPU": true, "RAM": true, "SSD": true,
+	"HDD": true, "GPU": true, "RAID": true, "VM": true, "OS": true,
+	"SLA": true, "RPO": true, "RTO": true,
+	// F5/Volterra specific
+	"RE": true, "CE": true, "SPO": true, "SMG": true,
+}
+
+// mixedCaseAcronyms defines acronyms with specific mixed-case conventions
+// These should be preserved exactly as specified
+var mixedCaseAcronyms = map[string]string{
+	"mtls":      "mTLS",
+	"oauth":     "OAuth",
+	"graphql":   "GraphQL",
+	"websocket": "WebSocket",
+	"iscsi":     "iSCSI",
+	"ipv4":      "IPv4",
+	"ipv6":      "IPv6",
+	"macos":     "macOS",
+	"ios":       "iOS",
+	"nosql":     "NoSQL",
+}
+
 // subcategoryOverrides provides explicit category assignments for resources
 // that don't match any pattern or need a specific override
 var subcategoryOverrides = map[string]string{
@@ -605,6 +650,9 @@ func cleanDescription(desc, attrPath string) string {
 		}
 	}
 
+	// Normalize acronym capitalization (e.g., Dns → DNS, Http → HTTP)
+	desc = normalizeAcronyms(desc)
+
 	return desc
 }
 
@@ -650,10 +698,42 @@ func toTitleCase(s string) string {
 	words := strings.Fields(s)
 	for i, word := range words {
 		if len(word) > 0 {
+			// Apply standard title case first
 			words[i] = strings.ToUpper(string(word[0])) + strings.ToLower(word[1:])
 		}
 	}
-	return strings.Join(words, " ")
+	result := strings.Join(words, " ")
+
+	// Apply acronym normalization to fix any acronyms
+	result = normalizeAcronyms(result)
+
+	return result
+}
+
+// normalizeAcronyms corrects acronym capitalization in text
+// This function is idempotent - running it multiple times produces the same result
+func normalizeAcronyms(text string) string {
+	// Build a regex pattern for word boundaries
+	// Process each word in the text
+	wordRegex := regexp.MustCompile(`\b([A-Za-z0-9]+)\b`)
+
+	return wordRegex.ReplaceAllStringFunc(text, func(word string) string {
+		upperWord := strings.ToUpper(word)
+		lowerWord := strings.ToLower(word)
+
+		// Check for mixed-case acronyms first (e.g., mTLS, OAuth)
+		if corrected, ok := mixedCaseAcronyms[lowerWord]; ok {
+			return corrected
+		}
+
+		// Check for uppercase acronyms (e.g., DNS, HTTP, TCP)
+		if uppercaseAcronyms[upperWord] {
+			return upperWord
+		}
+
+		// Return original word unchanged
+		return word
+	})
 }
 
 func toAnchorName(name string) string {

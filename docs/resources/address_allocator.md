@@ -44,53 +44,17 @@ resource "f5xc_address_allocator" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the AddressAllocator. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the AddressAllocator will be created (`String`).
-
 The following arguments are optional:
-
-`address_allocation_scheme` - (Optional) Address Allocation Scheme. Decides the scheme to be used to allocate addresses from the configured address pool. See [Address Allocation Scheme](#address-allocation-scheme) below for details.
-
-`address_pool` - (Optional) Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients (`List`).
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`mode` - (Optional) Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node (`String`).
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--address_allocation_scheme"></a>
 
-### Address Allocation Scheme
-
-`allocation_unit` - (Optional) Allocation Unit. Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool (`Number`).
-
-`local_interface_address_offset` - (Optional) Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet (`Number`).
-
-`local_interface_address_type` - (Optional) Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Int... (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

@@ -34,18 +34,6 @@ data "f5xc_virtual_k8s" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the VirtualK8S (`String`).
-
-`namespace` - (Required) Namespace where the VirtualK8S exists (`String`).
-
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
-
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
-
-`description` - (Optional) Description of the VirtualK8S (`String`).
-
-`id` - (Optional) Unique identifier for the resource (`String`).
-
-`labels` - (Optional) Labels applied to this resource (`Map`).

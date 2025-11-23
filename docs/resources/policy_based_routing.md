@@ -52,269 +52,75 @@ resource "f5xc_policy_based_routing" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the PolicyBasedRouting. Must be unique within the namespace (`String`).
-
-`namespace` - (Required) Namespace where the PolicyBasedRouting will be created (`String`).
-
 The following arguments are optional:
-
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
-
-> **Note:** One of the arguments from this list "forward_proxy_pbr, network_pbr" must be set.
-
-`forward_proxy_pbr` - (Optional) L3/L4 routing rule. Network(L3/L4) routing policy rule. See [Forward Proxy Pbr](#forward-proxy-pbr) below for details.
-
-`forwarding_class_list` - (Optional) Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match. See [Forwarding Class List](#forwarding-class-list) below for details.
-
-`labels` - (Optional) Labels to apply to this resource (`Map`).
-
-`network_pbr` - (Optional) Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule. See [Network Pbr](#network-pbr) below for details.
-
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
-
 ---
 
 <a id="nestedblock--forward_proxy_pbr"></a>
 
-### Forward Proxy Pbr
-
-`forward_proxy_pbr_rules` - (Optional) L3/L4 routing rules. Network(L3/L4) routing policy rules. See [Forward Proxy Pbr Rules](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules) below.
-
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules
-
-`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [All Destinations](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--all_destinations) below.
-
-`all_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sources](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--all_sources) below.
-
-`forwarding_class_list` - (Optional) Forwarding Class. Ordered list of forwarding Class to be used if no rule match. See [Forwarding Class List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--forwarding_class_list) below.
-
-`http_list` - (Optional) URLListType. See [Http List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list) below.
-
-`ip_prefix_set` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ip Prefix Set](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--ip_prefix_set) below.
-
-`label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Label Selector](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--label_selector) below.
-
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--metadata) below.
-
-`prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--prefix_list) below.
-
-`tls_list` - (Optional) DomainListType. See [Tls List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--tls_list) below.
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--all_destinations"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules All Destinations
-
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--all_sources"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules All Sources
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--forwarding_class_list"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Forwarding Class List
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules Http List
-
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [Http List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list--http_list) below.
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--http_list--http_list"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Http List Http List
-
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--ip_prefix_set"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules Ip Prefix Set
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--label_selector"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Label Selector
-
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
-
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--metadata"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules Metadata
-
-`description` - (Optional) Description. Human readable description (`String`).
-
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--prefix_list"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Prefix List
-
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
-
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--tls_list"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules Tls List
-
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [Tls List](#nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--tls_list--tls_list) below.
 
 <a id="nestedblock--forward_proxy_pbr--forward_proxy_pbr_rules--tls_list--tls_list"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Tls List Tls List
-
 <a id="nestedblock--forwarding_class_list"></a>
-
-### Forwarding Class List
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--network_pbr"></a>
 
-### Network Pbr
-
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#nestedblock--network_pbr--any) below.
-
-`label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. See [Label Selector](#nestedblock--network_pbr--label_selector) below.
-
-`network_pbr_rules` - (Optional) L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule. See [Network Pbr Rules](#nestedblock--network_pbr--network_pbr_rules) below.
-
-`prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#nestedblock--network_pbr--prefix_list) below.
-
 <a id="nestedblock--network_pbr--any"></a>
-
-### Network Pbr Any
 
 <a id="nestedblock--network_pbr--label_selector"></a>
 
-### Network Pbr Label Selector
-
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
-
 <a id="nestedblock--network_pbr--network_pbr_rules"></a>
-
-### Network Pbr Network Pbr Rules
-
-`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Tcp Traffic](#nestedblock--network_pbr--network_pbr_rules--all_tcp_traffic) below.
-
-`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Traffic](#nestedblock--network_pbr--network_pbr_rules--all_traffic) below.
-
-`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Udp Traffic](#nestedblock--network_pbr--network_pbr_rules--all_udp_traffic) below.
-
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#nestedblock--network_pbr--network_pbr_rules--any) below.
-
-`applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#nestedblock--network_pbr--network_pbr_rules--applications) below.
-
-`dns_name` - (Optional) DNS Name to IP. Resolve hostname to get the IP (`String`).
-
-`forwarding_class_list` - (Optional) Forwarding Classes. Ordered list of forwarding Class to be used if rule match. See [Forwarding Class List](#nestedblock--network_pbr--network_pbr_rules--forwarding_class_list) below.
-
-`ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [Ip Prefix Set](#nestedblock--network_pbr--network_pbr_rules--ip_prefix_set) below.
-
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. See [Metadata](#nestedblock--network_pbr--network_pbr_rules--metadata) below.
-
-`prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#nestedblock--network_pbr--network_pbr_rules--prefix_list) below.
-
-`protocol_port_range` - (Optional) Protocol and Port. Protocol and Port ranges. See [Protocol Port Range](#nestedblock--network_pbr--network_pbr_rules--protocol_port_range) below.
 
 <a id="nestedblock--network_pbr--network_pbr_rules--all_tcp_traffic"></a>
 
-### Network Pbr Network Pbr Rules All Tcp Traffic
-
 <a id="nestedblock--network_pbr--network_pbr_rules--all_traffic"></a>
-
-### Network Pbr Network Pbr Rules All Traffic
 
 <a id="nestedblock--network_pbr--network_pbr_rules--all_udp_traffic"></a>
 
-### Network Pbr Network Pbr Rules All Udp Traffic
-
 <a id="nestedblock--network_pbr--network_pbr_rules--any"></a>
-
-### Network Pbr Network Pbr Rules Any
 
 <a id="nestedblock--network_pbr--network_pbr_rules--applications"></a>
 
-### Network Pbr Network Pbr Rules Applications
-
-`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
-
 <a id="nestedblock--network_pbr--network_pbr_rules--forwarding_class_list"></a>
-
-### Network Pbr Network Pbr Rules Forwarding Class List
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--network_pbr--network_pbr_rules--ip_prefix_set"></a>
 
-### Network Pbr Network Pbr Rules Ip Prefix Set
-
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--network_pbr--network_pbr_rules--ip_prefix_set--ref) below.
-
 <a id="nestedblock--network_pbr--network_pbr_rules--ip_prefix_set--ref"></a>
-
-### Network Pbr Network Pbr Rules Ip Prefix Set Ref
 
 <a id="nestedblock--network_pbr--network_pbr_rules--metadata"></a>
 
-### Network Pbr Network Pbr Rules Metadata
-
-`description` - (Optional) Description. Human readable description (`String`).
-
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
-
 <a id="nestedblock--network_pbr--network_pbr_rules--prefix_list"></a>
-
-### Network Pbr Network Pbr Rules Prefix List
-
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="nestedblock--network_pbr--network_pbr_rules--protocol_port_range"></a>
 
-### Network Pbr Network Pbr Rules Protocol Port Range
-
-`port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
-
-`protocol` - (Optional) Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp (`String`).
-
 <a id="nestedblock--network_pbr--prefix_list"></a>
 
-### Network Pbr Prefix List
-
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`https://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m" (`String`).
 
 ## Import
 

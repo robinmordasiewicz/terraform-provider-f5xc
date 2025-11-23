@@ -34,18 +34,6 @@ data "f5xc_managed_tenant" "example" {
 
 The following arguments are required:
 
-`name` - (Required) Name of the ManagedTenant (`String`).
-
-`namespace` - (Required) Namespace where the ManagedTenant exists (`String`).
-
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
-
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
-
-`description` - (Optional) Description of the ManagedTenant (`String`).
-
-`id` - (Optional) Unique identifier for the resource (`String`).
-
-`labels` - (Optional) Labels applied to this resource (`Map`).

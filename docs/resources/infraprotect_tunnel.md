@@ -15,11 +15,11 @@ Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 ```terraform
 # Infraprotect Tunnel Resource Example
-# Creates a DDoS transit tunnel
+# Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 # Basic Infraprotect Tunnel configuration
 resource "f5xc_infraprotect_tunnel" "example" {
-  name      = "my-infraprotect-tunnel"
+  name      = "example-infraprotect-tunnel"
   namespace = "system"
 
   labels = {

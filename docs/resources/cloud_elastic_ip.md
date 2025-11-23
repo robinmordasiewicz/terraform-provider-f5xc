@@ -15,11 +15,11 @@ Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a
 
 ```terraform
 # Cloud Elastic Ip Resource Example
-# Create Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site
+# Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
 
 # Basic Cloud Elastic Ip configuration
 resource "f5xc_cloud_elastic_ip" "example" {
-  name      = "my-cloud-elastic-ip"
+  name      = "example-cloud-elastic-ip"
   namespace = "system"
 
   labels = {

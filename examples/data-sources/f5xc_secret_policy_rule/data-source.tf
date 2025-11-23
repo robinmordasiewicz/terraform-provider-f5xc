@@ -3,7 +3,7 @@
 
 # Look up an existing Secret Policy Rule by name
 data "f5xc_secret_policy_rule" "example" {
-  name      = "my-secret-policy-rule"
+  name      = "example-secret-policy-rule"
   namespace = "system"
 }
 

@@ -3,7 +3,7 @@
 
 # Look up an existing Network Interface by name
 data "f5xc_network_interface" "example" {
-  name      = "my-network-interface"
+  name      = "example-network-interface"
   namespace = "system"
 }
 

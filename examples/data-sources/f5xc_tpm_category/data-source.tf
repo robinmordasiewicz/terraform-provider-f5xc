@@ -3,7 +3,7 @@
 
 # Look up an existing Tpm Category by name
 data "f5xc_tpm_category" "example" {
-  name      = "my-tpm-category"
+  name      = "example-tpm-category"
   namespace = "system"
 }
 

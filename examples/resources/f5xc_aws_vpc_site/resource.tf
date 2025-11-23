@@ -1,9 +1,9 @@
 # Aws Vpc Site Resource Example
-# Shape of the AWS VPC site specification
+# Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 
 # Basic Aws Vpc Site configuration
 resource "f5xc_aws_vpc_site" "example" {
-  name      = "my-aws-vpc-site"
+  name      = "example-aws-vpc-site"
   namespace = "system"
 
   labels = {
@@ -55,21 +55,4 @@ resource "f5xc_aws_vpc_site" "example" {
 
   # No worker nodes by default
   no_worker_nodes {}
-}
-
-# Advanced Aws Vpc Site with additional configuration
-resource "f5xc_aws_vpc_site" "advanced" {
-  name      = "advanced-aws-vpc-site"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }

@@ -19,7 +19,7 @@ Manages DNS Zone in a given namespace. If one already exist it will give a error
 
 # Look up an existing Dns Zone by name
 data "f5xc_dns_zone" "example" {
-  name      = "my-dns-zone"
+  name      = "example-dns-zone"
   namespace = "system"
 }
 
@@ -30,7 +30,7 @@ data "f5xc_dns_zone" "example" {
 
 # Example: Reference DNS zone in DNS load balancer
 # resource "f5xc_dns_load_balancer" "example" {
-#   name      = "my-dns-lb"
+#   name      = "example-dns-lb"
 #   namespace = "system"
 #
 #   dns_zone {

@@ -19,7 +19,7 @@ Manages App type will create the configuration in namespace metadata.namespace i
 
 # Look up an existing Cminstance by name
 data "f5xc_cminstance" "example" {
-  name      = "my-cminstance"
+  name      = "example-cminstance"
   namespace = "system"
 }
 

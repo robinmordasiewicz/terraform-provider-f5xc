@@ -19,7 +19,7 @@ Manages a CertificateChain resource in F5 Distributed Cloud for certificate chai
 
 # Look up an existing Certificate Chain by name
 data "f5xc_certificate_chain" "example" {
-  name      = "my-certificate-chain"
+  name      = "example-certificate-chain"
   namespace = "system"
 }
 

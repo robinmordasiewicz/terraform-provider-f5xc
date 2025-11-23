@@ -1,9 +1,9 @@
 # Crl Resource Example
-# API to create CRL object
+# Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.
 
 # Basic Crl configuration
 resource "f5xc_crl" "example" {
-  name      = "my-crl"
+  name      = "example-crl"
   namespace = "system"
 
   labels = {

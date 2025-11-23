@@ -3,7 +3,7 @@
 
 # Look up an existing Contact by name
 data "f5xc_contact" "example" {
-  name      = "my-contact"
+  name      = "example-contact"
   namespace = "system"
 }
 

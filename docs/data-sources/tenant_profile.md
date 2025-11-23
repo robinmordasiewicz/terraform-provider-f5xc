@@ -19,7 +19,7 @@ Manages tenant_profile config instance. Name of the object is the name of the te
 
 # Look up an existing Tenant Profile by name
 data "f5xc_tenant_profile" "example" {
-  name      = "my-tenant-profile"
+  name      = "example-tenant-profile"
   namespace = "system"
 }
 

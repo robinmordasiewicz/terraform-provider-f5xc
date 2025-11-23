@@ -3,7 +3,7 @@
 
 # Look up an existing Dns Compliance Checks by name
 data "f5xc_dns_compliance_checks" "example" {
-  name      = "my-dns-compliance-checks"
+  name      = "example-dns-compliance-checks"
   namespace = "system"
 }
 

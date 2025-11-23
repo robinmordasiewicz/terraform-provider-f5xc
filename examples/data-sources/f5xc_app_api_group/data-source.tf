@@ -3,7 +3,7 @@
 
 # Look up an existing App Api Group by name
 data "f5xc_app_api_group" "example" {
-  name      = "my-app-api-group"
+  name      = "example-app-api-group"
   namespace = "system"
 }
 

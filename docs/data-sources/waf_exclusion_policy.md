@@ -19,7 +19,7 @@ Manages WAF exclusion policy in F5 Distributed Cloud.
 
 # Look up an existing Waf Exclusion Policy by name
 data "f5xc_waf_exclusion_policy" "example" {
-  name      = "my-waf-exclusion-policy"
+  name      = "example-waf-exclusion-policy"
   namespace = "system"
 }
 

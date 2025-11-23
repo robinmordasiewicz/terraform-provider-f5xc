@@ -3,7 +3,7 @@
 
 # Look up an existing Ike Phase1 Profile by name
 data "f5xc_ike_phase1_profile" "example" {
-  name      = "my-ike-phase1-profile"
+  name      = "example-ike-phase1-profile"
   namespace = "system"
 }
 

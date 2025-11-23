@@ -19,7 +19,7 @@ Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create con
 
 # Look up an existing Proxy by name
 data "f5xc_proxy" "example" {
-  name      = "my-proxy"
+  name      = "example-proxy"
   namespace = "system"
 }
 

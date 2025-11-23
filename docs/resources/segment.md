@@ -15,11 +15,11 @@ Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 
 ```terraform
 # Segment Resource Example
-# Shape of the segment specification
+# Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 
 # Basic Segment configuration
 resource "f5xc_segment" "example" {
-  name      = "my-segment"
+  name      = "example-segment"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_segment" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: disable, enable] Empty. This can be used for mess...
     disable {
       # Configure disable settings
     }

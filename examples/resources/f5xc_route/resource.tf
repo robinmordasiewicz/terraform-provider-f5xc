@@ -1,9 +1,9 @@
 # Route Resource Example
-# Create route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object
+# Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
 
 # Basic Route configuration
 resource "f5xc_route" "example" {
-  name      = "my-route"
+  name      = "example-route"
   namespace = "system"
 
   labels = {

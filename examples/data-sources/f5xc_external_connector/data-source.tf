@@ -3,7 +3,7 @@
 
 # Look up an existing External Connector by name
 data "f5xc_external_connector" "example" {
-  name      = "my-external-connector"
+  name      = "example-external-connector"
   namespace = "system"
 }
 

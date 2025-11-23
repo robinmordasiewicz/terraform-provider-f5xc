@@ -15,11 +15,11 @@ Manages virtual host in a given namespace. in F5 Distributed Cloud.
 
 ```terraform
 # Virtual Host Resource Example
-# Creates virtual host in a given namespace.
+# Manages virtual host in a given namespace. in F5 Distributed Cloud.
 
 # Basic Virtual Host configuration
 resource "f5xc_virtual_host" "example" {
-  name      = "my-virtual-host"
+  name      = "example-virtual-host"
   namespace = "system"
 
   labels = {
@@ -36,7 +36,7 @@ resource "f5xc_virtual_host" "example" {
     advertise_policies {
       # Configure advertise_policies settings
     }
-    # Authentication Details. Authentication related informatio...
+    # [OneOf: authentication, no_authentication] Authentication...
     authentication {
       # Configure authentication settings
     }

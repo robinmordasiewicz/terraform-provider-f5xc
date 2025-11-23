@@ -3,7 +3,7 @@
 
 # Look up an existing App Setting by name
 data "f5xc_app_setting" "example" {
-  name      = "my-app-setting"
+  name      = "example-app-setting"
   namespace = "system"
 }
 

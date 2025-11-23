@@ -1,9 +1,9 @@
 # Dns Zone Resource Example
-# Manages a DNSZone in F5 Distributed Cloud.
+# Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic Dns Zone configuration
 resource "f5xc_dns_zone" "example" {
-  name      = "my-dns-zone"
+  name      = "example-dns-zone"
   namespace = "system"
 
   labels = {

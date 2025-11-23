@@ -19,7 +19,7 @@ Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery 
 
 # Look up an existing Cdn Loadbalancer by name
 data "f5xc_cdn_loadbalancer" "example" {
-  name      = "my-cdn-loadbalancer"
+  name      = "example-cdn-loadbalancer"
   namespace = "system"
 }
 

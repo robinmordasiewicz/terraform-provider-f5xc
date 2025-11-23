@@ -19,7 +19,7 @@ Manages Address Allocator will create an address allocator object in 'system' na
 
 # Look up an existing Address Allocator by name
 data "f5xc_address_allocator" "example" {
-  name      = "my-address-allocator"
+  name      = "example-address-allocator"
   namespace = "system"
 }
 

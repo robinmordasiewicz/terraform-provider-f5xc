@@ -1,9 +1,9 @@
 # K8s Cluster Resource Example
-# Create k8s_cluster will create the object in the storage backend for namespace metadata.namespace
+# Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8s Cluster configuration
 resource "f5xc_k8s_cluster" "example" {
-  name      = "my-k8s-cluster"
+  name      = "example-k8s-cluster"
   namespace = "system"
 
   labels = {
@@ -37,21 +37,4 @@ resource "f5xc_k8s_cluster" "example" {
   }
 
   global_access_enable {}
-}
-
-# Advanced K8s Cluster with additional configuration
-resource "f5xc_k8s_cluster" "advanced" {
-  name      = "advanced-k8s-cluster"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }

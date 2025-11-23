@@ -19,7 +19,7 @@ Manages DDoS transit ASN in F5 Distributed Cloud.
 
 # Look up an existing Infraprotect Asn by name
 data "f5xc_infraprotect_asn" "example" {
-  name      = "my-infraprotect-asn"
+  name      = "example-infraprotect-asn"
   namespace = "system"
 }
 

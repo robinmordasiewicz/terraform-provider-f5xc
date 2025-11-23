@@ -15,11 +15,11 @@ Manages a ReportConfig resource in F5 Distributed Cloud for report configuration
 
 ```terraform
 # Report Config Resource Example
-# Report configuration is used to schedule report generation at a later point in time.
+# Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
 # Basic Report Config configuration
 resource "f5xc_report_config" "example" {
-  name      = "my-report-config"
+  name      = "example-report-config"
   namespace = "system"
 
   labels = {

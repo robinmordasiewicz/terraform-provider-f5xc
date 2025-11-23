@@ -3,7 +3,7 @@
 
 # Look up an existing Workload Flavor by name
 data "f5xc_workload_flavor" "example" {
-  name      = "my-workload-flavor"
+  name      = "example-workload-flavor"
   namespace = "system"
 }
 

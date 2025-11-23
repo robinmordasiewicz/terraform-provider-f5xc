@@ -15,11 +15,11 @@ Manages k8s_pod_security_policy will create the object in the storage backend fo
 
 ```terraform
 # K8s Pod Security Policy Resource Example
-# Create k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace
+# Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8s Pod Security Policy configuration
 resource "f5xc_k8s_pod_security_policy" "example" {
-  name      = "my-k8s-pod-security-policy"
+  name      = "example-k8s-pod-security-policy"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_k8s_pod_security_policy" "example" {
   }
 
   # Resource-specific configuration
-    # Pod Security Policy Specification. Form based pod securit...
+    # [OneOf: psp_spec, yaml] Pod Security Policy Specification...
     psp_spec {
       # Configure psp_spec settings
     }

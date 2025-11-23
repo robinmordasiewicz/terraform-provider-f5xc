@@ -3,7 +3,7 @@
 
 # Look up an existing Geo Location Set by name
 data "f5xc_geo_location_set" "example" {
-  name      = "my-geo-location-set"
+  name      = "example-geo-location-set"
   namespace = "system"
 }
 

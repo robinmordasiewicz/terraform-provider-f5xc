@@ -3,7 +3,7 @@
 
 # Look up an existing Ike1 by name
 data "f5xc_ike1" "example" {
-  name      = "my-ike1"
+  name      = "example-ike1"
   namespace = "system"
 }
 

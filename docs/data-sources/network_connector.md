@@ -19,7 +19,7 @@ Manages a NetworkConnector resource in F5 Distributed Cloud for network connecto
 
 # Look up an existing Network Connector by name
 data "f5xc_network_connector" "example" {
-  name      = "my-network-connector"
+  name      = "example-network-connector"
   namespace = "system"
 }
 

@@ -15,11 +15,11 @@ Manages new customer's contact detail record with us, including address and phon
 
 ```terraform
 # Contact Resource Example
-# Creates a new customer's contact detail record with us, including address and phone number.
+# Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
 
 # Basic Contact configuration
 resource "f5xc_contact" "example" {
-  name      = "my-contact"
+  name      = "example-contact"
   namespace = "system"
 
   labels = {

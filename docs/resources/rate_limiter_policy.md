@@ -15,11 +15,11 @@ Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter po
 
 ```terraform
 # Rate Limiter Policy Resource Example
-# Shape of the Rate Limiter Policy Create specification
+# Manages a RateLimiterPolicy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
 # Basic Rate Limiter Policy configuration
 resource "f5xc_rate_limiter_policy" "example" {
-  name      = "my-rate-limiter-policy"
+  name      = "example-rate-limiter-policy"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_rate_limiter_policy" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: any_server, server_name, server_name_matcher, ser...
     any_server {
       # Configure any_server settings
     }

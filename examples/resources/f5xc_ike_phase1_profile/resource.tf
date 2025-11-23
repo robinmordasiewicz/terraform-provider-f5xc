@@ -1,9 +1,9 @@
 # Ike Phase1 Profile Resource Example
-# Shape of the IKE Phase1 profile specification
+# Manages a IKEPhase1Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
 # Basic Ike Phase1 Profile configuration
 resource "f5xc_ike_phase1_profile" "example" {
-  name      = "my-ike-phase1-profile"
+  name      = "example-ike-phase1-profile"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_ike_phase1_profile" "example" {
   }
 
   # Resource-specific configuration
-    # Hours. Input Hours
+    # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
     ike_keylifetime_hours {
       # Configure ike_keylifetime_hours settings
     }
@@ -24,7 +24,7 @@ resource "f5xc_ike_phase1_profile" "example" {
     ike_keylifetime_minutes {
       # Configure ike_keylifetime_minutes settings
     }
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: reauth_disabled, reauth_timeout_days, reauth_time...
     reauth_disabled {
       # Configure reauth_disabled settings
     }

@@ -15,11 +15,11 @@ Manages api discovery creates a new object in the storage backend for metadata.n
 
 ```terraform
 # Api Discovery Resource Example
-# Create api discovery creates a new object in the storage backend for metadata.namespace.
+# Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Api Discovery configuration
 resource "f5xc_api_discovery" "example" {
-  name      = "my-api-discovery"
+  name      = "example-api-discovery"
   namespace = "system"
 
   labels = {

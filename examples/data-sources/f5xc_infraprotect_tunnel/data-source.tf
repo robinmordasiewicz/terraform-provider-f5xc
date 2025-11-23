@@ -3,7 +3,7 @@
 
 # Look up an existing Infraprotect Tunnel by name
 data "f5xc_infraprotect_tunnel" "example" {
-  name      = "my-infraprotect-tunnel"
+  name      = "example-infraprotect-tunnel"
   namespace = "system"
 }
 

@@ -1,9 +1,9 @@
 # Role Resource Example
-# Creates a role
+# Manages role in F5 Distributed Cloud.
 
 # Basic Role configuration
 resource "f5xc_role" "example" {
-  name      = "my-role"
+  name      = "example-role"
   namespace = "system"
 
   labels = {

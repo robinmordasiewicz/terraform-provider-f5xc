@@ -19,7 +19,7 @@ Manages a ContainerRegistry resource in F5 Distributed Cloud for container image
 
 # Look up an existing Container Registry by name
 data "f5xc_container_registry" "example" {
-  name      = "my-container-registry"
+  name      = "example-container-registry"
   namespace = "system"
 }
 

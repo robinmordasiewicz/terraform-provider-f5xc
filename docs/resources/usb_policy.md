@@ -15,11 +15,11 @@ Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb polic
 
 ```terraform
 # Usb Policy Resource Example
-# Creates a new USB policy object
+# Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
 # Basic Usb Policy configuration
 resource "f5xc_usb_policy" "example" {
-  name      = "my-usb-policy"
+  name      = "example-usb-policy"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_usb_policy" "example" {
   }
 
   # Resource-specific configuration
-    # Allowed USB devices. List of allowed USB devices Required...
+    # Allowed USB devices. List of allowed USB devices
     allowed_devices {
       # Configure allowed_devices settings
     }

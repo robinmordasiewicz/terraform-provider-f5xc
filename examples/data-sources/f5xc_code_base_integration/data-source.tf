@@ -3,7 +3,7 @@
 
 # Look up an existing Code Base Integration by name
 data "f5xc_code_base_integration" "example" {
-  name      = "my-code-base-integration"
+  name      = "example-code-base-integration"
   namespace = "system"
 }
 

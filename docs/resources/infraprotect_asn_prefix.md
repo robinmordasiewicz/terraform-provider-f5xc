@@ -15,11 +15,11 @@ Manages DDoS transit Prefix in F5 Distributed Cloud.
 
 ```terraform
 # Infraprotect Asn Prefix Resource Example
-# Creates a DDoS transit Prefix
+# Manages DDoS transit Prefix in F5 Distributed Cloud.
 
 # Basic Infraprotect Asn Prefix configuration
 resource "f5xc_infraprotect_asn_prefix" "example" {
-  name      = "my-infraprotect-asn-prefix"
+  name      = "example-infraprotect-asn-prefix"
   namespace = "system"
 
   labels = {

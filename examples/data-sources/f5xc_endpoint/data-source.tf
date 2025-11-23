@@ -3,7 +3,7 @@
 
 # Look up an existing Endpoint by name
 data "f5xc_endpoint" "example" {
-  name      = "my-endpoint"
+  name      = "example-endpoint"
   namespace = "system"
 }
 

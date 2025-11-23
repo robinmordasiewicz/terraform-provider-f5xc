@@ -15,11 +15,11 @@ Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant config
 
 ```terraform
 # Tenant Configuration Resource Example
-# Shape of the tenant configuration specification
+# Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 
 # Basic Tenant Configuration configuration
 resource "f5xc_tenant_configuration" "example" {
-  name      = "my-tenant-configuration"
+  name      = "example-tenant-configuration"
   namespace = "system"
 
   labels = {

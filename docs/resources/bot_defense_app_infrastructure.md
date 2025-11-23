@@ -15,11 +15,11 @@ Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed C
 
 ```terraform
 # Bot Defense App Infrastructure Resource Example
-# Creates Bot Defense App Infrastructure in a given namespace.
+# Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 
 # Basic Bot Defense App Infrastructure configuration
 resource "f5xc_bot_defense_app_infrastructure" "example" {
-  name      = "my-bot-defense-app-infrastructure"
+  name      = "example-bot-defense-app-infrastructure"
   namespace = "system"
 
   labels = {
@@ -32,15 +32,15 @@ resource "f5xc_bot_defense_app_infrastructure" "example" {
   }
 
   # Resource-specific configuration
-    # F5 Hosted. Infra F5 Hosted
+    # [OneOf: cloud_hosted, data_center_hosted] F5 Hosted. Infr...
     cloud_hosted {
       # Configure cloud_hosted settings
     }
-    # Egress. Egress Required: YES ves.io.schema.rules.message....
+    # Egress. Egress
     egress {
       # Configure egress settings
     }
-    # Ingress. Ingress Required: YES ves.io.schema.rules.messag...
+    # Ingress. Ingress
     ingress {
       # Configure ingress settings
     }

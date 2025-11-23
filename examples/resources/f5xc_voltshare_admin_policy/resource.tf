@@ -1,9 +1,9 @@
 # Voltshare Admin Policy Resource Example
-# Create voltshare_admin_policy creates a new object in the storage backend for metadata.namespace.
+# Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Voltshare Admin Policy configuration
 resource "f5xc_voltshare_admin_policy" "example" {
-  name      = "my-voltshare-admin-policy"
+  name      = "example-voltshare-admin-policy"
   namespace = "system"
 
   labels = {

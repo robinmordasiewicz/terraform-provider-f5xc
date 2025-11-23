@@ -3,7 +3,7 @@
 
 # Look up an existing Service Policy Rule by name
 data "f5xc_service_policy_rule" "example" {
-  name      = "my-service-policy-rule"
+  name      = "example-service-policy-rule"
   namespace = "system"
 }
 

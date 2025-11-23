@@ -19,7 +19,7 @@ Manages request specification. in F5 Distributed Cloud.
 
 # Look up an existing Api Credential by name
 data "f5xc_api_credential" "example" {
-  name      = "my-api-credential"
+  name      = "example-api-credential"
   namespace = "system"
 }
 

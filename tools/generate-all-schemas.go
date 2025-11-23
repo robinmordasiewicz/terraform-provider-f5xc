@@ -391,31 +391,77 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		attributes = append(attributes, attr)
 	}
 
-	// Sort attributes
+	// Sort attributes per HashiCorp documentation standards:
+	// Arguments: 1) ID components first, 2) Required alphabetically, 3) Optional alphabetically
+	// Attributes: 1) id first, 2) remaining alphabetically
 	sort.Slice(attributes, func(i, j int) bool {
+		// Computed attributes go after arguments
+		if attributes[i].Computed != attributes[j].Computed {
+			return !attributes[i].Computed
+		}
+		// Required before optional
 		if attributes[i].Required != attributes[j].Required {
 			return attributes[i].Required
 		}
+		// Alphabetical within each group
 		return attributes[i].Name < attributes[j].Name
 	})
 
-	// Add standard metadata attributes
-	standardAttrs := []TerraformAttribute{
+	// Add standard metadata attributes in HashiCorp-compliant order:
+	// 1. ID components (name, namespace) - these form the resource ID
+	// 2. Other required args alphabetically
+	// 3. Optional args alphabetically (annotations, labels)
+	// 4. Computed attributes (id first)
+	idComponentAttrs := []TerraformAttribute{
 		{Name: "name", GoName: "Name", TfsdkTag: "name", Type: "string",
 			Description: fmt.Sprintf("Name of the %s. Must be unique within the namespace.", toTitleCase(resourceName)),
 			Required: true, PlanModifier: "RequiresReplace"},
 		{Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
 			Description: fmt.Sprintf("Namespace where the %s will be created.", toTitleCase(resourceName)),
 			Required: true, PlanModifier: "RequiresReplace"},
-		{Name: "labels", GoName: "Labels", TfsdkTag: "labels", Type: "map", ElementType: "string",
-			Description: "Labels to apply to this resource.", Optional: true},
+	}
+
+	// Optional standard attrs will be sorted with other optionals
+	optionalStdAttrs := []TerraformAttribute{
 		{Name: "annotations", GoName: "Annotations", TfsdkTag: "annotations", Type: "map", ElementType: "string",
 			Description: "Annotations to apply to this resource.", Optional: true},
+		{Name: "labels", GoName: "Labels", TfsdkTag: "labels", Type: "map", ElementType: "string",
+			Description: "Labels to apply to this resource.", Optional: true},
+	}
+
+	// Computed attrs - id first per HashiCorp standards
+	computedAttrs := []TerraformAttribute{
 		{Name: "id", GoName: "ID", TfsdkTag: "id", Type: "string",
 			Description: "Unique identifier for the resource.", Computed: true, PlanModifier: "UseStateForUnknown"},
 	}
 
-	attributes = append(standardAttrs, attributes...)
+	// Combine: ID components first, then other required, then optional (incl. standard), then computed
+	var sortedAttrs []TerraformAttribute
+	sortedAttrs = append(sortedAttrs, idComponentAttrs...)
+
+	// Add remaining required attributes (alphabetically)
+	for _, attr := range attributes {
+		if attr.Required && !attr.Computed {
+			sortedAttrs = append(sortedAttrs, attr)
+		}
+	}
+
+	// Add optional attributes (standard + schema-derived, alphabetically)
+	allOptional := append(optionalStdAttrs, filterOptional(attributes)...)
+	sort.Slice(allOptional, func(i, j int) bool {
+		return allOptional[i].Name < allOptional[j].Name
+	})
+	sortedAttrs = append(sortedAttrs, allOptional...)
+
+	// Add computed attributes (id first, then others alphabetically)
+	sortedAttrs = append(sortedAttrs, computedAttrs...)
+	for _, attr := range attributes {
+		if attr.Computed && attr.Name != "id" {
+			sortedAttrs = append(sortedAttrs, attr)
+		}
+	}
+
+	attributes = sortedAttrs
 
 	// Transform raw API description into user-friendly Terraform description
 	description := transformResourceDescription(resourceName, createSpec.Description)
@@ -531,6 +577,11 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 	attr.Description = cleanDescription(description)
 	if attr.Description == "" {
 		attr.Description = fmt.Sprintf("Configuration for %s.", name)
+	}
+
+	// Format enum values per HashiCorp standards: "Possible values are `value1`, `value2`"
+	if len(schema.Enum) > 0 {
+		attr.Description = formatEnumDescription(attr.Description, schema.Enum)
 	}
 
 	// Determine type and extract nested attributes
@@ -675,6 +726,59 @@ func cleanDescription(desc string) string {
 		desc = desc[:497] + "..."
 	}
 	return desc
+}
+
+// filterOptional returns only optional (non-required, non-computed) attributes
+func filterOptional(attrs []TerraformAttribute) []TerraformAttribute {
+	var result []TerraformAttribute
+	for _, attr := range attrs {
+		if attr.Optional && !attr.Required && !attr.Computed {
+			result = append(result, attr)
+		}
+	}
+	return result
+}
+
+// formatEnumDescription appends enum values to a description per HashiCorp standards.
+// Format: "Possible values are `value1`, `value2`" or "The only possible value is `value1`"
+func formatEnumDescription(desc string, enumValues []interface{}) string {
+	if len(enumValues) == 0 {
+		return desc
+	}
+
+	// Convert enum values to strings with backtick formatting
+	var formattedValues []string
+	for _, v := range enumValues {
+		str := fmt.Sprintf("%v", v)
+		// Skip empty or very long values
+		if str == "" || len(str) > 50 {
+			continue
+		}
+		formattedValues = append(formattedValues, fmt.Sprintf("`%s`", str))
+	}
+
+	if len(formattedValues) == 0 {
+		return desc
+	}
+
+	// Ensure description ends properly before adding enum info
+	desc = strings.TrimSpace(desc)
+	if desc != "" && !strings.HasSuffix(desc, ".") && !strings.HasSuffix(desc, ":") {
+		desc += "."
+	}
+
+	// Format based on number of values per HashiCorp standards
+	if len(formattedValues) == 1 {
+		return fmt.Sprintf("%s The only possible value is %s.", desc, formattedValues[0])
+	}
+
+	// Limit to first 10 values to avoid overly long descriptions
+	if len(formattedValues) > 10 {
+		formattedValues = formattedValues[:10]
+		return fmt.Sprintf("%s Possible values include %s, and others.", desc, strings.Join(formattedValues, ", "))
+	}
+
+	return fmt.Sprintf("%s Possible values are %s.", desc, strings.Join(formattedValues, ", "))
 }
 
 // transformResourceDescription converts technical API descriptions into user-friendly

@@ -3,7 +3,7 @@
 
 # Look up an existing Trusted Ca List by name
 data "f5xc_trusted_ca_list" "example" {
-  name      = "my-trusted-ca-list"
+  name      = "example-trusted-ca-list"
   namespace = "system"
 }
 

@@ -3,7 +3,7 @@
 
 # Look up an existing Log Receiver by name
 data "f5xc_log_receiver" "example" {
-  name      = "my-log-receiver"
+  name      = "example-log-receiver"
   namespace = "system"
 }
 
@@ -14,7 +14,7 @@ data "f5xc_log_receiver" "example" {
 
 # Example: Reference log receiver in site configuration
 # resource "f5xc_securemesh_site_v2" "example" {
-#   name      = "my-site"
+#   name      = "example-site"
 #   namespace = "system"
 #
 #   log_receiver {

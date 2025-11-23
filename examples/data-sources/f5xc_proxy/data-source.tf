@@ -3,7 +3,7 @@
 
 # Look up an existing Proxy by name
 data "f5xc_proxy" "example" {
-  name      = "my-proxy"
+  name      = "example-proxy"
   namespace = "system"
 }
 

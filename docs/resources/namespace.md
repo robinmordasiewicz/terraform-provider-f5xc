@@ -15,11 +15,11 @@ Manages new namespace. Name of the object is name of the name space. in F5 Distr
 
 ```terraform
 # Namespace Resource Example
-# Creates a new namespace. Name of the object is name of the name space.
+# Manages new namespace. Name of the object is name of the name space. in F5 Distributed Cloud.
 
 # Basic Namespace configuration
 resource "f5xc_namespace" "example" {
-  name      = "my-namespace"
+  name      = "example-namespace"
   namespace = "system"
 
   labels = {

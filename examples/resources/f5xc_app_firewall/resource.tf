@@ -1,9 +1,9 @@
 # App Firewall Resource Example
-# Create Application Firewall
+# Manages Application Firewall in F5 Distributed Cloud.
 
 # Basic App Firewall configuration
 resource "f5xc_app_firewall" "example" {
-  name      = "my-app-firewall"
+  name      = "example-app-firewall"
   namespace = "system"
 
   labels = {

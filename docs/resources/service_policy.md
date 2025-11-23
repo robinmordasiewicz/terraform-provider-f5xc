@@ -15,11 +15,11 @@ Manages service_policy creates a new object in the storage backend for metadata.
 
 ```terraform
 # Service Policy Resource Example
-# Create service_policy creates a new object in the storage backend for metadata.namespace.
+# Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Service Policy configuration
 resource "f5xc_service_policy" "example" {
-  name      = "my-service-policy"
+  name      = "example-service-policy"
   namespace = "system"
 
   labels = {
@@ -45,23 +45,6 @@ resource "f5xc_service_policy" "example" {
         prefix = "/api/"
       }
     }
-  }
-}
-
-# Advanced Service Policy with additional configuration
-resource "f5xc_service_policy" "advanced" {
-  name      = "advanced-service-policy"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
   }
 }
 ```

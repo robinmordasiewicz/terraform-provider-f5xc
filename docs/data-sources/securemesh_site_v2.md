@@ -19,7 +19,7 @@ Manages a SecuremeshSiteV2 resource in F5 Distributed Cloud for deploying secure
 
 # Look up an existing Securemesh Site V2 by name
 data "f5xc_securemesh_site_v2" "example" {
-  name      = "my-securemesh-site-v2"
+  name      = "example-securemesh-site-v2"
   namespace = "system"
 }
 

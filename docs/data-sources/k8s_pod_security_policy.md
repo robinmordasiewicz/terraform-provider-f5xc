@@ -19,7 +19,7 @@ Manages k8s_pod_security_policy will create the object in the storage backend fo
 
 # Look up an existing K8s Pod Security Policy by name
 data "f5xc_k8s_pod_security_policy" "example" {
-  name      = "my-k8s-pod-security-policy"
+  name      = "example-k8s-pod-security-policy"
   namespace = "system"
 }
 

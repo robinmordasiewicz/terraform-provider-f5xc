@@ -1,9 +1,9 @@
 # Azure Vnet Site Resource Example
-# Shape of the Azure VNet site specification
+# Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
 # Basic Azure Vnet Site configuration
 resource "f5xc_azure_vnet_site" "example" {
-  name      = "my-azure-vnet-site"
+  name      = "example-azure-vnet-site"
   namespace = "system"
 
   labels = {
@@ -58,21 +58,4 @@ resource "f5xc_azure_vnet_site" "example" {
 
   # No worker nodes by default
   no_worker_nodes {}
-}
-
-# Advanced Azure Vnet Site with additional configuration
-resource "f5xc_azure_vnet_site" "advanced" {
-  name      = "advanced-azure-vnet-site"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }

@@ -1,9 +1,9 @@
 # Securemesh Site Resource Example
-# Shape of the Secure Mesh site specification
+# Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 
 # Basic Securemesh Site configuration
 resource "f5xc_securemesh_site" "example" {
-  name      = "my-securemesh-site"
+  name      = "example-securemesh-site"
   namespace = "system"
 
   labels = {
@@ -35,21 +35,4 @@ resource "f5xc_securemesh_site" "example" {
 
   # Disable HA
   disable_ha {}
-}
-
-# Advanced Securemesh Site with additional configuration
-resource "f5xc_securemesh_site" "advanced" {
-  name      = "advanced-securemesh-site"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }

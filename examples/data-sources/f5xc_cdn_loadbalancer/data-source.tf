@@ -3,7 +3,7 @@
 
 # Look up an existing Cdn Loadbalancer by name
 data "f5xc_cdn_loadbalancer" "example" {
-  name      = "my-cdn-loadbalancer"
+  name      = "example-cdn-loadbalancer"
   namespace = "system"
 }
 

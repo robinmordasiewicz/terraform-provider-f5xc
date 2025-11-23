@@ -19,7 +19,7 @@ Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configura
 
 # Look up an existing Ike1 by name
 data "f5xc_ike1" "example" {
-  name      = "my-ike1"
+  name      = "example-ike1"
   namespace = "system"
 }
 

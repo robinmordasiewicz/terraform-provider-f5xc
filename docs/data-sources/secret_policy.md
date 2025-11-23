@@ -19,7 +19,7 @@ Manages secret_policy creates a new object in the storage backend for metadata.n
 
 # Look up an existing Secret Policy by name
 data "f5xc_secret_policy" "example" {
-  name      = "my-secret-policy"
+  name      = "example-secret-policy"
   namespace = "system"
 }
 

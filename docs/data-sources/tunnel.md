@@ -19,7 +19,7 @@ Manages tunnel in a given namespace. If one already exist it will give a error. 
 
 # Look up an existing Tunnel by name
 data "f5xc_tunnel" "example" {
-  name      = "my-tunnel"
+  name      = "example-tunnel"
   namespace = "system"
 }
 

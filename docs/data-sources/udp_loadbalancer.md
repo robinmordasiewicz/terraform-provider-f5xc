@@ -19,7 +19,7 @@ Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UD
 
 # Look up an existing Udp Loadbalancer by name
 data "f5xc_udp_loadbalancer" "example" {
-  name      = "my-udp-loadbalancer"
+  name      = "example-udp-loadbalancer"
   namespace = "system"
 }
 

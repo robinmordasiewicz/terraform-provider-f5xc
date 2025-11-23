@@ -19,7 +19,7 @@ Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 # Look up an existing Nfv Service by name
 data "f5xc_nfv_service" "example" {
-  name      = "my-nfv-service"
+  name      = "example-nfv-service"
   namespace = "system"
 }
 

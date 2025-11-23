@@ -3,7 +3,7 @@
 
 # Look up an existing Workload by name
 data "f5xc_workload" "example" {
-  name      = "my-workload"
+  name      = "example-workload"
   namespace = "system"
 }
 

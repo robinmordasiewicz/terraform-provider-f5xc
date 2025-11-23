@@ -19,7 +19,7 @@ Manages iRule in a given namespace. If one already exists it will give an error.
 
 # Look up an existing Irule by name
 data "f5xc_irule" "example" {
-  name      = "my-irule"
+  name      = "example-irule"
   namespace = "system"
 }
 

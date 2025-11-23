@@ -19,7 +19,7 @@ Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 
 # Look up an existing Infraprotect Deny List Rule by name
 data "f5xc_infraprotect_deny_list_rule" "example" {
-  name      = "my-infraprotect-deny-list-rule"
+  name      = "example-infraprotect-deny-list-rule"
   namespace = "system"
 }
 

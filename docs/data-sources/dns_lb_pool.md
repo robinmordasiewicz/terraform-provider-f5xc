@@ -19,7 +19,7 @@ Manages DNS Load Balancer Pool in a given namespace. If one already exist it wil
 
 # Look up an existing Dns Lb Pool by name
 data "f5xc_dns_lb_pool" "example" {
-  name      = "my-dns-lb-pool"
+  name      = "example-dns-lb-pool"
   namespace = "system"
 }
 

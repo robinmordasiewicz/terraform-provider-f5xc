@@ -15,11 +15,11 @@ Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggr
 
 ```terraform
 # Global Log Receiver Resource Example
-# Creates a new Global Log Receiver object
+# Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.
 
 # Basic Global Log Receiver configuration
 resource "f5xc_global_log_receiver" "example" {
-  name      = "my-global-log-receiver"
+  name      = "example-global-log-receiver"
   namespace = "system"
 
   labels = {
@@ -32,11 +32,11 @@ resource "f5xc_global_log_receiver" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: audit_logs, dns_logs, request_logs, security_even...
     audit_logs {
       # Configure audit_logs settings
     }
-    # AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Co...
+    # [OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiv...
     aws_cloud_watch_receiver {
       # Configure aws_cloud_watch_receiver settings
     }

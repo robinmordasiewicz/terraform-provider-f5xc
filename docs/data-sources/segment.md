@@ -19,7 +19,7 @@ Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 
 # Look up an existing Segment by name
 data "f5xc_segment" "example" {
-  name      = "my-segment"
+  name      = "example-segment"
   namespace = "system"
 }
 

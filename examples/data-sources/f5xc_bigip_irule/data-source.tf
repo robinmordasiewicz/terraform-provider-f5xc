@@ -3,7 +3,7 @@
 
 # Look up an existing Bigip Irule by name
 data "f5xc_bigip_irule" "example" {
-  name      = "my-bigip-irule"
+  name      = "example-bigip-irule"
   namespace = "system"
 }
 

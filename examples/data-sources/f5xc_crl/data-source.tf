@@ -3,7 +3,7 @@
 
 # Look up an existing Crl by name
 data "f5xc_crl" "example" {
-  name      = "my-crl"
+  name      = "example-crl"
   namespace = "system"
 }
 

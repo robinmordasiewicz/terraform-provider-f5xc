@@ -19,7 +19,7 @@ Manages fleet will create a fleet object in 'system' namespace of the user in F5
 
 # Look up an existing Fleet by name
 data "f5xc_fleet" "example" {
-  name      = "my-fleet"
+  name      = "example-fleet"
   namespace = "system"
 }
 

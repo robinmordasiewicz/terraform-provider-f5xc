@@ -3,7 +3,7 @@
 
 # Look up an existing Securemesh Site by name
 data "f5xc_securemesh_site" "example" {
-  name      = "my-securemesh-site"
+  name      = "example-securemesh-site"
   namespace = "system"
 }
 

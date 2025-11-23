@@ -15,11 +15,11 @@ Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TC
 
 ```terraform
 # Tcp Loadbalancer Resource Example
-# Shape of the TCP load balancer create specification
+# Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
 # Basic Tcp Loadbalancer configuration
 resource "f5xc_tcp_loadbalancer" "example" {
-  name      = "my-tcp-loadbalancer"
+  name      = "example-tcp-loadbalancer"
   namespace = "system"
 
   labels = {
@@ -42,7 +42,7 @@ resource "f5xc_tcp_loadbalancer" "example" {
   # Origin pools
   origin_pools_weights {
     pool {
-      name      = "my-tcp-pool"
+      name      = "example-tcp-pool"
       namespace = "system"
     }
     weight = 1
@@ -53,23 +53,6 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
   # No retract cluster by default
   retract_cluster {}
-}
-
-# Advanced Tcp Loadbalancer with additional configuration
-resource "f5xc_tcp_loadbalancer" "advanced" {
-  name      = "advanced-tcp-loadbalancer"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }
 ```
 

@@ -15,11 +15,11 @@ Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 
 ```terraform
 # Infraprotect Deny List Rule Resource Example
-# Creates a DDoS transit Deny List Rule
+# Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 
 # Basic Infraprotect Deny List Rule configuration
 resource "f5xc_infraprotect_deny_list_rule" "example" {
-  name      = "my-infraprotect-deny-list-rule"
+  name      = "example-infraprotect-deny-list-rule"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_infraprotect_deny_list_rule" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: expiration_never, expiration_timestamp, one_day, ...
     expiration_never {
       # Configure expiration_never settings
     }

@@ -3,7 +3,7 @@
 
 # Look up an existing Network Firewall by name
 data "f5xc_network_firewall" "example" {
-  name      = "my-network-firewall"
+  name      = "example-network-firewall"
   namespace = "system"
 }
 

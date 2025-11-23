@@ -1,9 +1,9 @@
 # Tpm Category Resource Example
-# Create a Category object, which is a grouping of APIKeys used for TPM provisioning
+# Manages Category object, which is a grouping of APIKeys used for TPM provisioning in F5 Distributed Cloud.
 
 # Basic Tpm Category configuration
 resource "f5xc_tpm_category" "example" {
-  name      = "my-tpm-category"
+  name      = "example-tpm-category"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_tpm_category" "example" {
   }
 
   # Resource-specific configuration
-    # TPM Manager reference. Reference to TPM Manager Required:...
+    # TPM Manager reference. Reference to TPM Manager
     tpm_manager_ref {
       # Configure tpm_manager_ref settings
     }

@@ -3,7 +3,7 @@
 
 # Look up an existing Rate Limiter by name
 data "f5xc_rate_limiter" "example" {
-  name      = "my-rate-limiter"
+  name      = "example-rate-limiter"
   namespace = "system"
 }
 

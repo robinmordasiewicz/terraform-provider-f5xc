@@ -3,7 +3,7 @@
 
 # Look up an existing Api Definition by name
 data "f5xc_api_definition" "example" {
-  name      = "my-api-definition"
+  name      = "example-api-definition"
   namespace = "system"
 }
 

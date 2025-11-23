@@ -15,11 +15,11 @@ Manages a Discovery resource in F5 Distributed Cloud for api to create discovery
 
 ```terraform
 # Discovery Resource Example
-# API to create discovery object for a site or virtual site in system namespace
+# Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
 
 # Basic Discovery configuration
 resource "f5xc_discovery" "example" {
-  name      = "my-discovery"
+  name      = "example-discovery"
   namespace = "system"
 
   labels = {
@@ -50,7 +50,7 @@ resource "f5xc_discovery" "example" {
   where {
     site {
       ref {
-        name      = "my-site"
+        name      = "example-site"
         namespace = "system"
       }
       network_type = "VIRTUAL_NETWORK_SITE_LOCAL_INSIDE"

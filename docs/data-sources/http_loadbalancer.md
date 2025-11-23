@@ -19,7 +19,7 @@ Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing H
 
 # Look up an existing Http Loadbalancer by name
 data "f5xc_http_loadbalancer" "example" {
-  name      = "my-http-loadbalancer"
+  name      = "example-http-loadbalancer"
   namespace = "system"
 }
 

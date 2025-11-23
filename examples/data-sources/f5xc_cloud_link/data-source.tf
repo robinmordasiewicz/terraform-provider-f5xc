@@ -3,7 +3,7 @@
 
 # Look up an existing Cloud Link by name
 data "f5xc_cloud_link" "example" {
-  name      = "my-cloud-link"
+  name      = "example-cloud-link"
   namespace = "system"
 }
 

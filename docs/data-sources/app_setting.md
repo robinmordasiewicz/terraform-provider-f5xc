@@ -19,7 +19,7 @@ Manages App setting configuration in namespace metadata.namespace in F5 Distribu
 
 # Look up an existing App Setting by name
 data "f5xc_app_setting" "example" {
-  name      = "my-app-setting"
+  name      = "example-app-setting"
   namespace = "system"
 }
 

@@ -3,7 +3,7 @@
 
 # Look up an existing Managed Tenant by name
 data "f5xc_managed_tenant" "example" {
-  name      = "my-managed-tenant"
+  name      = "example-managed-tenant"
   namespace = "system"
 }
 

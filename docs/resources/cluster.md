@@ -15,11 +15,11 @@ Manages cluster will create the object in the storage backend for namespace meta
 
 ```terraform
 # Cluster Resource Example
-# Create cluster will create the object in the storage backend for namespace metadata.namespace
+# Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic Cluster configuration
 resource "f5xc_cluster" "example" {
-  name      = "my-cluster"
+  name      = "example-cluster"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_cluster" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: auto_http_config, http1_config, http2_options] Em...
     auto_http_config {
       # Configure auto_http_config settings
     }

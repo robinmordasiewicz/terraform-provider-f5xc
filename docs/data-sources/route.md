@@ -19,7 +19,7 @@ Manages a Route resource in F5 Distributed Cloud for defining traffic routing ru
 
 # Look up an existing Route by name
 data "f5xc_route" "example" {
-  name      = "my-route"
+  name      = "example-route"
   namespace = "system"
 }
 

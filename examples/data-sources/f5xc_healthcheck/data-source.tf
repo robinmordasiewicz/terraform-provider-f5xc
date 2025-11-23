@@ -3,7 +3,7 @@
 
 # Look up an existing Healthcheck by name
 data "f5xc_healthcheck" "example" {
-  name      = "my-healthcheck"
+  name      = "example-healthcheck"
   namespace = "system"
 }
 
@@ -14,7 +14,7 @@ data "f5xc_healthcheck" "example" {
 
 # Example: Reference healthcheck in origin pool
 # resource "f5xc_origin_pool" "example" {
-#   name      = "my-pool"
+#   name      = "example-pool"
 #   namespace = "system"
 #
 #   healthcheck {

@@ -19,7 +19,7 @@ Manages data_type creates a new object in the storage backend for metadata.names
 
 # Look up an existing Data Type by name
 data "f5xc_data_type" "example" {
-  name      = "my-data-type"
+  name      = "example-data-type"
   namespace = "system"
 }
 

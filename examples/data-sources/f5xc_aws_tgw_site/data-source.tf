@@ -3,7 +3,7 @@
 
 # Look up an existing Aws Tgw Site by name
 data "f5xc_aws_tgw_site" "example" {
-  name      = "my-aws-tgw-site"
+  name      = "example-aws-tgw-site"
   namespace = "system"
 }
 

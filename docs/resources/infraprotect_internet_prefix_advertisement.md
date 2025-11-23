@@ -15,11 +15,11 @@ Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 
 ```terraform
 # Infraprotect Internet Prefix Advertisement Resource Example
-# Creates a DDoS transit Internet Prefix
+# Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 
 # Basic Infraprotect Internet Prefix Advertisement configuration
 resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
-  name      = "my-infraprotect-internet-prefix-advertisement"
+  name      = "example-infraprotect-internet-prefix-advertisement"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: activation_announce, activation_withdraw] Empty. ...
     activation_announce {
       # Configure activation_announce settings
     }
@@ -40,7 +40,7 @@ resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
     activation_withdraw {
       # Configure activation_withdraw settings
     }
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: expiration_never, expiration_timestamp] Empty. Th...
     expiration_never {
       # Configure expiration_never settings
     }

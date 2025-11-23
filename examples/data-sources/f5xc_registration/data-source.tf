@@ -3,7 +3,7 @@
 
 # Look up an existing Registration by name
 data "f5xc_registration" "example" {
-  name      = "my-registration"
+  name      = "example-registration"
   namespace = "system"
 }
 

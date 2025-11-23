@@ -19,7 +19,7 @@ Manages rate_limiter creates a new object in the storage backend for metadata.na
 
 # Look up an existing Rate Limiter by name
 data "f5xc_rate_limiter" "example" {
-  name      = "my-rate-limiter"
+  name      = "example-rate-limiter"
   namespace = "system"
 }
 

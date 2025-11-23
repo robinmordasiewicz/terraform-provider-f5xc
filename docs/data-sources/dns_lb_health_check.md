@@ -19,7 +19,7 @@ Manages DNS Load Balancer Health Check in a given namespace. If one already exis
 
 # Look up an existing Dns Lb Health Check by name
 data "f5xc_dns_lb_health_check" "example" {
-  name      = "my-dns-lb-health-check"
+  name      = "example-dns-lb-health-check"
   namespace = "system"
 }
 

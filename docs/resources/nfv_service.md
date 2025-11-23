@@ -15,11 +15,11 @@ Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 ```terraform
 # Nfv Service Resource Example
-# Creates a new NFV service with configured parameters
+# Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 # Basic Nfv Service configuration
 resource "f5xc_nfv_service" "example" {
-  name      = "my-nfv-service"
+  name      = "example-nfv-service"
   namespace = "system"
 
   labels = {
@@ -32,11 +32,11 @@ resource "f5xc_nfv_service" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: disable_https_management, https_management] Empty...
     disable_https_management {
       # Configure disable_https_management settings
     }
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: disable_ssh_access, enabled_ssh_access] Empty. Th...
     disable_ssh_access {
       # Configure disable_ssh_access settings
     }

@@ -19,7 +19,7 @@ Manages a Registration resource in F5 Distributed Cloud for vpm creates registra
 
 # Look up an existing Registration by name
 data "f5xc_registration" "example" {
-  name      = "my-registration"
+  name      = "example-registration"
   namespace = "system"
 }
 

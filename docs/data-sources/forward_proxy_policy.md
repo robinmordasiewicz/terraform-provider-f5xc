@@ -19,7 +19,7 @@ Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy 
 
 # Look up an existing Forward Proxy Policy by name
 data "f5xc_forward_proxy_policy" "example" {
-  name      = "my-forward-proxy-policy"
+  name      = "example-forward-proxy-policy"
   namespace = "system"
 }
 

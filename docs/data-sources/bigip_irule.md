@@ -19,7 +19,7 @@ Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-
 
 # Look up an existing Bigip Irule by name
 data "f5xc_bigip_irule" "example" {
-  name      = "my-bigip-irule"
+  name      = "example-bigip-irule"
   namespace = "system"
 }
 

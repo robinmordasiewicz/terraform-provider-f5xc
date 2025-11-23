@@ -3,7 +3,7 @@
 
 # Look up an existing Voltshare Admin Policy by name
 data "f5xc_voltshare_admin_policy" "example" {
-  name      = "my-voltshare-admin-policy"
+  name      = "example-voltshare-admin-policy"
   namespace = "system"
 }
 

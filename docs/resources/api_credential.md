@@ -15,11 +15,11 @@ Manages request specification. in F5 Distributed Cloud.
 
 ```terraform
 # Api Credential Resource Example
-# Create request specification.
+# Manages request specification. in F5 Distributed Cloud.
 
 # Basic Api Credential configuration
 resource "f5xc_api_credential" "example" {
-  name      = "my-api-credential"
+  name      = "example-api-credential"
   namespace = "system"
 
   labels = {

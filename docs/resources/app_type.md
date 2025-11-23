@@ -15,11 +15,11 @@ Manages App type will create the configuration in namespace metadata.namespace i
 
 ```terraform
 # App Type Resource Example
-# Create App type will create the configuration in namespace metadata.namespace
+# Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic App Type configuration
 resource "f5xc_app_type" "example" {
-  name      = "my-app-type"
+  name      = "example-app-type"
   namespace = "system"
 
   labels = {

@@ -19,7 +19,7 @@ Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 # Look up an existing Site Mesh Group by name
 data "f5xc_site_mesh_group" "example" {
-  name      = "my-site-mesh-group"
+  name      = "example-site-mesh-group"
   namespace = "system"
 }
 

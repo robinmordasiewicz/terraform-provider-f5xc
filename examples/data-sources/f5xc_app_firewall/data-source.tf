@@ -3,7 +3,7 @@
 
 # Look up an existing App Firewall by name
 data "f5xc_app_firewall" "example" {
-  name      = "my-app-firewall"
+  name      = "example-app-firewall"
   namespace = "system"
 }
 

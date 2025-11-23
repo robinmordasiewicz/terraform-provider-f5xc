@@ -3,7 +3,7 @@
 
 # Look up an existing Quota by name
 data "f5xc_quota" "example" {
-  name      = "my-quota"
+  name      = "example-quota"
   namespace = "system"
 }
 

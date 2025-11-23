@@ -3,7 +3,7 @@
 
 # Look up an existing Apm by name
 data "f5xc_apm" "example" {
-  name      = "my-apm"
+  name      = "example-apm"
   namespace = "system"
 }
 

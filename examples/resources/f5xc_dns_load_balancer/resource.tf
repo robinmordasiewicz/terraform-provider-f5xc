@@ -1,9 +1,9 @@
 # Dns Load Balancer Resource Example
-# Create DNS Load Balancer in a given namespace. If one already exist it will give a error.
+# Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic Dns Load Balancer configuration
 resource "f5xc_dns_load_balancer" "example" {
-  name      = "my-dns-load-balancer"
+  name      = "example-dns-load-balancer"
   namespace = "system"
 
   labels = {
@@ -20,7 +20,7 @@ resource "f5xc_dns_load_balancer" "example" {
 
   # DNS zone reference
   dns_zone {
-    name      = "my-dns-zone"
+    name      = "example-dns-zone"
     namespace = "system"
   }
 

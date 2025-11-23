@@ -1,9 +1,9 @@
 # User Identification Resource Example
-# Create user_identification creates a new object in the storage backend for metadata.namespace.
+# Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic User Identification configuration
 resource "f5xc_user_identification" "example" {
-  name      = "my-user-identification"
+  name      = "example-user-identification"
   namespace = "system"
 
   labels = {

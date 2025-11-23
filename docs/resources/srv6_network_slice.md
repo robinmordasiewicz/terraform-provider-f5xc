@@ -15,11 +15,11 @@ Manages srv6_network_slice creates a new object in the storage backend for metad
 
 ```terraform
 # Srv6 Network Slice Resource Example
-# Create srv6_network_slice creates a new object in the storage backend for metadata.namespace.
+# Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Srv6 Network Slice configuration
 resource "f5xc_srv6_network_slice" "example" {
-  name      = "my-srv6-network-slice"
+  name      = "example-srv6-network-slice"
   namespace = "system"
 
   labels = {

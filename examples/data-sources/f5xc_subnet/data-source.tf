@@ -3,7 +3,7 @@
 
 # Look up an existing Subnet by name
 data "f5xc_subnet" "example" {
-  name      = "my-subnet"
+  name      = "example-subnet"
   namespace = "system"
 }
 

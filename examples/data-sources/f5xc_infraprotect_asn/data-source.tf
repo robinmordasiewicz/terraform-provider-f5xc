@@ -3,7 +3,7 @@
 
 # Look up an existing Infraprotect Asn by name
 data "f5xc_infraprotect_asn" "example" {
-  name      = "my-infraprotect-asn"
+  name      = "example-infraprotect-asn"
   namespace = "system"
 }
 

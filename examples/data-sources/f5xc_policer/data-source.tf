@@ -3,7 +3,7 @@
 
 # Look up an existing Policer by name
 data "f5xc_policer" "example" {
-  name      = "my-policer"
+  name      = "example-policer"
   namespace = "system"
 }
 

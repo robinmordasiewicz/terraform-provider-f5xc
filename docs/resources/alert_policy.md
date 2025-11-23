@@ -15,11 +15,11 @@ Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and no
 
 ```terraform
 # Alert Policy Resource Example
-# Creates a new Alert Policy Object
+# Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and notification policies.
 
 # Basic Alert Policy configuration
 resource "f5xc_alert_policy" "example" {
-  name      = "my-alert-policy"
+  name      = "example-alert-policy"
   namespace = "system"
 
   labels = {

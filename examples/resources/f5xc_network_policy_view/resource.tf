@@ -1,9 +1,9 @@
 # Network Policy View Resource Example
-# Shape of the Network policy view specification
+# Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy view configuration.
 
 # Basic Network Policy View configuration
 resource "f5xc_network_policy_view" "example" {
-  name      = "my-network-policy-view"
+  name      = "example-network-policy-view"
   namespace = "system"
 
   labels = {

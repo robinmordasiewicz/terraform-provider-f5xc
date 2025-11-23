@@ -3,7 +3,7 @@
 
 # Look up an existing Sensitive Data Policy by name
 data "f5xc_sensitive_data_policy" "example" {
-  name      = "my-sensitive-data-policy"
+  name      = "example-sensitive-data-policy"
   namespace = "system"
 }
 

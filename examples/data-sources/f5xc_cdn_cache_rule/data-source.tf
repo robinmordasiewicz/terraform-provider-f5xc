@@ -3,7 +3,7 @@
 
 # Look up an existing Cdn Cache Rule by name
 data "f5xc_cdn_cache_rule" "example" {
-  name      = "my-cdn-cache-rule"
+  name      = "example-cdn-cache-rule"
   namespace = "system"
 }
 

@@ -15,11 +15,11 @@ Manages a LogReceiver resource in F5 Distributed Cloud for log collection and fo
 
 ```terraform
 # Log Receiver Resource Example
-# Creates a new Log Receiver object
+# Manages a LogReceiver resource in F5 Distributed Cloud for log collection and forwarding configuration.
 
 # Basic Log Receiver configuration
 resource "f5xc_log_receiver" "example" {
-  name      = "my-log-receiver"
+  name      = "example-log-receiver"
   namespace = "system"
 
   labels = {

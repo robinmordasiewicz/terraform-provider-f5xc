@@ -19,7 +19,7 @@ Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 
 # Look up an existing Dc Cluster Group by name
 data "f5xc_dc_cluster_group" "example" {
-  name      = "my-dc-cluster-group"
+  name      = "example-dc-cluster-group"
   namespace = "system"
 }
 

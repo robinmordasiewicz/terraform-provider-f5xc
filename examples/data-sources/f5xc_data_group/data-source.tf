@@ -3,7 +3,7 @@
 
 # Look up an existing Data Group by name
 data "f5xc_data_group" "example" {
-  name      = "my-data-group"
+  name      = "example-data-group"
   namespace = "system"
 }
 

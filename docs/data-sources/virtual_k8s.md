@@ -19,7 +19,7 @@ Manages virtual_k8s will create the object in the storage backend for namespace 
 
 # Look up an existing Virtual K8s by name
 data "f5xc_virtual_k8s" "example" {
-  name      = "my-virtual-k8s"
+  name      = "example-virtual-k8s"
   namespace = "system"
 }
 

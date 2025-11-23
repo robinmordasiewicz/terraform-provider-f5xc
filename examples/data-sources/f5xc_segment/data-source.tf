@@ -3,7 +3,7 @@
 
 # Look up an existing Segment by name
 data "f5xc_segment" "example" {
-  name      = "my-segment"
+  name      = "example-segment"
   namespace = "system"
 }
 

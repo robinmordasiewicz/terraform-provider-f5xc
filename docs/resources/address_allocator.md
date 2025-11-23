@@ -15,11 +15,11 @@ Manages Address Allocator will create an address allocator object in 'system' na
 
 ```terraform
 # Address Allocator Resource Example
-# Create Address Allocator will create an address allocator object in 'system' namespace of the user
+# Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
 
 # Basic Address Allocator configuration
 resource "f5xc_address_allocator" "example" {
-  name      = "my-address-allocator"
+  name      = "example-address-allocator"
   namespace = "system"
 
   labels = {

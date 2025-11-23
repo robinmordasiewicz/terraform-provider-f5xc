@@ -1,9 +1,9 @@
 # App Api Group Resource Example
-# Create app_api_group creates a new object in the storage backend for metadata.namespace.
+# Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic App Api Group configuration
 resource "f5xc_app_api_group" "example" {
-  name      = "my-app-api-group"
+  name      = "example-app-api-group"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_app_api_group" "example" {
   }
 
   # Resource-specific configuration
-    # API Group Scope BIGIP Virtual Server. Set the scope of th...
+    # [OneOf: bigip_virtual_server, cdn_loadbalancer, http_load...
     bigip_virtual_server {
       # Configure bigip_virtual_server settings
     }

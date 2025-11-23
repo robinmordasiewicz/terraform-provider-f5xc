@@ -1,9 +1,9 @@
 # Customer Support Resource Example
-# Creates a new customer support ticket in our customer support provider system.
+# Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
 
 # Basic Customer Support configuration
 resource "f5xc_customer_support" "example" {
-  name      = "my-customer-support"
+  name      = "example-customer-support"
   namespace = "system"
 
   labels = {

@@ -19,7 +19,7 @@ Manages a Authentication resource in F5 Distributed Cloud.
 
 # Look up an existing Authentication by name
 data "f5xc_authentication" "example" {
-  name      = "my-authentication"
+  name      = "example-authentication"
   namespace = "system"
 }
 

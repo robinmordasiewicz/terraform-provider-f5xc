@@ -19,7 +19,7 @@ Manages new token. token object is used to manage site admission. User must gene
 
 # Look up an existing Token by name
 data "f5xc_token" "example" {
-  name      = "my-token"
+  name      = "example-token"
   namespace = "system"
 }
 

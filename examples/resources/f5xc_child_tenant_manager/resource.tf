@@ -1,9 +1,9 @@
 # Child Tenant Manager Resource Example
-# Creates a child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created.
+# Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.
 
 # Basic Child Tenant Manager configuration
 resource "f5xc_child_tenant_manager" "example" {
-  name      = "my-child-tenant-manager"
+  name      = "example-child-tenant-manager"
   namespace = "system"
 
   labels = {

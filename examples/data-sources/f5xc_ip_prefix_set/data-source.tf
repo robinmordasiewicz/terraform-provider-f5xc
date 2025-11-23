@@ -3,7 +3,7 @@
 
 # Look up an existing Ip Prefix Set by name
 data "f5xc_ip_prefix_set" "example" {
-  name      = "my-ip-prefix-set"
+  name      = "example-ip-prefix-set"
   namespace = "system"
 }
 

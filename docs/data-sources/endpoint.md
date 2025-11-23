@@ -19,7 +19,7 @@ Manages endpoint will create the object in the storage backend for namespace met
 
 # Look up an existing Endpoint by name
 data "f5xc_endpoint" "example" {
-  name      = "my-endpoint"
+  name      = "example-endpoint"
   namespace = "system"
 }
 

@@ -3,7 +3,7 @@
 
 # Look up an existing Cloud Elastic Ip by name
 data "f5xc_cloud_elastic_ip" "example" {
-  name      = "my-cloud-elastic-ip"
+  name      = "example-cloud-elastic-ip"
   namespace = "system"
 }
 

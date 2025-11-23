@@ -15,11 +15,11 @@ Manages Protocol Inspection Specification in a given namespace. If one already e
 
 ```terraform
 # Protocol Inspection Resource Example
-# Create Protocol Inspection Specification in a given namespace. If one already exists it will give an error.
+# Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 # Basic Protocol Inspection configuration
 resource "f5xc_protocol_inspection" "example" {
-  name      = "my-protocol-inspection"
+  name      = "example-protocol-inspection"
   namespace = "system"
 
   labels = {

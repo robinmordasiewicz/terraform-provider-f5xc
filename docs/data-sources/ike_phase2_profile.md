@@ -19,7 +19,7 @@ Manages a IKEPhase2Profile resource in F5 Distributed Cloud for ike phase2 profi
 
 # Look up an existing Ike Phase2 Profile by name
 data "f5xc_ike_phase2_profile" "example" {
-  name      = "my-ike-phase2-profile"
+  name      = "example-ike-phase2-profile"
   namespace = "system"
 }
 

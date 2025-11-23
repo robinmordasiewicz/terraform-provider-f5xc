@@ -1,9 +1,9 @@
 # Dc Cluster Group Resource Example
-# Create DC Cluster group in given namespace
+# Manages DC Cluster group in given namespace in F5 Distributed Cloud.
 
 # Basic Dc Cluster Group configuration
 resource "f5xc_dc_cluster_group" "example" {
-  name      = "my-dc-cluster-group"
+  name      = "example-dc-cluster-group"
   namespace = "system"
 
   labels = {

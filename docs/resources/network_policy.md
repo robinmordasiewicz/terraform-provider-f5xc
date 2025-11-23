@@ -15,11 +15,11 @@ Manages new network policy with configured parameters in specified namespace in 
 
 ```terraform
 # Network Policy Resource Example
-# Creates a new network policy with configured parameters in specified namespace
+# Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.
 
 # Basic Network Policy configuration
 resource "f5xc_network_policy" "example" {
-  name      = "my-network-policy"
+  name      = "example-network-policy"
   namespace = "system"
 
   labels = {
@@ -54,23 +54,6 @@ resource "f5xc_network_policy" "example" {
       action = "ALLOW"
       any   = {}
     }
-  }
-}
-
-# Advanced Network Policy with additional configuration
-resource "f5xc_network_policy" "advanced" {
-  name      = "advanced-network-policy"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
   }
 }
 ```

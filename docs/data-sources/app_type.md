@@ -19,7 +19,7 @@ Manages App type will create the configuration in namespace metadata.namespace i
 
 # Look up an existing App Type by name
 data "f5xc_app_type" "example" {
-  name      = "my-app-type"
+  name      = "example-app-type"
   namespace = "system"
 }
 

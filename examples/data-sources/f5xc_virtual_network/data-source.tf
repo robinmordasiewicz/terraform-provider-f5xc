@@ -3,7 +3,7 @@
 
 # Look up an existing Virtual Network by name
 data "f5xc_virtual_network" "example" {
-  name      = "my-virtual-network"
+  name      = "example-virtual-network"
   namespace = "system"
 }
 

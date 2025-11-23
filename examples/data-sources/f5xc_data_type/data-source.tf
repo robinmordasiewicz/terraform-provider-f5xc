@@ -3,7 +3,7 @@
 
 # Look up an existing Data Type by name
 data "f5xc_data_type" "example" {
-  name      = "my-data-type"
+  name      = "example-data-type"
   namespace = "system"
 }
 

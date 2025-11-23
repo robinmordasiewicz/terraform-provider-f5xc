@@ -3,7 +3,7 @@
 
 # Look up an existing Alert Policy by name
 data "f5xc_alert_policy" "example" {
-  name      = "my-alert-policy"
+  name      = "example-alert-policy"
   namespace = "system"
 }
 

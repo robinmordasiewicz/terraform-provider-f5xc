@@ -3,7 +3,7 @@
 
 # Look up an existing Alert Receiver by name
 data "f5xc_alert_receiver" "example" {
-  name      = "my-alert-receiver"
+  name      = "example-alert-receiver"
   namespace = "system"
 }
 
@@ -14,7 +14,7 @@ data "f5xc_alert_receiver" "example" {
 
 # Example: Reference alert receiver in alert policy
 # resource "f5xc_alert_policy" "example" {
-#   name      = "my-policy"
+#   name      = "example-policy"
 #   namespace = "system"
 #
 #   receivers {

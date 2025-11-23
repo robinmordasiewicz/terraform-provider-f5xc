@@ -19,7 +19,7 @@ Manages virtual site object in given namespace in F5 Distributed Cloud.
 
 # Look up an existing Virtual Site by name
 data "f5xc_virtual_site" "example" {
-  name      = "my-virtual-site"
+  name      = "example-virtual-site"
   namespace = "system"
 }
 

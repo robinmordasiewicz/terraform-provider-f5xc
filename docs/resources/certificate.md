@@ -15,11 +15,11 @@ Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate m
 
 ```terraform
 # Certificate Resource Example
-# Shape of the Certificate specification
+# Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.
 
 # Basic Certificate configuration
 resource "f5xc_certificate" "example" {
-  name      = "my-certificate"
+  name      = "example-certificate"
   namespace = "system"
 
   labels = {

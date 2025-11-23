@@ -3,7 +3,7 @@
 
 # Look up an existing Malicious User Mitigation by name
 data "f5xc_malicious_user_mitigation" "example" {
-  name      = "my-malicious-user-mitigation"
+  name      = "example-malicious-user-mitigation"
   namespace = "system"
 }
 

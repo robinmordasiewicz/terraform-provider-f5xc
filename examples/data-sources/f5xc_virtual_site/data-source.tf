@@ -3,7 +3,7 @@
 
 # Look up an existing Virtual Site by name
 data "f5xc_virtual_site" "example" {
-  name      = "my-virtual-site"
+  name      = "example-virtual-site"
   namespace = "system"
 }
 

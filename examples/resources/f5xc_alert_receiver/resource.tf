@@ -1,9 +1,9 @@
 # Alert Receiver Resource Example
-# Creates a new Alert Receiver object
+# Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification endpoints.
 
 # Basic Alert Receiver configuration
 resource "f5xc_alert_receiver" "example" {
-  name      = "my-alert-receiver"
+  name      = "example-alert-receiver"
   namespace = "system"
 
   labels = {

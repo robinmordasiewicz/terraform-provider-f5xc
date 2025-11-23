@@ -1,9 +1,9 @@
 # Api Crawler Resource Example
-# Manages a APICrawler in F5 Distributed Cloud.
+# Manages a APICrawler resource in F5 Distributed Cloud.
 
 # Basic Api Crawler configuration
 resource "f5xc_api_crawler" "example" {
-  name      = "my-api-crawler"
+  name      = "example-api-crawler"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_api_crawler" "example" {
   }
 
   # Resource-specific configuration
-    # API Crawler. API Crawler Configuration Required: YES ves....
+    # API Crawler. API Crawler Configuration
     domains {
       # Configure domains settings
     }

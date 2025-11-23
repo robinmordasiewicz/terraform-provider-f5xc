@@ -3,7 +3,7 @@
 
 # Look up an existing Nat Policy by name
 data "f5xc_nat_policy" "example" {
-  name      = "my-nat-policy"
+  name      = "example-nat-policy"
   namespace = "system"
 }
 

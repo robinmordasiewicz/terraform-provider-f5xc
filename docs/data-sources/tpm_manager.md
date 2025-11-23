@@ -19,7 +19,7 @@ Manages a TpmManager resource in F5 Distributed Cloud for create a tpm manager c
 
 # Look up an existing Tpm Manager by name
 data "f5xc_tpm_manager" "example" {
-  name      = "my-tpm-manager"
+  name      = "example-tpm-manager"
   namespace = "system"
 }
 

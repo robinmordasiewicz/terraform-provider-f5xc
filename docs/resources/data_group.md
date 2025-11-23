@@ -15,11 +15,11 @@ Manages data group in a given namespace. If one already exists it will give an e
 
 ```terraform
 # Data Group Resource Example
-# Create data group in a given namespace. If one already exists it will give an error.
+# Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 # Basic Data Group configuration
 resource "f5xc_data_group" "example" {
-  name      = "my-data-group"
+  name      = "example-data-group"
   namespace = "system"
 
   labels = {
@@ -32,11 +32,11 @@ resource "f5xc_data_group" "example" {
   }
 
   # Resource-specific configuration
-    # Address Record. Data group with address record List
+    # [OneOf: address_records, integer_records, string_records]...
     address_records {
       # Configure address_records settings
     }
-    # Address records. ves.io.schema.rules.map.keys.string.ip: ...
+    # Address records.
     records {
       # Configure records settings
     }

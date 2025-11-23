@@ -1,9 +1,9 @@
 # Voltstack Site Resource Example
-# Shape of the App Stack site specification
+# Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 # Basic Voltstack Site configuration
 resource "f5xc_voltstack_site" "example" {
-  name      = "my-voltstack-site"
+  name      = "example-voltstack-site"
   namespace = "system"
 
   labels = {
@@ -18,7 +18,7 @@ resource "f5xc_voltstack_site" "example" {
   # Voltstack Site configuration
   # Kubernetes configuration
   k8s_cluster {
-    name      = "my-k8s-cluster"
+    name      = "example-k8s-cluster"
     namespace = "system"
   }
 
@@ -38,21 +38,4 @@ resource "f5xc_voltstack_site" "example" {
 
   # No worker nodes
   no_worker_nodes {}
-}
-
-# Advanced Voltstack Site with additional configuration
-resource "f5xc_voltstack_site" "advanced" {
-  name      = "advanced-voltstack-site"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }

@@ -19,7 +19,7 @@ Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy 
 
 # Look up an existing Advertise Policy by name
 data "f5xc_advertise_policy" "example" {
-  name      = "my-advertise-policy"
+  name      = "example-advertise-policy"
   namespace = "system"
 }
 

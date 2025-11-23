@@ -15,11 +15,11 @@ Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy
 
 ```terraform
 # Policy Based Routing Resource Example
-# Shape of the Network Policy based routing create specification
+# Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.
 
 # Basic Policy Based Routing configuration
 resource "f5xc_policy_based_routing" "example" {
-  name      = "my-policy-based-routing"
+  name      = "example-policy-based-routing"
   namespace = "system"
 
   labels = {
@@ -32,11 +32,11 @@ resource "f5xc_policy_based_routing" "example" {
   }
 
   # Resource-specific configuration
-    # L3/L4 routing rule. Network(L3/L4) routing policy rule
+    # [OneOf: forward_proxy_pbr, network_pbr] L3/L4 routing rul...
     forward_proxy_pbr {
       # Configure forward_proxy_pbr settings
     }
-    # L3/L4 routing rules. Network(L3/L4) routing policy rules....
+    # L3/L4 routing rules. Network(L3/L4) routing policy rules.
     forward_proxy_pbr_rules {
       # Configure forward_proxy_pbr_rules settings
     }

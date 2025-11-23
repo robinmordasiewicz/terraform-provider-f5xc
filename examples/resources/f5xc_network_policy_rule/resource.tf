@@ -1,9 +1,9 @@
 # Network Policy Rule Resource Example
-# Creates a network policy rule with configured parameters in specified namespace
+# Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
 
 # Basic Network Policy Rule configuration
 resource "f5xc_network_policy_rule" "example" {
-  name      = "my-network-policy-rule"
+  name      = "example-network-policy-rule"
   namespace = "system"
 
   labels = {
@@ -20,11 +20,11 @@ resource "f5xc_network_policy_rule" "example" {
     advanced_action {
       # Configure advanced_action settings
     }
-    # IP Prefix Set Reference. A list of references to ip_prefi...
+    # [OneOf: ip_prefix_set, prefix, prefix_selector] IP Prefix...
     ip_prefix_set {
       # Configure ip_prefix_set settings
     }
-    # Reference. A list of references to ip_prefix_set objects....
+    # Reference. A list of references to ip_prefix_set objects.
     ref {
       # Configure ref settings
     }

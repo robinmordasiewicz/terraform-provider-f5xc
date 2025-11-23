@@ -15,11 +15,11 @@ Manages new token. token object is used to manage site admission. User must gene
 
 ```terraform
 # Token Resource Example
-# Creates new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration.
+# Manages new token. token object is used to manage site admission. User must generate token before provisioning and pass this token to site during it's registration. in F5 Distributed Cloud.
 
 # Basic Token configuration
 resource "f5xc_token" "example" {
-  name      = "my-token"
+  name      = "example-token"
   namespace = "system"
 
   labels = {

@@ -3,7 +3,7 @@
 
 # Look up an existing Customer Support by name
 data "f5xc_customer_support" "example" {
-  name      = "my-customer-support"
+  name      = "example-customer-support"
   namespace = "system"
 }
 

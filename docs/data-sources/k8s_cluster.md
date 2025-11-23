@@ -19,7 +19,7 @@ Manages k8s_cluster will create the object in the storage backend for namespace 
 
 # Look up an existing K8s Cluster by name
 data "f5xc_k8s_cluster" "example" {
-  name      = "my-k8s-cluster"
+  name      = "example-k8s-cluster"
   namespace = "system"
 }
 

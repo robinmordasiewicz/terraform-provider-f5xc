@@ -19,7 +19,7 @@ Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites wit
 
 # Look up an existing Aws Vpc Site by name
 data "f5xc_aws_vpc_site" "example" {
-  name      = "my-aws-vpc-site"
+  name      = "example-aws-vpc-site"
   namespace = "system"
 }
 

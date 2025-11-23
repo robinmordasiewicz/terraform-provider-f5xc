@@ -3,7 +3,7 @@
 
 # Look up an existing Policy Based Routing by name
 data "f5xc_policy_based_routing" "example" {
-  name      = "my-policy-based-routing"
+  name      = "example-policy-based-routing"
   namespace = "system"
 }
 

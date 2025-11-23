@@ -15,11 +15,11 @@ Manages data_type creates a new object in the storage backend for metadata.names
 
 ```terraform
 # Data Type Resource Example
-# Create data_type creates a new object in the storage backend for metadata.namespace.
+# Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Data Type configuration
 resource "f5xc_data_type" "example" {
-  name      = "my-data-type"
+  name      = "example-data-type"
   namespace = "system"
 
   labels = {

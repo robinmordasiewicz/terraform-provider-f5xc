@@ -15,11 +15,11 @@ Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 ```terraform
 # Site Mesh Group Resource Example
-# Create a Site Mesh Group in system namespace of user
+# Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
 
 # Basic Site Mesh Group configuration
 resource "f5xc_site_mesh_group" "example" {
-  name      = "my-site-mesh-group"
+  name      = "example-site-mesh-group"
   namespace = "system"
 
   labels = {
@@ -44,7 +44,7 @@ resource "f5xc_site_mesh_group" "example" {
 
   # Virtual site reference
   virtual_site {
-    name      = "my-virtual-site"
+    name      = "example-virtual-site"
     namespace = "system"
   }
 }

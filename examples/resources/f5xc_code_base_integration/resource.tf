@@ -1,9 +1,9 @@
 # Code Base Integration Resource Example
-# CREATE integration details
+# Manages integration details in F5 Distributed Cloud.
 
 # Basic Code Base Integration configuration
 resource "f5xc_code_base_integration" "example" {
-  name      = "my-code-base-integration"
+  name      = "example-code-base-integration"
   namespace = "system"
 
   labels = {

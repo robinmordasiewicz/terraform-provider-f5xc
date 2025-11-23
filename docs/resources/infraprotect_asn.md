@@ -15,11 +15,11 @@ Manages DDoS transit ASN in F5 Distributed Cloud.
 
 ```terraform
 # Infraprotect Asn Resource Example
-# Creates a DDoS transit ASN
+# Manages DDoS transit ASN in F5 Distributed Cloud.
 
 # Basic Infraprotect Asn configuration
 resource "f5xc_infraprotect_asn" "example" {
-  name      = "my-infraprotect-asn"
+  name      = "example-infraprotect-asn"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_infraprotect_asn" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: bgp_session_disabled, bgp_session_enabled] Empty....
     bgp_session_disabled {
       # Configure bgp_session_disabled settings
     }

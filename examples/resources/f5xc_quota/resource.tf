@@ -1,9 +1,9 @@
 # Quota Resource Example
-# Create quota creates a given object from storage backend for metadata.namespace.
+# Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Quota configuration
 resource "f5xc_quota" "example" {
-  name      = "my-quota"
+  name      = "example-quota"
   namespace = "system"
 
   labels = {

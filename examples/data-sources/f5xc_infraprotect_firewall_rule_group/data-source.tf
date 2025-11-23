@@ -3,7 +3,7 @@
 
 # Look up an existing Infraprotect Firewall Rule Group by name
 data "f5xc_infraprotect_firewall_rule_group" "example" {
-  name      = "my-infraprotect-firewall-rule-group"
+  name      = "example-infraprotect-firewall-rule-group"
   namespace = "system"
 }
 

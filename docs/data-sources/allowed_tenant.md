@@ -19,7 +19,7 @@ Manages allowed_tenant config instance. Name of the object is name of the tenant
 
 # Look up an existing Allowed Tenant by name
 data "f5xc_allowed_tenant" "example" {
-  name      = "my-allowed-tenant"
+  name      = "example-allowed-tenant"
   namespace = "system"
 }
 

@@ -3,7 +3,7 @@
 
 # Look up an existing Tcp Loadbalancer by name
 data "f5xc_tcp_loadbalancer" "example" {
-  name      = "my-tcp-loadbalancer"
+  name      = "example-tcp-loadbalancer"
   namespace = "system"
 }
 

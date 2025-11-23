@@ -1,9 +1,9 @@
 # Registration Resource Example
-# VPM creates registration using this message, never used by users.
+# Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.
 
 # Basic Registration configuration
 resource "f5xc_registration" "example" {
-  name      = "my-registration"
+  name      = "example-registration"
   namespace = "system"
 
   labels = {

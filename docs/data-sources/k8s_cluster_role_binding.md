@@ -19,7 +19,7 @@ Manages k8s_cluster_role_binding will create the object in the storage backend f
 
 # Look up an existing K8s Cluster Role Binding by name
 data "f5xc_k8s_cluster_role_binding" "example" {
-  name      = "my-k8s-cluster-role-binding"
+  name      = "example-k8s-cluster-role-binding"
   namespace = "system"
 }
 

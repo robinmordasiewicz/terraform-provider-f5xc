@@ -19,7 +19,7 @@ Manages a CloudConnect resource in F5 Distributed Cloud for establishing connect
 
 # Look up an existing Cloud Connect by name
 data "f5xc_cloud_connect" "example" {
-  name      = "my-cloud-connect"
+  name      = "example-cloud-connect"
   namespace = "system"
 }
 

@@ -1,9 +1,9 @@
 # Cloud Link Resource Example
-# Creates a new CloudLink with configured parameters
+# Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 # Basic Cloud Link configuration
 resource "f5xc_cloud_link" "example" {
-  name      = "my-cloud-link"
+  name      = "example-cloud-link"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_cloud_link" "example" {
   }
 
   # Resource-specific configuration
-    # Amazon Web Services(AWS) CloudLink Provider. CloudLink fo...
+    # [OneOf: aws, gcp] Amazon Web Services(AWS) CloudLink Prov...
     aws {
       # Configure aws settings
     }

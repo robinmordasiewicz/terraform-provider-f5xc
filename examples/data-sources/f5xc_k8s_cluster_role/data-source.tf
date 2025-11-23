@@ -3,7 +3,7 @@
 
 # Look up an existing K8s Cluster Role by name
 data "f5xc_k8s_cluster_role" "example" {
-  name      = "my-k8s-cluster-role"
+  name      = "example-k8s-cluster-role"
   namespace = "system"
 }
 

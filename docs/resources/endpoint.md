@@ -15,11 +15,11 @@ Manages endpoint will create the object in the storage backend for namespace met
 
 ```terraform
 # Endpoint Resource Example
-# Create endpoint will create the object in the storage backend for namespace metadata.namespace
+# Manages endpoint will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic Endpoint configuration
 resource "f5xc_endpoint" "example" {
-  name      = "my-endpoint"
+  name      = "example-endpoint"
   namespace = "system"
 
   labels = {

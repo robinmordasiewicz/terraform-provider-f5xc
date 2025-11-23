@@ -15,11 +15,11 @@ Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites wit
 
 ```terraform
 # Gcp Vpc Site Resource Example
-# Shape of the GCP VPC site specification
+# Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
 
 # Basic Gcp Vpc Site configuration
 resource "f5xc_gcp_vpc_site" "example" {
-  name      = "my-gcp-vpc-site"
+  name      = "example-gcp-vpc-site"
   namespace = "system"
 
   labels = {
@@ -73,23 +73,6 @@ resource "f5xc_gcp_vpc_site" "example" {
 
   # No worker nodes by default
   no_worker_nodes {}
-}
-
-# Advanced Gcp Vpc Site with additional configuration
-resource "f5xc_gcp_vpc_site" "advanced" {
-  name      = "advanced-gcp-vpc-site"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }
 ```
 

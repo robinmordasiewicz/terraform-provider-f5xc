@@ -19,7 +19,7 @@ Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggr
 
 # Look up an existing Global Log Receiver by name
 data "f5xc_global_log_receiver" "example" {
-  name      = "my-global-log-receiver"
+  name      = "example-global-log-receiver"
   namespace = "system"
 }
 

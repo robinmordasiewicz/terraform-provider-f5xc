@@ -1,9 +1,9 @@
 # Tenant Profile Resource Example
-# Creates a tenant_profile config instance. Name of the object is the name of the tenant profile to be created.
+# Manages tenant_profile config instance. Name of the object is the name of the tenant profile to be created. in F5 Distributed Cloud.
 
 # Basic Tenant Profile configuration
 resource "f5xc_tenant_profile" "example" {
-  name      = "my-tenant-profile"
+  name      = "example-tenant-profile"
   namespace = "system"
 
   labels = {

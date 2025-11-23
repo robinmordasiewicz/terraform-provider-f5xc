@@ -19,7 +19,7 @@ Manages workload_flavor in F5 Distributed Cloud.
 
 # Look up an existing Workload Flavor by name
 data "f5xc_workload_flavor" "example" {
-  name      = "my-workload-flavor"
+  name      = "example-workload-flavor"
   namespace = "system"
 }
 

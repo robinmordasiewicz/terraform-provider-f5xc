@@ -15,11 +15,11 @@ Manages bgp_asn_set creates a new object in the storage backend for metadata.nam
 
 ```terraform
 # Bgp Asn Set Resource Example
-# Create bgp_asn_set creates a new object in the storage backend for metadata.namespace.
+# Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Bgp Asn Set configuration
 resource "f5xc_bgp_asn_set" "example" {
-  name      = "my-bgp-asn-set"
+  name      = "example-bgp-asn-set"
   namespace = "system"
 
   labels = {

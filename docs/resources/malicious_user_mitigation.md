@@ -15,11 +15,11 @@ Manages malicious_user_mitigation creates a new object in the storage backend fo
 
 ```terraform
 # Malicious User Mitigation Resource Example
-# Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.
+# Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Malicious User Mitigation configuration
 resource "f5xc_malicious_user_mitigation" "example" {
-  name      = "my-malicious-user-mitigation"
+  name      = "example-malicious-user-mitigation"
   namespace = "system"
 
   labels = {

@@ -15,11 +15,11 @@ Manages new Addon Subscription with Addon Subscription State in F5 Distributed C
 
 ```terraform
 # Addon Subscription Resource Example
-# Create a new Addon Subscription with Addon Subscription State
+# Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 
 # Basic Addon Subscription configuration
 resource "f5xc_addon_subscription" "example" {
-  name      = "my-addon-subscription"
+  name      = "example-addon-subscription"
   namespace = "system"
 
   labels = {

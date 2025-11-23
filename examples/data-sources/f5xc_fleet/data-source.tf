@@ -3,7 +3,7 @@
 
 # Look up an existing Fleet by name
 data "f5xc_fleet" "example" {
-  name      = "my-fleet"
+  name      = "example-fleet"
   namespace = "system"
 }
 

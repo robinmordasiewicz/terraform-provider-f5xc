@@ -15,11 +15,11 @@ Manages a Subnet resource in F5 Distributed Cloud for subnet object contains con
 
 ```terraform
 # Subnet Resource Example
-# Subnet object contains configuration for an interface of a VM/pod. It is created in user or shared namespace.
+# Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
 
 # Basic Subnet configuration
 resource "f5xc_subnet" "example" {
-  name      = "my-subnet"
+  name      = "example-subnet"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_subnet" "example" {
   }
 
   # Resource-specific configuration
-    # Subnet connection to Layer2 Interface.
+    # [OneOf: connect_to_layer2, connect_to_slo, isolated_nw] S...
     connect_to_layer2 {
       # Configure connect_to_layer2 settings
     }

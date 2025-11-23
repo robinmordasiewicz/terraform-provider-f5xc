@@ -3,7 +3,7 @@
 
 # Look up an existing Bot Defense App Infrastructure by name
 data "f5xc_bot_defense_app_infrastructure" "example" {
-  name      = "my-bot-defense-app-infrastructure"
+  name      = "example-bot-defense-app-infrastructure"
   namespace = "system"
 }
 

@@ -3,7 +3,7 @@
 
 # Look up an existing Network Connector by name
 data "f5xc_network_connector" "example" {
-  name      = "my-network-connector"
+  name      = "example-network-connector"
   namespace = "system"
 }
 

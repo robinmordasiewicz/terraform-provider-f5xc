@@ -3,7 +3,7 @@
 
 # Look up an existing Forwarding Class by name
 data "f5xc_forwarding_class" "example" {
-  name      = "my-forwarding-class"
+  name      = "example-forwarding-class"
   namespace = "system"
 }
 

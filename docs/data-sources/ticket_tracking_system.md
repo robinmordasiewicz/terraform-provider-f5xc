@@ -19,7 +19,7 @@ Manages Ticket Tracking System in F5 Distributed Cloud.
 
 # Look up an existing Ticket Tracking System by name
 data "f5xc_ticket_tracking_system" "example" {
-  name      = "my-ticket-tracking-system"
+  name      = "example-ticket-tracking-system"
   namespace = "system"
 }
 

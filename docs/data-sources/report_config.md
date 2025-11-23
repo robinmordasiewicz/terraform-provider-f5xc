@@ -19,7 +19,7 @@ Manages a ReportConfig resource in F5 Distributed Cloud for report configuration
 
 # Look up an existing Report Config by name
 data "f5xc_report_config" "example" {
-  name      = "my-report-config"
+  name      = "example-report-config"
   namespace = "system"
 }
 

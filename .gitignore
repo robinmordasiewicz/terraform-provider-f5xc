@@ -1,5 +1,8 @@
 # Binaries
 terraform-provider-f5xc
+generate-all-schemas
+generate-examples
+generate-datasource-examples
 *.exe
 *.dll
 *.so

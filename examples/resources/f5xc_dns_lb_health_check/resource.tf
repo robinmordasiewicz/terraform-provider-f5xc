@@ -1,9 +1,9 @@
 # Dns Lb Health Check Resource Example
-# Create DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error.
+# Manages DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic Dns Lb Health Check configuration
 resource "f5xc_dns_lb_health_check" "example" {
-  name      = "my-dns-lb-health-check"
+  name      = "example-dns-lb-health-check"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_dns_lb_health_check" "example" {
   }
 
   # Resource-specific configuration
-    # HTTP Health Check.
+    # [OneOf: http_health_check, https_health_check, icmp_healt...
     http_health_check {
       # Configure http_health_check settings
     }

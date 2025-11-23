@@ -19,7 +19,7 @@ Manages new customer's contact detail record with us, including address and phon
 
 # Look up an existing Contact by name
 data "f5xc_contact" "example" {
-  name      = "my-contact"
+  name      = "example-contact"
   namespace = "system"
 }
 

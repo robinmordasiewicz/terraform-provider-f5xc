@@ -1,9 +1,9 @@
 # Infraprotect Firewall Rule Resource Example
-# Creates a DDoS transit Firewall Rule
+# Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 
 # Basic Infraprotect Firewall Rule configuration
 resource "f5xc_infraprotect_firewall_rule" "example" {
-  name      = "my-infraprotect-firewall-rule"
+  name      = "example-infraprotect-firewall-rule"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
   }
 
   # Resource-specific configuration
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: action_allow, action_deny] Empty. This can be use...
     action_allow {
       # Configure action_allow settings
     }
@@ -24,7 +24,7 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
     action_deny {
       # Configure action_deny settings
     }
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: destination_prefix_all, destination_prefix_single...
     destination_prefix_all {
       # Configure destination_prefix_all settings
     }

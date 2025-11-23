@@ -15,11 +15,11 @@ Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configura
 
 ```terraform
 # Ike2 Resource Example
-# Shape of the IKE Phase2 profile specification
+# Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
 
 # Basic Ike2 configuration
 resource "f5xc_ike2" "example" {
-  name      = "my-ike2"
+  name      = "example-ike2"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_ike2" "example" {
   }
 
   # Resource-specific configuration
-    # Diffie Hellman Groups. Choose the acceptable Diffie Hellm...
+    # [OneOf: dh_group_set, disable_pfs] Diffie Hellman Groups....
     dh_group_set {
       # Configure dh_group_set settings
     }
@@ -40,7 +40,7 @@ resource "f5xc_ike2" "example" {
     disable_pfs {
       # Configure disable_pfs settings
     }
-    # Hours. Input Hours
+    # [OneOf: ike_keylifetime_hours, ike_keylifetime_minutes, u...
     ike_keylifetime_hours {
       # Configure ike_keylifetime_hours settings
     }

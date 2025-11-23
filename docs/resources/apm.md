@@ -15,11 +15,11 @@ Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
 ```terraform
 # Apm Resource Example
-# Creates a new APM as a service with configured parameters
+# Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
 # Basic Apm configuration
 resource "f5xc_apm" "example" {
-  name      = "my-apm"
+  name      = "example-apm"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_apm" "example" {
   }
 
   # Resource-specific configuration
-    # AWS Transit Gateway Site choice. Virtual F5 BIG-IP APM se...
+    # [OneOf: aws_site_type_choice, baremetal_site_type_choice]...
     aws_site_type_choice {
       # Configure aws_site_type_choice settings
     }

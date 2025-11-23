@@ -19,7 +19,7 @@ Manages `fast_acl` object, `fast_acl` object contains rules to protect site from
 
 # Look up an existing Fast Acl by name
 data "f5xc_fast_acl" "example" {
-  name      = "my-fast-acl"
+  name      = "example-fast-acl"
   namespace = "system"
 }
 

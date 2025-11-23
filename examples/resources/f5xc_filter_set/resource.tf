@@ -1,9 +1,9 @@
 # Filter Set Resource Example
-# Create specification
+# Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 
 # Basic Filter Set configuration
 resource "f5xc_filter_set" "example" {
-  name      = "my-filter-set"
+  name      = "example-filter-set"
   namespace = "system"
 
   labels = {

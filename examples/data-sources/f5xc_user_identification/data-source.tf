@@ -3,7 +3,7 @@
 
 # Look up an existing User Identification by name
 data "f5xc_user_identification" "example" {
-  name      = "my-user-identification"
+  name      = "example-user-identification"
   namespace = "system"
 }
 

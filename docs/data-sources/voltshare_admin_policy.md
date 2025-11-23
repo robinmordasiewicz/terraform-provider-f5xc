@@ -19,7 +19,7 @@ Manages voltshare_admin_policy creates a new object in the storage backend for m
 
 # Look up an existing Voltshare Admin Policy by name
 data "f5xc_voltshare_admin_policy" "example" {
-  name      = "my-voltshare-admin-policy"
+  name      = "example-voltshare-admin-policy"
   namespace = "system"
 }
 

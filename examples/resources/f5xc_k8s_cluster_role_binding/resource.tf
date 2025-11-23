@@ -1,9 +1,9 @@
 # K8s Cluster Role Binding Resource Example
-# Create k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace
+# Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8s Cluster Role Binding configuration
 resource "f5xc_k8s_cluster_role_binding" "example" {
-  name      = "my-k8s-cluster-role-binding"
+  name      = "example-k8s-cluster-role-binding"
   namespace = "system"
 
   labels = {

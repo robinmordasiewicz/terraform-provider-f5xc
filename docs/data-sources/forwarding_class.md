@@ -19,7 +19,7 @@ Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class 
 
 # Look up an existing Forwarding Class by name
 data "f5xc_forwarding_class" "example" {
-  name      = "my-forwarding-class"
+  name      = "example-forwarding-class"
   namespace = "system"
 }
 

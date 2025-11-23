@@ -1,9 +1,9 @@
 # Secret Policy Resource Example
-# Create secret_policy creates a new object in the storage backend for metadata.namespace.
+# Manages secret_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Policy configuration
 resource "f5xc_secret_policy" "example" {
-  name      = "my-secret-policy"
+  name      = "example-secret-policy"
   namespace = "system"
 
   labels = {

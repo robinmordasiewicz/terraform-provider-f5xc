@@ -15,11 +15,11 @@ Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery 
 
 ```terraform
 # Cdn Loadbalancer Resource Example
-# Shape of the CDN loadbalancer specification
+# Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
 # Basic Cdn Loadbalancer configuration
 resource "f5xc_cdn_loadbalancer" "example" {
-  name      = "my-cdn-loadbalancer"
+  name      = "example-cdn-loadbalancer"
   namespace = "system"
 
   labels = {
@@ -55,23 +55,6 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
   # Add location header
   add_location = true
-}
-
-# Advanced Cdn Loadbalancer with additional configuration
-resource "f5xc_cdn_loadbalancer" "advanced" {
-  name      = "advanced-cdn-loadbalancer"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }
 ```
 

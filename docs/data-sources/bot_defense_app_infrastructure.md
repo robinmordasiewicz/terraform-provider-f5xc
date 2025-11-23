@@ -19,7 +19,7 @@ Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed C
 
 # Look up an existing Bot Defense App Infrastructure by name
 data "f5xc_bot_defense_app_infrastructure" "example" {
-  name      = "my-bot-defense-app-infrastructure"
+  name      = "example-bot-defense-app-infrastructure"
   namespace = "system"
 }
 

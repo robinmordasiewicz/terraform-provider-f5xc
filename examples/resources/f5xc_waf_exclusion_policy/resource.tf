@@ -1,9 +1,9 @@
 # Waf Exclusion Policy Resource Example
-# Create a WAF exclusion policy
+# Manages WAF exclusion policy in F5 Distributed Cloud.
 
 # Basic Waf Exclusion Policy configuration
 resource "f5xc_waf_exclusion_policy" "example" {
-  name      = "my-waf-exclusion-policy"
+  name      = "example-waf-exclusion-policy"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_waf_exclusion_policy" "example" {
   }
 
   # Resource-specific configuration
-    # WAF Exclusion Rules. An ordered list of rules. Required: ...
+    # WAF Exclusion Rules. An ordered list of rules.
     waf_exclusion_rules {
       # Configure waf_exclusion_rules settings
     }

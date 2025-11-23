@@ -19,7 +19,7 @@ Manages a Workload resource in F5 Distributed Cloud for workload configuration.
 
 # Look up an existing Workload by name
 data "f5xc_workload" "example" {
-  name      = "my-workload"
+  name      = "example-workload"
   namespace = "system"
 }
 

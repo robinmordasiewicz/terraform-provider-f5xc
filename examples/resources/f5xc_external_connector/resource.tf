@@ -1,9 +1,9 @@
 # External Connector Resource Example
-# Shape of the external_connector configuration specification
+# Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {
-  name      = "my-external-connector"
+  name      = "example-external-connector"
   namespace = "system"
 
   labels = {

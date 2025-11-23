@@ -19,7 +19,7 @@ Manages a APITesting resource in F5 Distributed Cloud.
 
 # Look up an existing Api Testing by name
 data "f5xc_api_testing" "example" {
-  name      = "my-api-testing"
+  name      = "example-api-testing"
   namespace = "system"
 }
 

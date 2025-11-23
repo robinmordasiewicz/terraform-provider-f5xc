@@ -3,7 +3,7 @@
 
 # Look up an existing Dns Domain by name
 data "f5xc_dns_domain" "example" {
-  name      = "my-dns-domain"
+  name      = "example-dns-domain"
   namespace = "system"
 }
 

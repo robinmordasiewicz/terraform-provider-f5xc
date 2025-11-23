@@ -19,7 +19,7 @@ Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites 
 
 # Look up an existing Azure Vnet Site by name
 data "f5xc_azure_vnet_site" "example" {
-  name      = "my-azure-vnet-site"
+  name      = "example-azure-vnet-site"
   namespace = "system"
 }
 

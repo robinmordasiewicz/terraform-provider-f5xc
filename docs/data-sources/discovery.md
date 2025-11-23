@@ -19,7 +19,7 @@ Manages a Discovery resource in F5 Distributed Cloud for api to create discovery
 
 # Look up an existing Discovery by name
 data "f5xc_discovery" "example" {
-  name      = "my-discovery"
+  name      = "example-discovery"
   namespace = "system"
 }
 

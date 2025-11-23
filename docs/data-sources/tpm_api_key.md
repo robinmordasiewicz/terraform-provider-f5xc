@@ -19,7 +19,7 @@ Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when succ
 
 # Look up an existing Tpm Api Key by name
 data "f5xc_tpm_api_key" "example" {
-  name      = "my-tpm-api-key"
+  name      = "example-tpm-api-key"
   namespace = "system"
 }
 

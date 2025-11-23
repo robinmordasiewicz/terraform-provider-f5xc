@@ -19,7 +19,7 @@ Manages child_tenant_manager config instance. Name of the object is the name of 
 
 # Look up an existing Child Tenant Manager by name
 data "f5xc_child_tenant_manager" "example" {
-  name      = "my-child-tenant-manager"
+  name      = "example-child-tenant-manager"
   namespace = "system"
 }
 

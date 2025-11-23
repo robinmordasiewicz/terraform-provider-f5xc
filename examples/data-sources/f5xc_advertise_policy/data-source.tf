@@ -3,7 +3,7 @@
 
 # Look up an existing Advertise Policy by name
 data "f5xc_advertise_policy" "example" {
-  name      = "my-advertise-policy"
+  name      = "example-advertise-policy"
   namespace = "system"
 }
 

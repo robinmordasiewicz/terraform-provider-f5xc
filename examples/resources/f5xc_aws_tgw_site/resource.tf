@@ -1,9 +1,9 @@
 # Aws Tgw Site Resource Example
-# Shape of the AWS TGW site specification
+# Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
 # Basic Aws Tgw Site configuration
 resource "f5xc_aws_tgw_site" "example" {
-  name      = "my-aws-tgw-site"
+  name      = "example-aws-tgw-site"
   namespace = "system"
 
   labels = {
@@ -67,21 +67,4 @@ resource "f5xc_aws_tgw_site" "example" {
 
   # No worker nodes
   no_worker_nodes {}
-}
-
-# Advanced Aws Tgw Site with additional configuration
-resource "f5xc_aws_tgw_site" "advanced" {
-  name      = "advanced-aws-tgw-site"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }

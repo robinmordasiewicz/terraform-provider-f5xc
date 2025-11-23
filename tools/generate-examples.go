@@ -172,7 +172,7 @@ func generateExample(resourceName string, schema *SchemaInfo) string {
 	// Generate basic example
 	sb.WriteString(fmt.Sprintf("# Basic %s configuration\n", humanName))
 	sb.WriteString(fmt.Sprintf("resource \"f5xc_%s\" \"example\" {\n", resourceName))
-	sb.WriteString(fmt.Sprintf("  name      = \"my-%s\"\n", strings.ReplaceAll(resourceName, "_", "-")))
+	sb.WriteString(fmt.Sprintf("  name      = \"example-%s\"\n", strings.ReplaceAll(resourceName, "_", "-")))
 	sb.WriteString("  namespace = \"system\"\n\n")
 
 	// Add labels
@@ -191,10 +191,8 @@ func generateExample(resourceName string, schema *SchemaInfo) string {
 
 	sb.WriteString("}\n")
 
-	// Generate advanced example for complex resources
-	if isComplexResource(resourceName) {
-		sb.WriteString(generateAdvancedExample(resourceName, schema))
-	}
+	// Per HashiCorp standards: "Avoid multiple examples unless configuration is particularly complex"
+	// We generate only the basic example - advanced configurations should be in user guides, not reference docs
 
 	return sb.String()
 }
@@ -211,7 +209,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Default origin server\n")
 		sb.WriteString("  default_route_pools {\n")
 		sb.WriteString("    pool {\n")
-		sb.WriteString("      name      = \"my-origin-pool\"\n")
+		sb.WriteString("      name      = \"example-origin-pool\"\n")
 		sb.WriteString("      namespace = \"system\"\n")
 		sb.WriteString("    }\n")
 		sb.WriteString("    weight   = 1\n")
@@ -414,7 +412,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Origin pools\n")
 		sb.WriteString("  origin_pools_weights {\n")
 		sb.WriteString("    pool {\n")
-		sb.WriteString("      name      = \"my-tcp-pool\"\n")
+		sb.WriteString("      name      = \"example-tcp-pool\"\n")
 		sb.WriteString("      namespace = \"system\"\n")
 		sb.WriteString("    }\n")
 		sb.WriteString("    weight = 1\n")
@@ -458,7 +456,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  record_type = \"A\"\n\n")
 		sb.WriteString("  # DNS zone reference\n")
 		sb.WriteString("  dns_zone {\n")
-		sb.WriteString("    name      = \"my-dns-zone\"\n")
+		sb.WriteString("    name      = \"example-dns-zone\"\n")
 		sb.WriteString("    namespace = \"system\"\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Rule-based load balancing\n")
@@ -572,7 +570,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  where {\n")
 		sb.WriteString("    site {\n")
 		sb.WriteString("      ref {\n")
-		sb.WriteString("        name      = \"my-site\"\n")
+		sb.WriteString("        name      = \"example-site\"\n")
 		sb.WriteString("        namespace = \"system\"\n")
 		sb.WriteString("      }\n")
 		sb.WriteString("      network_type = \"VIRTUAL_NETWORK_SITE_LOCAL_INSIDE\"\n")
@@ -716,7 +714,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  hub {}\n\n")
 		sb.WriteString("  # Virtual site reference\n")
 		sb.WriteString("  virtual_site {\n")
-		sb.WriteString("    name      = \"my-virtual-site\"\n")
+		sb.WriteString("    name      = \"example-virtual-site\"\n")
 		sb.WriteString("    namespace = \"system\"\n")
 		sb.WriteString("  }\n")
 
@@ -724,7 +722,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("\n  # Voltstack Site configuration\n")
 		sb.WriteString("  # Kubernetes configuration\n")
 		sb.WriteString("  k8s_cluster {\n")
-		sb.WriteString("    name      = \"my-k8s-cluster\"\n")
+		sb.WriteString("    name      = \"example-k8s-cluster\"\n")
 		sb.WriteString("    namespace = \"system\"\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Master nodes configuration\n")
@@ -766,7 +764,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("\n  # Virtual Kubernetes configuration\n")
 		sb.WriteString("  # Virtual site selection\n")
 		sb.WriteString("  vsite_refs {\n")
-		sb.WriteString("    name      = \"my-virtual-site\"\n")
+		sb.WriteString("    name      = \"example-virtual-site\"\n")
 		sb.WriteString("    namespace = \"system\"\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Disable cluster global access\n")
@@ -813,7 +811,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Deploy on regional edge\n")
 		sb.WriteString("  deploy_on_re {\n")
 		sb.WriteString("    virtual_site {\n")
-		sb.WriteString("      name      = \"my-virtual-site\"\n")
+		sb.WriteString("      name      = \"example-virtual-site\"\n")
 		sb.WriteString("      namespace = \"system\"\n")
 		sb.WriteString("    }\n")
 		sb.WriteString("  }\n")
@@ -912,7 +910,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  local_asn = 65001\n\n")
 		sb.WriteString("  # Site reference\n")
 		sb.WriteString("  site {\n")
-		sb.WriteString("    name      = \"my-site\"\n")
+		sb.WriteString("    name      = \"example-site\"\n")
 		sb.WriteString("    namespace = \"system\"\n")
 		sb.WriteString("  }\n")
 
@@ -929,7 +927,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Site reference\n")
 		sb.WriteString("  site {\n")
-		sb.WriteString("    name      = \"my-site\"\n")
+		sb.WriteString("    name      = \"example-site\"\n")
 		sb.WriteString("    namespace = \"system\"\n")
 		sb.WriteString("  }\n")
 
@@ -1112,7 +1110,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("    advertise_where {\n")
 		sb.WriteString("      site {\n")
 		sb.WriteString("        site {\n")
-		sb.WriteString("          name      = \"my-ce-site\"\n")
+		sb.WriteString("          name      = \"example-ce-site\"\n")
 		sb.WriteString("          namespace = \"system\"\n")
 		sb.WriteString("        }\n")
 		sb.WriteString("        network = \"SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP\"\n")
@@ -1148,7 +1146,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # WAF configuration\n")
 		sb.WriteString("  app_firewall {\n")
-		sb.WriteString("    name      = \"my-waf\"\n")
+		sb.WriteString("    name      = \"example-waf\"\n")
 		sb.WriteString("    namespace = \"shared\"\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Service policies\n")
@@ -1201,7 +1199,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("      service_name = \"backend-svc\"\n")
 		sb.WriteString("      site_locator {\n")
 		sb.WriteString("        site {\n")
-		sb.WriteString("          name      = \"my-site\"\n")
+		sb.WriteString("          name      = \"example-site\"\n")
 		sb.WriteString("          namespace = \"system\"\n")
 		sb.WriteString("        }\n")
 		sb.WriteString("      }\n")
@@ -1223,7 +1221,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Health check\n")
 		sb.WriteString("  healthcheck {\n")
-		sb.WriteString("    name      = \"my-healthcheck\"\n")
+		sb.WriteString("    name      = \"example-healthcheck\"\n")
 		sb.WriteString("    namespace = \"system\"\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Advanced load balancing\n")

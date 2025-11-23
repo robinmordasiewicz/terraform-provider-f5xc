@@ -19,7 +19,7 @@ Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites con
 
 # Look up an existing Aws Tgw Site by name
 data "f5xc_aws_tgw_site" "example" {
-  name      = "my-aws-tgw-site"
+  name      = "example-aws-tgw-site"
   namespace = "system"
 }
 

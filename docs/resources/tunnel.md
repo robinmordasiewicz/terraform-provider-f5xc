@@ -15,11 +15,11 @@ Manages tunnel in a given namespace. If one already exist it will give a error. 
 
 ```terraform
 # Tunnel Resource Example
-# Create tunnel in a given namespace. If one already exist it will give a error.
+# Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic Tunnel configuration
 resource "f5xc_tunnel" "example" {
-  name      = "my-tunnel"
+  name      = "example-tunnel"
   namespace = "system"
 
   labels = {
@@ -45,7 +45,7 @@ resource "f5xc_tunnel" "example" {
 
   # Site reference
   site {
-    name      = "my-site"
+    name      = "example-site"
     namespace = "system"
   }
 }

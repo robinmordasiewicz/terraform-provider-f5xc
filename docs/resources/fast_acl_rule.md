@@ -15,11 +15,11 @@ Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP,
 
 ```terraform
 # Fast Acl Rule Resource Example
-# Create a new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply
+# Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 
 # Basic Fast Acl Rule configuration
 resource "f5xc_fast_acl_rule" "example" {
-  name      = "my-fast-acl-rule"
+  name      = "example-fast-acl-rule"
   namespace = "system"
 
   labels = {
@@ -40,7 +40,7 @@ resource "f5xc_fast_acl_rule" "example" {
     policer_action {
       # Configure policer_action settings
     }
-    # Reference. A policer direct reference ves.io.schema.rules...
+    # Reference. A policer direct reference
     ref {
       # Configure ref settings
     }

@@ -3,7 +3,7 @@
 
 # Look up an existing Enhanced Firewall Policy by name
 data "f5xc_enhanced_firewall_policy" "example" {
-  name      = "my-enhanced-firewall-policy"
+  name      = "example-enhanced-firewall-policy"
   namespace = "system"
 }
 

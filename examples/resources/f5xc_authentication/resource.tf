@@ -1,9 +1,9 @@
 # Authentication Resource Example
-# Manages a Authentication in F5 Distributed Cloud.
+# Manages a Authentication resource in F5 Distributed Cloud.
 
 # Basic Authentication configuration
 resource "f5xc_authentication" "example" {
-  name      = "my-authentication"
+  name      = "example-authentication"
   namespace = "system"
 
   labels = {

@@ -15,11 +15,11 @@ Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for ame
 
 ```terraform
 # Infraprotect Firewall Rule Group Resource Example
-# Amends a DDoS transit Firewall Rule Group
+# Manages a InfraprotectFirewallRuleGroup resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
 # Basic Infraprotect Firewall Rule Group configuration
 resource "f5xc_infraprotect_firewall_rule_group" "example" {
-  name      = "my-infraprotect-firewall-rule-group"
+  name      = "example-infraprotect-firewall-rule-group"
   namespace = "system"
 
   labels = {

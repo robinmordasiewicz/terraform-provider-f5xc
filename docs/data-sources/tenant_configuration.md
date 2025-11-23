@@ -19,7 +19,7 @@ Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant config
 
 # Look up an existing Tenant Configuration by name
 data "f5xc_tenant_configuration" "example" {
-  name      = "my-tenant-configuration"
+  name      = "example-tenant-configuration"
   namespace = "system"
 }
 

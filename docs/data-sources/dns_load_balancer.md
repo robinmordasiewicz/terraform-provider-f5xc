@@ -19,7 +19,7 @@ Manages DNS Load Balancer in a given namespace. If one already exist it will giv
 
 # Look up an existing Dns Load Balancer by name
 data "f5xc_dns_load_balancer" "example" {
-  name      = "my-dns-load-balancer"
+  name      = "example-dns-load-balancer"
   namespace = "system"
 }
 

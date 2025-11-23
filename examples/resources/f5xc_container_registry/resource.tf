@@ -1,9 +1,9 @@
 # Container Registry Resource Example
-# Shape of Container Registry
+# Manages a ContainerRegistry resource in F5 Distributed Cloud for container image registry configuration.
 
 # Basic Container Registry configuration
 resource "f5xc_container_registry" "example" {
-  name      = "my-container-registry"
+  name      = "example-container-registry"
   namespace = "system"
 
   labels = {

@@ -3,7 +3,7 @@
 
 # Look up an existing Oidc Provider by name
 data "f5xc_oidc_provider" "example" {
-  name      = "my-oidc-provider"
+  name      = "example-oidc-provider"
   namespace = "system"
 }
 

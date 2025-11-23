@@ -15,11 +15,11 @@ Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create con
 
 ```terraform
 # Proxy Resource Example
-# Shape of the TCP loadbalancer create specification
+# Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
 
 # Basic Proxy configuration
 resource "f5xc_proxy" "example" {
-  name      = "my-proxy"
+  name      = "example-proxy"
   namespace = "system"
 
   labels = {

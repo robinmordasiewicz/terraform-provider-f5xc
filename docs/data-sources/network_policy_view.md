@@ -19,7 +19,7 @@ Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy 
 
 # Look up an existing Network Policy View by name
 data "f5xc_network_policy_view" "example" {
-  name      = "my-network-policy-view"
+  name      = "example-network-policy-view"
   namespace = "system"
 }
 

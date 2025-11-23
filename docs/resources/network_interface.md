@@ -15,11 +15,11 @@ Manages a NetworkInterface resource in F5 Distributed Cloud for network interfac
 
 ```terraform
 # Network Interface Resource Example
-# Network interface represents configuration of a network device. It is created by users in system namespace.
+# Manages a NetworkInterface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 # Basic Network Interface configuration
 resource "f5xc_network_interface" "example" {
-  name      = "my-network-interface"
+  name      = "example-network-interface"
   namespace = "system"
 
   labels = {
@@ -32,7 +32,7 @@ resource "f5xc_network_interface" "example" {
   }
 
   # Resource-specific configuration
-    # Dedicated Interface. Dedicated Interface Configuration
+    # [OneOf: dedicated_interface, dedicated_management_interfa...
     dedicated_interface {
       # Configure dedicated_interface settings
     }

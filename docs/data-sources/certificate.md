@@ -19,7 +19,7 @@ Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate m
 
 # Look up an existing Certificate by name
 data "f5xc_certificate" "example" {
-  name      = "my-certificate"
+  name      = "example-certificate"
   namespace = "system"
 }
 

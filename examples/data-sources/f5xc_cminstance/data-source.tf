@@ -3,7 +3,7 @@
 
 # Look up an existing Cminstance by name
 data "f5xc_cminstance" "example" {
-  name      = "my-cminstance"
+  name      = "example-cminstance"
   namespace = "system"
 }
 

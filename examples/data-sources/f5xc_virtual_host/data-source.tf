@@ -3,7 +3,7 @@
 
 # Look up an existing Virtual Host by name
 data "f5xc_virtual_host" "example" {
-  name      = "my-virtual-host"
+  name      = "example-virtual-host"
   namespace = "system"
 }
 

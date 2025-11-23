@@ -19,7 +19,7 @@ Manages a APICrawler resource in F5 Distributed Cloud.
 
 # Look up an existing Api Crawler by name
 data "f5xc_api_crawler" "example" {
-  name      = "my-api-crawler"
+  name      = "example-api-crawler"
   namespace = "system"
 }
 

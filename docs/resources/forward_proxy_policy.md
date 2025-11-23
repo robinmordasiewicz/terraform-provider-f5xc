@@ -15,11 +15,11 @@ Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy 
 
 ```terraform
 # Forward Proxy Policy Resource Example
-# Shape of the Forward Proxy Policy specification
+# Manages a ForwardProxyPolicy resource in F5 Distributed Cloud for forward proxy policy configuration.
 
 # Basic Forward Proxy Policy configuration
 resource "f5xc_forward_proxy_policy" "example" {
-  name      = "my-forward-proxy-policy"
+  name      = "example-forward-proxy-policy"
   namespace = "system"
 
   labels = {
@@ -51,23 +51,6 @@ resource "f5xc_forward_proxy_policy" "example" {
         }
       }
     }
-  }
-}
-
-# Advanced Forward Proxy Policy with additional configuration
-resource "f5xc_forward_proxy_policy" "advanced" {
-  name      = "advanced-forward-proxy-policy"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
   }
 }
 ```

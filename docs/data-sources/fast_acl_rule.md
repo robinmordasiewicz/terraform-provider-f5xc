@@ -19,7 +19,7 @@ Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP,
 
 # Look up an existing Fast Acl Rule by name
 data "f5xc_fast_acl_rule" "example" {
-  name      = "my-fast-acl-rule"
+  name      = "example-fast-acl-rule"
   namespace = "system"
 }
 

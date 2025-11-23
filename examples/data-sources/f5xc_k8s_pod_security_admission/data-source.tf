@@ -3,7 +3,7 @@
 
 # Look up an existing K8s Pod Security Admission by name
 data "f5xc_k8s_pod_security_admission" "example" {
-  name      = "my-k8s-pod-security-admission"
+  name      = "example-k8s-pod-security-admission"
   namespace = "system"
 }
 

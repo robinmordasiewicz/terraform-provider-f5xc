@@ -19,7 +19,7 @@ Manages a VoltstackSite resource in F5 Distributed Cloud for deploying Volterra 
 
 # Look up an existing Voltstack Site by name
 data "f5xc_voltstack_site" "example" {
-  name      = "my-voltstack-site"
+  name      = "example-voltstack-site"
   namespace = "system"
 }
 

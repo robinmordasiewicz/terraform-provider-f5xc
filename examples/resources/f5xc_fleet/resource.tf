@@ -1,9 +1,9 @@
 # Fleet Resource Example
-# Create fleet will create a fleet object in 'system' namespace of the user
+# Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
 
 # Basic Fleet configuration
 resource "f5xc_fleet" "example" {
-  name      = "my-fleet"
+  name      = "example-fleet"
   namespace = "system"
 
   labels = {
@@ -31,21 +31,4 @@ resource "f5xc_fleet" "example" {
 
   # Default config
   default_config {}
-}
-
-# Advanced Fleet with additional configuration
-resource "f5xc_fleet" "advanced" {
-  name      = "advanced-fleet"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
-  }
 }

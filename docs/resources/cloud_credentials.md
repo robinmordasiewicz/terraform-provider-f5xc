@@ -15,11 +15,11 @@ Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider c
 
 ```terraform
 # Cloud Credentials Resource Example
-# API to create cloud_credentials object
+# Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
 # Basic Cloud Credentials configuration
 resource "f5xc_cloud_credentials" "example" {
-  name      = "my-cloud-credentials"
+  name      = "example-cloud-credentials"
   namespace = "system"
 
   labels = {

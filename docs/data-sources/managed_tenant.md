@@ -19,7 +19,7 @@ Manages managed_tenant config instance. Name of the object is name of the tenant
 
 # Look up an existing Managed Tenant by name
 data "f5xc_managed_tenant" "example" {
-  name      = "my-managed-tenant"
+  name      = "example-managed-tenant"
   namespace = "system"
 }
 

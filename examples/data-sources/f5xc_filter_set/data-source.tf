@@ -3,7 +3,7 @@
 
 # Look up an existing Filter Set by name
 data "f5xc_filter_set" "example" {
-  name      = "my-filter-set"
+  name      = "example-filter-set"
   namespace = "system"
 }
 

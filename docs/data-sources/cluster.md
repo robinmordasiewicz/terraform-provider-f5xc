@@ -19,7 +19,7 @@ Manages cluster will create the object in the storage backend for namespace meta
 
 # Look up an existing Cluster by name
 data "f5xc_cluster" "example" {
-  name      = "my-cluster"
+  name      = "example-cluster"
   namespace = "system"
 }
 

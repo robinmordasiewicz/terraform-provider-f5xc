@@ -19,7 +19,7 @@ Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
 # Look up an existing Apm by name
 data "f5xc_apm" "example" {
-  name      = "my-apm"
+  name      = "example-apm"
   namespace = "system"
 }
 

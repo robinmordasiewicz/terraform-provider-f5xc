@@ -19,7 +19,7 @@ Manages Protocol Inspection Specification in a given namespace. If one already e
 
 # Look up an existing Protocol Inspection by name
 data "f5xc_protocol_inspection" "example" {
-  name      = "my-protocol-inspection"
+  name      = "example-protocol-inspection"
   namespace = "system"
 }
 

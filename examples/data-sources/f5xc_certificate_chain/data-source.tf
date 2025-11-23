@@ -3,7 +3,7 @@
 
 # Look up an existing Certificate Chain by name
 data "f5xc_certificate_chain" "example" {
-  name      = "my-certificate-chain"
+  name      = "example-certificate-chain"
   namespace = "system"
 }
 

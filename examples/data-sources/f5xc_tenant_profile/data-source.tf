@@ -3,7 +3,7 @@
 
 # Look up an existing Tenant Profile by name
 data "f5xc_tenant_profile" "example" {
-  name      = "my-tenant-profile"
+  name      = "example-tenant-profile"
   namespace = "system"
 }
 

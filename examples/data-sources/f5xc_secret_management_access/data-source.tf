@@ -3,7 +3,7 @@
 
 # Look up an existing Secret Management Access by name
 data "f5xc_secret_management_access" "example" {
-  name      = "my-secret-management-access"
+  name      = "example-secret-management-access"
   namespace = "system"
 }
 

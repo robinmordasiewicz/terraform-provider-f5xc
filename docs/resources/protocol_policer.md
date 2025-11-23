@@ -15,11 +15,11 @@ Manages protocol_policer object, protocol_policer object contains list of L4 pro
 
 ```terraform
 # Protocol Policer Resource Example
-# Create a protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits
+# Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 
 # Basic Protocol Policer configuration
 resource "f5xc_protocol_policer" "example" {
-  name      = "my-protocol-policer"
+  name      = "example-protocol-policer"
   namespace = "system"
 
   labels = {

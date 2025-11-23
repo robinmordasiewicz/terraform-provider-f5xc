@@ -1,9 +1,9 @@
 # Enhanced Firewall Policy Resource Example
-# Shape of Enhanced Firewall Policy specification
+# Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 
 # Basic Enhanced Firewall Policy configuration
 resource "f5xc_enhanced_firewall_policy" "example" {
-  name      = "my-enhanced-firewall-policy"
+  name      = "example-enhanced-firewall-policy"
   namespace = "system"
 
   labels = {
@@ -33,22 +33,5 @@ resource "f5xc_enhanced_firewall_policy" "example" {
       }
       all_traffic {}
     }
-  }
-}
-
-# Advanced Enhanced Firewall Policy with additional configuration
-resource "f5xc_enhanced_firewall_policy" "advanced" {
-  name      = "advanced-enhanced-firewall-policy"
-  namespace = "system"
-
-  labels = {
-    environment = "staging"
-    team        = "platform"
-    cost_center = "engineering"
-  }
-
-  annotations = {
-    "created_by" = "terraform"
-    "version"    = "2.0"
   }
 }

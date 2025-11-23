@@ -1,9 +1,9 @@
 # Cloud Connect Resource Example
-# Shape of the Cloud Connect specification
+# Manages a CloudConnect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
 # Basic Cloud Connect configuration
 resource "f5xc_cloud_connect" "example" {
-  name      = "my-cloud-connect"
+  name      = "example-cloud-connect"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_cloud_connect" "example" {
   }
 
   # Resource-specific configuration
-    # AWS TGW Site Type. Cloud Connect AWS TGW Site Type
+    # [OneOf: aws_tgw_site, azure_vnet_site] AWS TGW Site Type....
     aws_tgw_site {
       # Configure aws_tgw_site settings
     }

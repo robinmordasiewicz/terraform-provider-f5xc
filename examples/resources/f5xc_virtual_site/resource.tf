@@ -1,9 +1,9 @@
 # Virtual Site Resource Example
-# Create a virtual site object in given namespace
+# Manages virtual site object in given namespace in F5 Distributed Cloud.
 
 # Basic Virtual Site configuration
 resource "f5xc_virtual_site" "example" {
-  name      = "my-virtual-site"
+  name      = "example-virtual-site"
   namespace = "system"
 
   labels = {

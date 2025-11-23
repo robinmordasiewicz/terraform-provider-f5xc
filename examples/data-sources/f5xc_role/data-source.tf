@@ -3,7 +3,7 @@
 
 # Look up an existing Role by name
 data "f5xc_role" "example" {
-  name      = "my-role"
+  name      = "example-role"
   namespace = "system"
 }
 

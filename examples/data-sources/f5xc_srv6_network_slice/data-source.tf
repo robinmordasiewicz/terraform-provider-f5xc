@@ -3,7 +3,7 @@
 
 # Look up an existing Srv6 Network Slice by name
 data "f5xc_srv6_network_slice" "example" {
-  name      = "my-srv6-network-slice"
+  name      = "example-srv6-network-slice"
   namespace = "system"
 }
 

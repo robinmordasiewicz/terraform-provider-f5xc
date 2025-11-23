@@ -19,7 +19,7 @@ Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb polic
 
 # Look up an existing Usb Policy by name
 data "f5xc_usb_policy" "example" {
-  name      = "my-usb-policy"
+  name      = "example-usb-policy"
   namespace = "system"
 }
 

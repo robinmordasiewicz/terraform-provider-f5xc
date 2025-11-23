@@ -3,7 +3,7 @@
 
 # Look up an existing Site Mesh Group by name
 data "f5xc_site_mesh_group" "example" {
-  name      = "my-site-mesh-group"
+  name      = "example-site-mesh-group"
   namespace = "system"
 }
 

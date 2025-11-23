@@ -3,7 +3,7 @@
 
 # Look up an existing Addon Subscription by name
 data "f5xc_addon_subscription" "example" {
-  name      = "my-addon-subscription"
+  name      = "example-addon-subscription"
   namespace = "system"
 }
 

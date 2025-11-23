@@ -1,9 +1,9 @@
 # Fast Acl Resource Example
-# Create a `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule`
+# Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
 
 # Basic Fast Acl configuration
 resource "f5xc_fast_acl" "example" {
-  name      = "my-fast-acl"
+  name      = "example-fast-acl"
   namespace = "system"
 
   labels = {
@@ -20,7 +20,7 @@ resource "f5xc_fast_acl" "example" {
     protocol_policer {
       # Configure protocol_policer settings
     }
-    # Fast ACL for RE. Fast ACL definition for RE
+    # [OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL defin...
     re_acl {
       # Configure re_acl settings
     }

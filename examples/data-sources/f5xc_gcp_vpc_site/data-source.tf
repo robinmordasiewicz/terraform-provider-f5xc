@@ -3,7 +3,7 @@
 
 # Look up an existing Gcp Vpc Site by name
 data "f5xc_gcp_vpc_site" "example" {
-  name      = "my-gcp-vpc-site"
+  name      = "example-gcp-vpc-site"
   namespace = "system"
 }
 

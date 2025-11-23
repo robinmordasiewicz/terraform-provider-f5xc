@@ -3,7 +3,7 @@
 
 # Look up an existing Bgp Routing Policy by name
 data "f5xc_bgp_routing_policy" "example" {
-  name      = "my-bgp-routing-policy"
+  name      = "example-bgp-routing-policy"
   namespace = "system"
 }
 

@@ -19,7 +19,7 @@ Manages a OriginPool resource in F5 Distributed Cloud for defining backend serve
 
 # Look up an existing Origin Pool by name
 data "f5xc_origin_pool" "example" {
-  name      = "my-origin-pool"
+  name      = "example-origin-pool"
   namespace = "system"
 }
 
@@ -30,7 +30,7 @@ data "f5xc_origin_pool" "example" {
 
 # Example: Use origin pool data in HTTP load balancer
 # resource "f5xc_http_loadbalancer" "example" {
-#   name      = "my-lb"
+#   name      = "example-lb"
 #   namespace = "system"
 #   domains   = ["app.example.com"]
 #

@@ -1,9 +1,9 @@
 # Oidc Provider Resource Example
-# CustomCreateSpecType is the spec to create oidc provider
+# Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
 # Basic Oidc Provider configuration
 resource "f5xc_oidc_provider" "example" {
-  name      = "my-oidc-provider"
+  name      = "example-oidc-provider"
   namespace = "system"
 
   labels = {
@@ -16,7 +16,7 @@ resource "f5xc_oidc_provider" "example" {
   }
 
   # Resource-specific configuration
-    # Azure OIDC Spec Type. AzureOIDCSpecType specifies the att...
+    # [OneOf: azure_oidc_spec_type, google_oidc_spec_type, oidc...
     azure_oidc_spec_type {
       # Configure azure_oidc_spec_type settings
     }

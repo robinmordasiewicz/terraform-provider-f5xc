@@ -1,9 +1,9 @@
 # Rate Limiter Resource Example
-# Create rate_limiter creates a new object in the storage backend for metadata.namespace.
+# Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Rate Limiter configuration
 resource "f5xc_rate_limiter" "example" {
-  name      = "my-rate-limiter"
+  name      = "example-rate-limiter"
   namespace = "system"
 
   labels = {

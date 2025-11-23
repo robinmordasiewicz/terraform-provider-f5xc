@@ -19,7 +19,7 @@ Manages network policy rule with configured parameters in specified namespace in
 
 # Look up an existing Network Policy Rule by name
 data "f5xc_network_policy_rule" "example" {
-  name      = "my-network-policy-rule"
+  name      = "example-network-policy-rule"
   namespace = "system"
 }
 

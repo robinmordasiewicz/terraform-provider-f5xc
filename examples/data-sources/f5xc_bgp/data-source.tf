@@ -3,7 +3,7 @@
 
 # Look up an existing Bgp by name
 data "f5xc_bgp" "example" {
-  name      = "my-bgp"
+  name      = "example-bgp"
   namespace = "system"
 }
 

@@ -15,11 +15,11 @@ Manages child_tenant config instance. Name of the object is the name of the chil
 
 ```terraform
 # Child Tenant Resource Example
-# Creates a child_tenant config instance. Name of the object is the name of the child tenant to be created.
+# Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
 # Basic Child Tenant configuration
 resource "f5xc_child_tenant" "example" {
-  name      = "my-child-tenant"
+  name      = "example-child-tenant"
   namespace = "system"
 
   labels = {

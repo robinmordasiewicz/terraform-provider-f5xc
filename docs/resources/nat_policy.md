@@ -15,11 +15,11 @@ Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create speci
 
 ```terraform
 # Nat Policy Resource Example
-# NAT Policy create specification configures NAT Policy with multiple Rules,
+# Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 # Basic Nat Policy configuration
 resource "f5xc_nat_policy" "example" {
-  name      = "my-nat-policy"
+  name      = "example-nat-policy"
   namespace = "system"
 
   labels = {

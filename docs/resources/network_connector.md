@@ -15,11 +15,11 @@ Manages a NetworkConnector resource in F5 Distributed Cloud for network connecto
 
 ```terraform
 # Network Connector Resource Example
-# Network Connector is created by users in system namespace
+# Manages a NetworkConnector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 # Basic Network Connector configuration
 resource "f5xc_network_connector" "example" {
-  name      = "my-network-connector"
+  name      = "example-network-connector"
   namespace = "system"
 
   labels = {

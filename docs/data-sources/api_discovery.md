@@ -19,7 +19,7 @@ Manages api discovery creates a new object in the storage backend for metadata.n
 
 # Look up an existing Api Discovery by name
 data "f5xc_api_discovery" "example" {
-  name      = "my-api-discovery"
+  name      = "example-api-discovery"
   namespace = "system"
 }
 

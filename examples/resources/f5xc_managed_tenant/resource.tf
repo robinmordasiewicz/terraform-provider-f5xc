@@ -1,9 +1,9 @@
 # Managed Tenant Resource Example
-# Creates a managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage.
+# Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
 # Basic Managed Tenant configuration
 resource "f5xc_managed_tenant" "example" {
-  name      = "my-managed-tenant"
+  name      = "example-managed-tenant"
   namespace = "system"
 
   labels = {

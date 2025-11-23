@@ -3,7 +3,7 @@
 
 # Look up an existing Http Loadbalancer by name
 data "f5xc_http_loadbalancer" "example" {
-  name      = "my-http-loadbalancer"
+  name      = "example-http-loadbalancer"
   namespace = "system"
 }
 

@@ -19,7 +19,7 @@ Manages new namespace. Name of the object is name of the name space. in F5 Distr
 
 # Look up an existing Namespace by name
 data "f5xc_namespace" "example" {
-  name      = "my-namespace"
+  name      = "example-namespace"
   namespace = "system"
 }
 
@@ -30,7 +30,7 @@ data "f5xc_namespace" "example" {
 
 # Example: Create resources in a namespace discovered via data source
 # resource "f5xc_origin_pool" "example" {
-#   name      = "my-pool"
+#   name      = "example-pool"
 #   namespace = data.f5xc_namespace.example.name
 #   # ... other configuration
 # }

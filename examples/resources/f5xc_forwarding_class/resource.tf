@@ -1,9 +1,9 @@
 # Forwarding Class Resource Example
-# Forwarding Class is created by users in system namespace
+# Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 
 # Basic Forwarding Class configuration
 resource "f5xc_forwarding_class" "example" {
-  name      = "my-forwarding-class"
+  name      = "example-forwarding-class"
   namespace = "system"
 
   labels = {
@@ -16,11 +16,11 @@ resource "f5xc_forwarding_class" "example" {
   }
 
   # Resource-specific configuration
-    # DSCP Marking setting. DSCP marking setting as per RFC 2475
+    # [OneOf: dscp, no_marking, tos_value] DSCP Marking setting...
     dscp {
       # Configure dscp settings
     }
-    # Empty. This can be used for messages where no values are ...
+    # [OneOf: dscp_based_queue, queue_id_to_use] Empty. This ca...
     dscp_based_queue {
       # Configure dscp_based_queue settings
     }

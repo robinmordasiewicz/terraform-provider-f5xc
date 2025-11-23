@@ -3,7 +3,7 @@
 
 # Look up an existing Certificate by name
 data "f5xc_certificate" "example" {
-  name      = "my-certificate"
+  name      = "example-certificate"
   namespace = "system"
 }
 

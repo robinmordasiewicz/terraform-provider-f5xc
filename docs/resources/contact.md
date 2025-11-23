@@ -38,15 +38,57 @@ resource "f5xc_contact" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Contact. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Contact will be created (`String`).
+
 The following arguments are optional:
+
+`address1` - (Optional) Address Line 1 (`String`).
+
+`address2` - (Optional) Address Line 2 (`String`).
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`city` - (Optional) City (`String`).
+
+`contact_type` - (Optional) Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING` (`String`).
+
+`country` - (Optional) Country (`String`).
+
+`county` - (Optional) County (`String`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`phone_number` - (Optional) Phone Number (`String`).
+
+`state` - (Optional) State (`String`).
+
+`state_code` - (Optional) State Code (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`zip_code` - (Optional) ZIP code (`String`).
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

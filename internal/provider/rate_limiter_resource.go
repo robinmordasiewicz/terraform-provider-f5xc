@@ -124,7 +124,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional: true,
 						},
 						"unit": schema.StringAttribute{
-							MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`.",
+							MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND`.",
 							Optional: true,
 						},
 					},

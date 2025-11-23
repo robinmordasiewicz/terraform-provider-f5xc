@@ -62,47 +62,171 @@ resource "f5xc_dns_load_balancer" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the DNSLoadBalancer. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the DNSLoadBalancer will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`fallback_pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Fallback Pool](#fallback-pool) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`record_type` - (Optional) Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV. Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`. Defaults to `A` (`String`).
+
+`response_cache` - (Optional) Response Cache. Response Cache x-required. See [Response Cache](#response-cache) below for details.
+
+`rule_list` - (Optional) Load Balancing Rule List. List of the Load Balancing Rules. See [Rule List](#rule-list) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--fallback_pool"></a>
 
+### Fallback Pool
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--response_cache"></a>
+
+### Response Cache
+
+`default_response_cache_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Response Cache Parameters](#nestedblock--response_cache--default_response_cache_parameters) below.
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--response_cache--disable) below.
+
+`response_cache_parameters` - (Optional) Response Cache Parameters. See [Response Cache Parameters](#nestedblock--response_cache--response_cache_parameters) below.
 
 <a id="nestedblock--response_cache--default_response_cache_parameters"></a>
 
+### Response Cache Default Response Cache Parameters
+
 <a id="nestedblock--response_cache--disable"></a>
+
+### Response Cache Disable
 
 <a id="nestedblock--response_cache--response_cache_parameters"></a>
 
+### Response Cache Response Cache Parameters
+
+`cache_cidr_ipv4` - (Optional) Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients (`Number`).
+
+`cache_cidr_ipv6` - (Optional) Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients (`Number`).
+
+`cache_ttl` - (Optional) TTL. TTL for response cache (`Number`).
+
 <a id="nestedblock--rule_list"></a>
+
+### Rule List
+
+`rules` - (Optional) Load Balancing Rules. Rules to perform load balancing. See [Rules](#nestedblock--rule_list--rules) below.
 
 <a id="nestedblock--rule_list--rules"></a>
 
+### Rule List Rules
+
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#nestedblock--rule_list--rules--asn_list) below.
+
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--rule_list--rules--asn_matcher) below.
+
+`geo_location_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Geo Location Label Selector](#nestedblock--rule_list--rules--geo_location_label_selector) below.
+
+`geo_location_set` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Geo Location Set](#nestedblock--rule_list--rules--geo_location_set) below.
+
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#nestedblock--rule_list--rules--ip_prefix_list) below.
+
+`ip_prefix_set` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Prefix Set](#nestedblock--rule_list--rules--ip_prefix_set) below.
+
+`pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--rule_list--rules--pool) below.
+
+`score` - (Optional) Score. When multiple load balancing rules match a query, the one with the highest score is chosen (`Number`).
+
 <a id="nestedblock--rule_list--rules--asn_list"></a>
+
+### Rule List Rules Asn List
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
 
 <a id="nestedblock--rule_list--rules--asn_matcher"></a>
 
+### Rule List Rules Asn Matcher
+
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#nestedblock--rule_list--rules--asn_matcher--asn_sets) below.
+
 <a id="nestedblock--rule_list--rules--asn_matcher--asn_sets"></a>
+
+### Rule List Rules Asn Matcher Asn Sets
 
 <a id="nestedblock--rule_list--rules--geo_location_label_selector"></a>
 
+### Rule List Rules Geo Location Label Selector
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
 <a id="nestedblock--rule_list--rules--geo_location_set"></a>
+
+### Rule List Rules Geo Location Set
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--rule_list--rules--ip_prefix_list"></a>
 
+### Rule List Rules IP Prefix List
+
+`invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
+
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
+
 <a id="nestedblock--rule_list--rules--ip_prefix_set"></a>
+
+### Rule List Rules IP Prefix Set
+
+`invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
+
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#nestedblock--rule_list--rules--ip_prefix_set--prefix_sets) below.
 
 <a id="nestedblock--rule_list--rules--ip_prefix_set--prefix_sets"></a>
 
+### Rule List Rules IP Prefix Set Prefix Sets
+
 <a id="nestedblock--rule_list--rules--pool"></a>
 
+### Rule List Rules Pool
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

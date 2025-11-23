@@ -105,11 +105,11 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				ElementType: types.StringType,
 			},
 			"policer_mode": schema.StringAttribute{
-				MarkdownDescription: "Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`.",
+				MarkdownDescription: "Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`.",
 				Optional: true,
 			},
 			"policer_type": schema.StringAttribute{
-				MarkdownDescription: "Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`.",
+				MarkdownDescription: "Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`.",
 				Optional: true,
 			},
 			"id": schema.StringAttribute{

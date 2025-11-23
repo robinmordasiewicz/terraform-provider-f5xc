@@ -52,37 +52,141 @@ resource "f5xc_fast_acl_rule" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the FastACLRule. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the FastACLRule will be created (`String`).
+
 The following arguments are optional:
+
+`action` - (Optional) Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic. See [Action](#action) below for details.
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "ip_prefix_set, prefix" must be set.
+
+`ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#ip-prefix-set) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`port` - (Optional) Source Ports. L4 port numbers to match. See [Port](#port) below for details.
+
+`prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#prefix) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--action"></a>
 
+### Action
+
+`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#nestedblock--action--policer_action) below.
+
+`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#nestedblock--action--protocol_policer_action) below.
+
+`simple_action` - (Optional) Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY` (`String`).
+
 <a id="nestedblock--action--policer_action"></a>
+
+### Action Policer Action
+
+`ref` - (Optional) Reference. A policer direct reference. See [Ref](#nestedblock--action--policer_action--ref) below.
 
 <a id="nestedblock--action--policer_action--ref"></a>
 
+### Action Policer Action Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--action--protocol_policer_action"></a>
+
+### Action Protocol Policer Action
+
+`ref` - (Optional) Protocol policer Reference. Reference to protocol policer object. See [Ref](#nestedblock--action--protocol_policer_action--ref) below.
 
 <a id="nestedblock--action--protocol_policer_action--ref"></a>
 
+### Action Protocol Policer Action Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--ip_prefix_set"></a>
+
+### IP Prefix Set
+
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--ip_prefix_set--ref) below.
 
 <a id="nestedblock--ip_prefix_set--ref"></a>
 
+### IP Prefix Set Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--port"></a>
+
+### Port
+
+`all` - (Optional) Empty. This can be used for messages where no values are needed. See [All](#nestedblock--port--all) below.
+
+`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--port--dns) below.
+
+`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
 
 <a id="nestedblock--port--all"></a>
 
+### Port All
+
 <a id="nestedblock--port--dns"></a>
+
+### Port DNS
 
 <a id="nestedblock--prefix"></a>
 
+### Prefix
+
+`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

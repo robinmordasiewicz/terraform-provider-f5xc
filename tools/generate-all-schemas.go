@@ -50,6 +50,7 @@ type SchemaDefinition struct {
 	Title                string                      `json:"title"`
 	Format               string                      `json:"format"`
 	Enum                 []interface{}               `json:"enum"`
+	Default              interface{}                 `json:"default"`
 	Properties           map[string]SchemaDefinition `json:"properties"`
 	Items                *SchemaDefinition           `json:"items"`
 	Ref                  string                      `json:"$ref"`
@@ -584,6 +585,11 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		attr.Description = formatEnumDescription(attr.Description, schema.Enum)
 	}
 
+	// Format default values per HashiCorp standards: "Defaults to `value`."
+	if schema.Default != nil {
+		attr.Description = formatDefaultDescription(attr.Description, schema.Default)
+	}
+
 	// Determine type and extract nested attributes
 	switch schema.Type {
 	case "string":
@@ -737,6 +743,46 @@ func filterOptional(attrs []TerraformAttribute) []TerraformAttribute {
 		}
 	}
 	return result
+}
+
+// formatDefaultDescription appends a default value to a description per HashiCorp standards.
+// Format: "Defaults to `value`."
+func formatDefaultDescription(desc string, defaultValue interface{}) string {
+	if defaultValue == nil {
+		return desc
+	}
+
+	// Convert default value to string
+	defaultStr := fmt.Sprintf("%v", defaultValue)
+	if defaultStr == "" || defaultStr == "<nil>" {
+		return desc
+	}
+
+	// Skip invalid/placeholder defaults
+	invalidDefaults := map[string]bool{
+		"INVALID":      true,
+		"NONE":         true,
+		"UNKNOWN":      true,
+		"UNSPECIFIED":  true,
+		"0":            true, // Often placeholder
+		"false":        true, // Boolean false is often just the default state
+	}
+
+	// Check if default contains "INVALID" or similar markers
+	upperDefault := strings.ToUpper(defaultStr)
+	for invalid := range invalidDefaults {
+		if strings.Contains(upperDefault, invalid) {
+			return desc
+		}
+	}
+
+	// Ensure description ends properly before adding default info
+	desc = strings.TrimSpace(desc)
+	if desc != "" && !strings.HasSuffix(desc, ".") && !strings.HasSuffix(desc, ":") {
+		desc += "."
+	}
+
+	return fmt.Sprintf("%s Defaults to `%s`.", desc, defaultStr)
 }
 
 // formatEnumDescription appends enum values to a description per HashiCorp standards.

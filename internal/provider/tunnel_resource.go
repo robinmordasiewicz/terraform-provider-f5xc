@@ -94,7 +94,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				ElementType: types.StringType,
 			},
 			"tunnel_type": schema.StringAttribute{
-				MarkdownDescription: "Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type. Possible values are `IPSEC_PSK`, `GRE`.",
+				MarkdownDescription: "Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type. Possible values are `IPSEC_PSK`, `GRE`. Defaults to `IPSEC_PSK`.",
 				Optional: true,
 			},
 			"id": schema.StringAttribute{

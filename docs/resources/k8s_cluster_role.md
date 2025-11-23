@@ -52,25 +52,85 @@ resource "f5xc_k8s_cluster_role" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the K8SClusterRole. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the K8SClusterRole will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "k8s_cluster_role_selector, policy_rule_list, yaml" must be set.
+
+`k8s_cluster_role_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`policy_rule_list` - (Optional) Policy Rule List. List of rules for role permissions. See [Policy Rule List](#policy-rule-list) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`yaml` - (Optional) K8s YAML. K8s YAML for ClusterRole (`String`).
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--k8s_cluster_role_selector"></a>
 
+### K8s Cluster Role Selector
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
 <a id="nestedblock--policy_rule_list"></a>
+
+### Policy Rule List
+
+`policy_rule` - (Optional) Policy Rules. List of rules for role permissions. See [Policy Rule](#nestedblock--policy_rule_list--policy_rule) below.
 
 <a id="nestedblock--policy_rule_list--policy_rule"></a>
 
+### Policy Rule List Policy Rule
+
+`non_resource_url_list` - (Optional) List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource. See [Non Resource URL List](#nestedblock--policy_rule_list--policy_rule--non_resource_url_list) below.
+
+`resource_list` - (Optional) Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed. See [Resource List](#nestedblock--policy_rule_list--policy_rule--resource_list) below.
+
 <a id="nestedblock--policy_rule_list--policy_rule--non_resource_url_list"></a>
+
+### Policy Rule List Policy Rule Non Resource URL List
+
+`urls` - (Optional) Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex (`List`).
+
+`verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations (`List`).
 
 <a id="nestedblock--policy_rule_list--policy_rule--resource_list"></a>
 
+### Policy Rule List Policy Rule Resource List
+
+`api_groups` - (Optional) API Groups. Allowed list of API group that contains resources, all resources of a given API group (`List`).
+
+`resource_instances` - (Optional) Resource Instances. Allowed list of resource instances within the resource types (`List`).
+
+`resource_types` - (Optional) Resource Types. Allowed list of resource types within the API groups (`List`).
+
+`verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations (`List`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

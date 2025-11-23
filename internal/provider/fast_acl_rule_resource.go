@@ -111,7 +111,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic",
 				Attributes: map[string]schema.Attribute{
 					"simple_action": schema.StringAttribute{
-						MarkdownDescription: "Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`.",
+						MarkdownDescription: "Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
 						Optional: true,
 					},
 				},

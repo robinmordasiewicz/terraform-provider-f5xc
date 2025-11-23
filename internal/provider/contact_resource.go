@@ -110,7 +110,7 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 			},
 			"contact_type": schema.StringAttribute{
-				MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`.",
+				MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING`.",
 				Optional: true,
 			},
 			"country": schema.StringAttribute{

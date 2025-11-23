@@ -184,7 +184,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									ElementType: types.StringType,
 								},
 								"protocol": schema.StringAttribute{
-									MarkdownDescription: "Protocols. Protocols like TCP, UDP. Possible values are `ALL`, `ICMP`, `TCP`, `UDP`.",
+									MarkdownDescription: "Protocols. Protocols like TCP, UDP. Possible values are `ALL`, `ICMP`, `TCP`, `UDP`. Defaults to `ALL`.",
 									Optional: true,
 								},
 								"source_cidr": schema.ListAttribute{

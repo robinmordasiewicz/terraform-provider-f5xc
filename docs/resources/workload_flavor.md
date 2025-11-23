@@ -38,15 +38,43 @@ resource "f5xc_workload_flavor" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the WorkloadFlavor. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the WorkloadFlavor will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`ephemeral_storage` - (Optional) Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor (`String`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`memory` - (Optional) Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`vcpus` - (Optional) vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core (`Number`).
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

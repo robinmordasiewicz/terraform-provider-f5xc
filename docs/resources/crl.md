@@ -44,17 +44,53 @@ resource "f5xc_crl" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the CRL. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the CRL will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`http_access` - (Optional) HTTPAccessInfo. See [HTTP Access](#http-access) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`refresh_interval` - (Optional) CRL Refresh interval. CRL refresh interval, in hours (`Number`).
+
+`server_address` - (Optional) CRL Server address. CRL server address or hostname (`String`).
+
+`server_port` - (Optional) CRL Server Port. Set CRL Server port number (`Number`).
+
+`timeout` - (Optional) CRL download timeout. CRL download wait time, in seconds (`Number`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--http_access"></a>
 
+### HTTP Access
+
+`path` - (Optional) CRL File path. CRL file location (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

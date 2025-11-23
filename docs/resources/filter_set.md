@@ -52,25 +52,81 @@ resource "f5xc_filter_set" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the FilterSet. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the FilterSet will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`context_key` - (Optional) Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable (`String`).
+
+`filter_fields` - (Optional) Filter Fields. list of fields and their values selected by the user. See [Filter Fields](#filter-fields) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--filter_fields"></a>
 
+### Filter Fields
+
+`date_field` - (Optional) Filter Date/Time Range Field. either an absolute time range or a relative time interval. See [Date Field](#nestedblock--filter_fields--date_field) below.
+
+`field_id` - (Optional) Field ID. an identifier for the field that maps to some UI filter component (`String`).
+
+`filter_expression_field` - (Optional) Filter Expression Field. See [Filter Expression Field](#nestedblock--filter_fields--filter_expression_field) below.
+
+`string_field` - (Optional) Filter String Field. See [String Field](#nestedblock--filter_fields--string_field) below.
+
 <a id="nestedblock--filter_fields--date_field"></a>
+
+### Filter Fields Date Field
+
+`absolute` - (Optional) Date Range. Date range is for selecting a date range. See [Absolute](#nestedblock--filter_fields--date_field--absolute) below.
+
+`relative` - (Optional) Relative. relative time duration (`String`).
 
 <a id="nestedblock--filter_fields--date_field--absolute"></a>
 
+### Filter Fields Date Field Absolute
+
+`end_date` - (Optional) End Date. Contains end date (`String`).
+
+`start_date` - (Optional) Start Date. Contains start date (`String`).
+
 <a id="nestedblock--filter_fields--filter_expression_field"></a>
+
+### Filter Fields Filter Expression Field
+
+`expression` - (Optional) Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values (`String`).
 
 <a id="nestedblock--filter_fields--string_field"></a>
 
+### Filter Fields String Field
+
+`field_values` - (Optional) String Value(s) (`List`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

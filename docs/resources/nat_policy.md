@@ -52,83 +52,309 @@ resource "f5xc_nat_policy" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the NatPolicy. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the NatPolicy will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`rules` - (Optional) Rule. List of rules to apply under the NAT Policy. Rule that matches first would be applied. See [Rules](#rules) below for details.
+
+`site` - (Optional) Site Reference Type. Reference to Site Object. See [Site](#site) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--rules"></a>
 
+### Rules
+
+`action` - (Optional) Action. Action to apply on the packet if the NAT rule is applied. See [Action](#nestedblock--rules--action) below.
+
+`cloud_connect` - (Optional) Cloud Connect Reference Type. Reference to Cloud connect Object. See [Cloud Connect](#nestedblock--rules--cloud_connect) below.
+
+`criteria` - (Optional) Match Criteria. Match criteria of the packet to apply the NAT Rule. See [Criteria](#nestedblock--rules--criteria) below.
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--rules--disable) below.
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--rules--enable) below.
+
+`name` - (Optional) Name. Name of the Rule (`String`).
+
+`network_interface` - (Optional) NetworkInterface Reference Type. Reference to Network Interface Object. See [Network Interface](#nestedblock--rules--network_interface) below.
+
+`segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#nestedblock--rules--segment) below.
+
+`virtual_network` - (Optional) Virtual Network Reference Type. Carries the reference to virtual network. See [Virtual Network](#nestedblock--rules--virtual_network) below.
+
 <a id="nestedblock--rules--action"></a>
+
+### Rules Action
+
+`dynamic` - (Optional) Dynamic Pool. Dynamic Pool Configuration. See [Dynamic](#nestedblock--rules--action--dynamic) below.
+
+`virtual_cidr` - (Optional) Virtual Subnet NAT. Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectional fashion. The range of the real CIDR and virtual CIDRs should be the same (e.g. if the real CIDR has the CIDR 10.10.10.0/24, the virtual CIDR has 100.100.100.0/24 (`String`).
 
 <a id="nestedblock--rules--action--dynamic"></a>
 
+### Rules Action Dynamic
+
+`elastic_ips` - (Optional) Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object. See [Elastic Ips](#nestedblock--rules--action--dynamic--elastic_ips) below.
+
+`pools` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Pools](#nestedblock--rules--action--dynamic--pools) below.
+
 <a id="nestedblock--rules--action--dynamic--elastic_ips"></a>
+
+### Rules Action Dynamic Elastic Ips
 
 <a id="nestedblock--rules--action--dynamic--pools"></a>
 
+### Rules Action Dynamic Pools
+
 <a id="nestedblock--rules--cloud_connect"></a>
+
+### Rules Cloud Connect
+
+`refs` - (Optional) Cloud Connect. Reference to Cloud Connect Object. See [Refs](#nestedblock--rules--cloud_connect--refs) below.
 
 <a id="nestedblock--rules--cloud_connect--refs"></a>
 
+### Rules Cloud Connect Refs
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--rules--criteria"></a>
+
+### Rules Criteria
+
+`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#nestedblock--rules--criteria--any) below.
+
+`destination_cidr` - (Optional) Destination IP. Destination IP of the packet to match (`List`).
+
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#nestedblock--rules--criteria--destination_port) below.
+
+`icmp` - (Optional) Empty. This can be used for messages where no values are needed. See [ICMP](#nestedblock--rules--criteria--icmp) below.
+
+`protocol` - (Optional) Protocols. Protocols like TCP, UDP. Possible values are `ALL`, `ICMP`, `TCP`, `UDP`. Defaults to `ALL` (`String`).
+
+`segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#nestedblock--rules--criteria--segment) below.
+
+`source_cidr` - (Optional) Source IP. Source IP of the packet to match (`List`).
+
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#nestedblock--rules--criteria--source_port) below.
+
+`tcp` - (Optional) Port Match Configuration. Action to apply on the packet if the NAT rule is applied. See [TCP](#nestedblock--rules--criteria--tcp) below.
+
+`udp` - (Optional) Port Match Configuration. Action to apply on the packet if the NAT rule is applied. See [UDP](#nestedblock--rules--criteria--udp) below.
+
+`virtual_network` - (Optional) Virtual Network Reference Type. Carries the reference to virtual network. See [Virtual Network](#nestedblock--rules--criteria--virtual_network) below.
 
 <a id="nestedblock--rules--criteria--any"></a>
 
+### Rules Criteria Any
+
 <a id="nestedblock--rules--criteria--destination_port"></a>
+
+### Rules Criteria Destination Port
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--rules--criteria--destination_port--no_port_match) below.
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="nestedblock--rules--criteria--destination_port--no_port_match"></a>
 
+### Rules Criteria Destination Port No Port Match
+
 <a id="nestedblock--rules--criteria--icmp"></a>
+
+### Rules Criteria ICMP
 
 <a id="nestedblock--rules--criteria--segment"></a>
 
+### Rules Criteria Segment
+
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#nestedblock--rules--criteria--segment--refs) below.
+
 <a id="nestedblock--rules--criteria--segment--refs"></a>
+
+### Rules Criteria Segment Refs
 
 <a id="nestedblock--rules--criteria--source_port"></a>
 
+### Rules Criteria Source Port
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--rules--criteria--source_port--no_port_match) below.
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
 <a id="nestedblock--rules--criteria--source_port--no_port_match"></a>
+
+### Rules Criteria Source Port No Port Match
 
 <a id="nestedblock--rules--criteria--tcp"></a>
 
+### Rules Criteria TCP
+
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#nestedblock--rules--criteria--tcp--destination_port) below.
+
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#nestedblock--rules--criteria--tcp--source_port) below.
+
 <a id="nestedblock--rules--criteria--tcp--destination_port"></a>
+
+### Rules Criteria TCP Destination Port
 
 <a id="nestedblock--rules--criteria--tcp--source_port"></a>
 
+### Rules Criteria TCP Source Port
+
 <a id="nestedblock--rules--criteria--udp"></a>
+
+### Rules Criteria UDP
+
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#nestedblock--rules--criteria--udp--destination_port) below.
+
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#nestedblock--rules--criteria--udp--source_port) below.
 
 <a id="nestedblock--rules--criteria--udp--destination_port"></a>
 
+### Rules Criteria UDP Destination Port
+
 <a id="nestedblock--rules--criteria--udp--source_port"></a>
+
+### Rules Criteria UDP Source Port
 
 <a id="nestedblock--rules--criteria--virtual_network"></a>
 
+### Rules Criteria Virtual Network
+
+`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#nestedblock--rules--criteria--virtual_network--refs) below.
+
 <a id="nestedblock--rules--criteria--virtual_network--refs"></a>
+
+### Rules Criteria Virtual Network Refs
 
 <a id="nestedblock--rules--disable"></a>
 
+### Rules Disable
+
 <a id="nestedblock--rules--enable"></a>
+
+### Rules Enable
 
 <a id="nestedblock--rules--network_interface"></a>
 
+### Rules Network Interface
+
+`refs` - (Optional) Network Interface. Reference to Network Interface Object. See [Refs](#nestedblock--rules--network_interface--refs) below.
+
 <a id="nestedblock--rules--network_interface--refs"></a>
+
+### Rules Network Interface Refs
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--rules--segment"></a>
 
+### Rules Segment
+
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#nestedblock--rules--segment--refs) below.
+
 <a id="nestedblock--rules--segment--refs"></a>
+
+### Rules Segment Refs
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--rules--virtual_network"></a>
 
+### Rules Virtual Network
+
+`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#nestedblock--rules--virtual_network--refs) below.
+
 <a id="nestedblock--rules--virtual_network--refs"></a>
+
+### Rules Virtual Network Refs
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--site"></a>
 
+### Site
+
+`refs` - (Optional) Site. Reference to Site Object. See [Refs](#nestedblock--site--refs) below.
+
 <a id="nestedblock--site--refs"></a>
 
+### Site Refs
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

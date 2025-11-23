@@ -34,6 +34,18 @@ data "f5xc_cluster" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Cluster (`String`).
+
+`namespace` - (Required) Namespace where the Cluster exists (`String`).
+
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
+
+`annotations` - (Optional) Annotations applied to this resource (`Map`).
+
+`description` - (Optional) Description of the Cluster (`String`).
+
+`id` - (Optional) Unique identifier for the resource (`String`).
+
+`labels` - (Optional) Labels applied to this resource (`Map`).

@@ -52,83 +52,277 @@ resource "f5xc_fast_acl" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the FastACL. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the FastACL will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`protocol_policer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Protocol Policer](#protocol-policer) below for details.
+
+> **Note:** One of the arguments from this list "re_acl, site_acl" must be set.
+
+`re_acl` - (Optional) Fast ACL for RE. Fast ACL definition for RE. See [RE ACL](#re-acl) below for details.
+
+`site_acl` - (Optional) Fast ACL for Site. Fast ACL definition for Site. See [Site ACL](#site-acl) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--protocol_policer"></a>
 
+### Protocol Policer
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--re_acl"></a>
+
+### RE ACL
+
+`all_public_vips` - (Optional) Empty. This can be used for messages where no values are needed. See [All Public Vips](#nestedblock--re_acl--all_public_vips) below.
+
+`default_tenant_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Tenant VIP](#nestedblock--re_acl--default_tenant_vip) below.
+
+`fast_acl_rules` - (Optional) Rules. Fast ACL rules to match. See [Fast ACL Rules](#nestedblock--re_acl--fast_acl_rules) below.
+
+`selected_tenant_vip` - (Optional) Specific Tenant VIP. Select various tenant public VIP(s). See [Selected Tenant VIP](#nestedblock--re_acl--selected_tenant_vip) below.
 
 <a id="nestedblock--re_acl--all_public_vips"></a>
 
+### RE ACL All Public Vips
+
 <a id="nestedblock--re_acl--default_tenant_vip"></a>
+
+### RE ACL Default Tenant VIP
 
 <a id="nestedblock--re_acl--fast_acl_rules"></a>
 
+### RE ACL Fast ACL Rules
+
+`action` - (Optional) Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic. See [Action](#nestedblock--re_acl--fast_acl_rules--action) below.
+
+`ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#nestedblock--re_acl--fast_acl_rules--ip_prefix_set) below.
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--re_acl--fast_acl_rules--metadata) below.
+
+`port` - (Optional) Source Ports. L4 port numbers to match. See [Port](#nestedblock--re_acl--fast_acl_rules--port) below.
+
+`prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#nestedblock--re_acl--fast_acl_rules--prefix) below.
+
 <a id="nestedblock--re_acl--fast_acl_rules--action"></a>
+
+### RE ACL Fast ACL Rules Action
+
+`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#nestedblock--re_acl--fast_acl_rules--action--policer_action) below.
+
+`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#nestedblock--re_acl--fast_acl_rules--action--protocol_policer_action) below.
+
+`simple_action` - (Optional) Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY` (`String`).
 
 <a id="nestedblock--re_acl--fast_acl_rules--action--policer_action"></a>
 
+### RE ACL Fast ACL Rules Action Policer Action
+
 <a id="nestedblock--re_acl--fast_acl_rules--action--protocol_policer_action"></a>
+
+### RE ACL Fast ACL Rules Action Protocol Policer Action
 
 <a id="nestedblock--re_acl--fast_acl_rules--ip_prefix_set"></a>
 
+### RE ACL Fast ACL Rules IP Prefix Set
+
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--re_acl--fast_acl_rules--ip_prefix_set--ref) below.
+
 <a id="nestedblock--re_acl--fast_acl_rules--ip_prefix_set--ref"></a>
+
+### RE ACL Fast ACL Rules IP Prefix Set Ref
 
 <a id="nestedblock--re_acl--fast_acl_rules--metadata"></a>
 
+### RE ACL Fast ACL Rules Metadata
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
 <a id="nestedblock--re_acl--fast_acl_rules--port"></a>
+
+### RE ACL Fast ACL Rules Port
+
+`all` - (Optional) Empty. This can be used for messages where no values are needed. See [All](#nestedblock--re_acl--fast_acl_rules--port--all) below.
+
+`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--re_acl--fast_acl_rules--port--dns) below.
+
+`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
 
 <a id="nestedblock--re_acl--fast_acl_rules--port--all"></a>
 
+### RE ACL Fast ACL Rules Port All
+
 <a id="nestedblock--re_acl--fast_acl_rules--port--dns"></a>
+
+### RE ACL Fast ACL Rules Port DNS
 
 <a id="nestedblock--re_acl--fast_acl_rules--prefix"></a>
 
+### RE ACL Fast ACL Rules Prefix
+
+`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
+
 <a id="nestedblock--re_acl--selected_tenant_vip"></a>
+
+### RE ACL Selected Tenant VIP
+
+`default_tenant_vip` - (Optional) Include Tenant VIP. Include tenant VIP in list of specific VIP(s) (`Bool`).
+
+`public_ip_refs` - (Optional) Select Public VIP(s). Select additional public VIP(s). See [Public IP Refs](#nestedblock--re_acl--selected_tenant_vip--public_ip_refs) below.
 
 <a id="nestedblock--re_acl--selected_tenant_vip--public_ip_refs"></a>
 
+### RE ACL Selected Tenant VIP Public IP Refs
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--site_acl"></a>
+
+### Site ACL
+
+`all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [All Services](#nestedblock--site_acl--all_services) below.
+
+`fast_acl_rules` - (Optional) Rules. Fast ACL rules to match. See [Fast ACL Rules](#nestedblock--site_acl--fast_acl_rules) below.
+
+`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#nestedblock--site_acl--inside_network) below.
+
+`interface_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Interface Services](#nestedblock--site_acl--interface_services) below.
+
+`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#nestedblock--site_acl--outside_network) below.
+
+`vip_services` - (Optional) Empty. This can be used for messages where no values are needed. See [VIP Services](#nestedblock--site_acl--vip_services) below.
 
 <a id="nestedblock--site_acl--all_services"></a>
 
+### Site ACL All Services
+
 <a id="nestedblock--site_acl--fast_acl_rules"></a>
+
+### Site ACL Fast ACL Rules
+
+`action` - (Optional) Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic. See [Action](#nestedblock--site_acl--fast_acl_rules--action) below.
+
+`ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#nestedblock--site_acl--fast_acl_rules--ip_prefix_set) below.
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--site_acl--fast_acl_rules--metadata) below.
+
+`port` - (Optional) Source Ports. L4 port numbers to match. See [Port](#nestedblock--site_acl--fast_acl_rules--port) below.
+
+`prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#nestedblock--site_acl--fast_acl_rules--prefix) below.
 
 <a id="nestedblock--site_acl--fast_acl_rules--action"></a>
 
+### Site ACL Fast ACL Rules Action
+
+`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#nestedblock--site_acl--fast_acl_rules--action--policer_action) below.
+
+`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#nestedblock--site_acl--fast_acl_rules--action--protocol_policer_action) below.
+
+`simple_action` - (Optional) Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY` (`String`).
+
 <a id="nestedblock--site_acl--fast_acl_rules--action--policer_action"></a>
+
+### Site ACL Fast ACL Rules Action Policer Action
 
 <a id="nestedblock--site_acl--fast_acl_rules--action--protocol_policer_action"></a>
 
+### Site ACL Fast ACL Rules Action Protocol Policer Action
+
 <a id="nestedblock--site_acl--fast_acl_rules--ip_prefix_set"></a>
+
+### Site ACL Fast ACL Rules IP Prefix Set
+
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--site_acl--fast_acl_rules--ip_prefix_set--ref) below.
 
 <a id="nestedblock--site_acl--fast_acl_rules--ip_prefix_set--ref"></a>
 
+### Site ACL Fast ACL Rules IP Prefix Set Ref
+
 <a id="nestedblock--site_acl--fast_acl_rules--metadata"></a>
+
+### Site ACL Fast ACL Rules Metadata
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="nestedblock--site_acl--fast_acl_rules--port"></a>
 
+### Site ACL Fast ACL Rules Port
+
+`all` - (Optional) Empty. This can be used for messages where no values are needed. See [All](#nestedblock--site_acl--fast_acl_rules--port--all) below.
+
+`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--site_acl--fast_acl_rules--port--dns) below.
+
+`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
+
 <a id="nestedblock--site_acl--fast_acl_rules--port--all"></a>
+
+### Site ACL Fast ACL Rules Port All
 
 <a id="nestedblock--site_acl--fast_acl_rules--port--dns"></a>
 
+### Site ACL Fast ACL Rules Port DNS
+
 <a id="nestedblock--site_acl--fast_acl_rules--prefix"></a>
+
+### Site ACL Fast ACL Rules Prefix
+
+`prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 <a id="nestedblock--site_acl--inside_network"></a>
 
+### Site ACL Inside Network
+
 <a id="nestedblock--site_acl--interface_services"></a>
+
+### Site ACL Interface Services
 
 <a id="nestedblock--site_acl--outside_network"></a>
 
+### Site ACL Outside Network
+
 <a id="nestedblock--site_acl--vip_services"></a>
 
+### Site ACL VIP Services
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

@@ -116,7 +116,7 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 							Optional: true,
 						},
 						"parameter_type": schema.StringAttribute{
-							MarkdownDescription: "Authentication Parameter Type. Enumeration for authentication parameter types. Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`.",
+							MarkdownDescription: "Authentication Parameter Type. Enumeration for authentication parameter types. Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`. Defaults to `QUERY_PARAMETER`.",
 							Optional: true,
 						},
 					},

@@ -636,19 +636,8 @@ func cleanDescription(desc, attrPath string) string {
 	// Normalize multiple spaces
 	desc = regexp.MustCompile(`\s+`).ReplaceAllString(desc, " ")
 
-	// Remove trailing period
+	// Remove trailing period (will be added by the output formatting)
 	desc = strings.TrimSuffix(desc, ".")
-
-	// Truncate very long descriptions
-	if len(desc) > 200 {
-		// Find last sentence boundary
-		lastPeriod := strings.LastIndex(desc[:200], ".")
-		if lastPeriod > 50 {
-			desc = desc[:lastPeriod]
-		} else {
-			desc = desc[:197] + "..."
-		}
-	}
 
 	// Normalize acronym capitalization (e.g., Dns → DNS, Http → HTTP)
 	desc = normalizeAcronyms(desc)

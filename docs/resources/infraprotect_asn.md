@@ -48,19 +48,53 @@ resource "f5xc_infraprotect_asn" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the InfraprotectAsn. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the InfraprotectAsn will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`asn` - (Optional) ASN. 2-byte or 4-byte Autonomous System Number (ASN) (`Number`).
+
+> **Note:** One of the arguments from this list "bgp_session_disabled, bgp_session_enabled" must be set.
+
+`bgp_session_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [BGP Session Disabled](#bgp-session-disabled) below for details.
+
+`bgp_session_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [BGP Session Enabled](#bgp-session-enabled) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--bgp_session_disabled"></a>
 
+### BGP Session Disabled
+
 <a id="nestedblock--bgp_session_enabled"></a>
 
+### BGP Session Enabled
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

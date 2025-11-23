@@ -50,31 +50,97 @@ resource "f5xc_virtual_network" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the VirtualNetwork. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the VirtualNetwork will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "global_network, legacy_type, site_local_inside_network, site_local_network" must be set.
+
+`global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Global Network](#global-network) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`legacy_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside Network](#site-local-inside-network) below for details.
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#site-local-network) below for details.
+
+`static_routes` - (Optional) Static Routes. List of static routes on the virtual network. See [Static Routes](#static-routes) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--global_network"></a>
 
+### Global Network
+
 <a id="nestedblock--site_local_inside_network"></a>
+
+### Site Local Inside Network
 
 <a id="nestedblock--site_local_network"></a>
 
+### Site Local Network
+
 <a id="nestedblock--static_routes"></a>
+
+### Static Routes
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#nestedblock--static_routes--default_gateway) below.
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#nestedblock--static_routes--node_interface) below.
 
 <a id="nestedblock--static_routes--default_gateway"></a>
 
+### Static Routes Default Gateway
+
 <a id="nestedblock--static_routes--node_interface"></a>
+
+### Static Routes Node Interface
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#nestedblock--static_routes--node_interface--list) below.
 
 <a id="nestedblock--static_routes--node_interface--list"></a>
 
+### Static Routes Node Interface List
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#nestedblock--static_routes--node_interface--list--interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
 <a id="nestedblock--static_routes--node_interface--list--interface"></a>
 
+### Static Routes Node Interface List Interface
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

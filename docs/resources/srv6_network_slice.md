@@ -38,15 +38,45 @@ resource "f5xc_srv6_network_slice" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Srv6NetworkSlice. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Srv6NetworkSlice will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+`connect_to_access_networks` - (Optional) Connect To Access Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding access networks by importing route targets specified in the virtual network (`Bool`).
+
+`connect_to_enterprise_networks` - (Optional) Connect To Enterprise Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding enterprise networks by importing route targets specified in the virtual network (`Bool`).
+
+`connect_to_internet` - (Optional) Connect To Internet. Connect all SRv6 Virtual Networks in this slice to the Internet by importing route targets specified in the virtual network (`Bool`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`sid_prefixes` - (Optional) IPv6 Prefix for SID Allocation. A SID Locator from the prefix is allocated automatically for each node in each site (`List`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

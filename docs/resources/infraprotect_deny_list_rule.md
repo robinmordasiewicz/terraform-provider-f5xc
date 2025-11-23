@@ -52,25 +52,73 @@ resource "f5xc_infraprotect_deny_list_rule" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the InfraprotectDenyListRule. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the InfraprotectDenyListRule will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "expiration_never, expiration_timestamp, one_day, one_hour, one_month, one_year" must be set.
+
+`expiration_never` - (Optional) Empty. This can be used for messages where no values are needed. See [Expiration Never](#expiration-never) below for details.
+
+`expiration_timestamp` - (Optional) Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards (`String`).
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`one_day` - (Optional) Empty. This can be used for messages where no values are needed. See [One Day](#one-day) below for details.
+
+`one_hour` - (Optional) Empty. This can be used for messages where no values are needed. See [One Hour](#one-hour) below for details.
+
+`one_month` - (Optional) Empty. This can be used for messages where no values are needed. See [One Month](#one-month) below for details.
+
+`one_year` - (Optional) Empty. This can be used for messages where no values are needed. See [One Year](#one-year) below for details.
+
+`prefix` - (Optional) Prefix. Prefix (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--expiration_never"></a>
 
+### Expiration Never
+
 <a id="nestedblock--one_day"></a>
+
+### One Day
 
 <a id="nestedblock--one_hour"></a>
 
+### One Hour
+
 <a id="nestedblock--one_month"></a>
+
+### One Month
 
 <a id="nestedblock--one_year"></a>
 
+### One Year
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

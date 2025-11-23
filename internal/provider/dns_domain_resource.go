@@ -89,7 +89,7 @@ func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaReque
 				ElementType: types.StringType,
 			},
 			"dnssec_mode": schema.StringAttribute{
-				MarkdownDescription: "DNSSEC Mode. Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled. Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`.",
+				MarkdownDescription: "DNSSEC Mode. Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled. Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`. Defaults to `DNSSEC_DISABLE`.",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{

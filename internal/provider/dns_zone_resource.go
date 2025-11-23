@@ -270,7 +270,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"algorithm": schema.StringAttribute{
-												MarkdownDescription: "CERT Algorithm. CERT algorithm value must be compatible with the specified algorithm. - RESERVEDALGORITHM: RESERVEDALGORITHM - RSAMD5: RSAMD5 - DH: DH - DSASHA1: DSASHA1 - ECC: ECC - RSASHA1ALGORITHM: RSA-SHA1 - INDIRECT: INDIRECT - PRIVATEDNS: PRIVATEDNS - PRIVATEOID: PRIVATEOID. Possible values are `RESERVEDALGORITHM`, `RSAMD5`, `DH`, `DSASHA1`, `ECC`, `RSASHA1ALGORITHM`, `INDIRECT`, `PRIVATEDNS`, `PRIVATEOID`.",
+												MarkdownDescription: "CERT Algorithm. CERT algorithm value must be compatible with the specified algorithm. - RESERVEDALGORITHM: RESERVEDALGORITHM - RSAMD5: RSAMD5 - DH: DH - DSASHA1: DSASHA1 - ECC: ECC - RSASHA1ALGORITHM: RSA-SHA1 - INDIRECT: INDIRECT - PRIVATEDNS: PRIVATEDNS - PRIVATEOID: PRIVATEOID. Possible values are `RESERVEDALGORITHM`, `RSAMD5`, `DH`, `DSASHA1`, `ECC`, `RSASHA1ALGORITHM`, `INDIRECT`, `PRIVATEDNS`, `PRIVATEOID`. Defaults to `RESERVEDALGORITHM`.",
 												Optional: true,
 											},
 											"cert_key_tag": schema.Int64Attribute{
@@ -420,7 +420,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 												Optional: true,
 											},
 											"latitude_hemisphere": schema.StringAttribute{
-												MarkdownDescription: "Latitude hemisphere. Latitude hemisphere can only be N or S - N: North Hemisphere - S: South Hemisphere. Possible values are `N`, `S`.",
+												MarkdownDescription: "Latitude hemisphere. Latitude hemisphere can only be N or S - N: North Hemisphere - S: South Hemisphere. Possible values are `N`, `S`. Defaults to `N`.",
 												Optional: true,
 											},
 											"latitude_minute": schema.Int64Attribute{
@@ -440,7 +440,7 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 												Optional: true,
 											},
 											"longitude_hemisphere": schema.StringAttribute{
-												MarkdownDescription: "Longitude hemisphere. Longitude hemisphere can only be E or W - E: East Hemisphere - W: West Hemisphere. Possible values are `E`, `W`.",
+												MarkdownDescription: "Longitude hemisphere. Longitude hemisphere can only be E or W - E: East Hemisphere - W: West Hemisphere. Possible values are `E`, `W`. Defaults to `E`.",
 												Optional: true,
 											},
 											"longitude_minute": schema.Int64Attribute{
@@ -638,15 +638,15 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 												Optional: true,
 											},
 											"certificate_usage": schema.StringAttribute{
-												MarkdownDescription: "TLSA Record Certificate Usage. - CertificateAuthorityConstraint: Certificate Authority Constraint - ServiceCertificateConstraint: Service Certificate Constraint - TrustAnchorAssertion: Trust Anchor Assertion - DomainIssuedCertificate: Domain Issued Certificate. Possible values are `CertificateAuthorityConstraint`, `ServiceCertificateConstraint`, `TrustAnchorAssertion`, `DomainIssuedCertificate`.",
+												MarkdownDescription: "TLSA Record Certificate Usage. - CertificateAuthorityConstraint: Certificate Authority Constraint - ServiceCertificateConstraint: Service Certificate Constraint - TrustAnchorAssertion: Trust Anchor Assertion - DomainIssuedCertificate: Domain Issued Certificate. Possible values are `CertificateAuthorityConstraint`, `ServiceCertificateConstraint`, `TrustAnchorAssertion`, `DomainIssuedCertificate`. Defaults to `CertificateAuthorityConstraint`.",
 												Optional: true,
 											},
 											"matching_type": schema.StringAttribute{
-												MarkdownDescription: "TLSA Record Matching Type. - NoHash: No Hash - SHA256: SHA-256 - SHA512: SHA-512. Possible values are `NoHash`, `SHA256`, `SHA512`.",
+												MarkdownDescription: "TLSA Record Matching Type. - NoHash: No Hash - SHA256: SHA-256 - SHA512: SHA-512. Possible values are `NoHash`, `SHA256`, `SHA512`. Defaults to `NoHash`.",
 												Optional: true,
 											},
 											"selector": schema.StringAttribute{
-												MarkdownDescription: "TLSA Record Selector. - FullCertificate: Full Certificate - UseSubjectPublicKey: Use Subject Public Key. Possible values are `FullCertificate`, `UseSubjectPublicKey`.",
+												MarkdownDescription: "TLSA Record Selector. - FullCertificate: Full Certificate - UseSubjectPublicKey: Use Subject Public Key. Possible values are `FullCertificate`, `UseSubjectPublicKey`. Defaults to `FullCertificate`.",
 												Optional: true,
 											},
 										},

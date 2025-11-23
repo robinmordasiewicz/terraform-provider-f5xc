@@ -111,15 +111,15 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: ai_risk_based_blocking, default_detection_settings, detection_settings] Risk-Based Blocking (Powered by AI) - Preview. All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode.",
 				Attributes: map[string]schema.Attribute{
 					"high_risk_action": schema.StringAttribute{
-						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`.",
+						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`. Defaults to `AI_BLOCK`.",
 						Optional: true,
 					},
 					"low_risk_action": schema.StringAttribute{
-						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`.",
+						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`. Defaults to `AI_BLOCK`.",
 						Optional: true,
 					},
 					"medium_risk_action": schema.StringAttribute{
-						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`.",
+						MarkdownDescription: "Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`. Defaults to `AI_BLOCK`.",
 						Optional: true,
 					},
 				},
@@ -150,7 +150,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional: true,
 					},
 					"response_code": schema.StringAttribute{
-						MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code U... Possible values include `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, and others.",
+						MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code U... Possible values include `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, and others. Defaults to `EmptyStatusCode`.",
 						Optional: true,
 					},
 				},
@@ -160,15 +160,15 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: bot_protection_setting, default_bot_setting] Bot Protection. Configuration of WAF Bot Protection",
 				Attributes: map[string]schema.Attribute{
 					"good_bot_action": schema.StringAttribute{
-						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
+						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK`.",
 						Optional: true,
 					},
 					"malicious_bot_action": schema.StringAttribute{
-						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
+						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK`.",
 						Optional: true,
 					},
 					"suspicious_bot_action": schema.StringAttribute{
-						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
+						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK`.",
 						Optional: true,
 					},
 				},
@@ -236,15 +236,15 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Bot Protection. Configuration of WAF Bot Protection",
 						Attributes: map[string]schema.Attribute{
 							"good_bot_action": schema.StringAttribute{
-								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
+								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK`.",
 								Optional: true,
 							},
 							"malicious_bot_action": schema.StringAttribute{
-								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
+								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK`.",
 								Optional: true,
 							},
 							"suspicious_bot_action": schema.StringAttribute{
-								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`.",
+								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK`.",
 								Optional: true,
 							},
 						},

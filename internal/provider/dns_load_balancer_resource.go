@@ -94,7 +94,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				ElementType: types.StringType,
 			},
 			"record_type": schema.StringAttribute{
-				MarkdownDescription: "Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV. Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`.",
+				MarkdownDescription: "Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV. Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`. Defaults to `A`.",
 				Optional: true,
 			},
 			"id": schema.StringAttribute{

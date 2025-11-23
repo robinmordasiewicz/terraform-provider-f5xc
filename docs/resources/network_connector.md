@@ -50,57 +50,193 @@ resource "f5xc_network_connector" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the NetworkConnector. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the NetworkConnector will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "disable_forward_proxy, enable_forward_proxy" must be set.
+
+`disable_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Forward Proxy](#disable-forward-proxy) below for details.
+
+`enable_forward_proxy` - (Optional) Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connectio... See [Enable Forward Proxy](#enable-forward-proxy) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "sli_to_global_dr, sli_to_slo_snat, slo_to_global_dr" must be set.
+
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#sli-to-global-dr) below for details.
+
+`sli_to_slo_snat` - (Optional) SNAT Configuration. x-example: '' description. See [Sli To Slo Snat](#sli-to-slo-snat) below for details.
+
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#slo-to-global-dr) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--disable_forward_proxy"></a>
 
+### Disable Forward Proxy
+
 <a id="nestedblock--enable_forward_proxy"></a>
+
+### Enable Forward Proxy
+
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
+
+`max_connect_attempts` - (Optional) Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1 (`Number`).
+
+`no_interception` - (Optional) Empty. This can be used for messages where no values are needed. See [No Interception](#nestedblock--enable_forward_proxy--no_interception) below.
+
+`tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception. See [TLS Intercept](#nestedblock--enable_forward_proxy--tls_intercept) below.
+
+`white_listed_ports` - (Optional) TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port (`List`).
+
+`white_listed_prefixes` - (Optional) IP Prefixes to Skip Protocol Parsing. Traffic to these destination IP prefixes is not subjected to protocol parsing Example 'tmate' server IP (`List`).
 
 <a id="nestedblock--enable_forward_proxy--no_interception"></a>
 
+### Enable Forward Proxy No Interception
+
 <a id="nestedblock--enable_forward_proxy--tls_intercept"></a>
+
+### Enable Forward Proxy TLS Intercept
+
+`custom_certificate` - (Optional) TLS Certificate. Handle to fetch certificate and key. See [Custom Certificate](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate) below.
+
+`enable_for_all_domains` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable For All Domains](#nestedblock--enable_forward_proxy--tls_intercept--enable_for_all_domains) below.
+
+`policy` - (Optional) TLS Interception Policy. Policy to enable or disable TLS interception. See [Policy](#nestedblock--enable_forward_proxy--tls_intercept--policy) below.
+
+`trusted_ca_url` - (Optional) Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate (`String`).
+
+`volterra_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Certificate](#nestedblock--enable_forward_proxy--tls_intercept--volterra_certificate) below.
+
+`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Trusted CA](#nestedblock--enable_forward_proxy--tls_intercept--volterra_trusted_ca) below.
 
 <a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate"></a>
 
+### Enable Forward Proxy TLS Intercept Custom Certificate
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--custom_hash_algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--disable_ocsp_stapling) below.
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--private_key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--use_system_defaults) below.
+
 <a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--custom_hash_algorithms"></a>
+
+### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
 
 <a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--disable_ocsp_stapling"></a>
 
+### Enable Forward Proxy TLS Intercept Custom Certificate Disable OCSP Stapling
+
 <a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--private_key"></a>
+
+### Enable Forward Proxy TLS Intercept Custom Certificate Private Key
 
 <a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--use_system_defaults"></a>
 
+### Enable Forward Proxy TLS Intercept Custom Certificate Use System Defaults
+
 <a id="nestedblock--enable_forward_proxy--tls_intercept--enable_for_all_domains"></a>
+
+### Enable Forward Proxy TLS Intercept Enable For All Domains
 
 <a id="nestedblock--enable_forward_proxy--tls_intercept--policy"></a>
 
+### Enable Forward Proxy TLS Intercept Policy
+
+`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception. See [Interception Rules](#nestedblock--enable_forward_proxy--tls_intercept--policy--interception_rules) below.
+
 <a id="nestedblock--enable_forward_proxy--tls_intercept--policy--interception_rules"></a>
+
+### Enable Forward Proxy TLS Intercept Policy Interception Rules
 
 <a id="nestedblock--enable_forward_proxy--tls_intercept--volterra_certificate"></a>
 
+### Enable Forward Proxy TLS Intercept Volterra Certificate
+
 <a id="nestedblock--enable_forward_proxy--tls_intercept--volterra_trusted_ca"></a>
+
+### Enable Forward Proxy TLS Intercept Volterra Trusted CA
 
 <a id="nestedblock--sli_to_global_dr"></a>
 
+### Sli To Global DR
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#nestedblock--sli_to_global_dr--global_vn) below.
+
 <a id="nestedblock--sli_to_global_dr--global_vn"></a>
+
+### Sli To Global DR Global Vn
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--sli_to_slo_snat"></a>
 
+### Sli To Slo Snat
+
+`default_gw_snat` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gw Snat](#nestedblock--sli_to_slo_snat--default_gw_snat) below.
+
+`interface_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Interface IP](#nestedblock--sli_to_slo_snat--interface_ip) below.
+
 <a id="nestedblock--sli_to_slo_snat--default_gw_snat"></a>
+
+### Sli To Slo Snat Default Gw Snat
 
 <a id="nestedblock--sli_to_slo_snat--interface_ip"></a>
 
+### Sli To Slo Snat Interface IP
+
 <a id="nestedblock--slo_to_global_dr"></a>
+
+### Slo To Global DR
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#nestedblock--slo_to_global_dr--global_vn) below.
 
 <a id="nestedblock--slo_to_global_dr--global_vn"></a>
 
+### Slo To Global DR Global Vn
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

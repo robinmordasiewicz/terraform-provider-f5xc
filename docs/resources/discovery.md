@@ -64,91 +64,321 @@ resource "f5xc_discovery" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the Discovery. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the Discovery will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "cluster_id, no_cluster_id" must be set.
+
+`cluster_id` - (Optional) Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object (`String`).
+
+> **Note:** One of the arguments from this list "discovery_consul, discovery_k8s" must be set.
+
+`discovery_consul` - (Optional) Consul Discovery Configuration. Discovery configuration for Hashicorp Consul. See [Discovery Consul](#discovery-consul) below for details.
+
+`discovery_k8s` - (Optional) K8S Discovery Configuration. Discovery configuration for K8s. See [Discovery K8s](#discovery-k8s) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`no_cluster_id` - (Optional) Empty. This can be used for messages where no values are needed. See [No Cluster Id](#no-cluster-id) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+
+`where` - (Optional) Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local networks for sites selected by refering to virtual_site object. See [Where](#where) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--discovery_consul"></a>
 
+### Discovery Consul
+
+`access_info` - (Optional) Hashicorp Consul Parameters. Hashicorp Consul API server information. See [Access Info](#nestedblock--discovery_consul--access_info) below.
+
+`publish_info` - (Optional) VIP Publish Configuration. Consul Configuration to publish VIPs. See [Publish Info](#nestedblock--discovery_consul--publish_info) below.
+
 <a id="nestedblock--discovery_consul--access_info"></a>
+
+### Discovery Consul Access Info
+
+`connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#nestedblock--discovery_consul--access_info--connection_info) below.
+
+`http_basic_auth_info` - (Optional) Hashicorp Consul Credentials. Authentication parameters to access Hashicorp Consul. See [HTTP Basic Auth Info](#nestedblock--discovery_consul--access_info--http_basic_auth_info) below.
 
 <a id="nestedblock--discovery_consul--access_info--connection_info"></a>
 
+### Discovery Consul Access Info Connection Info
+
+`api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
+
+`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#nestedblock--discovery_consul--access_info--connection_info--tls_info) below.
+
 <a id="nestedblock--discovery_consul--access_info--connection_info--tls_info"></a>
+
+### Discovery Consul Access Info Connection Info TLS Info
 
 <a id="nestedblock--discovery_consul--access_info--http_basic_auth_info"></a>
 
+### Discovery Consul Access Info HTTP Basic Auth Info
+
+`passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd URL](#nestedblock--discovery_consul--access_info--http_basic_auth_info--passwd_url) below.
+
+`user_name` - (Optional) User Name. username in consul (`String`).
+
 <a id="nestedblock--discovery_consul--access_info--http_basic_auth_info--passwd_url"></a>
+
+### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL
 
 <a id="nestedblock--discovery_consul--publish_info"></a>
 
+### Discovery Consul Publish Info
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--discovery_consul--publish_info--disable) below.
+
+`publish` - (Optional) Empty. This can be used for messages where no values are needed. See [Publish](#nestedblock--discovery_consul--publish_info--publish) below.
+
 <a id="nestedblock--discovery_consul--publish_info--disable"></a>
+
+### Discovery Consul Publish Info Disable
 
 <a id="nestedblock--discovery_consul--publish_info--publish"></a>
 
+### Discovery Consul Publish Info Publish
+
 <a id="nestedblock--discovery_k8s"></a>
+
+### Discovery K8s
+
+`access_info` - (Optional) K8s API Server. K8S API server access. See [Access Info](#nestedblock--discovery_k8s--access_info) below.
+
+`default_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Default All](#nestedblock--discovery_k8s--default_all) below.
+
+`namespace_mapping` - (Optional) K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared. See [Namespace Mapping](#nestedblock--discovery_k8s--namespace_mapping) below.
+
+`publish_info` - (Optional) VIP Publish Configurations. K8S Configuration to publish VIPs. See [Publish Info](#nestedblock--discovery_k8s--publish_info) below.
 
 <a id="nestedblock--discovery_k8s--access_info"></a>
 
+### Discovery K8s Access Info
+
+`connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#nestedblock--discovery_k8s--access_info--connection_info) below.
+
+`isolated` - (Optional) Empty. This can be used for messages where no values are needed. See [Isolated](#nestedblock--discovery_k8s--access_info--isolated) below.
+
+`kubeconfig_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Kubeconfig URL](#nestedblock--discovery_k8s--access_info--kubeconfig_url) below.
+
+`reachable` - (Optional) Empty. This can be used for messages where no values are needed. See [Reachable](#nestedblock--discovery_k8s--access_info--reachable) below.
+
 <a id="nestedblock--discovery_k8s--access_info--connection_info"></a>
+
+### Discovery K8s Access Info Connection Info
+
+`api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
+
+`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#nestedblock--discovery_k8s--access_info--connection_info--tls_info) below.
 
 <a id="nestedblock--discovery_k8s--access_info--connection_info--tls_info"></a>
 
+### Discovery K8s Access Info Connection Info TLS Info
+
 <a id="nestedblock--discovery_k8s--access_info--isolated"></a>
+
+### Discovery K8s Access Info Isolated
 
 <a id="nestedblock--discovery_k8s--access_info--kubeconfig_url"></a>
 
+### Discovery K8s Access Info Kubeconfig URL
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--discovery_k8s--access_info--kubeconfig_url--blindfold_secret_info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--discovery_k8s--access_info--kubeconfig_url--clear_secret_info) below.
+
 <a id="nestedblock--discovery_k8s--access_info--kubeconfig_url--blindfold_secret_info"></a>
+
+### Discovery K8s Access Info Kubeconfig URL Blindfold Secret Info
 
 <a id="nestedblock--discovery_k8s--access_info--kubeconfig_url--clear_secret_info"></a>
 
+### Discovery K8s Access Info Kubeconfig URL Clear Secret Info
+
 <a id="nestedblock--discovery_k8s--access_info--reachable"></a>
+
+### Discovery K8s Access Info Reachable
 
 <a id="nestedblock--discovery_k8s--default_all"></a>
 
+### Discovery K8s Default All
+
 <a id="nestedblock--discovery_k8s--namespace_mapping"></a>
+
+### Discovery K8s Namespace Mapping
+
+`items` - (Optional) Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex. See [Items](#nestedblock--discovery_k8s--namespace_mapping--items) below.
 
 <a id="nestedblock--discovery_k8s--namespace_mapping--items"></a>
 
+### Discovery K8s Namespace Mapping Items
+
+`namespace` - (Optional) F5XC Application Namespaces. Select a namespace (`String`).
+
+`namespace_regex` - (Optional) K8S Namespaces. The regex here will be used to match K8s namespace(s) (`String`).
+
 <a id="nestedblock--discovery_k8s--publish_info"></a>
+
+### Discovery K8s Publish Info
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--discovery_k8s--publish_info--disable) below.
+
+`dns_delegation` - (Optional) K8SDelegationType. See [DNS Delegation](#nestedblock--discovery_k8s--publish_info--dns_delegation) below.
+
+`publish` - (Optional) K8SPublishType. See [Publish](#nestedblock--discovery_k8s--publish_info--publish) below.
+
+`publish_fqdns` - (Optional) Empty. This can be used for messages where no values are needed. See [Publish Fqdns](#nestedblock--discovery_k8s--publish_info--publish_fqdns) below.
 
 <a id="nestedblock--discovery_k8s--publish_info--disable"></a>
 
+### Discovery K8s Publish Info Disable
+
 <a id="nestedblock--discovery_k8s--publish_info--dns_delegation"></a>
+
+### Discovery K8s Publish Info DNS Delegation
+
+`dns_mode` - (Optional) DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-DNS KubeDNS: External K8s cluster is running kube-DNS. Possible values are `CORE_DNS`, `KUBE_DNS`. Defaults to `CORE_DNS` (`String`).
+
+`subdomain` - (Optional) Subdomain. The DNS subdomain for which F5XC will respond to DNS queries (`String`).
 
 <a id="nestedblock--discovery_k8s--publish_info--publish"></a>
 
+### Discovery K8s Publish Info Publish
+
+`namespace` - (Optional) Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists (`String`).
+
 <a id="nestedblock--discovery_k8s--publish_info--publish_fqdns"></a>
+
+### Discovery K8s Publish Info Publish Fqdns
 
 <a id="nestedblock--no_cluster_id"></a>
 
+### No Cluster Id
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 <a id="nestedblock--where"></a>
 
+### Where
+
+`site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#nestedblock--where--site) below.
+
+`virtual_network` - (Optional) Network Reference. This specifies a direct reference to a network configuration object. See [Virtual Network](#nestedblock--where--virtual_network) below.
+
+`virtual_site` - (Optional) Virtual Site. A reference to virtual_site object. See [Virtual Site](#nestedblock--where--virtual_site) below.
+
 <a id="nestedblock--where--site"></a>
+
+### Where Site
+
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#nestedblock--where--site--disable_internet_vip) below.
+
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#nestedblock--where--site--enable_internet_vip) below.
+
+`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
+
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
 
 <a id="nestedblock--where--site--disable_internet_vip"></a>
 
+### Where Site Disable Internet VIP
+
 <a id="nestedblock--where--site--enable_internet_vip"></a>
+
+### Where Site Enable Internet VIP
 
 <a id="nestedblock--where--site--ref"></a>
 
+### Where Site Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--where--virtual_network"></a>
+
+### Where Virtual Network
+
+`ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#nestedblock--where--virtual_network--ref) below.
 
 <a id="nestedblock--where--virtual_network--ref"></a>
 
+### Where Virtual Network Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--where--virtual_site"></a>
+
+### Where Virtual Site
+
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#nestedblock--where--virtual_site--disable_internet_vip) below.
+
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#nestedblock--where--virtual_site--enable_internet_vip) below.
+
+`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
+
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
 
 <a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
 
+### Where Virtual Site Disable Internet VIP
+
 <a id="nestedblock--where--virtual_site--enable_internet_vip"></a>
 
+### Where Virtual Site Enable Internet VIP
+
 <a id="nestedblock--where--virtual_site--ref"></a>
+
+### Where Virtual Site Ref
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 ## Import
 

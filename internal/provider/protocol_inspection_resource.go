@@ -84,7 +84,7 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"action": schema.StringAttribute{
-				MarkdownDescription: "Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic. Possible values are `ALLOW`, `DENY`, `DROP`.",
+				MarkdownDescription: "Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic. Possible values are `ALLOW`, `DENY`, `DROP`. Defaults to `ALLOW`.",
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{

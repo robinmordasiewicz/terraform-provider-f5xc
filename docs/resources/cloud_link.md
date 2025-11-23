@@ -52,49 +52,177 @@ resource "f5xc_cloud_link" "example" {
 
 The following arguments are required:
 
+`name` - (Required) Name of the CloudLink. Must be unique within the namespace (`String`).
+
+`namespace` - (Required) Namespace where the CloudLink will be created (`String`).
+
 The following arguments are optional:
+
+`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+
+> **Note:** One of the arguments from this list "aws, gcp" must be set.
+
+`aws` - (Optional) Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider. See [AWS](#aws) below for details.
+
+> **Note:** One of the arguments from this list "disabled, enabled" must be set.
+
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#disabled) below for details.
+
+`enabled` - (Optional) CloudLink ADN Network Config. See [Enabled](#enabled) below for details.
+
+`gcp` - (Optional) Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider. See [GCP](#gcp) below for details.
+
+`labels` - (Optional) Labels to apply to this resource (`Map`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
+`id` - (Optional) Unique identifier for the resource (`String`).
+
 ---
 
 <a id="nestedblock--aws"></a>
 
+### AWS
+
+`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#nestedblock--aws--aws_cred) below.
+
+`byoc` - (Optional) Bring Your Own Connections. List of Bring You Own Connection. See [Byoc](#nestedblock--aws--byoc) below.
+
+`custom_asn` - (Optional) Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294 (`Number`).
+
 <a id="nestedblock--aws--aws_cred"></a>
+
+### AWS AWS Cred
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--aws--byoc"></a>
 
+### AWS Byoc
+
+`connections` - (Optional) Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs. See [Connections](#nestedblock--aws--byoc--connections) below.
+
 <a id="nestedblock--aws--byoc--connections"></a>
+
+### AWS Byoc Connections
+
+`auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Auth Key](#nestedblock--aws--byoc--connections--auth_key) below.
+
+`bgp_asn` - (Optional) BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS (`Number`).
+
+`connection_id` - (Optional) Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection (`String`).
+
+`ipv4` - (Optional) IPv4 Peering. Configure BGP IPv4 peering for endpoints. See [IPv4](#nestedblock--aws--byoc--connections--ipv4) below.
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--aws--byoc--connections--metadata) below.
+
+`region` - (Optional) Region. Region where the connection is setup (`String`).
+
+`system_generated_name` - (Optional) Empty. This can be used for messages where no values are needed. See [System Generated Name](#nestedblock--aws--byoc--connections--system_generated_name) below.
+
+`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags. See [Tags](#nestedblock--aws--byoc--connections--tags) below.
+
+`user_assigned_name` - (Optional) User Assigned. User is managing the AWS resource name (`String`).
+
+`virtual_interface_type` - (Optional) Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`. Defaults to `PRIVATE` (`String`).
+
+`vlan` - (Optional) Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection (`Number`).
 
 <a id="nestedblock--aws--byoc--connections--auth_key"></a>
 
+### AWS Byoc Connections Auth Key
+
 <a id="nestedblock--aws--byoc--connections--ipv4"></a>
+
+### AWS Byoc Connections IPv4
 
 <a id="nestedblock--aws--byoc--connections--metadata"></a>
 
+### AWS Byoc Connections Metadata
+
 <a id="nestedblock--aws--byoc--connections--system_generated_name"></a>
+
+### AWS Byoc Connections System Generated Name
 
 <a id="nestedblock--aws--byoc--connections--tags"></a>
 
+### AWS Byoc Connections Tags
+
 <a id="nestedblock--disabled"></a>
+
+### Disabled
 
 <a id="nestedblock--enabled"></a>
 
+### Enabled
+
+`cloudlink_network_name` - (Optional) Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support (`String`).
+
 <a id="nestedblock--gcp"></a>
+
+### GCP
+
+`byoc` - (Optional) GCP Bring Your Own Connections. List of GCP Bring You Own Connections. See [Byoc](#nestedblock--gcp--byoc) below.
+
+`gcp_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [GCP Cred](#nestedblock--gcp--gcp_cred) below.
 
 <a id="nestedblock--gcp--byoc"></a>
 
+### GCP Byoc
+
+`connections` - (Optional) Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity. See [Connections](#nestedblock--gcp--byoc--connections) below.
+
 <a id="nestedblock--gcp--byoc--connections"></a>
+
+### GCP Byoc Connections
+
+`interconnect_attachment_name` - (Optional) Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment (`String`).
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--gcp--byoc--connections--metadata) below.
+
+`project` - (Optional) Specified Project. Specify a GCP Project for the interconnect attachment (`String`).
+
+`region` - (Optional) Region. GCP Region in which the GCP Cloud Interconnect attachment is configured (`String`).
+
+`same_as_credential` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Credential](#nestedblock--gcp--byoc--connections--same_as_credential) below.
 
 <a id="nestedblock--gcp--byoc--connections--metadata"></a>
 
+### GCP Byoc Connections Metadata
+
 <a id="nestedblock--gcp--byoc--connections--same_as_credential"></a>
+
+### GCP Byoc Connections Same As Credential
 
 <a id="nestedblock--gcp--gcp_cred"></a>
 
+### GCP GCP Cred
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

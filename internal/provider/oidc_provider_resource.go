@@ -94,7 +94,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				ElementType: types.StringType,
 			},
 			"provider_type": schema.StringAttribute{
-				MarkdownDescription: "Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC. Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`.",
+				MarkdownDescription: "Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC. Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`. Defaults to `DEFAULT`.",
 				Optional: true,
 			},
 			"id": schema.StringAttribute{

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_tpm_api_key Data Source - terraform-provider-f5xc"
-subcategory: "Integrations"
+subcategory: "API Security"
 description: |-
   APIKey object when successfully created returns actual APIKey bytes which is used by the users to call in to TPM provisioning API.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_infraprotect_firewall_rule_group Resource - terraform-provider-f5xc"
-subcategory: "Infrastructure Protection"
+subcategory: "Security"
 description: |-
   Amends a DDoS transit Firewall Rule Group
 ---

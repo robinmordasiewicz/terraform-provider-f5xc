@@ -14,128 +14,176 @@ import (
 	"strings"
 )
 
-// subcategoryMap assigns resources to logical categories for better organization
-// ALL resources must be categorized to avoid mixed layout in Terraform Registry sidebar
-var subcategoryMap = map[string]string{
-	// Sites and Infrastructure
-	"aws_vpc_site": "Sites", "azure_vnet_site": "Sites", "gcp_vpc_site": "Sites",
-	"aws_tgw_site": "Sites", "securemesh_site_v2": "Sites", "securemesh_site": "Sites",
-	"virtual_site": "Sites", "voltstack_site": "Sites",
-	"fleet": "Sites", "k8s_cluster": "Sites", "site_mesh_group": "Sites",
-	"registration": "Sites",
+// subcategoryOverrides provides explicit category assignments for resources
+// that don't match any pattern or need a specific override
+var subcategoryOverrides = map[string]string{
+	// Explicit overrides for resources that don't match patterns well
+	"apm":               "Monitoring",
+	"crl":               "Certificates",
+	"bgp":               "Networking",
+	"proxy":             "Networking",
+	"tunnel":            "Networking",
+	"segment":           "Networking",
+	"subnet":            "Networking",
+	"fleet":             "Sites",
+	"cluster":           "Load Balancing",
+	"endpoint":          "Load Balancing",
+	"route":             "Load Balancing",
+	"healthcheck":       "Load Balancing",
+	"origin_pool":       "Load Balancing",
+	"virtual_host":      "Load Balancing",
+	"discovery":         "Applications",
+	"filter_set":        "Applications",
+	"policer":           "Service Mesh",
+	"quota":             "Organization",
+	"contact":           "Organization",
+	"role":              "Organization",
+	"token":             "Authentication",
+	"registration":      "Sites",
+	"namespace":         "Organization",
+	"data_type":         "Security",
+	"data_group":        "BIG-IP Integration",
+	"irule":             "BIG-IP Integration",
+	"nfv_service":       "Networking",
+	"workload":          "Kubernetes",
+	"workload_flavor":   "Kubernetes",
+	"cminstance":          "Subscriptions",
+	"user_identification": "Security",
+	"virtual_network":     "Networking",
+}
+
+// categoryPatterns defines patterns to auto-categorize resources
+// Order matters: more specific patterns should come first
+var categoryPatterns = []struct {
+	pattern  string
+	category string
+}{
+	// Sites - cloud provider sites and site-related
+	{"_vpc_site", "Sites"},
+	{"_vnet_site", "Sites"},
+	{"_tgw_site", "Sites"},
+	{"securemesh_site", "Sites"},
+	{"voltstack_site", "Sites"},
+	{"virtual_site", "Sites"},
+	{"site_mesh", "Sites"},
 
 	// Load Balancing
-	"http_loadbalancer": "Load Balancing", "tcp_loadbalancer": "Load Balancing",
-	"udp_loadbalancer": "Load Balancing", "cdn_loadbalancer": "Load Balancing",
-	"dns_load_balancer": "Load Balancing", "origin_pool": "Load Balancing",
-	"healthcheck": "Load Balancing", "endpoint": "Load Balancing", "cluster": "Load Balancing",
-	"virtual_host": "Load Balancing", "route": "Load Balancing",
-	"advertise_policy": "Load Balancing", "cdn_cache_rule": "Load Balancing",
+	{"loadbalancer", "Load Balancing"},
+	{"cdn_", "Load Balancing"},
+	{"advertise_policy", "Load Balancing"},
 
-	// Security - Firewall & WAF
-	"app_firewall": "Security", "enhanced_firewall_policy": "Security",
-	"network_policy": "Security", "network_policy_rule": "Security", "network_policy_view": "Security",
-	"network_firewall": "Security", "forward_proxy_policy": "Security",
-	"service_policy": "Security", "service_policy_rule": "Security",
-	"fast_acl": "Security", "fast_acl_rule": "Security",
-	"rate_limiter": "Security", "rate_limiter_policy": "Security",
-	"malicious_user_mitigation": "Security", "bot_defense_app_infrastructure": "Security",
-	"waf_exclusion_policy": "Security", "user_identification": "Security",
-	"protocol_inspection": "Security", "protocol_policer": "Security",
-	"sensitive_data_policy": "Security", "data_type": "Security",
+	// Security - firewall, policies, WAF
+	{"firewall", "Security"},
+	{"_policy", "Security"},
+	{"_acl", "Security"},
+	{"rate_limiter", "Security"},
+	{"malicious_user", "Security"},
+	{"bot_defense", "Security"},
+	{"waf_", "Security"},
+	{"protocol_", "Security"},
+	{"sensitive_data", "Security"},
 
 	// Networking
-	"network_connector": "Networking", "network_interface": "Networking",
-	"virtual_network": "Networking", "nat_policy": "Networking",
-	"bgp": "Networking", "bgp_asn_set": "Networking", "bgp_routing_policy": "Networking",
-	"ip_prefix_set": "Networking", "cloud_link": "Networking", "cloud_connect": "Networking",
-	"tunnel": "Networking", "external_connector": "Networking",
-	"dc_cluster_group": "Networking", "segment": "Networking",
-	"srv6_network_slice": "Networking", "subnet": "Networking",
-	"policy_based_routing": "Networking", "forwarding_class": "Networking",
-	"nfv_service": "Networking", "proxy": "Networking",
+	{"network_", "Networking"},
+	{"bgp_", "Networking"},
+	{"ip_prefix", "Networking"},
+	{"cloud_link", "Networking"},
+	{"cloud_connect", "Networking"},
+	{"_connector", "Networking"},
+	{"dc_cluster", "Networking"},
+	{"srv6_", "Networking"},
+	{"forwarding_", "Networking"},
+	{"routing", "Networking"},
+	{"nat_", "Networking"},
 
 	// DNS
-	"dns_zone": "DNS", "dns_domain": "DNS", "dns_lb_pool": "DNS",
-	"dns_lb_health_check": "DNS", "dns_compliance_checks": "DNS",
+	{"dns_", "DNS"},
 
-	// Authentication & Credentials
-	"api_credential": "Authentication", "cloud_credentials": "Authentication",
-	"authentication": "Authentication", "oidc_provider": "Authentication",
-	"token": "Authentication", "secret_policy": "Authentication",
-	"secret_policy_rule": "Authentication", "secret_management_access": "Authentication",
+	// Authentication & Secrets
+	{"credential", "Authentication"},
+	{"authentication", "Authentication"},
+	{"oidc_", "Authentication"},
+	{"secret_", "Authentication"},
 
 	// Certificates
-	"certificate": "Certificates", "certificate_chain": "Certificates",
-	"crl": "Certificates", "trusted_ca_list": "Certificates",
+	{"certificate", "Certificates"},
+	{"trusted_ca", "Certificates"},
 
 	// API Security
-	"api_definition": "API Security", "api_discovery": "API Security",
-	"app_api_group": "API Security", "api_crawler": "API Security",
-	"api_testing": "API Security",
+	{"api_", "API Security"},
+	{"app_api", "API Security"},
 
 	// Monitoring & Logging
-	"log_receiver": "Monitoring", "global_log_receiver": "Monitoring",
-	"alert_policy": "Monitoring", "alert_receiver": "Monitoring",
-	"apm": "Monitoring", "report_config": "Monitoring",
+	{"log_receiver", "Monitoring"},
+	{"alert_", "Monitoring"},
+	{"report_", "Monitoring"},
 
-	// Namespace & Organization
-	"namespace": "Organization", "managed_tenant": "Organization",
-	"child_tenant": "Organization", "child_tenant_manager": "Organization",
-	"allowed_tenant": "Organization", "tenant_configuration": "Organization",
-	"tenant_profile": "Organization", "quota": "Organization",
-	"contact": "Organization", "customer_support": "Organization",
-	"voltshare_admin_policy": "Organization", "role": "Organization",
+	// Organization & Tenants
+	{"tenant", "Organization"},
+	{"_support", "Organization"},
+	{"voltshare", "Organization"},
+	{"allowed_", "Organization"},
 
 	// Kubernetes
-	"k8s_cluster_role": "Kubernetes", "k8s_cluster_role_binding": "Kubernetes",
-	"k8s_pod_security_admission": "Kubernetes", "k8s_pod_security_policy": "Kubernetes",
-	"virtual_k8s": "Kubernetes", "workload": "Kubernetes", "workload_flavor": "Kubernetes",
-	"container_registry": "Kubernetes",
+	{"k8s_", "Kubernetes"},
+	{"virtual_k8s", "Kubernetes"},
+	{"container_registry", "Kubernetes"},
 
 	// VPN & IPSec
-	"ike1": "VPN", "ike2": "VPN",
-	"ike_phase1_profile": "VPN", "ike_phase2_profile": "VPN",
+	{"ike", "VPN"},
 
 	// Infrastructure Protection (DDoS)
-	"infraprotect_asn": "Infrastructure Protection", "infraprotect_asn_prefix": "Infrastructure Protection",
-	"infraprotect_deny_list_rule": "Infrastructure Protection", "infraprotect_firewall_rule": "Infrastructure Protection",
-	"infraprotect_firewall_rule_group": "Infrastructure Protection",
-	"infraprotect_internet_prefix_advertisement": "Infrastructure Protection",
-	"infraprotect_tunnel": "Infrastructure Protection",
+	{"infraprotect_", "Infrastructure Protection"},
 
-	// Application Settings
-	"app_setting": "Applications", "app_type": "Applications",
-	"discovery": "Applications", "filter_set": "Applications",
+	// Applications
+	{"app_setting", "Applications"},
+	{"app_type", "Applications"},
 
 	// BIG-IP Integration
-	"bigip_irule": "BIG-IP Integration", "irule": "BIG-IP Integration",
-	"data_group": "BIG-IP Integration",
+	{"bigip_", "BIG-IP Integration"},
 
 	// Cloud Resources
-	"cloud_elastic_ip": "Cloud Resources", "address_allocator": "Cloud Resources",
-	"geo_location_set": "Cloud Resources",
+	{"cloud_elastic", "Cloud Resources"},
+	{"address_allocator", "Cloud Resources"},
+	{"geo_location", "Cloud Resources"},
 
-	// Service Mesh
-	"policer": "Service Mesh", "usb_policy": "Service Mesh",
+	// Integrations
+	{"ticket_tracking", "Integrations"},
+	{"code_base", "Integrations"},
+	{"tpm_", "Integrations"},
 
-	// Third-Party Integrations
-	"ticket_tracking_system": "Integrations", "code_base_integration": "Integrations",
-	"tpm_api_key": "Integrations", "tpm_category": "Integrations", "tpm_manager": "Integrations",
+	// Subscriptions
+	{"subscription", "Subscriptions"},
 
-	// Subscriptions & Licensing
-	"addon_subscription": "Subscriptions", "cminstance": "Subscriptions",
+	// Service Mesh (catch remaining mesh-related)
+	{"usb_policy", "Service Mesh"},
 }
 
 // getSubcategory returns the subcategory for a resource based on filename
+// Uses a three-tier approach:
+// 1. Check explicit overrides first (for exceptions)
+// 2. Apply pattern matching (for automatic categorization)
+// 3. Fall back to "Other" to ensure ALL resources are categorized
 func getSubcategory(filename string) string {
 	base := filepath.Base(filename)
 	name := strings.TrimSuffix(base, ".md")
 
-	if cat, ok := subcategoryMap[name]; ok {
+	// 1. Check explicit overrides first
+	if cat, ok := subcategoryOverrides[name]; ok {
 		return cat
 	}
-	return "" // Default empty subcategory for uncategorized resources
+
+	// 2. Apply pattern matching
+	for _, p := range categoryPatterns {
+		if strings.Contains(name, p.pattern) {
+			return p.category
+		}
+	}
+
+	// 3. Fall back to "Other" - ensures no uncategorized resources in Registry
+	// This prevents the mixed layout issue where uncategorized resources
+	// appear under a generic "Resources" section
+	return "Other"
 }
 
 func main() {

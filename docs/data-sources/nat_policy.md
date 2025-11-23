@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_nat_policy Data Source - terraform-provider-f5xc"
-subcategory: "Networking"
+subcategory: "Security"
 description: |-
   NAT Policy create specification configures NAT Policy with multiple Rules,
 ---

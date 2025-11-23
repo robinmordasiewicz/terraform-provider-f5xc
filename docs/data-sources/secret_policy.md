@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_secret_policy Data Source - terraform-provider-f5xc"
-subcategory: "Authentication"
+subcategory: "Security"
 description: |-
   Create secret_policy creates a new object in the storage backend for metadata.namespace.
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_k8s_pod_security_policy Resource - terraform-provider-f5xc"
-subcategory: "Kubernetes"
+subcategory: "Security"
 description: |-
   Create k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace
 ---

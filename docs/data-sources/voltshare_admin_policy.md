@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_voltshare_admin_policy Data Source - terraform-provider-f5xc"
-subcategory: "Organization"
+subcategory: "Security"
 description: |-
   Create voltshare_admin_policy creates a new object in the storage backend for metadata.namespace.
 ---

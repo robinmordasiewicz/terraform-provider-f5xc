@@ -1,6 +1,6 @@
 ---
 page_title: "f5xc_alert_policy Resource - terraform-provider-f5xc"
-subcategory: "Monitoring"
+subcategory: "Security"
 description: |-
   Creates a new Alert Policy Object
 ---

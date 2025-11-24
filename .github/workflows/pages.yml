@@ -41,7 +41,54 @@ jobs:
           python-version: '3.x'
 
       - name: Install MkDocs and plugins
-        run: pip install mkdocs mkdocs-material mkdocs-swagger-ui-tag
+        run: |
+          pip install \
+            babel \
+            backrefs \
+            colorama \
+            docs-chat-bot \
+            jinja2 \
+            lightgallery \
+            markdown \
+            markitdown \
+            mkdocs \
+            mkdocs-add-teaser \
+            mkdocs-asciinema-player \
+            mkdocs-awesome-pages-plugin \
+            mkdocs-badges \
+            mkdocs-content-tabs \
+            mkdocs-drawio \
+            mkdocs-enumerate-headings-plugin \
+            mkdocs-exclude \
+            mkdocs-exporter \
+            mkdocs-git-authors-plugin \
+            mkdocs-git-committers-plugin-2 \
+            mkdocs-github-admonitions-plugin \
+            mkdocs-git-revision-date-localized-plugin \
+            mkdocs-glightbox \
+            mkdocs-include-markdown-plugin \
+            mkdocs-literate-nav \
+            mkdocs-macros-plugin \
+            mkdocs-material \
+            mkdocs-material-extensions \
+            mkdocs-material-mark-as-read \
+            mkdocs-minify-plugin \
+            mkdocs-monorepo-plugin \
+            mkdocs-pdf-export-plugin \
+            mkdocs-same-dir \
+            mkdocs-section-index \
+            mkdocs-swagger-ui-tag \
+            mkdocs-table-reader-plugin \
+            mkdocs-with-pdf \
+            mkdocstrings[crystal,python] \
+            paginate \
+            poetry \
+            pydyf \
+            pygments \
+            pymdown-extensions \
+            qrcode \
+            regex \
+            requests
 
       - name: Generate navigation
         run: |

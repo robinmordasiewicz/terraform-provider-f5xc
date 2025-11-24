@@ -130,7 +130,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 
 			},
 			"peers": schema.ListNestedBlock{
-				MarkdownDescription: "Peers. List of peers",
+				MarkdownDescription: "Configuration for peers.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"label": schema.StringAttribute{

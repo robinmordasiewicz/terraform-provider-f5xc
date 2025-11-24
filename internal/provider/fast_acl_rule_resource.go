@@ -227,7 +227,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"user_defined": schema.Int64Attribute{
-							MarkdownDescription: "User defined port. Matches the user defined port",
+							MarkdownDescription: "Configuration for user_defined.",
 							Optional: true,
 						},
 					},

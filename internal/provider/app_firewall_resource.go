@@ -157,7 +157,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 
 			},
 			"bot_protection_setting": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: bot_protection_setting, default_bot_setting] Bot Protection. Configuration of WAF Bot Protection",
+				MarkdownDescription: "Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation.",
 				Attributes: map[string]schema.Attribute{
 					"good_bot_action": schema.StringAttribute{
 						MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK`.",
@@ -228,12 +228,12 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"detection_settings": schema.SingleNestedBlock{
-				MarkdownDescription: "Detection Settings. Specifies detection settings to be used by WAF",
+				MarkdownDescription: "Configuration for WAF attack detection sensitivity and signature coverage. Controls which attack signatures are enabled and how they detect potential threats.",
 				Attributes: map[string]schema.Attribute{
 				},
 				Blocks: map[string]schema.Block{
 					"bot_protection_setting": schema.SingleNestedBlock{
-						MarkdownDescription: "Bot Protection. Configuration of WAF Bot Protection",
+						MarkdownDescription: "Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation.",
 						Attributes: map[string]schema.Attribute{
 							"good_bot_action": schema.StringAttribute{
 								MarkdownDescription: "Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK`.",

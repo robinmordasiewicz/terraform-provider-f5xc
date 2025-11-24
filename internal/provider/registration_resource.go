@@ -284,7 +284,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								},
 							},
 							"kernel": schema.SingleNestedBlock{
-								MarkdownDescription: "Kernel. Kernel information",
+								MarkdownDescription: "Configuration for kernel.",
 								Attributes: map[string]schema.Attribute{
 									"architecture": schema.StringAttribute{
 										MarkdownDescription: "Architecture. kernel architecture",
@@ -471,15 +471,15 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Device description",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 										"i_manufacturer": schema.StringAttribute{
-											MarkdownDescription: "Manufacturer. Manufacturer name",
+											MarkdownDescription: "Configuration for i_manufacturer.",
 											Optional: true,
 										},
 										"i_product": schema.StringAttribute{
-											MarkdownDescription: "Device product. Product name reported by device",
+											MarkdownDescription: "Configuration for i_product.",
 											Optional: true,
 										},
 										"i_serial": schema.StringAttribute{
@@ -534,7 +534,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Optional: true,
 							},
 							"no_proxy": schema.StringAttribute{
-								MarkdownDescription: "NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo....",
+								MarkdownDescription: "NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo.",
 								Optional: true,
 							},
 							"proxy_cacert_url": schema.StringAttribute{

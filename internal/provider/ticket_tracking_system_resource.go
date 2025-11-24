@@ -120,7 +120,7 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 								Optional: true,
 							},
 							"api_token": schema.StringAttribute{
-								MarkdownDescription: "API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value a...",
+								MarkdownDescription: "API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value a.",
 								Optional: true,
 							},
 							"organization_domain": schema.StringAttribute{

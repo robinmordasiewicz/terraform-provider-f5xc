@@ -1,3 +1,7 @@
+<a href="https://terraform.io">
+    <img src="docs/images/tf.png" alt="Terraform logo" title="Terraform" align="left" height="50" />
+</a>
+
 # Terraform Provider for F5 Distributed Cloud (F5XC)
 
 > Open Source Community Provider

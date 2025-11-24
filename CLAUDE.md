@@ -2,6 +2,326 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Claude Constitution: GitHub Workflow & Automation Rules
+
+### Core Principle: Issue-First Development
+
+**ALL work MUST begin with a GitHub Issue. No exceptions.**
+
+This repository follows a strict Issue → Branch → PR workflow. Every code change must be traceable to a documented issue that describes what problem is being solved and why.
+
+---
+
+## Part 1: GitHub Workflow Rules
+
+### Rule 0: Always Create an Issue First (MANDATORY)
+
+**Before writing ANY code or creating ANY branch, create a GitHub Issue.**
+
+```bash
+# ✅ CORRECT workflow
+gh issue create --title "feat: Add user authentication" --body "Description of the feature..."
+# Note the issue number (e.g., #42)
+gh issue develop 42 --checkout  # Creates branch linked to issue
+# ... make changes ...
+git commit -m "feat(auth): implement login flow
+
+Closes #42"
+```
+
+```bash
+# ❌ INCORRECT workflow (what I was doing wrong)
+git checkout -b feature/some-feature  # NO! No issue created first
+# ... make changes ...
+git commit -m "add feature"  # NO! No issue reference
+gh pr create  # NO! PR not linked to any issue
+```
+
+**Issue Types and Templates:**
+- `bug` - Something isn't working correctly
+- `feature` - New functionality request
+- `docs` - Documentation improvements
+- `refactor` - Code restructuring without behavior change
+- `chore` - Maintenance tasks, dependency updates
+
+### Rule 1: Branch Naming Convention
+
+**Branch names MUST include the issue number and follow this pattern:**
+
+```
+<type>/<issue-number>-<short-description>
+```
+
+| Type | Purpose | Example |
+|------|---------|---------|
+| `feature/` | New functionality | `feature/42-add-user-auth` |
+| `bugfix/` | Bug corrections | `bugfix/57-fix-login-crash` |
+| `docs/` | Documentation changes | `docs/63-update-readme` |
+| `refactor/` | Code restructuring | `refactor/71-cleanup-api-client` |
+| `hotfix/` | Urgent production fixes | `hotfix/89-security-patch` |
+
+**Creating branches from issues:**
+```bash
+# Preferred: Use GitHub CLI to create linked branch
+gh issue develop 42 --checkout
+
+# Alternative: Manual creation with proper naming
+git checkout -b feature/42-add-user-auth
+```
+
+### Rule 2: Conventional Commits (MANDATORY)
+
+**All commit messages MUST follow the Conventional Commits specification.**
+
+Format:
+```
+<type>(<optional scope>): <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+**Commit Types:**
+| Type | Description | Version Bump |
+|------|-------------|--------------|
+| `feat` | New feature | Minor |
+| `fix` | Bug fix | Patch |
+| `docs` | Documentation only | None |
+| `style` | Formatting, no code change | None |
+| `refactor` | Code restructuring | None |
+| `perf` | Performance improvement | Patch |
+| `test` | Adding/fixing tests | None |
+| `chore` | Maintenance tasks | None |
+| `ci` | CI/CD changes | None |
+
+**Examples:**
+```bash
+# Feature with scope
+git commit -m "feat(auth): add OAuth2 login support
+
+Implements Google and GitHub OAuth providers.
+
+Closes #42"
+
+# Bug fix
+git commit -m "fix(api): resolve null pointer in user lookup
+
+The user service was not checking for nil responses
+from the database layer.
+
+Fixes #57"
+
+# Breaking change (note the !)
+git commit -m "feat(api)!: change authentication endpoint
+
+BREAKING CHANGE: The /auth endpoint now requires
+a JSON body instead of form data.
+
+Closes #63"
+```
+
+### Rule 3: Pull Request Requirements
+
+**Every PR MUST:**
+
+1. **Reference an issue** using closing keywords in the description
+2. **Have a descriptive title** following Conventional Commits format
+3. **Include a summary** of changes and testing performed
+
+**Closing Keywords** (use in PR description):
+- `Closes #42` - Closes the issue when PR merges
+- `Fixes #42` - Same as Closes
+- `Resolves #42` - Same as Closes
+
+**PR Description Template:**
+```markdown
+## Summary
+Brief description of changes
+
+## Related Issue
+Closes #42
+
+## Changes Made
+- Change 1
+- Change 2
+
+## Testing
+- [ ] Unit tests pass
+- [ ] Manual testing completed
+
+## Screenshots (if applicable)
+```
+
+**Creating PRs:**
+```bash
+# Create PR linked to issue
+gh pr create --title "feat(auth): add OAuth2 login support" --body "$(cat <<'EOF'
+## Summary
+Implements OAuth2 authentication with Google and GitHub providers.
+
+## Related Issue
+Closes #42
+
+## Changes Made
+- Added OAuth2 provider configuration
+- Implemented callback handlers
+- Added user session management
+
+## Testing
+- [x] Unit tests pass
+- [x] Manual testing with Google OAuth
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+EOF
+)"
+```
+
+### Rule 4: Issue-Branch-PR Traceability
+
+**Maintain complete traceability:**
+
+```
+Issue #42: "Add user authentication"
+    ↓
+Branch: feature/42-add-user-auth
+    ↓
+Commits: feat(auth): implement login flow (Closes #42)
+    ↓
+PR #43: "feat(auth): add OAuth2 login support" (Closes #42)
+    ↓
+Merge → Issue #42 auto-closes
+```
+
+**Verification checklist before PR:**
+- [ ] Issue exists and describes the work
+- [ ] Branch name includes issue number
+- [ ] All commits reference the issue
+- [ ] PR description uses closing keyword
+
+---
+
+## Part 2: CI/CD Automation Rules
+
+### Core Principle: Automation First
+
+**BEFORE making any changes, analyze `.github/workflows/` to understand existing automation patterns.**
+
+This repository uses CI/CD automation extensively. Respect the automation - do not bypass it.
+
+### Rule 1: Never Commit Generated Files
+
+**Generated/derived files are managed by CI/CD workflows, not manual commits.**
+
+| Directory/File | Generated By | Workflow |
+|----------------|--------------|----------|
+| `docs/resources/*.md` | `tfplugindocs` + `transform-docs.go` | `docs.yml` |
+| `docs/data-sources/*.md` | `tfplugindocs` + `transform-docs.go` | `docs.yml` |
+| `docs/api/*.md` | `generate-api-docs.go` | `pages.yml` |
+| `docs/nav-api.yml` | `generate-api-docs.go` | `pages.yml` |
+| `internal/provider/*_resource.go` | `generate-resources.go` | `generate.yml` |
+| `site/` | `mkdocs build` | `pages.yml` |
+
+**Correct behavior**: Commit only source/tool changes. Let workflows generate artifacts.
+
+### Rule 2: Understand the Workflow Chain
+
+```
+Source Change → Push to Branch → CI Workflow Runs → Auto-PR Created
+```
+
+**Workflows in this repository:**
+
+| Workflow | Trigger | Action | Creates PR? |
+|----------|---------|--------|-------------|
+| `docs.yml` | Changes to `internal/`, `docs/`, `templates/` | Regenerates provider docs | ✅ Yes |
+| `generate.yml` | Changes to `docs/specifications/api/` | Regenerates provider code | ✅ Yes |
+| `sync-openapi.yml` | Scheduled (daily) | Syncs OpenAPI specs from F5 | ✅ Yes |
+| `pages.yml` | Changes to `docs/`, `mkdocs.yml` | Builds & deploys MkDocs | ❌ Direct deploy |
+| `auto-tag.yml` | Push to main (non-docs) | Creates version tag | ❌ Creates tag |
+| `release.yml` | Tag push (`v*`) | Publishes release | ❌ Creates release |
+| `lint.yml` | All pushes/PRs | Runs tests & linting | ❌ Status checks |
+
+### Rule 3: One Concern Per Commit
+
+When modifying generator tools (e.g., `tools/transform-docs.go`):
+
+✅ **Correct**:
+```bash
+git add tools/transform-docs.go
+git commit -m "feat: add Metadata/Spec grouping to doc transformer"
+git push
+# Let docs.yml workflow create PR with generated docs
+```
+
+❌ **Incorrect**:
+```bash
+go run tools/transform-docs.go  # DON'T manually run generators
+git add tools/transform-docs.go docs/  # DON'T commit generated files
+git commit -m "feat: add grouping + regenerate all docs"
+```
+
+### Rule 4: Check .gitignore for Generated Patterns
+
+Before committing, verify files aren't in `.gitignore`:
+
+```bash
+# Generated documentation (rebuilt at deploy time)
+docs/api/
+docs/nav-api.yml
+site/
+```
+
+If a file pattern is in `.gitignore`, it's generated - don't commit it manually.
+
+### Rule 5: Respect Auto-Generated PRs
+
+When you see PRs from `github-actions` bot with labels `automated`, `documentation`:
+- These are legitimate CI-generated changes
+- Review them for correctness
+- Merge or close based on content quality
+- Do NOT duplicate their work manually
+
+### Rule 6: Pre-Flight Checklist
+
+Before creating any PR, verify:
+
+**GitHub Workflow:**
+- [ ] GitHub Issue exists for this work
+- [ ] Branch name includes issue number (e.g., `feature/42-description`)
+- [ ] All commits reference the issue number
+- [ ] PR description includes closing keyword (`Closes #42`)
+
+**Automation Compliance:**
+- [ ] Analyzed relevant workflows in `.github/workflows/`
+- [ ] Checked `.gitignore` for generated file patterns
+- [ ] Committing ONLY source code, not generated artifacts
+- [ ] Not bypassing automation that handles this task
+- [ ] PR contains single concern (not mixed source + generated)
+
+---
+
+## Part 3: Self-Correction Protocol
+
+### When I Violate These Rules
+
+If I create a branch or PR without following these rules:
+
+1. **Stop immediately** - Do not continue with incorrect workflow
+2. **Create the missing issue** - Document what work is being done
+3. **Rename or recreate branch** - Include issue number
+4. **Update PR** - Add issue reference with closing keyword
+5. **Document the violation** - Learn from the mistake
+
+### Behavior Analysis Triggers
+
+I should analyze my GitHub behavior when:
+- Creating a branch without `gh issue develop`
+- PR description missing `Closes #`, `Fixes #`, or `Resolves #`
+- Branch name missing issue number
+- Commit messages not following Conventional Commits
+- Manually running generators and committing output
+
 ## Project Overview
 
 Community-driven Terraform provider for F5 Distributed Cloud (F5XC) built using the HashiCorp Terraform Plugin Framework. The provider implements F5's public OpenAPI specifications to manage F5XC resources via Terraform.

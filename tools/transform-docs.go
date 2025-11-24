@@ -299,6 +299,200 @@ func transformIndexDoc(filePath string) error {
 	return os.WriteFile(filePath, []byte(text), 0644)
 }
 
+// attrInfo holds attribute information for documentation generation
+type attrInfo struct {
+	name            string
+	typeInfo        string
+	desc            string
+	reqStr          string
+	hasNested       bool
+	oneOfConstraint string
+	rawLine         string
+}
+
+// extractOneOfFromGoFile reads the resource Go file and extracts [OneOf: ...] markers
+// from MarkdownDescription fields, returning a map of attribute name to constraint
+func extractOneOfFromGoFile(mdFilePath string) map[string]string {
+	// Convert docs path to resource path
+	// Example: docs/resources/http_loadbalancer.md -> internal/provider/http_loadbalancer_resource.go
+	baseName := filepath.Base(mdFilePath)
+	resourceName := strings.TrimSuffix(baseName, ".md")
+	goFilePath := filepath.Join("internal/provider", resourceName+"_resource.go")
+
+	content, err := os.ReadFile(goFilePath)
+	if err != nil {
+		// If resource file doesn't exist, return empty map
+		return make(map[string]string)
+	}
+
+	text := string(content)
+	constraintMap := make(map[string]string)
+
+	// Find all MarkdownDescription fields with [OneOf: ...] markers
+	// Pattern: "attribute_name": schema.SingleNestedBlock{
+	//           MarkdownDescription: "[OneOf: attr1, attr2, attr3] description...",
+	oneOfRegex := regexp.MustCompile(`"([^"]+)":\s*schema\.\w+\{\s*MarkdownDescription:\s*"\[OneOf:\s*([^\]]+)\]`)
+	matches := oneOfRegex.FindAllStringSubmatch(text, -1)
+
+	for _, match := range matches {
+		if len(match) >= 3 {
+			constraintList := match[2]
+
+			// Add this constraint to all attributes mentioned in the list
+			attrNames := strings.Split(constraintList, ", ")
+			for _, name := range attrNames {
+				constraintMap[strings.TrimSpace(name)] = constraintList
+			}
+		}
+	}
+
+	return constraintMap
+}
+
+// propagateOneOfConstraints ensures all attributes mentioned in a OneOf constraint
+// have that constraint set, even if only one of them has the [OneOf: ...] marker.
+// This is necessary because in the schema, only one property typically has the marker.
+func propagateOneOfConstraints(attrs *[]attrInfo, constraintMap map[string]string) {
+	// Apply the constraints from the Go file to all matching attributes
+	for i := range *attrs {
+		if constraint, found := constraintMap[(*attrs)[i].name]; found {
+			(*attrs)[i].oneOfConstraint = constraint
+		}
+	}
+}
+
+// groupAndSortAttributes groups mutually exclusive attributes (with same OneOf constraint)
+// together and sorts them properly for display in documentation.
+//
+// Algorithm:
+// 1. Separate attributes into OneOf groups and standalone attributes
+// 2. Sort OneOf groups by the first attribute name in each group (alphabetically)
+// 3. Within each OneOf group, maintain the order specified in the constraint
+// 4. Merge OneOf groups with standalone attributes in sorted order
+func groupAndSortAttributes(attrs []attrInfo) []attrInfo {
+	// Group attributes by their normalized OneOf constraint
+	oneOfGroups := make(map[string][]attrInfo)
+	var standaloneAttrs []attrInfo
+
+	for _, attr := range attrs {
+		if attr.oneOfConstraint != "" {
+			key := normalizeOneOfKey(attr.oneOfConstraint)
+			oneOfGroups[key] = append(oneOfGroups[key], attr)
+		} else {
+			standaloneAttrs = append(standaloneAttrs, attr)
+		}
+	}
+
+	// Sort standalone attributes alphabetically
+	sort.Slice(standaloneAttrs, func(i, j int) bool {
+		return standaloneAttrs[i].name < standaloneAttrs[j].name
+	})
+
+	// Process each OneOf group
+	type oneOfGroup struct {
+		constraintKey  string
+		constraintText string
+		attrs          []attrInfo
+		firstAttrName  string
+	}
+
+	var groups []oneOfGroup
+	for key, groupAttrs := range oneOfGroups {
+		if len(groupAttrs) == 0 {
+			continue
+		}
+
+		// Parse the constraint to get the expected order
+		constraintText := groupAttrs[0].oneOfConstraint
+		constraintOrder := strings.Split(constraintText, ", ")
+
+		// Sort attributes within the group according to constraint order
+		sort.Slice(groupAttrs, func(i, j int) bool {
+			nameI := groupAttrs[i].name
+			nameJ := groupAttrs[j].name
+
+			// Find positions in constraint order
+			posI := indexOf(constraintOrder, nameI)
+			posJ := indexOf(constraintOrder, nameJ)
+
+			// If both found, sort by constraint order
+			if posI != -1 && posJ != -1 {
+				return posI < posJ
+			}
+
+			// If one found and one not, found one comes first
+			if posI != -1 {
+				return true
+			}
+			if posJ != -1 {
+				return false
+			}
+
+			// If neither found, sort alphabetically
+			return nameI < nameJ
+		})
+
+		groups = append(groups, oneOfGroup{
+			constraintKey:  key,
+			constraintText: constraintText,
+			attrs:          groupAttrs,
+			firstAttrName:  groupAttrs[0].name,
+		})
+	}
+
+	// Sort groups by first attribute name
+	sort.Slice(groups, func(i, j int) bool {
+		return groups[i].firstAttrName < groups[j].firstAttrName
+	})
+
+	// Merge groups and standalone attrs in sorted order
+	var result []attrInfo
+	groupIdx := 0
+	standaloneIdx := 0
+
+	for groupIdx < len(groups) || standaloneIdx < len(standaloneAttrs) {
+		// If we've exhausted groups, add remaining standalone attrs
+		if groupIdx >= len(groups) {
+			result = append(result, standaloneAttrs[standaloneIdx:]...)
+			break
+		}
+
+		// If we've exhausted standalone attrs, add remaining groups
+		if standaloneIdx >= len(standaloneAttrs) {
+			for _, group := range groups[groupIdx:] {
+				result = append(result, group.attrs...)
+			}
+			break
+		}
+
+		// Compare group's first attr with next standalone attr
+		group := groups[groupIdx]
+		standaloneAttr := standaloneAttrs[standaloneIdx]
+
+		if group.firstAttrName < standaloneAttr.name {
+			// Add the entire group
+			result = append(result, group.attrs...)
+			groupIdx++
+		} else {
+			// Add the standalone attr
+			result = append(result, standaloneAttr)
+			standaloneIdx++
+		}
+	}
+
+	return result
+}
+
+// indexOf returns the index of target in slice, or -1 if not found
+func indexOf(slice []string, target string) int {
+	for i, s := range slice {
+		if s == target {
+			return i
+		}
+	}
+	return -1
+}
+
 func transformDoc(filePath string) error {
 	content, err := os.ReadFile(filePath)
 	if err != nil {
@@ -357,16 +551,6 @@ func transformDoc(filePath string) error {
 	}
 
 	// Collect all attributes first, then group them
-	type attrInfo struct {
-		name          string
-		typeInfo      string
-		desc          string
-		reqStr        string
-		hasNested     bool
-		oneOfConstraint string
-		rawLine       string
-	}
-
 	var metadataAttrs []attrInfo
 	var specAttrs []attrInfo
 	var readOnlyAttrs []attrInfo
@@ -483,6 +667,15 @@ func transformDoc(filePath string) error {
 		}
 	}
 
+	// Extract OneOf constraints from the resource Go file
+	oneOfConstraintMap := extractOneOfFromGoFile(filePath)
+
+	// Propagate OneOf constraints to all attributes mentioned in the constraint
+	// This ensures that all mutually exclusive properties have the same constraint marker
+	propagateOneOfConstraints(&metadataAttrs, oneOfConstraintMap)
+	propagateOneOfConstraints(&specAttrs, oneOfConstraintMap)
+	propagateOneOfConstraints(&readOnlyAttrs, oneOfConstraintMap)
+
 	// Helper function to write attribute
 	printedConstraints := make(map[string]bool)
 	writeAttr := func(attr attrInfo) {
@@ -532,15 +725,11 @@ func transformDoc(filePath string) error {
 	// Write Spec Argument Reference section (if we have spec attrs)
 	if len(specAttrs) > 0 {
 		output.WriteString("### Spec Argument Reference\n\n")
-		// Write any collected OneOf constraints at the start of spec section
-		for _, constraint := range oneOfConstraints {
-			constraintKey := normalizeOneOfKey(constraint)
-			if !printedConstraints[constraintKey] {
-				output.WriteString(fmt.Sprintf("> **Note:** One of the arguments from this list \"%s\" must be set.\n\n", constraint))
-				printedConstraints[constraintKey] = true
-			}
-		}
-		for _, attr := range specAttrs {
+
+		// Group attributes by OneOf constraint and sort for proper display
+		sortedAttrs := groupAndSortAttributes(specAttrs)
+
+		for _, attr := range sortedAttrs {
 			writeAttr(attr)
 		}
 	}

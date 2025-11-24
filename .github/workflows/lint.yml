@@ -91,7 +91,8 @@ jobs:
           echo "🔍 Checking PR for generated files..."
 
           # Get list of changed files in this PR
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }})
+          # Use GITHUB_BASE_REF and current HEAD for PR comparisons
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
 
           # Define patterns for generated files
           GENERATED_PATTERNS=(

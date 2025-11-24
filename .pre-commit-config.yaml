@@ -116,6 +116,20 @@ repos:
           )$
 
   # =============================================================================
+  # CLAUDE.md Constitution Enforcement
+  # =============================================================================
+  - repo: local
+    hooks:
+      # Rule 1: Never Commit Generated Files
+      - id: check-no-generated-files
+        name: Block generated files (CLAUDE.md Rule 1)
+        entry: scripts/check-no-generated-files.sh
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [pre-commit]
+
+  # =============================================================================
   # Go module tidiness check
   # =============================================================================
   - repo: local

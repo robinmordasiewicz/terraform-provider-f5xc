@@ -301,7 +301,176 @@ Before creating any PR, verify:
 
 ---
 
-## Part 3: Self-Correction Protocol
+## Part 3: Constitution Enforcement
+
+### Automated Enforcement Mechanisms
+
+The repository includes multiple layers of enforcement to prevent violations of the constitution rules.
+
+#### Layer 1: Pre-Commit Hooks (Local)
+
+**Location**: `.pre-commit-config.yaml` + `scripts/check-no-generated-files.sh`
+
+**What it does**: Blocks commits containing generated files before they reach the repository
+
+**Setup** (one-time):
+```bash
+# Install pre-commit
+pip install pre-commit
+
+# Install hooks
+pre-commit install
+
+# Test (optional)
+pre-commit run --all-files
+```
+
+**How it works**:
+```bash
+# Attempt to commit generated file
+git add docs/resources/namespace.md
+git commit -m "docs: update namespace"
+
+# ❌ Blocked by pre-commit hook:
+# ERROR: Attempting to commit generated files
+# - docs/resources/namespace.md
+#
+# CLAUDE.md Rule 1: Never Commit Generated Files
+```
+
+**Patterns checked**:
+- `docs/resources/*.md` - Provider resource documentation
+- `docs/data-sources/*.md` - Provider data source documentation
+- `docs/api/*.md` - API reference documentation
+- `docs/nav-api.yml` - API navigation structure
+- `site/` - Built MkDocs site
+- `internal/provider/*_resource.go` - Generated resource implementations
+
+#### Layer 2: CI/CD Checks (Remote)
+
+**Location**: `.github/workflows/lint.yml` → `check-constitution` job
+
+**What it does**: Fails PRs that contain generated files, preventing merge to main
+
+**How it works**:
+```yaml
+# Runs automatically on every PR
+- Compares PR branch against base branch
+- Identifies changed files
+- Checks against generated file patterns
+- Fails CI if violations detected
+```
+
+**Result**:
+- ❌ PR status check fails with clear error message
+- 🚫 PR cannot be merged until violations are removed
+- 📝 Instructions provided for proper fix
+
+#### Layer 3: Branch Protection (GitHub Settings)
+
+**Recommended settings** (requires repo admin):
+```yaml
+Branch: main
+  ✅ Require status checks to pass before merging
+  ✅ Require "Constitution Check" to pass
+  ✅ Require "Lint" to pass
+  ✅ Require "Build and Test" to pass
+  ✅ Include administrators (no exceptions!)
+```
+
+### Enforcement Examples
+
+#### ✅ Correct Workflow (Passes All Checks)
+```bash
+# 1. Modify generator tool
+vim tools/transform-docs.go
+
+# 2. Pre-commit runs automatically
+git add tools/transform-docs.go
+git commit -m "feat: improve doc formatting"
+# ✅ Pre-commit: No generated files detected
+
+# 3. Push and create PR
+git push
+gh pr create
+
+# 4. CI checks run
+# ✅ Constitution Check: No generated files in PR
+# ✅ Lint: Code passes linting
+# ✅ Build and Test: All tests pass
+
+# 5. Merge PR
+# 6. docs.yml workflow triggers automatically
+# 7. Auto-PR created with regenerated docs
+# 8. Review and merge auto-PR
+```
+
+#### ❌ Incorrect Workflow (Blocked by Enforcement)
+```bash
+# 1. Manually run generator and commit results
+go run tools/transform-docs.go
+git add tools/transform-docs.go docs/
+git commit -m "feat: add grouping"
+
+# ❌ Pre-commit blocks:
+# ERROR: Attempting to commit generated files
+# - docs/resources/namespace.md
+# - docs/resources/http_loadbalancer.md
+# ... (142 more files)
+
+# Fix: Unstage generated files
+git restore --staged docs/
+
+# Commit only source code
+git commit -m "feat: add grouping"
+# ✅ Pre-commit: No generated files detected
+```
+
+### Bypassing Enforcement (Emergency Only)
+
+**NEVER bypass enforcement in normal development!**
+
+In genuine emergencies only (e.g., fixing broken CI):
+
+```bash
+# Skip pre-commit hooks (requires conscious decision)
+git commit --no-verify -m "emergency: fix broken workflow"
+
+# Note: CI checks will still fail if generated files present!
+```
+
+**Important**: Even with `--no-verify`, the PR will fail CI checks and cannot be merged. This provides defense-in-depth.
+
+### Testing Enforcement
+
+To verify enforcement is working:
+
+```bash
+# Test pre-commit hook
+echo "test" >> docs/resources/test.md
+git add docs/resources/test.md
+git commit -m "test"
+# Should fail with clear error message
+
+# Clean up
+git restore --staged docs/resources/test.md
+rm docs/resources/test.md
+```
+
+### Maintenance
+
+**Updating enforcement patterns**:
+
+When adding new generated file types:
+
+1. Update `scripts/check-no-generated-files.sh` (GENERATED_PATTERNS)
+2. Update `.github/workflows/lint.yml` (check-constitution job)
+3. Update this documentation (Part 3)
+4. Test enforcement with new patterns
+
+---
+
+## Part 4: Self-Correction Protocol
 
 ### When I Violate These Rules
 

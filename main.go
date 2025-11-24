@@ -3,6 +3,9 @@
 
 // terraform-provider-f5xc provides Terraform resources for managing F5 Distributed Cloud services.
 // For documentation, see https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest/docs
+//
+// Documentation features OneOf property grouping for mutually exclusive arguments,
+// improving clarity by grouping related properties with a single explanatory note.
 
 package main
 

@@ -269,3 +269,11 @@ jobs:
             });
             console.log(`Created PR #${pr.data.number}`);
             return pr.data.number;
+
+      - name: Enable auto-merge on PR
+        if: steps.create_pr.outputs.result != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ steps.create_pr.outputs.result }} \
+            --auto --squash

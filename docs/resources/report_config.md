@@ -62,7 +62,7 @@ resource "f5xc_report_config" "example" {
 
 ### Spec Argument Reference
 
-`report_recipients` - (Optional) Report recipients. Report recipients. See [Report Recipients](#report-recipients) below for details.
+`report_recipients` - (Optional) Configuration for report_recipients. See [Report Recipients](#report-recipients) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

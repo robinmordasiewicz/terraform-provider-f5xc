@@ -105,7 +105,7 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 `retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Retract Cluster](#retract-cluster) below for details.
 
-`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A . (`List`).
+`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A (`List`).
 
 > **Note:** One of the arguments from this list "hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness" must be set.
 
@@ -149,7 +149,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Active Service Policies
 
-`policies` - (Optional) Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are ... See [Policies](#nestedblock--active_service_policies--policies) below.
+`policies` - (Optional) Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are. See [Policies](#nestedblock--active_service_policies--policies) below.
 
 <a id="nestedblock--active_service_policies--policies"></a>
 
@@ -347,7 +347,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#nestedblock--origin_pools_weights--cluster) below.
 
-`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured ... See [Endpoint Subsets](#nestedblock--origin_pools_weights--endpoint_subsets) below.
+`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured. See [Endpoint Subsets](#nestedblock--origin_pools_weights--endpoint_subsets) below.
 
 `pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--origin_pools_weights--pool) below.
 
@@ -531,7 +531,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_tcp--tls_parameters--tls_certificates--custom_hash_algorithms) below.
 
-`description` - (Optional) Description. Description for the certificate (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--tls_tcp--tls_parameters--tls_certificates--disable_ocsp_stapling) below.
 

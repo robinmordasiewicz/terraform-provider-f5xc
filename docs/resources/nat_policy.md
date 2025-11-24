@@ -180,7 +180,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Port range to match (`String`).
+`port_ranges` - (Optional) Configuration for port_ranges (`String`).
 
 <a id="nestedblock--rules--criteria--destination_port--no_port_match"></a>
 
@@ -208,7 +208,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Port range to match (`String`).
+`port_ranges` - (Optional) Configuration for port_ranges (`String`).
 
 <a id="nestedblock--rules--criteria--source_port--no_port_match"></a>
 

@@ -72,7 +72,7 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 `destination_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Prefix All](#destination-prefix-all) below for details.
 
-`destination_prefix_single` - (Optional) Prefix. Prefix (`String`).
+`destination_prefix_single` - (Optional) Configuration for destination_prefix_single (`String`).
 
 > **Note:** One of the arguments from this list "fragments_allow, fragments_deny" must be set.
 
@@ -104,7 +104,7 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 `source_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Prefix All](#source-prefix-all) below for details.
 
-`source_prefix_single` - (Optional) Prefix. Prefix (`String`).
+`source_prefix_single` - (Optional) Configuration for source_prefix_single (`String`).
 
 > **Note:** One of the arguments from this list "state_off, state_on" must be set.
 
@@ -174,13 +174,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `parameter_problem` - (Optional) Parameter-Problem. Parameter-Problem (`Bool`).
 
-`redirect` - (Optional) Redirect. Redirect (`Bool`).
+`redirect` - (Optional) Configuration for redirect (`Bool`).
 
 `source_quench` - (Optional) Source-Quench. Source-Quench (`Bool`).
 
 `time_exceeded` - (Optional) Time-Exceeded. Time-Exceeded (`Bool`).
 
-`unreachable` - (Optional) Unreachable. Unreachable (`Bool`).
+`unreachable` - (Optional) Configuration for unreachable (`Bool`).
 
 <a id="nestedblock--protocol_icmp6"></a>
 
@@ -200,7 +200,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `parameter_problem` - (Optional) Parameter-Problem. Parameter-Problem (`Bool`).
 
-`redirect` - (Optional) Redirect. Redirect (`Bool`).
+`redirect` - (Optional) Configuration for redirect (`Bool`).
 
 `router_advertisement` - (Optional) Router-Advertisement. Router-Advertisement (`Bool`).
 
@@ -216,7 +216,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Protocol TCP
 
-`description` - (Optional) Description. Description (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
 `destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#nestedblock--protocol_tcp--destination_port_all) below.
 
@@ -238,7 +238,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Protocol UDP
 
-`description` - (Optional) Description. Description (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
 `destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#nestedblock--protocol_udp--destination_port_all) below.
 

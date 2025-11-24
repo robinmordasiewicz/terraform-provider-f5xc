@@ -122,7 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `gpu` - (Optional) GPU. GPU information on server. See [GPU](#nestedblock--infra--hw_info--gpu) below.
 
-`kernel` - (Optional) Kernel. Kernel information. See [Kernel](#nestedblock--infra--hw_info--kernel) below.
+`kernel` - (Optional) Configuration for kernel. See [Kernel](#nestedblock--infra--hw_info--kernel) below.
 
 `memory` - (Optional) Memory Information. Memory information. See [Memory](#nestedblock--infra--hw_info--memory) below.
 
@@ -310,11 +310,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `bus` - (Optional) Bus. The bus on which the device was detected in decimal (`Number`).
 
-`description` - (Optional) Description. Device description (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
-`i_manufacturer` - (Optional) Manufacturer. Manufacturer name (`String`).
+`i_manufacturer` - (Optional) Configuration for i_manufacturer (`String`).
 
-`i_product` - (Optional) Device product. Product name reported by device (`String`).
+`i_product` - (Optional) Configuration for i_product (`String`).
 
 `i_serial` - (Optional) iSerialNumber. Index of Serial Number String Descriptor (`String`).
 
@@ -344,7 +344,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `https_proxy` - (Optional) HTTPS PROXY. It will be used as the proxy URL for HTTPS requests unless overridden by NoProxy (`String`).
 
-`no_proxy` - (Optional) NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo... (`String`).
+`no_proxy` - (Optional) NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo (`String`).
 
 `proxy_cacert_url` - (Optional) Proxy CA certificate URL. Allow optional different trust-store for proxy in HTTP CONNECT step by picking proxy CA certificate value (`String`).
 

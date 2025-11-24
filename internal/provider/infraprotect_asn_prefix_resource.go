@@ -94,7 +94,7 @@ func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource
 				ElementType: types.StringType,
 			},
 			"prefix": schema.StringAttribute{
-				MarkdownDescription: "Prefix. Prefix",
+				MarkdownDescription: "Configuration for prefix.",
 				Optional: true,
 			},
 			"id": schema.StringAttribute{

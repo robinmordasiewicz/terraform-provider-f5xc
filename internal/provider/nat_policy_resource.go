@@ -205,7 +205,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											Optional: true,
 										},
 										"port_ranges": schema.StringAttribute{
-											MarkdownDescription: "Port range. Port range to match",
+											MarkdownDescription: "Configuration for port_ranges.",
 											Optional: true,
 										},
 									},
@@ -239,7 +239,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											Optional: true,
 										},
 										"port_ranges": schema.StringAttribute{
-											MarkdownDescription: "Port range. Port range to match",
+											MarkdownDescription: "Configuration for port_ranges.",
 											Optional: true,
 										},
 									},

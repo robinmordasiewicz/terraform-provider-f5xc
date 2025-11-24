@@ -398,7 +398,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},
@@ -486,7 +486,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},
@@ -574,7 +574,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},
@@ -662,7 +662,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},

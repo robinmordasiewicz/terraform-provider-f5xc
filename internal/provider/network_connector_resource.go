@@ -111,7 +111,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: disable_forward_proxy, enable_forward_proxy] Empty. This can be used for messages where no values are needed",
 			},
 			"enable_forward_proxy": schema.SingleNestedBlock{
-				MarkdownDescription: "Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and ip prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted ip-prefix-list and ports connectio...",
+				MarkdownDescription: "Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and ip prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted ip-prefix-list and ports connectio.",
 				Attributes: map[string]schema.Attribute{
 					"connection_timeout": schema.Int64Attribute{
 						MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds)",
@@ -153,7 +153,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 										Optional: true,
 									},
 									"description": schema.StringAttribute{
-										MarkdownDescription: "Description. Description for the certificate",
+										MarkdownDescription: "Configuration for description.",
 										Optional: true,
 									},
 								},

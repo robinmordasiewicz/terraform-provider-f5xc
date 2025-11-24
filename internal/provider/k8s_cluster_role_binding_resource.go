@@ -130,11 +130,11 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"group": schema.StringAttribute{
-							MarkdownDescription: "Group. Group id of the user group",
+							MarkdownDescription: "Configuration for group.",
 							Optional: true,
 						},
 						"user": schema.StringAttribute{
-							MarkdownDescription: "User. User id of the user",
+							MarkdownDescription: "Configuration for user.",
 							Optional: true,
 						},
 					},

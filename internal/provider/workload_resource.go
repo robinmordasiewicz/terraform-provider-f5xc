@@ -122,7 +122,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload",
+								MarkdownDescription: "Configuration for parameters.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -161,7 +161,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container",
+									MarkdownDescription: "Configuration for name.",
 									Optional: true,
 								},
 							},
@@ -348,11 +348,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Volumes. Volumes for the job",
+						MarkdownDescription: "Configuration for volumes.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume",
+									MarkdownDescription: "Configuration for name.",
 									Optional: true,
 								},
 							},
@@ -430,7 +430,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"ports": schema.ListNestedBlock{
-										MarkdownDescription: "Ports. Ports to advertise",
+										MarkdownDescription: "Configuration for ports.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -446,7 +446,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										MarkdownDescription: "Multiple Ports. Multiple ports",
 									},
 									"port": schema.SingleNestedBlock{
-										MarkdownDescription: "Port. Single port",
+										MarkdownDescription: "Configuration for port.",
 									},
 								},
 							},
@@ -474,7 +474,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload",
+								MarkdownDescription: "Configuration for parameters.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -513,7 +513,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container",
+									MarkdownDescription: "Configuration for name.",
 									Optional: true,
 								},
 							},
@@ -703,11 +703,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Volumes. Volumes for the service",
+						MarkdownDescription: "Configuration for volumes.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume",
+									MarkdownDescription: "Configuration for name.",
 									Optional: true,
 								},
 							},
@@ -774,7 +774,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload",
+								MarkdownDescription: "Configuration for parameters.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -812,7 +812,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								Optional: true,
 							},
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. Name of the container",
+								MarkdownDescription: "Configuration for name.",
 								Optional: true,
 							},
 						},
@@ -942,7 +942,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Persistent Storage Volume. Persistent storage volume configuration for the workload",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. Name of the volume",
+								MarkdownDescription: "Configuration for name.",
 								Optional: true,
 							},
 						},
@@ -966,7 +966,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Advertise Options For Simple Service. Advertise options for Simple Service",
 						Attributes: map[string]schema.Attribute{
 							"domains": schema.ListAttribute{
-								MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, a...",
+								MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, a.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -1005,7 +1005,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"ports": schema.ListNestedBlock{
-										MarkdownDescription: "Ports. Ports to advertise",
+										MarkdownDescription: "Configuration for ports.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1021,7 +1021,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										MarkdownDescription: "Multiple Ports. Multiple ports",
 									},
 									"port": schema.SingleNestedBlock{
-										MarkdownDescription: "Port. Single port",
+										MarkdownDescription: "Configuration for port.",
 									},
 								},
 							},
@@ -1049,7 +1049,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload",
+								MarkdownDescription: "Configuration for parameters.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -1088,7 +1088,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container",
+									MarkdownDescription: "Configuration for name.",
 									Optional: true,
 								},
 							},
@@ -1279,7 +1279,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume",
+									MarkdownDescription: "Configuration for name.",
 									Optional: true,
 								},
 							},
@@ -1308,7 +1308,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume",
+									MarkdownDescription: "Configuration for name.",
 									Optional: true,
 								},
 							},

@@ -410,7 +410,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},
@@ -498,7 +498,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},
@@ -586,7 +586,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},
@@ -674,7 +674,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},

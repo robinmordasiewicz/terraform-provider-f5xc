@@ -126,7 +126,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 						Optional: true,
 					},
 					"local_interface_address_offset": schema.Int64Attribute{
-						MarkdownDescription: "Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 2 with Local Interface Address Type set to 'Offset from beginning of Subnet', local interface address of 169.254.0.2 is used. If Local Int...",
+						MarkdownDescription: "Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 2 with Local Interface Address Type set to 'Offset from beginning of Subnet', local interface address of 169.254.0.2 is used. If Local Int.",
 						Optional: true,
 					},
 					"local_interface_address_type": schema.StringAttribute{

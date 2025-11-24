@@ -99,7 +99,7 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 				ElementType: types.StringType,
 			},
 			"prefix": schema.StringAttribute{
-				MarkdownDescription: "Prefix. Prefix",
+				MarkdownDescription: "Configuration for prefix.",
 				Optional: true,
 			},
 			"id": schema.StringAttribute{

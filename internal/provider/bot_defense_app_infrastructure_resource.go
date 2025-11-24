@@ -131,7 +131,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				},
 				Blocks: map[string]schema.Block{
 					"egress": schema.ListNestedBlock{
-						MarkdownDescription: "Egress. Egress",
+						MarkdownDescription: "Configuration for egress.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ip_address": schema.StringAttribute{
@@ -146,7 +146,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 						},
 					},
 					"ingress": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress. Ingress",
+						MarkdownDescription: "Configuration for ingress.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"host_name": schema.StringAttribute{
@@ -181,7 +181,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				},
 				Blocks: map[string]schema.Block{
 					"egress": schema.ListNestedBlock{
-						MarkdownDescription: "Egress. Egress",
+						MarkdownDescription: "Configuration for egress.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ip_address": schema.StringAttribute{
@@ -196,7 +196,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 						},
 					},
 					"ingress": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress. Ingress",
+						MarkdownDescription: "Configuration for ingress.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"host_name": schema.StringAttribute{

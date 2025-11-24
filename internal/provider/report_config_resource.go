@@ -108,7 +108,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 				Delete: true,
 			}),
 			"report_recipients": schema.SingleNestedBlock{
-				MarkdownDescription: "Report recipients. Report recipients",
+				MarkdownDescription: "Configuration for report_recipients.",
 				Attributes: map[string]schema.Attribute{
 				},
 				Blocks: map[string]schema.Block{

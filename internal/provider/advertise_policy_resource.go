@@ -110,7 +110,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 			},
 			"protocol": schema.StringAttribute{
-				MarkdownDescription: "Protocol. Protocol to advertise.",
+				MarkdownDescription: "Configuration for protocol.",
 				Optional: true,
 			},
 			"skip_xff_append": schema.BoolAttribute{
@@ -180,7 +180,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store",
 						Attributes: map[string]schema.Attribute{
 							"cipher_suites": schema.ListAttribute{
-								MarkdownDescription: "Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_...",
+								MarkdownDescription: "Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -203,7 +203,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Configuration for description.",
 											Optional: true,
 										},
 									},

@@ -196,7 +196,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Optional: true,
 												},
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. Name of the header",
+													MarkdownDescription: "Configuration for name.",
 													Optional: true,
 												},
 												"presence": schema.BoolAttribute{
@@ -218,7 +218,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Optional: true,
 											},
 											"port_ranges": schema.StringAttribute{
-												MarkdownDescription: "Port range. Port range to match",
+												MarkdownDescription: "Configuration for port_ranges.",
 												Optional: true,
 											},
 										},
@@ -344,11 +344,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Optional: true,
 									},
 									"add_expiry": schema.StringAttribute{
-										MarkdownDescription: "Add expiry. Add expiry attribute",
+										MarkdownDescription: "Configuration for add_expiry.",
 										Optional: true,
 									},
 									"add_path": schema.StringAttribute{
-										MarkdownDescription: "Add path. Add path attribute",
+										MarkdownDescription: "Configuration for add_path.",
 										Optional: true,
 									},
 									"max_age_value": schema.Int64Attribute{
@@ -476,7 +476,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Optional: true,
 								},
 								"prefix_rewrite": schema.StringAttribute{
-									MarkdownDescription: "Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value. This option allows application URLs to be rooted at a different path from those exposed at the reverse proxy layer. Example : gcSpec: routes: - match: - headers: [] path: prefix : /register/ query_params: [] - headers: [] path: prefix: /register query_par...",
+									MarkdownDescription: "Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value. This option allows application URLs to be rooted at a different path from those exposed at the reverse proxy layer. Example : gcSpec: routes: - match: - headers: [] path: prefix : /register/ query_params: [] - headers: [] path: prefix: /register query_par.",
 									Optional: true,
 								},
 								"priority": schema.StringAttribute{
@@ -503,7 +503,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"cors_policy": schema.SingleNestedBlock{
-									MarkdownDescription: "CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate...",
+									MarkdownDescription: "CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate.",
 									Attributes: map[string]schema.Attribute{
 										"allow_credentials": schema.BoolAttribute{
 											MarkdownDescription: "Allow Credentials. Specifies whether the resource allows credentials",
@@ -542,7 +542,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"csrf_policy": schema.SingleNestedBlock{
-									MarkdownDescription: "CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and ...",
+									MarkdownDescription: "CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and.",
 									Attributes: map[string]schema.Attribute{
 									},
 									Blocks: map[string]schema.Block{
@@ -558,7 +558,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"destinations": schema.ListNestedBlock{
-									MarkdownDescription: "Destination Origin pools (clusters). When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 w...",
+									MarkdownDescription: "Destination Origin pools (clusters). When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 w.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"priority": schema.Int64Attribute{
@@ -566,7 +566,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Optional: true,
 											},
 											"weight": schema.Int64Attribute{
-												MarkdownDescription: "Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 weight: 10 This indicates that...",
+												MarkdownDescription: "Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 weight: 10 This indicates that.",
 												Optional: true,
 											},
 										},
@@ -578,7 +578,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 											},
 											"endpoint_subsets": schema.SingleNestedBlock{
-												MarkdownDescription: "Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoints which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field....",
+												MarkdownDescription: "Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoints which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field.",
 											},
 										},
 									},
@@ -587,7 +587,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 								},
 								"endpoint_subsets": schema.SingleNestedBlock{
-									MarkdownDescription: "Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoint's which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field...",
+									MarkdownDescription: "Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoint's which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field.",
 								},
 								"hash_policy": schema.ListNestedBlock{
 									MarkdownDescription: "Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request",
@@ -608,7 +608,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										},
 										Blocks: map[string]schema.Block{
 											"cookie": schema.SingleNestedBlock{
-												MarkdownDescription: "Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g...",
+												MarkdownDescription: "Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g.",
 											},
 										},
 									},
@@ -679,7 +679,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											ElementType: types.StringType,
 										},
 										"retry_condition": schema.ListAttribute{
-											MarkdownDescription: "Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with...",
+											MarkdownDescription: "Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with.",
 											Optional: true,
 											ElementType: types.StringType,
 										},

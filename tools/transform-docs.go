@@ -14,6 +14,17 @@ import (
 	"strings"
 )
 
+// metadataFields defines the standard F5 XC metadata fields that should be grouped
+// under "Metadata Argument Reference" section, following Volterra provider conventions
+var metadataFields = map[string]bool{
+	"annotations": true,
+	"description": true,
+	"disable":     true,
+	"labels":      true,
+	"name":        true,
+	"namespace":   true,
+}
+
 // uppercaseAcronyms defines acronyms that should always be uppercase
 // Based on RFC 4949, IEEE standards, and industry style guides (Google, Microsoft, Apple)
 var uppercaseAcronyms = map[string]bool{
@@ -345,63 +356,105 @@ func transformDoc(filePath string) error {
 		mainSchemaEnd = importStart
 	}
 
-	// Parse main schema attributes
+	// Collect all attributes first, then group them
+	type attrInfo struct {
+		name          string
+		typeInfo      string
+		desc          string
+		reqStr        string
+		hasNested     bool
+		oneOfConstraint string
+		rawLine       string
+	}
+
+	var metadataAttrs []attrInfo
+	var specAttrs []attrInfo
+	var readOnlyAttrs []attrInfo
+	var oneOfConstraints []string // Collect constraints to print before sections
+
 	inSection := ""
+	// Match both tfplugindocs format: `- \`name\` (Type) desc`
+	// And already-transformed format: `\`name\` - (Required/Optional) desc`
 	attrRegex := regexp.MustCompile(`^- \x60([^\x60]+)\x60 \(([^)]+)\)(.*)$`)
-	printedConstraints := make(map[string]bool)  // Track already printed OneOf constraints
-	printedSections := make(map[string]bool)     // Track already printed section headers
+	transformedAttrRegex := regexp.MustCompile("^`([^`]+)` - \\((Required|Optional)\\) (.*)$")
 
 	for i := schemaStart + 1; i < mainSchemaEnd; i++ {
 		line := lines[i]
 
-		// Transform h6 OneOf headings to blockquotes (MD001 compliance)
+		// Collect OneOf constraints from h6 headings
 		if strings.HasPrefix(line, "###### One of") {
-			// Extract the constraint list from the h6 heading
 			oneOfH6Regex := regexp.MustCompile(`###### One of the arguments from this list "([^"]+)" must be set`)
 			if m := oneOfH6Regex.FindStringSubmatch(line); m != nil {
-				constraintKey := normalizeOneOfKey(m[1])
-				if !printedConstraints[constraintKey] {
-					output.WriteString(fmt.Sprintf("> **Note:** One of the arguments from this list \"%s\" must be set.\n\n", m[1]))
-					printedConstraints[constraintKey] = true
-				}
+				oneOfConstraints = append(oneOfConstraints, m[1])
 			}
 			continue
 		}
 
 		// Track sections - handle both original tfplugindocs format and already-transformed format
-		// Only print section headers once to avoid duplicates on re-processing
 		if strings.HasPrefix(line, "### Required") || strings.HasPrefix(line, "The following arguments are required:") {
-			if !printedSections["required"] {
-				output.WriteString("The following arguments are required:\n\n")
-				printedSections["required"] = true
-			}
 			inSection = "required"
 			continue
 		}
 		if strings.HasPrefix(line, "### Optional") || strings.HasPrefix(line, "The following arguments are optional:") {
-			if !printedSections["optional"] {
-				output.WriteString("\nThe following arguments are optional:\n\n")
-				printedSections["optional"] = true
-			}
+			inSection = "optional"
+			continue
+		}
+		// Handle already-transformed Metadata/Spec sections
+		if strings.HasPrefix(line, "### Metadata Argument Reference") {
+			inSection = "optional" // Metadata fields are typically optional except name
+			continue
+		}
+		if strings.HasPrefix(line, "### Spec Argument Reference") {
 			inSection = "optional"
 			continue
 		}
 		if strings.HasPrefix(line, "### Read-Only") || strings.HasPrefix(line, "### Attributes Reference") || strings.HasPrefix(line, "In addition to all arguments above") {
-			if !printedSections["readonly"] {
-				output.WriteString("\n### Attributes Reference\n\n")
-				output.WriteString("In addition to all arguments above, the following attributes are exported:\n\n")
-				printedSections["readonly"] = true
-			}
 			inSection = "readonly"
 			continue
 		}
 
-		// Transform attribute lines
-		if matches := attrRegex.FindStringSubmatch(line); matches != nil {
-			name := matches[1]
-			typeInfo := matches[2]
-			desc := strings.TrimSpace(matches[3])
+		// Parse attribute lines - try both formats
+		var name, typeInfo, desc, reqStr string
+		var hasNested bool
+		var matched bool
 
+		if matches := attrRegex.FindStringSubmatch(line); matches != nil {
+			// Original tfplugindocs format: `- \`name\` (Type) desc`
+			name = matches[1]
+			typeInfo = matches[2]
+			desc = strings.TrimSpace(matches[3])
+			hasNested = strings.Contains(matches[3], "see [below for nested schema]")
+			reqStr = "(Optional)"
+			if inSection == "required" {
+				reqStr = "(Required)"
+			}
+			matched = true
+		} else if matches := transformedAttrRegex.FindStringSubmatch(line); matches != nil {
+			// Already transformed format: `\`name\` - (Required/Optional) desc`
+			name = matches[1]
+			reqStr = "(" + matches[2] + ")"
+			desc = strings.TrimSpace(matches[3])
+			// Determine type from description or default to String
+			typeInfo = "String"
+			if strings.Contains(desc, "(`Block`)") || strings.Contains(desc, "See [") {
+				typeInfo = "Block"
+				hasNested = strings.Contains(desc, "See [") && strings.Contains(desc, "below")
+			} else if strings.Contains(desc, "(`List`)") {
+				typeInfo = "List"
+			} else if strings.Contains(desc, "(`Map`)") {
+				typeInfo = "Map"
+			} else if strings.Contains(desc, "(`Bool`)") {
+				typeInfo = "Bool"
+			} else if strings.Contains(desc, "(`Number`)") {
+				typeInfo = "Number"
+			}
+			// Clean the type annotation from desc
+			desc = regexp.MustCompile(`\s*\(\x60(String|Bool|Number|List|Map|Block|Set)\x60\)\.?$`).ReplaceAllString(desc, "")
+			desc = strings.TrimSuffix(desc, ".")
+			matched = true
+		}
+
+		if matched {
 			// Extract OneOf constraint if present
 			oneOfConstraint := extractOneOfConstraint(desc)
 			desc = removeOneOfConstraint(desc)
@@ -409,41 +462,95 @@ func transformDoc(filePath string) error {
 			// Clean up description
 			desc = cleanDescription(desc, name)
 
-			// Determine if it has nested block
-			hasNested := strings.Contains(matches[3], "see [below for nested schema]")
-
-			// Format the attribute line Volterra-style
-			reqStr := "(Optional)"
-			if inSection == "required" {
-				reqStr = "(Required)"
+			attr := attrInfo{
+				name:            name,
+				typeInfo:        typeInfo,
+				desc:            desc,
+				reqStr:          reqStr,
+				hasNested:       hasNested,
+				oneOfConstraint: oneOfConstraint,
+				rawLine:         line,
 			}
 
-			typeStr := extractSimpleType(typeInfo)
+			// Categorize attribute
+			if inSection == "readonly" {
+				readOnlyAttrs = append(readOnlyAttrs, attr)
+			} else if metadataFields[name] {
+				metadataAttrs = append(metadataAttrs, attr)
+			} else {
+				specAttrs = append(specAttrs, attr)
+			}
+		}
+	}
 
-			// Write OneOf constraint hint if present and not already printed (Volterra-style)
-			// Normalize the constraint key to handle different orderings of the same fields
-			constraintKey := normalizeOneOfKey(oneOfConstraint)
-			if oneOfConstraint != "" && !printedConstraints[constraintKey] {
-				output.WriteString(fmt.Sprintf("> **Note:** One of the arguments from this list \"%s\" must be set.\n\n", oneOfConstraint))
+	// Helper function to write attribute
+	printedConstraints := make(map[string]bool)
+	writeAttr := func(attr attrInfo) {
+		typeStr := extractSimpleType(attr.typeInfo)
+
+		// Write OneOf constraint hint if present and not already printed
+		constraintKey := normalizeOneOfKey(attr.oneOfConstraint)
+		if attr.oneOfConstraint != "" && !printedConstraints[constraintKey] {
+			output.WriteString(fmt.Sprintf("> **Note:** One of the arguments from this list \"%s\" must be set.\n\n", attr.oneOfConstraint))
+			printedConstraints[constraintKey] = true
+		}
+
+		// Clean any existing "See [X](#x) below" references from description to avoid duplication
+		desc := attr.desc
+		// Simple approach: remove any "See [...](...) below..." patterns
+		seeRefRegex := regexp.MustCompile(`See \[.+?\]\(#.+?\) below[^.]*\.?\s*`)
+		desc = seeRefRegex.ReplaceAllString(desc, "")
+		desc = strings.TrimSpace(desc)
+		desc = strings.TrimSuffix(desc, ".")
+
+		if attr.hasNested {
+			anchorName := toAnchorName(attr.name)
+			if desc != "" {
+				output.WriteString(fmt.Sprintf("`%s` - %s %s. See [%s](#%s) below for details.\n\n",
+					attr.name, attr.reqStr, desc, toTitleCase(attr.name), anchorName))
+			} else {
+				output.WriteString(fmt.Sprintf("`%s` - %s See [%s](#%s) below for details.\n\n",
+					attr.name, attr.reqStr, toTitleCase(attr.name), anchorName))
+			}
+		} else {
+			if desc != "" {
+				output.WriteString(fmt.Sprintf("`%s` - %s %s (`%s`).\n\n", attr.name, attr.reqStr, desc, typeStr))
+			} else {
+				output.WriteString(fmt.Sprintf("`%s` - %s (`%s`).\n\n", attr.name, attr.reqStr, typeStr))
+			}
+		}
+	}
+
+	// Write Metadata Argument Reference section (if we have metadata attrs)
+	if len(metadataAttrs) > 0 {
+		output.WriteString("### Metadata Argument Reference\n\n")
+		for _, attr := range metadataAttrs {
+			writeAttr(attr)
+		}
+	}
+
+	// Write Spec Argument Reference section (if we have spec attrs)
+	if len(specAttrs) > 0 {
+		output.WriteString("### Spec Argument Reference\n\n")
+		// Write any collected OneOf constraints at the start of spec section
+		for _, constraint := range oneOfConstraints {
+			constraintKey := normalizeOneOfKey(constraint)
+			if !printedConstraints[constraintKey] {
+				output.WriteString(fmt.Sprintf("> **Note:** One of the arguments from this list \"%s\" must be set.\n\n", constraint))
 				printedConstraints[constraintKey] = true
 			}
+		}
+		for _, attr := range specAttrs {
+			writeAttr(attr)
+		}
+	}
 
-			if hasNested {
-				anchorName := toAnchorName(name)
-				if desc != "" {
-					output.WriteString(fmt.Sprintf("`%s` - %s %s. See [%s](#%s) below for details.\n\n",
-						name, reqStr, desc, toTitleCase(name), anchorName))
-				} else {
-					output.WriteString(fmt.Sprintf("`%s` - %s See [%s](#%s) below for details.\n\n",
-						name, reqStr, toTitleCase(name), anchorName))
-				}
-			} else {
-				if desc != "" {
-					output.WriteString(fmt.Sprintf("`%s` - %s %s (`%s`).\n\n", name, reqStr, desc, typeStr))
-				} else {
-					output.WriteString(fmt.Sprintf("`%s` - %s (`%s`).\n\n", name, reqStr, typeStr))
-				}
-			}
+	// Write Read-Only/Attributes Reference section
+	if len(readOnlyAttrs) > 0 {
+		output.WriteString("\n### Attributes Reference\n\n")
+		output.WriteString("In addition to all arguments above, the following attributes are exported:\n\n")
+		for _, attr := range readOnlyAttrs {
+			writeAttr(attr)
 		}
 	}
 

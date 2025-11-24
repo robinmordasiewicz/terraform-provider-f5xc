@@ -116,8 +116,9 @@ jobs:
         if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
         run: |
           echo "📚 Regenerating API documentation..."
-          go run tools/generate-api-docs.go --spec-dir=${{ env.SPEC_DIR }}
-          echo "✅ API documentation regenerated"
+          go run tools/generate-api-docs.go --spec-dir=${{ env.SPEC_DIR }} --output-dir=docs/api
+          python3 tools/merge-nav.py
+          echo "✅ API documentation and navigation regenerated"
 
       - name: Run go mod tidy
         if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'

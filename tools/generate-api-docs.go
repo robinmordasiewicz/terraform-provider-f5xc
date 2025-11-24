@@ -1,26 +1,30 @@
-// generate-api-docs.go generates the docs/api.md file from OpenAPI specifications
-// Usage: go run tools/generate-api-docs.go [--spec-dir=path]
+// generate-api-docs.go generates API documentation pages from OpenAPI specifications
+// Creates separate pages per API for better performance and navigation
+// Usage: go run tools/generate-api-docs.go [--spec-dir=path] [--output-dir=path]
 package main
 
 import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
 )
 
 type APISpec struct {
-	Category   string
-	Name       string
-	Filename   string
-	SchemaPath string
+	Category    string
+	Name        string
+	Filename    string
+	SchemaPath  string
+	SlugName    string
+	Description string
 }
 
 func main() {
 	specDir := flag.String("spec-dir", "docs/specifications/api", "Directory containing OpenAPI spec files")
-	outputFile := flag.String("output", "docs/api.md", "Output markdown file")
+	outputDir := flag.String("output-dir", "docs/api", "Output directory for API documentation")
 	flag.Parse()
 
 	specs, err := scanSpecs(*specDir)
@@ -34,14 +38,49 @@ func main() {
 		os.Exit(1)
 	}
 
-	content := generateMarkdown(specs)
-
-	if err := os.WriteFile(*outputFile, []byte(content), 0644); err != nil {
-		fmt.Fprintf(os.Stderr, "Error writing output: %v\n", err)
+	// Create output directory
+	if err := os.MkdirAll(*outputDir, 0755); err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating output directory: %v\n", err)
 		os.Exit(1)
 	}
 
-	fmt.Printf("Generated %s with %d APIs across %d categories\n", *outputFile, len(specs), countCategories(specs))
+	// Clean existing .md files in output directory (except index.md initially)
+	cleanOutputDir(*outputDir)
+
+	// Generate index page
+	if err := generateIndexPage(*outputDir, specs); err != nil {
+		fmt.Fprintf(os.Stderr, "Error generating index: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Generate individual API pages
+	for _, spec := range specs {
+		if err := generateAPIPage(*outputDir, spec); err != nil {
+			fmt.Fprintf(os.Stderr, "Error generating page for %s: %v\n", spec.Name, err)
+			os.Exit(1)
+		}
+	}
+
+	// Generate navigation YAML for mkdocs.yml
+	if err := generateNavYAML(*outputDir, specs); err != nil {
+		fmt.Fprintf(os.Stderr, "Error generating nav YAML: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Generated %d API pages in %s\n", len(specs), *outputDir)
+}
+
+func cleanOutputDir(dir string) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return // Directory might not exist yet
+	}
+
+	for _, entry := range entries {
+		if !entry.IsDir() && strings.HasSuffix(entry.Name(), ".md") {
+			os.Remove(filepath.Join(dir, entry.Name()))
+		}
+	}
 }
 
 func scanSpecs(dir string) ([]APISpec, error) {
@@ -70,21 +109,18 @@ func scanSpecs(dir string) ([]APISpec, error) {
 
 		// Determine category and name
 		category := formatName(parts[0])
-		name := formatName(parts[len(parts)-1])
+		name := buildDisplayName(parts)
 
-		// Handle nested paths for better naming
-		if len(parts) > 1 {
-			// Use the last part as name, but include parent for context if it adds value
-			if parts[len(parts)-1] == "subscription" && len(parts) > 1 {
-				name = formatName(parts[len(parts)-2]) + " " + name
-			}
-		}
+		// Create slug for filename
+		slug := strings.ToLower(strings.ReplaceAll(schemaPath, ".", "-"))
 
 		specs = append(specs, APISpec{
-			Category:   category,
-			Name:       name,
-			Filename:   entry.Name(),
-			SchemaPath: schemaPath,
+			Category:    category,
+			Name:        name,
+			Filename:    entry.Name(),
+			SchemaPath:  schemaPath,
+			SlugName:    slug,
+			Description: fmt.Sprintf("API documentation for %s", name),
 		})
 	}
 
@@ -99,43 +135,46 @@ func scanSpecs(dir string) ([]APISpec, error) {
 	return specs, nil
 }
 
+func buildDisplayName(parts []string) string {
+	if len(parts) == 1 {
+		return formatName(parts[0])
+	}
+
+	// For nested paths, create a readable name
+	var nameParts []string
+	for _, p := range parts {
+		nameParts = append(nameParts, formatName(p))
+	}
+
+	// If last part is generic like "subscription", include parent
+	lastPart := parts[len(parts)-1]
+	if lastPart == "subscription" || lastPart == "ves-swagger" {
+		return strings.Join(nameParts, " - ")
+	}
+
+	// For views.*, show "View Name"
+	if parts[0] == "views" && len(parts) > 1 {
+		return formatName(parts[len(parts)-1])
+	}
+
+	return strings.Join(nameParts, " - ")
+}
+
 func formatName(s string) string {
-	// Replace underscores with spaces and title case
 	s = strings.ReplaceAll(s, "_", " ")
 
-	// Handle common abbreviations
 	abbreviations := map[string]string{
-		"api":   "API",
-		"cdn":   "CDN",
-		"dns":   "DNS",
-		"http":  "HTTP",
-		"https": "HTTPS",
-		"ip":    "IP",
-		"k8s":   "K8s",
-		"lb":    "LB",
-		"nat":   "NAT",
-		"nfv":   "NFV",
-		"oidc":  "OIDC",
-		"tcp":   "TCP",
-		"tls":   "TLS",
-		"udp":   "UDP",
-		"usb":   "USB",
-		"vpc":   "VPC",
-		"vpn":   "VPN",
-		"waf":   "WAF",
-		"bgp":   "BGP",
-		"crl":   "CRL",
-		"ike":   "IKE",
-		"scim":  "SCIM",
-		"tpm":   "TPM",
-		"acl":   "ACL",
-		"asn":   "ASN",
-		"aws":   "AWS",
-		"gcp":   "GCP",
-		"azure": "Azure",
-		"rbac":  "RBAC",
-		"soa":   "SOA",
-		"srv6":  "SRV6",
+		"api": "API", "cdn": "CDN", "dns": "DNS", "http": "HTTP",
+		"https": "HTTPS", "ip": "IP", "k8s": "K8s", "lb": "LB",
+		"nat": "NAT", "nfv": "NFV", "oidc": "OIDC", "tcp": "TCP",
+		"tls": "TLS", "udp": "UDP", "usb": "USB", "vpc": "VPC",
+		"vpn": "VPN", "waf": "WAF", "bgp": "BGP", "crl": "CRL",
+		"ike": "IKE", "scim": "SCIM", "tpm": "TPM", "acl": "ACL",
+		"asn": "ASN", "aws": "AWS", "gcp": "GCP", "azure": "Azure",
+		"rbac": "RBAC", "soa": "SOA", "srv6": "SRV6", "apm": "APM",
+		"cds": "CDS", "dhcp": "DHCP", "lte": "LTE", "nginx": "NGINX",
+		"pbac": "PBAC", "sdk": "SDK", "ssh": "SSH", "ui": "UI",
+		"vnet": "VNet", "tgw": "TGW", "csg": "CSG",
 	}
 
 	words := strings.Fields(s)
@@ -143,31 +182,80 @@ func formatName(s string) string {
 		lower := strings.ToLower(word)
 		if abbr, ok := abbreviations[lower]; ok {
 			words[i] = abbr
-		} else {
-			words[i] = strings.Title(lower)
+		} else if len(word) > 0 {
+			words[i] = strings.ToUpper(string(word[0])) + strings.ToLower(word[1:])
 		}
 	}
 
 	return strings.Join(words, " ")
 }
 
-func generateMarkdown(specs []APISpec) string {
+func generateIndexPage(outputDir string, specs []APISpec) error {
 	var sb strings.Builder
 
 	sb.WriteString(`---
 page_title: "API Reference"
-description: "Interactive F5 Distributed Cloud API documentation with Try it out functionality"
+description: "Interactive F5 Distributed Cloud API documentation"
 ---
 
 # API Reference
 
 Explore the F5 Distributed Cloud API documentation with interactive "Try it out" functionality.
 
-!!! tip "Usage"
-    Expand any API section below to view the interactive Swagger UI documentation.
-    Use the "Try it out" button to test API calls directly.
+!!! tip "Navigation"
+    Select an API from the left navigation menu to view its interactive documentation.
+    Each API page includes a Swagger UI with "Try it out" capability.
+
+## Quick Links
 
 `)
+
+	// Group by category for quick links
+	categories := make(map[string][]APISpec)
+	var categoryOrder []string
+
+	for _, spec := range specs {
+		if _, exists := categories[spec.Category]; !exists {
+			categoryOrder = append(categoryOrder, spec.Category)
+		}
+		categories[spec.Category] = append(categories[spec.Category], spec)
+	}
+
+	for _, category := range categoryOrder {
+		apis := categories[category]
+		sb.WriteString(fmt.Sprintf("### %s\n\n", category))
+		for _, api := range apis {
+			sb.WriteString(fmt.Sprintf("- [%s](%s.md)\n", api.Name, api.SlugName))
+		}
+		sb.WriteString("\n")
+	}
+
+	sb.WriteString(fmt.Sprintf("\n---\n\n*%d APIs available*\n", len(specs)))
+
+	return os.WriteFile(filepath.Join(outputDir, "index.md"), []byte(sb.String()), 0644)
+}
+
+func generateAPIPage(outputDir string, spec APISpec) error {
+	var sb strings.Builder
+
+	sb.WriteString(fmt.Sprintf(`---
+page_title: "%s API - F5XC Provider"
+description: "%s"
+---
+
+# %s
+
+%s
+
+<swagger-ui src="../specifications/api/%s"/>
+`, spec.Name, spec.Description, spec.Name, spec.Description, spec.Filename))
+
+	filename := filepath.Join(outputDir, spec.SlugName+".md")
+	return os.WriteFile(filename, []byte(sb.String()), 0644)
+}
+
+func generateNavYAML(outputDir string, specs []APISpec) error {
+	var sb strings.Builder
 
 	// Group by category
 	categories := make(map[string][]APISpec)
@@ -180,27 +268,22 @@ Explore the F5 Distributed Cloud API documentation with interactive "Try it out"
 		categories[spec.Category] = append(categories[spec.Category], spec)
 	}
 
-	// Generate content for each category
-	for _, category := range categoryOrder {
-		apis := categories[category]
-		sb.WriteString(fmt.Sprintf("## %s\n\n", category))
+	// Generate YAML navigation structure - flat list for cleaner navigation
+	sb.WriteString("# Auto-generated API navigation - DO NOT EDIT\n")
+	sb.WriteString("# Generated by tools/generate-api-docs.go\n")
+	sb.WriteString("nav:\n")
+	sb.WriteString("  - Home: index.md\n")
+	sb.WriteString("  - Resources: resources/\n")
+	sb.WriteString("  - Data Sources: data-sources/\n")
+	sb.WriteString("  - API Reference:\n")
+	sb.WriteString("    - Overview: api/index.md\n")
 
-		for _, api := range apis {
-			sb.WriteString(fmt.Sprintf("### %s\n\n", api.Name))
-			sb.WriteString(fmt.Sprintf("<swagger-ui src=\"specifications/api/%s\"/>\n\n", api.Filename))
-		}
-	}
-
-	// Add footer with metadata
-	sb.WriteString(fmt.Sprintf("\n<!-- Generated automatically from %d OpenAPI specifications -->\n", len(specs)))
-
-	return sb.String()
-}
-
-func countCategories(specs []APISpec) int {
-	categories := make(map[string]bool)
+	// Flatten the structure - just list all APIs alphabetically by name
 	for _, spec := range specs {
-		categories[spec.Category] = true
+		sb.WriteString(fmt.Sprintf("    - %s: api/%s.md\n", spec.Name, spec.SlugName))
 	}
-	return len(categories)
+
+	// Write to a separate file that can be used to update mkdocs.yml
+	navFile := filepath.Join(filepath.Dir(outputDir), "nav-api.yml")
+	return os.WriteFile(navFile, []byte(sb.String()), 0644)
 }

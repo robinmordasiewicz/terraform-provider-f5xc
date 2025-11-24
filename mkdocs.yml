@@ -65,3 +65,279 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/robinmordasiewicz/terraform-provider-f5xc
   generator: false
+
+nav:
+  - Home: index.md
+  - Resources: resources/
+  - Data Sources: data-sources/
+  - API Reference:
+    - Overview: api/index.md
+    - API Credential: api/api_credential.md
+    - API Group: api/api_group.md
+    - API Group Element: api/api_group_element.md
+    - API Sec - API Crawler: api/api_sec-api_crawler.md
+    - API Sec - API Discovery: api/api_sec-api_discovery.md
+    - API Sec - API Testing: api/api_sec-api_testing.md
+    - API Sec - Code Base Integration: api/api_sec-code_base_integration.md
+    - API Sec - Rule Suggestion: api/api_sec-rule_suggestion.md
+    - Address Allocator: api/address_allocator.md
+    - Advertise Policy: api/advertise_policy.md
+    - Ai Assistant: api/ai_assistant.md
+    - Ai Data - Bfdp: api/ai_data-bfdp.md
+    - Ai Data - Bfdp - Subscription: api/ai_data-bfdp-subscription.md
+    - Alert: api/alert.md
+    - Alert Policy: api/alert_policy.md
+    - Alert Receiver: api/alert_receiver.md
+    - App Firewall: api/app_firewall.md
+    - App Security: api/app_security.md
+    - App Setting: api/app_setting.md
+    - App Type: api/app_type.md
+    - Authentication: api/authentication.md
+    - BGP: api/bgp.md
+    - BGP ASN Set: api/bgp_asn_set.md
+    - BGP Routing Policy: api/bgp_routing_policy.md
+    - Bigcne - Data Group: api/bigcne-data_group.md
+    - Bigcne - Irule: api/bigcne-irule.md
+    - Bigip - APM: api/bigip-apm.md
+    - Bigip Irule: api/bigip_irule.md
+    - Billing - Payment Method: api/billing-payment_method.md
+    - Billing - Plan Transition: api/billing-plan_transition.md
+    - CDN Cache Rule: api/cdn_cache_rule.md
+    - CRL: api/crl.md
+    - Certificate: api/certificate.md
+    - Certificate Chain: api/certificate_chain.md
+    - Certified Hardware: api/certified_hardware.md
+    - Cloud Connect: api/cloud_connect.md
+    - Cloud Credentials: api/cloud_credentials.md
+    - Cloud Elastic IP: api/cloud_elastic_ip.md
+    - Cloud Link: api/cloud_link.md
+    - Cloud Region: api/cloud_region.md
+    - Cluster: api/cluster.md
+    - Cminstance: api/cminstance.md
+    - Contact: api/contact.md
+    - Container Registry: api/container_registry.md
+    - Customer Support: api/customer_support.md
+    - DNS Compliance Checks: api/dns_compliance_checks.md
+    - DNS Domain: api/dns_domain.md
+    - DNS LB Health Check: api/dns_lb_health_check.md
+    - DNS LB Pool: api/dns_lb_pool.md
+    - DNS Load Balancer: api/dns_load_balancer.md
+    - DNS Zone: api/dns_zone.md
+    - DNS Zone - Rrset: api/dns_zone-rrset.md
+    - DNS Zone - Subscription: api/dns_zone-subscription.md
+    - Data Privacy - Geo Config: api/data_privacy-geo_config.md
+    - Data Privacy - Lma Region: api/data_privacy-lma_region.md
+    - Data Type: api/data_type.md
+    - Dc Cluster Group: api/dc_cluster_group.md
+    - Discovered Service: api/discovered_service.md
+    - Discovery: api/discovery.md
+    - Endpoint: api/endpoint.md
+    - Enhanced Firewall Policy: api/enhanced_firewall_policy.md
+    - Fast ACL: api/fast_acl.md
+    - Fast ACL Rule: api/fast_acl_rule.md
+    - Filter Set: api/filter_set.md
+    - Fleet: api/fleet.md
+    - Flow: api/flow.md
+    - Flow Anomaly: api/flow_anomaly.md
+    - Forwarding Class: api/forwarding_class.md
+    - Geo Location Set: api/geo_location_set.md
+    - Gia: api/gia.md
+    - Global Log Receiver: api/global_log_receiver.md
+    - Graph - Connectivity: api/graph-connectivity.md
+    - Graph - L3l4: api/graph-l3l4.md
+    - Graph - Service: api/graph-service.md
+    - Graph - Site: api/graph-site.md
+    - Healthcheck: api/healthcheck.md
+    - IP Prefix Set: api/ip_prefix_set.md
+    - Ike1: api/ike1.md
+    - Ike2: api/ike2.md
+    - Implicit Label: api/implicit_label.md
+    - Infraprotect: api/infraprotect.md
+    - Infraprotect ASN: api/infraprotect_asn.md
+    - Infraprotect ASN Prefix: api/infraprotect_asn_prefix.md
+    - Infraprotect Deny List Rule: api/infraprotect_deny_list_rule.md
+    - Infraprotect Firewall Rule: api/infraprotect_firewall_rule.md
+    - Infraprotect Firewall Rule Group: api/infraprotect_firewall_rule_group.md
+    - Infraprotect Firewall Ruleset: api/infraprotect_firewall_ruleset.md
+    - Infraprotect Information: api/infraprotect_information.md
+    - Infraprotect Internet Prefix Advertisement: api/infraprotect_internet_prefix_advertisement.md
+    - Infraprotect Tunnel: api/infraprotect_tunnel.md
+    - K8s Cluster: api/k8s_cluster.md
+    - K8s Cluster Role: api/k8s_cluster_role.md
+    - K8s Cluster Role Binding: api/k8s_cluster_role_binding.md
+    - K8s Pod Security Admission: api/k8s_pod_security_admission.md
+    - K8s Pod Security Policy: api/k8s_pod_security_policy.md
+    - Known Label: api/known_label.md
+    - Known Label Key: api/known_label_key.md
+    - Log: api/log.md
+    - Log Receiver: api/log_receiver.md
+    - Maintenance Status: api/maintenance_status.md
+    - Malicious User Mitigation: api/malicious_user_mitigation.md
+    - Malware Protection - Subscription: api/malware_protection-subscription.md
+    - Marketplace - AWS Account: api/marketplace-aws_account.md
+    - Marketplace - Xc Saas: api/marketplace-xc_saas.md
+    - Module Management: api/module_management.md
+    - NAT Policy: api/nat_policy.md
+    - NFV Service: api/nfv_service.md
+    - NGINX - One - NGINX CSG: api/nginx-one-nginx_csg.md
+    - NGINX - One - NGINX Instance: api/nginx-one-nginx_instance.md
+    - NGINX - One - NGINX Server: api/nginx-one-nginx_server.md
+    - NGINX - One - NGINX Service Discovery: api/nginx-one-nginx_service_discovery.md
+    - NGINX - One - Subscription: api/nginx-one-subscription.md
+    - Namespace: api/namespace.md
+    - Namespace Role: api/namespace_role.md
+    - Network Connector: api/network_connector.md
+    - Network Firewall: api/network_firewall.md
+    - Network Interface: api/network_interface.md
+    - Network Policy: api/network_policy.md
+    - Network Policy Rule: api/network_policy_rule.md
+    - Network Policy Set: api/network_policy_set.md
+    - OIDC Provider: api/oidc_provider.md
+    - Observability - Subscription: api/observability-subscription.md
+    - Observability - Synthetic Monitor: api/observability-synthetic_monitor.md
+    - Observability - Synthetic Monitor - V1 DNS Monitor: api/observability-synthetic_monitor-v1_dns_monitor.md
+    - Observability - Synthetic Monitor - V1 HTTP Monitor: api/observability-synthetic_monitor-v1_http_monitor.md
+    - Operate - BGP: api/operate-bgp.md
+    - Operate - CRL: api/operate-crl.md
+    - Operate - DHCP: api/operate-dhcp.md
+    - Operate - Debug: api/operate-debug.md
+    - Operate - Flow: api/operate-flow.md
+    - Operate - LTE: api/operate-lte.md
+    - Operate - Ping: api/operate-ping.md
+    - Operate - Route: api/operate-route.md
+    - Operate - Tcpdump: api/operate-tcpdump.md
+    - Operate - Traceroute: api/operate-traceroute.md
+    - Operate - USB: api/operate-usb.md
+    - Operate - Wifi: api/operate-wifi.md
+    - PBAC - Addon Service: api/pbac-addon_service.md
+    - PBAC - Addon Subscription: api/pbac-addon_subscription.md
+    - PBAC - Catalog: api/pbac-catalog.md
+    - PBAC - Navigation Tile: api/pbac-navigation_tile.md
+    - PBAC - Plan: api/pbac-plan.md
+    - Policer: api/policer.md
+    - Protocol Inspection: api/protocol_inspection.md
+    - Protocol Policer: api/protocol_policer.md
+    - Public IP: api/public_ip.md
+    - Quota: api/quota.md
+    - RBAC Policy: api/rbac_policy.md
+    - Rate Limiter: api/rate_limiter.md
+    - Registration: api/registration.md
+    - Report: api/report.md
+    - Report Config: api/report_config.md
+    - Role: api/role.md
+    - Route: api/route.md
+    - SCIM: api/scim.md
+    - SRV6 Network Slice: api/srv6_network_slice.md
+    - Secret Management: api/secret_management.md
+    - Secret Management Access: api/secret_management_access.md
+    - Secret Policy: api/secret_policy.md
+    - Secret Policy Rule: api/secret_policy_rule.md
+    - Segment: api/segment.md
+    - Segment Connection: api/segment_connection.md
+    - Sensitive Data Policy: api/sensitive_data_policy.md
+    - Service Policy: api/service_policy.md
+    - Service Policy Rule: api/service_policy_rule.md
+    - Service Policy Set: api/service_policy_set.md
+    - Shape - Bot Defense - Bot Allowlist Policy: api/shape-bot_defense-bot_allowlist_policy.md
+    - Shape - Bot Defense - Bot Endpoint Policy: api/shape-bot_defense-bot_endpoint_policy.md
+    - Shape - Bot Defense - Bot Infrastructure: api/shape-bot_defense-bot_infrastructure.md
+    - Shape - Bot Defense - Bot Network Policy: api/shape-bot_defense-bot_network_policy.md
+    - Shape - Bot Defense - Mobile Base Config: api/shape-bot_defense-mobile_base_config.md
+    - Shape - Bot Defense - Mobile SDK: api/shape-bot_defense-mobile_sdk.md
+    - Shape - Bot Defense - Protected Application: api/shape-bot_defense-protected_application.md
+    - Shape - Bot Defense - Reporting: api/shape-bot_defense-reporting.md
+    - Shape - Bot Defense - Subscription: api/shape-bot_defense-subscription.md
+    - Shape - Bot Defense - Threat Intelligence - Bot Detection Rule: api/shape-bot_defense-threat_intelligence-bot_detection_rule.md
+    - Shape - Bot Defense - Threat Intelligence - Bot Detection Update: api/shape-bot_defense-threat_intelligence-bot_detection_update.md
+    - Shape - Brmalerts - Alert Gen Policy: api/shape-brmalerts-alert_gen_policy.md
+    - Shape - Brmalerts - Alert Template: api/shape-brmalerts-alert_template.md
+    - Shape - Client Side Defense: api/shape-client_side_defense.md
+    - Shape - Client Side Defense - Allowed Domain: api/shape-client_side_defense-allowed_domain.md
+    - Shape - Client Side Defense - Mitigated Domain: api/shape-client_side_defense-mitigated_domain.md
+    - Shape - Client Side Defense - Protected Domain: api/shape-client_side_defense-protected_domain.md
+    - Shape - Client Side Defense - Subscription: api/shape-client_side_defense-subscription.md
+    - Shape - Data Delivery: api/shape-data_delivery.md
+    - Shape - Data Delivery - Receiver: api/shape-data_delivery-receiver.md
+    - Shape - Data Delivery - Subscription: api/shape-data_delivery-subscription.md
+    - Shape - Device Id: api/shape-device_id.md
+    - Shape - Mobile App Shield - Subscription: api/shape-mobile_app_shield-subscription.md
+    - Shape - Mobile Integrator - Subscription: api/shape-mobile_integrator-subscription.md
+    - Shape - Recognize: api/shape-recognize.md
+    - Shape - Safe: api/shape-safe.md
+    - Shape - Safeap: api/shape-safeap.md
+    - Shape Bot Defense Instance: api/shape_bot_defense_instance.md
+    - Signup: api/signup.md
+    - Site: api/site.md
+    - Site Mesh Group: api/site_mesh_group.md
+    - Status At Site: api/status_at_site.md
+    - Stored Object: api/stored_object.md
+    - Subnet: api/subnet.md
+    - Subscription: api/subscription.md
+    - TPM API Key: api/tpm_api_key.md
+    - TPM Category: api/tpm_category.md
+    - TPM Manager: api/tpm_manager.md
+    - TPM Provision: api/tpm_provision.md
+    - Tenant: api/tenant.md
+    - Tenant Management: api/tenant_management.md
+    - Tenant Management - Allowed Tenant: api/tenant_management-allowed_tenant.md
+    - Tenant Management - Child Tenant: api/tenant_management-child_tenant.md
+    - Tenant Management - Child Tenant Manager: api/tenant_management-child_tenant_manager.md
+    - Tenant Management - Managed Tenant: api/tenant_management-managed_tenant.md
+    - Tenant Management - Tenant Profile: api/tenant_management-tenant_profile.md
+    - Ticket Management - Ticket Tracking System: api/ticket_management-ticket_tracking_system.md
+    - Token: api/token.md
+    - Topology: api/topology.md
+    - Trusted Ca List: api/trusted_ca_list.md
+    - Tunnel: api/tunnel.md
+    - UI - Static Component: api/ui-static_component.md
+    - USB Policy: api/usb_policy.md
+    - Upgrade Status: api/upgrade_status.md
+    - Usage: api/usage.md
+    - Usage - Invoice: api/usage-invoice.md
+    - Usage - Plan: api/usage-plan.md
+    - Usage - Subscription: api/usage-subscription.md
+    - User: api/user.md
+    - User - Setting: api/user-setting.md
+    - User Group: api/user_group.md
+    - User Identification: api/user_identification.md
+    - API Definition: api/views-api_definition.md
+    - AWS TGW Site: api/views-aws_tgw_site.md
+    - AWS VPC Site: api/views-aws_vpc_site.md
+    - App API Group: api/views-app_api_group.md
+    - Azure VNet Site: api/views-azure_vnet_site.md
+    - Bigip Virtual Server: api/views-bigip_virtual_server.md
+    - Bot Defense App Infrastructure: api/views-bot_defense_app_infrastructure.md
+    - CDN Loadbalancer: api/views-cdn_loadbalancer.md
+    - External Connector: api/views-external_connector.md
+    - Forward Proxy Policy: api/views-forward_proxy_policy.md
+    - GCP VPC Site: api/views-gcp_vpc_site.md
+    - HTTP Loadbalancer: api/views-http_loadbalancer.md
+    - IKE Phase1 Profile: api/views-ike_phase1_profile.md
+    - IKE Phase2 Profile: api/views-ike_phase2_profile.md
+    - Network Policy View: api/views-network_policy_view.md
+    - Origin Pool: api/views-origin_pool.md
+    - Policy Based Routing: api/views-policy_based_routing.md
+    - Proxy: api/views-proxy.md
+    - Rate Limiter Policy: api/views-rate_limiter_policy.md
+    - Securemesh Site: api/views-securemesh_site.md
+    - Securemesh Site V2: api/views-securemesh_site_v2.md
+    - TCP Loadbalancer: api/views-tcp_loadbalancer.md
+    - Tenant Configuration: api/views-tenant_configuration.md
+    - Terraform Parameters: api/views-terraform_parameters.md
+    - Third Party Application: api/views-third_party_application.md
+    - UDP Loadbalancer: api/views-udp_loadbalancer.md
+    - View Internal: api/views-view_internal.md
+    - Voltstack Site: api/views-voltstack_site.md
+    - Workload: api/views-workload.md
+    - Virtual Appliance: api/virtual_appliance.md
+    - Virtual Host: api/virtual_host.md
+    - Virtual K8s: api/virtual_k8s.md
+    - Virtual Network: api/virtual_network.md
+    - Virtual Site: api/virtual_site.md
+    - Voltshare: api/voltshare.md
+    - Voltshare Admin Policy: api/voltshare_admin_policy.md
+    - WAF: api/waf.md
+    - WAF Exclusion Policy: api/waf_exclusion_policy.md
+    - WAF Signatures Changelog: api/waf_signatures_changelog.md
+    - Was - User Token: api/was-user_token.md
+    - Workload Flavor: api/workload_flavor.md

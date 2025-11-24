@@ -1,5 +1,6 @@
 # Terraform Provider documentation generation workflow
 # Uses hashicorp/terraform-plugin-docs to generate provider documentation
+# Can be triggered manually via workflow_dispatch for immediate documentation regeneration
 name: Documentation
 
 on:
@@ -21,6 +22,7 @@ on:
       - 'examples/**'
       - 'templates/**'
       - 'tools/**'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -66,7 +68,7 @@ jobs:
           fi
 
       - name: Create Pull Request for documentation changes
-        if: steps.changes.outputs.changed == 'true' && github.event_name == 'push'
+        if: steps.changes.outputs.changed == 'true' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

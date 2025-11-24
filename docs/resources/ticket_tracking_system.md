@@ -72,9 +72,31 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--jira_config"></a>
 
+### Jira Config
+
+`adhoc_rest_api` - (Optional) JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message. See [Adhoc REST API](#nestedblock--jira_config--adhoc_rest_api) below.
+
 <a id="nestedblock--jira_config--adhoc_rest_api"></a>
 
+### Jira Config Adhoc REST API
+
+`account_email` - (Optional) Account Email. Username (email) for the Atlassian account (`String`).
+
+`api_token` - (Optional) API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value a.. (`String`).
+
+`organization_domain` - (Optional) Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034 (`String`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

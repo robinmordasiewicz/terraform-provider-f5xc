@@ -82,25 +82,93 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--rules"></a>
 
+### Rules
+
+`key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#nestedblock--rules--key_pattern) below.
+
+`key_value_pattern` - (Optional) Key & Value Pattern. Search for specific key & value patterns in the specified sections. See [Key Value Pattern](#nestedblock--rules--key_value_pattern) below.
+
+`value_pattern` - (Optional) Rule Pattern Type. test. See [Value Pattern](#nestedblock--rules--value_pattern) below.
+
 <a id="nestedblock--rules--key_pattern"></a>
+
+### Rules Key Pattern
+
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_pattern--exact_values) below.
+
+`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
+
+`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
 <a id="nestedblock--rules--key_pattern--exact_values"></a>
 
+### Rules Key Pattern Exact Values
+
+`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
+
 <a id="nestedblock--rules--key_value_pattern"></a>
+
+### Rules Key Value Pattern
+
+`key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#nestedblock--rules--key_value_pattern--key_pattern) below.
+
+`value_pattern` - (Optional) Rule Pattern Type. test. See [Value Pattern](#nestedblock--rules--key_value_pattern--value_pattern) below.
 
 <a id="nestedblock--rules--key_value_pattern--key_pattern"></a>
 
+### Rules Key Value Pattern Key Pattern
+
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_value_pattern--key_pattern--exact_values) below.
+
+`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
+
+`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+
 <a id="nestedblock--rules--key_value_pattern--key_pattern--exact_values"></a>
+
+### Rules Key Value Pattern Key Pattern Exact Values
 
 <a id="nestedblock--rules--key_value_pattern--value_pattern"></a>
 
+### Rules Key Value Pattern Value Pattern
+
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_value_pattern--value_pattern--exact_values) below.
+
+`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
+
+`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+
 <a id="nestedblock--rules--key_value_pattern--value_pattern--exact_values"></a>
+
+### Rules Key Value Pattern Value Pattern Exact Values
 
 <a id="nestedblock--rules--value_pattern"></a>
 
+### Rules Value Pattern
+
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--value_pattern--exact_values) below.
+
+`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
+
+`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+
 <a id="nestedblock--rules--value_pattern--exact_values"></a>
 
+### Rules Value Pattern Exact Values
+
+`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

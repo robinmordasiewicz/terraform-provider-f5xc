@@ -65,9 +65,13 @@ resource "f5xc_site_mesh_group" "example" {
 
 ### Spec Argument Reference
 
+> **Note:** One of the arguments from this list "disable_re_fallback, enable_re_fallback" must be set.
+
 `disable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable RE Fallback](#disable-re-fallback) below for details.
 
 `enable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable RE Fallback](#enable-re-fallback) below for details.
+
+> **Note:** One of the arguments from this list "full_mesh, hub_mesh, spoke_mesh" must be set.
 
 `full_mesh` - (Optional) Full Mesh. Details of Full Mesh Group Type. See [Full Mesh](#full-mesh) below for details.
 
@@ -89,31 +93,97 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--disable_re_fallback"></a>
 
+### Disable RE Fallback
+
 <a id="nestedblock--enable_re_fallback"></a>
+
+### Enable RE Fallback
 
 <a id="nestedblock--full_mesh"></a>
 
+### Full Mesh
+
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#nestedblock--full_mesh--control_and_data_plane_mesh) below.
+
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#nestedblock--full_mesh--data_plane_mesh) below.
+
 <a id="nestedblock--full_mesh--control_and_data_plane_mesh"></a>
+
+### Full Mesh Control And Data Plane Mesh
 
 <a id="nestedblock--full_mesh--data_plane_mesh"></a>
 
+### Full Mesh Data Plane Mesh
+
 <a id="nestedblock--hub_mesh"></a>
+
+### Hub Mesh
+
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#nestedblock--hub_mesh--control_and_data_plane_mesh) below.
+
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#nestedblock--hub_mesh--data_plane_mesh) below.
 
 <a id="nestedblock--hub_mesh--control_and_data_plane_mesh"></a>
 
+### Hub Mesh Control And Data Plane Mesh
+
 <a id="nestedblock--hub_mesh--data_plane_mesh"></a>
+
+### Hub Mesh Data Plane Mesh
 
 <a id="nestedblock--spoke_mesh"></a>
 
+### Spoke Mesh
+
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#nestedblock--spoke_mesh--control_and_data_plane_mesh) below.
+
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#nestedblock--spoke_mesh--data_plane_mesh) below.
+
+`hub_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Hub Mesh Group](#nestedblock--spoke_mesh--hub_mesh_group) below.
+
 <a id="nestedblock--spoke_mesh--control_and_data_plane_mesh"></a>
+
+### Spoke Mesh Control And Data Plane Mesh
 
 <a id="nestedblock--spoke_mesh--data_plane_mesh"></a>
 
+### Spoke Mesh Data Plane Mesh
+
 <a id="nestedblock--spoke_mesh--hub_mesh_group"></a>
+
+### Spoke Mesh Hub Mesh Group
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
 <a id="nestedblock--virtual_site"></a>
+
+### Virtual Site
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 ## Import
 

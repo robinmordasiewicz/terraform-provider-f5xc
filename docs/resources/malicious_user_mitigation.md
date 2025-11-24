@@ -74,25 +74,73 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--mitigation_type"></a>
 
+### Mitigation Type
+
+`rules` - (Optional) Rules. Define the threat levels and the corresponding mitigation actions to be taken. See [Rules](#nestedblock--mitigation_type--rules) below.
+
 <a id="nestedblock--mitigation_type--rules"></a>
+
+### Mitigation Type Rules
+
+`mitigation_action` - (Optional) Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user. See [Mitigation Action](#nestedblock--mitigation_type--rules--mitigation_action) below.
+
+`threat_level` - (Optional) Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation. See [Threat Level](#nestedblock--mitigation_type--rules--threat_level) below.
 
 <a id="nestedblock--mitigation_type--rules--mitigation_action"></a>
 
+### Mitigation Type Rules Mitigation Action
+
+`block_temporarily` - (Optional) Empty. This can be used for messages where no values are needed. See [Block Temporarily](#nestedblock--mitigation_type--rules--mitigation_action--block_temporarily) below.
+
+`captcha_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Captcha Challenge](#nestedblock--mitigation_type--rules--mitigation_action--captcha_challenge) below.
+
+`javascript_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Javascript Challenge](#nestedblock--mitigation_type--rules--mitigation_action--javascript_challenge) below.
+
 <a id="nestedblock--mitigation_type--rules--mitigation_action--block_temporarily"></a>
+
+### Mitigation Type Rules Mitigation Action Block Temporarily
 
 <a id="nestedblock--mitigation_type--rules--mitigation_action--captcha_challenge"></a>
 
+### Mitigation Type Rules Mitigation Action Captcha Challenge
+
 <a id="nestedblock--mitigation_type--rules--mitigation_action--javascript_challenge"></a>
+
+### Mitigation Type Rules Mitigation Action Javascript Challenge
 
 <a id="nestedblock--mitigation_type--rules--threat_level"></a>
 
+### Mitigation Type Rules Threat Level
+
+`high` - (Optional) Empty. This can be used for messages where no values are needed. See [High](#nestedblock--mitigation_type--rules--threat_level--high) below.
+
+`low` - (Optional) Empty. This can be used for messages where no values are needed. See [Low](#nestedblock--mitigation_type--rules--threat_level--low) below.
+
+`medium` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium](#nestedblock--mitigation_type--rules--threat_level--medium) below.
+
 <a id="nestedblock--mitigation_type--rules--threat_level--high"></a>
+
+### Mitigation Type Rules Threat Level High
 
 <a id="nestedblock--mitigation_type--rules--threat_level--low"></a>
 
+### Mitigation Type Rules Threat Level Low
+
 <a id="nestedblock--mitigation_type--rules--threat_level--medium"></a>
 
+### Mitigation Type Rules Threat Level Medium
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

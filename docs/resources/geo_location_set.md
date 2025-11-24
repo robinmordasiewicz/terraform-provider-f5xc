@@ -51,7 +51,9 @@ resource "f5xc_geo_location_set" "example" {
 
 ### Spec Argument Reference
 
-`custom_geo_location_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Custom Geo Location Selector](#custom-geo-location-selector) below for details.
+> **Note:** One of the arguments from this list "custom_geo_location_selector, global" must be set.
+
+`custom_geo_location_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar.. See [Custom Geo Location Selector](#custom-geo-location-selector) below for details.
 
 `global` - (Optional) Empty. This can be used for messages where no values are needed. See [Global](#global) below for details.
 
@@ -67,9 +69,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--custom_geo_location_selector"></a>
 
+### Custom Geo Location Selector
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
 <a id="nestedblock--global"></a>
 
+### Global
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

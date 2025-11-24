@@ -64,9 +64,15 @@ resource "f5xc_service_policy_rule" "example" {
 
 `action` - (Optional) Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY D... Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY` (`String`).
 
+> **Note:** One of the arguments from this list "any_asn, asn_list, asn_matcher" must be set.
+
 `any_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Asn](#any-asn) below for details.
 
+> **Note:** One of the arguments from this list "any_client, client_name, client_name_matcher, client_selector, ip_threat_category_list" must be set.
+
 `any_client` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Client](#any-client) below for details.
+
+> **Note:** One of the arguments from this list "any_ip, ip_matcher, ip_prefix_list" must be set.
 
 `any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any IP](#any-ip) below for details.
 
@@ -86,7 +92,7 @@ resource "f5xc_service_policy_rule" "example" {
 
 `client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Client Name Matcher](#client-name-matcher) below for details.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Client Selector](#client-selector) below for details.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar.. See [Client Selector](#client-selector) below for details.
 
 `cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matchers](#cookie-matchers) below for details.
 
@@ -103,6 +109,8 @@ resource "f5xc_service_policy_rule" "example" {
 `ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#ip-prefix-list) below for details.
 
 `ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#ip-threat-category-list) below for details.
+
+> **Note:** One of the arguments from this list "ja4_tls_fingerprint, tls_fingerprint_matcher" must be set.
 
 `ja4_tls_fingerprint` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 TLS Fingerprint](#ja4-tls-fingerprint) below for details.
 
@@ -138,159 +146,607 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--any_asn"></a>
 
+### Any Asn
+
 <a id="nestedblock--any_client"></a>
+
+### Any Client
 
 <a id="nestedblock--any_ip"></a>
 
+### Any IP
+
 <a id="nestedblock--api_group_matcher"></a>
+
+### API Group Matcher
+
+`invert_matcher` - (Optional) Invert String Matcher. Invert the match result (`Bool`).
+
+`match` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
 
 <a id="nestedblock--arg_matchers"></a>
 
+### Arg Matchers
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#nestedblock--arg_matchers--check_not_present) below.
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#nestedblock--arg_matchers--check_present) below.
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#nestedblock--arg_matchers--item) below.
+
+`name` - (Optional) Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body (`String`).
+
 <a id="nestedblock--arg_matchers--check_not_present"></a>
+
+### Arg Matchers Check Not Present
 
 <a id="nestedblock--arg_matchers--check_present"></a>
 
+### Arg Matchers Check Present
+
 <a id="nestedblock--arg_matchers--item"></a>
+
+### Arg Matchers Item
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--asn_list"></a>
 
+### Asn List
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
+
 <a id="nestedblock--asn_matcher"></a>
+
+### Asn Matcher
+
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#nestedblock--asn_matcher--asn_sets) below.
 
 <a id="nestedblock--asn_matcher--asn_sets"></a>
 
+### Asn Matcher Asn Sets
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--body_matcher"></a>
+
+### Body Matcher
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--bot_action"></a>
 
+### Bot Action
+
+`bot_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Bot Skip Processing](#nestedblock--bot_action--bot_skip_processing) below.
+
+`none` - (Optional) Empty. This can be used for messages where no values are needed. See [None](#nestedblock--bot_action--none) below.
+
 <a id="nestedblock--bot_action--bot_skip_processing"></a>
+
+### Bot Action Bot Skip Processing
 
 <a id="nestedblock--bot_action--none"></a>
 
+### Bot Action None
+
 <a id="nestedblock--client_name_matcher"></a>
+
+### Client Name Matcher
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--client_selector"></a>
 
+### Client Selector
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
 <a id="nestedblock--cookie_matchers"></a>
+
+### Cookie Matchers
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#nestedblock--cookie_matchers--check_not_present) below.
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#nestedblock--cookie_matchers--check_present) below.
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#nestedblock--cookie_matchers--item) below.
+
+`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
 
 <a id="nestedblock--cookie_matchers--check_not_present"></a>
 
+### Cookie Matchers Check Not Present
+
 <a id="nestedblock--cookie_matchers--check_present"></a>
+
+### Cookie Matchers Check Present
 
 <a id="nestedblock--cookie_matchers--item"></a>
 
+### Cookie Matchers Item
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
+
 <a id="nestedblock--domain_matcher"></a>
+
+### Domain Matcher
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
 <a id="nestedblock--headers"></a>
 
+### Headers
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#nestedblock--headers--check_not_present) below.
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#nestedblock--headers--check_present) below.
+
+`invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#nestedblock--headers--item) below.
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
 <a id="nestedblock--headers--check_not_present"></a>
+
+### Headers Check Not Present
 
 <a id="nestedblock--headers--check_present"></a>
 
+### Headers Check Present
+
 <a id="nestedblock--headers--item"></a>
+
+### Headers Item
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--http_method"></a>
 
+### HTTP Method
+
+`invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
+
+`methods` - (Optional) Method List. List of methods values to match against (`List`).
+
 <a id="nestedblock--ip_matcher"></a>
+
+### IP Matcher
+
+`invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
+
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#nestedblock--ip_matcher--prefix_sets) below.
 
 <a id="nestedblock--ip_matcher--prefix_sets"></a>
 
+### IP Matcher Prefix Sets
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--ip_prefix_list"></a>
+
+### IP Prefix List
+
+`invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
+
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
 <a id="nestedblock--ip_threat_category_list"></a>
 
+### IP Threat Category List
+
+`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions (`List`).
+
 <a id="nestedblock--ja4_tls_fingerprint"></a>
+
+### Ja4 TLS Fingerprint
+
+`exact_values` - (Optional) Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against (`List`).
 
 <a id="nestedblock--jwt_claims"></a>
 
+### JWT Claims
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#nestedblock--jwt_claims--check_not_present) below.
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#nestedblock--jwt_claims--check_present) below.
+
+`invert_matcher` - (Optional) Invert Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#nestedblock--jwt_claims--item) below.
+
+`name` - (Optional) JWT Claim Name. JWT claim name (`String`).
+
 <a id="nestedblock--jwt_claims--check_not_present"></a>
+
+### JWT Claims Check Not Present
 
 <a id="nestedblock--jwt_claims--check_present"></a>
 
+### JWT Claims Check Present
+
 <a id="nestedblock--jwt_claims--item"></a>
+
+### JWT Claims Item
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--label_matcher"></a>
 
+### Label Matcher
+
+`keys` - (Optional) Keys. The list of label key names that have to match (`List`).
+
 <a id="nestedblock--mum_action"></a>
+
+### Mum Action
+
+`default` - (Optional) Empty. This can be used for messages where no values are needed. See [Default](#nestedblock--mum_action--default) below.
+
+`skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Processing](#nestedblock--mum_action--skip_processing) below.
 
 <a id="nestedblock--mum_action--default"></a>
 
+### Mum Action Default
+
 <a id="nestedblock--mum_action--skip_processing"></a>
+
+### Mum Action Skip Processing
 
 <a id="nestedblock--path"></a>
 
+### Path
+
+`exact_values` - (Optional) Exact Values. A list of exact path values to match the input HTTP path against (`List`).
+
+`invert_matcher` - (Optional) Invert Path Matcher. Invert the match result (`Bool`).
+
+`prefix_values` - (Optional) Prefix Values. A list of path prefix values to match the input HTTP path against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input HTTP path against (`List`).
+
+`suffix_values` - (Optional) Suffix Values. A list of path suffix values to match the input HTTP path against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
+
 <a id="nestedblock--port_matcher"></a>
+
+### Port Matcher
+
+`invert_matcher` - (Optional) Invert Port Matcher. Invert the match result (`Bool`).
+
+`ports` - (Optional) Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range (`List`).
 
 <a id="nestedblock--query_params"></a>
 
+### Query Params
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#nestedblock--query_params--check_not_present) below.
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#nestedblock--query_params--check_present) below.
+
+`invert_matcher` - (Optional) Invert Query Parameter Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#nestedblock--query_params--item) below.
+
+`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
+
 <a id="nestedblock--query_params--check_not_present"></a>
+
+### Query Params Check Not Present
 
 <a id="nestedblock--query_params--check_present"></a>
 
+### Query Params Check Present
+
 <a id="nestedblock--query_params--item"></a>
+
+### Query Params Item
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
 <a id="nestedblock--request_constraints"></a>
 
+### Request Constraints
+
+`max_cookie_count_exceeds` - (Optional) Match on the Count for all Cookies that exceed this value (`Number`).
+
+`max_cookie_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Count None](#nestedblock--request_constraints--max_cookie_count_none) below.
+
+`max_cookie_key_size_exceeds` - (Optional) Match on the Name Size per Cookie that exceed this value (`Number`).
+
+`max_cookie_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Key Size None](#nestedblock--request_constraints--max_cookie_key_size_none) below.
+
+`max_cookie_value_size_exceeds` - (Optional) Match on the Value Size per Cookie that exceed this value (`Number`).
+
+`max_cookie_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Value Size None](#nestedblock--request_constraints--max_cookie_value_size_none) below.
+
+`max_header_count_exceeds` - (Optional) Match on the Count for all Headers that exceed this value (`Number`).
+
+`max_header_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Count None](#nestedblock--request_constraints--max_header_count_none) below.
+
+`max_header_key_size_exceeds` - (Optional) Match on the Name Size per Header that exceed this value (`Number`).
+
+`max_header_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Key Size None](#nestedblock--request_constraints--max_header_key_size_none) below.
+
+`max_header_value_size_exceeds` - (Optional) Match on the Value Size per Header that exceed this value (`Number`).
+
+`max_header_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Value Size None](#nestedblock--request_constraints--max_header_value_size_none) below.
+
+`max_parameter_count_exceeds` - (Optional) Match on the Parameter Count that exceed this value (`Number`).
+
+`max_parameter_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Count None](#nestedblock--request_constraints--max_parameter_count_none) below.
+
+`max_parameter_name_size_exceeds` - (Optional) Match on the Parameter Name Size that exceed this value (`Number`).
+
+`max_parameter_name_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Name Size None](#nestedblock--request_constraints--max_parameter_name_size_none) below.
+
+`max_parameter_value_size_exceeds` - (Optional) Match on the Parameter Value Size that exceed this value (`Number`).
+
+`max_parameter_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Value Size None](#nestedblock--request_constraints--max_parameter_value_size_none) below.
+
+`max_query_size_exceeds` - (Optional) Match on the URL Query Size that exceed this value (`Number`).
+
+`max_query_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Query Size None](#nestedblock--request_constraints--max_query_size_none) below.
+
+`max_request_line_size_exceeds` - (Optional) Match on the Request Line Size that exceed this value (`Number`).
+
+`max_request_line_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Request Line Size None](#nestedblock--request_constraints--max_request_line_size_none) below.
+
+`max_request_size_exceeds` - (Optional) Match on the Request Size that exceed this value (`Number`).
+
+`max_request_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Request Size None](#nestedblock--request_constraints--max_request_size_none) below.
+
+`max_url_size_exceeds` - (Optional) Match on the URL Size that exceed this value (`Number`).
+
+`max_url_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max URL Size None](#nestedblock--request_constraints--max_url_size_none) below.
+
 <a id="nestedblock--request_constraints--max_cookie_count_none"></a>
+
+### Request Constraints Max Cookie Count None
 
 <a id="nestedblock--request_constraints--max_cookie_key_size_none"></a>
 
+### Request Constraints Max Cookie Key Size None
+
 <a id="nestedblock--request_constraints--max_cookie_value_size_none"></a>
+
+### Request Constraints Max Cookie Value Size None
 
 <a id="nestedblock--request_constraints--max_header_count_none"></a>
 
+### Request Constraints Max Header Count None
+
 <a id="nestedblock--request_constraints--max_header_key_size_none"></a>
+
+### Request Constraints Max Header Key Size None
 
 <a id="nestedblock--request_constraints--max_header_value_size_none"></a>
 
+### Request Constraints Max Header Value Size None
+
 <a id="nestedblock--request_constraints--max_parameter_count_none"></a>
+
+### Request Constraints Max Parameter Count None
 
 <a id="nestedblock--request_constraints--max_parameter_name_size_none"></a>
 
+### Request Constraints Max Parameter Name Size None
+
 <a id="nestedblock--request_constraints--max_parameter_value_size_none"></a>
+
+### Request Constraints Max Parameter Value Size None
 
 <a id="nestedblock--request_constraints--max_query_size_none"></a>
 
+### Request Constraints Max Query Size None
+
 <a id="nestedblock--request_constraints--max_request_line_size_none"></a>
+
+### Request Constraints Max Request Line Size None
 
 <a id="nestedblock--request_constraints--max_request_size_none"></a>
 
+### Request Constraints Max Request Size None
+
 <a id="nestedblock--request_constraints--max_url_size_none"></a>
+
+### Request Constraints Max URL Size None
 
 <a id="nestedblock--segment_policy"></a>
 
+### Segment Policy
+
+`dst_any` - (Optional) Empty. This can be used for messages where no values are needed. See [Dst Any](#nestedblock--segment_policy--dst_any) below.
+
+`dst_segments` - (Optional) Segment List. List of references to Segments. See [Dst Segments](#nestedblock--segment_policy--dst_segments) below.
+
+`intra_segment` - (Optional) Empty. This can be used for messages where no values are needed. See [Intra Segment](#nestedblock--segment_policy--intra_segment) below.
+
+`src_any` - (Optional) Empty. This can be used for messages where no values are needed. See [Src Any](#nestedblock--segment_policy--src_any) below.
+
+`src_segments` - (Optional) Segment List. List of references to Segments. See [Src Segments](#nestedblock--segment_policy--src_segments) below.
+
 <a id="nestedblock--segment_policy--dst_any"></a>
+
+### Segment Policy Dst Any
 
 <a id="nestedblock--segment_policy--dst_segments"></a>
 
+### Segment Policy Dst Segments
+
+`segments` - (Optional) Segments. Select list of segments. See [Segments](#nestedblock--segment_policy--dst_segments--segments) below.
+
 <a id="nestedblock--segment_policy--dst_segments--segments"></a>
+
+### Segment Policy Dst Segments Segments
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--segment_policy--intra_segment"></a>
 
+### Segment Policy Intra Segment
+
 <a id="nestedblock--segment_policy--src_any"></a>
+
+### Segment Policy Src Any
 
 <a id="nestedblock--segment_policy--src_segments"></a>
 
+### Segment Policy Src Segments
+
+`segments` - (Optional) Segments. Select list of segments. See [Segments](#nestedblock--segment_policy--src_segments--segments) below.
+
 <a id="nestedblock--segment_policy--src_segments--segments"></a>
+
+### Segment Policy Src Segments Segments
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
 <a id="nestedblock--tls_fingerprint_matcher"></a>
+
+### TLS Fingerprint Matcher
+
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher (`List`).
 
 <a id="nestedblock--waf_action"></a>
 
+### WAF Action
+
+`app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria. See [App Firewall Detection Control](#nestedblock--waf_action--app_firewall_detection_control) below.
+
+`none` - (Optional) Empty. This can be used for messages where no values are needed. See [None](#nestedblock--waf_action--none) below.
+
+`waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [WAF Skip Processing](#nestedblock--waf_action--waf_skip_processing) below.
+
 <a id="nestedblock--waf_action--app_firewall_detection_control"></a>
+
+### WAF Action App Firewall Detection Control
+
+`exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria. See [Exclude Attack Type Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_attack_type_contexts) below.
+
+`exclude_bot_name_contexts` - (Optional) Bot Names. Bot Names to be excluded for the defined match criteria. See [Exclude Bot Name Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_bot_name_contexts) below.
+
+`exclude_signature_contexts` - (Optional) Signature IDs. Signature IDs to be excluded for the defined match criteria. See [Exclude Signature Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_signature_contexts) below.
+
+`exclude_violation_contexts` - (Optional) Violations. Violations to be excluded for the defined match criteria. See [Exclude Violation Contexts](#nestedblock--waf_action--app_firewall_detection_control--exclude_violation_contexts) below.
 
 <a id="nestedblock--waf_action--app_firewall_detection_control--exclude_attack_type_contexts"></a>
 
+### WAF Action App Firewall Detection Control Exclude Attack Type Contexts
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field... Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`exclude_attack_type` - (Optional) Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATT... Possible values include `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, and others (`String`).
+
 <a id="nestedblock--waf_action--app_firewall_detection_control--exclude_bot_name_contexts"></a>
+
+### WAF Action App Firewall Detection Control Exclude Bot Name Contexts
+
+`bot_name` - (Optional) Bot Name (`String`).
 
 <a id="nestedblock--waf_action--app_firewall_detection_control--exclude_signature_contexts"></a>
 
+### WAF Action App Firewall Detection Control Exclude Signature Contexts
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field... Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`signature_id` - (Optional) SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context (`Number`).
+
 <a id="nestedblock--waf_action--app_firewall_detection_control--exclude_violation_contexts"></a>
+
+### WAF Action App Firewall Detection Control Exclude Violation Contexts
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field... Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`exclude_violation` - (Optional) App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCO... Possible values include `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, and others (`String`).
 
 <a id="nestedblock--waf_action--none"></a>
 
+### WAF Action None
+
 <a id="nestedblock--waf_action--waf_skip_processing"></a>
+
+### WAF Action WAF Skip Processing
 
 ## Import
 

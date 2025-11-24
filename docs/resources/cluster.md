@@ -62,6 +62,8 @@ resource "f5xc_cluster" "example" {
 
 ### Spec Argument Reference
 
+> **Note:** One of the arguments from this list "auto_http_config, http1_config, http2_options" must be set.
+
 `auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto HTTP Config](#auto-http-config) below for details.
 
 `circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly. See [Circuit Breaker](#circuit-breaker) below for details.
@@ -70,11 +72,13 @@ resource "f5xc_cluster" "example" {
 
 `default_subset` - (Optional) Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists. See [Default Subset](#default-subset) below for details.
 
+> **Note:** One of the arguments from this list "disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2" must be set.
+
 `disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Proxy Protocol](#disable-proxy-protocol) below for details.
 
 `endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED` (`String`).
 
-`endpoint_subsets` - (Optional) Endpoint Subsets. Cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer. endpoint_subsets is list of subsets for this cluster. Each entry in this list has definition for a subset (which is collection of keys) During routing, the route’s metadata match configuration is used to find a specific subset. If there is a subset with the e... See [Endpoint Subsets](#endpoint-subsets) below for details.
+`endpoint_subsets` - (Optional) Endpoint Subsets. Cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer. endpoint_subsets is list of subsets for this cluster. Each entry in this list has definition for a subset (which is collection of keys) During routing, the route’s metadata match configuration is used to find a specific subset. If there is a subset with the e.. See [Endpoint Subsets](#endpoint-subsets) below for details.
 
 `endpoints` - (Optional) Endpoints. List of references to all endpoint objects that belong to this cluster. See [Endpoints](#endpoints) below for details.
 
@@ -90,9 +94,11 @@ resource "f5xc_cluster" "example" {
 
 `loadbalancer_algorithm` - (Optional) Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy im... Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN` (`String`).
 
+> **Note:** One of the arguments from this list "no_panic_threshold, panic_threshold" must be set.
+
 `no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed. See [No Panic Threshold](#no-panic-threshold) below for details.
 
-`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i... See [Outlier Detection](#outlier-detection) below for details.
+`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i.. See [Outlier Detection](#outlier-detection) below for details.
 
 `panic_threshold` - (Optional) Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status (`Number`).
 
@@ -116,81 +122,299 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--auto_http_config"></a>
 
+### Auto HTTP Config
+
 <a id="nestedblock--circuit_breaker"></a>
+
+### Circuit Breaker
+
+`connection_limit` - (Optional) Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit (`Number`).
+
+`max_requests` - (Optional) Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count (`Number`).
+
+`pending_requests` - (Optional) Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit b.. (`Number`).
+
+`priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism. Possible values are `DEFAULT`, `HIGH`. Defaults to `DEFAULT` (`String`).
+
+`retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
 
 <a id="nestedblock--default_subset"></a>
 
+### Default Subset
+
 <a id="nestedblock--disable_proxy_protocol"></a>
+
+### Disable Proxy Protocol
 
 <a id="nestedblock--endpoint_subsets"></a>
 
+### Endpoint Subsets
+
+`keys` - (Optional) Keys. List of keys that define a cluster subset class (`List`).
+
 <a id="nestedblock--endpoints"></a>
+
+### Endpoints
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--health_checks"></a>
 
+### Health Checks
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="nestedblock--http1_config"></a>
+
+### Http1 Config
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#nestedblock--http1_config--header_transformation) below.
 
 <a id="nestedblock--http1_config--header_transformation"></a>
 
+### Http1 Config Header Transformation
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header Transformation](#nestedblock--http1_config--header_transformation--default_header_transformation) below.
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Legacy Header Transformation](#nestedblock--http1_config--header_transformation--legacy_header_transformation) below.
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Preserve Case Header Transformation](#nestedblock--http1_config--header_transformation--preserve_case_header_transformation) below.
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Proper Case Header Transformation](#nestedblock--http1_config--header_transformation--proper_case_header_transformation) below.
+
 <a id="nestedblock--http1_config--header_transformation--default_header_transformation"></a>
+
+### Http1 Config Header Transformation Default Header Transformation
 
 <a id="nestedblock--http1_config--header_transformation--legacy_header_transformation"></a>
 
+### Http1 Config Header Transformation Legacy Header Transformation
+
 <a id="nestedblock--http1_config--header_transformation--preserve_case_header_transformation"></a>
+
+### Http1 Config Header Transformation Preserve Case Header Transformation
 
 <a id="nestedblock--http1_config--header_transformation--proper_case_header_transformation"></a>
 
+### Http1 Config Header Transformation Proper Case Header Transformation
+
 <a id="nestedblock--http2_options"></a>
+
+### Http2 Options
+
+`enabled` - (Optional) HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections (`Bool`).
 
 <a id="nestedblock--no_panic_threshold"></a>
 
+### No Panic Threshold
+
 <a id="nestedblock--outlier_detection"></a>
+
+### Outlier Detection
+
+`base_ejection_time` - (Optional) Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds (`Number`).
+
+`consecutive_5xx` - (Optional) Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to 5 (`Number`).
+
+`consecutive_gateway_failure` - (Optional) Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to 5 (`Number`).
+
+`interval` - (Optional) Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds (`Number`).
+
+`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
 
 <a id="nestedblock--proxy_protocol_v1"></a>
 
+### Proxy Protocol V1
+
 <a id="nestedblock--proxy_protocol_v2"></a>
+
+### Proxy Protocol V2
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
 <a id="nestedblock--tls_parameters"></a>
+
+### TLS Parameters
+
+`cert_params` - (Optional) Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store. See [Cert Params](#nestedblock--tls_parameters--cert_params) below.
+
+`common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#nestedblock--tls_parameters--common_params) below.
+
+`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Session Key Caching](#nestedblock--tls_parameters--default_session_key_caching) below.
+
+`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Session Key Caching](#nestedblock--tls_parameters--disable_session_key_caching) below.
+
+`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#nestedblock--tls_parameters--disable_sni) below.
+
+`max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
+
+`sni` - (Optional) SNI Value. SNI value to be used (`String`).
+
+`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#nestedblock--tls_parameters--use_host_header_as_sni) below.
 
 <a id="nestedblock--tls_parameters--cert_params"></a>
 
+### TLS Parameters Cert Params
+
+`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication. See [Certificates](#nestedblock--tls_parameters--cert_params--certificates) below.
+
+`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_.. (`List`).
+
+`maximum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#nestedblock--tls_parameters--cert_params--validation_params) below.
+
 <a id="nestedblock--tls_parameters--cert_params--certificates"></a>
+
+### TLS Parameters Cert Params Certificates
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--tls_parameters--cert_params--validation_params"></a>
 
+### TLS Parameters Cert Params Validation Params
+
+`skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
+
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#nestedblock--tls_parameters--cert_params--validation_params--trusted_ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
+
+`verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
+
 <a id="nestedblock--tls_parameters--cert_params--validation_params--trusted_ca"></a>
+
+### TLS Parameters Cert Params Validation Params Trusted CA
 
 <a id="nestedblock--tls_parameters--common_params"></a>
 
+### TLS Parameters Common Params
+
+`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_.. (`List`).
+
+`maximum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates. See [TLS Certificates](#nestedblock--tls_parameters--common_params--tls_certificates) below.
+
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#nestedblock--tls_parameters--common_params--validation_params) below.
+
 <a id="nestedblock--tls_parameters--common_params--tls_certificates"></a>
+
+### TLS Parameters Common Params TLS Certificates
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--tls_parameters--common_params--tls_certificates--disable_ocsp_stapling) below.
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--tls_parameters--common_params--tls_certificates--private_key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--tls_parameters--common_params--tls_certificates--use_system_defaults) below.
 
 <a id="nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms"></a>
 
+### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
+
 <a id="nestedblock--tls_parameters--common_params--tls_certificates--disable_ocsp_stapling"></a>
+
+### TLS Parameters Common Params TLS Certificates Disable OCSP Stapling
 
 <a id="nestedblock--tls_parameters--common_params--tls_certificates--private_key"></a>
 
+### TLS Parameters Common Params TLS Certificates Private Key
+
 <a id="nestedblock--tls_parameters--common_params--tls_certificates--use_system_defaults"></a>
+
+### TLS Parameters Common Params TLS Certificates Use System Defaults
 
 <a id="nestedblock--tls_parameters--common_params--validation_params"></a>
 
+### TLS Parameters Common Params Validation Params
+
+`skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
+
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#nestedblock--tls_parameters--common_params--validation_params--trusted_ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
+
+`verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
+
 <a id="nestedblock--tls_parameters--common_params--validation_params--trusted_ca"></a>
+
+### TLS Parameters Common Params Validation Params Trusted CA
 
 <a id="nestedblock--tls_parameters--default_session_key_caching"></a>
 
+### TLS Parameters Default Session Key Caching
+
 <a id="nestedblock--tls_parameters--disable_session_key_caching"></a>
+
+### TLS Parameters Disable Session Key Caching
 
 <a id="nestedblock--tls_parameters--disable_sni"></a>
 
+### TLS Parameters Disable Sni
+
 <a id="nestedblock--tls_parameters--use_host_header_as_sni"></a>
+
+### TLS Parameters Use Host Header As Sni
 
 <a id="nestedblock--upstream_conn_pool_reuse_type"></a>
 
+### Upstream Conn Pool Reuse Type
+
+`disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Conn Pool Reuse](#nestedblock--upstream_conn_pool_reuse_type--disable_conn_pool_reuse) below.
+
+`enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Conn Pool Reuse](#nestedblock--upstream_conn_pool_reuse_type--enable_conn_pool_reuse) below.
+
 <a id="nestedblock--upstream_conn_pool_reuse_type--disable_conn_pool_reuse"></a>
 
+### Upstream Conn Pool Reuse Type Disable Conn Pool Reuse
+
 <a id="nestedblock--upstream_conn_pool_reuse_type--enable_conn_pool_reuse"></a>
+
+### Upstream Conn Pool Reuse Type Enable Conn Pool Reuse
 
 ## Import
 

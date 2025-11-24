@@ -80,17 +80,53 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--enable_disable_compliance_checks"></a>
 
+### Enable Disable Compliance Checks
+
+`disable_compliance_checks` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Compliance Checks](#nestedblock--enable_disable_compliance_checks--disable_compliance_checks) below.
+
+`enable_compliance_checks` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Enable Compliance Checks](#nestedblock--enable_disable_compliance_checks--enable_compliance_checks) below.
+
 <a id="nestedblock--enable_disable_compliance_checks--disable_compliance_checks"></a>
+
+### Enable Disable Compliance Checks Disable Compliance Checks
 
 <a id="nestedblock--enable_disable_compliance_checks--enable_compliance_checks"></a>
 
+### Enable Disable Compliance Checks Enable Compliance Checks
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="nestedblock--enable_disable_signatures"></a>
+
+### Enable Disable Signatures
+
+`disable_signature` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Signature](#nestedblock--enable_disable_signatures--disable_signature) below.
+
+`enable_signature` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Signature](#nestedblock--enable_disable_signatures--enable_signature) below.
 
 <a id="nestedblock--enable_disable_signatures--disable_signature"></a>
 
+### Enable Disable Signatures Disable Signature
+
 <a id="nestedblock--enable_disable_signatures--enable_signature"></a>
 
+### Enable Disable Signatures Enable Signature
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

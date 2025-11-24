@@ -78,21 +78,77 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--report_recipients"></a>
 
+### Report Recipients
+
+`user_groups` - (Optional) User Groups. Select one or more user groups, to which the report should be sent via email. See [User Groups](#nestedblock--report_recipients--user_groups) below.
+
 <a id="nestedblock--report_recipients--user_groups"></a>
+
+### Report Recipients User Groups
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--timeouts"></a>
 
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
 <a id="nestedblock--waap"></a>
+
+### Waap
+
+`current_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Current Namespace](#nestedblock--waap--current_namespace) below.
+
+`daily` - (Optional) Report Frequency Daily. create report daily. See [Daily](#nestedblock--waap--daily) below.
+
+`monthly` - (Optional) Report Frequency Monthly. create report monthly. See [Monthly](#nestedblock--waap--monthly) below.
+
+`namespaces` - (Optional) Namespaces. namespaces. See [Namespaces](#nestedblock--waap--namespaces) below.
+
+`weekly` - (Optional) Report Frequency Weekly. create report weekly. See [Weekly](#nestedblock--waap--weekly) below.
 
 <a id="nestedblock--waap--current_namespace"></a>
 
+### Waap Current Namespace
+
 <a id="nestedblock--waap--daily"></a>
+
+### Waap Daily
+
+`report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
 <a id="nestedblock--waap--monthly"></a>
 
+### Waap Monthly
+
+`date` - (Optional) Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values include `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, and others (`String`).
+
+`report_generation_time` - (Optional) Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
+
 <a id="nestedblock--waap--namespaces"></a>
 
+### Waap Namespaces
+
+`namespaces` - (Optional) Namespaces. list of namespaces for which user wants to generate report (`List`).
+
 <a id="nestedblock--waap--weekly"></a>
+
+### Waap Weekly
+
+`day` - (Optional) Report Generation Weekday. report generation weekday Indicates field not being set. Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY` (`String`).
+
+`report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
 ## Import
 

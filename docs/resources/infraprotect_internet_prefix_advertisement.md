@@ -62,9 +62,13 @@ resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
 
 ### Spec Argument Reference
 
+> **Note:** One of the arguments from this list "activation_announce, activation_withdraw" must be set.
+
 `activation_announce` - (Optional) Empty. This can be used for messages where no values are needed. See [Activation Announce](#activation-announce) below for details.
 
 `activation_withdraw` - (Optional) Empty. This can be used for messages where no values are needed. See [Activation Withdraw](#activation-withdraw) below for details.
+
+> **Note:** One of the arguments from this list "expiration_never, expiration_timestamp" must be set.
 
 `expiration_never` - (Optional) Empty. This can be used for messages where no values are needed. See [Expiration Never](#expiration-never) below for details.
 
@@ -84,11 +88,27 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--activation_announce"></a>
 
+### Activation Announce
+
 <a id="nestedblock--activation_withdraw"></a>
+
+### Activation Withdraw
 
 <a id="nestedblock--expiration_never"></a>
 
+### Expiration Never
+
 <a id="nestedblock--timeouts"></a>
+
+### Timeouts
+
+`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+
+`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+
+`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

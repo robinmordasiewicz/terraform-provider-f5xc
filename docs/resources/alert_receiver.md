@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Email
 
-`email` - (Optional) Email. Email id of the user (`String`).
+`email` - (Optional) Configuration for email (`String`).
 
 <a id="nestedblock--opsgenie"></a>
 

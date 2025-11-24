@@ -64,7 +64,7 @@ resource "f5xc_k8s_cluster_role" "example" {
 
 > **Note:** One of the arguments from this list "k8s_cluster_role_selector, policy_rule_list, yaml" must be set.
 
-`k8s_cluster_role_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar.. See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
+`k8s_cluster_role_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
 
 `policy_rule_list` - (Optional) Policy Rule List. List of rules for role permissions. See [Policy Rule List](#policy-rule-list) below for details.
 

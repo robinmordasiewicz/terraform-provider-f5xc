@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [AWS S3](#nestedblock--favicon--aws_s3) below.
 
-`content` - (Optional) Content. Content of the file (`String`).
+`content` - (Optional) Configuration for content (`String`).
 
 `content_type` - (Optional) Content Type. Content type of the file (MIME type) (`String`).
 
@@ -120,7 +120,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [AWS S3](#nestedblock--logo--aws_s3) below.
 
-`content` - (Optional) Content. Content of the file (`String`).
+`content` - (Optional) Configuration for content (`String`).
 
 `content_type` - (Optional) Content Type. Content type of the file (MIME type) (`String`).
 

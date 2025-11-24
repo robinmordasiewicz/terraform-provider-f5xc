@@ -168,7 +168,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--re_acl--fast_acl_rules--port--dns) below.
 
-`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
+`user_defined` - (Optional) Configuration for user_defined (`Number`).
 
 <a id="nestedblock--re_acl--fast_acl_rules--port--all"></a>
 
@@ -280,7 +280,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--site_acl--fast_acl_rules--port--dns) below.
 
-`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
+`user_defined` - (Optional) Configuration for user_defined (`Number`).
 
 <a id="nestedblock--site_acl--fast_acl_rules--port--all"></a>
 

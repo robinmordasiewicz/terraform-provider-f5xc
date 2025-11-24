@@ -64,7 +64,7 @@ resource "f5xc_network_connector" "example" {
 
 `disable_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Forward Proxy](#disable-forward-proxy) below for details.
 
-`enable_forward_proxy` - (Optional) Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connectio.. See [Enable Forward Proxy](#enable-forward-proxy) below for details.
+`enable_forward_proxy` - (Optional) Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connectio. See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
 > **Note:** One of the arguments from this list "sli_to_global_dr, sli_to_slo_snat, slo_to_global_dr" must be set.
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--custom_hash_algorithms) below.
 
-`description` - (Optional) Description. Description for the certificate (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--disable_ocsp_stapling) below.
 

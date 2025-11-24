@@ -86,11 +86,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Cloud Hosted
 
-`egress` - (Optional) Egress. Egress. See [Egress](#nestedblock--cloud_hosted--egress) below.
+`egress` - (Optional) Configuration for egress. See [Egress](#nestedblock--cloud_hosted--egress) below.
 
 `infra_host_name` - (Optional) Infra Host Name. Infra Host Name (`String`).
 
-`ingress` - (Optional) Ingress. Ingress. See [Ingress](#nestedblock--cloud_hosted--ingress) below.
+`ingress` - (Optional) Configuration for ingress. See [Ingress](#nestedblock--cloud_hosted--ingress) below.
 
 `region` - (Optional) Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`. Defaults to `US` (`String`).
 
@@ -116,11 +116,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Data Center Hosted
 
-`egress` - (Optional) Egress. Egress. See [Egress](#nestedblock--data_center_hosted--egress) below.
+`egress` - (Optional) Configuration for egress. See [Egress](#nestedblock--data_center_hosted--egress) below.
 
 `infra_host_name` - (Optional) Infra Host Name. Infra Host Name (`String`).
 
-`ingress` - (Optional) Ingress. Ingress. See [Ingress](#nestedblock--data_center_hosted--ingress) below.
+`ingress` - (Optional) Configuration for ingress. See [Ingress](#nestedblock--data_center_hosted--ingress) below.
 
 `region` - (Optional) Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`. Defaults to `US` (`String`).
 

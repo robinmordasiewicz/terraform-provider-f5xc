@@ -77,13 +77,7 @@ resource "f5xc_http_loadbalancer" "example" {
 
 ### Spec Argument Reference
 
-> **Note:** One of the arguments from this list "active_service_policies, no_service_policies, service_policies_from_namespace" must be set.
-
-`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
-
-`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Service Policies](#no-service-policies) below for details.
-
-`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Service Policies From Namespace](#service-policies-from-namespace) below for details.
+`active_service_policies` - (Optional) A list of service policies evaluated sequentially to control request handling. Service policies are evaluated top-to-bottom in order, with the first matching policy taking effect. See [Active Service Policies](#active-service-policies) below for details.
 
 `add_location` - (Optional) Add Location. x-example: true Appends header x-volterra-location = <RE-site-name> in responses. This configuration is ignored on CE sites (`Bool`).
 
@@ -143,11 +137,11 @@ resource "f5xc_http_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "captcha_challenge, enable_challenge, js_challenge, no_challenge, policy_based_challenge" must be set.
 
-`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap.. See [Captcha Challenge](#captcha-challenge) below for details.
+`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Captcha Challenge](#captcha-challenge) below for details.
 
 `enable_challenge` - (Optional) Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users. See [Enable Challenge](#enable-challenge) below for details.
 
-`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [Js Challenge](#js-challenge) below for details.
+`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Js Challenge](#js-challenge) below for details.
 
 `no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
 
@@ -161,7 +155,7 @@ resource "f5xc_http_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "cookie_stickiness, least_active, random, ring_hash, round_robin, source_ip_stickiness" must be set.
 
-`cookie_stickiness` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g.. See [Cookie Stickiness](#cookie-stickiness) below for details.
+`cookie_stickiness` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g. See [Cookie Stickiness](#cookie-stickiness) below for details.
 
 `least_active` - (Optional) Empty. This can be used for messages where no values are needed. See [Least Active](#least-active) below for details.
 
@@ -173,9 +167,9 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed. See [Source IP Stickiness](#source-ip-stickiness) below for details.
 
-`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate.. See [CORS Policy](#cors-policy) below for details.
+`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate. See [CORS Policy](#cors-policy) below for details.
 
-`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and .. See [CSRF Policy](#csrf-policy) below for details.
+`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and. See [CSRF Policy](#csrf-policy) below for details.
 
 `data_guard_rules` - (Optional) Data Guard Rules. Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the HTTP response with a string of asterisks (*). Note: App Firewall should be enabled, to use Data Guard feature. See [Data Guard Rules](#data-guard-rules) below for details.
 
@@ -231,7 +225,7 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `enable_trust_client_ip_headers` - (Optional) Trust Client IP Headers List. List of Client IP Headers. See [Enable Trust Client IP Headers](#enable-trust-client-ip-headers) below for details.
 
-`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildc. (`List`).
+`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildc (`List`).
 
 `graphql_rules` - (Optional) GraphQL Inspection. GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy configuration to analyze GraphQL queries and prevent GraphQL tailored attacks. See [GraphQL Rules](#graphql-rules) below for details.
 
@@ -251,7 +245,7 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `l7_ddos_action_default` - (Optional) Empty. This can be used for messages where no values are needed. See [L7 DDOS Action Default](#l7-ddos-action-default) below for details.
 
-`l7_ddos_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [L7 DDOS Action Js Challenge](#l7-ddos-action-js-challenge) below for details.
+`l7_ddos_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [L7 DDOS Action Js Challenge](#l7-ddos-action-js-challenge) below for details.
 
 `l7_ddos_protection` - (Optional) L7 DDOS Protection Settings. L7 DDOS protection is critical for safeguarding web applications, APIs, and services that are exposed to the internet from sophisticated, volumetric, application-level threats. Configure actions, thresholds and policies to apply during L7 DDOS attack. See [L7 DDOS Protection](#l7-ddos-protection) below for details.
 
@@ -263,6 +257,8 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `single_lb_app` - (Optional) Single Load Balancer App Setting. Specific settings for Machine learning analysis on this HTTP LB, independently from other LBs. See [Single LB App](#single-lb-app) below for details.
 
+`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Service Policies](#no-service-policies) below for details.
+
 `origin_server_subset_rule_list` - (Optional) Origin Server Subset Rule List Type. List of Origin Pools. See [Origin Server Subset Rule List](#origin-server-subset-rule-list) below for details.
 
 `protected_cookies` - (Optional) Cookie Protection. Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite. The configured mode of WAF (monitoring or blocking) will be enforced on the request when cookie tampering is identified. Note: We recommend enabling Secure and HttpOnly attributes along with cookie tampering protection. See [Protected Cookies](#protected-cookies) below for details.
@@ -270,6 +266,8 @@ resource "f5xc_http_loadbalancer" "example" {
 `routes` - (Optional) Routes. Routes allow users to define match condition on a path and/or HTTP method to either forward matching traffic to origin pool or redirect matching traffic to a different URL or respond directly to matching traffic. See [Routes](#routes) below for details.
 
 `sensitive_data_disclosure_rules` - (Optional) Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses. See [Sensitive Data Disclosure Rules](#sensitive-data-disclosure-rules) below for details.
+
+`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Service Policies From Namespace](#service-policies-from-namespace) below for details.
 
 > **Note:** One of the arguments from this list "slow_ddos_mitigation, system_default_timeouts" must be set.
 
@@ -301,7 +299,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Active Service Policies
 
-`policies` - (Optional) Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are ... See [Policies](#nestedblock--active_service_policies--policies) below.
+`policies` - (Optional) List of service policies. Service policies form a sequential evaluation engine where each policy (and rules within that policy) are evaluated in order from top to bottom. When a request's characteristics match a policy's criteria, that policy takes effect and no further policies are evaluated. The order of policies in this list is critical for achieving the intended behavior. Each policy is a reference to a service_policy resource. See [Policies](#nestedblock--active_service_policies--policies) below.
 
 <a id="nestedblock--active_service_policies--policies"></a>
 
@@ -525,7 +523,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--api_protection_rules--api_endpoint_rules--client_matcher--asn_matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Client Selector](#nestedblock--api_protection_rules--api_endpoint_rules--client_matcher--client_selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#nestedblock--api_protection_rules--api_endpoint_rules--client_matcher--client_selector) below.
 
 `ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#nestedblock--api_protection_rules--api_endpoint_rules--client_matcher--ip_matcher) below.
 
@@ -659,7 +657,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--api_protection_rules--api_groups_rules--client_matcher--asn_matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Client Selector](#nestedblock--api_protection_rules--api_groups_rules--client_matcher--client_selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#nestedblock--api_protection_rules--api_groups_rules--client_matcher--client_selector) below.
 
 `ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#nestedblock--api_protection_rules--api_groups_rules--client_matcher--ip_matcher) below.
 
@@ -801,7 +799,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher--asn_matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Client Selector](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher--client_selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher--client_selector) below.
 
 `ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher--ip_matcher) below.
 
@@ -1017,7 +1015,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--api_rate_limit--server_url_rules--client_matcher--asn_matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Client Selector](#nestedblock--api_rate_limit--server_url_rules--client_matcher--client_selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#nestedblock--api_rate_limit--server_url_rules--client_matcher--client_selector) below.
 
 `ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#nestedblock--api_rate_limit--server_url_rules--client_matcher--ip_matcher) below.
 
@@ -1449,7 +1447,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
@@ -1575,7 +1573,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#nestedblock--bot_defense--policy--protected_app_endpoints--any_domain) below.
 
-`domain` - (Optional) Domains. Domains names. See [Domain](#nestedblock--bot_defense--policy--protected_app_endpoints--domain) below.
+`domain` - (Optional) Configuration for domain. See [Domain](#nestedblock--bot_defense--policy--protected_app_endpoints--domain) below.
 
 `flow_label` - (Optional) Bot Defense Flow Label Category. Bot Defense Flow Label Category allows to associate traffic with selected category. See [Flow Label](#nestedblock--bot_defense--policy--protected_app_endpoints--flow_label) below.
 
@@ -1707,7 +1705,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#nestedblock--bot_defense_advanced--js_insert_all_pages_except--exclude_list--any_domain) below.
 
-`domain` - (Optional) Domains. Domains names. See [Domain](#nestedblock--bot_defense_advanced--js_insert_all_pages_except--exclude_list--domain) below.
+`domain` - (Optional) Configuration for domain. See [Domain](#nestedblock--bot_defense_advanced--js_insert_all_pages_except--exclude_list--domain) below.
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--bot_defense_advanced--js_insert_all_pages_except--exclude_list--metadata) below.
 
@@ -1743,7 +1741,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#nestedblock--bot_defense_advanced--js_insertion_rules--exclude_list--any_domain) below.
 
-`domain` - (Optional) Domains. Domains names. See [Domain](#nestedblock--bot_defense_advanced--js_insertion_rules--exclude_list--domain) below.
+`domain` - (Optional) Configuration for domain. See [Domain](#nestedblock--bot_defense_advanced--js_insertion_rules--exclude_list--domain) below.
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--bot_defense_advanced--js_insertion_rules--exclude_list--metadata) below.
 
@@ -1771,7 +1769,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#nestedblock--bot_defense_advanced--js_insertion_rules--rules--any_domain) below.
 
-`domain` - (Optional) Domains. Domains names. See [Domain](#nestedblock--bot_defense_advanced--js_insertion_rules--rules--domain) below.
+`domain` - (Optional) Configuration for domain. See [Domain](#nestedblock--bot_defense_advanced--js_insertion_rules--rules--domain) below.
 
 `javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD` (`String`).
 
@@ -2157,7 +2155,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED` (`String`).
 
-`health_check_port` - (Optional) Health check port. Port used for performing health check (`Number`).
+`health_check_port` - (Optional) Configuration for health_check_port (`Number`).
 
 `healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects. See [Healthcheck](#nestedblock--default_pool--healthcheck) below.
 
@@ -2213,7 +2211,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed. See [No Panic Threshold](#nestedblock--default_pool--advanced_options--no_panic_threshold) below.
 
-`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i... See [Outlier Detection](#nestedblock--default_pool--advanced_options--outlier_detection) below.
+`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i. See [Outlier Detection](#nestedblock--default_pool--advanced_options--outlier_detection) below.
 
 `panic_threshold` - (Optional) Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status (`Number`).
 
@@ -2233,7 +2231,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_requests` - (Optional) Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count (`Number`).
 
-`pending_requests` - (Optional) Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit b.. (`Number`).
+`pending_requests` - (Optional) Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit b (`Number`).
 
 `priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism. Possible values are `DEFAULT`, `HIGH`. Defaults to `DEFAULT` (`String`).
 
@@ -2745,7 +2743,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#nestedblock--default_pool_list--pools--cluster) below.
 
-`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured ... See [Endpoint Subsets](#nestedblock--default_pool_list--pools--endpoint_subsets) below.
+`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured. See [Endpoint Subsets](#nestedblock--default_pool_list--pools--endpoint_subsets) below.
 
 `pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--default_pool_list--pools--pool) below.
 
@@ -2783,7 +2781,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#nestedblock--default_route_pools--cluster) below.
 
-`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured ... See [Endpoint Subsets](#nestedblock--default_route_pools--endpoint_subsets) below.
+`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured. See [Endpoint Subsets](#nestedblock--default_route_pools--endpoint_subsets) below.
 
 `pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--default_route_pools--pool) below.
 
@@ -2981,7 +2979,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Enable Challenge
 
-`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap... See [Captcha Challenge Parameters](#nestedblock--enable_challenge--captcha_challenge_parameters) below.
+`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Captcha Challenge Parameters](#nestedblock--enable_challenge--captcha_challenge_parameters) below.
 
 `default_captcha_challenge_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Captcha Challenge Parameters](#nestedblock--enable_challenge--default_captcha_challenge_parameters) below.
 
@@ -2989,7 +2987,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_mitigation_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Mitigation Settings](#nestedblock--enable_challenge--default_mitigation_settings) below.
 
-`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o... See [Js Challenge Parameters](#nestedblock--enable_challenge--js_challenge_parameters) below.
+`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Js Challenge Parameters](#nestedblock--enable_challenge--js_challenge_parameters) below.
 
 `malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Malicious User Mitigation](#nestedblock--enable_challenge--malicious_user_mitigation) below.
 
@@ -3051,7 +3049,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Enable Trust Client IP Headers
 
-`client_ip_headers` - (Optional) Client IP Headers. Define the list of one or more Client IP Headers. Headers will be used in order from top to bottom, meaning if the first header is not present in the request, the system will proceed to check for the second header, and so on, until one of the listed headers is found. If none of the defined headers exist, or the value is not an IP address, then the system will use the source IP of the packet. If multiple defined headers with different names are present in the request, the va.. (`List`).
+`client_ip_headers` - (Optional) Client IP Headers. Define the list of one or more Client IP Headers. Headers will be used in order from top to bottom, meaning if the first header is not present in the request, the system will proceed to check for the second header, and so on, until one of the listed headers is found. If none of the defined headers exist, or the value is not an IP address, then the system will use the source IP of the packet. If multiple defined headers with different names are present in the request, the va (`List`).
 
 <a id="nestedblock--graphql_rules"></a>
 
@@ -3347,7 +3345,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--https--tls_parameters--tls_certificates--custom_hash_algorithms) below.
 
-`description` - (Optional) Description. Description for the certificate (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--https--tls_parameters--tls_certificates--disable_ocsp_stapling) below.
 
@@ -3785,9 +3783,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### L7 DDOS Protection
 
-`clientside_action_captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap... See [Clientside Action Captcha Challenge](#nestedblock--l7_ddos_protection--clientside_action_captcha_challenge) below.
+`clientside_action_captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Clientside Action Captcha Challenge](#nestedblock--l7_ddos_protection--clientside_action_captcha_challenge) below.
 
-`clientside_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o... See [Clientside Action Js Challenge](#nestedblock--l7_ddos_protection--clientside_action_js_challenge) below.
+`clientside_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Clientside Action Js Challenge](#nestedblock--l7_ddos_protection--clientside_action_js_challenge) below.
 
 `clientside_action_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Clientside Action None](#nestedblock--l7_ddos_protection--clientside_action_none) below.
 
@@ -3799,9 +3797,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `mitigation_block` - (Optional) Empty. This can be used for messages where no values are needed. See [Mitigation Block](#nestedblock--l7_ddos_protection--mitigation_block) below.
 
-`mitigation_captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap... See [Mitigation Captcha Challenge](#nestedblock--l7_ddos_protection--mitigation_captcha_challenge) below.
+`mitigation_captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Mitigation Captcha Challenge](#nestedblock--l7_ddos_protection--mitigation_captcha_challenge) below.
 
-`mitigation_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o... See [Mitigation Js Challenge](#nestedblock--l7_ddos_protection--mitigation_js_challenge) below.
+`mitigation_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Mitigation Js Challenge](#nestedblock--l7_ddos_protection--mitigation_js_challenge) below.
 
 `rps_threshold` - (Optional) Custom. Configure custom RPS threshold (`Number`).
 
@@ -3913,7 +3911,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#nestedblock--malware_protection_settings--malware_protection_rules--domain--any_domain) below.
 
-`domain` - (Optional) Domains. Domains names. See [Domain](#nestedblock--malware_protection_settings--malware_protection_rules--domain--domain) below.
+`domain` - (Optional) Configuration for domain. See [Domain](#nestedblock--malware_protection_settings--malware_protection_rules--domain--domain) below.
 
 <a id="nestedblock--malware_protection_settings--malware_protection_rules--domain--any_domain"></a>
 
@@ -3947,9 +3945,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#nestedblock--more_option--buffer_policy) below.
 
-`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding ... See [Compression Params](#nestedblock--more_option--compression_params) below.
+`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding. See [Compression Params](#nestedblock--more_option--compression_params) below.
 
-`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code... See [Custom Errors](#nestedblock--more_option--custom_errors) below.
+`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code. See [Custom Errors](#nestedblock--more_option--custom_errors) below.
 
 `disable_default_error_pages` - (Optional) Disable Default Error Pages. Disable the use of default F5XC error pages (`Bool`).
 
@@ -4071,13 +4069,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
 
-`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
+`add_expiry` - (Optional) Configuration for add_expiry (`String`).
 
 `add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#nestedblock--more_option--response_cookies_to_add--add_httponly) below.
 
 `add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#nestedblock--more_option--response_cookies_to_add--add_partitioned) below.
 
-`add_path` - (Optional) Add path. Add path attribute (`String`).
+`add_path` - (Optional) Configuration for add_path (`String`).
 
 `add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#nestedblock--more_option--response_cookies_to_add--add_secure) below.
 
@@ -4235,7 +4233,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Origin Server Subset Rule List
 
-`origin_server_subset_rules` - (Optional) Origin Server Subset Rules. Origin Server Subset Rules allow users to define match condition on Client (IP address, ASN, Country), IP Reputation, Regional Edge names, Request for subset selection of origin servers. Origin Server Subset is a sequential engine where rules are evaluated one after the other. It's important to define the correct order for Origin Server Subset to get the intended result, rules are evaluated from top to bottom in the list. When an Origin server subset rule is matche... See [Origin Server Subset Rules](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules) below.
+`origin_server_subset_rules` - (Optional) Origin Server Subset Rules. Origin Server Subset Rules allow users to define match condition on Client (IP address, ASN, Country), IP Reputation, Regional Edge names, Request for subset selection of origin servers. Origin Server Subset is a sequential engine where rules are evaluated one after the other. It's important to define the correct order for Origin Server Subset to get the intended result, rules are evaluated from top to bottom in the list. When an Origin server subset rule is matche. See [Origin Server Subset Rules](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules) below.
 
 <a id="nestedblock--origin_server_subset_rule_list--origin_server_subset_rules"></a>
 
@@ -4249,7 +4247,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--asn_matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Client Selector](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--client_selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#nestedblock--origin_server_subset_rule_list--origin_server_subset_rules--client_selector) below.
 
 `country_codes` - (Optional) Country Codes List. List of Country Codes (`List`).
 
@@ -4339,7 +4337,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `always_enable_js_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Always Enable Js Challenge](#nestedblock--policy_based_challenge--always_enable_js_challenge) below.
 
-`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap... See [Captcha Challenge Parameters](#nestedblock--policy_based_challenge--captcha_challenge_parameters) below.
+`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Captcha Challenge Parameters](#nestedblock--policy_based_challenge--captcha_challenge_parameters) below.
 
 `default_captcha_challenge_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Captcha Challenge Parameters](#nestedblock--policy_based_challenge--default_captcha_challenge_parameters) below.
 
@@ -4349,7 +4347,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_temporary_blocking_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Temporary Blocking Parameters](#nestedblock--policy_based_challenge--default_temporary_blocking_parameters) below.
 
-`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o... See [Js Challenge Parameters](#nestedblock--policy_based_challenge--js_challenge_parameters) below.
+`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Js Challenge Parameters](#nestedblock--policy_based_challenge--js_challenge_parameters) below.
 
 `malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Malicious User Mitigation](#nestedblock--policy_based_challenge--malicious_user_mitigation) below.
 
@@ -4357,7 +4355,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `rule_list` - (Optional) Challenge Rule List. List of challenge rules to be used in policy based challenge. See [Rule List](#nestedblock--policy_based_challenge--rule_list) below.
 
-`temporary_user_blocking` - (Optional) Temporary User Blocking. Specifies configuration for temporary user blocking resulting from user behavior analysis. When Malicious User Mitigation is enabled from service policy rules, users' accessing the application will be analyzed for malicious activity and the configured mitigation actions will be taken on identified malicious users. These mitigation actions include setting up temporary blocking on that user. This configuration specifies settings on how that blocking should be done by th... See [Temporary User Blocking](#nestedblock--policy_based_challenge--temporary_user_blocking) below.
+`temporary_user_blocking` - (Optional) Temporary User Blocking. Specifies configuration for temporary user blocking resulting from user behavior analysis. When Malicious User Mitigation is enabled from service policy rules, users' accessing the application will be analyzed for malicious activity and the configured mitigation actions will be taken on identified malicious users. These mitigation actions include setting up temporary blocking on that user. This configuration specifies settings on how that blocking should be done by th. See [Temporary User Blocking](#nestedblock--policy_based_challenge--temporary_user_blocking) below.
 
 <a id="nestedblock--policy_based_challenge--always_enable_captcha_challenge"></a>
 
@@ -4427,7 +4425,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--policy_based_challenge--rule_list--rules--metadata) below.
 
-`spec` - (Optional) Challenge Rule Specification. A Challenge Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the rule if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a request API matches a challenge rule, the configured challenge is enfor... See [Spec](#nestedblock--policy_based_challenge--rule_list--rules--spec) below.
+`spec` - (Optional) Challenge Rule Specification. A Challenge Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the rule if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a request API matches a challenge rule, the configured challenge is enfor. See [Spec](#nestedblock--policy_based_challenge--rule_list--rules--spec) below.
 
 <a id="nestedblock--policy_based_challenge--rule_list--rules--metadata"></a>
 
@@ -4533,7 +4531,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Policies](#nestedblock--rate_limit--no_policies) below.
 
-`policies` - (Optional) Rate Limiter Policy List. List of rate limiter policies to be applied. See [Policies](#nestedblock--rate_limit--policies) below.
+`policies` - (Optional) List of service policies. Service policies form a sequential evaluation engine where each policy (and rules within that policy) are evaluated in order from top to bottom. When a request's characteristics match a policy's criteria, that policy takes effect and no further policies are evaluated. The order of policies in this list is critical for achieving the intended behavior. Each policy is a reference to a service_policy resource. See [Policies](#nestedblock--rate_limit--policies) below.
 
 `rate_limiter` - (Optional) Rate Limit Value. A tuple consisting of a rate limit period unit and the total number of allowed requests for that period. See [Rate Limiter](#nestedblock--rate_limit--rate_limiter) below.
 
@@ -4571,7 +4569,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rate Limit Policies
 
-`policies` - (Optional) Rate Limiter Policies. Ordered list of rate limiter policies. See [Policies](#nestedblock--rate_limit--policies--policies) below.
+`policies` - (Optional) List of service policies. Service policies form a sequential evaluation engine where each policy (and rules within that policy) are evaluated in order from top to bottom. When a request's characteristics match a policy's criteria, that policy takes effect and no further policies are evaluated. The order of policies in this list is critical for achieving the intended behavior. Each policy is a reference to a service_policy resource. See [Policies](#nestedblock--rate_limit--policies--policies) below.
 
 <a id="nestedblock--rate_limit--policies--policies"></a>
 
@@ -4647,7 +4645,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ring Hash Hash Policy
 
-`cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g... See [Cookie](#nestedblock--ring_hash--hash_policy--cookie) below.
+`cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g. See [Cookie](#nestedblock--ring_hash--hash_policy--cookie) below.
 
 `header_name` - (Optional) Header Name. The name or key of the request header that will be used to obtain the hash key (`String`).
 
@@ -4767,7 +4765,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
@@ -4781,7 +4779,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Port range to match (`String`).
+`port_ranges` - (Optional) Configuration for port_ranges (`String`).
 
 <a id="nestedblock--routes--direct_response_route--incoming_port--no_port_match"></a>
 
@@ -4827,7 +4825,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
@@ -4841,7 +4839,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Port range to match (`String`).
+`port_ranges` - (Optional) Configuration for port_ranges (`String`).
 
 <a id="nestedblock--routes--redirect_route--incoming_port--no_port_match"></a>
 
@@ -4923,9 +4921,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `common_hash_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Common Hash Policy](#nestedblock--routes--simple_route--advanced_options--common_hash_policy) below.
 
-`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate... See [CORS Policy](#nestedblock--routes--simple_route--advanced_options--cors_policy) below.
+`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate. See [CORS Policy](#nestedblock--routes--simple_route--advanced_options--cors_policy) below.
 
-`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and ... See [CSRF Policy](#nestedblock--routes--simple_route--advanced_options--csrf_policy) below.
+`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and. See [CSRF Policy](#nestedblock--routes--simple_route--advanced_options--csrf_policy) below.
 
 `default_retry_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Retry Policy](#nestedblock--routes--simple_route--advanced_options--default_retry_policy) below.
 
@@ -4945,7 +4943,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `enable_spdy` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Spdy](#nestedblock--routes--simple_route--advanced_options--enable_spdy) below.
 
-`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured ... See [Endpoint Subsets](#nestedblock--routes--simple_route--advanced_options--endpoint_subsets) below.
+`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured. See [Endpoint Subsets](#nestedblock--routes--simple_route--advanced_options--endpoint_subsets) below.
 
 `inherited_bot_defense_javascript_injection` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherited Bot Defense Javascript Injection](#nestedblock--routes--simple_route--advanced_options--inherited_bot_defense_javascript_injection) below.
 
@@ -5131,7 +5129,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
@@ -5145,7 +5143,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Port range. Port range to match (`String`).
+`port_ranges` - (Optional) Configuration for port_ranges (`String`).
 
 <a id="nestedblock--routes--simple_route--incoming_port--no_port_match"></a>
 
@@ -5157,7 +5155,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#nestedblock--routes--simple_route--origin_pools--cluster) below.
 
-`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured ... See [Endpoint Subsets](#nestedblock--routes--simple_route--origin_pools--endpoint_subsets) below.
+`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured. See [Endpoint Subsets](#nestedblock--routes--simple_route--origin_pools--endpoint_subsets) below.
 
 `pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--routes--simple_route--origin_pools--pool) below.
 
@@ -5227,9 +5225,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Sensitive Data Disclosure Rules Sensitive Data Types In Response API Endpoint
 
-`methods` - (Optional) Methods. Methods to be matched (`List`).
+`methods` - (Optional) Configuration for methods (`List`).
 
-`path` - (Optional) Path. Path to be matched (`String`).
+`path` - (Optional) Configuration for path (`String`).
 
 <a id="nestedblock--sensitive_data_disclosure_rules--sensitive_data_types_in_response--body"></a>
 
@@ -5439,7 +5437,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 

@@ -70,13 +70,13 @@ resource "f5xc_network_policy_rule" "example" {
 
 `ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#ip-prefix-set) below for details.
 
-`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name. See [Label Matcher](#label-matcher) below for details.
-
-`ports` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
-
 `prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#prefix) below for details.
 
 `prefix_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar.. See [Prefix Selector](#prefix-selector) below for details.
+
+`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name. See [Label Matcher](#label-matcher) below for details.
+
+`ports` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
 
 `protocol` - (Optional) Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP (`String`).
 

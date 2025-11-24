@@ -62,13 +62,13 @@ resource "f5xc_rate_limiter_policy" "example" {
 
 `any_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Server](#any-server) below for details.
 
-`rules` - (Optional) Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified. See [Rules](#rules) below for details.
-
 `server_name` - (Optional) Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request (`String`).
 
 `server_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Server Name Matcher](#server-name-matcher) below for details.
 
 `server_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar.. See [Server Selector](#server-selector) below for details.
+
+`rules` - (Optional) Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified. See [Rules](#rules) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

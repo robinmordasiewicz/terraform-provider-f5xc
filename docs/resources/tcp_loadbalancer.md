@@ -75,6 +75,10 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 `active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
 
+`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Service Policies](#no-service-policies) below for details.
+
+`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Service Policies From Namespace](#service-policies-from-namespace) below for details.
+
 > **Note:** One of the arguments from this list "advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise" must be set.
 
 `advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
@@ -83,17 +87,23 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 `advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Public Default VIP](#advertise-on-public-default-vip) below for details.
 
+`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
+
 > **Note:** One of the arguments from this list "default_lb_with_sni, no_sni, sni" must be set.
 
 `default_lb_with_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Default LB With Sni](#default-lb-with-sni) below for details.
 
-`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by Volterra. This requires the domain to be delegated to F5XC using the Delegated Domain feature (`Bool`).
+`no_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [No Sni](#no-sni) below for details.
 
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
+`sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Sni](#sni) below for details.
+
+`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by Volterra. This requires the domain to be delegated to F5XC using the Delegated Domain feature (`Bool`).
 
 > **Note:** One of the arguments from this list "do_not_retract_cluster, retract_cluster" must be set.
 
 `do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Retract Cluster](#do-not-retract-cluster) below for details.
+
+`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Retract Cluster](#retract-cluster) below for details.
 
 `domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A . (`List`).
 
@@ -113,29 +123,19 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 `listen_port` - (Optional) Listen Port. Listen Port for this load balancer (`Number`).
 
-`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Service Policies](#no-service-policies) below for details.
-
-`no_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [No Sni](#no-sni) below for details.
-
-`origin_pools_weights` - (Optional) Origin Pools. Origin pools and weights used for this load balancer. See [Origin Pools Weights](#origin-pools-weights) below for details.
-
 `port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
-`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Retract Cluster](#retract-cluster) below for details.
-
-`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Service Policies From Namespace](#service-policies-from-namespace) below for details.
-
-`sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Sni](#sni) below for details.
+`origin_pools_weights` - (Optional) Origin Pools. Origin pools and weights used for this load balancer. See [Origin Pools Weights](#origin-pools-weights) below for details.
 
 > **Note:** One of the arguments from this list "tcp, tls_tcp, tls_tcp_auto_cert" must be set.
 
 `tcp` - (Optional) Empty. This can be used for messages where no values are needed. See [TCP](#tcp) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
 `tls_tcp` - (Optional) BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates. See [TLS TCP](#tls-tcp) below for details.
 
 `tls_tcp_auto_cert` - (Optional) TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates. See [TLS TCP Auto Cert](#tls-tcp-auto-cert) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

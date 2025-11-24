@@ -66,9 +66,9 @@ resource "f5xc_alert_receiver" "example" {
 
 `sms` - (Optional) SMS Configuration. See [Sms](#sms) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
 `webhook` - (Optional) Webhook Config. Webhook configuration to send alert notifications. See [Webhook](#webhook) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

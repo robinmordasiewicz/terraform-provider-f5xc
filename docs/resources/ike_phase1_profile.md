@@ -74,6 +74,8 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 
+`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
+
 `prf` - (Optional) PseudoRandomFunction. Select PseudoRandomFunction for IKE SA (`List`).
 
 > **Note:** One of the arguments from this list "reauth_disabled, reauth_timeout_days, reauth_timeout_hours" must be set.
@@ -85,8 +87,6 @@ resource "f5xc_ike_phase1_profile" "example" {
 `reauth_timeout_hours` - (Optional) Hours. Input Hours. See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
 
 ### Attributes Reference
 

@@ -70,15 +70,15 @@ resource "f5xc_service_policy" "example" {
 
 `allow_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Allow List](#allow-list) below for details.
 
-> **Note:** One of the arguments from this list "any_server, server_name, server_name_matcher, server_selector" must be set.
-
-`any_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Server](#any-server) below for details.
-
 `deny_all_requests` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Requests](#deny-all-requests) below for details.
 
 `deny_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Deny List](#deny-list) below for details.
 
 `rule_list` - (Optional) Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm. See [Rule List](#rule-list) below for details.
+
+> **Note:** One of the arguments from this list "any_server, server_name, server_name_matcher, server_selector" must be set.
+
+`any_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Server](#any-server) below for details.
 
 `server_name` - (Optional) Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name (`String`).
 

@@ -78,13 +78,13 @@ resource "f5xc_discovery" "example" {
 
 `cluster_id` - (Optional) Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object (`String`).
 
+`no_cluster_id` - (Optional) Empty. This can be used for messages where no values are needed. See [No Cluster Id](#no-cluster-id) below for details.
+
 > **Note:** One of the arguments from this list "discovery_consul, discovery_k8s" must be set.
 
 `discovery_consul` - (Optional) Consul Discovery Configuration. Discovery configuration for Hashicorp Consul. See [Discovery Consul](#discovery-consul) below for details.
 
 `discovery_k8s` - (Optional) K8S Discovery Configuration. Discovery configuration for K8s. See [Discovery K8s](#discovery-k8s) below for details.
-
-`no_cluster_id` - (Optional) Empty. This can be used for messages where no values are needed. See [No Cluster Id](#no-cluster-id) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

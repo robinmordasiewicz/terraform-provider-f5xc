@@ -72,9 +72,9 @@ resource "f5xc_network_interface" "example" {
 
 `layer2_interface` - (Optional) Layer2 Interface. Layer2 Interface Configuration. See [Layer2 Interface](#layer2-interface) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
 `tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration. See [Tunnel Interface](#tunnel-interface) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

@@ -66,9 +66,13 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
 
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#no-network-policy) below for details.
+
 > **Note:** One of the arguments from this list "active_forward_proxy_policies, no_forward_proxy" must be set.
 
 `active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
+
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#no-forward-proxy) below for details.
 
 `admin_user_credentials` - (Optional) Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access. See [Admin User Credentials](#admin-user-credentials) below for details.
 
@@ -80,6 +84,20 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type. See [Baremetal](#baremetal) below for details.
 
+`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type. See [Equinix](#equinix) below for details.
+
+`gcp` - (Optional) GCP Provider Type. GCP Provider Type. See [GCP](#gcp) below for details.
+
+`kvm` - (Optional) KVM Provider Type. KVM Provider Type. See [Kvm](#kvm) below for details.
+
+`nutanix` - (Optional) Nutanix Provider Type. Nutanix Provider Type. See [Nutanix](#nutanix) below for details.
+
+`oci` - (Optional) OCI Provider Type. OCI Provider Type. See [Oci](#oci) below for details.
+
+`openstack` - (Optional) Openstack Provider Type. Openstack Provider Type. See [Openstack](#openstack) below for details.
+
+`vmware` - (Optional) VMware Provider Type. VMware Provider Type. See [Vmware](#vmware) below for details.
+
 > **Note:** One of the arguments from this list "block_all_services, blocked_services" must be set.
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Block All Services](#block-all-services) below for details.
@@ -90,39 +108,41 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy. See [Custom Proxy](#custom-proxy) below for details.
 
+`f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 Proxy](#f5-proxy) below for details.
+
 > **Note:** One of the arguments from this list "custom_proxy_bypass, no_proxy_bypass" must be set.
 
 `custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy. See [Custom Proxy Bypass](#custom-proxy-bypass) below for details.
+
+`no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed. See [No Proxy Bypass](#no-proxy-bypass) below for details.
 
 > **Note:** One of the arguments from this list "dc_cluster_group_sli, no_s2s_connectivity_sli" must be set.
 
 `dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Sli](#dc-cluster-group-sli) below for details.
 
+`no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed. See [No S2s Connectivity Sli](#no-s2s-connectivity-sli) below for details.
+
 > **Note:** One of the arguments from this list "dc_cluster_group_slo, no_s2s_connectivity_slo, site_mesh_group_on_slo" must be set.
 
 `dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Slo](#dc-cluster-group-slo) below for details.
+
+`no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed. See [No S2s Connectivity Slo](#no-s2s-connectivity-slo) below for details.
+
+`site_mesh_group_on_slo` - (Optional) Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used. See [Site Mesh Group On Slo](#site-mesh-group-on-slo) below for details.
 
 > **Note:** One of the arguments from this list "disable_ha, enable_ha" must be set.
 
 `disable_ha` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable HA](#disable-ha) below for details.
 
+`enable_ha` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable HA](#enable-ha) below for details.
+
 > **Note:** One of the arguments from this list "disable_url_categorization, enable_url_categorization" must be set.
 
 `disable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable URL Categorization](#disable-url-categorization) below for details.
 
-`dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site. See [DNS NTP Config](#dns-ntp-config) below for details.
-
-`enable_ha` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable HA](#enable-ha) below for details.
-
 `enable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable URL Categorization](#enable-url-categorization) below for details.
 
-`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type. See [Equinix](#equinix) below for details.
-
-`f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 Proxy](#f5-proxy) below for details.
-
-`gcp` - (Optional) GCP Provider Type. GCP Provider Type. See [GCP](#gcp) below for details.
-
-`kvm` - (Optional) KVM Provider Type. KVM Provider Type. See [Kvm](#kvm) below for details.
+`dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site. See [DNS NTP Config](#dns-ntp-config) below for details.
 
 `load_balancing` - (Optional) Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality. See [Load Balancing](#load-balancing) below for details.
 
@@ -134,29 +154,11 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#no-forward-proxy) below for details.
-
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#no-network-policy) below for details.
-
-`no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed. See [No Proxy Bypass](#no-proxy-bypass) below for details.
-
-`no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed. See [No S2s Connectivity Sli](#no-s2s-connectivity-sli) below for details.
-
-`no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed. See [No S2s Connectivity Slo](#no-s2s-connectivity-slo) below for details.
-
-`nutanix` - (Optional) Nutanix Provider Type. Nutanix Provider Type. See [Nutanix](#nutanix) below for details.
-
-`oci` - (Optional) OCI Provider Type. OCI Provider Type. See [Oci](#oci) below for details.
-
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handl.. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
-
-`openstack` - (Optional) Openstack Provider Type. Openstack Provider Type. See [Openstack](#openstack) below for details.
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
 `re_select` - (Optional) Regional Edge Selection. Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s). See [RE Select](#re-select) below for details.
-
-`site_mesh_group_on_slo` - (Optional) Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used. See [Site Mesh Group On Slo](#site-mesh-group-on-slo) below for details.
 
 `software_settings` - (Optional) F5XC Software Settings. Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created. See [Software Settings](#software-settings) below for details.
 
@@ -167,8 +169,6 @@ resource "f5xc_securemesh_site_v2" "example" {
 `tunnel_type` - (Optional) Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL. Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`. Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL` (`String`).
 
 `upgrade_settings` - (Optional) Upgrade Settings. Specify how a site will be upgraded. See [Upgrade Settings](#upgrade-settings) below for details.
-
-`vmware` - (Optional) VMware Provider Type. VMware Provider Type. See [Vmware](#vmware) below for details.
 
 ### Attributes Reference
 

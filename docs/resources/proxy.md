@@ -55,11 +55,15 @@ resource "f5xc_proxy" "example" {
 
 `active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
 
+`no_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy Policy](#no-forward-proxy-policy) below for details.
+
 `connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
 
 > **Note:** One of the arguments from this list "do_not_advertise, site_virtual_sites" must be set.
 
 `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
+
+`site_virtual_sites` - (Optional) Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites. See [Site Virtual Sites](#site-virtual-sites) below for details.
 
 > **Note:** One of the arguments from this list "dynamic_proxy, http_proxy" must be set.
 
@@ -67,11 +71,11 @@ resource "f5xc_proxy" "example" {
 
 `http_proxy` - (Optional) HTTP Connect Proxy. Parameters for HTTP Connect Proxy. See [HTTP Proxy](#http-proxy) below for details.
 
-`no_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy Policy](#no-forward-proxy-policy) below for details.
-
 > **Note:** One of the arguments from this list "no_interception, tls_intercept" must be set.
 
 `no_interception` - (Optional) Empty. This can be used for messages where no values are needed. See [No Interception](#no-interception) below for details.
+
+`tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception. See [TLS Intercept](#tls-intercept) below for details.
 
 > **Note:** One of the arguments from this list "site_local_inside_network, site_local_network" must be set.
 
@@ -79,11 +83,7 @@ resource "f5xc_proxy" "example" {
 
 `site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#site-local-network) below for details.
 
-`site_virtual_sites` - (Optional) Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites. See [Site Virtual Sites](#site-virtual-sites) below for details.
-
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception. See [TLS Intercept](#tls-intercept) below for details.
 
 ### Attributes Reference
 

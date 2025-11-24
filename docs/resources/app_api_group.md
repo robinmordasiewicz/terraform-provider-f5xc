@@ -68,9 +68,9 @@ resource "f5xc_app_api_group" "example" {
 
 `cdn_loadbalancer` - (Optional) API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer. See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
 
-`elements` - (Optional) API Group Elements. List of API group elements with methods and path regex for matching requests. See [Elements](#elements) below for details.
-
 `http_loadbalancer` - (Optional) API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer. See [HTTP Loadbalancer](#http-loadbalancer) below for details.
+
+`elements` - (Optional) API Group Elements. List of API group elements with methods and path regex for matching requests. See [Elements](#elements) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

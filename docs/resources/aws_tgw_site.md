@@ -109,17 +109,19 @@ resource "f5xc_aws_tgw_site" "example" {
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
 `custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
-
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
 
 > **Note:** One of the arguments from this list "direct_connect_disabled, direct_connect_enabled, private_connectivity" must be set.
 
 `direct_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Direct Connect Disabled](#direct-connect-disabled) below for details.
 
 `direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](#direct-connect-enabled) below for details.
+
+`private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration. See [Private Connectivity](#private-connectivity) below for details.
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
@@ -134,8 +136,6 @@ resource "f5xc_aws_tgw_site" "example" {
 `os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](#os) below for details.
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
-
-`private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration. See [Private Connectivity](#private-connectivity) below for details.
 
 `sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
 

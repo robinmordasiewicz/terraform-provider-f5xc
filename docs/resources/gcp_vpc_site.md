@@ -101,13 +101,13 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+
 `cloud_credentials` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Credentials](#cloud-credentials) below for details.
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
 `custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
-
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
 
 `disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
@@ -120,6 +120,8 @@ resource "f5xc_gcp_vpc_site" "example" {
 `ingress_egress_gw` - (Optional) GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
 
 `ingress_gw` - (Optional) GCP Ingress Gateway. Single interface GCP ingress site. See [Ingress Gw](#ingress-gw) below for details.
+
+`voltstack_cluster` - (Optional) GCP App Stack Cluster. App Stack cluster of single interface GCP site. See [Voltstack Cluster](#voltstack-cluster) below for details.
 
 `instance_type` - (Optional) GCP Instance Type for Node. Select Instance size based on performance needed (`String`).
 
@@ -146,8 +148,6 @@ resource "f5xc_gcp_vpc_site" "example" {
 `sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`voltstack_cluster` - (Optional) GCP App Stack Cluster. App Stack cluster of single interface GCP site. See [Voltstack Cluster](#voltstack-cluster) below for details.
 
 ### Attributes Reference
 

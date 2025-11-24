@@ -66,13 +66,17 @@ resource "f5xc_forwarding_class" "example" {
 
 `dscp` - (Optional) DSCP Marking setting. DSCP marking setting as per RFC 2475. See [Dscp](#dscp) below for details.
 
+`no_marking` - (Optional) Empty. This can be used for messages where no values are needed. See [No Marking](#no-marking) below for details.
+
+`tos_value` - (Optional) TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low (`Number`).
+
 > **Note:** One of the arguments from this list "dscp_based_queue, queue_id_to_use" must be set.
 
 `dscp_based_queue` - (Optional) Empty. This can be used for messages where no values are needed. See [Dscp Based Queue](#dscp-based-queue) below for details.
 
-`interface_group` - (Optional) Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE` (`String`).
+`queue_id_to_use` - (Optional) Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT` (`String`).
 
-`no_marking` - (Optional) Empty. This can be used for messages where no values are needed. See [No Marking](#no-marking) below for details.
+`interface_group` - (Optional) Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE` (`String`).
 
 > **Note:** One of the arguments from this list "no_policer, policer" must be set.
 
@@ -80,11 +84,7 @@ resource "f5xc_forwarding_class" "example" {
 
 `policer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Policer](#policer) below for details.
 
-`queue_id_to_use` - (Optional) Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT` (`String`).
-
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`tos_value` - (Optional) TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low (`Number`).
 
 ### Attributes Reference
 

@@ -100,9 +100,9 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `alternate_region` - (Optional) Alternate Azure Region Name. Name of the azure region which does not support availability zones (`String`).
 
-`azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Azure Cred](#azure-cred) below for details.
-
 `azure_region` - (Optional) Recommended Azure Region Name. Name of the azure region which supports availability zones (`String`).
+
+`azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Azure Cred](#azure-cred) below for details.
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
 
@@ -110,11 +110,11 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
 `custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
-
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
 
 `disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
@@ -127,6 +127,10 @@ resource "f5xc_azure_vnet_site" "example" {
 `ingress_gw` - (Optional) Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region. See [Ingress Gw](#ingress-gw) below for details.
 
 `ingress_gw_ar` - (Optional) Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site. See [Ingress Gw Ar](#ingress-gw-ar) below for details.
+
+`voltstack_cluster` - (Optional) Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes. See [Voltstack Cluster](#voltstack-cluster) below for details.
+
+`voltstack_cluster_ar` - (Optional) Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes. See [Voltstack Cluster Ar](#voltstack-cluster-ar) below for details.
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
@@ -144,6 +148,8 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
 
+`total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
+
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handl.. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
 `os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](#os) below for details.
@@ -158,13 +164,7 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
-`total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
-
 `vnet` - (Optional) Azure Vnet choice. This defines choice about Azure Vnet for a view. See [Vnet](#vnet) below for details.
-
-`voltstack_cluster` - (Optional) Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes. See [Voltstack Cluster](#voltstack-cluster) below for details.
-
-`voltstack_cluster_ar` - (Optional) Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes. See [Voltstack Cluster Ar](#voltstack-cluster-ar) below for details.
 
 ### Attributes Reference
 

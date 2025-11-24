@@ -103,6 +103,8 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
 `custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
@@ -111,7 +113,7 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `custom_security_group` - (Optional) Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC. See [Custom Security Group](#custom-security-group) below for details.
 
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+`f5xc_security_group` - (Optional) Empty. This can be used for messages where no values are needed. See [F5xc Security Group](#f5xc-security-group) below for details.
 
 > **Note:** One of the arguments from this list "direct_connect_disabled, direct_connect_enabled, private_connectivity" must be set.
 
@@ -119,9 +121,13 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](#direct-connect-enabled) below for details.
 
+`private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration. See [Private Connectivity](#private-connectivity) below for details.
+
 > **Note:** One of the arguments from this list "disable_internet_vip, enable_internet_vip" must be set.
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#disable-internet-vip) below for details.
+
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#enable-internet-vip) below for details.
 
 `disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
@@ -133,19 +139,19 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `egress_virtual_private_gateway` - (Optional) AWS Virtual Private Gateway choice. With this option, egress site traffic will be routed through an Virtual Private Gateway. See [Egress Virtual Private Gateway](#egress-virtual-private-gateway) below for details.
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#enable-internet-vip) below for details.
-
 > **Note:** One of the arguments from this list "f5_orchestrated_routing, manual_routing" must be set.
 
 `f5_orchestrated_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 Orchestrated Routing](#f5-orchestrated-routing) below for details.
 
-`f5xc_security_group` - (Optional) Empty. This can be used for messages where no values are needed. See [F5xc Security Group](#f5xc-security-group) below for details.
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#manual-routing) below for details.
 
 > **Note:** One of the arguments from this list "ingress_egress_gw, ingress_gw, voltstack_cluster" must be set.
 
 `ingress_egress_gw` - (Optional) AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
 
 `ingress_gw` - (Optional) AWS Ingress Gateway. Single interface AWS ingress site. See [Ingress Gw](#ingress-gw) below for details.
+
+`voltstack_cluster` - (Optional) AWS App Stack Cluster. App Stack cluster of single interface AWS nodes. See [Voltstack Cluster](#voltstack-cluster) below for details.
 
 `instance_type` - (Optional) AWS Instance Type for Node. Select Instance size based on performance needed (`String`).
 
@@ -157,19 +163,17 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
 
-`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#manual-routing) below for details.
-
 > **Note:** One of the arguments from this list "no_worker_nodes, nodes_per_az, total_nodes" must be set.
 
 `no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Worker Nodes](#no-worker-nodes) below for details.
 
 `nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
 
+`total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
+
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handl.. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
 `os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](#os) below for details.
-
-`private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration. See [Private Connectivity](#private-connectivity) below for details.
 
 `ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the site (`String`).
 
@@ -178,10 +182,6 @@ resource "f5xc_aws_vpc_site" "example" {
 `tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. See [Tags](#tags) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
-
-`voltstack_cluster` - (Optional) AWS App Stack Cluster. App Stack cluster of single interface AWS nodes. See [Voltstack Cluster](#voltstack-cluster) below for details.
 
 `vpc` - (Optional) AWS VPC choice. This defines choice about AWS VPC for a view. See [Vpc](#vpc) below for details.
 

@@ -76,19 +76,19 @@ resource "f5xc_forward_proxy_policy" "example" {
 
 `allow_list` - (Optional) Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP). See [Allow List](#allow-list) below for details.
 
+`deny_list` - (Optional) Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP). See [Deny List](#deny-list) below for details.
+
+`rule_list` - (Optional) Custom Rule List. List of custom rules. See [Rule List](#rule-list) below for details.
+
 > **Note:** One of the arguments from this list "any_proxy, drp_http_connect, network_connector, proxy_label_selector" must be set.
 
 `any_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Proxy](#any-proxy) below for details.
-
-`deny_list` - (Optional) Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP). See [Deny List](#deny-list) below for details.
 
 `drp_http_connect` - (Optional) Empty. This can be used for messages where no values are needed. See [Drp HTTP Connect](#drp-http-connect) below for details.
 
 `network_connector` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Network Connector](#network-connector) below for details.
 
 `proxy_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar.. See [Proxy Label Selector](#proxy-label-selector) below for details.
-
-`rule_list` - (Optional) Custom Rule List. List of custom rules. See [Rule List](#rule-list) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

@@ -68,31 +68,37 @@ resource "f5xc_service_policy_rule" "example" {
 
 `any_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Asn](#any-asn) below for details.
 
-> **Note:** One of the arguments from this list "any_client, client_name, client_name_matcher, client_selector, ip_threat_category_list" must be set.
-
-`any_client` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Client](#any-client) below for details.
-
-> **Note:** One of the arguments from this list "any_ip, ip_matcher, ip_prefix_list" must be set.
-
-`any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any IP](#any-ip) below for details.
-
-`api_group_matcher` - (Optional) String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true. See [API Group Matcher](#api-group-matcher) below for details.
-
-`arg_matchers` - (Optional) Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true. See [Arg Matchers](#arg-matchers) below for details.
-
 `asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#asn-list) below for details.
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#asn-matcher) below for details.
 
-`body_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Body Matcher](#body-matcher) below for details.
+> **Note:** One of the arguments from this list "any_client, client_name, client_name_matcher, client_selector, ip_threat_category_list" must be set.
 
-`bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing. See [Bot Action](#bot-action) below for details.
+`any_client` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Client](#any-client) below for details.
 
 `client_name` - (Optional) Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name (`String`).
 
 `client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Client Name Matcher](#client-name-matcher) below for details.
 
 `client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar.. See [Client Selector](#client-selector) below for details.
+
+`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#ip-threat-category-list) below for details.
+
+> **Note:** One of the arguments from this list "any_ip, ip_matcher, ip_prefix_list" must be set.
+
+`any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any IP](#any-ip) below for details.
+
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#ip-matcher) below for details.
+
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#ip-prefix-list) below for details.
+
+`api_group_matcher` - (Optional) String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true. See [API Group Matcher](#api-group-matcher) below for details.
+
+`arg_matchers` - (Optional) Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true. See [Arg Matchers](#arg-matchers) below for details.
+
+`body_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Body Matcher](#body-matcher) below for details.
+
+`bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing. See [Bot Action](#bot-action) below for details.
 
 `cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matchers](#cookie-matchers) below for details.
 
@@ -104,15 +110,11 @@ resource "f5xc_service_policy_rule" "example" {
 
 `http_method` - (Optional) HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true. See [HTTP Method](#http-method) below for details.
 
-`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#ip-matcher) below for details.
-
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#ip-prefix-list) below for details.
-
-`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#ip-threat-category-list) below for details.
-
 > **Note:** One of the arguments from this list "ja4_tls_fingerprint, tls_fingerprint_matcher" must be set.
 
 `ja4_tls_fingerprint` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 TLS Fingerprint](#ja4-tls-fingerprint) below for details.
+
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#tls-fingerprint-matcher) below for details.
 
 `jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. See [JWT Claims](#jwt-claims) below for details.
 
@@ -131,8 +133,6 @@ resource "f5xc_service_policy_rule" "example" {
 `segment_policy` - (Optional) Configure Segments. Configure source and destination segment for policy. See [Segment Policy](#segment-policy) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#tls-fingerprint-matcher) below for details.
 
 `waf_action` - (Optional) App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings. See [WAF Action](#waf-action) below for details.
 

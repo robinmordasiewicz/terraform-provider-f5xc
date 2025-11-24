@@ -70,11 +70,11 @@ resource "f5xc_dns_lb_pool" "example" {
 
 `cname_pool` - (Optional) Pool for CNAME Record. See [Cname Pool](#cname-pool) below for details.
 
-`load_balancing_mode` - (Optional) LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to sen... Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`. Defaults to `ROUND_ROBIN` (`String`).
-
 `mx_pool` - (Optional) Pool for MX Record. See [Mx Pool](#mx-pool) below for details.
 
 `srv_pool` - (Optional) Pool for SRV Record. See [Srv Pool](#srv-pool) below for details.
+
+`load_balancing_mode` - (Optional) LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to sen... Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`. Defaults to `ROUND_ROBIN` (`String`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

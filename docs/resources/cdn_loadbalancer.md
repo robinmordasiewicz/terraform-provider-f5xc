@@ -107,11 +107,11 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "captcha_challenge, enable_challenge, js_challenge, no_challenge, policy_based_challenge" must be set.
 
-`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap.. See [Captcha Challenge](#captcha-challenge) below for details.
+`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Captcha Challenge](#captcha-challenge) below for details.
 
 `enable_challenge` - (Optional) Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users. See [Enable Challenge](#enable-challenge) below for details.
 
-`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [Js Challenge](#js-challenge) below for details.
+`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Js Challenge](#js-challenge) below for details.
 
 `no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
 
@@ -123,9 +123,9 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 `disable_client_side_defense` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Client Side Defense](#disable-client-side-defense) below for details.
 
-`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate.. See [CORS Policy](#cors-policy) below for details.
+`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate. See [CORS Policy](#cors-policy) below for details.
 
-`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and .. See [CSRF Policy](#csrf-policy) below for details.
+`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and. See [CSRF Policy](#csrf-policy) below for details.
 
 `custom_cache_rule` - (Optional) Custom Cache Rules. Caching policies for CDN. See [Custom Cache Rule](#custom-cache-rule) below for details.
 
@@ -185,7 +185,7 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 `l7_ddos_action_default` - (Optional) Empty. This can be used for messages where no values are needed. See [L7 DDOS Action Default](#l7-ddos-action-default) below for details.
 
-`l7_ddos_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [L7 DDOS Action Js Challenge](#l7-ddos-action-js-challenge) below for details.
+`l7_ddos_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [L7 DDOS Action Js Challenge](#l7-ddos-action-js-challenge) below for details.
 
 `origin_pool` - (Optional) CDN Origin Pool. Origin Pool for the CDN distribution. See [Origin Pool](#origin-pool) below for details.
 
@@ -223,7 +223,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Active Service Policies
 
-`policies` - (Optional) Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are ... See [Policies](#nestedblock--active_service_policies--policies) below.
+`policies` - (Optional) Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are. See [Policies](#nestedblock--active_service_policies--policies) below.
 
 <a id="nestedblock--active_service_policies--policies"></a>
 
@@ -295,7 +295,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher--asn_matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Client Selector](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher--client_selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher--client_selector) below.
 
 `ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#nestedblock--api_rate_limit--api_endpoint_rules--client_matcher--ip_matcher) below.
 
@@ -511,7 +511,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--api_rate_limit--server_url_rules--client_matcher--asn_matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar... See [Client Selector](#nestedblock--api_rate_limit--server_url_rules--client_matcher--client_selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#nestedblock--api_rate_limit--server_url_rules--client_matcher--client_selector) below.
 
 `ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#nestedblock--api_rate_limit--server_url_rules--client_matcher--ip_matcher) below.
 
@@ -865,7 +865,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 
@@ -991,7 +991,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#nestedblock--bot_defense--policy--protected_app_endpoints--any_domain) below.
 
-`domain` - (Optional) Domains. Domains names. See [Domain](#nestedblock--bot_defense--policy--protected_app_endpoints--domain) below.
+`domain` - (Optional) Configuration for domain. See [Domain](#nestedblock--bot_defense--policy--protected_app_endpoints--domain) below.
 
 `flow_label` - (Optional) Bot Defense Flow Label Category. Bot Defense Flow Label Category allows to associate traffic with selected category. See [Flow Label](#nestedblock--bot_defense--policy--protected_app_endpoints--flow_label) below.
 
@@ -1467,7 +1467,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Enable Challenge
 
-`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap... See [Captcha Challenge Parameters](#nestedblock--enable_challenge--captcha_challenge_parameters) below.
+`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Captcha Challenge Parameters](#nestedblock--enable_challenge--captcha_challenge_parameters) below.
 
 `default_captcha_challenge_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Captcha Challenge Parameters](#nestedblock--enable_challenge--default_captcha_challenge_parameters) below.
 
@@ -1475,7 +1475,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_mitigation_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Mitigation Settings](#nestedblock--enable_challenge--default_mitigation_settings) below.
 
-`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o... See [Js Challenge Parameters](#nestedblock--enable_challenge--js_challenge_parameters) below.
+`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Js Challenge Parameters](#nestedblock--enable_challenge--js_challenge_parameters) below.
 
 `malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Malicious User Mitigation](#nestedblock--enable_challenge--malicious_user_mitigation) below.
 
@@ -2103,13 +2103,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Other Settings Logging Options Client Log Options
 
-`header_list` - (Optional) Headers. List of headers (`List`).
+`header_list` - (Optional) Configuration for header_list (`List`).
 
 <a id="nestedblock--other_settings--logging_options--origin_log_options"></a>
 
 ### Other Settings Logging Options Origin Log Options
 
-`header_list` - (Optional) Headers. List of headers (`List`).
+`header_list` - (Optional) Configuration for header_list (`List`).
 
 <a id="nestedblock--policy_based_challenge"></a>
 
@@ -2119,7 +2119,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `always_enable_js_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Always Enable Js Challenge](#nestedblock--policy_based_challenge--always_enable_js_challenge) below.
 
-`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap... See [Captcha Challenge Parameters](#nestedblock--policy_based_challenge--captcha_challenge_parameters) below.
+`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Captcha Challenge Parameters](#nestedblock--policy_based_challenge--captcha_challenge_parameters) below.
 
 `default_captcha_challenge_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Captcha Challenge Parameters](#nestedblock--policy_based_challenge--default_captcha_challenge_parameters) below.
 
@@ -2129,7 +2129,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_temporary_blocking_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Temporary Blocking Parameters](#nestedblock--policy_based_challenge--default_temporary_blocking_parameters) below.
 
-`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o... See [Js Challenge Parameters](#nestedblock--policy_based_challenge--js_challenge_parameters) below.
+`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Js Challenge Parameters](#nestedblock--policy_based_challenge--js_challenge_parameters) below.
 
 `malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Malicious User Mitigation](#nestedblock--policy_based_challenge--malicious_user_mitigation) below.
 
@@ -2137,7 +2137,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `rule_list` - (Optional) Challenge Rule List. List of challenge rules to be used in policy based challenge. See [Rule List](#nestedblock--policy_based_challenge--rule_list) below.
 
-`temporary_user_blocking` - (Optional) Temporary User Blocking. Specifies configuration for temporary user blocking resulting from user behavior analysis. When Malicious User Mitigation is enabled from service policy rules, users' accessing the application will be analyzed for malicious activity and the configured mitigation actions will be taken on identified malicious users. These mitigation actions include setting up temporary blocking on that user. This configuration specifies settings on how that blocking should be done by th... See [Temporary User Blocking](#nestedblock--policy_based_challenge--temporary_user_blocking) below.
+`temporary_user_blocking` - (Optional) Temporary User Blocking. Specifies configuration for temporary user blocking resulting from user behavior analysis. When Malicious User Mitigation is enabled from service policy rules, users' accessing the application will be analyzed for malicious activity and the configured mitigation actions will be taken on identified malicious users. These mitigation actions include setting up temporary blocking on that user. This configuration specifies settings on how that blocking should be done by th. See [Temporary User Blocking](#nestedblock--policy_based_challenge--temporary_user_blocking) below.
 
 <a id="nestedblock--policy_based_challenge--always_enable_captcha_challenge"></a>
 
@@ -2207,7 +2207,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--policy_based_challenge--rule_list--rules--metadata) below.
 
-`spec` - (Optional) Challenge Rule Specification. A Challenge Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the rule if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a request API matches a challenge rule, the configured challenge is enfor... See [Spec](#nestedblock--policy_based_challenge--rule_list--rules--spec) below.
+`spec` - (Optional) Challenge Rule Specification. A Challenge Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the rule if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a request API matches a challenge rule, the configured challenge is enfor. See [Spec](#nestedblock--policy_based_challenge--rule_list--rules--spec) below.
 
 <a id="nestedblock--policy_based_challenge--rule_list--rules--metadata"></a>
 
@@ -2507,7 +2507,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
 
-`name` - (Optional) Name. Name of the header (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
 

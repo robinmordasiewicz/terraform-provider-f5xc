@@ -70,7 +70,7 @@ resource "f5xc_app_firewall" "example" {
 
 `default_detection_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Detection Settings](#default-detection-settings) below for details.
 
-`detection_settings` - (Optional) Detection Settings. Specifies detection settings to be used by WAF. See [Detection Settings](#detection-settings) below for details.
+`detection_settings` - (Optional) Configuration for WAF attack detection sensitivity and signature coverage. Controls which attack signatures are enabled and how they detect potential threats. See [Detection Settings](#detection-settings) below for details.
 
 > **Note:** One of the arguments from this list "allow_all_response_codes, allowed_response_codes" must be set.
 
@@ -90,11 +90,7 @@ resource "f5xc_app_firewall" "example" {
 
 `use_default_blocking_page` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Blocking Page](#use-default-blocking-page) below for details.
 
-> **Note:** One of the arguments from this list "bot_protection_setting, default_bot_setting" must be set.
-
-`bot_protection_setting` - (Optional) Bot Protection. Configuration of WAF Bot Protection. See [Bot Protection Setting](#bot-protection-setting) below for details.
-
-`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#default-bot-setting) below for details.
+`bot_protection_setting` - (Optional) Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation. See [Bot Protection Setting](#bot-protection-setting) below for details.
 
 > **Note:** One of the arguments from this list "custom_anonymization, default_anonymization, disable_anonymization" must be set.
 
@@ -103,6 +99,8 @@ resource "f5xc_app_firewall" "example" {
 `default_anonymization` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Anonymization](#default-anonymization) below for details.
 
 `disable_anonymization` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Anonymization](#disable-anonymization) below for details.
+
+`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#default-bot-setting) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -206,7 +204,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Detection Settings
 
-`bot_protection_setting` - (Optional) Bot Protection. Configuration of WAF Bot Protection. See [Bot Protection Setting](#nestedblock--detection_settings--bot_protection_setting) below.
+`bot_protection_setting` - (Optional) Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation. See [Bot Protection Setting](#nestedblock--detection_settings--bot_protection_setting) below.
 
 `default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#nestedblock--detection_settings--default_bot_setting) below.
 

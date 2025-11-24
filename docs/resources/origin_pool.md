@@ -146,7 +146,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed. See [No Panic Threshold](#nestedblock--advanced_options--no_panic_threshold) below.
 
-`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i... See [Outlier Detection](#nestedblock--advanced_options--outlier_detection) below.
+`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i. See [Outlier Detection](#nestedblock--advanced_options--outlier_detection) below.
 
 `panic_threshold` - (Optional) Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status (`Number`).
 
@@ -166,7 +166,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_requests` - (Optional) Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count (`Number`).
 
-`pending_requests` - (Optional) Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit b.. (`Number`).
+`pending_requests` - (Optional) Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit b (`Number`).
 
 `priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism. Possible values are `DEFAULT`, `HIGH`. Defaults to `DEFAULT` (`String`).
 
@@ -810,7 +810,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--use_tls--use_mtls--tls_certificates--custom_hash_algorithms) below.
 
-`description` - (Optional) Description. Description for the certificate (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--use_tls--use_mtls--tls_certificates--disable_ocsp_stapling) below.
 

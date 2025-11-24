@@ -76,7 +76,7 @@ resource "f5xc_infraprotect_deny_list_rule" "example" {
 
 `one_year` - (Optional) Empty. This can be used for messages where no values are needed. See [One Year](#one-year) below for details.
 
-`prefix` - (Optional) Prefix. Prefix (`String`).
+`prefix` - (Optional) Configuration for prefix (`String`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

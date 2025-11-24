@@ -80,7 +80,7 @@ resource "f5xc_service_policy_rule" "example" {
 
 `client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Client Name Matcher](#client-name-matcher) below for details.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar.. See [Client Selector](#client-selector) below for details.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#client-selector) below for details.
 
 `ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#ip-threat-category-list) below for details.
 

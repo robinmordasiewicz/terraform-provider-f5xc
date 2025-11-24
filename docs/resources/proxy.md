@@ -119,7 +119,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_dns_masquerade` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable DNS Masquerade](#nestedblock--dynamic_proxy--disable_dns_masquerade) below.
 
-`domains` - (Optional) Domains. A list of Domains to be proxied. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional note.. (`List`).
+`domains` - (Optional) Domains. A list of Domains to be proxied. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional note (`List`).
 
 `enable_dns_masquerade` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable DNS Masquerade](#nestedblock--dynamic_proxy--enable_dns_masquerade) below.
 
@@ -149,9 +149,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#nestedblock--dynamic_proxy--http_proxy--more_option--buffer_policy) below.
 
-`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding ... See [Compression Params](#nestedblock--dynamic_proxy--http_proxy--more_option--compression_params) below.
+`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding. See [Compression Params](#nestedblock--dynamic_proxy--http_proxy--more_option--compression_params) below.
 
-`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code... See [Custom Errors](#nestedblock--dynamic_proxy--http_proxy--more_option--custom_errors) below.
+`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code. See [Custom Errors](#nestedblock--dynamic_proxy--http_proxy--more_option--custom_errors) below.
 
 `disable_default_error_pages` - (Optional) Disable Default Error Pages. Disable the use of default F5XC error pages (`Bool`).
 
@@ -229,9 +229,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#nestedblock--dynamic_proxy--https_proxy--more_option--buffer_policy) below.
 
-`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding ... See [Compression Params](#nestedblock--dynamic_proxy--https_proxy--more_option--compression_params) below.
+`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding. See [Compression Params](#nestedblock--dynamic_proxy--https_proxy--more_option--compression_params) below.
 
-`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code... See [Custom Errors](#nestedblock--dynamic_proxy--https_proxy--more_option--custom_errors) below.
+`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code. See [Custom Errors](#nestedblock--dynamic_proxy--https_proxy--more_option--custom_errors) below.
 
 `disable_default_error_pages` - (Optional) Disable Default Error Pages. Disable the use of default F5XC error pages (`Bool`).
 
@@ -347,9 +347,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#nestedblock--http_proxy--more_option--buffer_policy) below.
 
-`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding ... See [Compression Params](#nestedblock--http_proxy--more_option--compression_params) below.
+`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding. See [Compression Params](#nestedblock--http_proxy--more_option--compression_params) below.
 
-`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code... See [Custom Errors](#nestedblock--http_proxy--more_option--custom_errors) below.
+`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code. See [Custom Errors](#nestedblock--http_proxy--more_option--custom_errors) below.
 
 `disable_default_error_pages` - (Optional) Disable Default Error Pages. Disable the use of default F5XC error pages (`Bool`).
 
@@ -447,13 +447,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
 
-`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
+`add_expiry` - (Optional) Configuration for add_expiry (`String`).
 
 `add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#nestedblock--http_proxy--more_option--response_cookies_to_add--add_httponly) below.
 
 `add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#nestedblock--http_proxy--more_option--response_cookies_to_add--add_partitioned) below.
 
-`add_path` - (Optional) Add path. Add path attribute (`String`).
+`add_path` - (Optional) Configuration for add_path (`String`).
 
 `add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#nestedblock--http_proxy--more_option--response_cookies_to_add--add_secure) below.
 
@@ -671,7 +671,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_intercept--custom_certificate--custom_hash_algorithms) below.
 
-`description` - (Optional) Description. Description for the certificate (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--tls_intercept--custom_certificate--disable_ocsp_stapling) below.
 
@@ -725,7 +725,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_interception` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Interception](#nestedblock--tls_intercept--policy--interception_rules--disable_interception) below.
 
-`domain_match` - (Optional) Domains. Domains names. See [Domain Match](#nestedblock--tls_intercept--policy--interception_rules--domain_match) below.
+`domain_match` - (Optional) Configuration for domain_match. See [Domain Match](#nestedblock--tls_intercept--policy--interception_rules--domain_match) below.
 
 `enable_interception` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Interception](#nestedblock--tls_intercept--policy--interception_rules--enable_interception) below.
 

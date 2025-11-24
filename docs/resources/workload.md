@@ -99,13 +99,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `num_replicas` - (Optional) Number of Replicas. Number of replicas of the batch job to spawn per site (`Number`).
 
-`volumes` - (Optional) Volumes. Volumes for the job. See [Volumes](#nestedblock--job--volumes) below.
+`volumes` - (Optional) Configuration for volumes. See [Volumes](#nestedblock--job--volumes) below.
 
 <a id="nestedblock--job--configuration"></a>
 
 ### Job Configuration
 
-`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--job--configuration--parameters) below.
+`parameters` - (Optional) Configuration for parameters. See [Parameters](#nestedblock--job--configuration--parameters) below.
 
 <a id="nestedblock--job--configuration--parameters"></a>
 
@@ -143,7 +143,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--job--containers--liveness_check) below.
 
-`name` - (Optional) Name. Name of the container (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--job--containers--readiness_check) below.
 
@@ -317,7 +317,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--job--volumes--host_path) below.
 
-`name` - (Optional) Name. Name of the volume (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--job--volumes--persistent_volume) below.
 
@@ -377,7 +377,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed. See [Scale To Zero](#nestedblock--service--scale_to_zero) below.
 
-`volumes` - (Optional) Volumes. Volumes for the service. See [Volumes](#nestedblock--service--volumes) below.
+`volumes` - (Optional) Configuration for volumes. See [Volumes](#nestedblock--service--volumes) below.
 
 <a id="nestedblock--service--advertise_options"></a>
 
@@ -397,7 +397,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--service--advertise_options--advertise_custom--advertise_where) below.
 
-`ports` - (Optional) Ports. Ports to advertise. See [Ports](#nestedblock--service--advertise_options--advertise_custom--ports) below.
+`ports` - (Optional) Configuration for ports. See [Ports](#nestedblock--service--advertise_options--advertise_custom--ports) below.
 
 <a id="nestedblock--service--advertise_options--advertise_custom--advertise_where"></a>
 
@@ -413,7 +413,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `multi_ports` - (Optional) Multiple Ports. Multiple ports. See [Multi Ports](#nestedblock--service--advertise_options--advertise_in_cluster--multi_ports) below.
 
-`port` - (Optional) Port. Single port. See [Port](#nestedblock--service--advertise_options--advertise_in_cluster--port) below.
+`port` - (Optional) Configuration for port. See [Port](#nestedblock--service--advertise_options--advertise_in_cluster--port) below.
 
 <a id="nestedblock--service--advertise_options--advertise_in_cluster--multi_ports"></a>
 
@@ -447,7 +447,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Service Configuration
 
-`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--service--configuration--parameters) below.
+`parameters` - (Optional) Configuration for parameters. See [Parameters](#nestedblock--service--configuration--parameters) below.
 
 <a id="nestedblock--service--configuration--parameters"></a>
 
@@ -485,7 +485,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--service--containers--liveness_check) below.
 
-`name` - (Optional) Name. Name of the container (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--service--containers--readiness_check) below.
 
@@ -663,7 +663,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--service--volumes--host_path) below.
 
-`name` - (Optional) Name. Name of the volume (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--service--volumes--persistent_volume) below.
 
@@ -729,7 +729,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Simple Service Configuration
 
-`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--simple_service--configuration--parameters) below.
+`parameters` - (Optional) Configuration for parameters. See [Parameters](#nestedblock--simple_service--configuration--parameters) below.
 
 <a id="nestedblock--simple_service--configuration--parameters"></a>
 
@@ -767,7 +767,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--simple_service--container--liveness_check) below.
 
-`name` - (Optional) Name. Name of the container (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--simple_service--container--readiness_check) below.
 
@@ -881,7 +881,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Simple Service Enabled
 
-`name` - (Optional) Name. Name of the volume (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--simple_service--enabled--persistent_volume) below.
 
@@ -905,7 +905,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Simple Service Simple Advertise
 
-`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, a.. (`List`).
+`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, a (`List`).
 
 `service_port` - (Optional) Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80 (`Number`).
 
@@ -947,7 +947,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--stateful_service--advertise_options--advertise_custom--advertise_where) below.
 
-`ports` - (Optional) Ports. Ports to advertise. See [Ports](#nestedblock--stateful_service--advertise_options--advertise_custom--ports) below.
+`ports` - (Optional) Configuration for ports. See [Ports](#nestedblock--stateful_service--advertise_options--advertise_custom--ports) below.
 
 <a id="nestedblock--stateful_service--advertise_options--advertise_custom--advertise_where"></a>
 
@@ -963,7 +963,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `multi_ports` - (Optional) Multiple Ports. Multiple ports. See [Multi Ports](#nestedblock--stateful_service--advertise_options--advertise_in_cluster--multi_ports) below.
 
-`port` - (Optional) Port. Single port. See [Port](#nestedblock--stateful_service--advertise_options--advertise_in_cluster--port) below.
+`port` - (Optional) Configuration for port. See [Port](#nestedblock--stateful_service--advertise_options--advertise_in_cluster--port) below.
 
 <a id="nestedblock--stateful_service--advertise_options--advertise_in_cluster--multi_ports"></a>
 
@@ -997,7 +997,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Stateful Service Configuration
 
-`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#nestedblock--stateful_service--configuration--parameters) below.
+`parameters` - (Optional) Configuration for parameters. See [Parameters](#nestedblock--stateful_service--configuration--parameters) below.
 
 <a id="nestedblock--stateful_service--configuration--parameters"></a>
 
@@ -1035,7 +1035,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#nestedblock--stateful_service--containers--liveness_check) below.
 
-`name` - (Optional) Name. Name of the container (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#nestedblock--stateful_service--containers--readiness_check) below.
 
@@ -1205,7 +1205,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Stateful Service Persistent Volumes
 
-`name` - (Optional) Name. Name of the volume (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#nestedblock--stateful_service--persistent_volumes--persistent_volume) below.
 
@@ -1237,7 +1237,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#nestedblock--stateful_service--volumes--host_path) below.
 
-`name` - (Optional) Name. Name of the volume (`String`).
+`name` - (Optional) Configuration for name (`String`).
 
 <a id="nestedblock--stateful_service--volumes--empty_dir"></a>
 

@@ -71,7 +71,7 @@ resource "f5xc_bgp" "example" {
 
 `bgp_parameters` - (Optional) BGP Parameters. BGP parameters for the local site. See [BGP Parameters](#bgp-parameters) below for details.
 
-`peers` - (Optional) Peers. List of peers. See [Peers](#peers) below for details.
+`peers` - (Optional) Configuration for peers. See [Peers](#peers) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

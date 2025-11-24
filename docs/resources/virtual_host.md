@@ -86,23 +86,23 @@ resource "f5xc_virtual_host" "example" {
 
 > **Note:** One of the arguments from this list "captcha_challenge, js_challenge, no_challenge" must be set.
 
-`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap.. See [Captcha Challenge](#captcha-challenge) below for details.
+`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap. See [Captcha Challenge](#captcha-challenge) below for details.
 
-`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [Js Challenge](#js-challenge) below for details.
+`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Js Challenge](#js-challenge) below for details.
 
 `no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
 
 `coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#coalescing-options) below for details.
 
-`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding .. See [Compression Params](#compression-params) below for details.
+`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding. See [Compression Params](#compression-params) below for details.
 
 `connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
 
-`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate.. See [CORS Policy](#cors-policy) below for details.
+`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate. See [CORS Policy](#cors-policy) below for details.
 
-`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and .. See [CSRF Policy](#csrf-policy) below for details.
+`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and. See [CSRF Policy](#csrf-policy) below for details.
 
-`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value is the uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 .. See [Custom Errors](#custom-errors) below for details.
+`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value is the uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64. See [Custom Errors](#custom-errors) below for details.
 
 > **Note:** One of the arguments from this list "default_loadbalancer, non_default_loadbalancer" must be set.
 
@@ -120,15 +120,15 @@ resource "f5xc_virtual_host" "example" {
 
 `enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Path Normalize](#enable-path-normalize) below for details.
 
-`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.co. (`List`).
+`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.co (`List`).
 
-`dynamic_reverse_proxy` - (Optional) Dynamic Reverse Proxy Type. In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyTyp.. See [Dynamic Reverse Proxy](#dynamic-reverse-proxy) below for details.
+`dynamic_reverse_proxy` - (Optional) Dynamic Reverse Proxy Type. In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyTyp. See [Dynamic Reverse Proxy](#dynamic-reverse-proxy) below for details.
 
 `http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#http-protocol-options) below for details.
 
-`idle_timeout` - (Optional) Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity. Idle timeout and Proxy Type: HTTP_PROXY, HTTPS_PROXY: Idle timer is started when the first byte is received on the connection. Each time an encode/decode event for headers or data is processed for the stream, the timer will be reset. If the timeout fires, the stream is terminated with a 504 (Gateway Timeout) error code if no upstream RE. (`Number`).
+`idle_timeout` - (Optional) Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity. Idle timeout and Proxy Type: HTTP_PROXY, HTTPS_PROXY: Idle timer is started when the first byte is received on the connection. Each time an encode/decode event for headers or data is processed for the stream, the timer will be reset. If the timeout fires, the stream is terminated with a 504 (Gateway Timeout) error code if no upstream RE (`Number`).
 
-`max_request_header_size` - (Optional) Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response. The max configurable limit is 96 KiB, based on current implementation constraints. Note: a. This configuration parameter is applicable only for HTTP_PROXY and HTTPS_PROXY b. When multiple HTTP_PROXY virtual hosts share the same advertise policy, the effective 'maximu. (`Number`).
+`max_request_header_size` - (Optional) Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response. The max configurable limit is 96 KiB, based on current implementation constraints. Note: a. This configuration parameter is applicable only for HTTP_PROXY and HTTPS_PROXY b. When multiple HTTP_PROXY virtual hosts share the same advertise policy, the effective 'maximu (`Number`).
 
 `proxy` - (Optional) Type of Proxy. ProxyType tells the type of proxy to install for the virtual host. Only the following combination of VirtualHosts within same AdvertisePolicy is permitted (None of them should have '*' in domains when used with other VirtualHosts in same AdvertisePolicy) 1. Multiple TCP_PROXY_WITH_SNI and multiple HTTPS_PROXY 2. Multiple HTTP_PROXY 3. Multiple HTTPS_PROXY 4. Multiple TCP_PROXY_WITH_SNI HTTPS_PROXY without TLS parameters is not permitted HTTP_PROXY/HTTPS_PROXY/TCP_PROXY_WITH_SNI... Possible values are `UDP_PROXY`, `SMA_PROXY`, `DNS_PROXY`, `ZTNA_PROXY`, `UZTNA_PROXY`. Defaults to `HTTP_PROXY` (`String`).
 
@@ -152,7 +152,7 @@ resource "f5xc_virtual_host" "example" {
 
 `retry_policy` - (Optional) Retry Policy. Retry policy configuration for route destination. See [Retry Policy](#retry-policy) below for details.
 
-`routes` - (Optional) Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for T.. See [Routes](#routes) below for details.
+`routes` - (Optional) Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for T. See [Routes](#routes) below for details.
 
 `sensitive_data_policy` - (Optional) Sensitive Data Discovery. References to sensitive_data_policy objects. See [Sensitive Data Policy](#sensitive-data-policy) below for details.
 
@@ -380,7 +380,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `resolution_network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`resolve_endpoint_dynamically` - (Optional) Dynamic Endpoint Resolution. x-example : true In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI.. (`Bool`).
+`resolve_endpoint_dynamically` - (Optional) Dynamic Endpoint Resolution. x-example : true In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI (`Bool`).
 
 <a id="nestedblock--dynamic_reverse_proxy--resolution_network"></a>
 
@@ -574,13 +574,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
 
-`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
+`add_expiry` - (Optional) Configuration for add_expiry (`String`).
 
 `add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#nestedblock--response_cookies_to_add--add_httponly) below.
 
 `add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#nestedblock--response_cookies_to_add--add_partitioned) below.
 
-`add_path` - (Optional) Add path. Add path attribute (`String`).
+`add_path` - (Optional) Configuration for add_path (`String`).
 
 `add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#nestedblock--response_cookies_to_add--add_secure) below.
 
@@ -754,7 +754,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `retriable_status_codes` - (Optional) Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on (`List`).
 
-`retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with.. (`List`).
+`retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with (`List`).
 
 <a id="nestedblock--retry_policy--back_off"></a>
 
@@ -822,9 +822,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### TLS Cert Params
 
-`certificates` - (Optional) Certificates. Set of certificates. See [Certificates](#nestedblock--tls_cert_params--certificates) below.
+`certificates` - (Optional) Configuration for certificates. See [Certificates](#nestedblock--tls_cert_params--certificates) below.
 
-`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_.. (`List`).
+`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_ (`List`).
 
 `client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Optional](#nestedblock--tls_cert_params--client_certificate_optional) below.
 
@@ -914,7 +914,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### TLS Parameters Common Params
 
-`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_.. (`List`).
+`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_ (`List`).
 
 `maximum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
@@ -932,7 +932,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms) below.
 
-`description` - (Optional) Description. Description for the certificate (`String`).
+`description` - (Optional) Configuration for description (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--tls_parameters--common_params--tls_certificates--disable_ocsp_stapling) below.
 

@@ -90,11 +90,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Subjects
 
-`group` - (Optional) Group. Group id of the user group (`String`).
+`group` - (Optional) Configuration for group (`String`).
 
 `service_account` - (Optional) ServiceAccountType. See [Service Account](#nestedblock--subjects--service_account) below.
 
-`user` - (Optional) User. User id of the user (`String`).
+`user` - (Optional) Configuration for user (`String`).
 
 <a id="nestedblock--subjects--service_account"></a>
 

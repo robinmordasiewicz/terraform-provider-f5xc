@@ -160,7 +160,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--port--dns) below.
 
-`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
+`user_defined` - (Optional) Configuration for user_defined (`Number`).
 
 <a id="nestedblock--port--all"></a>
 

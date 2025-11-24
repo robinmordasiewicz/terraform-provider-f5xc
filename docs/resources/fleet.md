@@ -293,7 +293,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Device List Devices Network Device
 
-`interface` - (Optional) Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if us... See [Interface](#nestedblock--device_list--devices--network_device--interface) below.
+`interface` - (Optional) Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if us. See [Interface](#nestedblock--device_list--devices--network_device--interface) below.
 
 `use` - (Optional) Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network. Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`. Defaults to `NETWORK_INTERFACE_USE_REGULAR` (`String`).
 
@@ -507,7 +507,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `number_of_vfio_vfs` - (Optional) Number of virtual functions reserved for vfio. Number of virtual functions reserved for VNFs and DPDK-based CNFs (`Number`).
 
-`number_of_vfs` - (Optional) Total number of virtual functions. Total number of virtual functions (`Number`).
+`number_of_vfs` - (Optional) Configuration for number_of_vfs (`Number`).
 
 <a id="nestedblock--storage_class_list"></a>
 

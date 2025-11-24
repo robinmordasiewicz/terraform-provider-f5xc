@@ -299,6 +299,31 @@ Before creating any PR, verify:
 - [ ] Not bypassing automation that handles this task
 - [ ] PR contains single concern (not mixed source + generated)
 
+### Rule 7: Automation Security and Token Management
+
+**All automated workflows use the `AUTO_MERGE_TOKEN` for PR creation to enable workflow triggers.**
+
+**Why this matters:**
+- PRs created with `GITHUB_TOKEN` **do not trigger workflows** (GitHub security feature)
+- Our automation requires status checks to run on bot-created PRs
+- The `AUTO_MERGE_TOKEN` is a Personal Access Token (PAT) that enables this
+
+**Security practices:**
+- See `.github/AUTOMATION_SECURITY.md` for complete token management procedures
+- Token rotation required every 90 days
+- Token scopes: `repo`, `workflow` (minimum required)
+- Token access: This repository only (fine-grained PAT)
+
+**Affected workflows:**
+- `docs.yml` (line 75): Creates PRs with regenerated documentation
+- `generate.yml` (line 98): Creates PRs with regenerated provider code
+- `sync-openapi.yml` (lines 236, 277): Creates PRs with updated OpenAPI specs
+
+**If automation fails:**
+1. Check if `AUTO_MERGE_TOKEN` has expired
+2. Follow token rotation procedure in `.github/AUTOMATION_SECURITY.md`
+3. Verify workflow logs for authentication errors
+
 ---
 
 ## Part 3: Constitution Enforcement

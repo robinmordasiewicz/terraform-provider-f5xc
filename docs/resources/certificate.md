@@ -66,11 +66,11 @@ resource "f5xc_certificate" "example" {
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#disable-ocsp-stapling) below for details.
 
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#use-system-defaults) below for details.
+
 `private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#private-key) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#use-system-defaults) below for details.
 
 ### Attributes Reference
 

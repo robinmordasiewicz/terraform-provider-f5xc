@@ -66,6 +66,12 @@ resource "f5xc_global_log_receiver" "example" {
 
 `audit_logs` - (Optional) Empty. This can be used for messages where no values are needed. See [Audit Logs](#audit-logs) below for details.
 
+`dns_logs` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS Logs](#dns-logs) below for details.
+
+`request_logs` - (Optional) Empty. This can be used for messages where no values are needed. See [Request Logs](#request-logs) below for details.
+
+`security_events` - (Optional) Empty. This can be used for messages where no values are needed. See [Security Events](#security-events) below for details.
+
 > **Note:** One of the arguments from this list "aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver" must be set.
 
 `aws_cloud_watch_receiver` - (Optional) AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver. See [AWS Cloud Watch Receiver](#aws-cloud-watch-receiver) below for details.
@@ -76,8 +82,6 @@ resource "f5xc_global_log_receiver" "example" {
 
 `datadog_receiver` - (Optional) Datadog Configuration. Configuration for Datadog endpoint. See [Datadog Receiver](#datadog-receiver) below for details.
 
-`dns_logs` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS Logs](#dns-logs) below for details.
-
 `gcp_bucket_receiver` - (Optional) GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver. See [GCP Bucket Receiver](#gcp-bucket-receiver) below for details.
 
 `http_receiver` - (Optional) HTTP Configuration. Configuration for HTTP endpoint. See [HTTP Receiver](#http-receiver) below for details.
@@ -86,6 +90,14 @@ resource "f5xc_global_log_receiver" "example" {
 
 `new_relic_receiver` - (Optional) NewRelic Configuration. Configuration for NewRelic endpoint. See [New Relic Receiver](#new-relic-receiver) below for details.
 
+`qradar_receiver` - (Optional) IBM QRadar Configuration. Configuration for IBM QRadar endpoint. See [Qradar Receiver](#qradar-receiver) below for details.
+
+`s3_receiver` - (Optional) S3 Configuration. S3 Configuration for Global Log Receiver. See [S3 Receiver](#s3-receiver) below for details.
+
+`splunk_receiver` - (Optional) Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint. See [Splunk Receiver](#splunk-receiver) below for details.
+
+`sumo_logic_receiver` - (Optional) SumoLogic Configuration. Configuration for SumoLogic endpoint. See [Sumo Logic Receiver](#sumo-logic-receiver) below for details.
+
 > **Note:** One of the arguments from this list "ns_all, ns_current, ns_list" must be set.
 
 `ns_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Ns All](#ns-all) below for details.
@@ -93,18 +105,6 @@ resource "f5xc_global_log_receiver" "example" {
 `ns_current` - (Optional) Empty. This can be used for messages where no values are needed. See [Ns Current](#ns-current) below for details.
 
 `ns_list` - (Optional) Namespace List. Namespace List. See [Ns List](#ns-list) below for details.
-
-`qradar_receiver` - (Optional) IBM QRadar Configuration. Configuration for IBM QRadar endpoint. See [Qradar Receiver](#qradar-receiver) below for details.
-
-`request_logs` - (Optional) Empty. This can be used for messages where no values are needed. See [Request Logs](#request-logs) below for details.
-
-`s3_receiver` - (Optional) S3 Configuration. S3 Configuration for Global Log Receiver. See [S3 Receiver](#s3-receiver) below for details.
-
-`security_events` - (Optional) Empty. This can be used for messages where no values are needed. See [Security Events](#security-events) below for details.
-
-`splunk_receiver` - (Optional) Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint. See [Splunk Receiver](#splunk-receiver) below for details.
-
-`sumo_logic_receiver` - (Optional) SumoLogic Configuration. Configuration for SumoLogic endpoint. See [Sumo Logic Receiver](#sumo-logic-receiver) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

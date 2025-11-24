@@ -68,9 +68,9 @@ resource "f5xc_k8s_cluster_role" "example" {
 
 `policy_rule_list` - (Optional) Policy Rule List. List of rules for role permissions. See [Policy Rule List](#policy-rule-list) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
 `yaml` - (Optional) K8s YAML. K8s YAML for ClusterRole (`String`).
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

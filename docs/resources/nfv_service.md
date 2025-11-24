@@ -66,6 +66,8 @@ resource "f5xc_nfv_service" "example" {
 
 `disable_https_management` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable HTTPS Management](#disable-https-management) below for details.
 
+`https_management` - (Optional) HTTPS based management. HTTPS based configuration. See [HTTPS Management](#https-management) below for details.
+
 > **Note:** One of the arguments from this list "disable_ssh_access, enabled_ssh_access" must be set.
 
 `disable_ssh_access` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable SSH Access](#disable-ssh-access) below for details.
@@ -75,8 +77,6 @@ resource "f5xc_nfv_service" "example" {
 > **Note:** One of the arguments from this list "f5_big_ip_aws_service, palo_alto_fw_service" must be set.
 
 `f5_big_ip_aws_service` - (Optional) Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS. See [F5 Big IP AWS Service](#f5-big-ip-aws-service) below for details.
-
-`https_management` - (Optional) HTTPS based management. HTTPS based configuration. See [HTTPS Management](#https-management) below for details.
 
 `palo_alto_fw_service` - (Optional) Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration. See [Palo Alto Fw Service](#palo-alto-fw-service) below for details.
 

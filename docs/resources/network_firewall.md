@@ -66,21 +66,21 @@ resource "f5xc_network_firewall" "example" {
 
 `active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
 
+`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#active-network-policies) below for details.
+
+`disable_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Network Policy](#disable-network-policy) below for details.
+
 > **Note:** One of the arguments from this list "active_fast_acls, disable_fast_acl" must be set.
 
 `active_fast_acls` - (Optional) Active Fast ACL(s). List of Fast ACL(s). See [Active Fast Acls](#active-fast-acls) below for details.
+
+`disable_fast_acl` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Fast ACL](#disable-fast-acl) below for details.
 
 > **Note:** One of the arguments from this list "active_forward_proxy_policies, disable_forward_proxy_policy" must be set.
 
 `active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
 
-`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#active-network-policies) below for details.
-
-`disable_fast_acl` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Fast ACL](#disable-fast-acl) below for details.
-
 `disable_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Forward Proxy Policy](#disable-forward-proxy-policy) below for details.
-
-`disable_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Network Policy](#disable-network-policy) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

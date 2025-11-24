@@ -68,15 +68,15 @@ resource "f5xc_endpoint" "example" {
 
 `dns_name_advanced` - (Optional) DNS Name Advanced Type. Specifies name and TTL used for DNS resolution. See [DNS Name Advanced](#dns-name-advanced) below for details.
 
-`health_check_port` - (Optional) Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port (`Number`).
-
 `ip` - (Optional) Endpoint IP Address. Endpoint is reachable at the given IPv4/IPv6 address (`String`).
+
+`service_info` - (Optional) Service Info Type. Specifies whether endpoint service is discovered by name or labels. See [Service Info](#service-info) below for details.
+
+`health_check_port` - (Optional) Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port (`Number`).
 
 `port` - (Optional) Port. Endpoint service is available on this port (`Number`).
 
 `protocol` - (Optional) Protocol. Endpoint protocol. Default is TCP. Both TCP and UDP protocols are supported (`String`).
-
-`service_info` - (Optional) Service Info Type. Specifies whether endpoint service is discovered by name or labels. See [Service Info](#service-info) below for details.
 
 `snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#snat-pool) below for details.
 

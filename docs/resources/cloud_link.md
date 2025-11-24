@@ -66,13 +66,13 @@ resource "f5xc_cloud_link" "example" {
 
 `aws` - (Optional) Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider. See [AWS](#aws) below for details.
 
+`gcp` - (Optional) Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider. See [GCP](#gcp) below for details.
+
 > **Note:** One of the arguments from this list "disabled, enabled" must be set.
 
 `disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#disabled) below for details.
 
 `enabled` - (Optional) CloudLink ADN Network Config. See [Enabled](#enabled) below for details.
-
-`gcp` - (Optional) Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider. See [GCP](#gcp) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

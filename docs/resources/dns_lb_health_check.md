@@ -74,9 +74,9 @@ resource "f5xc_dns_lb_health_check" "example" {
 
 `tcp_hex_health_check` - (Optional) TCP Hex Health Check. See [TCP Hex Health Check](#tcp-hex-health-check) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
 `udp_health_check` - (Optional) UDP Health Check. See [UDP Health Check](#udp-health-check) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

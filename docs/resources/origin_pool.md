@@ -76,15 +76,19 @@ resource "f5xc_origin_pool" "example" {
 
 `automatic_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic Port](#automatic-port) below for details.
 
+`lb_port` - (Optional) Empty. This can be used for messages where no values are needed. See [LB Port](#lb-port) below for details.
+
+`port` - (Optional) Port. Endpoint service is available on this port (`Number`).
+
 `endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED` (`String`).
 
 > **Note:** One of the arguments from this list "health_check_port, same_as_endpoint_port" must be set.
 
 `health_check_port` - (Optional) Health check port. Port used for performing health check (`Number`).
 
-`healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects. See [Healthcheck](#healthcheck) below for details.
+`same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Endpoint Port](#same-as-endpoint-port) below for details.
 
-`lb_port` - (Optional) Empty. This can be used for messages where no values are needed. See [LB Port](#lb-port) below for details.
+`healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects. See [Healthcheck](#healthcheck) below for details.
 
 `loadbalancer_algorithm` - (Optional) Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy im... Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN` (`String`).
 
@@ -92,17 +96,13 @@ resource "f5xc_origin_pool" "example" {
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No TLS](#no-tls) below for details.
 
+`use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters. See [Use TLS](#use-tls) below for details.
+
 `origin_servers` - (Optional) Origin Servers. List of origin servers in this pool. See [Origin Servers](#origin-servers) below for details.
-
-`port` - (Optional) Port. Endpoint service is available on this port (`Number`).
-
-`same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Endpoint Port](#same-as-endpoint-port) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 `upstream_conn_pool_reuse_type` - (Optional) Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only. See [Upstream Conn Pool Reuse Type](#upstream-conn-pool-reuse-type) below for details.
-
-`use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters. See [Use TLS](#use-tls) below for details.
 
 ### Attributes Reference
 

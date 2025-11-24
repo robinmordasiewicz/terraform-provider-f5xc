@@ -70,15 +70,27 @@ resource "f5xc_virtual_host" "example" {
 
 `append_server_name` - (Optional) Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed (`String`).
 
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header](#default-header) below for details.
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed. See [Pass Through](#pass-through) below for details.
+
+`server_name` - (Optional) Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header (`String`).
+
 > **Note:** One of the arguments from this list "authentication, no_authentication" must be set.
 
 `authentication` - (Optional) Authentication Details. Authentication related information. This allows to configure the URL to redirect after the authentication Authentication Object Reference, configuration of cookie params etc. See [Authentication](#authentication) below for details.
+
+`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authentication](#no-authentication) below for details.
 
 `buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#buffer-policy) below for details.
 
 > **Note:** One of the arguments from this list "captcha_challenge, js_challenge, no_challenge" must be set.
 
 `captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap.. See [Captcha Challenge](#captcha-challenge) below for details.
+
+`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [Js Challenge](#js-challenge) below for details.
+
+`no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
 
 `coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#coalescing-options) below for details.
 
@@ -92,11 +104,11 @@ resource "f5xc_virtual_host" "example" {
 
 `custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value is the uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 .. See [Custom Errors](#custom-errors) below for details.
 
-`default_header` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header](#default-header) below for details.
-
 > **Note:** One of the arguments from this list "default_loadbalancer, non_default_loadbalancer" must be set.
 
 `default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Loadbalancer](#default-loadbalancer) below for details.
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed. See [Non Default Loadbalancer](#non-default-loadbalancer) below for details.
 
 `disable_default_error_pages` - (Optional) Disable default error pages. An option to specify whether to disable using default F5XC error pages (`Bool`).
 
@@ -106,27 +118,17 @@ resource "f5xc_virtual_host" "example" {
 
 `disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Path Normalize](#disable-path-normalize) below for details.
 
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Path Normalize](#enable-path-normalize) below for details.
+
 `domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.co. (`List`).
 
 `dynamic_reverse_proxy` - (Optional) Dynamic Reverse Proxy Type. In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyTyp.. See [Dynamic Reverse Proxy](#dynamic-reverse-proxy) below for details.
-
-`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Path Normalize](#enable-path-normalize) below for details.
 
 `http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#http-protocol-options) below for details.
 
 `idle_timeout` - (Optional) Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity. Idle timeout and Proxy Type: HTTP_PROXY, HTTPS_PROXY: Idle timer is started when the first byte is received on the connection. Each time an encode/decode event for headers or data is processed for the stream, the timer will be reset. If the timeout fires, the stream is terminated with a 504 (Gateway Timeout) error code if no upstream RE. (`Number`).
 
-`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [Js Challenge](#js-challenge) below for details.
-
 `max_request_header_size` - (Optional) Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response. The max configurable limit is 96 KiB, based on current implementation constraints. Note: a. This configuration parameter is applicable only for HTTP_PROXY and HTTPS_PROXY b. When multiple HTTP_PROXY virtual hosts share the same advertise policy, the effective 'maximu. (`Number`).
-
-`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authentication](#no-authentication) below for details.
-
-`no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
-
-`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed. See [Non Default Loadbalancer](#non-default-loadbalancer) below for details.
-
-`pass_through` - (Optional) Empty. This can be used for messages where no values are needed. See [Pass Through](#pass-through) below for details.
 
 `proxy` - (Optional) Type of Proxy. ProxyType tells the type of proxy to install for the virtual host. Only the following combination of VirtualHosts within same AdvertisePolicy is permitted (None of them should have '*' in domains when used with other VirtualHosts in same AdvertisePolicy) 1. Multiple TCP_PROXY_WITH_SNI and multiple HTTPS_PROXY 2. Multiple HTTP_PROXY 3. Multiple HTTPS_PROXY 4. Multiple TCP_PROXY_WITH_SNI HTTPS_PROXY without TLS parameters is not permitted HTTP_PROXY/HTTPS_PROXY/TCP_PROXY_WITH_SNI... Possible values are `UDP_PROXY`, `SMA_PROXY`, `DNS_PROXY`, `ZTNA_PROXY`, `UZTNA_PROXY`. Defaults to `HTTP_PROXY` (`String`).
 
@@ -153,8 +155,6 @@ resource "f5xc_virtual_host" "example" {
 `routes` - (Optional) Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for T.. See [Routes](#routes) below for details.
 
 `sensitive_data_policy` - (Optional) Sensitive Data Discovery. References to sensitive_data_policy objects. See [Sensitive Data Policy](#sensitive-data-policy) below for details.
-
-`server_name` - (Optional) Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header (`String`).
 
 `slow_ddos_mitigation` - (Optional) Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users. See [Slow DDOS Mitigation](#slow-ddos-mitigation) below for details.
 

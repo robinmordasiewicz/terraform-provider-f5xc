@@ -68,6 +68,8 @@ resource "f5xc_ike1" "example" {
 
 `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 
+`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
+
 > **Note:** One of the arguments from this list "reauth_disabled, reauth_timeout_days, reauth_timeout_hours" must be set.
 
 `reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Reauth Disabled](#reauth-disabled) below for details.
@@ -77,8 +79,6 @@ resource "f5xc_ike1" "example" {
 `reauth_timeout_hours` - (Optional) Hours. Input Hours. See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
 
 ### Attributes Reference
 

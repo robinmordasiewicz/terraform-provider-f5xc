@@ -81,6 +81,10 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
 
+`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Service Policies](#no-service-policies) below for details.
+
+`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Service Policies From Namespace](#service-policies-from-namespace) below for details.
+
 `add_location` - (Optional) Add Location. x-example: true Appends header x-volterra-location = <RE-site-name> in responses. This configuration is ignored on CE sites (`Bool`).
 
 > **Note:** One of the arguments from this list "advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise" must be set.
@@ -91,23 +95,35 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Public Default VIP](#advertise-on-public-default-vip) below for details.
 
+`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
+
 `api_protection_rules` - (Optional) API Protection Rules. API Protection Rules. See [API Protection Rules](#api-protection-rules) below for details.
 
 > **Note:** One of the arguments from this list "api_rate_limit, disable_rate_limit, rate_limit" must be set.
 
 `api_rate_limit` - (Optional) APIRateLimit. See [API Rate Limit](#api-rate-limit) below for details.
 
+`disable_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Rate Limit](#disable-rate-limit) below for details.
+
+`rate_limit` - (Optional) RateLimitConfigType. See [Rate Limit](#rate-limit) below for details.
+
 > **Note:** One of the arguments from this list "api_specification, disable_api_definition" must be set.
 
 `api_specification` - (Optional) API Specification and Validation. Settings for API specification (API definition, OpenAPI validation, etc.). See [API Specification](#api-specification) below for details.
+
+`disable_api_definition` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable API Definition](#disable-api-definition) below for details.
 
 > **Note:** One of the arguments from this list "api_testing, disable_api_testing" must be set.
 
 `api_testing` - (Optional) API Testing. See [API Testing](#api-testing) below for details.
 
+`disable_api_testing` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable API Testing](#disable-api-testing) below for details.
+
 > **Note:** One of the arguments from this list "app_firewall, disable_waf" must be set.
 
 `app_firewall` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [App Firewall](#app-firewall) below for details.
+
+`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable WAF](#disable-waf) below for details.
 
 `blocked_clients` - (Optional) Client Blocking Rules. Define rules to block IP Prefixes or AS numbers. See [Blocked Clients](#blocked-clients) below for details.
 
@@ -117,21 +133,45 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `bot_defense_advanced` - (Optional) Bot Defense Advanced. Bot Defense Advanced. See [Bot Defense Advanced](#bot-defense-advanced) below for details.
 
+`disable_bot_defense` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Bot Defense](#disable-bot-defense) below for details.
+
 > **Note:** One of the arguments from this list "caching_policy, disable_caching" must be set.
 
 `caching_policy` - (Optional) Caching Policies. x-required Caching Policies for the CDN. See [Caching Policy](#caching-policy) below for details.
+
+`disable_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Caching](#disable-caching) below for details.
 
 > **Note:** One of the arguments from this list "captcha_challenge, enable_challenge, js_challenge, no_challenge, policy_based_challenge" must be set.
 
 `captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the cap.. See [Captcha Challenge](#captcha-challenge) below for details.
 
+`enable_challenge` - (Optional) Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users. See [Enable Challenge](#enable-challenge) below for details.
+
+`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [Js Challenge](#js-challenge) below for details.
+
+`no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
+
+`policy_based_challenge` - (Optional) Policy Based Challenge. Specifies the settings for policy rule based challenge. See [Policy Based Challenge](#policy-based-challenge) below for details.
+
 > **Note:** One of the arguments from this list "client_side_defense, disable_client_side_defense" must be set.
 
 `client_side_defense` - (Optional) Client-Side Defense. This defines various configuration options for Client-Side Defense Policy. See [Client Side Defense](#client-side-defense) below for details.
 
+`disable_client_side_defense` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Client Side Defense](#disable-client-side-defense) below for details.
+
 > **Note:** One of the arguments from this list "cookie_stickiness, least_active, random, ring_hash, round_robin, source_ip_stickiness" must be set.
 
 `cookie_stickiness` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g.. See [Cookie Stickiness](#cookie-stickiness) below for details.
+
+`least_active` - (Optional) Empty. This can be used for messages where no values are needed. See [Least Active](#least-active) below for details.
+
+`random` - (Optional) Empty. This can be used for messages where no values are needed. See [Random](#random) below for details.
+
+`ring_hash` - (Optional) Hash Policy List. List of hash policy rules. See [Ring Hash](#ring-hash) below for details.
+
+`round_robin` - (Optional) Empty. This can be used for messages where no values are needed. See [Round Robin](#round-robin) below for details.
+
+`source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed. See [Source IP Stickiness](#source-ip-stickiness) below for details.
 
 `cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate.. See [CORS Policy](#cors-policy) below for details.
 
@@ -153,59 +193,45 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `default_sensitive_data_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sensitive Data Policy](#default-sensitive-data-policy) below for details.
 
-`disable_api_definition` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable API Definition](#disable-api-definition) below for details.
+`sensitive_data_policy` - (Optional) Sensitive Data Discovery. Settings for data type policy. See [Sensitive Data Policy](#sensitive-data-policy) below for details.
 
 > **Note:** One of the arguments from this list "disable_api_discovery, enable_api_discovery" must be set.
 
 `disable_api_discovery` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable API Discovery](#disable-api-discovery) below for details.
 
-`disable_api_testing` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable API Testing](#disable-api-testing) below for details.
-
-`disable_bot_defense` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Bot Defense](#disable-bot-defense) below for details.
-
-`disable_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Caching](#disable-caching) below for details.
-
-`disable_client_side_defense` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Client Side Defense](#disable-client-side-defense) below for details.
+`enable_api_discovery` - (Optional) API Discovery Setting. Specifies the settings used for API discovery. See [Enable API Discovery](#enable-api-discovery) below for details.
 
 > **Note:** One of the arguments from this list "disable_ip_reputation, enable_ip_reputation" must be set.
 
 `disable_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable IP Reputation](#disable-ip-reputation) below for details.
 
+`enable_ip_reputation` - (Optional) IP Threat Category List. List of IP threat categories. See [Enable IP Reputation](#enable-ip-reputation) below for details.
+
 > **Note:** One of the arguments from this list "disable_malicious_user_detection, enable_malicious_user_detection" must be set.
 
 `disable_malicious_user_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Malicious User Detection](#disable-malicious-user-detection) below for details.
+
+`enable_malicious_user_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Malicious User Detection](#enable-malicious-user-detection) below for details.
 
 > **Note:** One of the arguments from this list "disable_malware_protection, malware_protection_settings" must be set.
 
 `disable_malware_protection` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Malware Protection](#disable-malware-protection) below for details.
 
-`disable_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Rate Limit](#disable-rate-limit) below for details.
+`malware_protection_settings` - (Optional) Malware Protection Policy. Malware Protection protects Web Apps and APIs, from malicious file uploads by scanning files in real-time. See [Malware Protection Settings](#malware-protection-settings) below for details.
 
 > **Note:** One of the arguments from this list "disable_threat_mesh, enable_threat_mesh" must be set.
 
 `disable_threat_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Threat Mesh](#disable-threat-mesh) below for details.
 
+`enable_threat_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Threat Mesh](#enable-threat-mesh) below for details.
+
 > **Note:** One of the arguments from this list "disable_trust_client_ip_headers, enable_trust_client_ip_headers" must be set.
 
 `disable_trust_client_ip_headers` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Trust Client IP Headers](#disable-trust-client-ip-headers) below for details.
 
-`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable WAF](#disable-waf) below for details.
-
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
+`enable_trust_client_ip_headers` - (Optional) Trust Client IP Headers List. List of Client IP Headers. See [Enable Trust Client IP Headers](#enable-trust-client-ip-headers) below for details.
 
 `domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildc. (`List`).
-
-`enable_api_discovery` - (Optional) API Discovery Setting. Specifies the settings used for API discovery. See [Enable API Discovery](#enable-api-discovery) below for details.
-
-`enable_challenge` - (Optional) Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users. See [Enable Challenge](#enable-challenge) below for details.
-
-`enable_ip_reputation` - (Optional) IP Threat Category List. List of IP threat categories. See [Enable IP Reputation](#enable-ip-reputation) below for details.
-
-`enable_malicious_user_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Malicious User Detection](#enable-malicious-user-detection) below for details.
-
-`enable_threat_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Threat Mesh](#enable-threat-mesh) below for details.
-
-`enable_trust_client_ip_headers` - (Optional) Trust Client IP Headers List. List of Client IP Headers. See [Enable Trust Client IP Headers](#enable-trust-client-ip-headers) below for details.
 
 `graphql_rules` - (Optional) GraphQL Inspection. GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy configuration to analyze GraphQL queries and prevent GraphQL tailored attacks. See [GraphQL Rules](#graphql-rules) below for details.
 
@@ -216,8 +242,6 @@ resource "f5xc_http_loadbalancer" "example" {
 `https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS](#https) below for details.
 
 `https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS Auto Cert](#https-auto-cert) below for details.
-
-`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o.. See [Js Challenge](#js-challenge) below for details.
 
 `jwt_validation` - (Optional) JWT Validation. JWT Validation stops JWT replay attacks and JWT tampering by cryptographically verifying incoming JWTs before they are passed to your API origin. JWT Validation will also stop requests with expired tokens or tokens that are not yet valid. See [JWT Validation](#jwt-validation) below for details.
 
@@ -231,49 +255,25 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `l7_ddos_protection` - (Optional) L7 DDOS Protection Settings. L7 DDOS protection is critical for safeguarding web applications, APIs, and services that are exposed to the internet from sophisticated, volumetric, application-level threats. Configure actions, thresholds and policies to apply during L7 DDOS attack. See [L7 DDOS Protection](#l7-ddos-protection) below for details.
 
-`least_active` - (Optional) Empty. This can be used for messages where no values are needed. See [Least Active](#least-active) below for details.
-
-`malware_protection_settings` - (Optional) Malware Protection Policy. Malware Protection protects Web Apps and APIs, from malicious file uploads by scanning files in real-time. See [Malware Protection Settings](#malware-protection-settings) below for details.
-
 `more_option` - (Optional) Advanced Options. This defines various options to define a route. See [More Option](#more-option) below for details.
 
 > **Note:** One of the arguments from this list "multi_lb_app, single_lb_app" must be set.
 
 `multi_lb_app` - (Optional) Empty. This can be used for messages where no values are needed. See [Multi LB App](#multi-lb-app) below for details.
 
-`no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
-
-`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Service Policies](#no-service-policies) below for details.
+`single_lb_app` - (Optional) Single Load Balancer App Setting. Specific settings for Machine learning analysis on this HTTP LB, independently from other LBs. See [Single LB App](#single-lb-app) below for details.
 
 `origin_server_subset_rule_list` - (Optional) Origin Server Subset Rule List Type. List of Origin Pools. See [Origin Server Subset Rule List](#origin-server-subset-rule-list) below for details.
 
-`policy_based_challenge` - (Optional) Policy Based Challenge. Specifies the settings for policy rule based challenge. See [Policy Based Challenge](#policy-based-challenge) below for details.
-
 `protected_cookies` - (Optional) Cookie Protection. Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite. The configured mode of WAF (monitoring or blocking) will be enforced on the request when cookie tampering is identified. Note: We recommend enabling Secure and HttpOnly attributes along with cookie tampering protection. See [Protected Cookies](#protected-cookies) below for details.
-
-`random` - (Optional) Empty. This can be used for messages where no values are needed. See [Random](#random) below for details.
-
-`rate_limit` - (Optional) RateLimitConfigType. See [Rate Limit](#rate-limit) below for details.
-
-`ring_hash` - (Optional) Hash Policy List. List of hash policy rules. See [Ring Hash](#ring-hash) below for details.
-
-`round_robin` - (Optional) Empty. This can be used for messages where no values are needed. See [Round Robin](#round-robin) below for details.
 
 `routes` - (Optional) Routes. Routes allow users to define match condition on a path and/or HTTP method to either forward matching traffic to origin pool or redirect matching traffic to a different URL or respond directly to matching traffic. See [Routes](#routes) below for details.
 
 `sensitive_data_disclosure_rules` - (Optional) Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses. See [Sensitive Data Disclosure Rules](#sensitive-data-disclosure-rules) below for details.
 
-`sensitive_data_policy` - (Optional) Sensitive Data Discovery. Settings for data type policy. See [Sensitive Data Policy](#sensitive-data-policy) below for details.
-
-`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Service Policies From Namespace](#service-policies-from-namespace) below for details.
-
-`single_lb_app` - (Optional) Single Load Balancer App Setting. Specific settings for Machine learning analysis on this HTTP LB, independently from other LBs. See [Single LB App](#single-lb-app) below for details.
-
 > **Note:** One of the arguments from this list "slow_ddos_mitigation, system_default_timeouts" must be set.
 
 `slow_ddos_mitigation` - (Optional) Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users. See [Slow DDOS Mitigation](#slow-ddos-mitigation) below for details.
-
-`source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed. See [Source IP Stickiness](#source-ip-stickiness) below for details.
 
 `system_default_timeouts` - (Optional) Empty. This can be used for messages where no values are needed. See [System Default Timeouts](#system-default-timeouts) below for details.
 

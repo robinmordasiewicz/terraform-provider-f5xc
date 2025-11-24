@@ -78,13 +78,21 @@ resource "f5xc_voltstack_site" "example" {
 
 `allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Usb](#allow-all-usb) below for details.
 
+`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
+
+`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
+
 > **Note:** One of the arguments from this list "blocked_services, default_blocked_services" must be set.
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+
 > **Note:** One of the arguments from this list "bond_device_list, no_bond_devices" must be set.
 
 `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
+
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
@@ -94,33 +102,31 @@ resource "f5xc_voltstack_site" "example" {
 
 `custom_network_config` - (Optional) VssNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
 
+`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Network Config](#default-network-config) below for details.
+
 > **Note:** One of the arguments from this list "custom_storage_config, default_storage_config" must be set.
 
 `custom_storage_config` - (Optional) VssStorageConfiguration. See [Custom Storage Config](#custom-storage-config) below for details.
 
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
-
-`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Network Config](#default-network-config) below for details.
+`default_storage_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Config](#default-storage-config) below for details.
 
 > **Note:** One of the arguments from this list "default_sriov_interface, sriov_interfaces" must be set.
 
 `default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sriov Interface](#default-sriov-interface) below for details.
 
-`default_storage_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Config](#default-storage-config) below for details.
-
-`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
+`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
 
 > **Note:** One of the arguments from this list "disable_gpu, enable_gpu, enable_vgpu" must be set.
 
 `disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable GPU](#disable-gpu) below for details.
 
-> **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
-
-`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable VM](#disable-vm) below for details.
-
 `enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable GPU](#enable-gpu) below for details.
 
 `enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU. See [Enable Vgpu](#enable-vgpu) below for details.
+
+> **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
+
+`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable VM](#disable-vm) below for details.
 
 `enable_vm` - (Optional) VM Configuration. VMs support configuration. See [Enable VM](#enable-vm) below for details.
 
@@ -128,11 +134,15 @@ resource "f5xc_voltstack_site" "example" {
 
 `k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#k8s-cluster) below for details.
 
+`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#no-k8s-cluster) below for details.
+
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
 > **Note:** One of the arguments from this list "local_control_plane, no_local_control_plane" must be set.
 
 `local_control_plane` - (Optional) Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc. See [Local Control Plane](#local-control-plane) below for details.
+
+`no_local_control_plane` - (Optional) Empty. This can be used for messages where no values are needed. See [No Local Control Plane](#no-local-control-plane) below for details.
 
 > **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
 
@@ -142,23 +152,13 @@ resource "f5xc_voltstack_site" "example" {
 
 `master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes. See [Master Node Configuration](#master-node-configuration) below for details.
 
-`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
-
-`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#no-k8s-cluster) below for details.
-
-`no_local_control_plane` - (Optional) Empty. This can be used for messages where no values are needed. See [No Local Control Plane](#no-local-control-plane) below for details.
-
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handl.. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
 `os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](#os) below for details.
 
-`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
-
 `sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
 
 `volterra_certified_hw` - (Optional) Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site (`String`).
 

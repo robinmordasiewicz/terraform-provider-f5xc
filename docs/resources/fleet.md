@@ -69,11 +69,17 @@ resource "f5xc_fleet" "example" {
 
 `allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Usb](#allow-all-usb) below for details.
 
+`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
+
+`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
+
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. See [Blocked Services](#blocked-services) below for details.
 
 > **Note:** One of the arguments from this list "bond_device_list, no_bond_devices" must be set.
 
 `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
+
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
 
 > **Note:** One of the arguments from this list "dc_cluster_group, dc_cluster_group_inside, no_dc_cluster_group" must be set.
 
@@ -81,43 +87,47 @@ resource "f5xc_fleet" "example" {
 
 `dc_cluster_group_inside` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
 
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#no-dc-cluster-group) below for details.
+
 > **Note:** One of the arguments from this list "default_config, device_list, interface_list" must be set.
 
 `default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#default-config) below for details.
+
+`device_list` - (Optional) List of Devices. Add device for all interfaces belonging to this fleet. See [Device List](#device-list) below for details.
+
+`interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interface List](#interface-list) below for details.
 
 > **Note:** One of the arguments from this list "default_sriov_interface, sriov_interfaces" must be set.
 
 `default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sriov Interface](#default-sriov-interface) below for details.
 
+`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
+
 > **Note:** One of the arguments from this list "default_storage_class, storage_class_list" must be set.
 
 `default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Class](#default-storage-class) below for details.
 
-`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
-
-`device_list` - (Optional) List of Devices. Add device for all interfaces belonging to this fleet. See [Device List](#device-list) below for details.
+`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Class List](#storage-class-list) below for details.
 
 > **Note:** One of the arguments from this list "disable_gpu, enable_gpu, enable_vgpu" must be set.
 
 `disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable GPU](#disable-gpu) below for details.
 
-> **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
-
-`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable VM](#disable-vm) below for details.
-
-`enable_default_fleet_config_download` - (Optional) Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config (`Bool`).
-
 `enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable GPU](#enable-gpu) below for details.
 
 `enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU. See [Enable Vgpu](#enable-vgpu) below for details.
 
+> **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
+
+`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable VM](#disable-vm) below for details.
+
 `enable_vm` - (Optional) VM Configuration. VMs support configuration. See [Enable VM](#enable-vm) below for details.
+
+`enable_default_fleet_config_download` - (Optional) Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config (`Bool`).
 
 `fleet_label` - (Optional) Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet (`String`).
 
 `inside_virtual_network` - (Optional) Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet. See [Inside Virtual Network](#inside-virtual-network) below for details.
-
-`interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interface List](#interface-list) below for details.
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
@@ -131,21 +141,23 @@ resource "f5xc_fleet" "example" {
 
 `network_firewall` - (Optional) Network Firewall. Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network. See [Network Firewall](#network-firewall) below for details.
 
-`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
-
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#no-dc-cluster-group) below for details.
-
 > **Note:** One of the arguments from this list "no_storage_device, storage_device_list" must be set.
 
 `no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Device](#no-storage-device) below for details.
+
+`storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Device List](#storage-device-list) below for details.
 
 > **Note:** One of the arguments from this list "no_storage_interfaces, storage_interface_list" must be set.
 
 `no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Interfaces](#no-storage-interfaces) below for details.
 
+`storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Storage Interface List](#storage-interface-list) below for details.
+
 > **Note:** One of the arguments from this list "no_storage_static_routes, storage_static_routes" must be set.
 
 `no_storage_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Static Routes](#no-storage-static-routes) below for details.
+
+`storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes. See [Storage Static Routes](#storage-static-routes) below for details.
 
 `operating_system_version` - (Optional) Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config (`String`).
 
@@ -153,19 +165,7 @@ resource "f5xc_fleet" "example" {
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
-`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
-
-`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Class List](#storage-class-list) below for details.
-
-`storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Device List](#storage-device-list) below for details.
-
-`storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Storage Interface List](#storage-interface-list) below for details.
-
-`storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes. See [Storage Static Routes](#storage-static-routes) below for details.
-
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
 
 `volterra_software_version` - (Optional) Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config (`String`).
 

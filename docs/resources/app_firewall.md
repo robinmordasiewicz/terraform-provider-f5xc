@@ -68,6 +68,10 @@ resource "f5xc_app_firewall" "example" {
 
 `ai_risk_based_blocking` - (Optional) Risk-Based Blocking (Powered by AI) - Preview. All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode. See [Ai Risk Based Blocking](#ai-risk-based-blocking) below for details.
 
+`default_detection_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Detection Settings](#default-detection-settings) below for details.
+
+`detection_settings` - (Optional) Detection Settings. Specifies detection settings to be used by WAF. See [Detection Settings](#detection-settings) below for details.
+
 > **Note:** One of the arguments from this list "allow_all_response_codes, allowed_response_codes" must be set.
 
 `allow_all_response_codes` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Response Codes](#allow-all-response-codes) below for details.
@@ -78,13 +82,19 @@ resource "f5xc_app_firewall" "example" {
 
 `blocking` - (Optional) Empty. This can be used for messages where no values are needed. See [Blocking](#blocking) below for details.
 
+`monitoring` - (Optional) Empty. This can be used for messages where no values are needed. See [Monitoring](#monitoring) below for details.
+
 > **Note:** One of the arguments from this list "blocking_page, use_default_blocking_page" must be set.
 
 `blocking_page` - (Optional) Custom Blocking Response Page. Custom blocking response page body. See [Blocking Page](#blocking-page) below for details.
 
+`use_default_blocking_page` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Blocking Page](#use-default-blocking-page) below for details.
+
 > **Note:** One of the arguments from this list "bot_protection_setting, default_bot_setting" must be set.
 
 `bot_protection_setting` - (Optional) Bot Protection. Configuration of WAF Bot Protection. See [Bot Protection Setting](#bot-protection-setting) below for details.
+
+`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#default-bot-setting) below for details.
 
 > **Note:** One of the arguments from this list "custom_anonymization, default_anonymization, disable_anonymization" must be set.
 
@@ -92,19 +102,9 @@ resource "f5xc_app_firewall" "example" {
 
 `default_anonymization` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Anonymization](#default-anonymization) below for details.
 
-`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#default-bot-setting) below for details.
-
-`default_detection_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Detection Settings](#default-detection-settings) below for details.
-
-`detection_settings` - (Optional) Detection Settings. Specifies detection settings to be used by WAF. See [Detection Settings](#detection-settings) below for details.
-
 `disable_anonymization` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Anonymization](#disable-anonymization) below for details.
 
-`monitoring` - (Optional) Empty. This can be used for messages where no values are needed. See [Monitoring](#monitoring) below for details.
-
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`use_default_blocking_page` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Blocking Page](#use-default-blocking-page) below for details.
 
 ### Attributes Reference
 

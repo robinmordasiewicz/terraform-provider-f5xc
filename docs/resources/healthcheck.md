@@ -67,17 +67,17 @@ resource "f5xc_healthcheck" "example" {
 
 `http_health_check` - (Optional) HTTP Health Check. Healthy if 'get' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request. See [HTTP Health Check](#http-health-check) below for details.
 
+`tcp_health_check` - (Optional) TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>. See [TCP Health Check](#tcp-health-check) below for details.
+
+`udp_icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [UDP ICMP Health Check](#udp-icmp-health-check) below for details.
+
 `interval` - (Optional) Interval. Time interval in seconds between two healthcheck requests (`Number`).
 
 `jitter_percent` - (Optional) Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>. See [TCP Health Check](#tcp-health-check) below for details.
-
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`udp_icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [UDP ICMP Health Check](#udp-icmp-health-check) below for details.
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately (`Number`).
 

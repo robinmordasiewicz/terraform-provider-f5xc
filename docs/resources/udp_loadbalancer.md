@@ -76,9 +76,9 @@ resource "f5xc_udp_loadbalancer" "example" {
 
 `advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Public Default VIP](#advertise-on-public-default-vip) below for details.
 
-`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain to be delegated to F5 Distributed Cloud using the Delegated Domain feature or a DNS CNAME record must be created in your DNS provider's portal (`Bool`).
-
 `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
+
+`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain to be delegated to F5 Distributed Cloud using the Delegated Domain feature or a DNS CNAME record must be created in your DNS provider's portal (`Bool`).
 
 `domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to this load balancer (`List`).
 
@@ -98,9 +98,9 @@ resource "f5xc_udp_loadbalancer" "example" {
 
 `listen_port` - (Optional) Listen Port. Listen Port for this load balancer (`Number`).
 
-`origin_pools_weights` - (Optional) Origin Pools. Origin pools with weights and priorities used for this load balancer. See [Origin Pools Weights](#origin-pools-weights) below for details.
-
 `port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`origin_pools_weights` - (Optional) Origin Pools. Origin pools with weights and priorities used for this load balancer. See [Origin Pools Weights](#origin-pools-weights) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

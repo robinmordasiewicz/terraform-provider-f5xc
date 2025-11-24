@@ -75,17 +75,19 @@ resource "f5xc_securemesh_site" "example" {
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+
 > **Note:** One of the arguments from this list "bond_device_list, no_bond_devices" must be set.
 
 `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
+
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
 > **Note:** One of the arguments from this list "custom_network_config, default_network_config" must be set.
 
 `custom_network_config` - (Optional) SmsNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
-
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
 
 `default_network_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Network Config](#default-network-config) below for details.
 
@@ -98,8 +100,6 @@ resource "f5xc_securemesh_site" "example" {
 `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
 
 `master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes. See [Master Node Configuration](#master-node-configuration) below for details.
-
-`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handl.. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 

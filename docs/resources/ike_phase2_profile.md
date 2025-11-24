@@ -78,9 +78,9 @@ resource "f5xc_ike_phase2_profile" "example" {
 
 `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
 `use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
+
+`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

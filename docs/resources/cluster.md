@@ -66,6 +66,10 @@ resource "f5xc_cluster" "example" {
 
 `auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto HTTP Config](#auto-http-config) below for details.
 
+`http1_config` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections. See [Http1 Config](#http1-config) below for details.
+
+`http2_options` - (Optional) Http2 Protocol Options. Http2 Protocol options for upstream connections. See [Http2 Options](#http2-options) below for details.
+
 `circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly. See [Circuit Breaker](#circuit-breaker) below for details.
 
 `connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds (`Number`).
@@ -75,6 +79,10 @@ resource "f5xc_cluster" "example" {
 > **Note:** One of the arguments from this list "disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2" must be set.
 
 `disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Proxy Protocol](#disable-proxy-protocol) below for details.
+
+`proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V1](#proxy-protocol-v1) below for details.
+
+`proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V2](#proxy-protocol-v2) below for details.
 
 `endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED` (`String`).
 
@@ -86,10 +94,6 @@ resource "f5xc_cluster" "example" {
 
 `health_checks` - (Optional) Health Checks. List of references to healthcheck object for this cluster. See [Health Checks](#health-checks) below for details.
 
-`http1_config` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections. See [Http1 Config](#http1-config) below for details.
-
-`http2_options` - (Optional) Http2 Protocol Options. Http2 Protocol options for upstream connections. See [Http2 Options](#http2-options) below for details.
-
 `http_idle_timeout` - (Optional) HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes (`Number`).
 
 `loadbalancer_algorithm` - (Optional) Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy im... Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN` (`String`).
@@ -98,13 +102,9 @@ resource "f5xc_cluster" "example" {
 
 `no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed. See [No Panic Threshold](#no-panic-threshold) below for details.
 
-`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i.. See [Outlier Detection](#outlier-detection) below for details.
-
 `panic_threshold` - (Optional) Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status (`Number`).
 
-`proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V1](#proxy-protocol-v1) below for details.
-
-`proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V2](#proxy-protocol-v2) below for details.
+`outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i.. See [Outlier Detection](#outlier-detection) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

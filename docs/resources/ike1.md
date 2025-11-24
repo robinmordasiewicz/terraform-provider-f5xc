@@ -68,6 +68,8 @@ resource "f5xc_ike1" "example" {
 
 `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 
+`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
+
 > **Note:** One of the arguments from this list "reauth_disabled, reauth_timeout_days, reauth_timeout_hours" must be set.
 
 `reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Reauth Disabled](#reauth-disabled) below for details.
@@ -77,8 +79,6 @@ resource "f5xc_ike1" "example" {
 `reauth_timeout_hours` - (Optional) Hours. Input Hours. See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
 
 ### Attributes Reference
 
@@ -90,47 +90,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--ike_keylifetime_hours"></a>
 
-### Ike Keylifetime Hours
-
-`duration` - (Optional) Duration (`Number`).
-
 <a id="nestedblock--ike_keylifetime_minutes"></a>
-
-### Ike Keylifetime Minutes
-
-`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--reauth_disabled"></a>
 
-### Reauth Disabled
-
 <a id="nestedblock--reauth_timeout_days"></a>
-
-### Reauth Timeout Days
-
-`duration` - (Optional) Duration (`Number`).
 
 <a id="nestedblock--reauth_timeout_hours"></a>
 
-### Reauth Timeout Hours
-
-`duration` - (Optional) Duration (`Number`).
-
 <a id="nestedblock--timeouts"></a>
 
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
 <a id="nestedblock--use_default_keylifetime"></a>
-
-### Use Default Keylifetime
 
 ## Import
 

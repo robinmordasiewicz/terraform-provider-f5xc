@@ -69,11 +69,17 @@ resource "f5xc_fleet" "example" {
 
 `allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Usb](#allow-all-usb) below for details.
 
+`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
+
+`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
+
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. See [Blocked Services](#blocked-services) below for details.
 
 > **Note:** One of the arguments from this list "bond_device_list, no_bond_devices" must be set.
 
 `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
+
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
 
 > **Note:** One of the arguments from this list "dc_cluster_group, dc_cluster_group_inside, no_dc_cluster_group" must be set.
 
@@ -81,43 +87,47 @@ resource "f5xc_fleet" "example" {
 
 `dc_cluster_group_inside` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
 
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#no-dc-cluster-group) below for details.
+
 > **Note:** One of the arguments from this list "default_config, device_list, interface_list" must be set.
 
 `default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#default-config) below for details.
+
+`device_list` - (Optional) List of Devices. Add device for all interfaces belonging to this fleet. See [Device List](#device-list) below for details.
+
+`interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interface List](#interface-list) below for details.
 
 > **Note:** One of the arguments from this list "default_sriov_interface, sriov_interfaces" must be set.
 
 `default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sriov Interface](#default-sriov-interface) below for details.
 
+`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
+
 > **Note:** One of the arguments from this list "default_storage_class, storage_class_list" must be set.
 
 `default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Class](#default-storage-class) below for details.
 
-`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
-
-`device_list` - (Optional) List of Devices. Add device for all interfaces belonging to this fleet. See [Device List](#device-list) below for details.
+`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Class List](#storage-class-list) below for details.
 
 > **Note:** One of the arguments from this list "disable_gpu, enable_gpu, enable_vgpu" must be set.
 
 `disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable GPU](#disable-gpu) below for details.
 
-> **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
-
-`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable VM](#disable-vm) below for details.
-
-`enable_default_fleet_config_download` - (Optional) Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config (`Bool`).
-
 `enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable GPU](#enable-gpu) below for details.
 
 `enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU. See [Enable Vgpu](#enable-vgpu) below for details.
 
+> **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
+
+`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable VM](#disable-vm) below for details.
+
 `enable_vm` - (Optional) VM Configuration. VMs support configuration. See [Enable VM](#enable-vm) below for details.
+
+`enable_default_fleet_config_download` - (Optional) Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config (`Bool`).
 
 `fleet_label` - (Optional) Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet (`String`).
 
 `inside_virtual_network` - (Optional) Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet. See [Inside Virtual Network](#inside-virtual-network) below for details.
-
-`interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interface List](#interface-list) below for details.
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
@@ -131,21 +141,23 @@ resource "f5xc_fleet" "example" {
 
 `network_firewall` - (Optional) Network Firewall. Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network. See [Network Firewall](#network-firewall) below for details.
 
-`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
-
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#no-dc-cluster-group) below for details.
-
 > **Note:** One of the arguments from this list "no_storage_device, storage_device_list" must be set.
 
 `no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Device](#no-storage-device) below for details.
+
+`storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Device List](#storage-device-list) below for details.
 
 > **Note:** One of the arguments from this list "no_storage_interfaces, storage_interface_list" must be set.
 
 `no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Interfaces](#no-storage-interfaces) below for details.
 
+`storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Storage Interface List](#storage-interface-list) below for details.
+
 > **Note:** One of the arguments from this list "no_storage_static_routes, storage_static_routes" must be set.
 
 `no_storage_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Static Routes](#no-storage-static-routes) below for details.
+
+`storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes. See [Storage Static Routes](#storage-static-routes) below for details.
 
 `operating_system_version` - (Optional) Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config (`String`).
 
@@ -153,19 +165,7 @@ resource "f5xc_fleet" "example" {
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
-`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
-
-`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Class List](#storage-class-list) below for details.
-
-`storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Device List](#storage-device-list) below for details.
-
-`storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Storage Interface List](#storage-interface-list) below for details.
-
-`storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes. See [Storage Static Routes](#storage-static-routes) below for details.
-
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
-
-`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
 
 `volterra_software_version` - (Optional) Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config (`String`).
 
@@ -179,617 +179,167 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--allow_all_usb"></a>
 
-### Allow All Usb
-
 <a id="nestedblock--blocked_services"></a>
-
-### Blocked Services
-
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--blocked_services--dns) below.
-
-`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
-
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#nestedblock--blocked_services--ssh) below.
-
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#nestedblock--blocked_services--web_user_interface) below.
 
 <a id="nestedblock--blocked_services--dns"></a>
 
-### Blocked Services DNS
-
 <a id="nestedblock--blocked_services--ssh"></a>
-
-### Blocked Services SSH
 
 <a id="nestedblock--blocked_services--web_user_interface"></a>
 
-### Blocked Services Web User Interface
-
 <a id="nestedblock--bond_device_list"></a>
-
-### Bond Device List
-
-`bond_devices` - (Optional) Bond Devices. List of bond devices. See [Bond Devices](#nestedblock--bond_device_list--bond_devices) below.
 
 <a id="nestedblock--bond_device_list--bond_devices"></a>
 
-### Bond Device List Bond Devices
-
-`active_backup` - (Optional) Empty. This can be used for messages where no values are needed. See [Active Backup](#nestedblock--bond_device_list--bond_devices--active_backup) below.
-
-`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
-
-`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#nestedblock--bond_device_list--bond_devices--lacp) below.
-
-`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
-
-`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
-
-`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
-
 <a id="nestedblock--bond_device_list--bond_devices--active_backup"></a>
-
-### Bond Device List Bond Devices Active Backup
 
 <a id="nestedblock--bond_device_list--bond_devices--lacp"></a>
 
-### Bond Device List Bond Devices Lacp
-
-`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
-
 <a id="nestedblock--dc_cluster_group"></a>
-
-### Dc Cluster Group
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--dc_cluster_group_inside"></a>
 
-### Dc Cluster Group Inside
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--default_config"></a>
-
-### Default Config
 
 <a id="nestedblock--default_sriov_interface"></a>
 
-### Default Sriov Interface
-
 <a id="nestedblock--default_storage_class"></a>
-
-### Default Storage Class
 
 <a id="nestedblock--deny_all_usb"></a>
 
-### Deny All Usb
-
 <a id="nestedblock--device_list"></a>
-
-### Device List
-
-`devices` - (Optional) Devices. Configuration for all devices in the fleet. Examples of devices are - network interfaces, cameras, scanners etc. Configuration a device is applied on VER node if the VER node is member of this fleet and has an corresponding interface/device. The mapping from device configured in fleet with interface/device in VER node depends on the type of device and is documented in device instance specific sections. See [Devices](#nestedblock--device_list--devices) below.
 
 <a id="nestedblock--device_list--devices"></a>
 
-### Device List Devices
-
-`name` - (Optional) Device Name. Name of the device including the unit number (e.g. eth0 or disk1). The name must match name of device in host-OS of node (`String`).
-
-`network_device` - (Optional) Network Device Type. Represents physical network interface. The 'interface' reference points to a Network Interface object. Attributes such as Labels, MTU from Network Interface must be applied to the device. Device mapping to nodes A fleet can have many devices and nodes in VER customer edge site can have many interfaces. An interface in node inherits configuration from a device by matching, - device_name in Network Interface for the device - device name for physical-interface in the node. See [Network Device](#nestedblock--device_list--devices--network_device) below.
-
-`owner` - (Optional) Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST` (`String`).
-
 <a id="nestedblock--device_list--devices--network_device"></a>
-
-### Device List Devices Network Device
-
-`interface` - (Optional) Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if us... See [Interface](#nestedblock--device_list--devices--network_device--interface) below.
-
-`use` - (Optional) Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network. Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`. Defaults to `NETWORK_INTERFACE_USE_REGULAR` (`String`).
 
 <a id="nestedblock--device_list--devices--network_device--interface"></a>
 
-### Device List Devices Network Device Interface
-
 <a id="nestedblock--disable_gpu"></a>
-
-### Disable GPU
 
 <a id="nestedblock--disable_vm"></a>
 
-### Disable VM
-
 <a id="nestedblock--enable_gpu"></a>
-
-### Enable GPU
 
 <a id="nestedblock--enable_vgpu"></a>
 
-### Enable Vgpu
-
-`feature_type` - (Optional) Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server. Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`. Defaults to `UNLICENSED` (`String`).
-
-`server_address` - (Optional) License Server Address. Set License Server Address (`String`).
-
-`server_port` - (Optional) License Server Port Number. Set License Server port number (`Number`).
-
 <a id="nestedblock--enable_vm"></a>
-
-### Enable VM
 
 <a id="nestedblock--inside_virtual_network"></a>
 
-### Inside Virtual Network
-
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
-
 <a id="nestedblock--interface_list"></a>
-
-### Interface List
-
-`interfaces` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interfaces](#nestedblock--interface_list--interfaces) below.
 
 <a id="nestedblock--interface_list--interfaces"></a>
 
-### Interface List Interfaces
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--kubernetes_upgrade_drain"></a>
-
-### Kubernetes Upgrade Drain
-
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain) below.
-
-`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain) below.
 
 <a id="nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain"></a>
 
-### Kubernetes Upgrade Drain Disable Upgrade Drain
-
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain
-
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
-
-`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
-
-`drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
-
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode) below.
 
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode"></a>
 
-### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
-
 <a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
 
 <a id="nestedblock--log_receiver"></a>
 
-### Log Receiver
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--logs_streaming_disabled"></a>
-
-### Logs Streaming Disabled
 
 <a id="nestedblock--network_connectors"></a>
 
-### Network Connectors
-
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
-
 <a id="nestedblock--network_firewall"></a>
-
-### Network Firewall
-
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--no_bond_devices"></a>
 
-### No Bond Devices
-
 <a id="nestedblock--no_dc_cluster_group"></a>
-
-### No Dc Cluster Group
 
 <a id="nestedblock--no_storage_device"></a>
 
-### No Storage Device
-
 <a id="nestedblock--no_storage_interfaces"></a>
-
-### No Storage Interfaces
 
 <a id="nestedblock--no_storage_static_routes"></a>
 
-### No Storage Static Routes
-
 <a id="nestedblock--outside_virtual_network"></a>
-
-### Outside Virtual Network
-
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="nestedblock--performance_enhancement_mode"></a>
 
-### Performance Enhancement Mode
-
-`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced) below.
-
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--performance_enhancement_mode--perf_mode_l7_enhanced) below.
-
 <a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced
-
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
-
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
 
 <a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
 
-### Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
 <a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
 
 <a id="nestedblock--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
 
-### Performance Enhancement Mode Perf Mode L7 Enhanced
-
 <a id="nestedblock--sriov_interfaces"></a>
-
-### Sriov Interfaces
-
-`sriov_interface` - (Optional) Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration. See [Sriov Interface](#nestedblock--sriov_interfaces--sriov_interface) below.
 
 <a id="nestedblock--sriov_interfaces--sriov_interface"></a>
 
-### Sriov Interfaces Sriov Interface
-
-`interface_name` - (Optional) Name of physical interface. Name of SR-IOV physical interface (`String`).
-
-`number_of_vfio_vfs` - (Optional) Number of virtual functions reserved for vfio. Number of virtual functions reserved for VNFs and DPDK-based CNFs (`Number`).
-
-`number_of_vfs` - (Optional) Total number of virtual functions. Total number of virtual functions (`Number`).
-
 <a id="nestedblock--storage_class_list"></a>
-
-### Storage Class List
-
-`storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#nestedblock--storage_class_list--storage_classes) below.
 
 <a id="nestedblock--storage_class_list--storage_classes"></a>
 
-### Storage Class List Storage Classes
-
-`advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Storage Parameters](#nestedblock--storage_class_list--storage_classes--advanced_storage_parameters) below.
-
-`allow_volume_expansion` - (Optional) Allow Volume Expansion. Allow volume expansion (`Bool`).
-
-`custom_storage` - (Optional) Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site. See [Custom Storage](#nestedblock--storage_class_list--storage_classes--custom_storage) below.
-
-`default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
-
-`description` - (Optional) Storage Class Description. Description for this storage class (`String`).
-
-`hpe_storage` - (Optional) HPE Storage. Storage class Device configuration for HPE Storage. See [Hpe Storage](#nestedblock--storage_class_list--storage_classes--hpe_storage) below.
-
-`netapp_trident` - (Optional) NetApp Trident Storage. Storage class Device configuration for NetApp Trident. See [Netapp Trident](#nestedblock--storage_class_list--storage_classes--netapp_trident) below.
-
-`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator. See [Pure Service Orchestrator](#nestedblock--storage_class_list--storage_classes--pure_service_orchestrator) below.
-
-`reclaim_policy` - (Optional) Reclaim Policy. Reclaim Policy (`String`).
-
-`storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
-
-`storage_device` - (Optional) Storage Device. Storage device that this class will use. The Device name defined at previous step (`String`).
-
 <a id="nestedblock--storage_class_list--storage_classes--advanced_storage_parameters"></a>
-
-### Storage Class List Storage Classes Advanced Storage Parameters
 
 <a id="nestedblock--storage_class_list--storage_classes--custom_storage"></a>
 
-### Storage Class List Storage Classes Custom Storage
-
-`yaml` - (Optional) Storage Class YAML. K8s YAML for StorageClass (`String`).
-
 <a id="nestedblock--storage_class_list--storage_classes--hpe_storage"></a>
-
-### Storage Class List Storage Classes Hpe Storage
-
-`allow_mutations` - (Optional) allowMutations. mutation can override specified parameters (`String`).
-
-`allow_overrides` - (Optional) allowOverrides. PVC can override specified parameters (`String`).
-
-`dedupe_enabled` - (Optional) dedupeEnabled. Indicates that the volume should enable deduplication (`Bool`).
-
-`description` - (Optional) Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information (`String`).
-
-`destroy_on_delete` - (Optional) destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted (`Bool`).
-
-`encrypted` - (Optional) encrypted. Indicates that the volume should be encrypted (`Bool`).
-
-`folder` - (Optional) folder. The name of the folder in which to place the volume (`String`).
-
-`limit_iops` - (Optional) limitIops. The IOPS limit of the volume (`String`).
-
-`limit_mbps` - (Optional) limitMbps. The IOPS limit of the volume (`String`).
-
-`performance_policy` - (Optional) performancePolicy. The name of the performance policy to assign to the volume (`String`).
-
-`pool` - (Optional) pool. The name of the pool in which to place the volume (`String`).
-
-`protection_template` - (Optional) protectionTemplate. The name of the performance policy to assign to the volume (`String`).
-
-`secret_name` - (Optional) Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information (`String`).
-
-`secret_namespace` - (Optional) Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides (`String`).
-
-`sync_on_detach` - (Optional) syncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node (`Bool`).
-
-`thick` - (Optional) thick. Indicates that the volume should be thick provisioned (`Bool`).
 
 <a id="nestedblock--storage_class_list--storage_classes--netapp_trident"></a>
 
-### Storage Class List Storage Classes Netapp Trident
-
-`selector` - (Optional) Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool. See [Selector](#nestedblock--storage_class_list--storage_classes--netapp_trident--selector) below.
-
-`storage_pools` - (Optional) Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes (`String`).
-
 <a id="nestedblock--storage_class_list--storage_classes--netapp_trident--selector"></a>
-
-### Storage Class List Storage Classes Netapp Trident Selector
 
 <a id="nestedblock--storage_class_list--storage_classes--pure_service_orchestrator"></a>
 
-### Storage Class List Storage Classes Pure Service Orchestrator
-
-`backend` - (Optional) Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool (`String`).
-
-`bandwidth_limit` - (Optional) Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB (`String`).
-
-`iops_limit` - (Optional) IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined (`Number`).
-
 <a id="nestedblock--storage_device_list"></a>
-
-### Storage Device List
-
-`storage_devices` - (Optional) List of Storage Devices. List of custom storage devices. See [Storage Devices](#nestedblock--storage_device_list--storage_devices) below.
 
 <a id="nestedblock--storage_device_list--storage_devices"></a>
 
-### Storage Device List Storage Devices
-
-`advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Advanced Parameters](#nestedblock--storage_device_list--storage_devices--advanced_advanced_parameters) below.
-
-`custom_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Custom Storage](#nestedblock--storage_device_list--storage_devices--custom_storage) below.
-
-`hpe_storage` - (Optional) HPE Storage. Device configuration for HPE Storage. See [Hpe Storage](#nestedblock--storage_device_list--storage_devices--hpe_storage) below.
-
-`netapp_trident` - (Optional) NetApp Trident. Device configuration for NetApp Trident Storage. See [Netapp Trident](#nestedblock--storage_device_list--storage_devices--netapp_trident) below.
-
-`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator. See [Pure Service Orchestrator](#nestedblock--storage_device_list--storage_devices--pure_service_orchestrator) below.
-
-`storage_device` - (Optional) Storage Device. Storage device and device unit (`String`).
-
 <a id="nestedblock--storage_device_list--storage_devices--advanced_advanced_parameters"></a>
-
-### Storage Device List Storage Devices Advanced Advanced Parameters
 
 <a id="nestedblock--storage_device_list--storage_devices--custom_storage"></a>
 
-### Storage Device List Storage Devices Custom Storage
-
 <a id="nestedblock--storage_device_list--storage_devices--hpe_storage"></a>
-
-### Storage Device List Storage Devices Hpe Storage
-
-`api_server_port` - (Optional) Storage server Port. Enter Storage Server Port (`Number`).
-
-`iscsi_chap_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [iSCSI Chap Password](#nestedblock--storage_device_list--storage_devices--hpe_storage--iscsi_chap_password) below.
-
-`iscsi_chap_user` - (Optional) iSCSI chapUser. chap Username to connect to the HPE storage (`String`).
-
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--storage_device_list--storage_devices--hpe_storage--password) below.
-
-`storage_server_ip_address` - (Optional) Storage Server IP address. Enter storage server IP address (`String`).
-
-`storage_server_name` - (Optional) Storage Server Name. Enter storage server Name (`String`).
-
-`username` - (Optional) Username. Username to connect to the HPE storage management IP (`String`).
 
 <a id="nestedblock--storage_device_list--storage_devices--hpe_storage--iscsi_chap_password"></a>
 
-### Storage Device List Storage Devices Hpe Storage iSCSI Chap Password
-
 <a id="nestedblock--storage_device_list--storage_devices--hpe_storage--password"></a>
-
-### Storage Device List Storage Devices Hpe Storage Password
 
 <a id="nestedblock--storage_device_list--storage_devices--netapp_trident"></a>
 
-### Storage Device List Storage Devices Netapp Trident
-
-`netapp_backend_ontap_nas` - (Optional) Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS. See [Netapp Backend Ontap Nas](#nestedblock--storage_device_list--storage_devices--netapp_trident--netapp_backend_ontap_nas) below.
-
-`netapp_backend_ontap_san` - (Optional) Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN. See [Netapp Backend Ontap San](#nestedblock--storage_device_list--storage_devices--netapp_trident--netapp_backend_ontap_san) below.
-
 <a id="nestedblock--storage_device_list--storage_devices--netapp_trident--netapp_backend_ontap_nas"></a>
-
-### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas
 
 <a id="nestedblock--storage_device_list--storage_devices--netapp_trident--netapp_backend_ontap_san"></a>
 
-### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San
-
 <a id="nestedblock--storage_device_list--storage_devices--pure_service_orchestrator"></a>
-
-### Storage Device List Storage Devices Pure Service Orchestrator
-
-`arrays` - (Optional) Arrays Configuration. Device configuration for PSO Arrays. See [Arrays](#nestedblock--storage_device_list--storage_devices--pure_service_orchestrator--arrays) below.
-
-`cluster_id` - (Optional) Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores (`String`).
-
-`enable_storage_topology` - (Optional) Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi (`Bool`).
-
-`enable_strict_topology` - (Optional) Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi (`Bool`).
 
 <a id="nestedblock--storage_device_list--storage_devices--pure_service_orchestrator--arrays"></a>
 
-### Storage Device List Storage Devices Pure Service Orchestrator Arrays
-
 <a id="nestedblock--storage_interface_list"></a>
-
-### Storage Interface List
-
-`interfaces` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interfaces](#nestedblock--storage_interface_list--interfaces) below.
 
 <a id="nestedblock--storage_interface_list--interfaces"></a>
 
-### Storage Interface List Interfaces
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--storage_static_routes"></a>
-
-### Storage Static Routes
-
-`storage_routes` - (Optional) List of Static Routes. List of storage static routes. See [Storage Routes](#nestedblock--storage_static_routes--storage_routes) below.
 
 <a id="nestedblock--storage_static_routes--storage_routes"></a>
 
-### Storage Static Routes Storage Routes
-
-`attrs` - (Optional) Attributes. List of route attributes associated with the static route (`List`).
-
-`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy. See [Labels](#nestedblock--storage_static_routes--storage_routes--labels) below.
-
-`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#nestedblock--storage_static_routes--storage_routes--nexthop) below.
-
-`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#nestedblock--storage_static_routes--storage_routes--subnets) below.
-
 <a id="nestedblock--storage_static_routes--storage_routes--labels"></a>
-
-### Storage Static Routes Storage Routes Labels
 
 <a id="nestedblock--storage_static_routes--storage_routes--nexthop"></a>
 
-### Storage Static Routes Storage Routes Nexthop
-
-`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#nestedblock--storage_static_routes--storage_routes--nexthop--interface) below.
-
-`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#nestedblock--storage_static_routes--storage_routes--nexthop--nexthop_address) below.
-
-`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
-
 <a id="nestedblock--storage_static_routes--storage_routes--nexthop--interface"></a>
-
-### Storage Static Routes Storage Routes Nexthop Interface
 
 <a id="nestedblock--storage_static_routes--storage_routes--nexthop--nexthop_address"></a>
 
-### Storage Static Routes Storage Routes Nexthop Nexthop Address
-
 <a id="nestedblock--storage_static_routes--storage_routes--subnets"></a>
-
-### Storage Static Routes Storage Routes Subnets
-
-`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#nestedblock--storage_static_routes--storage_routes--subnets--ipv4) below.
-
-`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#nestedblock--storage_static_routes--storage_routes--subnets--ipv6) below.
 
 <a id="nestedblock--storage_static_routes--storage_routes--subnets--ipv4"></a>
 
-### Storage Static Routes Storage Routes Subnets IPv4
-
 <a id="nestedblock--storage_static_routes--storage_routes--subnets--ipv6"></a>
-
-### Storage Static Routes Storage Routes Subnets IPv6
 
 <a id="nestedblock--timeouts"></a>
 
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
 <a id="nestedblock--usb_policy"></a>
-
-### Usb Policy
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 ## Import
 

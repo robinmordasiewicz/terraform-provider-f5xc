@@ -68,89 +68,27 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--rules"></a>
 
-### Rules
-
-`client_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Asn](#nestedblock--rules--client_asn) below.
-
-`client_city` - (Optional) Empty. This can be used for messages where no values are needed. See [Client City](#nestedblock--rules--client_city) below.
-
-`client_country` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Country](#nestedblock--rules--client_country) below.
-
-`client_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Client IP](#nestedblock--rules--client_ip) below.
-
-`client_region` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Region](#nestedblock--rules--client_region) below.
-
-`cookie_name` - (Optional) Cookie Name. Use the HTTP cookie value for the given name as user identifier (`String`).
-
-`http_header_name` - (Optional) HTTP Header Name. Use the HTTP header value for the given name as user identifier (`String`).
-
-`ip_and_http_header_name` - (Optional) HTTP Header Name. Name of HTTP header from which the value should be extracted (`String`).
-
-`ip_and_ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [IP And Ja4 TLS Fingerprint](#nestedblock--rules--ip_and_ja4_tls_fingerprint) below.
-
-`ip_and_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [IP And TLS Fingerprint](#nestedblock--rules--ip_and_tls_fingerprint) below.
-
-`ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Ja4 TLS Fingerprint](#nestedblock--rules--ja4_tls_fingerprint) below.
-
-`jwt_claim_name` - (Optional) JWT Claim Name. Use the JWT claim value as user identifier (`String`).
-
-`none` - (Optional) Empty. This can be used for messages where no values are needed. See [None](#nestedblock--rules--none) below.
-
-`query_param_key` - (Optional) Query Parameter Key. Use the query parameter value for the given key as user identifier (`String`).
-
-`tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [TLS Fingerprint](#nestedblock--rules--tls_fingerprint) below.
-
 <a id="nestedblock--rules--client_asn"></a>
-
-### Rules Client Asn
 
 <a id="nestedblock--rules--client_city"></a>
 
-### Rules Client City
-
 <a id="nestedblock--rules--client_country"></a>
-
-### Rules Client Country
 
 <a id="nestedblock--rules--client_ip"></a>
 
-### Rules Client IP
-
 <a id="nestedblock--rules--client_region"></a>
-
-### Rules Client Region
 
 <a id="nestedblock--rules--ip_and_ja4_tls_fingerprint"></a>
 
-### Rules IP And Ja4 TLS Fingerprint
-
 <a id="nestedblock--rules--ip_and_tls_fingerprint"></a>
-
-### Rules IP And TLS Fingerprint
 
 <a id="nestedblock--rules--ja4_tls_fingerprint"></a>
 
-### Rules Ja4 TLS Fingerprint
-
 <a id="nestedblock--rules--none"></a>
-
-### Rules None
 
 <a id="nestedblock--rules--tls_fingerprint"></a>
 
-### Rules TLS Fingerprint
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

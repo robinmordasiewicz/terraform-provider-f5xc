@@ -86,113 +86,35 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--domains"></a>
 
-### Domains
-
-`allow_destructive_methods` - (Optional) Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data (`Bool`).
-
-`credentials` - (Optional) Credentials. Add credentials for API testing to use in the selected environment. See [Credentials](#nestedblock--domains--credentials) below.
-
-`domain` - (Optional) Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments (`String`).
-
 <a id="nestedblock--domains--credentials"></a>
-
-### Domains Credentials
-
-`admin` - (Optional) Empty. This can be used for messages where no values are needed. See [Admin](#nestedblock--domains--credentials--admin) below.
-
-`api_key` - (Optional) API Key. See [API Key](#nestedblock--domains--credentials--api_key) below.
-
-`basic_auth` - (Optional) Basic Authentication. See [Basic Auth](#nestedblock--domains--credentials--basic_auth) below.
-
-`bearer_token` - (Optional) Bearer. See [Bearer Token](#nestedblock--domains--credentials--bearer_token) below.
-
-`credential_name` - (Optional) Name. Enter a unique name for the credentials used in API testing (`String`).
-
-`login_endpoint` - (Optional) Login Endpoint. See [Login Endpoint](#nestedblock--domains--credentials--login_endpoint) below.
-
-`standard` - (Optional) Empty. This can be used for messages where no values are needed. See [Standard](#nestedblock--domains--credentials--standard) below.
 
 <a id="nestedblock--domains--credentials--admin"></a>
 
-### Domains Credentials Admin
-
 <a id="nestedblock--domains--credentials--api_key"></a>
-
-### Domains Credentials API Key
-
-`key` - (Optional) Key (`String`).
-
-`value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Value](#nestedblock--domains--credentials--api_key--value) below.
 
 <a id="nestedblock--domains--credentials--api_key--value"></a>
 
-### Domains Credentials API Key Value
-
 <a id="nestedblock--domains--credentials--basic_auth"></a>
-
-### Domains Credentials Basic Auth
-
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--domains--credentials--basic_auth--password) below.
-
-`user` - (Optional) User (`String`).
 
 <a id="nestedblock--domains--credentials--basic_auth--password"></a>
 
-### Domains Credentials Basic Auth Password
-
 <a id="nestedblock--domains--credentials--bearer_token"></a>
-
-### Domains Credentials Bearer Token
-
-`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#nestedblock--domains--credentials--bearer_token--token) below.
 
 <a id="nestedblock--domains--credentials--bearer_token--token"></a>
 
-### Domains Credentials Bearer Token Token
-
 <a id="nestedblock--domains--credentials--login_endpoint"></a>
-
-### Domains Credentials Login Endpoint
-
-`json_payload` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [JSON Payload](#nestedblock--domains--credentials--login_endpoint--json_payload) below.
-
-`method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values include `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, and others. Defaults to `ANY` (`String`).
-
-`path` - (Optional) Path (`String`).
-
-`token_response_key` - (Optional) Token Response Key (`String`).
 
 <a id="nestedblock--domains--credentials--login_endpoint--json_payload"></a>
 
-### Domains Credentials Login Endpoint JSON Payload
-
 <a id="nestedblock--domains--credentials--standard"></a>
-
-### Domains Credentials Standard
 
 <a id="nestedblock--every_day"></a>
 
-### Every Day
-
 <a id="nestedblock--every_month"></a>
-
-### Every Month
 
 <a id="nestedblock--every_week"></a>
 
-### Every Week
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

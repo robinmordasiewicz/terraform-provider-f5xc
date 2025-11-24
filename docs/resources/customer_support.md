@@ -102,59 +102,11 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--comments"></a>
 
-### Comments
-
-`attachment_ids` - (Optional) Attachment IDs. Third party id of any attachment related to this ticket comment (`List`).
-
-`attachments_info` - (Optional) Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have. See [Attachments Info](#nestedblock--comments--attachments_info) below.
-
-`author_email` - (Optional) Email. Email of the author of the comment (`String`).
-
-`author_name` - (Optional) Author. Author of the comment (as a name) (`String`).
-
-`created_at` - (Optional) At. Comment creation time (`String`).
-
-`html` - (Optional) Comment. Comment body as HTML (`String`).
-
-`plain_text` - (Optional) Comment. Comment body as plain text (`String`).
-
 <a id="nestedblock--comments--attachments_info"></a>
-
-### Comments Attachments Info
-
-`attachment` - (Optional) Attachment data. Any binary attachment (such as screenshots, plain text files, PDFs) encoded as base64 if used over HTTP (`String`).
-
-`content_type` - (Optional) Content type. Mime content type of the attachment. Helps the UI to properly display the data (`String`).
-
-`filename` - (Optional) Filename. Filename of the attachment as provided by the caller (`String`).
-
-`tp_id` - (Optional) 3rd party ID. Optional ID as assigned by the 3rd party actually storing the data (`String`).
 
 <a id="nestedblock--relates_to"></a>
 
-### Relates To
-
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

@@ -130,163 +130,51 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--action_allow"></a>
 
-### Action Allow
-
 <a id="nestedblock--action_deny"></a>
-
-### Action Deny
 
 <a id="nestedblock--destination_prefix_all"></a>
 
-### Destination Prefix All
-
 <a id="nestedblock--fragments_allow"></a>
-
-### Fragments Allow
 
 <a id="nestedblock--fragments_deny"></a>
 
-### Fragments Deny
-
 <a id="nestedblock--protocol_ah"></a>
-
-### Protocol Ah
 
 <a id="nestedblock--protocol_all"></a>
 
-### Protocol All
-
 <a id="nestedblock--protocol_esp"></a>
-
-### Protocol Esp
 
 <a id="nestedblock--protocol_gre"></a>
 
-### Protocol Gre
-
 <a id="nestedblock--protocol_icmp"></a>
-
-### Protocol ICMP
-
-`echo_reply` - (Optional) Echo-Reply. Echo-Reply (`Bool`).
-
-`echo_request` - (Optional) Echo-Request. Echo-Request (`Bool`).
-
-`parameter_problem` - (Optional) Parameter-Problem. Parameter-Problem (`Bool`).
-
-`redirect` - (Optional) Redirect. Redirect (`Bool`).
-
-`source_quench` - (Optional) Source-Quench. Source-Quench (`Bool`).
-
-`time_exceeded` - (Optional) Time-Exceeded. Time-Exceeded (`Bool`).
-
-`unreachable` - (Optional) Unreachable. Unreachable (`Bool`).
 
 <a id="nestedblock--protocol_icmp6"></a>
 
-### Protocol Icmp6
-
-`destination_unreachable` - (Optional) Destination-Unreachable. Destination-Unreachable (`Bool`).
-
-`echo_reply` - (Optional) Echo-Reply. Echo-Reply (`Bool`).
-
-`echo_request` - (Optional) Echo-Request. Echo-Request (`Bool`).
-
-`neighbor_advertisement` - (Optional) Neighbor-Advertisement. Neighbor-Advertisement (`Bool`).
-
-`neighbor_solicit` - (Optional) Neighbor-Solicit. Neighbor-Solicit (`Bool`).
-
-`packet_too_big` - (Optional) Packet-Too-Big. Packet-Too-Big (`Bool`).
-
-`parameter_problem` - (Optional) Parameter-Problem. Parameter-Problem (`Bool`).
-
-`redirect` - (Optional) Redirect. Redirect (`Bool`).
-
-`router_advertisement` - (Optional) Router-Advertisement. Router-Advertisement (`Bool`).
-
-`router_solicit` - (Optional) Router-Solicit. Router-Solicit (`Bool`).
-
-`time_exceeded` - (Optional) Time-Exceeded. Time-Exceeded (`Bool`).
-
 <a id="nestedblock--protocol_ipv6"></a>
-
-### Protocol IPv6
 
 <a id="nestedblock--protocol_tcp"></a>
 
-### Protocol TCP
-
-`description` - (Optional) Description. Description (`String`).
-
-`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#nestedblock--protocol_tcp--destination_port_all) below.
-
-`destination_port_range` - (Optional) Port Range. Port Range (`String`).
-
-`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#nestedblock--protocol_tcp--source_port_all) below.
-
-`source_port_range` - (Optional) Port Range. Port Range (`String`).
-
 <a id="nestedblock--protocol_tcp--destination_port_all"></a>
-
-### Protocol TCP Destination Port All
 
 <a id="nestedblock--protocol_tcp--source_port_all"></a>
 
-### Protocol TCP Source Port All
-
 <a id="nestedblock--protocol_udp"></a>
-
-### Protocol UDP
-
-`description` - (Optional) Description. Description (`String`).
-
-`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#nestedblock--protocol_udp--destination_port_all) below.
-
-`destination_port_range` - (Optional) Port Range. Port Range (`String`).
-
-`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#nestedblock--protocol_udp--source_port_all) below.
-
-`source_port_range` - (Optional) Port Range. Port Range (`String`).
 
 <a id="nestedblock--protocol_udp--destination_port_all"></a>
 
-### Protocol UDP Destination Port All
-
 <a id="nestedblock--protocol_udp--source_port_all"></a>
-
-### Protocol UDP Source Port All
 
 <a id="nestedblock--source_prefix_all"></a>
 
-### Source Prefix All
-
 <a id="nestedblock--state_off"></a>
-
-### State Off
 
 <a id="nestedblock--state_on"></a>
 
-### State On
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 <a id="nestedblock--version_ipv4"></a>
 
-### Version IPv4
-
 <a id="nestedblock--version_ipv6"></a>
-
-### Version IPv6
 
 ## Import
 

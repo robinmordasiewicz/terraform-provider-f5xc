@@ -86,71 +86,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--child_tenant_manager"></a>
 
-### Child Tenant Manager
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--contact_detail"></a>
-
-### Contact Detail
-
-`address1` - (Optional) Address Line 1 (`String`).
-
-`address2` - (Optional) Address Line 2 (`String`).
-
-`city` - (Optional) City (`String`).
-
-`contact_type` - (Optional) Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING` (`String`).
-
-`country` - (Optional) Country (`String`).
-
-`county` - (Optional) County (`String`).
-
-`phone_number` - (Optional) Phone Number (`String`).
-
-`state` - (Optional) State (`String`).
-
-`state_code` - (Optional) State Code (`String`).
-
-`zip_code` - (Optional) ZIP code (`String`).
 
 <a id="nestedblock--customer_info"></a>
 
-### Customer Info
-
-`additional_info` - (Optional) Additional Info. Use this field for any additional information about the new child tenant (`String`).
-
-`email` - (Optional) Email (`String`).
-
-`first_name` - (Optional) First Name (`String`).
-
-`last_name` - (Optional) Last Name (`String`).
-
 <a id="nestedblock--tenant_profile"></a>
 
-### Tenant Profile
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

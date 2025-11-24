@@ -80,47 +80,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--addon_service"></a>
 
-### Addon Service
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--notification_preference"></a>
-
-### Notification Preference
-
-`emails` - (Optional) Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription. See [Emails](#nestedblock--notification_preference--emails) below.
-
-`support_ticket_id` - (Optional) Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription. See [Support Ticket Id](#nestedblock--notification_preference--support_ticket_id) below.
 
 <a id="nestedblock--notification_preference--emails"></a>
 
-### Notification Preference Emails
-
-`email_ids` - (Optional) Emails. Email ids associated with the Addon Subscription (`List`).
-
 <a id="nestedblock--notification_preference--support_ticket_id"></a>
 
-### Notification Preference Support Ticket Id
-
-`subscription_ticket_id` - (Optional) Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription (`String`).
-
-`unsubscription_ticket_id` - (Optional) Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

@@ -82,45 +82,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--address_records"></a>
 
-### Address Records
-
-`records` - (Optional) Address records. See [Records](#nestedblock--address_records--records) below.
-
 <a id="nestedblock--address_records--records"></a>
-
-### Address Records Records
 
 <a id="nestedblock--integer_records"></a>
 
-### Integer Records
-
-`records` - (Optional) Integer records. See [Records](#nestedblock--integer_records--records) below.
-
 <a id="nestedblock--integer_records--records"></a>
-
-### Integer Records Records
 
 <a id="nestedblock--string_records"></a>
 
-### String Records
-
-`records` - (Optional) String records. See [Records](#nestedblock--string_records--records) below.
-
 <a id="nestedblock--string_records--records"></a>
 
-### String Records Records
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

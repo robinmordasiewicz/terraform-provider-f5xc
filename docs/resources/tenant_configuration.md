@@ -80,47 +80,11 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--basic_configuration"></a>
 
-### Basic Configuration
-
-`display_name` - (Optional) Display Name. Tenant display name in the login screen (`String`).
-
 <a id="nestedblock--brute_force_detection_settings"></a>
-
-### Brute Force Detection Settings
-
-`max_login_failures` - (Optional) Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes (`Number`).
 
 <a id="nestedblock--password_policy"></a>
 
-### Password Policy
-
-`digits` - (Optional) Min Number Of Digits. The number of digits required to be in the password string (`Number`).
-
-`expire_password` - (Optional) Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password (`Number`).
-
-`lowercase_characters` - (Optional) Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string (`Number`).
-
-`minimum_length` - (Optional) Minimum Length. Minimum length of password (`Number`).
-
-`not_recently_used` - (Optional) Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password (`Number`).
-
-`not_username` - (Optional) Not Username. When set, the password is not allowed to be the same as the username (`Bool`).
-
-`special_characters` - (Optional) Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string (`Number`).
-
-`uppercase_characters` - (Optional) Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string (`Number`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

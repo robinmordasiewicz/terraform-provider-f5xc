@@ -76,47 +76,15 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--domains"></a>
 
-### Domains
-
-`domain` - (Optional) Domains to Crawl. Select the domain to execute API Crawling with given credentials (`String`).
-
-`simple_login` - (Optional) Simple Login. See [Simple Login](#nestedblock--domains--simple_login) below.
-
 <a id="nestedblock--domains--simple_login"></a>
-
-### Domains Simple Login
-
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--domains--simple_login--password) below.
-
-`user` - (Optional) User. Enter the username to assign credentials for the selected domain to crawl (`String`).
 
 <a id="nestedblock--domains--simple_login--password"></a>
 
-### Domains Simple Login Password
-
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--domains--simple_login--password--blindfold_secret_info) below.
-
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--domains--simple_login--password--clear_secret_info) below.
-
 <a id="nestedblock--domains--simple_login--password--blindfold_secret_info"></a>
-
-### Domains Simple Login Password Blindfold Secret Info
 
 <a id="nestedblock--domains--simple_login--password--clear_secret_info"></a>
 
-### Domains Simple Login Password Clear Secret Info
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

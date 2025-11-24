@@ -81,23 +81,23 @@ resource "f5xc_k8s_cluster" "example" {
 
 `cluster_wide_app_list` - (Optional) Cluster Wide Application List. List of cluster wide applications. See [Cluster Wide App List](#cluster-wide-app-list) below for details.
 
+`no_cluster_wide_apps` - (Optional) Empty. This can be used for messages where no values are needed. See [No Cluster Wide Apps](#no-cluster-wide-apps) below for details.
+
 > **Note:** One of the arguments from this list "global_access_enable, no_global_access" must be set.
 
 `global_access_enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Global Access Enable](#global-access-enable) below for details.
+
+`no_global_access` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Access](#no-global-access) below for details.
 
 > **Note:** One of the arguments from this list "insecure_registry_list, no_insecure_registries" must be set.
 
 `insecure_registry_list` - (Optional) Docker Insecure Registry List. List of docker insecure registries. See [Insecure Registry List](#insecure-registry-list) below for details.
 
+`no_insecure_registries` - (Optional) Empty. This can be used for messages where no values are needed. See [No Insecure Registries](#no-insecure-registries) below for details.
+
 > **Note:** One of the arguments from this list "local_access_config, no_local_access" must be set.
 
 `local_access_config` - (Optional) Local Access Configuration. Parameters required to enable local access. See [Local Access Config](#local-access-config) below for details.
-
-`no_cluster_wide_apps` - (Optional) Empty. This can be used for messages where no values are needed. See [No Cluster Wide Apps](#no-cluster-wide-apps) below for details.
-
-`no_global_access` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Access](#no-global-access) below for details.
-
-`no_insecure_registries` - (Optional) Empty. This can be used for messages where no values are needed. See [No Insecure Registries](#no-insecure-registries) below for details.
 
 `no_local_access` - (Optional) Empty. This can be used for messages where no values are needed. See [No Local Access](#no-local-access) below for details.
 
@@ -107,23 +107,23 @@ resource "f5xc_k8s_cluster" "example" {
 
 `use_custom_cluster_role_bindings` - (Optional) Cluster Role Binding List. List of active cluster role binding list for a K8s cluster. See [Use Custom Cluster Role Bindings](#use-custom-cluster-role-bindings) below for details.
 
+`use_default_cluster_role_bindings` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Cluster Role Bindings](#use-default-cluster-role-bindings) below for details.
+
 > **Note:** One of the arguments from this list "use_custom_cluster_role_list, use_default_cluster_roles" must be set.
 
 `use_custom_cluster_role_list` - (Optional) Cluster Role List. List of active cluster role list for a K8s cluster. See [Use Custom Cluster Role List](#use-custom-cluster-role-list) below for details.
+
+`use_default_cluster_roles` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Cluster Roles](#use-default-cluster-roles) below for details.
 
 > **Note:** One of the arguments from this list "use_custom_pod_security_admission, use_default_pod_security_admission" must be set.
 
 `use_custom_pod_security_admission` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Use Custom Pod Security Admission](#use-custom-pod-security-admission) below for details.
 
+`use_default_pod_security_admission` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Pod Security Admission](#use-default-pod-security-admission) below for details.
+
 > **Note:** One of the arguments from this list "use_custom_psp_list, use_default_psp" must be set.
 
 `use_custom_psp_list` - (Optional) Pod Security Policy List. List of active Pod security policies for a K8s cluster. See [Use Custom Psp List](#use-custom-psp-list) below for details.
-
-`use_default_cluster_role_bindings` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Cluster Role Bindings](#use-default-cluster-role-bindings) below for details.
-
-`use_default_cluster_roles` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Cluster Roles](#use-default-cluster-roles) below for details.
-
-`use_default_pod_security_admission` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Pod Security Admission](#use-default-pod-security-admission) below for details.
 
 `use_default_psp` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Psp](#use-default-psp) below for details.
 
@@ -143,185 +143,65 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--cluster_scoped_access_deny"></a>
 
-### Cluster Scoped Access Deny
-
 <a id="nestedblock--cluster_scoped_access_permit"></a>
-
-### Cluster Scoped Access Permit
 
 <a id="nestedblock--cluster_wide_app_list"></a>
 
-### Cluster Wide App List
-
-`cluster_wide_apps` - (Optional) Cluster Wide Application List. List of cluster wide applications. See [Cluster Wide Apps](#nestedblock--cluster_wide_app_list--cluster_wide_apps) below.
-
 <a id="nestedblock--cluster_wide_app_list--cluster_wide_apps"></a>
-
-### Cluster Wide App List Cluster Wide Apps
-
-`argo_cd` - (Optional) Argo CD configuration. description Parameters for Argo Continuous Deployment(CD) application. See [Argo Cd](#nestedblock--cluster_wide_app_list--cluster_wide_apps--argo_cd) below.
-
-`dashboard` - (Optional) K8s Dashboard configuration. description Parameters for K8s dashboard. See [Dashboard](#nestedblock--cluster_wide_app_list--cluster_wide_apps--dashboard) below.
-
-`metrics_server` - (Optional) K8s Metrics Server configuration. description Parameters for Kubernetes Metrics Server application. See [Metrics Server](#nestedblock--cluster_wide_app_list--cluster_wide_apps--metrics_server) below.
-
-`prometheus` - (Optional) Prometheus access configuration. description Parameters for Prometheus server access. See [Prometheus](#nestedblock--cluster_wide_app_list--cluster_wide_apps--prometheus) below.
 
 <a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--argo_cd"></a>
 
-### Cluster Wide App List Cluster Wide Apps Argo Cd
-
-`local_domain` - (Optional) Local Access Configuration. Parameters required to enable local access. See [Local Domain](#nestedblock--cluster_wide_app_list--cluster_wide_apps--argo_cd--local_domain) below.
-
 <a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--argo_cd--local_domain"></a>
-
-### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain
 
 <a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--dashboard"></a>
 
-### Cluster Wide App List Cluster Wide Apps Dashboard
-
 <a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--metrics_server"></a>
-
-### Cluster Wide App List Cluster Wide Apps Metrics Server
 
 <a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--prometheus"></a>
 
-### Cluster Wide App List Cluster Wide Apps Prometheus
-
 <a id="nestedblock--global_access_enable"></a>
-
-### Global Access Enable
 
 <a id="nestedblock--insecure_registry_list"></a>
 
-### Insecure Registry List
-
-`insecure_registries` - (Optional) Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000' (`List`).
-
 <a id="nestedblock--local_access_config"></a>
-
-### Local Access Config
-
-`default_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Port](#nestedblock--local_access_config--default_port) below.
-
-`local_domain` - (Optional) Local Domain. Local K8s API server will be accessible at <site name>.<local domain> (`String`).
-
-`port` - (Optional) Custom k8s Port. Use custom K8s port for API server. Available port range is less than 65000 except reserved ports (`Number`).
 
 <a id="nestedblock--local_access_config--default_port"></a>
 
-### Local Access Config Default Port
-
 <a id="nestedblock--no_cluster_wide_apps"></a>
-
-### No Cluster Wide Apps
 
 <a id="nestedblock--no_global_access"></a>
 
-### No Global Access
-
 <a id="nestedblock--no_insecure_registries"></a>
-
-### No Insecure Registries
 
 <a id="nestedblock--no_local_access"></a>
 
-### No Local Access
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 <a id="nestedblock--use_custom_cluster_role_bindings"></a>
 
-### Use Custom Cluster Role Bindings
-
-`cluster_role_bindings` - (Optional) Cluster Role Binding List. List of active cluster role binding list for a K8s cluster. See [Cluster Role Bindings](#nestedblock--use_custom_cluster_role_bindings--cluster_role_bindings) below.
-
 <a id="nestedblock--use_custom_cluster_role_bindings--cluster_role_bindings"></a>
-
-### Use Custom Cluster Role Bindings Cluster Role Bindings
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--use_custom_cluster_role_list"></a>
 
-### Use Custom Cluster Role List
-
-`cluster_roles` - (Optional) Cluster Role List. List of active cluster role list for a K8s cluster. See [Cluster Roles](#nestedblock--use_custom_cluster_role_list--cluster_roles) below.
-
 <a id="nestedblock--use_custom_cluster_role_list--cluster_roles"></a>
-
-### Use Custom Cluster Role List Cluster Roles
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--use_custom_pod_security_admission"></a>
 
-### Use Custom Pod Security Admission
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--use_custom_psp_list"></a>
-
-### Use Custom Psp List
-
-`pod_security_policies` - (Optional) Pod Security Policy List. List of active Pod security policies for a K8s cluster. See [Pod Security Policies](#nestedblock--use_custom_psp_list--pod_security_policies) below.
 
 <a id="nestedblock--use_custom_psp_list--pod_security_policies"></a>
 
-### Use Custom Psp List Pod Security Policies
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--use_default_cluster_role_bindings"></a>
-
-### Use Default Cluster Role Bindings
 
 <a id="nestedblock--use_default_cluster_roles"></a>
 
-### Use Default Cluster Roles
-
 <a id="nestedblock--use_default_pod_security_admission"></a>
-
-### Use Default Pod Security Admission
 
 <a id="nestedblock--use_default_psp"></a>
 
-### Use Default Psp
-
 <a id="nestedblock--vk8s_namespace_access_deny"></a>
 
-### Vk8s Namespace Access Deny
-
 <a id="nestedblock--vk8s_namespace_access_permit"></a>
-
-### Vk8s Namespace Access Permit
 
 ## Import
 

@@ -78,173 +78,47 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--ce_site_reference"></a>
 
-### CE Site Reference
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--ipsec"></a>
-
-### Ipsec
-
-`ike_parameters` - (Optional) IKE Parameters. IKE configuration parameters required for IPSec Connection type. See [Ike Parameters](#nestedblock--ipsec--ike_parameters) below.
-
-`ipsec_tunnel_parameters` - (Optional) Configure IPSec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment. See [Ipsec Tunnel Parameters](#nestedblock--ipsec--ipsec_tunnel_parameters) below.
 
 <a id="nestedblock--ipsec--ike_parameters"></a>
 
-### Ipsec Ike Parameters
-
-`dpd_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Dpd Disabled](#nestedblock--ipsec--ike_parameters--dpd_disabled) below.
-
-`dpd_keep_alive_timer` - (Optional) Keepalive Timer. See [Dpd Keep Alive Timer](#nestedblock--ipsec--ike_parameters--dpd_keep_alive_timer) below.
-
-`ike_phase1_profile` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ike Phase1 Profile](#nestedblock--ipsec--ike_parameters--ike_phase1_profile) below.
-
-`ike_phase2_profile` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ike Phase2 Profile](#nestedblock--ipsec--ike_parameters--ike_phase2_profile) below.
-
-`initiator` - (Optional) Empty. This can be used for messages where no values are needed. See [Initiator](#nestedblock--ipsec--ike_parameters--initiator) below.
-
-`responder` - (Optional) Empty. This can be used for messages where no values are needed. See [Responder](#nestedblock--ipsec--ike_parameters--responder) below.
-
-`rm_hostname` - (Optional) Hostname. Configure an hostname Remote IKE ID (`String`).
-
-`rm_ip_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Rm IP Address](#nestedblock--ipsec--ike_parameters--rm_ip_address) below.
-
-`use_default_local_ike_id` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Local Ike Id](#nestedblock--ipsec--ike_parameters--use_default_local_ike_id) below.
-
-`use_default_remote_ike_id` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Remote Ike Id](#nestedblock--ipsec--ike_parameters--use_default_remote_ike_id) below.
-
 <a id="nestedblock--ipsec--ike_parameters--dpd_disabled"></a>
-
-### Ipsec Ike Parameters Dpd Disabled
 
 <a id="nestedblock--ipsec--ike_parameters--dpd_keep_alive_timer"></a>
 
-### Ipsec Ike Parameters Dpd Keep Alive Timer
-
-`timeout` - (Optional) Keepalive Timer (`Number`).
-
 <a id="nestedblock--ipsec--ike_parameters--ike_phase1_profile"></a>
-
-### Ipsec Ike Parameters Ike Phase1 Profile
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="nestedblock--ipsec--ike_parameters--ike_phase2_profile"></a>
 
-### Ipsec Ike Parameters Ike Phase2 Profile
-
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
-
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
-
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
 <a id="nestedblock--ipsec--ike_parameters--initiator"></a>
-
-### Ipsec Ike Parameters Initiator
 
 <a id="nestedblock--ipsec--ike_parameters--responder"></a>
 
-### Ipsec Ike Parameters Responder
-
 <a id="nestedblock--ipsec--ike_parameters--rm_ip_address"></a>
-
-### Ipsec Ike Parameters Rm IP Address
-
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#nestedblock--ipsec--ike_parameters--rm_ip_address--ipv4) below.
-
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#nestedblock--ipsec--ike_parameters--rm_ip_address--ipv6) below.
 
 <a id="nestedblock--ipsec--ike_parameters--rm_ip_address--ipv4"></a>
 
-### Ipsec Ike Parameters Rm IP Address IPv4
-
 <a id="nestedblock--ipsec--ike_parameters--rm_ip_address--ipv6"></a>
-
-### Ipsec Ike Parameters Rm IP Address IPv6
 
 <a id="nestedblock--ipsec--ike_parameters--use_default_local_ike_id"></a>
 
-### Ipsec Ike Parameters Use Default Local Ike Id
-
 <a id="nestedblock--ipsec--ike_parameters--use_default_remote_ike_id"></a>
-
-### Ipsec Ike Parameters Use Default Remote Ike Id
 
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters"></a>
 
-### Ipsec Ipsec Tunnel Parameters
-
-`peer_ip_address` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [Peer IP Address](#nestedblock--ipsec--ipsec_tunnel_parameters--peer_ip_address) below.
-
-`psk` - (Optional) Pre-Shared Key. The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation (`String`).
-
-`segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#nestedblock--ipsec--ipsec_tunnel_parameters--segment) below.
-
-`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside Network](#nestedblock--ipsec--ipsec_tunnel_parameters--site_local_inside_network) below.
-
-`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#nestedblock--ipsec--ipsec_tunnel_parameters--site_local_network) below.
-
-`tunnel_eps` - (Optional) Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses. See [Tunnel Eps](#nestedblock--ipsec--ipsec_tunnel_parameters--tunnel_eps) below.
-
-`tunnel_mtu` - (Optional) MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented (`Number`).
-
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--peer_ip_address"></a>
-
-### Ipsec Ipsec Tunnel Parameters Peer IP Address
-
-`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
 
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--segment"></a>
 
-### Ipsec Ipsec Tunnel Parameters Segment
-
-`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#nestedblock--ipsec--ipsec_tunnel_parameters--segment--refs) below.
-
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--segment--refs"></a>
-
-### Ipsec Ipsec Tunnel Parameters Segment Refs
 
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--site_local_inside_network"></a>
 
-### Ipsec Ipsec Tunnel Parameters Site Local Inside Network
-
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--site_local_network"></a>
-
-### Ipsec Ipsec Tunnel Parameters Site Local Network
 
 <a id="nestedblock--ipsec--ipsec_tunnel_parameters--tunnel_eps"></a>
 
-### Ipsec Ipsec Tunnel Parameters Tunnel Eps
-
-`interface` - (Optional) Interface. For the chosen node, specify the interface that will be the tunnel source (`String`).
-
-`local_tunnel_ip` - (Optional) Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. the IP address of the tunnel on the CE node itself and a subnet prefix length (`String`).
-
-`node` - (Optional) Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection (`String`).
-
-`remote_tunnel_ip` - (Optional) Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. the IP address of the tunnel on the remote gateway and a subnet prefix length (`String`).
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

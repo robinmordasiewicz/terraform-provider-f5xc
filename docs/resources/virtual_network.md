@@ -84,63 +84,21 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nestedblock--global_network"></a>
 
-### Global Network
-
 <a id="nestedblock--site_local_inside_network"></a>
-
-### Site Local Inside Network
 
 <a id="nestedblock--site_local_network"></a>
 
-### Site Local Network
-
 <a id="nestedblock--static_routes"></a>
-
-### Static Routes
-
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
-
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#nestedblock--static_routes--default_gateway) below.
-
-`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
-
-`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
-
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#nestedblock--static_routes--node_interface) below.
 
 <a id="nestedblock--static_routes--default_gateway"></a>
 
-### Static Routes Default Gateway
-
 <a id="nestedblock--static_routes--node_interface"></a>
-
-### Static Routes Node Interface
-
-`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#nestedblock--static_routes--node_interface--list) below.
 
 <a id="nestedblock--static_routes--node_interface--list"></a>
 
-### Static Routes Node Interface List
-
-`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#nestedblock--static_routes--node_interface--list--interface) below.
-
-`node` - (Optional) Node. Node name on this site (`String`).
-
 <a id="nestedblock--static_routes--node_interface--list--interface"></a>
 
-### Static Routes Node Interface List Interface
-
 <a id="nestedblock--timeouts"></a>
-
-### Timeouts
-
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
-
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
-
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
 ## Import
 

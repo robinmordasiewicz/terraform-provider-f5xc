@@ -78,8 +78,8 @@ jobs:
   check-constitution:
     name: Constitution Check
     runs-on: ubuntu-latest
-    # Run on all PRs to enforce rules
-    if: github.event_name == 'pull_request'
+    # Run on all PRs to enforce rules, except automated documentation PRs
+    if: github.event_name == 'pull_request' && github.head_ref != 'docs/auto-update'
     steps:
       - name: Checkout
         uses: actions/checkout@v5

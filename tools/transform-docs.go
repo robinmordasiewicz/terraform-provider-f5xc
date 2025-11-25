@@ -242,8 +242,31 @@ func getSubcategory(filename string) string {
 	return "Other"
 }
 
+// Terraform Registry limits
+const (
+	// File size limit - documents exceeding this will be truncated
+	maxDocSizeBytes = 500 * 1024 // 500KB
+
+	// H3 heading threshold - Registry truncates rendering around 65 headings
+	// We use 60 as the safe threshold for generating anchor links
+	maxSafeH3Headings = 60
+
+	// Warning threshold - warn if document has many headings (likely truncated)
+	warnH3Headings = 50
+)
+
+// docWarning tracks documentation files that may have issues
+type docWarning struct {
+	path       string
+	sizeKB     float64
+	h3Count    int
+	isOversized bool  // exceeds 500KB
+	willTruncate bool // has too many H3 headings
+}
+
 func main() {
 	docsDir := "docs/resources"
+	var docWarnings []docWarning
 
 	files, err := filepath.Glob(filepath.Join(docsDir, "*.md"))
 	if err != nil {
@@ -257,6 +280,10 @@ func main() {
 		} else {
 			fmt.Printf("Transformed: %s\n", file)
 		}
+		// Check for potential Registry issues after transformation
+		if warn := checkDocLimits(file); warn != nil {
+			docWarnings = append(docWarnings, *warn)
+		}
 	}
 
 	// Also process data sources
@@ -268,6 +295,10 @@ func main() {
 			} else {
 				fmt.Printf("Transformed: %s\n", file)
 			}
+			// Check for potential Registry issues after transformation
+			if warn := checkDocLimits(file); warn != nil {
+				docWarnings = append(docWarnings, *warn)
+			}
 		}
 	}
 
@@ -276,6 +307,87 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error transforming docs/index.md: %v\n", err)
 	} else {
 		fmt.Printf("Transformed: docs/index.md\n")
+	}
+
+	// Report documents with potential issues
+	reportDocWarnings(docWarnings)
+}
+
+// checkDocLimits validates document against Terraform Registry limits
+// Returns docWarning if file exceeds size or heading limits, nil otherwise
+func checkDocLimits(filePath string) *docWarning {
+	info, err := os.Stat(filePath)
+	if err != nil {
+		return nil
+	}
+
+	// Read file to count headings
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		return nil
+	}
+
+	h3Count := 0
+	for _, line := range strings.Split(string(content), "\n") {
+		if strings.HasPrefix(line, "### ") {
+			h3Count++
+		}
+	}
+
+	isOversized := info.Size() > maxDocSizeBytes
+	willTruncate := h3Count > warnH3Headings
+
+	// Only return warning if there's an issue
+	if isOversized || willTruncate {
+		return &docWarning{
+			path:         filePath,
+			sizeKB:       float64(info.Size()) / 1024,
+			h3Count:      h3Count,
+			isOversized:  isOversized,
+			willTruncate: willTruncate,
+		}
+	}
+
+	return nil
+}
+
+// reportDocWarnings outputs warnings about documents that may have Registry issues
+func reportDocWarnings(warnings []docWarning) {
+	if len(warnings) == 0 {
+		return
+	}
+
+	// Separate by issue type
+	var oversized, truncated []docWarning
+	for _, w := range warnings {
+		if w.isOversized {
+			oversized = append(oversized, w)
+		}
+		if w.willTruncate {
+			truncated = append(truncated, w)
+		}
+	}
+
+	fmt.Fprintf(os.Stderr, "\n")
+
+	// Report oversized files (500KB limit)
+	if len(oversized) > 0 {
+		fmt.Fprintf(os.Stderr, "⛔ ERROR: %d document(s) exceed Terraform Registry 500KB storage limit:\n", len(oversized))
+		for _, doc := range oversized {
+			fmt.Fprintf(os.Stderr, "   • %s: %.1fKB\n", doc.path, doc.sizeKB)
+		}
+		fmt.Fprintf(os.Stderr, "   Reference: https://developer.hashicorp.com/terraform/registry/providers/docs#storage-limits\n\n")
+	}
+
+	// Report files that will have rendering truncated
+	if len(truncated) > 0 {
+		fmt.Fprintf(os.Stderr, "⚠️  WARNING: %d document(s) exceed %d H3 headings (Registry truncates ~65 headings):\n", len(truncated), warnH3Headings)
+		fmt.Fprintf(os.Stderr, "   These documents will have content truncated when displayed in the Registry.\n")
+		fmt.Fprintf(os.Stderr, "   Dead anchor links for truncated sections have been automatically removed.\n\n")
+		for _, doc := range truncated {
+			fmt.Fprintf(os.Stderr, "   • %s: %d H3 headings (%.1fKB)\n", doc.path, doc.h3Count, doc.sizeKB)
+		}
+		fmt.Fprintf(os.Stderr, "\n")
 	}
 }
 

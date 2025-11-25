@@ -4,6 +4,10 @@
 // generate-all-schemas.go - Batch generator for all F5 XC Terraform resources
 // This tool processes all OpenAPI spec files and generates comprehensive Terraform schemas.
 //
+// CI/CD Integration:
+//   Changes to this file trigger the generate.yml workflow which regenerates all
+//   provider resources from the latest OpenAPI specifications.
+//
 // Usage: go run tools/generate-all-schemas.go [--spec-dir=/path/to/specs] [--dry-run]
 //
 // Environment Variables:

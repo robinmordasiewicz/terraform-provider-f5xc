@@ -3,12 +3,13 @@
 name: Generate Provider Code
 
 on:
-  # Trigger when OpenAPI specs are updated in the repository
+  # Trigger when OpenAPI specs are updated OR generator tool changes
   push:
     branches:
       - main
     paths:
       - 'docs/specifications/api/**'
+      - 'tools/generate-all-schemas.go'
 
   # Manual trigger with options
   workflow_dispatch:

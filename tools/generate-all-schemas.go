@@ -552,7 +552,8 @@ func generateExampleUsage(resourceName string, attributes []TerraformAttribute) 
 }
 
 // Maximum recursion depth for nested schemas to prevent infinite loops
-const maxNestedDepth = 3
+// Set high enough to capture all nested defaults while still preventing infinite recursion
+const maxNestedDepth = 20
 
 func convertToTerraformAttribute(name string, schema SchemaDefinition, required bool, oneOfGroup string, spec *OpenAPI3Spec) TerraformAttribute {
 	return convertToTerraformAttributeWithDepth(name, schema, required, oneOfGroup, spec, 0)
@@ -620,6 +621,13 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 				}
 			} else {
 				attr.ElementType = mapSchemaType(itemSchema.Type)
+				// Capture enum and default values from item schema for list element documentation
+				if len(itemSchema.Enum) > 0 {
+					attr.Description = formatEnumDescription(attr.Description, itemSchema.Enum)
+				}
+				if itemSchema.Default != nil {
+					attr.Description = formatDefaultDescription(attr.Description, itemSchema.Default)
+				}
 			}
 		}
 	case "object":
@@ -760,22 +768,21 @@ func formatDefaultDescription(desc string, defaultValue interface{}) string {
 		return desc
 	}
 
-	// Skip invalid/placeholder defaults
+	// Skip invalid/placeholder defaults using EXACT match only
+	// These are sentinel values that indicate "no value" rather than actual defaults
 	invalidDefaults := map[string]bool{
 		"INVALID":      true,
 		"NONE":         true,
 		"UNKNOWN":      true,
 		"UNSPECIFIED":  true,
-		"0":            true, // Often placeholder
-		"false":        true, // Boolean false is often just the default state
+		"0":            true, // Integer zero is often just the zero value
 	}
 
-	// Check if default contains "INVALID" or similar markers
+	// Check if default is EXACTLY an invalid/placeholder value
+	// Use exact matching to preserve valid defaults like XFCC_NONE, MTLS_NONE, etc.
 	upperDefault := strings.ToUpper(defaultStr)
-	for invalid := range invalidDefaults {
-		if strings.Contains(upperDefault, invalid) {
-			return desc
-		}
+	if invalidDefaults[upperDefault] {
+		return desc
 	}
 
 	// Ensure description ends properly before adding default info

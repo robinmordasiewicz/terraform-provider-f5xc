@@ -429,11 +429,16 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	}
 
 	// Optional standard attrs will be sorted with other optionals
+	// These match the F5XC schemaObjectCreateMetaType fields from OpenAPI specs
 	optionalStdAttrs := []TerraformAttribute{
 		{Name: "annotations", GoName: "Annotations", TfsdkTag: "annotations", Type: "map", ElementType: "string",
-			Description: "Annotations to apply to this resource.", Optional: true},
+			Description: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.", Optional: true},
+		{Name: "description", GoName: "Description", TfsdkTag: "description", Type: "string",
+			Description: "Human readable description for the object.", Optional: true},
+		{Name: "disable", GoName: "Disable", TfsdkTag: "disable", Type: "bool",
+			Description: "A value of true will administratively disable the object.", Optional: true},
 		{Name: "labels", GoName: "Labels", TfsdkTag: "labels", Type: "map", ElementType: "string",
-			Description: "Labels to apply to this resource.", Optional: true},
+			Description: "Labels is a user defined key value map that can be attached to resources for organization and filtering.", Optional: true},
 	}
 
 	// Computed attrs - id first per HashiCorp standards
@@ -454,7 +459,19 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	}
 
 	// Add optional attributes (standard + schema-derived, alphabetically)
-	allOptional := append(optionalStdAttrs, filterOptional(attributes)...)
+	// First, filter out standard attrs that already exist in schema-derived attrs to avoid duplicates
+	schemaOptional := filterOptional(attributes)
+	schemaAttrNames := make(map[string]bool)
+	for _, attr := range schemaOptional {
+		schemaAttrNames[attr.Name] = true
+	}
+	var filteredStdAttrs []TerraformAttribute
+	for _, stdAttr := range optionalStdAttrs {
+		if !schemaAttrNames[stdAttr.Name] {
+			filteredStdAttrs = append(filteredStdAttrs, stdAttr)
+		}
+	}
+	allOptional := append(filteredStdAttrs, schemaOptional...)
 	sort.Slice(allOptional, func(i, j int) bool {
 		return allOptional[i].Name < allOptional[j].Name
 	})

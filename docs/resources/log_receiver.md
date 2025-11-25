@@ -121,7 +121,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
-`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#syslog-tls-server-mtls-enable-key-url) below.
+
+<a id="syslog-tls-server-mtls-enable-key-url"></a>
+
+**Syslog TLS Server mTLS Enable Key URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) below.
+
+<a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info"></a>
+
+**Syslog TLS Server mTLS Enable Key URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info"></a>
+
+**Syslog TLS Server mTLS Enable Key URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="syslog-udp-server"></a>
 

@@ -48,9 +48,9 @@ resource "f5xc_dns_compliance_checks" "example" {
 
 ### Spec Argument Reference
 
-`disallowed_query_type_list` - (Optional) Disallowed Query Type Values. Disallowed Query Type Values (`List`).
+`disallowed_query_type_list` - (Optional) Disallowed Query Type Values. Disallowed Query Type Values. Possible values are `QUERY`, `IQUERY`, `STATUS`, `NOTIFY`, `UPDATE`. Defaults to `QUERY` (`List`).
 
-`disallowed_resource_record_type_list` - (Optional) Disallowed Resource Record Types. Disallowed Resource Record Type List (`List`).
+`disallowed_resource_record_type_list` - (Optional) Disallowed Resource Record Types. Disallowed Resource Record Type List. Possible values are `T`, `A`, `NS`, `MD`, `MF`, `CNAME`, `SOA`, `MB`, `MG`, `MR`, `NULL`, `WKS`, `PTR`, `HINFO`, `MINFO`, `MX`, `TXT`, `RP`, `AFSDB`, `X25`, `ISDN`, `RT`, `NSAP`, `NSAP_PTR`, `SIG`, `KEY`, `PX`, `GPOS`, `AAAA`, `LOC`, `NXT`, `EID`, `NIMLOC`, `SRV`, `ATMA`, `NAPTR`, `KX`, `CERT`, `A6`, `DNAME`, `SINK`, `OPT`, `APL`, `DS`, `SSHFP`, `IPSECKEY`, `RRSIG`, `NSEC`, `DNSKEY`, `DHCID`, `NSEC3`, `NSEC3PARAM`, `TLSA`, `SMIMEA`, `HIP`, `NINFO`, `RKEY`, `TALINK`, `CDS`, `CDNSKEY`, `OPENPGPKEY`, `CSYNC`, `SPF`, `UINFO`, `UID`, `GID`, `UNSPEC`, `NID`, `L32`, `L64`, `LP`, `EUI48`, `EUI64`, `TKEY`, `TSIG`, `IXFR`, `AXFR`, `MAILB`, `MAILA`, `URI`, `CAA`, `TA`, `DLV`. Defaults to `T` (`List`).
 
 `domain_denylist` - (Optional) Domain Deny list. List of domains to be denied by configuration object (`List`).
 

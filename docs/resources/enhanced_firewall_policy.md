@@ -192,7 +192,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List Rules Applications**
 
-`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
+`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP` (`List`).
 
 <a id="rule-list-rules-destination-aws-vpc-ids"></a>
 
@@ -204,7 +204,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List Rules Destination IP Prefix Set**
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#rule-list-rules-destination-ip-prefix-set-ref) below.
+
+<a id="rule-list-rules-destination-ip-prefix-set-ref"></a>
+
+**Rule List Rules Destination IP Prefix Set Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="rule-list-rules-destination-label-selector"></a>
 
@@ -222,7 +236,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List Rules Insert Service**
 
-`nfv_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`nfv_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Nfv Service](#rule-list-rules-insert-service-nfv-service) below.
+
+<a id="rule-list-rules-insert-service-nfv-service"></a>
+
+**Rule List Rules Insert Service Nfv Service**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="rule-list-rules-label-matcher"></a>
 
@@ -256,7 +280,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List Rules Source IP Prefix Set**
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#rule-list-rules-source-ip-prefix-set-ref) below.
+
+<a id="rule-list-rules-source-ip-prefix-set-ref"></a>
+
+**Rule List Rules Source IP Prefix Set Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="rule-list-rules-source-label-selector"></a>
 

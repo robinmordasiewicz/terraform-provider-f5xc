@@ -122,7 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Egress Rules Applications**
 
-`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
+`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP` (`List`).
 
 <a id="egress-rules-ip-prefix-set"></a>
 
@@ -248,7 +248,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Rules Applications**
 
-`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
+`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP` (`List`).
 
 <a id="ingress-rules-ip-prefix-set"></a>
 

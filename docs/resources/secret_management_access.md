@@ -106,9 +106,35 @@ In addition to all arguments above, the following attributes are exported:
 
 **Access Info REST Auth Info Basic Auth**
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#access-info-rest-auth-info-basic-auth-password) below.
 
 `username` - (Optional) Username. The username to encode in Basic Auth scheme (`String`).
+
+<a id="access-info-rest-auth-info-basic-auth-password"></a>
+
+**Access Info REST Auth Info Basic Auth Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) below.
+
+<a id="access-info-rest-auth-info-basic-auth-password-blindfold-secret-info"></a>
+
+**Access Info REST Auth Info Basic Auth Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="access-info-rest-auth-info-basic-auth-password-clear-secret-info"></a>
+
+**Access Info REST Auth Info Basic Auth Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="access-info-rest-auth-info-headers-auth"></a>
 
@@ -146,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Access Info TLS Config Cert Params**
 
-`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication (`Block`).
+`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication. See [Certificates](#access-info-tls-config-cert-params-certificates) below.
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used (`List`).
 
@@ -154,7 +180,53 @@ In addition to all arguments above, the following attributes are exported:
 
 `minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
-`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification (`Block`).
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#access-info-tls-config-cert-params-validation-params) below.
+
+<a id="access-info-tls-config-cert-params-certificates"></a>
+
+**Access Info TLS Config Cert Params Certificates**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="access-info-tls-config-cert-params-validation-params"></a>
+
+**Access Info TLS Config Cert Params Validation Params**
+
+`skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
+
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#access-info-tls-config-cert-params-validation-params-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
+
+`verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
+
+<a id="access-info-tls-config-cert-params-validation-params-trusted-ca"></a>
+
+**Access Info TLS Config Cert Params Validation Params Trusted CA**
+
+`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA List](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
+
+<a id="access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
+
+**Access Info TLS Config Cert Params Validation Params Trusted CA Trusted CA List**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="access-info-tls-config-common-params"></a>
 
@@ -166,9 +238,89 @@ In addition to all arguments above, the following attributes are exported:
 
 `minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
-`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates (`Block`).
+`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates. See [TLS Certificates](#access-info-tls-config-common-params-tls-certificates) below.
 
-`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification (`Block`).
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#access-info-tls-config-common-params-validation-params) below.
+
+<a id="access-info-tls-config-common-params-tls-certificates"></a>
+
+**Access Info TLS Config Common Params TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#access-info-tls-config-common-params-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms"></a>
+
+**Access Info TLS Config Common Params TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="access-info-tls-config-common-params-tls-certificates-private-key"></a>
+
+**Access Info TLS Config Common Params TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Access Info TLS Config Common Params TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info"></a>
+
+**Access Info TLS Config Common Params TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="access-info-tls-config-common-params-validation-params"></a>
+
+**Access Info TLS Config Common Params Validation Params**
+
+`skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
+
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#access-info-tls-config-common-params-validation-params-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
+
+`verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
+
+<a id="access-info-tls-config-common-params-validation-params-trusted-ca"></a>
+
+**Access Info TLS Config Common Params Validation Params Trusted CA**
+
+`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA List](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list) below.
+
+<a id="access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
+
+**Access Info TLS Config Common Params Validation Params Trusted CA Trusted CA List**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="access-info-vault-auth-info"></a>
 
@@ -184,15 +336,59 @@ In addition to all arguments above, the following attributes are exported:
 
 `role_id` - (Optional) Role ID. role-id to be used for authentication (`String`).
 
-`secret_id` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`secret_id` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Id](#access-info-vault-auth-info-app-role-auth-secret-id) below.
+
+<a id="access-info-vault-auth-info-app-role-auth-secret-id"></a>
+
+**Access Info Vault Auth Info App Role Auth Secret Id**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) below.
+
+<a id="access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info"></a>
+
+**Access Info Vault Auth Info App Role Auth Secret Id Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info"></a>
+
+**Access Info Vault Auth Info App Role Auth Secret Id Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="access-info-vault-auth-info-token"></a>
 
 **Access Info Vault Auth Info Token**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#access-info-vault-auth-info-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#access-info-vault-auth-info-token-clear-secret-info) below.
+
+<a id="access-info-vault-auth-info-token-blindfold-secret-info"></a>
+
+**Access Info Vault Auth Info Token Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="access-info-vault-auth-info-token-clear-secret-info"></a>
+
+**Access Info Vault Auth Info Token Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="timeouts"></a>
 

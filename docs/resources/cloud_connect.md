@@ -120,15 +120,43 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Tgw Site Vpc Attachments Vpc List**
 
-`custom_routing` - (Optional) AWS Route Table List. AWS Route Table List (`Block`).
+`custom_routing` - (Optional) AWS Route Table List. AWS Route Table List. See [Custom Routing](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) below.
 
-`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice (`Block`).
+`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice. See [Default Route](#aws-tgw-site-vpc-attachments-vpc-list-default-route) below.
 
 `labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall (`Block`).
 
 `manual_routing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `vpc_id` - (Optional) VPC ID. Enter the VPC ID of the VPC to be attached (`String`).
+
+<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing"></a>
+
+**AWS Tgw Site Vpc Attachments Vpc List Custom Routing**
+
+`route_tables` - (Optional) List of route tables. Route Tables. See [Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) below.
+
+<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables"></a>
+
+**AWS Tgw Site Vpc Attachments Vpc List Custom Routing Route Tables**
+
+`route_table_id` - (Optional) Route table ID. Route table ID (`String`).
+
+`static_routes` - (Optional) Static Routes. List of Static Routes (`List`).
+
+<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route"></a>
+
+**AWS Tgw Site Vpc Attachments Vpc List Default Route**
+
+`all_route_tables` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`selective_route_tables` - (Optional) AWS Route Table. AWS Route Table. See [Selective Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) below.
+
+<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables"></a>
+
+**AWS Tgw Site Vpc Attachments Vpc List Default Route Selective Route Tables**
+
+`route_table_id` - (Optional) Route table ID. Route table ID (`List`).
 
 <a id="azure-vnet-site"></a>
 
@@ -158,9 +186,9 @@ In addition to all arguments above, the following attributes are exported:
 
 **Azure Vnet Site Vnet Attachments Vnet List**
 
-`custom_routing` - (Optional) List Azure Route Table with Static Route. List Azure Route Table with Static Route (`Block`).
+`custom_routing` - (Optional) List Azure Route Table with Static Route. List Azure Route Table with Static Route. See [Custom Routing](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) below.
 
-`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice (`Block`).
+`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice. See [Default Route](#azure-vnet-site-vnet-attachments-vnet-list-default-route) below.
 
 `labels` - (Optional) Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies (`Block`).
 
@@ -169,6 +197,34 @@ In addition to all arguments above, the following attributes are exported:
 `subscription_id` - (Optional) Subscription ID. Enter the Subscription ID of the VNET to be attached (`String`).
 
 `vnet_id` - (Optional) VNET ID. Enter the vnet ID of the VNET to be attached in format /<resource-group-name>/<vnet-name> (`String`).
+
+<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing"></a>
+
+**Azure Vnet Site Vnet Attachments Vnet List Custom Routing**
+
+`route_tables` - (Optional) List of route tables with static routes. Route Tables with static routes. See [Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) below.
+
+<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables"></a>
+
+**Azure Vnet Site Vnet Attachments Vnet List Custom Routing Route Tables**
+
+`route_table_id` - (Optional) Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name> (`String`).
+
+`static_routes` - (Optional) Static Routes. List of Static Routes (`List`).
+
+<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route"></a>
+
+**Azure Vnet Site Vnet Attachments Vnet List Default Route**
+
+`all_route_tables` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`selective_route_tables` - (Optional) Azure Route Table. Azure Route Table. See [Selective Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) below.
+
+<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables"></a>
+
+**Azure Vnet Site Vnet Attachments Vnet List Default Route Selective Route Tables**
+
+`route_table_id` - (Optional) Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name> (`List`).
 
 <a id="segment"></a>
 

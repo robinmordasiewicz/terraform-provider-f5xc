@@ -120,17 +120,71 @@ In addition to all arguments above, the following attributes are exported:
 
 **RE ACL Fast ACL Rules Action**
 
-`policer_action` - (Optional) Policer Reference. Reference to policer object (`Block`).
+`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#re-acl-fast-acl-rules-action-policer-action) below.
 
-`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object (`Block`).
+`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#re-acl-fast-acl-rules-action-protocol-policer-action) below.
 
 `simple_action` - (Optional) Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY` (`String`).
+
+<a id="re-acl-fast-acl-rules-action-policer-action"></a>
+
+**RE ACL Fast ACL Rules Action Policer Action**
+
+`ref` - (Optional) Reference. A policer direct reference. See [Ref](#re-acl-fast-acl-rules-action-policer-action-ref) below.
+
+<a id="re-acl-fast-acl-rules-action-policer-action-ref"></a>
+
+**RE ACL Fast ACL Rules Action Policer Action Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="re-acl-fast-acl-rules-action-protocol-policer-action"></a>
+
+**RE ACL Fast ACL Rules Action Protocol Policer Action**
+
+`ref` - (Optional) Protocol policer Reference. Reference to protocol policer object. See [Ref](#re-acl-fast-acl-rules-action-protocol-policer-action-ref) below.
+
+<a id="re-acl-fast-acl-rules-action-protocol-policer-action-ref"></a>
+
+**RE ACL Fast ACL Rules Action Protocol Policer Action Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="re-acl-fast-acl-rules-ip-prefix-set"></a>
 
 **RE ACL Fast ACL Rules IP Prefix Set**
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#re-acl-fast-acl-rules-ip-prefix-set-ref) below.
+
+<a id="re-acl-fast-acl-rules-ip-prefix-set-ref"></a>
+
+**RE ACL Fast ACL Rules IP Prefix Set Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="re-acl-fast-acl-rules-metadata"></a>
 
@@ -208,17 +262,71 @@ In addition to all arguments above, the following attributes are exported:
 
 **Site ACL Fast ACL Rules Action**
 
-`policer_action` - (Optional) Policer Reference. Reference to policer object (`Block`).
+`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#site-acl-fast-acl-rules-action-policer-action) below.
 
-`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object (`Block`).
+`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#site-acl-fast-acl-rules-action-protocol-policer-action) below.
 
 `simple_action` - (Optional) Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY` (`String`).
+
+<a id="site-acl-fast-acl-rules-action-policer-action"></a>
+
+**Site ACL Fast ACL Rules Action Policer Action**
+
+`ref` - (Optional) Reference. A policer direct reference. See [Ref](#site-acl-fast-acl-rules-action-policer-action-ref) below.
+
+<a id="site-acl-fast-acl-rules-action-policer-action-ref"></a>
+
+**Site ACL Fast ACL Rules Action Policer Action Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="site-acl-fast-acl-rules-action-protocol-policer-action"></a>
+
+**Site ACL Fast ACL Rules Action Protocol Policer Action**
+
+`ref` - (Optional) Protocol policer Reference. Reference to protocol policer object. See [Ref](#site-acl-fast-acl-rules-action-protocol-policer-action-ref) below.
+
+<a id="site-acl-fast-acl-rules-action-protocol-policer-action-ref"></a>
+
+**Site ACL Fast ACL Rules Action Protocol Policer Action Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="site-acl-fast-acl-rules-ip-prefix-set"></a>
 
 **Site ACL Fast ACL Rules IP Prefix Set**
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#site-acl-fast-acl-rules-ip-prefix-set-ref) below.
+
+<a id="site-acl-fast-acl-rules-ip-prefix-set-ref"></a>
+
+**Site ACL Fast ACL Rules IP Prefix Set Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="site-acl-fast-acl-rules-metadata"></a>
 

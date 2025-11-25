@@ -128,7 +128,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
+`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="tls-parameters-common-params"></a>
 
@@ -150,15 +150,47 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) below.
 
 `description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#tls-parameters-common-params-tls-certificates-private-key) below.
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
+
+**TLS Parameters Common Params TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="tls-parameters-common-params-tls-certificates-private-key"></a>
+
+**TLS Parameters Common Params TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="tls-parameters-common-params-tls-certificates-private-key-clear-secret-info"></a>
+
+**TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
@@ -166,11 +198,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate (`Block`).
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-parameters-common-params-validation-params-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
+
+<a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
+
+**TLS Parameters Common Params Validation Params Trusted CA**
+
+`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
+
+<a id="tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
+
+**TLS Parameters Common Params Validation Params Trusted CA Trusted CA List**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="where"></a>
 

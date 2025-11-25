@@ -114,15 +114,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Byoc Connections**
 
-`auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Auth Key](#aws-byoc-connections-auth-key) below.
 
 `bgp_asn` - (Optional) BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS (`Number`).
 
 `connection_id` - (Optional) Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection (`String`).
 
-`ipv4` - (Optional) IPv4 Peering. Configure BGP IPv4 peering for endpoints (`Block`).
+`ipv4` - (Optional) IPv4 Peering. Configure BGP IPv4 peering for endpoints. See [IPv4](#aws-byoc-connections-ipv4) below.
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#aws-byoc-connections-metadata) below.
 
 `region` - (Optional) Region. Region where the connection is setup (`String`).
 
@@ -135,6 +135,48 @@ In addition to all arguments above, the following attributes are exported:
 `virtual_interface_type` - (Optional) Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`. Defaults to `PRIVATE` (`String`).
 
 `vlan` - (Optional) Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection (`Number`).
+
+<a id="aws-byoc-connections-auth-key"></a>
+
+**AWS Byoc Connections Auth Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#aws-byoc-connections-auth-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#aws-byoc-connections-auth-key-clear-secret-info) below.
+
+<a id="aws-byoc-connections-auth-key-blindfold-secret-info"></a>
+
+**AWS Byoc Connections Auth Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="aws-byoc-connections-auth-key-clear-secret-info"></a>
+
+**AWS Byoc Connections Auth Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="aws-byoc-connections-ipv4"></a>
+
+**AWS Byoc Connections IPv4**
+
+`aws_router_peer_address` - (Optional) AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint (`String`).
+
+`router_peer_address` - (Optional) Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint (`String`).
+
+<a id="aws-byoc-connections-metadata"></a>
+
+**AWS Byoc Connections Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="enabled"></a>
 
@@ -162,13 +204,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `interconnect_attachment_name` - (Optional) Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#gcp-byoc-connections-metadata) below.
 
 `project` - (Optional) Specified Project. Specify a GCP Project for the interconnect attachment (`String`).
 
 `region` - (Optional) Region. GCP Region in which the GCP Cloud Interconnect attachment is configured (`String`).
 
 `same_as_credential` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="gcp-byoc-connections-metadata"></a>
+
+**GCP Byoc Connections Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="gcp-gcp-cred"></a>
 

@@ -257,7 +257,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-inside-subnet-subnet-param) below.
+
+<a id="aws-parameters-az-nodes-inside-subnet-subnet-param"></a>
+
+**AWS Parameters Az Nodes Inside Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="aws-parameters-az-nodes-outside-subnet"></a>
 
@@ -265,7 +271,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-outside-subnet-subnet-param) below.
+
+<a id="aws-parameters-az-nodes-outside-subnet-subnet-param"></a>
+
+**AWS Parameters Az Nodes Outside Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="aws-parameters-az-nodes-workload-subnet"></a>
 
@@ -273,7 +285,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-workload-subnet-subnet-param) below.
+
+<a id="aws-parameters-az-nodes-workload-subnet-subnet-param"></a>
+
+**AWS Parameters Az Nodes Workload Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="aws-parameters-custom-security-group"></a>
 
@@ -685,9 +703,41 @@ In addition to all arguments above, the following attributes are exported:
 
 **Vn Config Global Network List Global Network Connections**
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#vn-config-global-network-list-global-network-connections-slo-to-global-dr) below.
+
+<a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr"></a>
+
+**Vn Config Global Network List Global Network Connections Sli To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#vn-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
+
+<a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
+
+**Vn Config Global Network List Global Network Connections Sli To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="vn-config-global-network-list-global-network-connections-slo-to-global-dr"></a>
+
+**Vn Config Global Network List Global Network Connections Slo To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#vn-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
+
+<a id="vn-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
+
+**Vn Config Global Network List Global Network Connections Slo To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="vn-config-inside-static-routes"></a>
 
@@ -699,9 +749,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **Vn Config Inside Static Routes Static Route List**
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#vn-config-inside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route**
+
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
+
+`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop) below.
+
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#vn-config-inside-static-routes-static-route-list-custom-static-route-subnets) below.
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop**
+
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
+
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
+
+`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) below.
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route-subnets"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route Subnets**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#vn-config-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#vn-config-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6) below.
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
+
+**Vn Config Inside Static Routes Static Route List Custom Static Route Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="vn-config-outside-static-routes"></a>
 
@@ -713,9 +843,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **Vn Config Outside Static Routes Static Route List**
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#vn-config-outside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route**
+
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
+
+`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop) below.
+
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#vn-config-outside-static-routes-static-route-list-custom-static-route-subnets) below.
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop**
+
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
+
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
+
+`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) below.
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route-subnets"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route Subnets**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) below.
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
+
+**Vn Config Outside Static Routes Static Route List Custom Static Route Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="vpc-attachments"></a>
 

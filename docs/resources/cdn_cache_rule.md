@@ -126,13 +126,131 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cache Rules Rule Expression List Cache Rule Expression**
 
-`cache_headers` - (Optional) Cache Headers. Configure cache rule headers to match the criteria (`Block`).
+`cache_headers` - (Optional) Cache Headers. Configure cache rule headers to match the criteria. See [Cache Headers](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) below.
 
-`cookie_matcher` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
+`cookie_matcher` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matcher](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) below.
 
-`path_match` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match (`Block`).
+`path_match` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path Match](#cache-rules-rule-expression-list-cache-rule-expression-path-match) below.
 
-`query_parameters` - (Optional) Query Parameters. List of (key, value) query parameters (`Block`).
+`query_parameters` - (Optional) Query Parameters. List of (key, value) query parameters. See [Query Parameters](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) below.
+
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers"></a>
+
+**Cache Rules Rule Expression List Cache Rule Expression Cache Headers**
+
+`name` - (Optional) Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent. Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`. Defaults to `PROXY_HOST` (`String`).
+
+`operator` - (Optional) Operator. See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) below.
+
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator"></a>
+
+**Cache Rules Rule Expression List Cache Rule Expression Cache Headers Operator**
+
+`contains` - (Optional) Contains. Field must contain (`String`).
+
+`does_not_contain` - (Optional) Does Not Contain. Field must not contain (`String`).
+
+`does_not_end_with` - (Optional) Does Not End With. Field must not end with (`String`).
+
+`does_not_equal` - (Optional) Does Not Equal. Field must not equal (`String`).
+
+`does_not_start_with` - (Optional) Does Not Start With. Field must not start with (`String`).
+
+`endswith` - (Optional) Ends With. Field must end with (`String`).
+
+`equals` - (Optional) Equals. Field must exactly match (`String`).
+
+`match_regex` - (Optional) Matches Regex. Field matches PCRE 1 compliant regular expression (`String`).
+
+`startswith` - (Optional) Starts With. Field must start with (`String`).
+
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher"></a>
+
+**Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher**
+
+`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
+
+`operator` - (Optional) Operator. See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) below.
+
+<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator"></a>
+
+**Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher Operator**
+
+`contains` - (Optional) Contains. Field must contain (`String`).
+
+`does_not_contain` - (Optional) Does Not Contain. Field must not contain (`String`).
+
+`does_not_end_with` - (Optional) Does Not End With. Field must not end with (`String`).
+
+`does_not_equal` - (Optional) Does Not Equal. Field must not equal (`String`).
+
+`does_not_start_with` - (Optional) Does Not Start With. Field must not start with (`String`).
+
+`endswith` - (Optional) Ends With. Field must end with (`String`).
+
+`equals` - (Optional) Equals. Field must exactly match (`String`).
+
+`match_regex` - (Optional) Matches Regex. Field matches PCRE 1 compliant regular expression (`String`).
+
+`startswith` - (Optional) Starts With. Field must start with (`String`).
+
+<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match"></a>
+
+**Cache Rules Rule Expression List Cache Rule Expression Path Match**
+
+`operator` - (Optional) Operator. See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) below.
+
+<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator"></a>
+
+**Cache Rules Rule Expression List Cache Rule Expression Path Match Operator**
+
+`contains` - (Optional) Contains. Field must contain (`String`).
+
+`does_not_contain` - (Optional) Does Not Contain. Field must not contain (`String`).
+
+`does_not_end_with` - (Optional) Does Not End With. Field must not end with (`String`).
+
+`does_not_equal` - (Optional) Does Not Equal. Field must not equal (`String`).
+
+`does_not_start_with` - (Optional) Does Not Start With. Field must not start with (`String`).
+
+`endswith` - (Optional) Ends With. Field must end with (`String`).
+
+`equals` - (Optional) Equals. Field must exactly match (`String`).
+
+`match_regex` - (Optional) Matches Regex. Field matches PCRE 1 compliant regular expression (`String`).
+
+`startswith` - (Optional) Starts With. Field must start with (`String`).
+
+<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters"></a>
+
+**Cache Rules Rule Expression List Cache Rule Expression Query Parameters**
+
+`key` - (Optional) Key. Query parameter key In the above example, assignee_username is the key (`String`).
+
+`operator` - (Optional) Operator. See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) below.
+
+<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator"></a>
+
+**Cache Rules Rule Expression List Cache Rule Expression Query Parameters Operator**
+
+`contains` - (Optional) Contains. Field must contain (`String`).
+
+`does_not_contain` - (Optional) Does Not Contain. Field must not contain (`String`).
+
+`does_not_end_with` - (Optional) Does Not End With. Field must not end with (`String`).
+
+`does_not_equal` - (Optional) Does Not Equal. Field must not equal (`String`).
+
+`does_not_start_with` - (Optional) Does Not Start With. Field must not start with (`String`).
+
+`endswith` - (Optional) Ends With. Field must end with (`String`).
+
+`equals` - (Optional) Equals. Field must exactly match (`String`).
+
+`match_regex` - (Optional) Matches Regex. Field matches PCRE 1 compliant regular expression (`String`).
+
+`startswith` - (Optional) Starts With. Field must start with (`String`).
 
 <a id="timeouts"></a>
 

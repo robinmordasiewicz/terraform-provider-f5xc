@@ -277,7 +277,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
 
-`methods` - (Optional) Method List. List of methods values to match against (`List`).
+`methods` - (Optional) Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher"></a>
 
@@ -287,31 +287,119 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`Block`).
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#api-rate-limit-api-endpoint-rules-client-matcher-asn-list) below.
 
-`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets (`Block`).
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE (`Block`).
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Client Selector](#api-rate-limit-api-endpoint-rules-client-matcher-client-selector) below.
 
-`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true (`Block`).
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher) below.
 
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against (`Block`).
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#api-rate-limit-api-endpoint-rules-client-matcher-ip-prefix-list) below.
 
-`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories (`Block`).
+`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#api-rate-limit-api-endpoint-rules-client-matcher-ip-threat-category-list) below.
 
-`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#api-rate-limit-api-endpoint-rules-client-matcher-tls-fingerprint-matcher) below.
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-list"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher Asn List**
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher Asn Matcher**
+
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher-asn-sets) below.
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher-asn-sets"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher Asn Matcher Asn Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-client-selector"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher Client Selector**
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher IP Matcher**
+
+`invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
+
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher-prefix-sets) below.
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher-prefix-sets"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher IP Matcher Prefix Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-prefix-list"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher IP Prefix List**
+
+`invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
+
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-threat-category-list"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher IP Threat Category List**
+
+`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES` (`List`).
+
+<a id="api-rate-limit-api-endpoint-rules-client-matcher-tls-fingerprint-matcher"></a>
+
+**API Rate Limit API Endpoint Rules Client Matcher TLS Fingerprint Matcher**
+
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE` (`List`).
+
+`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher (`List`).
 
 <a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter"></a>
 
 **API Rate Limit API Endpoint Rules Inline Rate Limiter**
 
-`ref_user_id` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`ref_user_id` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ref User Id](#api-rate-limit-api-endpoint-rules-inline-rate-limiter-ref-user-id) below.
 
 `threshold` - (Optional) Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period (`Number`).
 
 `unit` - (Optional) Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND` (`String`).
 
 `use_http_lb_user_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter-ref-user-id"></a>
+
+**API Rate Limit API Endpoint Rules Inline Rate Limiter Ref User Id**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="api-rate-limit-api-endpoint-rules-ref-rate-limiter"></a>
 
@@ -327,13 +415,109 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Rate Limit API Endpoint Rules Request Matcher**
 
-`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
+`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matchers](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers) below.
 
-`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true (`Block`).
+`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#api-rate-limit-api-endpoint-rules-request-matcher-headers) below.
 
-`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled (`Block`).
+`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled. See [JWT Claims](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims) below.
 
-`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
+`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. See [Query Params](#api-rate-limit-api-endpoint-rules-request-matcher-query-params) below.
+
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers"></a>
+
+**API Rate Limit API Endpoint Rules Request Matcher Cookie Matchers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-item) below.
+
+`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
+
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-item"></a>
+
+**API Rate Limit API Endpoint Rules Request Matcher Cookie Matchers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-headers"></a>
+
+**API Rate Limit API Endpoint Rules Request Matcher Headers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-api-endpoint-rules-request-matcher-headers-item) below.
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-headers-item"></a>
+
+**API Rate Limit API Endpoint Rules Request Matcher Headers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims"></a>
+
+**API Rate Limit API Endpoint Rules Request Matcher JWT Claims**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-item) below.
+
+`name` - (Optional) JWT Claim Name. JWT claim name (`String`).
+
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-item"></a>
+
+**API Rate Limit API Endpoint Rules Request Matcher JWT Claims Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params"></a>
+
+**API Rate Limit API Endpoint Rules Request Matcher Query Params**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Query Parameter Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-api-endpoint-rules-request-matcher-query-params-item) below.
+
+`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
+
+<a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params-item"></a>
+
+**API Rate Limit API Endpoint Rules Request Matcher Query Params Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
 
 <a id="api-rate-limit-bypass-rate-limiting-rules"></a>
 
@@ -349,17 +533,239 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_url` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`api_endpoint` - (Optional) API Endpoint. This defines API endpoint (`Block`).
+`api_endpoint` - (Optional) API Endpoint. This defines API endpoint. See [API Endpoint](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-endpoint) below.
 
-`api_groups` - (Optional) API Groups (`Block`).
+`api_groups` - (Optional) API Groups. See [API Groups](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-groups) below.
 
 `base_path` - (Optional) Base Path. The base path which this validation applies to (`String`).
 
-`client_matcher` - (Optional) Client Matcher. Client conditions for matching a rule (`Block`).
+`client_matcher` - (Optional) Client Matcher. Client conditions for matching a rule. See [Client Matcher](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher) below.
 
-`request_matcher` - (Optional) Request Matcher. Request conditions for matching a rule (`Block`).
+`request_matcher` - (Optional) Request Matcher. Request conditions for matching a rule. See [Request Matcher](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher) below.
 
 `specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain. For example: API.example.com (`String`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-endpoint"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules API Endpoint**
+
+`methods` - (Optional) Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
+
+`path` - (Optional) Path. Path to be matched (`String`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-groups"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules API Groups**
+
+`api_groups` - (Optional) API Groups (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher**
+
+`any_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`any_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-list) below.
+
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher) below.
+
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Client Selector](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-client-selector) below.
+
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher) below.
+
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-prefix-list) below.
+
+`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-threat-category-list) below.
+
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-tls-fingerprint-matcher) below.
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-list"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn List**
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn Matcher**
+
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher-asn-sets) below.
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher-asn-sets"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn Matcher Asn Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-client-selector"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Client Selector**
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Matcher**
+
+`invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
+
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher-prefix-sets) below.
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher-prefix-sets"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Matcher Prefix Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-prefix-list"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Prefix List**
+
+`invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
+
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-threat-category-list"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Threat Category List**
+
+`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES` (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-tls-fingerprint-matcher"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher TLS Fingerprint Matcher**
+
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE` (`List`).
+
+`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher**
+
+`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matchers](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers) below.
+
+`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers) below.
+
+`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled. See [JWT Claims](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims) below.
+
+`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. See [Query Params](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params) below.
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Cookie Matchers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-item) below.
+
+`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-item"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Cookie Matchers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Headers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-item) below.
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-item"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Headers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher JWT Claims**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-item) below.
+
+`name` - (Optional) JWT Claim Name. JWT claim name (`String`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-item"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher JWT Claims Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Query Params**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Query Parameter Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-item) below.
+
+`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
+
+<a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-item"></a>
+
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Query Params Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
 
 <a id="api-rate-limit-custom-ip-allowed-list"></a>
 
@@ -411,31 +817,119 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`Block`).
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#api-rate-limit-server-url-rules-client-matcher-asn-list) below.
 
-`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets (`Block`).
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#api-rate-limit-server-url-rules-client-matcher-asn-matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE (`Block`).
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Client Selector](#api-rate-limit-server-url-rules-client-matcher-client-selector) below.
 
-`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true (`Block`).
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#api-rate-limit-server-url-rules-client-matcher-ip-matcher) below.
 
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against (`Block`).
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#api-rate-limit-server-url-rules-client-matcher-ip-prefix-list) below.
 
-`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories (`Block`).
+`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#api-rate-limit-server-url-rules-client-matcher-ip-threat-category-list) below.
 
-`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#api-rate-limit-server-url-rules-client-matcher-tls-fingerprint-matcher) below.
+
+<a id="api-rate-limit-server-url-rules-client-matcher-asn-list"></a>
+
+**API Rate Limit Server URL Rules Client Matcher Asn List**
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
+
+<a id="api-rate-limit-server-url-rules-client-matcher-asn-matcher"></a>
+
+**API Rate Limit Server URL Rules Client Matcher Asn Matcher**
+
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#api-rate-limit-server-url-rules-client-matcher-asn-matcher-asn-sets) below.
+
+<a id="api-rate-limit-server-url-rules-client-matcher-asn-matcher-asn-sets"></a>
+
+**API Rate Limit Server URL Rules Client Matcher Asn Matcher Asn Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="api-rate-limit-server-url-rules-client-matcher-client-selector"></a>
+
+**API Rate Limit Server URL Rules Client Matcher Client Selector**
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
+<a id="api-rate-limit-server-url-rules-client-matcher-ip-matcher"></a>
+
+**API Rate Limit Server URL Rules Client Matcher IP Matcher**
+
+`invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
+
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#api-rate-limit-server-url-rules-client-matcher-ip-matcher-prefix-sets) below.
+
+<a id="api-rate-limit-server-url-rules-client-matcher-ip-matcher-prefix-sets"></a>
+
+**API Rate Limit Server URL Rules Client Matcher IP Matcher Prefix Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="api-rate-limit-server-url-rules-client-matcher-ip-prefix-list"></a>
+
+**API Rate Limit Server URL Rules Client Matcher IP Prefix List**
+
+`invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
+
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
+
+<a id="api-rate-limit-server-url-rules-client-matcher-ip-threat-category-list"></a>
+
+**API Rate Limit Server URL Rules Client Matcher IP Threat Category List**
+
+`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES` (`List`).
+
+<a id="api-rate-limit-server-url-rules-client-matcher-tls-fingerprint-matcher"></a>
+
+**API Rate Limit Server URL Rules Client Matcher TLS Fingerprint Matcher**
+
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE` (`List`).
+
+`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher (`List`).
 
 <a id="api-rate-limit-server-url-rules-inline-rate-limiter"></a>
 
 **API Rate Limit Server URL Rules Inline Rate Limiter**
 
-`ref_user_id` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`ref_user_id` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ref User Id](#api-rate-limit-server-url-rules-inline-rate-limiter-ref-user-id) below.
 
 `threshold` - (Optional) Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period (`Number`).
 
 `unit` - (Optional) Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND` (`String`).
 
 `use_http_lb_user_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="api-rate-limit-server-url-rules-inline-rate-limiter-ref-user-id"></a>
+
+**API Rate Limit Server URL Rules Inline Rate Limiter Ref User Id**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="api-rate-limit-server-url-rules-ref-rate-limiter"></a>
 
@@ -451,13 +945,109 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Rate Limit Server URL Rules Request Matcher**
 
-`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
+`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matchers](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers) below.
 
-`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true (`Block`).
+`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#api-rate-limit-server-url-rules-request-matcher-headers) below.
 
-`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled (`Block`).
+`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled. See [JWT Claims](#api-rate-limit-server-url-rules-request-matcher-jwt-claims) below.
 
-`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
+`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. See [Query Params](#api-rate-limit-server-url-rules-request-matcher-query-params) below.
+
+<a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers"></a>
+
+**API Rate Limit Server URL Rules Request Matcher Cookie Matchers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-item) below.
+
+`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
+
+<a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers-item"></a>
+
+**API Rate Limit Server URL Rules Request Matcher Cookie Matchers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-server-url-rules-request-matcher-headers"></a>
+
+**API Rate Limit Server URL Rules Request Matcher Headers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-server-url-rules-request-matcher-headers-item) below.
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+<a id="api-rate-limit-server-url-rules-request-matcher-headers-item"></a>
+
+**API Rate Limit Server URL Rules Request Matcher Headers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims"></a>
+
+**API Rate Limit Server URL Rules Request Matcher JWT Claims**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-item) below.
+
+`name` - (Optional) JWT Claim Name. JWT claim name (`String`).
+
+<a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims-item"></a>
+
+**API Rate Limit Server URL Rules Request Matcher JWT Claims Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="api-rate-limit-server-url-rules-request-matcher-query-params"></a>
+
+**API Rate Limit Server URL Rules Request Matcher Query Params**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Query Parameter Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#api-rate-limit-server-url-rules-request-matcher-query-params-item) below.
+
+`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
+
+<a id="api-rate-limit-server-url-rules-request-matcher-query-params-item"></a>
+
+**API Rate Limit Server URL Rules Request Matcher Query Params Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
 
 <a id="api-specification"></a>
 
@@ -497,7 +1087,47 @@ In addition to all arguments above, the following attributes are exported:
 
 `fall_through_mode_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`fall_through_mode_custom` - (Optional) Custom Fall Through Mode. Define the fall through settings (`Block`).
+`fall_through_mode_custom` - (Optional) Custom Fall Through Mode. Define the fall through settings. See [Fall Through Mode Custom](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom) below.
+
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom"></a>
+
+**API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom**
+
+`open_api_validation_rules` - (Optional) Custom Fall Through Rule List. See [Open API Validation Rules](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules) below.
+
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules"></a>
+
+**API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules**
+
+`action_block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`action_report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`action_skip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`api_endpoint` - (Optional) API Endpoint. This defines API endpoint. See [API Endpoint](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint) below.
+
+`api_group` - (Optional) API Group. The API group which this validation applies to (`String`).
+
+`base_path` - (Optional) Base Path. The base path which this validation applies to (`String`).
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata) below.
+
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint"></a>
+
+**API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules API Endpoint**
+
+`methods` - (Optional) Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
+
+`path` - (Optional) Path. Path to be matched (`String`).
+
+<a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata"></a>
+
+**API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="api-specification-validation-all-spec-endpoints-settings"></a>
 
@@ -507,21 +1137,55 @@ In addition to all arguments above, the following attributes are exported:
 
 `oversized_body_skip_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`property_validation_settings_custom` - (Optional) Validation Property Settings. Custom property validation settings (`Block`).
+`property_validation_settings_custom` - (Optional) Validation Property Settings. Custom property validation settings. See [Property Validation Settings Custom](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom) below.
 
 `property_validation_settings_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom"></a>
+
+**API Specification Validation All Spec Endpoints Settings Property Validation Settings Custom**
+
+`query_parameters` - (Optional) Validation Settings For Query Parameters. Custom settings for query parameters validation. See [Query Parameters](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters) below.
+
+<a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters"></a>
+
+**API Specification Validation All Spec Endpoints Settings Property Validation Settings Custom Query Parameters**
+
+`allow_additional_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disallow_additional_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode"></a>
 
 **API Specification Validation All Spec Endpoints Validation Mode**
 
-`response_validation_mode_active` - (Optional) Open API Validation Mode Active. Validation mode properties of response (`Block`).
+`response_validation_mode_active` - (Optional) Open API Validation Mode Active. Validation mode properties of response. See [Response Validation Mode Active](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active) below.
 
 `skip_response_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `skip_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`validation_mode_active` - (Optional) Open API Validation Mode Active. Validation mode properties of request (`Block`).
+`validation_mode_active` - (Optional) Open API Validation Mode Active. Validation mode properties of request. See [Validation Mode Active](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active) below.
+
+<a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active"></a>
+
+**API Specification Validation All Spec Endpoints Validation Mode Response Validation Mode Active**
+
+`enforcement_block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enforcement_report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`response_validation_properties` - (Optional) Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS` (`List`).
+
+<a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active"></a>
+
+**API Specification Validation All Spec Endpoints Validation Mode Validation Mode Active**
+
+`enforcement_block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enforcement_report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`request_validation_properties` - (Optional) Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS` (`List`).
 
 <a id="api-specification-validation-custom-list"></a>
 
@@ -539,7 +1203,47 @@ In addition to all arguments above, the following attributes are exported:
 
 `fall_through_mode_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`fall_through_mode_custom` - (Optional) Custom Fall Through Mode. Define the fall through settings (`Block`).
+`fall_through_mode_custom` - (Optional) Custom Fall Through Mode. Define the fall through settings. See [Fall Through Mode Custom](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom) below.
+
+<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom"></a>
+
+**API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom**
+
+`open_api_validation_rules` - (Optional) Custom Fall Through Rule List. See [Open API Validation Rules](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules) below.
+
+<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules"></a>
+
+**API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules**
+
+`action_block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`action_report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`action_skip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`api_endpoint` - (Optional) API Endpoint. This defines API endpoint. See [API Endpoint](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint) below.
+
+`api_group` - (Optional) API Group. The API group which this validation applies to (`String`).
+
+`base_path` - (Optional) Base Path. The base path which this validation applies to (`String`).
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata) below.
+
+<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint"></a>
+
+**API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules API Endpoint**
+
+`methods` - (Optional) Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
+
+`path` - (Optional) Path. Path to be matched (`String`).
+
+<a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata"></a>
+
+**API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules"></a>
 
@@ -547,17 +1251,65 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`api_endpoint` - (Optional) API Endpoint. This defines API endpoint (`Block`).
+`api_endpoint` - (Optional) API Endpoint. This defines API endpoint. See [API Endpoint](#api-specification-validation-custom-list-open-api-validation-rules-api-endpoint) below.
 
 `api_group` - (Optional) API Group. The API group which this validation applies to (`String`).
 
 `base_path` - (Optional) Base Path. The base path which this validation applies to (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#api-specification-validation-custom-list-open-api-validation-rules-metadata) below.
 
 `specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain (`String`).
 
-`validation_mode` - (Optional) Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger) (`Block`).
+`validation_mode` - (Optional) Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger). See [Validation Mode](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode) below.
+
+<a id="api-specification-validation-custom-list-open-api-validation-rules-api-endpoint"></a>
+
+**API Specification Validation Custom List Open API Validation Rules API Endpoint**
+
+`methods` - (Optional) Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
+
+`path` - (Optional) Path. Path to be matched (`String`).
+
+<a id="api-specification-validation-custom-list-open-api-validation-rules-metadata"></a>
+
+**API Specification Validation Custom List Open API Validation Rules Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode"></a>
+
+**API Specification Validation Custom List Open API Validation Rules Validation Mode**
+
+`response_validation_mode_active` - (Optional) Open API Validation Mode Active. Validation mode properties of response. See [Response Validation Mode Active](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active) below.
+
+`skip_response_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`skip_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`validation_mode_active` - (Optional) Open API Validation Mode Active. Validation mode properties of request. See [Validation Mode Active](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active) below.
+
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active"></a>
+
+**API Specification Validation Custom List Open API Validation Rules Validation Mode Response Validation Mode Active**
+
+`enforcement_block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enforcement_report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`response_validation_properties` - (Optional) Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS` (`List`).
+
+<a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active"></a>
+
+**API Specification Validation Custom List Open API Validation Rules Validation Mode Validation Mode Active**
+
+`enforcement_block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enforcement_report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`request_validation_properties` - (Optional) Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS` (`List`).
 
 <a id="api-specification-validation-custom-list-settings"></a>
 
@@ -567,9 +1319,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `oversized_body_skip_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`property_validation_settings_custom` - (Optional) Validation Property Settings. Custom property validation settings (`Block`).
+`property_validation_settings_custom` - (Optional) Validation Property Settings. Custom property validation settings. See [Property Validation Settings Custom](#api-specification-validation-custom-list-settings-property-validation-settings-custom) below.
 
 `property_validation_settings_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="api-specification-validation-custom-list-settings-property-validation-settings-custom"></a>
+
+**API Specification Validation Custom List Settings Property Validation Settings Custom**
+
+`query_parameters` - (Optional) Validation Settings For Query Parameters. Custom settings for query parameters validation. See [Query Parameters](#api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters) below.
+
+<a id="api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters"></a>
+
+**API Specification Validation Custom List Settings Property Validation Settings Custom Query Parameters**
+
+`allow_additional_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disallow_additional_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="app-firewall"></a>
 
@@ -585,7 +1351,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Blocked Clients**
 
-`actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule (`List`).
+`actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule. Possible values are `SKIP_PROCESSING_WAF`, `SKIP_PROCESSING_BOT`, `SKIP_PROCESSING_MUM`, `SKIP_PROCESSING_IP_REPUTATION`, `SKIP_PROCESSING_API_PROTECTION`, `SKIP_PROCESSING_OAS_VALIDATION`, `SKIP_PROCESSING_DDOS_PROTECTION`, `SKIP_PROCESSING_THREAT_MESH`, `SKIP_PROCESSING_MALWARE_PROTECTION`. Defaults to `SKIP_PROCESSING_WAF` (`List`).
 
 `as_number` - (Optional) AS Number. RFC 6793 defined 4-byte AS number (`Number`).
 
@@ -681,23 +1447,173 @@ In addition to all arguments above, the following attributes are exported:
 
 **Bot Defense Policy Js Insert All Pages Except**
 
-`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers (`Block`).
+`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#bot-defense-policy-js-insert-all-pages-except-exclude-list) below.
 
 `javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD` (`String`).
+
+<a id="bot-defense-policy-js-insert-all-pages-except-exclude-list"></a>
+
+**Bot Defense Policy Js Insert All Pages Except Exclude List**
+
+`any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`domain` - (Optional) Domains. Domains names. See [Domain](#bot-defense-policy-js-insert-all-pages-except-exclude-list-domain) below.
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#bot-defense-policy-js-insert-all-pages-except-exclude-list-path) below.
+
+<a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-domain"></a>
+
+**Bot Defense Policy Js Insert All Pages Except Exclude List Domain**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+
+<a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata"></a>
+
+**Bot Defense Policy Js Insert All Pages Except Exclude List Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-path"></a>
+
+**Bot Defense Policy Js Insert All Pages Except Exclude List Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="bot-defense-policy-js-insertion-rules"></a>
 
 **Bot Defense Policy Js Insertion Rules**
 
-`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers (`Block`).
+`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#bot-defense-policy-js-insertion-rules-exclude-list) below.
 
-`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript (`Block`).
+`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript. See [Rules](#bot-defense-policy-js-insertion-rules-rules) below.
+
+<a id="bot-defense-policy-js-insertion-rules-exclude-list"></a>
+
+**Bot Defense Policy Js Insertion Rules Exclude List**
+
+`any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`domain` - (Optional) Domains. Domains names. See [Domain](#bot-defense-policy-js-insertion-rules-exclude-list-domain) below.
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#bot-defense-policy-js-insertion-rules-exclude-list-metadata) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#bot-defense-policy-js-insertion-rules-exclude-list-path) below.
+
+<a id="bot-defense-policy-js-insertion-rules-exclude-list-domain"></a>
+
+**Bot Defense Policy Js Insertion Rules Exclude List Domain**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+
+<a id="bot-defense-policy-js-insertion-rules-exclude-list-metadata"></a>
+
+**Bot Defense Policy Js Insertion Rules Exclude List Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="bot-defense-policy-js-insertion-rules-exclude-list-path"></a>
+
+**Bot Defense Policy Js Insertion Rules Exclude List Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="bot-defense-policy-js-insertion-rules-rules"></a>
+
+**Bot Defense Policy Js Insertion Rules Rules**
+
+`any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`domain` - (Optional) Domains. Domains names. See [Domain](#bot-defense-policy-js-insertion-rules-rules-domain) below.
+
+`javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD` (`String`).
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#bot-defense-policy-js-insertion-rules-rules-metadata) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#bot-defense-policy-js-insertion-rules-rules-path) below.
+
+<a id="bot-defense-policy-js-insertion-rules-rules-domain"></a>
+
+**Bot Defense Policy Js Insertion Rules Rules Domain**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+
+<a id="bot-defense-policy-js-insertion-rules-rules-metadata"></a>
+
+**Bot Defense Policy Js Insertion Rules Rules Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="bot-defense-policy-js-insertion-rules-rules-path"></a>
+
+**Bot Defense Policy Js Insertion Rules Rules Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="bot-defense-policy-mobile-sdk-config"></a>
 
 **Bot Defense Policy Mobile Sdk Config**
 
-`mobile_identifier` - (Optional) Mobile Traffic Identifier. Mobile traffic identifier type (`Block`).
+`mobile_identifier` - (Optional) Mobile Traffic Identifier. Mobile traffic identifier type. See [Mobile Identifier](#bot-defense-policy-mobile-sdk-config-mobile-identifier) below.
+
+<a id="bot-defense-policy-mobile-sdk-config-mobile-identifier"></a>
+
+**Bot Defense Policy Mobile Sdk Config Mobile Identifier**
+
+`headers` - (Optional) Headers. Headers that can be used to identify mobile traffic. See [Headers](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers) below.
+
+<a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers"></a>
+
+**Bot Defense Policy Mobile Sdk Config Mobile Identifier Headers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item) below.
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+<a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item"></a>
+
+**Bot Defense Policy Mobile Sdk Config Mobile Identifier Headers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
 
 <a id="bot-defense-policy-protected-app-endpoints"></a>
 
@@ -707,33 +1623,295 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`domain` - (Optional) Domains. Domains names (`Block`).
+`domain` - (Optional) Domains. Domains names. See [Domain](#bot-defense-policy-protected-app-endpoints-domain) below.
 
-`flow_label` - (Optional) Bot Defense Flow Label Category. Bot Defense Flow Label Category allows to associate traffic with selected category (`Block`).
+`flow_label` - (Optional) Bot Defense Flow Label Category. Bot Defense Flow Label Category allows to associate traffic with selected category. See [Flow Label](#bot-defense-policy-protected-app-endpoints-flow-label) below.
 
-`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true (`Block`).
+`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#bot-defense-policy-protected-app-endpoints-headers) below.
 
-`http_methods` - (Optional) HTTP Methods. List of HTTP methods (`List`).
+`http_methods` - (Optional) HTTP Methods. List of HTTP methods. Possible values are `METHOD_ANY`, `METHOD_GET`, `METHOD_POST`, `METHOD_PUT`, `METHOD_PATCH`, `METHOD_DELETE`, `METHOD_GET_DOCUMENT`. Defaults to `METHOD_ANY` (`List`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#bot-defense-policy-protected-app-endpoints-metadata) below.
 
 `mitigate_good_bots` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`mitigation` - (Optional) Bot Mitigation Action. Modify Bot Defense behavior for a matching request (`Block`).
+`mitigation` - (Optional) Bot Mitigation Action. Modify Bot Defense behavior for a matching request. See [Mitigation](#bot-defense-policy-protected-app-endpoints-mitigation) below.
 
 `mobile` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match (`Block`).
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#bot-defense-policy-protected-app-endpoints-path) below.
 
 `protocol` - (Optional) URL Scheme. SchemeType is used to indicate URL scheme. - BOTH: BOTH URL scheme for HTTPS:// or `HTTP://.` - HTTP: HTTP URL scheme HTTP:// only. - HTTPS: HTTPS URL scheme HTTPS:// only. Possible values are `BOTH`, `HTTP`, `HTTPS`. Defaults to `BOTH` (`String`).
 
-`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
+`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. See [Query Params](#bot-defense-policy-protected-app-endpoints-query-params) below.
 
 `undefined_flow_label` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `web` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`web_mobile` - (Optional) Web and Mobile traffic type. Web and Mobile traffic type (`Block`).
+`web_mobile` - (Optional) Web and Mobile traffic type. Web and Mobile traffic type. See [Web Mobile](#bot-defense-policy-protected-app-endpoints-web-mobile) below.
+
+<a id="bot-defense-policy-protected-app-endpoints-domain"></a>
+
+**Bot Defense Policy Protected App Endpoints Domain**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label**
+
+`account_management` - (Optional) Bot Defense Flow Label Account Management Category. Bot Defense Flow Label Account Management Category. See [Account Management](#bot-defense-policy-protected-app-endpoints-flow-label-account-management) below.
+
+`authentication` - (Optional) Bot Defense Flow Label Authentication Category. Bot Defense Flow Label Authentication Category. See [Authentication](#bot-defense-policy-protected-app-endpoints-flow-label-authentication) below.
+
+`financial_services` - (Optional) Bot Defense Flow Label Financial Services Category. Bot Defense Flow Label Financial Services Category. See [Financial Services](#bot-defense-policy-protected-app-endpoints-flow-label-financial-services) below.
+
+`flight` - (Optional) Bot Defense Flow Label Flight Category. Bot Defense Flow Label Flight Category. See [Flight](#bot-defense-policy-protected-app-endpoints-flow-label-flight) below.
+
+`profile_management` - (Optional) Bot Defense Flow Label Profile Management Category. Bot Defense Flow Label Profile Management Category. See [Profile Management](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management) below.
+
+`search` - (Optional) Bot Defense Flow Label Search Category. Bot Defense Flow Label Search Category. See [Search](#bot-defense-policy-protected-app-endpoints-flow-label-search) below.
+
+`shopping_gift_cards` - (Optional) Bot Defense Flow Label Shopping & Gift Cards Category. Bot Defense Flow Label Shopping & Gift Cards Category. See [Shopping Gift Cards](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards) below.
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-account-management"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Account Management**
+
+`create` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`password_reset` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Authentication**
+
+`login` - (Optional) Bot Defense Transaction Result. Bot Defense Transaction Result. See [Login](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login) below.
+
+`login_mfa` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`login_partner` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`logout` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`token_refresh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Authentication Login**
+
+`disable_transaction_result` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`transaction_result` - (Optional) Bot Defense Transaction Result Type. Bot Defense Transaction ResultType. See [Transaction Result](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result) below.
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result**
+
+`failure_conditions` - (Optional) Failure Conditions. Failure Conditions. See [Failure Conditions](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-failure-conditions) below.
+
+`success_conditions` - (Optional) Success Conditions. Success Conditions. See [Success Conditions](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-success-conditions) below.
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-failure-conditions"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result Failure Conditions**
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`status` - (Optional) HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode` (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-success-conditions"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result Success Conditions**
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`status` - (Optional) HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode` (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-financial-services"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Financial Services**
+
+`apply` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`money_transfer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-flight"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Flight**
+
+`checkin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Profile Management**
+
+`create` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`update` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`view` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-search"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Search**
+
+`flight_search` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`product_search` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`reservation_search` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`room_search` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards"></a>
+
+**Bot Defense Policy Protected App Endpoints Flow Label Shopping Gift Cards**
+
+`gift_card_make_purchase_with_gift_card` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`gift_card_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_add_to_cart` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_checkout` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_choose_seat` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_enter_drawing_submission` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_make_payment` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_order` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_price_inquiry` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_promo_code_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_purchase_gift_card` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`shop_update_quantity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="bot-defense-policy-protected-app-endpoints-headers"></a>
+
+**Bot Defense Policy Protected App Endpoints Headers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#bot-defense-policy-protected-app-endpoints-headers-item) below.
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-headers-item"></a>
+
+**Bot Defense Policy Protected App Endpoints Headers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="bot-defense-policy-protected-app-endpoints-metadata"></a>
+
+**Bot Defense Policy Protected App Endpoints Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-mitigation"></a>
+
+**Bot Defense Policy Protected App Endpoints Mitigation**
+
+`block` - (Optional) Block bot mitigation. Block request and respond with custom content. See [Block](#bot-defense-policy-protected-app-endpoints-mitigation-block) below.
+
+`flag` - (Optional) Select Flag Bot Mitigation Action. Flag mitigation action. See [Flag](#bot-defense-policy-protected-app-endpoints-mitigation-flag) below.
+
+`redirect` - (Optional) Redirect bot mitigation. Redirect request to a custom URI. See [Redirect](#bot-defense-policy-protected-app-endpoints-mitigation-redirect) below.
+
+<a id="bot-defense-policy-protected-app-endpoints-mitigation-block"></a>
+
+**Bot Defense Policy Protected App Endpoints Mitigation Block**
+
+`body` - (Optional) Body. Custom body message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Your request was blocked' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Your request was blocked </p>'. Base64 encoded string for this HTML is 'LzxwPiBZb3VyIHJlcXVlc3Qgd2FzIGJsb2NrZWQgPC9wPg==' (`String`).
+
+`status` - (Optional) HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode` (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-mitigation-flag"></a>
+
+**Bot Defense Policy Protected App Endpoints Mitigation Flag**
+
+`append_headers` - (Optional) Append Flag Mitigation Headers. Append flag mitigation headers to forwarded request. See [Append Headers](#bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers) below.
+
+`no_headers` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers"></a>
+
+**Bot Defense Policy Protected App Endpoints Mitigation Flag Append Headers**
+
+`auto_type_header_name` - (Optional) Automation Type Header Name. A case-insensitive HTTP header name (`String`).
+
+`inference_header_name` - (Optional) Inference Header Name. A case-insensitive HTTP header name (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-mitigation-redirect"></a>
+
+**Bot Defense Policy Protected App Endpoints Mitigation Redirect**
+
+`uri` - (Optional) URI. URI location for redirect may be relative or absolute (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-path"></a>
+
+**Bot Defense Policy Protected App Endpoints Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-query-params"></a>
+
+**Bot Defense Policy Protected App Endpoints Query Params**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Query Parameter Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#bot-defense-policy-protected-app-endpoints-query-params-item) below.
+
+`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
+
+<a id="bot-defense-policy-protected-app-endpoints-query-params-item"></a>
+
+**Bot Defense Policy Protected App Endpoints Query Params Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="bot-defense-policy-protected-app-endpoints-web-mobile"></a>
+
+**Bot Defense Policy Protected App Endpoints Web Mobile**
+
+`mobile_identifier` - (Optional) Mobile Identifier. Mobile identifier type - HEADERS: Headers Headers. The only possible value is `HEADERS`. Defaults to `HEADERS` (`String`).
 
 <a id="captcha-challenge"></a>
 
@@ -765,15 +1943,135 @@ In addition to all arguments above, the following attributes are exported:
 
 **Client Side Defense Policy Js Insert All Pages Except**
 
-`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers (`Block`).
+`exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#client-side-defense-policy-js-insert-all-pages-except-exclude-list) below.
+
+<a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list"></a>
+
+**Client Side Defense Policy Js Insert All Pages Except Exclude List**
+
+`any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`domain` - (Optional) Domains. Domains names. See [Domain](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-domain) below.
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-path) below.
+
+<a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-domain"></a>
+
+**Client Side Defense Policy Js Insert All Pages Except Exclude List Domain**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+
+<a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata"></a>
+
+**Client Side Defense Policy Js Insert All Pages Except Exclude List Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-path"></a>
+
+**Client Side Defense Policy Js Insert All Pages Except Exclude List Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="client-side-defense-policy-js-insertion-rules"></a>
 
 **Client Side Defense Policy Js Insertion Rules**
 
-`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers (`Block`).
+`exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#client-side-defense-policy-js-insertion-rules-exclude-list) below.
 
-`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript (`Block`).
+`rules` - (Optional) JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript. See [Rules](#client-side-defense-policy-js-insertion-rules-rules) below.
+
+<a id="client-side-defense-policy-js-insertion-rules-exclude-list"></a>
+
+**Client Side Defense Policy Js Insertion Rules Exclude List**
+
+`any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`domain` - (Optional) Domains. Domains names. See [Domain](#client-side-defense-policy-js-insertion-rules-exclude-list-domain) below.
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#client-side-defense-policy-js-insertion-rules-exclude-list-metadata) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#client-side-defense-policy-js-insertion-rules-exclude-list-path) below.
+
+<a id="client-side-defense-policy-js-insertion-rules-exclude-list-domain"></a>
+
+**Client Side Defense Policy Js Insertion Rules Exclude List Domain**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+
+<a id="client-side-defense-policy-js-insertion-rules-exclude-list-metadata"></a>
+
+**Client Side Defense Policy Js Insertion Rules Exclude List Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="client-side-defense-policy-js-insertion-rules-exclude-list-path"></a>
+
+**Client Side Defense Policy Js Insertion Rules Exclude List Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="client-side-defense-policy-js-insertion-rules-rules"></a>
+
+**Client Side Defense Policy Js Insertion Rules Rules**
+
+`any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`domain` - (Optional) Domains. Domains names. See [Domain](#client-side-defense-policy-js-insertion-rules-rules-domain) below.
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#client-side-defense-policy-js-insertion-rules-rules-metadata) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#client-side-defense-policy-js-insertion-rules-rules-path) below.
+
+<a id="client-side-defense-policy-js-insertion-rules-rules-domain"></a>
+
+**Client Side Defense Policy Js Insertion Rules Rules Domain**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+
+<a id="client-side-defense-policy-js-insertion-rules-rules-metadata"></a>
+
+**Client Side Defense Policy Js Insertion Rules Rules Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="client-side-defense-policy-js-insertion-rules-rules-path"></a>
+
+**Client Side Defense Policy Js Insertion Rules Rules Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
 <a id="cors-policy"></a>
 
@@ -883,7 +2181,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#ddos-mitigation-rules-ddos-client-source-asn-list) below.
 
-`country_list` - (Optional) Country List. Sources that are located in one of the countries in the given list (`List`).
+`country_list` - (Optional) Country List. Sources that are located in one of the countries in the given list. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE` (`List`).
 
 `ja4_tls_fingerprint_matcher` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 TLS Fingerprint Matcher](#ddos-mitigation-rules-ddos-client-source-ja4-tls-fingerprint-matcher) below.
 
@@ -905,7 +2203,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **DDOS Mitigation Rules DDOS Client Source TLS Fingerprint Matcher**
 
-`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE` (`List`).
 
 `exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
@@ -967,7 +2265,49 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enable API Discovery API Crawler API Crawler Config**
 
-`domains` - (Optional) Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer (`Block`).
+`domains` - (Optional) Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer. See [Domains](#enable-api-discovery-api-crawler-api-crawler-config-domains) below.
+
+<a id="enable-api-discovery-api-crawler-api-crawler-config-domains"></a>
+
+**Enable API Discovery API Crawler API Crawler Config Domains**
+
+`domain` - (Optional) Domain. Select the domain to execute API Crawling with given credentials (`String`).
+
+`simple_login` - (Optional) Simple Login. See [Simple Login](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login) below.
+
+<a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login"></a>
+
+**Enable API Discovery API Crawler API Crawler Config Domains Simple Login**
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password) below.
+
+`user` - (Optional) User. Enter the username to assign credentials for the selected domain to crawl (`String`).
+
+<a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password"></a>
+
+**Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-clear-secret-info) below.
+
+<a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-blindfold-secret-info"></a>
+
+**Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-clear-secret-info"></a>
+
+**Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="enable-api-discovery-api-discovery-from-code-scan"></a>
 
@@ -981,9 +2321,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `all_repos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`code_base_integration` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`code_base_integration` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Code Base Integration](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration) below.
 
-`selected_repos` - (Optional) API Code Repositories. Select which API repositories represent the LB applications (`Block`).
+`selected_repos` - (Optional) API Code Repositories. Select which API repositories represent the LB applications. See [Selected Repos](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-selected-repos) below.
+
+<a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration"></a>
+
+**Enable API Discovery API Discovery From Code Scan Code Base Integrations Code Base Integration**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-selected-repos"></a>
+
+**Enable API Discovery API Discovery From Code Scan Code Base Integrations Selected Repos**
+
+`api_code_repo` - (Optional) API Code Repository. Code repository which contain API endpoints (`List`).
 
 <a id="enable-api-discovery-custom-api-auth-discovery"></a>
 
@@ -1055,7 +2411,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enable IP Reputation**
 
-`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied (`List`).
+`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES` (`List`).
 
 <a id="graphql-rules"></a>
 
@@ -1131,13 +2487,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTPS TLS Cert Options TLS Cert Params**
 
-`certificates` - (Optional) Certificates. Select one or more certificates with any domain names (`Block`).
+`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#https-tls-cert-options-tls-cert-params-certificates) below.
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters (`Block`).
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#https-tls-cert-options-tls-cert-params-tls-config) below.
 
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections (`Block`).
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-tls-cert-options-tls-cert-params-use-mtls) below.
+
+<a id="https-tls-cert-options-tls-cert-params-certificates"></a>
+
+**HTTPS TLS Cert Options TLS Cert Params Certificates**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-tls-cert-options-tls-cert-params-tls-config"></a>
+
+**HTTPS TLS Cert Options TLS Cert Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-tls-cert-options-tls-cert-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="https-tls-cert-options-tls-cert-params-tls-config-custom-security"></a>
+
+**HTTPS TLS Cert Options TLS Cert Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="https-tls-cert-options-tls-cert-params-use-mtls"></a>
+
+**HTTPS TLS Cert Options TLS Cert Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-tls-cert-options-tls-cert-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options) below.
+
+<a id="https-tls-cert-options-tls-cert-params-use-mtls-crl"></a>
+
+**HTTPS TLS Cert Options TLS Cert Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca"></a>
+
+**HTTPS TLS Cert Options TLS Cert Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options"></a>
+
+**HTTPS TLS Cert Options TLS Cert Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="https-tls-cert-options-tls-inline-params"></a>
 
@@ -1145,11 +2577,125 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms (`Block`).
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#https-tls-cert-options-tls-inline-params-tls-certificates) below.
 
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters (`Block`).
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#https-tls-cert-options-tls-inline-params-tls-config) below.
 
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections (`Block`).
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-tls-cert-options-tls-inline-params-use-mtls) below.
+
+<a id="https-tls-cert-options-tls-inline-params-tls-certificates"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-tls-cert-options-tls-inline-params-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="https-tls-cert-options-tls-inline-params-tls-certificates-custom-hash-algorithms"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="https-tls-cert-options-tls-inline-params-tls-certificates-private-key"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="https-tls-cert-options-tls-inline-params-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="https-tls-cert-options-tls-inline-params-tls-certificates-private-key-clear-secret-info"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="https-tls-cert-options-tls-inline-params-tls-config"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-tls-cert-options-tls-inline-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="https-tls-cert-options-tls-inline-params-tls-config-custom-security"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="https-tls-cert-options-tls-inline-params-use-mtls"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-tls-cert-options-tls-inline-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-tls-cert-options-tls-inline-params-use-mtls-xfcc-options) below.
+
+<a id="https-tls-cert-options-tls-inline-params-use-mtls-crl"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-tls-cert-options-tls-inline-params-use-mtls-xfcc-options"></a>
+
+**HTTPS TLS Cert Options TLS Inline Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="https-auto-cert"></a>
 
@@ -1365,7 +2911,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Origin Pool Use TLS TLS Config**
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#origin-pool-use-tls-tls-config-custom-security) below.
 
 `default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1373,11 +2919,69 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="origin-pool-use-tls-tls-config-custom-security"></a>
+
+**Origin Pool Use TLS TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
 <a id="origin-pool-use-tls-use-mtls"></a>
 
 **Origin Pool Use TLS Use mTLS**
 
-`tls_certificates` - (Optional) mTLS Client Certificate. mTLS Client Certificate (`Block`).
+`tls_certificates` - (Optional) mTLS Client Certificate. mTLS Client Certificate. See [TLS Certificates](#origin-pool-use-tls-use-mtls-tls-certificates) below.
+
+<a id="origin-pool-use-tls-use-mtls-tls-certificates"></a>
+
+**Origin Pool Use TLS Use mTLS TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#origin-pool-use-tls-use-mtls-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#origin-pool-use-tls-use-mtls-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="origin-pool-use-tls-use-mtls-tls-certificates-custom-hash-algorithms"></a>
+
+**Origin Pool Use TLS Use mTLS TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="origin-pool-use-tls-use-mtls-tls-certificates-private-key"></a>
+
+**Origin Pool Use TLS Use mTLS TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#origin-pool-use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#origin-pool-use-tls-use-mtls-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="origin-pool-use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Origin Pool Use TLS Use mTLS TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="origin-pool-use-tls-use-mtls-tls-certificates-private-key-clear-secret-info"></a>
+
+**Origin Pool Use TLS Use mTLS TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="origin-pool-use-tls-use-mtls-obj"></a>
 
@@ -1393,9 +2997,19 @@ In addition to all arguments above, the following attributes are exported:
 
 **Origin Pool Use TLS Use Server Verification**
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#origin-pool-use-tls-use-server-verification-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate (`String`).
+
+<a id="origin-pool-use-tls-use-server-verification-trusted-ca"></a>
+
+**Origin Pool Use TLS Use Server Verification Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="other-settings"></a>
 
@@ -1427,9 +3041,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#other-settings-header-options-request-headers-to-add-secret-value) below.
 
 `value` - (Optional) Value. Value of the HTTP header (`String`).
+
+<a id="other-settings-header-options-request-headers-to-add-secret-value"></a>
+
+**Other Settings Header Options Request Headers To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#other-settings-header-options-request-headers-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#other-settings-header-options-request-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="other-settings-header-options-request-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**Other Settings Header Options Request Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="other-settings-header-options-request-headers-to-add-secret-value-clear-secret-info"></a>
+
+**Other Settings Header Options Request Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="other-settings-header-options-response-headers-to-add"></a>
 
@@ -1439,9 +3079,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#other-settings-header-options-response-headers-to-add-secret-value) below.
 
 `value` - (Optional) Value. Value of the HTTP header (`String`).
+
+<a id="other-settings-header-options-response-headers-to-add-secret-value"></a>
+
+**Other Settings Header Options Response Headers To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#other-settings-header-options-response-headers-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#other-settings-header-options-response-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="other-settings-header-options-response-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**Other Settings Header Options Response Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="other-settings-header-options-response-headers-to-add-secret-value-clear-secret-info"></a>
+
+**Other Settings Header Options Response Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="other-settings-logging-options"></a>
 
@@ -1529,9 +3195,273 @@ In addition to all arguments above, the following attributes are exported:
 
 **Policy Based Challenge Rule List Rules**
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#policy-based-challenge-rule-list-rules-metadata) below.
 
-`spec` - (Optional) Challenge Rule Specification. A Challenge Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the rule if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a request API matches a challenge rule, the configured challenge is enforced (`Block`).
+`spec` - (Optional) Challenge Rule Specification. A Challenge Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the rule if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a request API matches a challenge rule, the configured challenge is enforced. See [Spec](#policy-based-challenge-rule-list-rules-spec) below.
+
+<a id="policy-based-challenge-rule-list-rules-metadata"></a>
+
+**Policy Based Challenge Rule List Rules Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="policy-based-challenge-rule-list-rules-spec"></a>
+
+**Policy Based Challenge Rule List Rules Spec**
+
+`any_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`any_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`any_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`arg_matchers` - (Optional) A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true. See [Arg Matchers](#policy-based-challenge-rule-list-rules-spec-arg-matchers) below.
+
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#policy-based-challenge-rule-list-rules-spec-asn-list) below.
+
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#policy-based-challenge-rule-list-rules-spec-asn-matcher) below.
+
+`body_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Body Matcher](#policy-based-challenge-rule-list-rules-spec-body-matcher) below.
+
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Client Selector](#policy-based-challenge-rule-list-rules-spec-client-selector) below.
+
+`cookie_matchers` - (Optional) A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matchers](#policy-based-challenge-rule-list-rules-spec-cookie-matchers) below.
+
+`disable_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`domain_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Domain Matcher](#policy-based-challenge-rule-list-rules-spec-domain-matcher) below.
+
+`enable_captcha_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_javascript_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`expiration_timestamp` - (Optional) The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore (`String`).
+
+`headers` - (Optional) A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#policy-based-challenge-rule-list-rules-spec-headers) below.
+
+`http_method` - (Optional) HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true. See [HTTP Method](#policy-based-challenge-rule-list-rules-spec-http-method) below.
+
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#policy-based-challenge-rule-list-rules-spec-ip-matcher) below.
+
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#policy-based-challenge-rule-list-rules-spec-ip-prefix-list) below.
+
+`path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions. See [Path](#policy-based-challenge-rule-list-rules-spec-path) below.
+
+`query_params` - (Optional) A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. See [Query Params](#policy-based-challenge-rule-list-rules-spec-query-params) below.
+
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#policy-based-challenge-rule-list-rules-spec-tls-fingerprint-matcher) below.
+
+<a id="policy-based-challenge-rule-list-rules-spec-arg-matchers"></a>
+
+**Policy Based Challenge Rule List Rules Spec Arg Matchers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#policy-based-challenge-rule-list-rules-spec-arg-matchers-item) below.
+
+`name` - (Optional) Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body (`String`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-item"></a>
+
+**Policy Based Challenge Rule List Rules Spec Arg Matchers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-asn-list"></a>
+
+**Policy Based Challenge Rule List Rules Spec Asn List**
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-asn-matcher"></a>
+
+**Policy Based Challenge Rule List Rules Spec Asn Matcher**
+
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#policy-based-challenge-rule-list-rules-spec-asn-matcher-asn-sets) below.
+
+<a id="policy-based-challenge-rule-list-rules-spec-asn-matcher-asn-sets"></a>
+
+**Policy Based Challenge Rule List Rules Spec Asn Matcher Asn Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-body-matcher"></a>
+
+**Policy Based Challenge Rule List Rules Spec Body Matcher**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-client-selector"></a>
+
+**Policy Based Challenge Rule List Rules Spec Client Selector**
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers"></a>
+
+**Policy Based Challenge Rule List Rules Spec Cookie Matchers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#policy-based-challenge-rule-list-rules-spec-cookie-matchers-item) below.
+
+`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers-item"></a>
+
+**Policy Based Challenge Rule List Rules Spec Cookie Matchers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-domain-matcher"></a>
+
+**Policy Based Challenge Rule List Rules Spec Domain Matcher**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-headers"></a>
+
+**Policy Based Challenge Rule List Rules Spec Headers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#policy-based-challenge-rule-list-rules-spec-headers-item) below.
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-headers-item"></a>
+
+**Policy Based Challenge Rule List Rules Spec Headers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-http-method"></a>
+
+**Policy Based Challenge Rule List Rules Spec HTTP Method**
+
+`invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
+
+`methods` - (Optional) Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-ip-matcher"></a>
+
+**Policy Based Challenge Rule List Rules Spec IP Matcher**
+
+`invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
+
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#policy-based-challenge-rule-list-rules-spec-ip-matcher-prefix-sets) below.
+
+<a id="policy-based-challenge-rule-list-rules-spec-ip-matcher-prefix-sets"></a>
+
+**Policy Based Challenge Rule List Rules Spec IP Matcher Prefix Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-ip-prefix-list"></a>
+
+**Policy Based Challenge Rule List Rules Spec IP Prefix List**
+
+`invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
+
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-path"></a>
+
+**Policy Based Challenge Rule List Rules Spec Path**
+
+`exact_values` - (Optional) Exact Values. A list of exact path values to match the input HTTP path against (`List`).
+
+`invert_matcher` - (Optional) Invert Path Matcher. Invert the match result (`Bool`).
+
+`prefix_values` - (Optional) Prefix Values. A list of path prefix values to match the input HTTP path against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input HTTP path against (`List`).
+
+`suffix_values` - (Optional) Suffix Values. A list of path suffix values to match the input HTTP path against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-query-params"></a>
+
+**Policy Based Challenge Rule List Rules Spec Query Params**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Query Parameter Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#policy-based-challenge-rule-list-rules-spec-query-params-item) below.
+
+`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-query-params-item"></a>
+
+**Policy Based Challenge Rule List Rules Spec Query Params Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="policy-based-challenge-rule-list-rules-spec-tls-fingerprint-matcher"></a>
+
+**Policy Based Challenge Rule List Rules Spec TLS Fingerprint Matcher**
+
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE` (`List`).
+
+`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher (`List`).
 
 <a id="policy-based-challenge-temporary-user-blocking"></a>
 
@@ -1647,11 +3577,29 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rate Limit Rate Limiter Action Block**
 
-`hours` - (Optional) Hours. Input Duration Hours (`Block`).
+`hours` - (Optional) Hours. Input Duration Hours. See [Hours](#rate-limit-rate-limiter-action-block-hours) below.
 
-`minutes` - (Optional) Minutes. Input Duration Minutes (`Block`).
+`minutes` - (Optional) Minutes. Input Duration Minutes. See [Minutes](#rate-limit-rate-limiter-action-block-minutes) below.
 
-`seconds` - (Optional) Seconds. Input Duration Seconds (`Block`).
+`seconds` - (Optional) Seconds. Input Duration Seconds. See [Seconds](#rate-limit-rate-limiter-action-block-seconds) below.
+
+<a id="rate-limit-rate-limiter-action-block-hours"></a>
+
+**Rate Limit Rate Limiter Action Block Hours**
+
+`duration` - (Optional) Duration (`Number`).
+
+<a id="rate-limit-rate-limiter-action-block-minutes"></a>
+
+**Rate Limit Rate Limiter Action Block Minutes**
+
+`duration` - (Optional) Duration (`Number`).
+
+<a id="rate-limit-rate-limiter-action-block-seconds"></a>
+
+**Rate Limit Rate Limiter Action Block Seconds**
+
+`duration` - (Optional) Duration (`Number`).
 
 <a id="sensitive-data-policy"></a>
 
@@ -1695,7 +3643,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Trusted Clients**
 
-`actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule (`List`).
+`actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule. Possible values are `SKIP_PROCESSING_WAF`, `SKIP_PROCESSING_BOT`, `SKIP_PROCESSING_MUM`, `SKIP_PROCESSING_IP_REPUTATION`, `SKIP_PROCESSING_API_PROTECTION`, `SKIP_PROCESSING_OAS_VALIDATION`, `SKIP_PROCESSING_DDOS_PROTECTION`, `SKIP_PROCESSING_THREAT_MESH`, `SKIP_PROCESSING_MALWARE_PROTECTION`. Defaults to `SKIP_PROCESSING_WAF` (`List`).
 
 `as_number` - (Optional) AS Number. RFC 6793 defined 4-byte AS number (`Number`).
 
@@ -1777,15 +3725,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria (`Block`).
+`app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria. See [App Firewall Detection Control](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control) below.
 
 `exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
 `expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#waf-exclusion-waf-exclusion-inline-rules-rules-metadata) below.
 
-`methods` - (Optional) Methods. methods to be matched (`List`).
+`methods` - (Optional) Methods. methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
 
 `path_prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
 
@@ -1794,6 +3742,62 @@ In addition to all arguments above, the following attributes are exported:
 `suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 `waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control"></a>
+
+**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control**
+
+`exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria. See [Exclude Attack Type Contexts](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-attack-type-contexts) below.
+
+`exclude_bot_name_contexts` - (Optional) Bot Names. Bot Names to be excluded for the defined match criteria. See [Exclude Bot Name Contexts](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-bot-name-contexts) below.
+
+`exclude_signature_contexts` - (Optional) Signature IDs. Signature IDs to be excluded for the defined match criteria. See [Exclude Signature Contexts](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-signature-contexts) below.
+
+`exclude_violation_contexts` - (Optional) Violations. Violations to be excluded for the defined match criteria. See [Exclude Violation Contexts](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-violation-contexts) below.
+
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-attack-type-contexts"></a>
+
+**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Attack Type Contexts**
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`exclude_attack_type` - (Optional) Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK. Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`. Defaults to `ATTACK_TYPE_NONE` (`String`).
+
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-bot-name-contexts"></a>
+
+**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Bot Name Contexts**
+
+`bot_name` - (Optional) Bot Name (`String`).
+
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-signature-contexts"></a>
+
+**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Signature Contexts**
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`signature_id` - (Optional) SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context (`Number`).
+
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-violation-contexts"></a>
+
+**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Violation Contexts**
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`exclude_violation` - (Optional) App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY. Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`. Defaults to `VIOL_NONE` (`String`).
+
+<a id="waf-exclusion-waf-exclusion-inline-rules-rules-metadata"></a>
+
+**WAF Exclusion WAF Exclusion Inline Rules Rules Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
 <a id="waf-exclusion-waf-exclusion-policy"></a>
 

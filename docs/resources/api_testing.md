@@ -118,33 +118,137 @@ In addition to all arguments above, the following attributes are exported:
 
 `key` - (Optional) Key (`String`).
 
-`value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Value](#domains-credentials-api-key-value) below.
+
+<a id="domains-credentials-api-key-value"></a>
+
+**Domains Credentials API Key Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#domains-credentials-api-key-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#domains-credentials-api-key-value-clear-secret-info) below.
+
+<a id="domains-credentials-api-key-value-blindfold-secret-info"></a>
+
+**Domains Credentials API Key Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="domains-credentials-api-key-value-clear-secret-info"></a>
+
+**Domains Credentials API Key Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="domains-credentials-basic-auth"></a>
 
 **Domains Credentials Basic Auth**
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#domains-credentials-basic-auth-password) below.
 
 `user` - (Optional) User (`String`).
+
+<a id="domains-credentials-basic-auth-password"></a>
+
+**Domains Credentials Basic Auth Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#domains-credentials-basic-auth-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#domains-credentials-basic-auth-password-clear-secret-info) below.
+
+<a id="domains-credentials-basic-auth-password-blindfold-secret-info"></a>
+
+**Domains Credentials Basic Auth Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="domains-credentials-basic-auth-password-clear-secret-info"></a>
+
+**Domains Credentials Basic Auth Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="domains-credentials-bearer-token"></a>
 
 **Domains Credentials Bearer Token**
 
-`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#domains-credentials-bearer-token-token) below.
+
+<a id="domains-credentials-bearer-token-token"></a>
+
+**Domains Credentials Bearer Token Token**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#domains-credentials-bearer-token-token-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#domains-credentials-bearer-token-token-clear-secret-info) below.
+
+<a id="domains-credentials-bearer-token-token-blindfold-secret-info"></a>
+
+**Domains Credentials Bearer Token Token Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="domains-credentials-bearer-token-token-clear-secret-info"></a>
+
+**Domains Credentials Bearer Token Token Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="domains-credentials-login-endpoint"></a>
 
 **Domains Credentials Login Endpoint**
 
-`json_payload` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`json_payload` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [JSON Payload](#domains-credentials-login-endpoint-json-payload) below.
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
 
 `path` - (Optional) Path (`String`).
 
 `token_response_key` - (Optional) Token Response Key (`String`).
+
+<a id="domains-credentials-login-endpoint-json-payload"></a>
+
+**Domains Credentials Login Endpoint JSON Payload**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#domains-credentials-login-endpoint-json-payload-clear-secret-info) below.
+
+<a id="domains-credentials-login-endpoint-json-payload-blindfold-secret-info"></a>
+
+**Domains Credentials Login Endpoint JSON Payload Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="domains-credentials-login-endpoint-json-payload-clear-secret-info"></a>
+
+**Domains Credentials Login Endpoint JSON Payload Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="timeouts"></a>
 

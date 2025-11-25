@@ -148,9 +148,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ipsec Ike Parameters Rm IP Address**
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation (`Block`).
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#ipsec-ike-parameters-rm-ip-address-ipv4) below.
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':' (`Block`).
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#ipsec-ike-parameters-rm-ip-address-ipv6) below.
+
+<a id="ipsec-ike-parameters-rm-ip-address-ipv4"></a>
+
+**Ipsec Ike Parameters Rm IP Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="ipsec-ike-parameters-rm-ip-address-ipv6"></a>
+
+**Ipsec Ike Parameters Rm IP Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
 
 <a id="ipsec-ipsec-tunnel-parameters"></a>
 
@@ -180,7 +192,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ipsec Ipsec Tunnel Parameters Segment**
 
-`refs` - (Optional) Segment. Reference to Segment Object (`Block`).
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#ipsec-ipsec-tunnel-parameters-segment-refs) below.
+
+<a id="ipsec-ipsec-tunnel-parameters-segment-refs"></a>
+
+**Ipsec Ipsec Tunnel Parameters Segment Refs**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="ipsec-ipsec-tunnel-parameters-tunnel-eps"></a>
 

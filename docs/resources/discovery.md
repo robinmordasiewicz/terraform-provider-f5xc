@@ -120,15 +120,79 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
-`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service (`Block`).
+`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#discovery-consul-access-info-connection-info-tls-info) below.
+
+<a id="discovery-consul-access-info-connection-info-tls-info"></a>
+
+**Discovery Consul Access Info Connection Info TLS Info**
+
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
+
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#discovery-consul-access-info-connection-info-tls-info-key-url) below.
+
+`server_name` - (Optional) SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used (`String`).
+
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
+
+<a id="discovery-consul-access-info-connection-info-tls-info-key-url"></a>
+
+**Discovery Consul Access Info Connection Info TLS Info Key URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#discovery-consul-access-info-connection-info-tls-info-key-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#discovery-consul-access-info-connection-info-tls-info-key-url-clear-secret-info) below.
+
+<a id="discovery-consul-access-info-connection-info-tls-info-key-url-blindfold-secret-info"></a>
+
+**Discovery Consul Access Info Connection Info TLS Info Key URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="discovery-consul-access-info-connection-info-tls-info-key-url-clear-secret-info"></a>
+
+**Discovery Consul Access Info Connection Info TLS Info Key URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="discovery-consul-access-info-http-basic-auth-info"></a>
 
 **Discovery Consul Access Info HTTP Basic Auth Info**
 
-`passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd URL](#discovery-consul-access-info-http-basic-auth-info-passwd-url) below.
 
 `user_name` - (Optional) User Name. username in consul (`String`).
+
+<a id="discovery-consul-access-info-http-basic-auth-info-passwd-url"></a>
+
+**Discovery Consul Access Info HTTP Basic Auth Info Passwd URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#discovery-consul-access-info-http-basic-auth-info-passwd-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#discovery-consul-access-info-http-basic-auth-info-passwd-url-clear-secret-info) below.
+
+<a id="discovery-consul-access-info-http-basic-auth-info-passwd-url-blindfold-secret-info"></a>
+
+**Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="discovery-consul-access-info-http-basic-auth-info-passwd-url-clear-secret-info"></a>
+
+**Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="discovery-consul-publish-info"></a>
 
@@ -168,15 +232,71 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
-`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service (`Block`).
+`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#discovery-k8s-access-info-connection-info-tls-info) below.
+
+<a id="discovery-k8s-access-info-connection-info-tls-info"></a>
+
+**Discovery K8s Access Info Connection Info TLS Info**
+
+`certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
+
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#discovery-k8s-access-info-connection-info-tls-info-key-url) below.
+
+`server_name` - (Optional) SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used (`String`).
+
+`trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
+
+<a id="discovery-k8s-access-info-connection-info-tls-info-key-url"></a>
+
+**Discovery K8s Access Info Connection Info TLS Info Key URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info) below.
+
+<a id="discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info"></a>
+
+**Discovery K8s Access Info Connection Info TLS Info Key URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info"></a>
+
+**Discovery K8s Access Info Connection Info TLS Info Key URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="discovery-k8s-access-info-kubeconfig-url"></a>
 
 **Discovery K8s Access Info Kubeconfig URL**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info) below.
+
+<a id="discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info"></a>
+
+**Discovery K8s Access Info Kubeconfig URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="discovery-k8s-access-info-kubeconfig-url-clear-secret-info"></a>
+
+**Discovery K8s Access Info Kubeconfig URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="discovery-k8s-namespace-mapping"></a>
 

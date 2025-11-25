@@ -193,7 +193,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advertise Custom Advertise Where Advertise On Public**
 
-`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public IP](#advertise-custom-advertise-where-advertise-on-public-public-ip) below.
+
+<a id="advertise-custom-advertise-where-advertise-on-public-public-ip"></a>
+
+**Advertise Custom Advertise Where Advertise On Public Public IP**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="advertise-custom-advertise-where-site"></a>
 
@@ -203,7 +213,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#advertise-custom-advertise-where-site-site) below.
+
+<a id="advertise-custom-advertise-where-site-site"></a>
+
+**Advertise Custom Advertise Where Site Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="advertise-custom-advertise-where-virtual-network"></a>
 
@@ -217,7 +237,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `specific_vip` - (Optional) Specific V4 VIP. Use given IPv4 address as VIP on virtual Network (`String`).
 
-`virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#advertise-custom-advertise-where-virtual-network-virtual-network) below.
+
+<a id="advertise-custom-advertise-where-virtual-network-virtual-network"></a>
+
+**Advertise Custom Advertise Where Virtual Network Virtual Network**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="advertise-custom-advertise-where-virtual-site"></a>
 
@@ -225,7 +255,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-virtual-site-virtual-site) below.
+
+<a id="advertise-custom-advertise-where-virtual-site-virtual-site"></a>
+
+**Advertise Custom Advertise Where Virtual Site Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="advertise-custom-advertise-where-virtual-site-with-vip"></a>
 
@@ -235,15 +275,45 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks. Possible values are `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`, `SITE_NETWORK_SPECIFIED_VIP_INSIDE`. Defaults to `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE` (`String`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-virtual-site-with-vip-virtual-site) below.
+
+<a id="advertise-custom-advertise-where-virtual-site-with-vip-virtual-site"></a>
+
+**Advertise Custom Advertise Where Virtual Site With VIP Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="advertise-custom-advertise-where-vk8s-service"></a>
 
 **Advertise Custom Advertise Where Vk8s Service**
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#advertise-custom-advertise-where-vk8s-service-site) below.
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-vk8s-service-virtual-site) below.
+
+<a id="advertise-custom-advertise-where-vk8s-service-site"></a>
+
+**Advertise Custom Advertise Where Vk8s Service Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
+
+**Advertise Custom Advertise Where Vk8s Service Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="advertise-on-public"></a>
 
@@ -341,7 +411,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **TLS TCP TLS Cert Params TLS Config**
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#tls-tcp-tls-cert-params-tls-config-custom-security) below.
 
 `default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -349,23 +419,59 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="tls-tcp-tls-cert-params-tls-config-custom-security"></a>
+
+**TLS TCP TLS Cert Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
 <a id="tls-tcp-tls-cert-params-use-mtls"></a>
 
 **TLS TCP TLS Cert Params Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#tls-tcp-tls-cert-params-use-mtls-crl) below.
 
 `no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#tls-tcp-tls-cert-params-use-mtls-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#tls-tcp-tls-cert-params-use-mtls-xfcc-options) below.
+
+<a id="tls-tcp-tls-cert-params-use-mtls-crl"></a>
+
+**TLS TCP TLS Cert Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="tls-tcp-tls-cert-params-use-mtls-trusted-ca"></a>
+
+**TLS TCP TLS Cert Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="tls-tcp-tls-cert-params-use-mtls-xfcc-options"></a>
+
+**TLS TCP TLS Cert Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="tls-tcp-tls-parameters"></a>
 
@@ -385,21 +491,53 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#tls-tcp-tls-parameters-tls-certificates-custom-hash-algorithms) below.
 
 `description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#tls-tcp-tls-parameters-tls-certificates-private-key) below.
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="tls-tcp-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
+
+**TLS TCP TLS Parameters TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="tls-tcp-tls-parameters-tls-certificates-private-key"></a>
+
+**TLS TCP TLS Parameters TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#tls-tcp-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#tls-tcp-tls-parameters-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="tls-tcp-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**TLS TCP TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="tls-tcp-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
+
+**TLS TCP TLS Parameters TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="tls-tcp-tls-parameters-tls-config"></a>
 
 **TLS TCP TLS Parameters TLS Config**
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#tls-tcp-tls-parameters-tls-config-custom-security) below.
 
 `default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -407,23 +545,59 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="tls-tcp-tls-parameters-tls-config-custom-security"></a>
+
+**TLS TCP TLS Parameters TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
 <a id="tls-tcp-tls-parameters-use-mtls"></a>
 
 **TLS TCP TLS Parameters Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#tls-tcp-tls-parameters-use-mtls-crl) below.
 
 `no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#tls-tcp-tls-parameters-use-mtls-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#tls-tcp-tls-parameters-use-mtls-xfcc-options) below.
+
+<a id="tls-tcp-tls-parameters-use-mtls-crl"></a>
+
+**TLS TCP TLS Parameters Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="tls-tcp-tls-parameters-use-mtls-trusted-ca"></a>
+
+**TLS TCP TLS Parameters Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="tls-tcp-tls-parameters-use-mtls-xfcc-options"></a>
+
+**TLS TCP TLS Parameters Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="tls-tcp-auto-cert"></a>
 
@@ -499,7 +673,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **TLS TCP Auto Cert Use mTLS Xfcc Options**
 
-`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`List`).
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 ## Import
 

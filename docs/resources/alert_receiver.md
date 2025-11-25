@@ -236,21 +236,87 @@ In addition to all arguments above, the following attributes are exported:
 
 **Webhook HTTP Config Auth Token**
 
-`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#webhook-http-config-auth-token-token) below.
+
+<a id="webhook-http-config-auth-token-token"></a>
+
+**Webhook HTTP Config Auth Token Token**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#webhook-http-config-auth-token-token-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#webhook-http-config-auth-token-token-clear-secret-info) below.
+
+<a id="webhook-http-config-auth-token-token-blindfold-secret-info"></a>
+
+**Webhook HTTP Config Auth Token Token Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="webhook-http-config-auth-token-token-clear-secret-info"></a>
+
+**Webhook HTTP Config Auth Token Token Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="webhook-http-config-basic-auth"></a>
 
 **Webhook HTTP Config Basic Auth**
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#webhook-http-config-basic-auth-password) below.
 
 `user_name` - (Optional) User Name. HTTP Basic Auth User Name (`String`).
+
+<a id="webhook-http-config-basic-auth-password"></a>
+
+**Webhook HTTP Config Basic Auth Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#webhook-http-config-basic-auth-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#webhook-http-config-basic-auth-password-clear-secret-info) below.
+
+<a id="webhook-http-config-basic-auth-password-blindfold-secret-info"></a>
+
+**Webhook HTTP Config Basic Auth Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="webhook-http-config-basic-auth-password-clear-secret-info"></a>
+
+**Webhook HTTP Config Basic Auth Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="webhook-http-config-client-cert-obj"></a>
 
 **Webhook HTTP Config Client Cert Obj**
 
-`use_tls_obj` - (Optional) Certificate Object. Reference to client certificate object (`Block`).
+`use_tls_obj` - (Optional) Certificate Object. Reference to client certificate object. See [Use TLS Obj](#webhook-http-config-client-cert-obj-use-tls-obj) below.
+
+<a id="webhook-http-config-client-cert-obj-use-tls-obj"></a>
+
+**Webhook HTTP Config Client Cert Obj Use TLS Obj**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="webhook-http-config-use-tls"></a>
 
@@ -264,9 +330,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
-`use_server_verification` - (Optional) TLS Validation Context for Servers. Upstream TLS Validation Context (`Block`).
+`use_server_verification` - (Optional) TLS Validation Context for Servers. Upstream TLS Validation Context. See [Use Server Verification](#webhook-http-config-use-tls-use-server-verification) below.
 
 `volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="webhook-http-config-use-tls-use-server-verification"></a>
+
+**Webhook HTTP Config Use TLS Use Server Verification**
+
+`ca_cert_obj` - (Optional) CA Certificate Object. Configuration for CA certificate. See [CA Cert Obj](#webhook-http-config-use-tls-use-server-verification-ca-cert-obj) below.
+
+<a id="webhook-http-config-use-tls-use-server-verification-ca-cert-obj"></a>
+
+**Webhook HTTP Config Use TLS Use Server Verification CA Cert Obj**
+
+`trusted_ca` - (Optional) Certificate Object. Reference to client certificate object. See [Trusted CA](#webhook-http-config-use-tls-use-server-verification-ca-cert-obj-trusted-ca) below.
+
+<a id="webhook-http-config-use-tls-use-server-verification-ca-cert-obj-trusted-ca"></a>
+
+**Webhook HTTP Config Use TLS Use Server Verification CA Cert Obj Trusted CA**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="webhook-url"></a>
 

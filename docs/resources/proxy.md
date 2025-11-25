@@ -69,7 +69,7 @@ resource "f5xc_proxy" "example" {
 
 `dynamic_proxy` - (Optional) DynamicProxyType. See [Dynamic Proxy](#dynamic-proxy) below for details.
 
-`http_proxy` - (Optional) HTTP Connect Proxy. Parameters for HTTP Connect Proxy. See [HTTP Proxy](#http-proxy) below for details.
+`http_proxy` - (Optional) HTTP Connect Proxy. Parameters for HTTP Connect Proxy (`Block`).
 
 > **Note:** One of the arguments from this list "no_interception, tls_intercept" must be set.
 
@@ -135,9 +135,9 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dynamic Proxy HTTP Proxy More Option**
 
-`buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence (`Block`).
+`buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#dynamic-proxy-http-proxy-more-option-buffer-policy) below.
 
-`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/JSON, application/xhtml+XML, image/svg+XML, text/CSS, text/HTML, text/plain, text/XML. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen (`Block`).
+`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/JSON, application/xhtml+XML, image/svg+XML, text/CSS, text/HTML, text/plain, text/XML. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen. See [Compression Params](#dynamic-proxy-http-proxy-more-option-compression-params) below.
 
 `custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code and response code class matches for a request (`Block`).
 
@@ -151,21 +151,231 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_request_header_size` - (Optional) Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question (`Number`).
 
-`request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied (`Block`).
+`request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied. See [Request Cookies To Add](#dynamic-proxy-http-proxy-more-option-request-cookies-to-add) below.
 
 `request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream (`List`).
 
-`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied (`Block`).
+`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied. See [Request Headers To Add](#dynamic-proxy-http-proxy-more-option-request-headers-to-add) below.
 
 `request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
 
-`response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied (`Block`).
+`response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied. See [Response Cookies To Add](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add) below.
 
 `response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed (`List`).
 
-`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied (`Block`).
+`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied. See [Response Headers To Add](#dynamic-proxy-http-proxy-more-option-response-headers-to-add) below.
 
 `response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
+
+<a id="dynamic-proxy-http-proxy-more-option-buffer-policy"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Buffer Policy**
+
+`disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
+
+`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
+
+<a id="dynamic-proxy-http-proxy-more-option-compression-params"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Compression Params**
+
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
+
+`content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML' (`List`).
+
+`disable_on_etag_header` - (Optional) Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed (`Bool`).
+
+`remove_accept_encoding_header` - (Optional) Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter (`Bool`).
+
+<a id="dynamic-proxy-http-proxy-more-option-request-cookies-to-add"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Request Cookies To Add**
+
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value) below.
+
+`value` - (Optional) Value. Value of the Cookie header (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info) below.
+
+<a id="dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-request-headers-to-add"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Request Headers To Add**
+
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+
+`name` - (Optional) Name. Name of the HTTP header (`String`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value) below.
+
+`value` - (Optional) Value. Value of the HTTP header (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Response Cookies To Add**
+
+`add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
+
+`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
+
+`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`add_path` - (Optional) Add path. Add path attribute (`String`).
+
+`add_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
+
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+
+`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value) below.
+
+`value` - (Optional) Value. Value of the Cookie header (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info) below.
+
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-response-headers-to-add"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Response Headers To Add**
+
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+
+`name` - (Optional) Name. Name of the HTTP header (`String`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value) below.
+
+`value` - (Optional) Value. Value of the HTTP header (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info"></a>
+
+**Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="dynamic-proxy-https-proxy"></a>
 
@@ -179,9 +389,9 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dynamic Proxy HTTPS Proxy More Option**
 
-`buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence (`Block`).
+`buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#dynamic-proxy-https-proxy-more-option-buffer-policy) below.
 
-`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/JSON, application/xhtml+XML, image/svg+XML, text/CSS, text/HTML, text/plain, text/XML. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen (`Block`).
+`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/JSON, application/xhtml+XML, image/svg+XML, text/CSS, text/HTML, text/plain, text/XML. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen. See [Compression Params](#dynamic-proxy-https-proxy-more-option-compression-params) below.
 
 `custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code and response code class matches for a request (`Block`).
 
@@ -195,21 +405,231 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_request_header_size` - (Optional) Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question (`Number`).
 
-`request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied (`Block`).
+`request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied. See [Request Cookies To Add](#dynamic-proxy-https-proxy-more-option-request-cookies-to-add) below.
 
 `request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream (`List`).
 
-`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied (`Block`).
+`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied. See [Request Headers To Add](#dynamic-proxy-https-proxy-more-option-request-headers-to-add) below.
 
 `request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
 
-`response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied (`Block`).
+`response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied. See [Response Cookies To Add](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add) below.
 
 `response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed (`List`).
 
-`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied (`Block`).
+`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied. See [Response Headers To Add](#dynamic-proxy-https-proxy-more-option-response-headers-to-add) below.
 
 `response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
+
+<a id="dynamic-proxy-https-proxy-more-option-buffer-policy"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Buffer Policy**
+
+`disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
+
+`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
+
+<a id="dynamic-proxy-https-proxy-more-option-compression-params"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Compression Params**
+
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
+
+`content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML' (`List`).
+
+`disable_on_etag_header` - (Optional) Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed (`Bool`).
+
+`remove_accept_encoding_header` - (Optional) Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter (`Bool`).
+
+<a id="dynamic-proxy-https-proxy-more-option-request-cookies-to-add"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add**
+
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value) below.
+
+`value` - (Optional) Value. Value of the Cookie header (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info) below.
+
+<a id="dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-request-headers-to-add"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Request Headers To Add**
+
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+
+`name` - (Optional) Name. Name of the HTTP header (`String`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value) below.
+
+`value` - (Optional) Value. Value of the HTTP header (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add**
+
+`add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
+
+`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
+
+`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`add_path` - (Optional) Add path. Add path attribute (`String`).
+
+`add_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
+
+`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+
+`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value) below.
+
+`value` - (Optional) Value. Value of the Cookie header (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info) below.
+
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-response-headers-to-add"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Response Headers To Add**
+
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+
+`name` - (Optional) Name. Name of the HTTP header (`String`).
+
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value) below.
+
+`value` - (Optional) Value. Value of the HTTP header (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="dynamic-proxy-https-proxy-tls-params"></a>
 
@@ -217,11 +637,125 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms (`Block`).
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#dynamic-proxy-https-proxy-tls-params-tls-certificates) below.
 
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters (`Block`).
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#dynamic-proxy-https-proxy-tls-params-tls-config) below.
 
-`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections (`Block`).
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#dynamic-proxy-https-proxy-tls-params-use-mtls) below.
+
+<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key-clear-secret-info"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="dynamic-proxy-https-proxy-tls-params-tls-config"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="dynamic-proxy-https-proxy-tls-params-tls-config-custom-security"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="dynamic-proxy-https-proxy-tls-params-use-mtls"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#dynamic-proxy-https-proxy-tls-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options) below.
+
+<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-crl"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options"></a>
+
+**Dynamic Proxy HTTPS Proxy TLS Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="dynamic-proxy-sni-proxy"></a>
 
@@ -301,9 +835,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#http-proxy-more-option-request-cookies-to-add-secret-value) below.
 
 `value` - (Optional) Value. Value of the Cookie header (`String`).
+
+<a id="http-proxy-more-option-request-cookies-to-add-secret-value"></a>
+
+**HTTP Proxy More Option Request Cookies To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#http-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#http-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info) below.
+
+<a id="http-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
+
+**HTTP Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="http-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info"></a>
+
+**HTTP Proxy More Option Request Cookies To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="http-proxy-more-option-request-headers-to-add"></a>
 
@@ -313,9 +873,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#http-proxy-more-option-request-headers-to-add-secret-value) below.
 
 `value` - (Optional) Value. Value of the HTTP header (`String`).
+
+<a id="http-proxy-more-option-request-headers-to-add-secret-value"></a>
+
+**HTTP Proxy More Option Request Headers To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#http-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#http-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="http-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**HTTP Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="http-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info"></a>
+
+**HTTP Proxy More Option Request Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="http-proxy-more-option-response-cookies-to-add"></a>
 
@@ -363,9 +949,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#http-proxy-more-option-response-cookies-to-add-secret-value) below.
 
 `value` - (Optional) Value. Value of the Cookie header (`String`).
+
+<a id="http-proxy-more-option-response-cookies-to-add-secret-value"></a>
+
+**HTTP Proxy More Option Response Cookies To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#http-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#http-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info) below.
+
+<a id="http-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
+
+**HTTP Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="http-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info"></a>
+
+**HTTP Proxy More Option Response Cookies To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="http-proxy-more-option-response-headers-to-add"></a>
 
@@ -375,9 +987,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#http-proxy-more-option-response-headers-to-add-secret-value) below.
 
 `value` - (Optional) Value. Value of the HTTP header (`String`).
+
+<a id="http-proxy-more-option-response-headers-to-add-secret-value"></a>
+
+**HTTP Proxy More Option Response Headers To Add Secret Value**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#http-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#http-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="http-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**HTTP Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="http-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info"></a>
+
+**HTTP Proxy More Option Response Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="site-virtual-sites"></a>
 
@@ -405,7 +1043,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#site-virtual-sites-advertise-where-site-site) below.
+
+<a id="site-virtual-sites-advertise-where-site-site"></a>
+
+**Site Virtual Sites Advertise Where Site Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="site-virtual-sites-advertise-where-virtual-site"></a>
 
@@ -413,7 +1061,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#site-virtual-sites-advertise-where-virtual-site-virtual-site) below.
+
+<a id="site-virtual-sites-advertise-where-virtual-site-virtual-site"></a>
+
+**Site Virtual Sites Advertise Where Virtual Site Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="timeouts"></a>
 
@@ -463,15 +1121,33 @@ In addition to all arguments above, the following attributes are exported:
 
 **TLS Intercept Custom Certificate Custom Hash Algorithms**
 
-`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used (`List`).
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
 
 <a id="tls-intercept-custom-certificate-private-key"></a>
 
 **TLS Intercept Custom Certificate Private Key**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#tls-intercept-custom-certificate-private-key-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#tls-intercept-custom-certificate-private-key-clear-secret-info) below.
+
+<a id="tls-intercept-custom-certificate-private-key-blindfold-secret-info"></a>
+
+**TLS Intercept Custom Certificate Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="tls-intercept-custom-certificate-private-key-clear-secret-info"></a>
+
+**TLS Intercept Custom Certificate Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="tls-intercept-policy"></a>
 
@@ -485,9 +1161,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`domain_match` - (Optional) Domains. Domains names (`Block`).
+`domain_match` - (Optional) Domains. Domains names. See [Domain Match](#tls-intercept-policy-interception-rules-domain-match) below.
 
 `enable_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="tls-intercept-policy-interception-rules-domain-match"></a>
+
+**TLS Intercept Policy Interception Rules Domain Match**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 ## Import
 

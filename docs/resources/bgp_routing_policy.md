@@ -126,7 +126,19 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules Match IP Prefixes**
 
-`prefixes` - (Optional) Prefix list. List of IP prefix (`Block`).
+`prefixes` - (Optional) Prefix list. List of IP prefix. See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
+
+<a id="rules-match-ip-prefixes-prefixes"></a>
+
+**Rules Match IP Prefixes Prefixes**
+
+`equal_or_longer_than` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`exact_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_prefixes` - (Optional) IP Prefix. IP prefix to match on BGP route (`String`).
+
+`longer_than` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="timeouts"></a>
 

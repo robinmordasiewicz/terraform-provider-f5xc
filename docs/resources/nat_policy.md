@@ -110,9 +110,35 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules Action Dynamic**
 
-`elastic_ips` - (Optional) Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object (`Block`).
+`elastic_ips` - (Optional) Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object. See [Elastic Ips](#rules-action-dynamic-elastic-ips) below.
 
-`pools` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
+`pools` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Pools](#rules-action-dynamic-pools) below.
+
+<a id="rules-action-dynamic-elastic-ips"></a>
+
+**Rules Action Dynamic Elastic Ips**
+
+`refs` - (Optional) Cloud Elastic IP Reference List. Reference to one or more cloud elastic IP objects. See [Refs](#rules-action-dynamic-elastic-ips-refs) below.
+
+<a id="rules-action-dynamic-elastic-ips-refs"></a>
+
+**Rules Action Dynamic Elastic Ips Refs**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="rules-action-dynamic-pools"></a>
+
+**Rules Action Dynamic Pools**
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="rules-cloud-connect"></a>
 
@@ -174,7 +200,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules Criteria Segment**
 
-`refs` - (Optional) Segment. Reference to Segment Object (`Block`).
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#rules-criteria-segment-refs) below.
+
+<a id="rules-criteria-segment-refs"></a>
+
+**Rules Criteria Segment Refs**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="rules-criteria-source-port"></a>
 
@@ -190,23 +230,77 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules Criteria TCP**
 
-`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#rules-criteria-tcp-destination-port) below.
 
-`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#rules-criteria-tcp-source-port) below.
+
+<a id="rules-criteria-tcp-destination-port"></a>
+
+**Rules Criteria TCP Destination Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="rules-criteria-tcp-source-port"></a>
+
+**Rules Criteria TCP Source Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="rules-criteria-udp"></a>
 
 **Rules Criteria UDP**
 
-`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#rules-criteria-udp-destination-port) below.
 
-`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#rules-criteria-udp-source-port) below.
+
+<a id="rules-criteria-udp-destination-port"></a>
+
+**Rules Criteria UDP Destination Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="rules-criteria-udp-source-port"></a>
+
+**Rules Criteria UDP Source Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="rules-criteria-virtual-network"></a>
 
 **Rules Criteria Virtual Network**
 
-`refs` - (Optional) Virtual Network Reference. Reference to virtual network (`Block`).
+`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#rules-criteria-virtual-network-refs) below.
+
+<a id="rules-criteria-virtual-network-refs"></a>
+
+**Rules Criteria Virtual Network Refs**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="rules-network-interface"></a>
 

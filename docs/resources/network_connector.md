@@ -122,21 +122,73 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) below.
 
 `description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) below.
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms"></a>
+
+**Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key"></a>
+
+**Enable Forward Proxy TLS Intercept Custom Certificate Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info) below.
+
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info"></a>
+
+**Enable Forward Proxy TLS Intercept Custom Certificate Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info"></a>
+
+**Enable Forward Proxy TLS Intercept Custom Certificate Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="enable-forward-proxy-tls-intercept-policy"></a>
 
 **Enable Forward Proxy TLS Intercept Policy**
 
-`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception (`Block`).
+`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception. See [Interception Rules](#enable-forward-proxy-tls-intercept-policy-interception-rules) below.
+
+<a id="enable-forward-proxy-tls-intercept-policy-interception-rules"></a>
+
+**Enable Forward Proxy TLS Intercept Policy Interception Rules**
+
+`disable_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`domain_match` - (Optional) Domains. Domains names. See [Domain Match](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) below.
+
+`enable_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match"></a>
+
+**Enable Forward Proxy TLS Intercept Policy Interception Rules Domain Match**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 <a id="sli-to-global-dr"></a>
 

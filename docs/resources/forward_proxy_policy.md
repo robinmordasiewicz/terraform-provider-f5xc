@@ -310,7 +310,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List Rules HTTP List**
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections (`Block`).
+`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [HTTP List](#rule-list-rules-http-list-http-list) below.
+
+<a id="rule-list-rules-http-list-http-list"></a>
+
+**Rule List Rules HTTP List HTTP List**
+
+`any_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`exact_value` - (Optional) Exact Values. Exact domain name (`String`).
+
+`path_exact_value` - (Optional) Exact Path. Exact Path to match (`String`).
+
+`path_prefix_value` - (Optional) Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' (`String`).
+
+`path_regex_value` - (Optional) Regex of Path. Regular Expression value for the Path to match (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' (`String`).
 
 <a id="rule-list-rules-ip-prefix-set"></a>
 
@@ -354,13 +372,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List Rules TLS List**
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections (`Block`).
+`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [TLS List](#rule-list-rules-tls-list-tls-list) below.
+
+<a id="rule-list-rules-tls-list-tls-list"></a>
+
+**Rule List Rules TLS List TLS List**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 <a id="rule-list-rules-url-category-list"></a>
 
 **Rule List Rules URL Category List**
 
-`url_categories` - (Optional) URL Categories. List of URL categories to be selected (`List`).
+`url_categories` - (Optional) URL Categories. List of URL categories to be selected. Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`. Defaults to `UNCATEGORIZED` (`List`).
 
 <a id="timeouts"></a>
 

@@ -158,13 +158,29 @@ In addition to all arguments above, the following attributes are exported:
 
 **User Restrictions User Restrictions Allow List**
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s) (`Block`).
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
+
+<a id="user-restrictions-user-restrictions-allow-list-custom-list"></a>
+
+**User Restrictions User Restrictions Allow List Custom List**
+
+`exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
+
+`regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
 
 <a id="user-restrictions-user-restrictions-deny-list"></a>
 
 **User Restrictions User Restrictions Deny List**
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s) (`Block`).
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
+
+<a id="user-restrictions-user-restrictions-deny-list-custom-list"></a>
+
+**User Restrictions User Restrictions Deny List Custom List**
+
+`exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
+
+`regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
 
 ## Import
 

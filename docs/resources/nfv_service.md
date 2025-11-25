@@ -244,7 +244,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#f5-big-ip-aws-service-nodes-mgmt-subnet-subnet-param) below.
+
+<a id="f5-big-ip-aws-service-nodes-mgmt-subnet-subnet-param"></a>
+
+**F5 Big IP AWS Service Nodes Mgmt Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="https-management"></a>
 
@@ -302,21 +308,53 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms) below.
 
 `description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-management-advertise-on-sli-vip-tls-certificates-private-key) below.
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms"></a>
+
+**HTTPS Management Advertise On Sli VIP TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="https-management-advertise-on-sli-vip-tls-certificates-private-key"></a>
+
+**HTTPS Management Advertise On Sli VIP TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#https-management-advertise-on-sli-vip-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#https-management-advertise-on-sli-vip-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="https-management-advertise-on-sli-vip-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**HTTPS Management Advertise On Sli VIP TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="https-management-advertise-on-sli-vip-tls-certificates-private-key-clear-secret-info"></a>
+
+**HTTPS Management Advertise On Sli VIP TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="https-management-advertise-on-sli-vip-tls-config"></a>
 
 **HTTPS Management Advertise On Sli VIP TLS Config**
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-management-advertise-on-sli-vip-tls-config-custom-security) below.
 
 `default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -324,23 +362,59 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="https-management-advertise-on-sli-vip-tls-config-custom-security"></a>
+
+**HTTPS Management Advertise On Sli VIP TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
 <a id="https-management-advertise-on-sli-vip-use-mtls"></a>
 
 **HTTPS Management Advertise On Sli VIP Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-management-advertise-on-sli-vip-use-mtls-crl) below.
 
 `no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-management-advertise-on-sli-vip-use-mtls-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options) below.
+
+<a id="https-management-advertise-on-sli-vip-use-mtls-crl"></a>
+
+**HTTPS Management Advertise On Sli VIP Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-management-advertise-on-sli-vip-use-mtls-trusted-ca"></a>
+
+**HTTPS Management Advertise On Sli VIP Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-options"></a>
+
+**HTTPS Management Advertise On Sli VIP Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="https-management-advertise-on-slo-internet-vip"></a>
 
@@ -360,21 +434,53 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms) below.
 
 `description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-management-advertise-on-slo-internet-vip-tls-certificates-private-key) below.
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms"></a>
+
+**HTTPS Management Advertise On Slo Internet VIP TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-private-key"></a>
+
+**HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#https-management-advertise-on-slo-internet-vip-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#https-management-advertise-on-slo-internet-vip-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-private-key-clear-secret-info"></a>
+
+**HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-config"></a>
 
 **HTTPS Management Advertise On Slo Internet VIP TLS Config**
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security) below.
 
 `default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -382,23 +488,59 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security"></a>
+
+**HTTPS Management Advertise On Slo Internet VIP TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls"></a>
 
 **HTTPS Management Advertise On Slo Internet VIP Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-management-advertise-on-slo-internet-vip-use-mtls-crl) below.
 
 `no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options) below.
+
+<a id="https-management-advertise-on-slo-internet-vip-use-mtls-crl"></a>
+
+**HTTPS Management Advertise On Slo Internet VIP Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca"></a>
+
+**HTTPS Management Advertise On Slo Internet VIP Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options"></a>
+
+**HTTPS Management Advertise On Slo Internet VIP Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="https-management-advertise-on-slo-sli"></a>
 
@@ -418,21 +560,53 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms) below.
 
 `description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-management-advertise-on-slo-sli-tls-certificates-private-key) below.
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms"></a>
+
+**HTTPS Management Advertise On Slo Sli TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="https-management-advertise-on-slo-sli-tls-certificates-private-key"></a>
+
+**HTTPS Management Advertise On Slo Sli TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#https-management-advertise-on-slo-sli-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#https-management-advertise-on-slo-sli-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="https-management-advertise-on-slo-sli-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**HTTPS Management Advertise On Slo Sli TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="https-management-advertise-on-slo-sli-tls-certificates-private-key-clear-secret-info"></a>
+
+**HTTPS Management Advertise On Slo Sli TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="https-management-advertise-on-slo-sli-tls-config"></a>
 
 **HTTPS Management Advertise On Slo Sli TLS Config**
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-management-advertise-on-slo-sli-tls-config-custom-security) below.
 
 `default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -440,23 +614,59 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="https-management-advertise-on-slo-sli-tls-config-custom-security"></a>
+
+**HTTPS Management Advertise On Slo Sli TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
 <a id="https-management-advertise-on-slo-sli-use-mtls"></a>
 
 **HTTPS Management Advertise On Slo Sli Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-management-advertise-on-slo-sli-use-mtls-crl) below.
 
 `no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-management-advertise-on-slo-sli-use-mtls-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options) below.
+
+<a id="https-management-advertise-on-slo-sli-use-mtls-crl"></a>
+
+**HTTPS Management Advertise On Slo Sli Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-management-advertise-on-slo-sli-use-mtls-trusted-ca"></a>
+
+**HTTPS Management Advertise On Slo Sli Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-options"></a>
+
+**HTTPS Management Advertise On Slo Sli Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="https-management-advertise-on-slo-vip"></a>
 
@@ -476,21 +686,53 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms) below.
 
 `description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-management-advertise-on-slo-vip-tls-certificates-private-key) below.
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms"></a>
+
+**HTTPS Management Advertise On Slo VIP TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="https-management-advertise-on-slo-vip-tls-certificates-private-key"></a>
+
+**HTTPS Management Advertise On Slo VIP TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#https-management-advertise-on-slo-vip-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#https-management-advertise-on-slo-vip-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="https-management-advertise-on-slo-vip-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**HTTPS Management Advertise On Slo VIP TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="https-management-advertise-on-slo-vip-tls-certificates-private-key-clear-secret-info"></a>
+
+**HTTPS Management Advertise On Slo VIP TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="https-management-advertise-on-slo-vip-tls-config"></a>
 
 **HTTPS Management Advertise On Slo VIP TLS Config**
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-management-advertise-on-slo-vip-tls-config-custom-security) below.
 
 `default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -498,23 +740,59 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="https-management-advertise-on-slo-vip-tls-config-custom-security"></a>
+
+**HTTPS Management Advertise On Slo VIP TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
 <a id="https-management-advertise-on-slo-vip-use-mtls"></a>
 
 **HTTPS Management Advertise On Slo VIP Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-management-advertise-on-slo-vip-use-mtls-crl) below.
 
 `no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-management-advertise-on-slo-vip-use-mtls-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
 `xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options) below.
+
+<a id="https-management-advertise-on-slo-vip-use-mtls-crl"></a>
+
+**HTTPS Management Advertise On Slo VIP Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-management-advertise-on-slo-vip-use-mtls-trusted-ca"></a>
+
+**HTTPS Management Advertise On Slo VIP Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-options"></a>
+
+**HTTPS Management Advertise On Slo VIP Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
 
 <a id="palo-alto-fw-service"></a>
 
@@ -556,17 +834,61 @@ In addition to all arguments above, the following attributes are exported:
 
 **Palo Alto Fw Service Auto Setup Admin Password**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#palo-alto-fw-service-auto-setup-admin-password-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#palo-alto-fw-service-auto-setup-admin-password-clear-secret-info) below.
+
+<a id="palo-alto-fw-service-auto-setup-admin-password-blindfold-secret-info"></a>
+
+**Palo Alto Fw Service Auto Setup Admin Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="palo-alto-fw-service-auto-setup-admin-password-clear-secret-info"></a>
+
+**Palo Alto Fw Service Auto Setup Admin Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="palo-alto-fw-service-auto-setup-manual-ssh-keys"></a>
 
 **Palo Alto Fw Service Auto Setup Manual SSH Keys**
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key) below.
 
 `public_key` - (Optional) Public SSH key. Authorized Public SSH key which will be programmed on the node (`String`).
+
+<a id="palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key"></a>
+
+**Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key-clear-secret-info) below.
+
+<a id="palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key-blindfold-secret-info"></a>
+
+**Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key-clear-secret-info"></a>
+
+**Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="palo-alto-fw-service-aws-tgw-site"></a>
 
@@ -594,9 +916,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **Palo Alto Fw Service Panorama Server Authorization Key**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#palo-alto-fw-service-panorama-server-authorization-key-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#palo-alto-fw-service-panorama-server-authorization-key-clear-secret-info) below.
+
+<a id="palo-alto-fw-service-panorama-server-authorization-key-blindfold-secret-info"></a>
+
+**Palo Alto Fw Service Panorama Server Authorization Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="palo-alto-fw-service-panorama-server-authorization-key-clear-secret-info"></a>
+
+**Palo Alto Fw Service Panorama Server Authorization Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="palo-alto-fw-service-service-nodes"></a>
 
@@ -610,11 +950,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `aws_az_name` - (Optional) AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites (`String`).
 
-`mgmt_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet (`Block`).
+`mgmt_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Mgmt Subnet](#palo-alto-fw-service-service-nodes-nodes-mgmt-subnet) below.
 
 `node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service (`String`).
 
 `reserved_mgmt_subnet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="palo-alto-fw-service-service-nodes-nodes-mgmt-subnet"></a>
+
+**Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet**
+
+`existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#palo-alto-fw-service-service-nodes-nodes-mgmt-subnet-subnet-param) below.
+
+<a id="palo-alto-fw-service-service-nodes-nodes-mgmt-subnet-subnet-param"></a>
+
+**Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="timeouts"></a>
 

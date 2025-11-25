@@ -134,7 +134,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `javascript_url` - (Optional) URL. Please enter the full URL (include domain and path), or relative path (`String`).
 
-`tag_attributes` - (Optional) Tag Attributes. Add the tag attributes you want to include in your Javascript tag (`Block`).
+`tag_attributes` - (Optional) Tag Attributes. Add the tag attributes you want to include in your Javascript tag. See [Tag Attributes](#routes-bot-defense-javascript-injection-javascript-tags-tag-attributes) below.
+
+<a id="routes-bot-defense-javascript-injection-javascript-tags-tag-attributes"></a>
+
+**Routes Bot Defense Javascript Injection Javascript Tags Tag Attributes**
+
+`javascript_tag` - (Optional) Tag Attribute Name. Select from one of the predefined tag attributes. Possible values are `JS_ATTR_ID`, `JS_ATTR_CID`, `JS_ATTR_CN`, `JS_ATTR_API_DOMAIN`, `JS_ATTR_API_URL`, `JS_ATTR_API_PATH`, `JS_ATTR_ASYNC`, `JS_ATTR_DEFER`. Defaults to `JS_ATTR_ID` (`String`).
+
+`tag_value` - (Optional) Value. Add the tag attribute value (`String`).
 
 <a id="routes-match"></a>
 
@@ -210,9 +218,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Request Cookies To Add Secret Value**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#routes-request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#routes-request-cookies-to-add-secret-value-clear-secret-info) below.
+
+<a id="routes-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
+
+**Routes Request Cookies To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="routes-request-cookies-to-add-secret-value-clear-secret-info"></a>
+
+**Routes Request Cookies To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="routes-request-headers-to-add"></a>
 
@@ -230,9 +256,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Request Headers To Add Secret Value**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#routes-request-headers-to-add-secret-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#routes-request-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="routes-request-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**Routes Request Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="routes-request-headers-to-add-secret-value-clear-secret-info"></a>
+
+**Routes Request Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="routes-response-cookies-to-add"></a>
 
@@ -288,9 +332,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Response Cookies To Add Secret Value**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#routes-response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#routes-response-cookies-to-add-secret-value-clear-secret-info) below.
+
+<a id="routes-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
+
+**Routes Response Cookies To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="routes-response-cookies-to-add-secret-value-clear-secret-info"></a>
+
+**Routes Response Cookies To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="routes-response-headers-to-add"></a>
 
@@ -308,9 +370,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Response Headers To Add Secret Value**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#routes-response-headers-to-add-secret-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#routes-response-headers-to-add-secret-value-clear-secret-info) below.
+
+<a id="routes-response-headers-to-add-secret-value-blindfold-secret-info"></a>
+
+**Routes Response Headers To Add Secret Value Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="routes-response-headers-to-add-secret-value-clear-secret-info"></a>
+
+**Routes Response Headers To Add Secret Value Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="routes-route-destination"></a>
 
@@ -388,15 +468,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`custom_domain_list` - (Optional) Domain name list. List of domain names used for Host header matching (`Block`).
+`custom_domain_list` - (Optional) Domain name list. List of domain names used for Host header matching. See [Custom Domain List](#routes-route-destination-csrf-policy-custom-domain-list) below.
 
 `disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="routes-route-destination-csrf-policy-custom-domain-list"></a>
+
+**Routes Route Destination CSRF Policy Custom Domain List**
+
+`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form (`List`).
 
 <a id="routes-route-destination-destinations"></a>
 
 **Routes Route Destination Destinations**
 
-`cluster` - (Optional) Cluster. Indicates the upstream cluster to which the request should be sent. If the cluster does not exist ServiceUnavailable response will be sent (`Block`).
+`cluster` - (Optional) Cluster. Indicates the upstream cluster to which the request should be sent. If the cluster does not exist ServiceUnavailable response will be sent. See [Cluster](#routes-route-destination-destinations-cluster) below.
 
 `endpoint_subsets` - (Optional) Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoints which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured endpoint and discovered service, labels from discovered service takes precedence. List of key-value pairs that will be used as matching metadata. Only those endpoints of upstream cluster which match this metadata will be selected for load balancing (`Block`).
 
@@ -404,11 +490,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `weight` - (Optional) Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 weight: 10 This indicates that out of every 60 requests, 10 goes to cluster-3, 30 to cluster-2 and 20 to cluster-1 When single destination is configured, weight is ignored. All the requests are sent to the cluster specified in the destination (`Number`).
 
+<a id="routes-route-destination-destinations-cluster"></a>
+
+**Routes Route Destination Destinations Cluster**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
 <a id="routes-route-destination-hash-policy"></a>
 
 **Routes Route Destination Hash Policy**
 
-`cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously (`Block`).
+`cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously. See [Cookie](#routes-route-destination-hash-policy-cookie) below.
 
 `header_name` - (Optional) Header Name. The name or key of the request header that will be used to obtain the hash key (`String`).
 
@@ -416,13 +516,61 @@ In addition to all arguments above, the following attributes are exported:
 
 `terminal` - (Optional) Terminal. Specify if its a terminal policy (`Bool`).
 
+<a id="routes-route-destination-hash-policy-cookie"></a>
+
+**Routes Route Destination Hash Policy Cookie**
+
+`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`add_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`name` - (Optional) Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced (`String`).
+
+`path` - (Optional) Path. The name of the path for the cookie. If no path is specified here, no path will be set for the cookie (`String`).
+
+`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ttl` - (Optional) TTL. If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds (`Number`).
+
 <a id="routes-route-destination-mirror-policy"></a>
 
 **Routes Route Destination Mirror Policy**
 
-`cluster` - (Optional) Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present (`Block`).
+`cluster` - (Optional) Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present. See [Cluster](#routes-route-destination-mirror-policy-cluster) below.
 
-`percent` - (Optional) Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests (`Block`).
+`percent` - (Optional) Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests. See [Percent](#routes-route-destination-mirror-policy-percent) below.
+
+<a id="routes-route-destination-mirror-policy-cluster"></a>
+
+**Routes Route Destination Mirror Policy Cluster**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="routes-route-destination-mirror-policy-percent"></a>
+
+**Routes Route Destination Mirror Policy Percent**
+
+`denominator` - (Optional) Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator. Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`. Defaults to `HUNDRED` (`String`).
+
+`numerator` - (Optional) Numerator. sampled parts per denominator. If denominator was 10000, then value of 5 will be 5 in 10000 (`Number`).
 
 <a id="routes-route-destination-query-params"></a>
 
@@ -446,7 +594,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Route Destination Retry Policy**
 
-`back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off (`Block`).
+`back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#routes-route-destination-retry-policy-back-off) below.
 
 `num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry (`Number`).
 
@@ -455,6 +603,14 @@ In addition to all arguments above, the following attributes are exported:
 `retriable_status_codes` - (Optional) Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on (`List`).
 
 `retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.) (`List`).
+
+<a id="routes-route-destination-retry-policy-back-off"></a>
+
+**Routes Route Destination Retry Policy Back Off**
+
+`base_interval` - (Optional) Base Retry Interval. Specifies the base interval between retries in milliseconds (`Number`).
+
+`max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The default is 10 times the base_interval (`Number`).
 
 <a id="routes-route-destination-spdy-config"></a>
 
@@ -526,7 +682,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes WAF Type App Firewall**
 
-`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object (`Block`).
+`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object. See [App Firewall](#routes-waf-type-app-firewall-app-firewall) below.
+
+<a id="routes-waf-type-app-firewall-app-firewall"></a>
+
+**Routes WAF Type App Firewall App Firewall**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="timeouts"></a>
 

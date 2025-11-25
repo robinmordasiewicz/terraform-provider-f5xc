@@ -112,13 +112,13 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol Policer Protocol ICMP**
 
-`type` - (Optional) ICMP type. ICMP message type to be matched in packet (`List`).
+`type` - (Optional) ICMP type. ICMP message type to be matched in packet. Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`. Defaults to `ECHO_REPLY` (`List`).
 
 <a id="protocol-policer-protocol-tcp"></a>
 
 **Protocol Policer Protocol TCP**
 
-`flags` - (Optional) TCP flags. TCP flag to be matched in a TCP packet (`List`).
+`flags` - (Optional) TCP flags. TCP flag to be matched in a TCP packet. Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`. Defaults to `FIN` (`List`).
 
 <a id="timeouts"></a>
 

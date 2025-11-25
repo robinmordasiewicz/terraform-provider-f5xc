@@ -195,7 +195,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Peers External Interface List**
 
-`interfaces` - (Optional) Interface List. List of network interfaces (`Block`).
+`interfaces` - (Optional) Interface List. List of network interfaces. See [Interfaces](#peers-external-interface-list-interfaces) below.
+
+<a id="peers-external-interface-list-interfaces"></a>
+
+**Peers External Interface List Interfaces**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="peers-metadata"></a>
 
@@ -219,11 +229,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `inbound` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`node_name` - (Optional) Nodes. List of nodes on which BGP routing policy has to be applied (`Block`).
+`node_name` - (Optional) Nodes. List of nodes on which BGP routing policy has to be applied. See [Node Name](#peers-routing-policies-route-policy-node-name) below.
 
-`object_refs` - (Optional) BGP routing policy. Select route policy to apply (`Block`).
+`object_refs` - (Optional) BGP routing policy. Select route policy to apply. See [Object Refs](#peers-routing-policies-route-policy-object-refs) below.
 
 `outbound` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="peers-routing-policies-route-policy-node-name"></a>
+
+**Peers Routing Policies Route Policy Node Name**
+
+`node` - (Optional) Node of choice. Select BGP Session on which policy will be applied (`List`).
+
+<a id="peers-routing-policies-route-policy-object-refs"></a>
+
+**Peers Routing Policies Route Policy Object Refs**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="timeouts"></a>
 

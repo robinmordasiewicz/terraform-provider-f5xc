@@ -82,13 +82,13 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `azure` - (Optional) Azure Provider Type. Azure Provider Type. See [Azure](#azure) below for details.
 
-`baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type. See [Baremetal](#baremetal) below for details.
+`baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type (`Block`).
 
-`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type. See [Equinix](#equinix) below for details.
+`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type (`Block`).
 
-`gcp` - (Optional) GCP Provider Type. GCP Provider Type. See [GCP](#gcp) below for details.
+`gcp` - (Optional) GCP Provider Type. GCP Provider Type (`Block`).
 
-`kvm` - (Optional) KVM Provider Type. KVM Provider Type. See [Kvm](#kvm) below for details.
+`kvm` - (Optional) KVM Provider Type. KVM Provider Type (`Block`).
 
 `nutanix` - (Optional) Nutanix Provider Type. Nutanix Provider Type (`Block`).
 
@@ -102,29 +102,29 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site (`Block`).
 
 > **Note:** One of the arguments from this list "custom_proxy, f5_proxy" must be set.
 
-`custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy. See [Custom Proxy](#custom-proxy) below for details.
+`custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy (`Block`).
 
 `f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "custom_proxy_bypass, no_proxy_bypass" must be set.
 
-`custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy. See [Custom Proxy Bypass](#custom-proxy-bypass) below for details.
+`custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy (`Block`).
 
 `no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group_sli, no_s2s_connectivity_sli" must be set.
 
-`dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Sli](#dc-cluster-group-sli) below for details.
+`dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group_slo, no_s2s_connectivity_slo, site_mesh_group_on_slo" must be set.
 
-`dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Slo](#dc-cluster-group-slo) below for details.
+`dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -142,7 +142,7 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `enable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site. See [DNS NTP Config](#dns-ntp-config) below for details.
+`dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site (`Block`).
 
 `load_balancing` - (Optional) Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality (`Block`).
 
@@ -262,11 +262,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#aws-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="aws-not-managed-node-list-interface-list"></a>
+
+**AWS Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#aws-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#aws-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#aws-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#aws-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#aws-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#aws-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#aws-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="aws-not-managed-node-list-interface-list-bond-interface"></a>
+
+**AWS Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#aws-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="aws-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**AWS Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="aws-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**AWS Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="aws-not-managed-node-list-interface-list-network-option"></a>
+
+**AWS Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="aws-not-managed-node-list-interface-list-static-ip"></a>
+
+**AWS Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="aws-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**AWS Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#aws-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#aws-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="aws-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**AWS Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="aws-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**AWS Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="aws-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**AWS Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 <a id="azure"></a>
 
@@ -286,11 +484,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#azure-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="azure-not-managed-node-list-interface-list"></a>
+
+**Azure Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#azure-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#azure-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#azure-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#azure-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#azure-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#azure-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#azure-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="azure-not-managed-node-list-interface-list-bond-interface"></a>
+
+**Azure Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#azure-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="azure-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**Azure Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="azure-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**Azure Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="azure-not-managed-node-list-interface-list-network-option"></a>
+
+**Azure Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="azure-not-managed-node-list-interface-list-static-ip"></a>
+
+**Azure Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="azure-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**Azure Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#azure-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#azure-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="azure-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**Azure Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="azure-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**Azure Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="azure-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**Azure Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 <a id="baremetal"></a>
 
@@ -310,11 +706,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#baremetal-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="baremetal-not-managed-node-list-interface-list"></a>
+
+**Baremetal Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#baremetal-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#baremetal-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#baremetal-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#baremetal-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#baremetal-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#baremetal-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="baremetal-not-managed-node-list-interface-list-bond-interface"></a>
+
+**Baremetal Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#baremetal-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="baremetal-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**Baremetal Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="baremetal-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**Baremetal Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="baremetal-not-managed-node-list-interface-list-network-option"></a>
+
+**Baremetal Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="baremetal-not-managed-node-list-interface-list-static-ip"></a>
+
+**Baremetal Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="baremetal-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**Baremetal Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#baremetal-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#baremetal-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="baremetal-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**Baremetal Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="baremetal-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**Baremetal Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="baremetal-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**Baremetal Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 <a id="blocked-services"></a>
 
@@ -444,11 +1038,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#equinix-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="equinix-not-managed-node-list-interface-list"></a>
+
+**Equinix Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#equinix-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#equinix-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#equinix-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#equinix-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#equinix-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#equinix-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#equinix-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="equinix-not-managed-node-list-interface-list-bond-interface"></a>
+
+**Equinix Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#equinix-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="equinix-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**Equinix Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="equinix-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**Equinix Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="equinix-not-managed-node-list-interface-list-network-option"></a>
+
+**Equinix Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="equinix-not-managed-node-list-interface-list-static-ip"></a>
+
+**Equinix Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="equinix-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**Equinix Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#equinix-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#equinix-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="equinix-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**Equinix Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="equinix-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**Equinix Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="equinix-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**Equinix Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 <a id="gcp"></a>
 
@@ -468,11 +1260,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#gcp-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="gcp-not-managed-node-list-interface-list"></a>
+
+**GCP Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#gcp-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#gcp-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#gcp-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#gcp-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#gcp-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#gcp-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#gcp-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="gcp-not-managed-node-list-interface-list-bond-interface"></a>
+
+**GCP Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#gcp-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="gcp-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**GCP Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="gcp-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**GCP Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="gcp-not-managed-node-list-interface-list-network-option"></a>
+
+**GCP Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="gcp-not-managed-node-list-interface-list-static-ip"></a>
+
+**GCP Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="gcp-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**GCP Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#gcp-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#gcp-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="gcp-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**GCP Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="gcp-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**GCP Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="gcp-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**GCP Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 <a id="kvm"></a>
 
@@ -492,17 +1482,215 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#kvm-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
+<a id="kvm-not-managed-node-list-interface-list"></a>
+
+**Kvm Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#kvm-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#kvm-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#kvm-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#kvm-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#kvm-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#kvm-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#kvm-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="kvm-not-managed-node-list-interface-list-bond-interface"></a>
+
+**Kvm Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#kvm-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="kvm-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**Kvm Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="kvm-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**Kvm Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="kvm-not-managed-node-list-interface-list-network-option"></a>
+
+**Kvm Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="kvm-not-managed-node-list-interface-list-static-ip"></a>
+
+**Kvm Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="kvm-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**Kvm Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#kvm-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#kvm-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="kvm-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**Kvm Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="kvm-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**Kvm Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="kvm-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**Kvm Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
+
 <a id="load-balancing"></a>
 
 **Load Balancing**
 
-`vip_vrrp_mode` - (Optional) VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE` (`String`).
+`vip_vrrp_mode` - (Optional) VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`. Defaults to `VIP_VRRP_INVALID` (`String`).
 
 <a id="local-vrf"></a>
 
@@ -538,13 +1726,97 @@ In addition to all arguments above, the following attributes are exported:
 
 **Local Vrf Sli Config Static Routes**
 
-`static_routes` - (Optional) Static Routes (`Block`).
+`static_routes` - (Optional) Static Routes. See [Static Routes](#local-vrf-sli-config-static-routes-static-routes) below.
+
+<a id="local-vrf-sli-config-static-routes-static-routes"></a>
+
+**Local Vrf Sli Config Static Routes Static Routes**
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#local-vrf-sli-config-static-routes-static-routes-node-interface) below.
+
+<a id="local-vrf-sli-config-static-routes-static-routes-node-interface"></a>
+
+**Local Vrf Sli Config Static Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#local-vrf-sli-config-static-routes-static-routes-node-interface-list) below.
+
+<a id="local-vrf-sli-config-static-routes-static-routes-node-interface-list"></a>
+
+**Local Vrf Sli Config Static Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#local-vrf-sli-config-static-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="local-vrf-sli-config-static-routes-static-routes-node-interface-list-interface"></a>
+
+**Local Vrf Sli Config Static Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="local-vrf-sli-config-static-v6-routes"></a>
 
 **Local Vrf Sli Config Static V6 Routes**
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#local-vrf-sli-config-static-v6-routes-static-routes) below.
+
+<a id="local-vrf-sli-config-static-v6-routes-static-routes"></a>
+
+**Local Vrf Sli Config Static V6 Routes Static Routes**
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface) below.
+
+<a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface"></a>
+
+**Local Vrf Sli Config Static V6 Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list) below.
+
+<a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list"></a>
+
+**Local Vrf Sli Config Static V6 Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list-interface"></a>
+
+**Local Vrf Sli Config Static V6 Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="local-vrf-slo-config"></a>
 
@@ -568,13 +1840,97 @@ In addition to all arguments above, the following attributes are exported:
 
 **Local Vrf Slo Config Static Routes**
 
-`static_routes` - (Optional) Static Routes (`Block`).
+`static_routes` - (Optional) Static Routes. See [Static Routes](#local-vrf-slo-config-static-routes-static-routes) below.
+
+<a id="local-vrf-slo-config-static-routes-static-routes"></a>
+
+**Local Vrf Slo Config Static Routes Static Routes**
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#local-vrf-slo-config-static-routes-static-routes-node-interface) below.
+
+<a id="local-vrf-slo-config-static-routes-static-routes-node-interface"></a>
+
+**Local Vrf Slo Config Static Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#local-vrf-slo-config-static-routes-static-routes-node-interface-list) below.
+
+<a id="local-vrf-slo-config-static-routes-static-routes-node-interface-list"></a>
+
+**Local Vrf Slo Config Static Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#local-vrf-slo-config-static-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="local-vrf-slo-config-static-routes-static-routes-node-interface-list-interface"></a>
+
+**Local Vrf Slo Config Static Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="local-vrf-slo-config-static-v6-routes"></a>
 
 **Local Vrf Slo Config Static V6 Routes**
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#local-vrf-slo-config-static-v6-routes-static-routes) below.
+
+<a id="local-vrf-slo-config-static-v6-routes-static-routes"></a>
+
+**Local Vrf Slo Config Static V6 Routes Static Routes**
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#local-vrf-slo-config-static-v6-routes-static-routes-node-interface) below.
+
+<a id="local-vrf-slo-config-static-v6-routes-static-routes-node-interface"></a>
+
+**Local Vrf Slo Config Static V6 Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#local-vrf-slo-config-static-v6-routes-static-routes-node-interface-list) below.
+
+<a id="local-vrf-slo-config-static-v6-routes-static-routes-node-interface-list"></a>
+
+**Local Vrf Slo Config Static V6 Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#local-vrf-slo-config-static-v6-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="local-vrf-slo-config-static-v6-routes-static-routes-node-interface-list-interface"></a>
+
+**Local Vrf Slo Config Static V6 Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="log-receiver"></a>
 
@@ -604,11 +1960,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nutanix-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="nutanix-not-managed-node-list-interface-list"></a>
+
+**Nutanix Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#nutanix-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#nutanix-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#nutanix-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#nutanix-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#nutanix-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#nutanix-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="nutanix-not-managed-node-list-interface-list-bond-interface"></a>
+
+**Nutanix Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#nutanix-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="nutanix-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**Nutanix Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="nutanix-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**Nutanix Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="nutanix-not-managed-node-list-interface-list-network-option"></a>
+
+**Nutanix Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="nutanix-not-managed-node-list-interface-list-static-ip"></a>
+
+**Nutanix Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="nutanix-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**Nutanix Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#nutanix-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#nutanix-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="nutanix-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**Nutanix Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="nutanix-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**Nutanix Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="nutanix-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**Nutanix Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 <a id="oci"></a>
 
@@ -628,11 +2182,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#oci-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="oci-not-managed-node-list-interface-list"></a>
+
+**Oci Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#oci-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#oci-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#oci-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#oci-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#oci-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#oci-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#oci-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="oci-not-managed-node-list-interface-list-bond-interface"></a>
+
+**Oci Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#oci-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="oci-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**Oci Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="oci-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**Oci Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="oci-not-managed-node-list-interface-list-network-option"></a>
+
+**Oci Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="oci-not-managed-node-list-interface-list-static-ip"></a>
+
+**Oci Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="oci-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**Oci Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#oci-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#oci-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="oci-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**Oci Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="oci-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**Oci Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="oci-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**Oci Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 <a id="offline-survivability-mode"></a>
 
@@ -660,11 +2412,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#openstack-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="openstack-not-managed-node-list-interface-list"></a>
+
+**Openstack Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#openstack-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#openstack-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#openstack-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#openstack-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#openstack-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#openstack-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#openstack-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="openstack-not-managed-node-list-interface-list-bond-interface"></a>
+
+**Openstack Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#openstack-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="openstack-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**Openstack Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="openstack-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**Openstack Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="openstack-not-managed-node-list-interface-list-network-option"></a>
+
+**Openstack Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="openstack-not-managed-node-list-interface-list-static-ip"></a>
+
+**Openstack Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="openstack-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**Openstack Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#openstack-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#openstack-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="openstack-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**Openstack Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="openstack-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**Openstack Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="openstack-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**Openstack Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 <a id="performance-enhancement-mode"></a>
 
@@ -798,11 +2748,209 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#vmware-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
+
+<a id="vmware-not-managed-node-list-interface-list"></a>
+
+**Vmware Not Managed Node List Interface List**
+
+`bond_interface` - (Optional) Bond Device. Bond devices configuration for fleet. See [Bond Interface](#vmware-not-managed-node-list-interface-list-bond-interface) below.
+
+`description` - (Optional) Interface Description. Description for this Interface (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ethernet_interface` - (Optional) Ethernet Interface. See [Ethernet Interface](#vmware-not-managed-node-list-interface-list-ethernet-interface) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#vmware-not-managed-node-list-interface-list-ipv6-auto-config) below.
+
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`name` - (Optional) Interface Name. Name of this Interface (`String`).
+
+`network_option` - (Optional) Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs). See [Network Option](#vmware-not-managed-node-list-interface-list-network-option) below.
+
+`no_ipv4_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority (`Number`).
+
+`site_to_site_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_to_site_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Static IP](#vmware-not-managed-node-list-interface-list-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#vmware-not-managed-node-list-interface-list-static-ipv6-address) below.
+
+`vlan_interface` - (Optional) VLAN Interface. See [VLAN Interface](#vmware-not-managed-node-list-interface-list-vlan-interface) below.
+
+<a id="vmware-not-managed-node-list-interface-list-bond-interface"></a>
+
+**Vmware Not Managed Node List Interface List Bond Interface**
+
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+
+`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#vmware-not-managed-node-list-interface-list-bond-interface-lacp) below.
+
+`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+
+`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+
+`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+
+<a id="vmware-not-managed-node-list-interface-list-bond-interface-lacp"></a>
+
+**Vmware Not Managed Node List Interface List Bond Interface Lacp**
+
+`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+
+<a id="vmware-not-managed-node-list-interface-list-ethernet-interface"></a>
+
+**Vmware Not Managed Node List Interface List Ethernet Interface**
+
+`device` - (Optional) Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site (`String`).
+
+`mac` - (Optional) MAC Address (`String`).
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router) below.
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful) below.
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="vmware-not-managed-node-list-interface-list-network-option"></a>
+
+**Vmware Not Managed Node List Interface List Network Option**
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="vmware-not-managed-node-list-interface-list-static-ip"></a>
+
+**Vmware Not Managed Node List Interface List Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="vmware-not-managed-node-list-interface-list-static-ipv6-address"></a>
+
+**Vmware Not Managed Node List Interface List Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#vmware-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#vmware-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip) below.
+
+<a id="vmware-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
+
+**Vmware Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="vmware-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
+
+**Vmware Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="vmware-not-managed-node-list-interface-list-vlan-interface"></a>
+
+**Vmware Not Managed Node List Interface List VLAN Interface**
+
+`device` - (Optional) Parent Interface. Select a parent interface from the dropdown (`String`).
+
+`vlan_id` - (Optional) VLAN ID. Configure the VLAN tag for this interface (`Number`).
 
 ## Import
 

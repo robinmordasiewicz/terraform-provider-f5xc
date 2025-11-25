@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **App Type Settings Timeseries Analyses Setting Metric Selectors**
 
-`metric` - (Optional) Metrics. Choose one or more metrics to be included in the detection logic (`List`).
+`metric` - (Optional) Metrics. Choose one or more metrics to be included in the detection logic. Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`. Defaults to `NO_METRICS` (`List`).
 
 `metrics_source` - (Optional) Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations. Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS` (`String`).
 
@@ -160,19 +160,47 @@ In addition to all arguments above, the following attributes are exported:
 
 `include_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`include_failed_login_activity` - (Optional) Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior (`Block`).
+`include_failed_login_activity` - (Optional) Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior. See [Include Failed Login Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) below.
 
-`include_forbidden_activity` - (Optional) Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior (`Block`).
+`include_forbidden_activity` - (Optional) Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior. See [Include Forbidden Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) below.
 
 `include_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`include_non_existent_url_activity_automatic` - (Optional) Non-existent URL Automatic Activity Settings (`Block`).
+`include_non_existent_url_activity_automatic` - (Optional) Non-existent URL Automatic Activity Settings. See [Include Non Existent URL Activity Automatic](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) below.
 
-`include_non_existent_url_activity_custom` - (Optional) Non-existent URL Custom Activity Setting (`Block`).
+`include_non_existent_url_activity_custom` - (Optional) Non-existent URL Custom Activity Setting. See [Include Non Existent URL Activity Custom](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) below.
 
 `include_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `include_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity"></a>
+
+**App Type Settings User Behavior Analysis Setting Enable Detection Include Failed Login Activity**
+
+`login_failures_threshold` - (Optional) Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious (`Number`).
+
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity"></a>
+
+**App Type Settings User Behavior Analysis Setting Enable Detection Include Forbidden Activity**
+
+`forbidden_requests_threshold` - (Optional) Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious (`Number`).
+
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic"></a>
+
+**App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Automatic**
+
+`high` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom"></a>
+
+**App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Custom**
+
+`nonexistent_requests_threshold` - (Optional) Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious (`Number`).
 
 <a id="timeouts"></a>
 

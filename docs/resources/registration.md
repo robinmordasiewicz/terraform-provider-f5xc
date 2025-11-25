@@ -202,7 +202,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `driver_version` - (Optional) Driver Version. GPU Driver Version (`String`).
 
-`gpu_device` - (Optional) GPU devices. List of GPU devices in server (`Block`).
+`gpu_device` - (Optional) GPU devices. List of GPU devices in server. See [GPU Device](#infra-hw-info-gpu-gpu-device) below.
+
+<a id="infra-hw-info-gpu-gpu-device"></a>
+
+**Infra Hw Info GPU GPU Device**
+
+`id` - (Optional) GPU ID. GPU ID (`String`).
+
+`processes` - (Optional) Processes. GPU Processes (`String`).
+
+`product_name` - (Optional) Product Name. GPU Product Name (`String`).
 
 <a id="infra-hw-info-kernel"></a>
 
@@ -232,9 +242,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `ip_address` - (Optional) IP Address. IP address on interface (`List`).
 
-`link_quality` - (Optional) Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled. Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED` (`String`).
+`link_quality` - (Optional) Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled. Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED`. Defaults to `QUALITY_UNKNOWN` (`String`).
 
-`link_type` - (Optional) Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link. Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN` (`String`).
+`link_type` - (Optional) Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link. Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN`. Defaults to `LINK_TYPE_UNKNOWN` (`String`).
 
 `mac_address` - (Optional) MAC Address. mac address on interface (`String`).
 
@@ -324,7 +334,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `speed` - (Optional) Speed. The negotiated operating speed for the device (`String`).
 
-`usb_type` - (Optional) USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules. Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE` (`String`).
+`usb_type` - (Optional) USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules. Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE`. Defaults to `UNKNOWN_USB` (`String`).
 
 `vendor_name` - (Optional) Vendor name. Vendor ID translated to name (if available) (`String`).
 

@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Elements**
 
-`methods` - (Optional) HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list (`List`).
+`methods` - (Optional) HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
 
 `path_regex` - (Optional) Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex (`String`).
 

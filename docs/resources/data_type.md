@@ -62,7 +62,7 @@ resource "f5xc_data_type" "example" {
 
 ### Spec Argument Reference
 
-`compliances` - (Optional) Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach (`List`).
+`compliances` - (Optional) Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX` (`List`).
 
 `is_pii` - (Optional) Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII) (`Bool`).
 
@@ -118,21 +118,33 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules Key Value Pattern Key Pattern**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match (`Block`).
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
 
 `regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
 `substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+
+<a id="rules-key-value-pattern-key-pattern-exact-values"></a>
+
+**Rules Key Value Pattern Key Pattern Exact Values**
+
+`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
 
 <a id="rules-key-value-pattern-value-pattern"></a>
 
 **Rules Key Value Pattern Value Pattern**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match (`Block`).
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
 
 `regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
 `substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+
+<a id="rules-key-value-pattern-value-pattern-exact-values"></a>
+
+**Rules Key Value Pattern Value Pattern Exact Values**
+
+`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
 
 <a id="rules-value-pattern"></a>
 

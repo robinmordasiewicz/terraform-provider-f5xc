@@ -251,15 +251,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `network_device` - (Optional) Network Device Type. Represents physical network interface. The 'interface' reference points to a Network Interface object. Attributes such as Labels, MTU from Network Interface must be applied to the device. Device mapping to nodes A fleet can have many devices and nodes in VER customer edge site can have many interfaces. An interface in node inherits configuration from a device by matching, - device_name in Network Interface for the device - device name for physical-interface in the node. See [Network Device](#device-list-devices-network-device) below.
 
-`owner` - (Optional) Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST` (`String`).
+`owner` - (Optional) Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`. Defaults to `DEVICE_OWNER_INVALID` (`String`).
 
 <a id="device-list-devices-network-device"></a>
 
 **Device List Devices Network Device**
 
-`interface` - (Optional) Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if use is NETWORK_INTERFACE_USE_OUTSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL if use is NETWORK_INTERFACE_USE_INSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE (`Block`).
+`interface` - (Optional) Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if use is NETWORK_INTERFACE_USE_OUTSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL if use is NETWORK_INTERFACE_USE_INSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE. See [Interface](#device-list-devices-network-device-interface) below.
 
 `use` - (Optional) Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network. Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`. Defaults to `NETWORK_INTERFACE_USE_REGULAR` (`String`).
+
+<a id="device-list-devices-network-device-interface"></a>
+
+**Device List Devices Network Device Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="enable-vgpu"></a>
 
@@ -525,11 +539,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_server_port` - (Optional) Storage server Port. Enter Storage Server Port (`Number`).
 
-`iscsi_chap_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`iscsi_chap_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [iSCSI Chap Password](#storage-device-list-storage-devices-hpe-storage-iscsi-chap-password) below.
 
 `iscsi_chap_user` - (Optional) iSCSI chapUser. chap Username to connect to the HPE storage (`String`).
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#storage-device-list-storage-devices-hpe-storage-password) below.
 
 `storage_server_ip_address` - (Optional) Storage Server IP address. Enter storage server IP address (`String`).
 
@@ -537,25 +551,601 @@ In addition to all arguments above, the following attributes are exported:
 
 `username` - (Optional) Username. Username to connect to the HPE storage management IP (`String`).
 
+<a id="storage-device-list-storage-devices-hpe-storage-iscsi-chap-password"></a>
+
+**Storage Device List Storage Devices Hpe Storage iSCSI Chap Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="storage-device-list-storage-devices-hpe-storage-password"></a>
+
+**Storage Device List Storage Devices Hpe Storage Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-hpe-storage-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-hpe-storage-password-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-hpe-storage-password-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Hpe Storage Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-hpe-storage-password-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Hpe Storage Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
 <a id="storage-device-list-storage-devices-netapp-trident"></a>
 
 **Storage Device List Storage Devices Netapp Trident**
 
-`netapp_backend_ontap_nas` - (Optional) Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS (`Block`).
+`netapp_backend_ontap_nas` - (Optional) Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS. See [Netapp Backend Ontap Nas](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas) below.
 
-`netapp_backend_ontap_san` - (Optional) Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN (`Block`).
+`netapp_backend_ontap_san` - (Optional) Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN. See [Netapp Backend Ontap San](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas**
+
+`auto_export_cidrs` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Auto Export Cidrs](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) below.
+
+`auto_export_policy` - (Optional) Auto Export Policy. Enable automatic export policy creation and updating (`Bool`).
+
+`backend_name` - (Optional) Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF (`String`).
+
+`client_certificate` - (Optional) Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth (`String`).
+
+`client_private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Client Private Key](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key) below.
+
+`data_lif_dns_name` - (Optional) Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`data_lif_ip` - (Optional) Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address (`String`).
+
+`labels` - (Optional) Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection (`Block`).
+
+`limit_aggregate_usage` - (Optional) Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default (`String`).
+
+`limit_volume_size` - (Optional) Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default (`String`).
+
+`management_lif_dns_name` - (Optional) Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`management_lif_ip` - (Optional) Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address (`String`).
+
+`nfs_mount_options` - (Optional) NFS Mount Options. Comma-separated list of NFS mount options. Not enforced by default (`String`).
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password) below.
+
+`region` - (Optional) Backend Region. Virtual Pool Region (`String`).
+
+`storage` - (Optional) Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection. See [Storage](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage) below.
+
+`storage_driver_name` - (Optional) Storage Backend Driver. Configuration of Backend Name (`String`).
+
+`storage_prefix` - (Optional) Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated (`String`).
+
+`svm` - (Optional) Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified (`String`).
+
+`trusted_ca_certificate` - (Optional) Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth (`String`).
+
+`username` - (Optional) Username. Username to connect to the cluster/SVM (`String`).
+
+`volume_defaults` - (Optional) Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration. See [Volume Defaults](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Auto Export Cidrs**
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage**
+
+`labels` - (Optional) Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection (`Block`).
+
+`volume_defaults` - (Optional) Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration. See [Volume Defaults](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults) below.
+
+`zone` - (Optional) Virtual Pool Zone. Virtual Storage Pool zone definition (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage Volume Defaults**
+
+`adaptive_qos_policy` - (Optional) Adaptive QOS Policy name. Enter Adaptive QOS Policy Name (`String`).
+
+`encryption` - (Optional) Enable Encryption. Enable NetApp volume encryption (`Bool`).
+
+`export_policy` - (Optional) Export Policy. Export policy to use (`String`).
+
+`no_qos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`qos_policy` - (Optional) QOS Policy Name. Enter QOS Policy Name (`String`).
+
+`security_style` - (Optional) Security Style. Security style for new volumes (`String`).
+
+`snapshot_dir` - (Optional) Access to Snapshot Directory. Access to the .snapshot directory (`Bool`).
+
+`snapshot_policy` - (Optional) Snapshot Policy. Snapshot policy to use (`String`).
+
+`snapshot_reserve` - (Optional) Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else '' (`String`).
+
+`space_reserve` - (Optional) Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick) (`String`).
+
+`split_on_clone` - (Optional) Split on Clone. Split a clone from its parent upon creation (`Bool`).
+
+`tiering_policy` - (Optional) Tiering Policy. Tiering policy to use. 'none' is default (`String`).
+
+`unix_permissions` - (Optional) Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777 (`Number`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Volume Defaults**
+
+`adaptive_qos_policy` - (Optional) Adaptive QOS Policy name. Enter Adaptive QOS Policy Name (`String`).
+
+`encryption` - (Optional) Enable Encryption. Enable NetApp volume encryption (`Bool`).
+
+`export_policy` - (Optional) Export Policy. Export policy to use (`String`).
+
+`no_qos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`qos_policy` - (Optional) QOS Policy Name. Enter QOS Policy Name (`String`).
+
+`security_style` - (Optional) Security Style. Security style for new volumes (`String`).
+
+`snapshot_dir` - (Optional) Access to Snapshot Directory. Access to the .snapshot directory (`Bool`).
+
+`snapshot_policy` - (Optional) Snapshot Policy. Snapshot policy to use (`String`).
+
+`snapshot_reserve` - (Optional) Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else '' (`String`).
+
+`space_reserve` - (Optional) Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick) (`String`).
+
+`split_on_clone` - (Optional) Split on Clone. Split a clone from its parent upon creation (`Bool`).
+
+`tiering_policy` - (Optional) Tiering Policy. Tiering policy to use. 'none' is default (`String`).
+
+`unix_permissions` - (Optional) Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777 (`Number`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San**
+
+`client_certificate` - (Optional) Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth (`String`).
+
+`client_private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Client Private Key](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key) below.
+
+`data_lif_dns_name` - (Optional) Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`data_lif_ip` - (Optional) Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address (`String`).
+
+`igroup_name` - (Optional) iGroup Name. Name of the igroup for SAN volumes to use (`String`).
+
+`labels` - (Optional) Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection (`Block`).
+
+`limit_aggregate_usage` - (Optional) Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default (`Number`).
+
+`limit_volume_size` - (Optional) Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default (`Number`).
+
+`management_lif_dns_name` - (Optional) Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`management_lif_ip` - (Optional) Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address (`String`).
+
+`no_chap` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password) below.
+
+`region` - (Optional) Backend Region. Virtual Pool Region (`String`).
+
+`storage` - (Optional) Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection. See [Storage](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage) below.
+
+`storage_driver_name` - (Optional) Storage Backend Driver. Configuration of Backend Name (`String`).
+
+`storage_prefix` - (Optional) Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated (`String`).
+
+`svm` - (Optional) Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified (`String`).
+
+`trusted_ca_certificate` - (Optional) Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth (`String`).
+
+`use_chap` - (Optional) Device NetApp Backend ONTAP SAN CHAP Configuration. Device NetApp Backend ONTAP SAN CHAP configuration options for enabled CHAP. See [Use Chap](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap) below.
+
+`username` - (Optional) Username. Username to connect to the cluster/SVM (`String`).
+
+`volume_defaults` - (Optional) Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration. See [Volume Defaults](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage**
+
+`labels` - (Optional) Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection (`Block`).
+
+`volume_defaults` - (Optional) Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration. See [Volume Defaults](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults) below.
+
+`zone` - (Optional) Virtual Pool Zone. Virtual Storage Pool zone definition (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage Volume Defaults**
+
+`adaptive_qos_policy` - (Optional) Adaptive QOS Policy name. Enter Adaptive QOS Policy Name (`String`).
+
+`encryption` - (Optional) Enable Encryption. Enable NetApp volume encryption (`Bool`).
+
+`export_policy` - (Optional) Export Policy. Export policy to use (`String`).
+
+`no_qos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`qos_policy` - (Optional) QOS Policy Name. Enter QOS Policy Name (`String`).
+
+`security_style` - (Optional) Security Style. Security style for new volumes (`String`).
+
+`snapshot_dir` - (Optional) Access to Snapshot Directory. Access to the .snapshot directory (`Bool`).
+
+`snapshot_policy` - (Optional) Snapshot Policy. Snapshot policy to use (`String`).
+
+`snapshot_reserve` - (Optional) Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else '' (`String`).
+
+`space_reserve` - (Optional) Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick) (`String`).
+
+`split_on_clone` - (Optional) Split on Clone. Split a clone from its parent upon creation (`Bool`).
+
+`tiering_policy` - (Optional) Tiering Policy. Tiering policy to use. 'none' is default (`String`).
+
+`unix_permissions` - (Optional) Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777 (`Number`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap**
+
+`chap_initiator_secret` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Chap Initiator Secret](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret) below.
+
+`chap_target_initiator_secret` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Chap Target Initiator Secret](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret) below.
+
+`chap_target_username` - (Optional) CHAP Target Username. Target username. Required if useCHAP=true (`String`).
+
+`chap_username` - (Optional) CHAP Username. Inbound username. Required if useCHAP=true (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults"></a>
+
+**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Volume Defaults**
+
+`adaptive_qos_policy` - (Optional) Adaptive QOS Policy name. Enter Adaptive QOS Policy Name (`String`).
+
+`encryption` - (Optional) Enable Encryption. Enable NetApp volume encryption (`Bool`).
+
+`export_policy` - (Optional) Export Policy. Export policy to use (`String`).
+
+`no_qos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`qos_policy` - (Optional) QOS Policy Name. Enter QOS Policy Name (`String`).
+
+`security_style` - (Optional) Security Style. Security style for new volumes (`String`).
+
+`snapshot_dir` - (Optional) Access to Snapshot Directory. Access to the .snapshot directory (`Bool`).
+
+`snapshot_policy` - (Optional) Snapshot Policy. Snapshot policy to use (`String`).
+
+`snapshot_reserve` - (Optional) Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else '' (`String`).
+
+`space_reserve` - (Optional) Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick) (`String`).
+
+`split_on_clone` - (Optional) Split on Clone. Split a clone from its parent upon creation (`Bool`).
+
+`tiering_policy` - (Optional) Tiering Policy. Tiering policy to use. 'none' is default (`String`).
+
+`unix_permissions` - (Optional) Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777 (`Number`).
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator"></a>
 
 **Storage Device List Storage Devices Pure Service Orchestrator**
 
-`arrays` - (Optional) Arrays Configuration. Device configuration for PSO Arrays (`Block`).
+`arrays` - (Optional) Arrays Configuration. Device configuration for PSO Arrays. See [Arrays](#storage-device-list-storage-devices-pure-service-orchestrator-arrays) below.
 
 `cluster_id` - (Optional) Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores (`String`).
 
 `enable_storage_topology` - (Optional) Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi (`Bool`).
 
 `enable_strict_topology` - (Optional) Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi (`Bool`).
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays**
+
+`flash_array` - (Optional) Flash Arrays. Specify what storage flash arrays should be managed the plugin. See [Flash Array](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array) below.
+
+`flash_blade` - (Optional) Flash Blades. Specify what storage flash blades should be managed the plugin. See [Flash Blade](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade) below.
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array**
+
+`default_fs_opt` - (Optional) Default Filesystem Options. Block volume default mkfs options. Not recommended to change! (`String`).
+
+`default_fs_type` - (Optional) Default Filesystem Type. Block volume default filesystem type. Not recommended to change! (`String`).
+
+`default_mount_opts` - (Optional) Default Mount Options. Block volume default filesystem mount options. Not recommended to change! (`List`).
+
+`disable_preempt_attachments` - (Optional) Disable Preempt Attachments. Enable/Disable attachment preemption! (`Bool`).
+
+`flash_arrays` - (Optional) Flash Arrays. For FlashArrays you must set the 'mgmt_endpoint' and 'api_token'. See [Flash Arrays](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays) below.
+
+`iscsi_login_timeout` - (Optional) iSCSI Login Timeout. iSCSI login timeout in seconds. Not recommended to change! (`Number`).
+
+`san_type` - (Optional) SAN Type. Block volume access protocol, either iSCSI or FC (`String`).
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays**
+
+`api_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [API Token](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token) below.
+
+`labels` - (Optional) Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner (`Block`).
+
+`mgmt_dns_name` - (Optional) Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`mgmt_ip` - (Optional) Management Endpoint IP Address. Management Endpoint is reachable at the given IP address (`String`).
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade**
+
+`enable_snapshot_directory` - (Optional) Enable Snapshot Directory. Enable/Disable FlashBlade snapshots (`Bool`).
+
+`export_rules` - (Optional) NFS Export Rules. NFS Export rules (`String`).
+
+`flash_blades` - (Optional) Flash Blades. For FlashBlades you must set the 'mgmt_endpoint', 'api_token' and nfs_endpoint. See [Flash Blades](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades) below.
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades**
+
+`api_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [API Token](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token) below.
+
+`lables` - (Optional) Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner (`Block`).
+
+`mgmt_dns_name` - (Optional) Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`mgmt_ip` - (Optional) Management Endpoint IP Address. Management Endpoint is reachable at the given IP address (`String`).
+
+`nfs_endpoint_dns_name` - (Optional) NFS DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`nfs_endpoint_ip` - (Optional) NFS IP Address. Endpoint is reachable at the given IP address (`String`).
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-clear-secret-info) below.
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-blindfold-secret-info"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-clear-secret-info"></a>
+
+**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="storage-interface-list"></a>
 
@@ -583,7 +1173,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Storage Static Routes Storage Routes**
 
-`attrs` - (Optional) Attributes. List of route attributes associated with the static route (`List`).
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
 
 `labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
 
@@ -595,19 +1185,69 @@ In addition to all arguments above, the following attributes are exported:
 
 **Storage Static Routes Storage Routes Nexthop**
 
-`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface' (`Block`).
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#storage-static-routes-storage-routes-nexthop-interface) below.
 
-`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address (`Block`).
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#storage-static-routes-storage-routes-nexthop-nexthop-address) below.
 
 `type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="storage-static-routes-storage-routes-nexthop-interface"></a>
+
+**Storage Static Routes Storage Routes Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="storage-static-routes-storage-routes-nexthop-nexthop-address"></a>
+
+**Storage Static Routes Storage Routes Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#storage-static-routes-storage-routes-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#storage-static-routes-storage-routes-nexthop-nexthop-address-ipv6) below.
+
+<a id="storage-static-routes-storage-routes-nexthop-nexthop-address-ipv4"></a>
+
+**Storage Static Routes Storage Routes Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="storage-static-routes-storage-routes-nexthop-nexthop-address-ipv6"></a>
+
+**Storage Static Routes Storage Routes Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
 
 <a id="storage-static-routes-storage-routes-subnets"></a>
 
 **Storage Static Routes Storage Routes Subnets**
 
-`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32 (`Block`).
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#storage-static-routes-storage-routes-subnets-ipv4) below.
 
-`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128 (`Block`).
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#storage-static-routes-storage-routes-subnets-ipv6) below.
+
+<a id="storage-static-routes-storage-routes-subnets-ipv4"></a>
+
+**Storage Static Routes Storage Routes Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="storage-static-routes-storage-routes-subnets-ipv6"></a>
+
+**Storage Static Routes Storage Routes Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="timeouts"></a>
 

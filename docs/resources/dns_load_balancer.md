@@ -156,7 +156,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List Rules Asn Matcher**
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects (`Block`).
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
+
+<a id="rule-list-rules-asn-matcher-asn-sets"></a>
+
+**Rule List Rules Asn Matcher Asn Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="rule-list-rules-geo-location-label-selector"></a>
 
@@ -188,7 +202,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects (`Block`).
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#rule-list-rules-ip-prefix-set-prefix-sets) below.
+
+<a id="rule-list-rules-ip-prefix-set-prefix-sets"></a>
+
+**Rule List Rules IP Prefix Set Prefix Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="rule-list-rules-pool"></a>
 

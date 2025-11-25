@@ -62,11 +62,11 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 ### Spec Argument Reference
 
-`authentication_algos` - (Optional) Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the AES-gcm or AES-ccm encryption algorithms (`List`).
+`authentication_algos` - (Optional) Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the AES-gcm or AES-ccm encryption algorithms. Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`. Defaults to `AUTH_ALG_DEFAULT` (`List`).
 
-`dh_group` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile (`List`).
+`dh_group` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT` (`List`).
 
-`encryption_algos` - (Optional) Configure Encryption Algorithms. Choose one or more encryption algorithms (`List`).
+`encryption_algos` - (Optional) Configure Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT` (`List`).
 
 > **Note:** One of the arguments from this list "ike_keylifetime_hours, ike_keylifetime_minutes, use_default_keylifetime" must be set.
 
@@ -76,7 +76,7 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 `use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`prf` - (Optional) PseudoRandomFunction. Select PseudoRandomFunction for IKE SA (`List`).
+`prf` - (Optional) PseudoRandomFunction. Select PseudoRandomFunction for IKE SA. Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`. Defaults to `PRF_DEFAULT` (`List`).
 
 > **Note:** One of the arguments from this list "reauth_disabled, reauth_timeout_days, reauth_timeout_hours" must be set.
 

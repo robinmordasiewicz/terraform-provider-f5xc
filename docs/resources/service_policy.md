@@ -82,11 +82,11 @@ resource "f5xc_service_policy" "example" {
 
 `server_name` - (Optional) Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name (`String`).
 
-`server_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Server Name Matcher](#server-name-matcher) below for details.
+`server_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
 
-`server_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Server Selector](#server-selector) below for details.
+`server_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE (`Block`).
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+`timeouts` - (Optional) (`Block`).
 
 ### Attributes Reference
 
@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_set` - (Optional) BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. See [Asn Set](#allow-list-asn-set) below.
 
-`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB (`List`).
+`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE` (`List`).
 
 `default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#allow-list-prefix-list) below.
 
-`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
+`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE` (`List`).
 
 `tls_fingerprint_values` - (Optional) TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
@@ -160,7 +160,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn_set` - (Optional) BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. See [Asn Set](#deny-list-asn-set) below.
 
-`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB (`List`).
+`country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE` (`List`).
 
 `default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -172,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#deny-list-prefix-list) below.
 
-`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
+`tls_fingerprint_classes` - (Optional) TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE` (`List`).
 
 `tls_fingerprint_values` - (Optional) TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
@@ -242,63 +242,527 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`api_group_matcher` - (Optional) String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true (`Block`).
+`api_group_matcher` - (Optional) String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true. See [API Group Matcher](#rule-list-rules-spec-api-group-matcher) below.
 
-`arg_matchers` - (Optional) Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true (`Block`).
+`arg_matchers` - (Optional) Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true. See [Arg Matchers](#rule-list-rules-spec-arg-matchers) below.
 
-`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`Block`).
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#rule-list-rules-spec-asn-list) below.
 
-`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets (`Block`).
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#rule-list-rules-spec-asn-matcher) below.
 
-`body_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
+`body_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Body Matcher](#rule-list-rules-spec-body-matcher) below.
 
-`bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing (`Block`).
+`bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing. See [Bot Action](#rule-list-rules-spec-bot-action) below.
 
 `client_name` - (Optional) Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name (`String`).
 
-`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
+`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Client Name Matcher](#rule-list-rules-spec-client-name-matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE (`Block`).
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Client Selector](#rule-list-rules-spec-client-selector) below.
 
-`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
+`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matchers](#rule-list-rules-spec-cookie-matchers) below.
 
-`domain_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
+`domain_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Domain Matcher](#rule-list-rules-spec-domain-matcher) below.
 
 `expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore (`String`).
 
-`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true (`Block`).
+`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#rule-list-rules-spec-headers) below.
 
-`http_method` - (Optional) HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true (`Block`).
+`http_method` - (Optional) HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true. See [HTTP Method](#rule-list-rules-spec-http-method) below.
 
-`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true (`Block`).
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#rule-list-rules-spec-ip-matcher) below.
 
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against (`Block`).
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#rule-list-rules-spec-ip-prefix-list) below.
 
-`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories (`Block`).
+`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#rule-list-rules-spec-ip-threat-category-list) below.
 
-`ja4_tls_fingerprint` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length (`Block`).
+`ja4_tls_fingerprint` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 TLS Fingerprint](#rule-list-rules-spec-ja4-tls-fingerprint) below.
 
-`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true (`Block`).
+`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. See [JWT Claims](#rule-list-rules-spec-jwt-claims) below.
 
-`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name (`Block`).
+`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name. See [Label Matcher](#rule-list-rules-spec-label-matcher) below.
 
-`mum_action` - (Optional) Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing (`Block`).
+`mum_action` - (Optional) Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing. See [Mum Action](#rule-list-rules-spec-mum-action) below.
 
-`path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions (`Block`).
+`path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions. See [Path](#rule-list-rules-spec-path) below.
 
-`port_matcher` - (Optional) Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true (`Block`).
+`port_matcher` - (Optional) Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true. See [Port Matcher](#rule-list-rules-spec-port-matcher) below.
 
-`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
+`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. See [Query Params](#rule-list-rules-spec-query-params) below.
 
-`request_constraints` - (Optional) Request Constraints (`Block`).
+`request_constraints` - (Optional) Request Constraints. See [Request Constraints](#rule-list-rules-spec-request-constraints) below.
 
-`segment_policy` - (Optional) Configure Segments. Configure source and destination segment for policy (`Block`).
+`segment_policy` - (Optional) Configure Segments. Configure source and destination segment for policy. See [Segment Policy](#rule-list-rules-spec-segment-policy) below.
 
-`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#rule-list-rules-spec-tls-fingerprint-matcher) below.
 
-`user_identity_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
+`user_identity_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [User Identity Matcher](#rule-list-rules-spec-user-identity-matcher) below.
 
-`waf_action` - (Optional) App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings (`Block`).
+`waf_action` - (Optional) App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings. See [WAF Action](#rule-list-rules-spec-waf-action) below.
+
+<a id="rule-list-rules-spec-api-group-matcher"></a>
+
+**Rule List Rules Spec API Group Matcher**
+
+`invert_matcher` - (Optional) Invert String Matcher. Invert the match result (`Bool`).
+
+`match` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+<a id="rule-list-rules-spec-arg-matchers"></a>
+
+**Rule List Rules Spec Arg Matchers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#rule-list-rules-spec-arg-matchers-item) below.
+
+`name` - (Optional) Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body (`String`).
+
+<a id="rule-list-rules-spec-arg-matchers-item"></a>
+
+**Rule List Rules Spec Arg Matchers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-asn-list"></a>
+
+**Rule List Rules Spec Asn List**
+
+`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
+
+<a id="rule-list-rules-spec-asn-matcher"></a>
+
+**Rule List Rules Spec Asn Matcher**
+
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#rule-list-rules-spec-asn-matcher-asn-sets) below.
+
+<a id="rule-list-rules-spec-asn-matcher-asn-sets"></a>
+
+**Rule List Rules Spec Asn Matcher Asn Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="rule-list-rules-spec-body-matcher"></a>
+
+**Rule List Rules Spec Body Matcher**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-bot-action"></a>
+
+**Rule List Rules Spec Bot Action**
+
+`bot_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="rule-list-rules-spec-client-name-matcher"></a>
+
+**Rule List Rules Spec Client Name Matcher**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-client-selector"></a>
+
+**Rule List Rules Spec Client Selector**
+
+`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+
+<a id="rule-list-rules-spec-cookie-matchers"></a>
+
+**Rule List Rules Spec Cookie Matchers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#rule-list-rules-spec-cookie-matchers-item) below.
+
+`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
+
+<a id="rule-list-rules-spec-cookie-matchers-item"></a>
+
+**Rule List Rules Spec Cookie Matchers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-domain-matcher"></a>
+
+**Rule List Rules Spec Domain Matcher**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-headers"></a>
+
+**Rule List Rules Spec Headers**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#rule-list-rules-spec-headers-item) below.
+
+`name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
+
+<a id="rule-list-rules-spec-headers-item"></a>
+
+**Rule List Rules Spec Headers Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-http-method"></a>
+
+**Rule List Rules Spec HTTP Method**
+
+`invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
+
+`methods` - (Optional) Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`List`).
+
+<a id="rule-list-rules-spec-ip-matcher"></a>
+
+**Rule List Rules Spec IP Matcher**
+
+`invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
+
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#rule-list-rules-spec-ip-matcher-prefix-sets) below.
+
+<a id="rule-list-rules-spec-ip-matcher-prefix-sets"></a>
+
+**Rule List Rules Spec IP Matcher Prefix Sets**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="rule-list-rules-spec-ip-prefix-list"></a>
+
+**Rule List Rules Spec IP Prefix List**
+
+`invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
+
+`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
+
+<a id="rule-list-rules-spec-ip-threat-category-list"></a>
+
+**Rule List Rules Spec IP Threat Category List**
+
+`ip_threat_categories` - (Optional) List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES` (`List`).
+
+<a id="rule-list-rules-spec-ja4-tls-fingerprint"></a>
+
+**Rule List Rules Spec Ja4 TLS Fingerprint**
+
+`exact_values` - (Optional) Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against (`List`).
+
+<a id="rule-list-rules-spec-jwt-claims"></a>
+
+**Rule List Rules Spec JWT Claims**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#rule-list-rules-spec-jwt-claims-item) below.
+
+`name` - (Optional) JWT Claim Name. JWT claim name (`String`).
+
+<a id="rule-list-rules-spec-jwt-claims-item"></a>
+
+**Rule List Rules Spec JWT Claims Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-label-matcher"></a>
+
+**Rule List Rules Spec Label Matcher**
+
+`keys` - (Optional) Keys. The list of label key names that have to match (`List`).
+
+<a id="rule-list-rules-spec-mum-action"></a>
+
+**Rule List Rules Spec Mum Action**
+
+`default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="rule-list-rules-spec-path"></a>
+
+**Rule List Rules Spec Path**
+
+`exact_values` - (Optional) Exact Values. A list of exact path values to match the input HTTP path against (`List`).
+
+`invert_matcher` - (Optional) Invert Path Matcher. Invert the match result (`Bool`).
+
+`prefix_values` - (Optional) Prefix Values. A list of path prefix values to match the input HTTP path against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input HTTP path against (`List`).
+
+`suffix_values` - (Optional) Suffix Values. A list of path suffix values to match the input HTTP path against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-port-matcher"></a>
+
+**Rule List Rules Spec Port Matcher**
+
+`invert_matcher` - (Optional) Invert Port Matcher. Invert the match result (`Bool`).
+
+`ports` - (Optional) Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range (`List`).
+
+<a id="rule-list-rules-spec-query-params"></a>
+
+**Rule List Rules Spec Query Params**
+
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`invert_matcher` - (Optional) Invert Query Parameter Matcher. Invert the match result (`Bool`).
+
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#rule-list-rules-spec-query-params-item) below.
+
+`key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
+
+<a id="rule-list-rules-spec-query-params-item"></a>
+
+**Rule List Rules Spec Query Params Item**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+`transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE` (`List`).
+
+<a id="rule-list-rules-spec-request-constraints"></a>
+
+**Rule List Rules Spec Request Constraints**
+
+`max_cookie_count_exceeds` - (Optional) Match on the Count for all Cookies that exceed this value (`Number`).
+
+`max_cookie_count_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_cookie_key_size_exceeds` - (Optional) Match on the Name Size per Cookie that exceed this value (`Number`).
+
+`max_cookie_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_cookie_value_size_exceeds` - (Optional) Match on the Value Size per Cookie that exceed this value (`Number`).
+
+`max_cookie_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_header_count_exceeds` - (Optional) Match on the Count for all Headers that exceed this value (`Number`).
+
+`max_header_count_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_header_key_size_exceeds` - (Optional) Match on the Name Size per Header that exceed this value (`Number`).
+
+`max_header_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_header_value_size_exceeds` - (Optional) Match on the Value Size per Header that exceed this value (`Number`).
+
+`max_header_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_parameter_count_exceeds` - (Optional) Match on the Parameter Count that exceed this value (`Number`).
+
+`max_parameter_count_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_parameter_name_size_exceeds` - (Optional) Match on the Parameter Name Size that exceed this value (`Number`).
+
+`max_parameter_name_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_parameter_value_size_exceeds` - (Optional) Match on the Parameter Value Size that exceed this value (`Number`).
+
+`max_parameter_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_query_size_exceeds` - (Optional) Match on the URL Query Size that exceed this value (`Number`).
+
+`max_query_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_request_line_size_exceeds` - (Optional) Match on the Request Line Size that exceed this value (`Number`).
+
+`max_request_line_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_request_size_exceeds` - (Optional) Match on the Request Size that exceed this value (`Number`).
+
+`max_request_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`max_url_size_exceeds` - (Optional) Match on the URL Size that exceed this value (`Number`).
+
+`max_url_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="rule-list-rules-spec-segment-policy"></a>
+
+**Rule List Rules Spec Segment Policy**
+
+`dst_any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dst_segments` - (Optional) Segment List. List of references to Segments. See [Dst Segments](#rule-list-rules-spec-segment-policy-dst-segments) below.
+
+`intra_segment` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`src_any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`src_segments` - (Optional) Segment List. List of references to Segments. See [Src Segments](#rule-list-rules-spec-segment-policy-src-segments) below.
+
+<a id="rule-list-rules-spec-segment-policy-dst-segments"></a>
+
+**Rule List Rules Spec Segment Policy Dst Segments**
+
+`segments` - (Optional) Segments. Select list of segments. See [Segments](#rule-list-rules-spec-segment-policy-dst-segments-segments) below.
+
+<a id="rule-list-rules-spec-segment-policy-dst-segments-segments"></a>
+
+**Rule List Rules Spec Segment Policy Dst Segments Segments**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="rule-list-rules-spec-segment-policy-src-segments"></a>
+
+**Rule List Rules Spec Segment Policy Src Segments**
+
+`segments` - (Optional) Segments. Select list of segments. See [Segments](#rule-list-rules-spec-segment-policy-src-segments-segments) below.
+
+<a id="rule-list-rules-spec-segment-policy-src-segments-segments"></a>
+
+**Rule List Rules Spec Segment Policy Src Segments Segments**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="rule-list-rules-spec-tls-fingerprint-matcher"></a>
+
+**Rule List Rules Spec TLS Fingerprint Matcher**
+
+`classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE` (`List`).
+
+`exact_values` - (Optional) Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against (`List`).
+
+`excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher (`List`).
+
+<a id="rule-list-rules-spec-user-identity-matcher"></a>
+
+**Rule List Rules Spec User Identity Matcher**
+
+`exact_values` - (Optional) Exact Values. A list of exact values to match the input against (`List`).
+
+`regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
+
+<a id="rule-list-rules-spec-waf-action"></a>
+
+**Rule List Rules Spec WAF Action**
+
+`app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria. See [App Firewall Detection Control](#rule-list-rules-spec-waf-action-app-firewall-detection-control) below.
+
+`none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="rule-list-rules-spec-waf-action-app-firewall-detection-control"></a>
+
+**Rule List Rules Spec WAF Action App Firewall Detection Control**
+
+`exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria. See [Exclude Attack Type Contexts](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-attack-type-contexts) below.
+
+`exclude_bot_name_contexts` - (Optional) Bot Names. Bot Names to be excluded for the defined match criteria. See [Exclude Bot Name Contexts](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-bot-name-contexts) below.
+
+`exclude_signature_contexts` - (Optional) Signature IDs. Signature IDs to be excluded for the defined match criteria. See [Exclude Signature Contexts](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-signature-contexts) below.
+
+`exclude_violation_contexts` - (Optional) Violations. Violations to be excluded for the defined match criteria. See [Exclude Violation Contexts](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-violation-contexts) below.
+
+<a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-attack-type-contexts"></a>
+
+**Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Attack Type Contexts**
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`exclude_attack_type` - (Optional) Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK. Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`. Defaults to `ATTACK_TYPE_NONE` (`String`).
+
+<a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-bot-name-contexts"></a>
+
+**Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Bot Name Contexts**
+
+`bot_name` - (Optional) Bot Name (`String`).
+
+<a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-signature-contexts"></a>
+
+**Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Signature Contexts**
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`signature_id` - (Optional) SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context (`Number`).
+
+<a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-violation-contexts"></a>
+
+**Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Violation Contexts**
+
+`context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
+
+`context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
+
+`exclude_violation` - (Optional) App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY. Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`. Defaults to `VIOL_NONE` (`String`).
 
 <a id="server-name-matcher"></a>
 

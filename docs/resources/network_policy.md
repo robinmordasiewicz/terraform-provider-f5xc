@@ -165,13 +165,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules Egress Rules Applications**
 
-`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
+`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP` (`List`).
 
 <a id="rules-egress-rules-ip-prefix-set"></a>
 
 **Rules Egress Rules IP Prefix Set**
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#rules-egress-rules-ip-prefix-set-ref) below.
+
+<a id="rules-egress-rules-ip-prefix-set-ref"></a>
+
+**Rules Egress Rules IP Prefix Set Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="rules-egress-rules-label-matcher"></a>
 
@@ -251,13 +265,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules Ingress Rules Applications**
 
-`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
+`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP` (`List`).
 
 <a id="rules-ingress-rules-ip-prefix-set"></a>
 
 **Rules Ingress Rules IP Prefix Set**
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#rules-ingress-rules-ip-prefix-set-ref) below.
+
+<a id="rules-ingress-rules-ip-prefix-set-ref"></a>
+
+**Rules Ingress Rules IP Prefix Set Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="rules-ingress-rules-label-matcher"></a>
 

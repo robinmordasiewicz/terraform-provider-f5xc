@@ -122,7 +122,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List**
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections (`Block`).
+`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [HTTP List](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list) below.
+
+<a id="forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list"></a>
+
+**Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List HTTP List**
+
+`any_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`exact_value` - (Optional) Exact Values. Exact domain name (`String`).
+
+`path_exact_value` - (Optional) Exact Path. Exact Path to match (`String`).
+
+`path_prefix_value` - (Optional) Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' (`String`).
+
+`path_regex_value` - (Optional) Regex of Path. Regular Expression value for the Path to match (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' (`String`).
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-ip-prefix-set"></a>
 
@@ -158,7 +176,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules TLS List**
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections (`Block`).
+`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list) below.
+
+<a id="forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list"></a>
+
+**Forward Proxy Pbr Forward Proxy Pbr Rules TLS List TLS List**
+
+`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+
+`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+
+`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
 <a id="forwarding-class-list"></a>
 
@@ -218,7 +246,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Network Pbr Network Pbr Rules Applications**
 
-`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
+`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP` (`List`).
 
 <a id="network-pbr-network-pbr-rules-forwarding-class-list"></a>
 
@@ -234,7 +262,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Network Pbr Network Pbr Rules IP Prefix Set**
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#network-pbr-network-pbr-rules-ip-prefix-set-ref) below.
+
+<a id="network-pbr-network-pbr-rules-ip-prefix-set-ref"></a>
+
+**Network Pbr Network Pbr Rules IP Prefix Set Ref**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="network-pbr-network-pbr-rules-metadata"></a>
 

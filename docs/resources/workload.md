@@ -111,9 +111,39 @@ In addition to all arguments above, the following attributes are exported:
 
 **Job Configuration Parameters**
 
-`env_var` - (Optional) Environment Variable. Environment Variable (`Block`).
+`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#job-configuration-parameters-env-var) below.
 
-`file` - (Optional) Configuration File. Configuration File for the workload (`Block`).
+`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#job-configuration-parameters-file) below.
+
+<a id="job-configuration-parameters-env-var"></a>
+
+**Job Configuration Parameters Env Var**
+
+`name` - (Optional) Name. Name of Environment Variable (`String`).
+
+`value` - (Optional) Value. Value of Environment Variable (`String`).
+
+<a id="job-configuration-parameters-file"></a>
+
+**Job Configuration Parameters File**
+
+`data` - (Optional) Data. File data (`String`).
+
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#job-configuration-parameters-file-mount) below.
+
+`name` - (Optional) Name. Name of the file (`String`).
+
+`volume_name` - (Optional) Volume Name. Name of the Volume (`String`).
+
+<a id="job-configuration-parameters-file-mount"></a>
+
+**Job Configuration Parameters File Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="job-containers"></a>
 
@@ -153,7 +183,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Job Containers Image**
 
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#job-containers-image-container-registry) below.
 
 `name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed (`String`).
 
@@ -161,45 +191,135 @@ In addition to all arguments above, the following attributes are exported:
 
 `pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
 
+<a id="job-containers-image-container-registry"></a>
+
+**Job Containers Image Container Registry**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="job-containers-liveness-check"></a>
 
 **Job Containers Liveness Check**
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#job-containers-liveness-check-exec-health-check) below.
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#job-containers-liveness-check-http-health-check) below.
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#job-containers-liveness-check-tcp-health-check) below.
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
+
+<a id="job-containers-liveness-check-exec-health-check"></a>
+
+**Job Containers Liveness Check Exec Health Check**
+
+`command` - (Optional) Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell (`List`).
+
+<a id="job-containers-liveness-check-http-health-check"></a>
+
+**Job Containers Liveness Check HTTP Health Check**
+
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs (`Block`).
+
+`host_header` - (Optional) Host Header. The value of the host header in the HTTP health check request (`String`).
+
+`path` - (Optional) Path. Path to access on the HTTP server (`String`).
+
+`port` - (Optional) Port. Port. See [Port](#job-containers-liveness-check-http-health-check-port) below.
+
+<a id="job-containers-liveness-check-http-health-check-port"></a>
+
+**Job Containers Liveness Check HTTP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
+
+<a id="job-containers-liveness-check-tcp-health-check"></a>
+
+**Job Containers Liveness Check TCP Health Check**
+
+`port` - (Optional) Port. Port. See [Port](#job-containers-liveness-check-tcp-health-check-port) below.
+
+<a id="job-containers-liveness-check-tcp-health-check-port"></a>
+
+**Job Containers Liveness Check TCP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
 
 <a id="job-containers-readiness-check"></a>
 
 **Job Containers Readiness Check**
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#job-containers-readiness-check-exec-health-check) below.
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#job-containers-readiness-check-http-health-check) below.
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#job-containers-readiness-check-tcp-health-check) below.
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
+
+<a id="job-containers-readiness-check-exec-health-check"></a>
+
+**Job Containers Readiness Check Exec Health Check**
+
+`command` - (Optional) Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell (`List`).
+
+<a id="job-containers-readiness-check-http-health-check"></a>
+
+**Job Containers Readiness Check HTTP Health Check**
+
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs (`Block`).
+
+`host_header` - (Optional) Host Header. The value of the host header in the HTTP health check request (`String`).
+
+`path` - (Optional) Path. Path to access on the HTTP server (`String`).
+
+`port` - (Optional) Port. Port. See [Port](#job-containers-readiness-check-http-health-check-port) below.
+
+<a id="job-containers-readiness-check-http-health-check-port"></a>
+
+**Job Containers Readiness Check HTTP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
+
+<a id="job-containers-readiness-check-tcp-health-check"></a>
+
+**Job Containers Readiness Check TCP Health Check**
+
+`port` - (Optional) Port. Port. See [Port](#job-containers-readiness-check-tcp-health-check-port) below.
+
+<a id="job-containers-readiness-check-tcp-health-check-port"></a>
+
+**Job Containers Readiness Check TCP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
 
 <a id="job-deploy-options"></a>
 
@@ -221,25 +341,65 @@ In addition to all arguments above, the following attributes are exported:
 
 **Job Deploy Options Deploy CE Sites**
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed (`Block`).
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#job-deploy-options-deploy-ce-sites-site) below.
+
+<a id="job-deploy-options-deploy-ce-sites-site"></a>
+
+**Job Deploy Options Deploy CE Sites Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="job-deploy-options-deploy-ce-virtual-sites"></a>
 
 **Job Deploy Options Deploy CE Virtual Sites**
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed (`Block`).
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#job-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
+
+<a id="job-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
+
+**Job Deploy Options Deploy CE Virtual Sites Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="job-deploy-options-deploy-re-sites"></a>
 
 **Job Deploy Options Deploy RE Sites**
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed (`Block`).
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#job-deploy-options-deploy-re-sites-site) below.
+
+<a id="job-deploy-options-deploy-re-sites-site"></a>
+
+**Job Deploy Options Deploy RE Sites Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="job-deploy-options-deploy-re-virtual-sites"></a>
 
 **Job Deploy Options Deploy RE Virtual Sites**
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed (`Block`).
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#job-deploy-options-deploy-re-virtual-sites-virtual-site) below.
+
+<a id="job-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
+
+**Job Deploy Options Deploy RE Virtual Sites Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="job-volumes"></a>
 
@@ -257,25 +417,67 @@ In addition to all arguments above, the following attributes are exported:
 
 **Job Volumes Empty Dir**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#job-volumes-empty-dir-mount) below.
 
 `size_limit` - (Optional) Size Limit (in GiB) (`Number`).
+
+<a id="job-volumes-empty-dir-mount"></a>
+
+**Job Volumes Empty Dir Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="job-volumes-host-path"></a>
 
 **Job Volumes Host Path**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#job-volumes-host-path-mount) below.
 
 `path` - (Optional) Path. Path of the directory on the host (`String`).
+
+<a id="job-volumes-host-path-mount"></a>
+
+**Job Volumes Host Path Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="job-volumes-persistent-volume"></a>
 
 **Job Volumes Persistent Volume**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#job-volumes-persistent-volume-mount) below.
 
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC) (`Block`).
+`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#job-volumes-persistent-volume-storage) below.
+
+<a id="job-volumes-persistent-volume-mount"></a>
+
+**Job Volumes Persistent Volume Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
+
+<a id="job-volumes-persistent-volume-storage"></a>
+
+**Job Volumes Persistent Volume Storage**
+
+`access_mode` - (Optional) Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE` (`String`).
+
+`class_name` - (Optional) Class Name. Use the specified class name (`String`).
+
+`default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`storage_size` - (Optional) Size (in GiB). Size in GiB of the persistent storage (`Number`).
 
 <a id="service"></a>
 
@@ -311,25 +513,2207 @@ In addition to all arguments above, the following attributes are exported:
 
 **Service Advertise Options Advertise Custom**
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available (`Block`).
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#service-advertise-options-advertise-custom-advertise-where) below.
 
-`ports` - (Optional) Ports. Ports to advertise (`Block`).
+`ports` - (Optional) Ports. Ports to advertise. See [Ports](#service-advertise-options-advertise-custom-ports) below.
+
+<a id="service-advertise-options-advertise-custom-advertise-where"></a>
+
+**Service Advertise Options Advertise Custom Advertise Where**
+
+`site` - (Optional) Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised. See [Site](#service-advertise-options-advertise-custom-advertise-where-site) below.
+
+`virtual_site` - (Optional) Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised. See [Virtual Site](#service-advertise-options-advertise-custom-advertise-where-virtual-site) below.
+
+`vk8s_service` - (Optional) vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network. See [Vk8s Service](#service-advertise-options-advertise-custom-advertise-where-vk8s-service) below.
+
+<a id="service-advertise-options-advertise-custom-advertise-where-site"></a>
+
+**Service Advertise Options Advertise Custom Advertise Where Site**
+
+`ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
+
+`network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
+
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#service-advertise-options-advertise-custom-advertise-where-site-site) below.
+
+<a id="service-advertise-options-advertise-custom-advertise-where-site-site"></a>
+
+**Service Advertise Options Advertise Custom Advertise Where Site Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-advertise-where-virtual-site"></a>
+
+**Service Advertise Options Advertise Custom Advertise Where Virtual Site**
+
+`network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
+
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#service-advertise-options-advertise-custom-advertise-where-virtual-site-virtual-site) below.
+
+<a id="service-advertise-options-advertise-custom-advertise-where-virtual-site-virtual-site"></a>
+
+**Service Advertise Options Advertise Custom Advertise Where Virtual Site Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-advertise-where-vk8s-service"></a>
+
+**Service Advertise Options Advertise Custom Advertise Where Vk8s Service**
+
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#service-advertise-options-advertise-custom-advertise-where-vk8s-service-site) below.
+
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#service-advertise-options-advertise-custom-advertise-where-vk8s-service-virtual-site) below.
+
+<a id="service-advertise-options-advertise-custom-advertise-where-vk8s-service-site"></a>
+
+**Service Advertise Options Advertise Custom Advertise Where Vk8s Service Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
+
+**Service Advertise Options Advertise Custom Advertise Where Vk8s Service Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports"></a>
+
+**Service Advertise Options Advertise Custom Ports**
+
+`http_loadbalancer` - (Optional) HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer. See [HTTP Loadbalancer](#service-advertise-options-advertise-custom-ports-http-loadbalancer) below.
+
+`port` - (Optional) Port. Port of the workload. See [Port](#service-advertise-options-advertise-custom-ports-port) below.
+
+`tcp_loadbalancer` - (Optional) TCP Load Balancer. TCP loadbalancer. See [TCP Loadbalancer](#service-advertise-options-advertise-custom-ports-tcp-loadbalancer) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer**
+
+`default_route` - (Optional) Default Route. Default route matching all APIs. See [Default Route](#service-advertise-options-advertise-custom-ports-http-loadbalancer-default-route) below.
+
+`domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy. See [HTTP](#service-advertise-options-advertise-custom-ports-http-loadbalancer-http) below.
+
+`https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https) below.
+
+`https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS Auto Cert](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert) below.
+
+`specific_routes` - (Optional) Route Type. This defines various options to define a route. See [Specific Routes](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-default-route"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Default Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-http"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTP**
+
+`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal (`Bool`).
+
+`port` - (Optional) HTTP Listen Port. HTTP port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [TLS Cert Params](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params) below.
+
+`tls_parameters` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [TLS Parameters](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-coalescing-options"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params**
+
+`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-certificates) below.
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-certificates"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters**
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates) below.
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Listen Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-coalescing-options"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes**
+
+`routes` - (Optional) Routes. Routes for this loadbalancer. See [Routes](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes**
+
+`custom_route_object` - (Optional) Custom Route Object. A custom route uses a route object created outside of this view. See [Custom Route Object](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object) below.
+
+`direct_response_route` - (Optional) Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic. See [Direct Response Route](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route) below.
+
+`redirect_route` - (Optional) Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL. See [Redirect Route](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route) below.
+
+`simple_route` - (Optional) Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside. See [Simple Route](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+
+`route_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Route Ref](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path) below.
+
+`route_direct_response` - (Optional) Direct Response. Send this direct response in case of route match action is direct response. See [Route Direct Response](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+
+`response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg== (`String`).
+
+`response_code` - (Optional) Response Code. response code to send (`Number`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-path) below.
+
+`route_redirect` - (Optional) Redirect. route redirect parameters when match action is redirect. See [Route Redirect](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+
+`host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
+
+`path_redirect` - (Optional) Path. swap path part of incoming URL in redirect URL (`String`).
+
+`prefix_rewrite` - (Optional) Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request (`String`).
+
+`proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done (`String`).
+
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`replace_params` - (Optional) Replace All Parameters (`String`).
+
+`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
+
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route-path) below.
+
+<a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
+
+**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-port"></a>
+
+**Service Advertise Options Advertise Custom Ports Port**
+
+`info` - (Optional) Port Information. Port information. See [Info](#service-advertise-options-advertise-custom-ports-port-info) below.
+
+`name` - (Optional) Name. Name of the Port (`String`).
+
+<a id="service-advertise-options-advertise-custom-ports-port-info"></a>
+
+**Service Advertise Options Advertise Custom Ports Port Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
+
+<a id="service-advertise-options-advertise-custom-ports-tcp-loadbalancer"></a>
+
+**Service Advertise Options Advertise Custom Ports TCP Loadbalancer**
+
+`domains` - (Optional) Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`with_sni` - (Optional) With SNI. Set to true to enable TCP loadbalancer with SNI (`Bool`).
 
 <a id="service-advertise-options-advertise-in-cluster"></a>
 
 **Service Advertise Options Advertise In Cluster**
 
-`multi_ports` - (Optional) Multiple Ports. Multiple ports (`Block`).
+`multi_ports` - (Optional) Multiple Ports. Multiple ports. See [Multi Ports](#service-advertise-options-advertise-in-cluster-multi-ports) below.
 
-`port` - (Optional) Port. Single port (`Block`).
+`port` - (Optional) Port. Single port. See [Port](#service-advertise-options-advertise-in-cluster-port) below.
+
+<a id="service-advertise-options-advertise-in-cluster-multi-ports"></a>
+
+**Service Advertise Options Advertise In Cluster Multi Ports**
+
+`ports` - (Optional) Ports. Ports to advertise. See [Ports](#service-advertise-options-advertise-in-cluster-multi-ports-ports) below.
+
+<a id="service-advertise-options-advertise-in-cluster-multi-ports-ports"></a>
+
+**Service Advertise Options Advertise In Cluster Multi Ports Ports**
+
+`info` - (Optional) Port Information. Port information. See [Info](#service-advertise-options-advertise-in-cluster-multi-ports-ports-info) below.
+
+`name` - (Optional) Name. Name of the Port (`String`).
+
+<a id="service-advertise-options-advertise-in-cluster-multi-ports-ports-info"></a>
+
+**Service Advertise Options Advertise In Cluster Multi Ports Ports Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
+
+<a id="service-advertise-options-advertise-in-cluster-port"></a>
+
+**Service Advertise Options Advertise In Cluster Port**
+
+`info` - (Optional) Port Information. Port information. See [Info](#service-advertise-options-advertise-in-cluster-port-info) below.
+
+<a id="service-advertise-options-advertise-in-cluster-port-info"></a>
+
+**Service Advertise Options Advertise In Cluster Port Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
 
 <a id="service-advertise-options-advertise-on-public"></a>
 
 **Service Advertise Options Advertise On Public**
 
-`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports (`Block`).
+`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports. See [Multi Ports](#service-advertise-options-advertise-on-public-multi-ports) below.
 
-`port` - (Optional) Advertise Port. Advertise single port (`Block`).
+`port` - (Optional) Advertise Port. Advertise single port. See [Port](#service-advertise-options-advertise-on-public-port) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports**
+
+`ports` - (Optional) Ports. Ports to advertise. See [Ports](#service-advertise-options-advertise-on-public-multi-ports-ports) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports**
+
+`http_loadbalancer` - (Optional) HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer. See [HTTP Loadbalancer](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer) below.
+
+`port` - (Optional) Port. Port of the workload. See [Port](#service-advertise-options-advertise-on-public-multi-ports-ports-port) below.
+
+`tcp_loadbalancer` - (Optional) TCP Load Balancer. TCP loadbalancer. See [TCP Loadbalancer](#service-advertise-options-advertise-on-public-multi-ports-ports-tcp-loadbalancer) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer**
+
+`default_route` - (Optional) Default Route. Default route matching all APIs. See [Default Route](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-default-route) below.
+
+`domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy. See [HTTP](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-http) below.
+
+`https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https) below.
+
+`https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS Auto Cert](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert) below.
+
+`specific_routes` - (Optional) Route Type. This defines various options to define a route. See [Specific Routes](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-default-route"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Default Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-http"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTP**
+
+`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal (`Bool`).
+
+`port` - (Optional) HTTP Listen Port. HTTP port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [TLS Cert Params](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params) below.
+
+`tls_parameters` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [TLS Parameters](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-coalescing-options"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params**
+
+`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-certificates) below.
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-certificates"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters**
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates) below.
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Listen Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-coalescing-options"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes**
+
+`routes` - (Optional) Routes. Routes for this loadbalancer. See [Routes](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes**
+
+`custom_route_object` - (Optional) Custom Route Object. A custom route uses a route object created outside of this view. See [Custom Route Object](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object) below.
+
+`direct_response_route` - (Optional) Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic. See [Direct Response Route](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route) below.
+
+`redirect_route` - (Optional) Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL. See [Redirect Route](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route) below.
+
+`simple_route` - (Optional) Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside. See [Simple Route](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+
+`route_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Route Ref](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path) below.
+
+`route_direct_response` - (Optional) Direct Response. Send this direct response in case of route match action is direct response. See [Route Direct Response](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+
+`response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg== (`String`).
+
+`response_code` - (Optional) Response Code. response code to send (`Number`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-path) below.
+
+`route_redirect` - (Optional) Redirect. route redirect parameters when match action is redirect. See [Route Redirect](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+
+`host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
+
+`path_redirect` - (Optional) Path. swap path part of incoming URL in redirect URL (`String`).
+
+`prefix_rewrite` - (Optional) Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request (`String`).
+
+`proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done (`String`).
+
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`replace_params` - (Optional) Replace All Parameters (`String`).
+
+`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
+
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route-path) below.
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-port"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports Port**
+
+`info` - (Optional) Port Information. Port information. See [Info](#service-advertise-options-advertise-on-public-multi-ports-ports-port-info) below.
+
+`name` - (Optional) Name. Name of the Port (`String`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-port-info"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports Port Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
+
+<a id="service-advertise-options-advertise-on-public-multi-ports-ports-tcp-loadbalancer"></a>
+
+**Service Advertise Options Advertise On Public Multi Ports Ports TCP Loadbalancer**
+
+`domains` - (Optional) Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`with_sni` - (Optional) With SNI. Set to true to enable TCP loadbalancer with SNI (`Bool`).
+
+<a id="service-advertise-options-advertise-on-public-port"></a>
+
+**Service Advertise Options Advertise On Public Port**
+
+`http_loadbalancer` - (Optional) HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer. See [HTTP Loadbalancer](#service-advertise-options-advertise-on-public-port-http-loadbalancer) below.
+
+`port` - (Optional) Port. Single port. See [Port](#service-advertise-options-advertise-on-public-port-port) below.
+
+`tcp_loadbalancer` - (Optional) TCP Load Balancer. TCP loadbalancer. See [TCP Loadbalancer](#service-advertise-options-advertise-on-public-port-tcp-loadbalancer) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer**
+
+`default_route` - (Optional) Default Route. Default route matching all APIs. See [Default Route](#service-advertise-options-advertise-on-public-port-http-loadbalancer-default-route) below.
+
+`domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy. See [HTTP](#service-advertise-options-advertise-on-public-port-http-loadbalancer-http) below.
+
+`https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https) below.
+
+`https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS Auto Cert](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert) below.
+
+`specific_routes` - (Optional) Route Type. This defines various options to define a route. See [Specific Routes](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-default-route"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Default Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-http"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTP**
+
+`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal (`Bool`).
+
+`port` - (Optional) HTTP Listen Port. HTTP port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [TLS Cert Params](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params) below.
+
+`tls_parameters` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [TLS Parameters](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-coalescing-options"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params**
+
+`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-certificates) below.
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-certificates"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters**
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates) below.
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Listen Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-coalescing-options"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes**
+
+`routes` - (Optional) Routes. Routes for this loadbalancer. See [Routes](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes**
+
+`custom_route_object` - (Optional) Custom Route Object. A custom route uses a route object created outside of this view. See [Custom Route Object](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object) below.
+
+`direct_response_route` - (Optional) Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic. See [Direct Response Route](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route) below.
+
+`redirect_route` - (Optional) Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL. See [Redirect Route](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route) below.
+
+`simple_route` - (Optional) Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside. See [Simple Route](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+
+`route_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Route Ref](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-path) below.
+
+`route_direct_response` - (Optional) Direct Response. Send this direct response in case of route match action is direct response. See [Route Direct Response](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+
+`response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg== (`String`).
+
+`response_code` - (Optional) Response Code. response code to send (`Number`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-path) below.
+
+`route_redirect` - (Optional) Redirect. route redirect parameters when match action is redirect. See [Route Redirect](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+
+`host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
+
+`path_redirect` - (Optional) Path. swap path part of incoming URL in redirect URL (`String`).
+
+`prefix_rewrite` - (Optional) Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request (`String`).
+
+`proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done (`String`).
+
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`replace_params` - (Optional) Replace All Parameters (`String`).
+
+`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
+
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route-path) below.
+
+<a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
+
+**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="service-advertise-options-advertise-on-public-port-port"></a>
+
+**Service Advertise Options Advertise On Public Port Port**
+
+`info` - (Optional) Port Information. Port information. See [Info](#service-advertise-options-advertise-on-public-port-port-info) below.
+
+<a id="service-advertise-options-advertise-on-public-port-port-info"></a>
+
+**Service Advertise Options Advertise On Public Port Port Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
+
+<a id="service-advertise-options-advertise-on-public-port-tcp-loadbalancer"></a>
+
+**Service Advertise Options Advertise On Public Port TCP Loadbalancer**
+
+`domains` - (Optional) Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`with_sni` - (Optional) With SNI. Set to true to enable TCP loadbalancer with SNI (`Bool`).
 
 <a id="service-configuration"></a>
 
@@ -341,9 +2725,39 @@ In addition to all arguments above, the following attributes are exported:
 
 **Service Configuration Parameters**
 
-`env_var` - (Optional) Environment Variable. Environment Variable (`Block`).
+`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#service-configuration-parameters-env-var) below.
 
-`file` - (Optional) Configuration File. Configuration File for the workload (`Block`).
+`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#service-configuration-parameters-file) below.
+
+<a id="service-configuration-parameters-env-var"></a>
+
+**Service Configuration Parameters Env Var**
+
+`name` - (Optional) Name. Name of Environment Variable (`String`).
+
+`value` - (Optional) Value. Value of Environment Variable (`String`).
+
+<a id="service-configuration-parameters-file"></a>
+
+**Service Configuration Parameters File**
+
+`data` - (Optional) Data. File data (`String`).
+
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#service-configuration-parameters-file-mount) below.
+
+`name` - (Optional) Name. Name of the file (`String`).
+
+`volume_name` - (Optional) Volume Name. Name of the Volume (`String`).
+
+<a id="service-configuration-parameters-file-mount"></a>
+
+**Service Configuration Parameters File Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="service-containers"></a>
 
@@ -383,7 +2797,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Service Containers Image**
 
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#service-containers-image-container-registry) below.
 
 `name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed (`String`).
 
@@ -391,45 +2805,135 @@ In addition to all arguments above, the following attributes are exported:
 
 `pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
 
+<a id="service-containers-image-container-registry"></a>
+
+**Service Containers Image Container Registry**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="service-containers-liveness-check"></a>
 
 **Service Containers Liveness Check**
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#service-containers-liveness-check-exec-health-check) below.
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#service-containers-liveness-check-http-health-check) below.
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#service-containers-liveness-check-tcp-health-check) below.
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
+
+<a id="service-containers-liveness-check-exec-health-check"></a>
+
+**Service Containers Liveness Check Exec Health Check**
+
+`command` - (Optional) Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell (`List`).
+
+<a id="service-containers-liveness-check-http-health-check"></a>
+
+**Service Containers Liveness Check HTTP Health Check**
+
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs (`Block`).
+
+`host_header` - (Optional) Host Header. The value of the host header in the HTTP health check request (`String`).
+
+`path` - (Optional) Path. Path to access on the HTTP server (`String`).
+
+`port` - (Optional) Port. Port. See [Port](#service-containers-liveness-check-http-health-check-port) below.
+
+<a id="service-containers-liveness-check-http-health-check-port"></a>
+
+**Service Containers Liveness Check HTTP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
+
+<a id="service-containers-liveness-check-tcp-health-check"></a>
+
+**Service Containers Liveness Check TCP Health Check**
+
+`port` - (Optional) Port. Port. See [Port](#service-containers-liveness-check-tcp-health-check-port) below.
+
+<a id="service-containers-liveness-check-tcp-health-check-port"></a>
+
+**Service Containers Liveness Check TCP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
 
 <a id="service-containers-readiness-check"></a>
 
 **Service Containers Readiness Check**
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#service-containers-readiness-check-exec-health-check) below.
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#service-containers-readiness-check-http-health-check) below.
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#service-containers-readiness-check-tcp-health-check) below.
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
+
+<a id="service-containers-readiness-check-exec-health-check"></a>
+
+**Service Containers Readiness Check Exec Health Check**
+
+`command` - (Optional) Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell (`List`).
+
+<a id="service-containers-readiness-check-http-health-check"></a>
+
+**Service Containers Readiness Check HTTP Health Check**
+
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs (`Block`).
+
+`host_header` - (Optional) Host Header. The value of the host header in the HTTP health check request (`String`).
+
+`path` - (Optional) Path. Path to access on the HTTP server (`String`).
+
+`port` - (Optional) Port. Port. See [Port](#service-containers-readiness-check-http-health-check-port) below.
+
+<a id="service-containers-readiness-check-http-health-check-port"></a>
+
+**Service Containers Readiness Check HTTP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
+
+<a id="service-containers-readiness-check-tcp-health-check"></a>
+
+**Service Containers Readiness Check TCP Health Check**
+
+`port` - (Optional) Port. Port. See [Port](#service-containers-readiness-check-tcp-health-check-port) below.
+
+<a id="service-containers-readiness-check-tcp-health-check-port"></a>
+
+**Service Containers Readiness Check TCP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
 
 <a id="service-deploy-options"></a>
 
@@ -451,25 +2955,65 @@ In addition to all arguments above, the following attributes are exported:
 
 **Service Deploy Options Deploy CE Sites**
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed (`Block`).
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#service-deploy-options-deploy-ce-sites-site) below.
+
+<a id="service-deploy-options-deploy-ce-sites-site"></a>
+
+**Service Deploy Options Deploy CE Sites Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="service-deploy-options-deploy-ce-virtual-sites"></a>
 
 **Service Deploy Options Deploy CE Virtual Sites**
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed (`Block`).
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#service-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
+
+<a id="service-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
+
+**Service Deploy Options Deploy CE Virtual Sites Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="service-deploy-options-deploy-re-sites"></a>
 
 **Service Deploy Options Deploy RE Sites**
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed (`Block`).
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#service-deploy-options-deploy-re-sites-site) below.
+
+<a id="service-deploy-options-deploy-re-sites-site"></a>
+
+**Service Deploy Options Deploy RE Sites Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="service-deploy-options-deploy-re-virtual-sites"></a>
 
 **Service Deploy Options Deploy RE Virtual Sites**
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed (`Block`).
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#service-deploy-options-deploy-re-virtual-sites-virtual-site) below.
+
+<a id="service-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
+
+**Service Deploy Options Deploy RE Virtual Sites Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="service-volumes"></a>
 
@@ -487,25 +3031,67 @@ In addition to all arguments above, the following attributes are exported:
 
 **Service Volumes Empty Dir**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#service-volumes-empty-dir-mount) below.
 
 `size_limit` - (Optional) Size Limit (in GiB) (`Number`).
+
+<a id="service-volumes-empty-dir-mount"></a>
+
+**Service Volumes Empty Dir Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="service-volumes-host-path"></a>
 
 **Service Volumes Host Path**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#service-volumes-host-path-mount) below.
 
 `path` - (Optional) Path. Path of the directory on the host (`String`).
+
+<a id="service-volumes-host-path-mount"></a>
+
+**Service Volumes Host Path Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="service-volumes-persistent-volume"></a>
 
 **Service Volumes Persistent Volume**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#service-volumes-persistent-volume-mount) below.
 
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC) (`Block`).
+`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#service-volumes-persistent-volume-storage) below.
+
+<a id="service-volumes-persistent-volume-mount"></a>
+
+**Service Volumes Persistent Volume Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
+
+<a id="service-volumes-persistent-volume-storage"></a>
+
+**Service Volumes Persistent Volume Storage**
+
+`access_mode` - (Optional) Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE` (`String`).
+
+`class_name` - (Optional) Class Name. Use the specified class name (`String`).
+
+`default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`storage_size` - (Optional) Size (in GiB). Size in GiB of the persistent storage (`Number`).
 
 <a id="simple-service"></a>
 
@@ -535,9 +3121,39 @@ In addition to all arguments above, the following attributes are exported:
 
 **Simple Service Configuration Parameters**
 
-`env_var` - (Optional) Environment Variable. Environment Variable (`Block`).
+`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#simple-service-configuration-parameters-env-var) below.
 
-`file` - (Optional) Configuration File. Configuration File for the workload (`Block`).
+`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#simple-service-configuration-parameters-file) below.
+
+<a id="simple-service-configuration-parameters-env-var"></a>
+
+**Simple Service Configuration Parameters Env Var**
+
+`name` - (Optional) Name. Name of Environment Variable (`String`).
+
+`value` - (Optional) Value. Value of Environment Variable (`String`).
+
+<a id="simple-service-configuration-parameters-file"></a>
+
+**Simple Service Configuration Parameters File**
+
+`data` - (Optional) Data. File data (`String`).
+
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#simple-service-configuration-parameters-file-mount) below.
+
+`name` - (Optional) Name. Name of the file (`String`).
+
+`volume_name` - (Optional) Volume Name. Name of the Volume (`String`).
+
+<a id="simple-service-configuration-parameters-file-mount"></a>
+
+**Simple Service Configuration Parameters File Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="simple-service-container"></a>
 
@@ -577,7 +3193,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Simple Service Container Image**
 
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#simple-service-container-image-container-registry) below.
 
 `name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed (`String`).
 
@@ -585,45 +3201,135 @@ In addition to all arguments above, the following attributes are exported:
 
 `pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
 
+<a id="simple-service-container-image-container-registry"></a>
+
+**Simple Service Container Image Container Registry**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="simple-service-container-liveness-check"></a>
 
 **Simple Service Container Liveness Check**
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#simple-service-container-liveness-check-exec-health-check) below.
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#simple-service-container-liveness-check-http-health-check) below.
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#simple-service-container-liveness-check-tcp-health-check) below.
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
+
+<a id="simple-service-container-liveness-check-exec-health-check"></a>
+
+**Simple Service Container Liveness Check Exec Health Check**
+
+`command` - (Optional) Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell (`List`).
+
+<a id="simple-service-container-liveness-check-http-health-check"></a>
+
+**Simple Service Container Liveness Check HTTP Health Check**
+
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs (`Block`).
+
+`host_header` - (Optional) Host Header. The value of the host header in the HTTP health check request (`String`).
+
+`path` - (Optional) Path. Path to access on the HTTP server (`String`).
+
+`port` - (Optional) Port. Port. See [Port](#simple-service-container-liveness-check-http-health-check-port) below.
+
+<a id="simple-service-container-liveness-check-http-health-check-port"></a>
+
+**Simple Service Container Liveness Check HTTP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
+
+<a id="simple-service-container-liveness-check-tcp-health-check"></a>
+
+**Simple Service Container Liveness Check TCP Health Check**
+
+`port` - (Optional) Port. Port. See [Port](#simple-service-container-liveness-check-tcp-health-check-port) below.
+
+<a id="simple-service-container-liveness-check-tcp-health-check-port"></a>
+
+**Simple Service Container Liveness Check TCP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
 
 <a id="simple-service-container-readiness-check"></a>
 
 **Simple Service Container Readiness Check**
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#simple-service-container-readiness-check-exec-health-check) below.
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#simple-service-container-readiness-check-http-health-check) below.
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#simple-service-container-readiness-check-tcp-health-check) below.
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
+
+<a id="simple-service-container-readiness-check-exec-health-check"></a>
+
+**Simple Service Container Readiness Check Exec Health Check**
+
+`command` - (Optional) Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell (`List`).
+
+<a id="simple-service-container-readiness-check-http-health-check"></a>
+
+**Simple Service Container Readiness Check HTTP Health Check**
+
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs (`Block`).
+
+`host_header` - (Optional) Host Header. The value of the host header in the HTTP health check request (`String`).
+
+`path` - (Optional) Path. Path to access on the HTTP server (`String`).
+
+`port` - (Optional) Port. Port. See [Port](#simple-service-container-readiness-check-http-health-check-port) below.
+
+<a id="simple-service-container-readiness-check-http-health-check-port"></a>
+
+**Simple Service Container Readiness Check HTTP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
+
+<a id="simple-service-container-readiness-check-tcp-health-check"></a>
+
+**Simple Service Container Readiness Check TCP Health Check**
+
+`port` - (Optional) Port. Port. See [Port](#simple-service-container-readiness-check-tcp-health-check-port) below.
+
+<a id="simple-service-container-readiness-check-tcp-health-check-port"></a>
+
+**Simple Service Container Readiness Check TCP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
 
 <a id="simple-service-enabled"></a>
 
@@ -637,9 +3343,31 @@ In addition to all arguments above, the following attributes are exported:
 
 **Simple Service Enabled Persistent Volume**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#simple-service-enabled-persistent-volume-mount) below.
 
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC) (`Block`).
+`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#simple-service-enabled-persistent-volume-storage) below.
+
+<a id="simple-service-enabled-persistent-volume-mount"></a>
+
+**Simple Service Enabled Persistent Volume Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
+
+<a id="simple-service-enabled-persistent-volume-storage"></a>
+
+**Simple Service Enabled Persistent Volume Storage**
+
+`access_mode` - (Optional) Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE` (`String`).
+
+`class_name` - (Optional) Class Name. Use the specified class name (`String`).
+
+`default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`storage_size` - (Optional) Size (in GiB). Size in GiB of the persistent storage (`Number`).
 
 <a id="simple-service-simple-advertise"></a>
 
@@ -685,25 +3413,2207 @@ In addition to all arguments above, the following attributes are exported:
 
 **Stateful Service Advertise Options Advertise Custom**
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available (`Block`).
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#stateful-service-advertise-options-advertise-custom-advertise-where) below.
 
-`ports` - (Optional) Ports. Ports to advertise (`Block`).
+`ports` - (Optional) Ports. Ports to advertise. See [Ports](#stateful-service-advertise-options-advertise-custom-ports) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-advertise-where"></a>
+
+**Stateful Service Advertise Options Advertise Custom Advertise Where**
+
+`site` - (Optional) Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised. See [Site](#stateful-service-advertise-options-advertise-custom-advertise-where-site) below.
+
+`virtual_site` - (Optional) Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised. See [Virtual Site](#stateful-service-advertise-options-advertise-custom-advertise-where-virtual-site) below.
+
+`vk8s_service` - (Optional) vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network. See [Vk8s Service](#stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-advertise-where-site"></a>
+
+**Stateful Service Advertise Options Advertise Custom Advertise Where Site**
+
+`ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
+
+`network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
+
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#stateful-service-advertise-options-advertise-custom-advertise-where-site-site) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-advertise-where-site-site"></a>
+
+**Stateful Service Advertise Options Advertise Custom Advertise Where Site Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-advertise-where-virtual-site"></a>
+
+**Stateful Service Advertise Options Advertise Custom Advertise Where Virtual Site**
+
+`network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
+
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#stateful-service-advertise-options-advertise-custom-advertise-where-virtual-site-virtual-site) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-advertise-where-virtual-site-virtual-site"></a>
+
+**Stateful Service Advertise Options Advertise Custom Advertise Where Virtual Site Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service"></a>
+
+**Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service**
+
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service-site) below.
+
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service-virtual-site) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service-site"></a>
+
+**Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
+
+**Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports**
+
+`http_loadbalancer` - (Optional) HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer. See [HTTP Loadbalancer](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer) below.
+
+`port` - (Optional) Port. Port of the workload. See [Port](#stateful-service-advertise-options-advertise-custom-ports-port) below.
+
+`tcp_loadbalancer` - (Optional) TCP Load Balancer. TCP loadbalancer. See [TCP Loadbalancer](#stateful-service-advertise-options-advertise-custom-ports-tcp-loadbalancer) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer**
+
+`default_route` - (Optional) Default Route. Default route matching all APIs. See [Default Route](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-default-route) below.
+
+`domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy. See [HTTP](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-http) below.
+
+`https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https) below.
+
+`https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS Auto Cert](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert) below.
+
+`specific_routes` - (Optional) Route Type. This defines various options to define a route. See [Specific Routes](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-default-route"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Default Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-http"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTP**
+
+`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal (`Bool`).
+
+`port` - (Optional) HTTP Listen Port. HTTP port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [TLS Cert Params](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params) below.
+
+`tls_parameters` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [TLS Parameters](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-coalescing-options"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params**
+
+`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-certificates) below.
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-certificates"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters**
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates) below.
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Listen Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-coalescing-options"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes**
+
+`routes` - (Optional) Routes. Routes for this loadbalancer. See [Routes](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes**
+
+`custom_route_object` - (Optional) Custom Route Object. A custom route uses a route object created outside of this view. See [Custom Route Object](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object) below.
+
+`direct_response_route` - (Optional) Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic. See [Direct Response Route](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route) below.
+
+`redirect_route` - (Optional) Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL. See [Redirect Route](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route) below.
+
+`simple_route` - (Optional) Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside. See [Simple Route](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+
+`route_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Route Ref](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path) below.
+
+`route_direct_response` - (Optional) Direct Response. Send this direct response in case of route match action is direct response. See [Route Direct Response](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+
+`response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg== (`String`).
+
+`response_code` - (Optional) Response Code. response code to send (`Number`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-path) below.
+
+`route_redirect` - (Optional) Redirect. route redirect parameters when match action is redirect. See [Route Redirect](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+
+`host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
+
+`path_redirect` - (Optional) Path. swap path part of incoming URL in redirect URL (`String`).
+
+`prefix_rewrite` - (Optional) Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request (`String`).
+
+`proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done (`String`).
+
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`replace_params` - (Optional) Replace All Parameters (`String`).
+
+`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
+
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route-path) below.
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-port"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports Port**
+
+`info` - (Optional) Port Information. Port information. See [Info](#stateful-service-advertise-options-advertise-custom-ports-port-info) below.
+
+`name` - (Optional) Name. Name of the Port (`String`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-port-info"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports Port Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
+
+<a id="stateful-service-advertise-options-advertise-custom-ports-tcp-loadbalancer"></a>
+
+**Stateful Service Advertise Options Advertise Custom Ports TCP Loadbalancer**
+
+`domains` - (Optional) Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`with_sni` - (Optional) With SNI. Set to true to enable TCP loadbalancer with SNI (`Bool`).
 
 <a id="stateful-service-advertise-options-advertise-in-cluster"></a>
 
 **Stateful Service Advertise Options Advertise In Cluster**
 
-`multi_ports` - (Optional) Multiple Ports. Multiple ports (`Block`).
+`multi_ports` - (Optional) Multiple Ports. Multiple ports. See [Multi Ports](#stateful-service-advertise-options-advertise-in-cluster-multi-ports) below.
 
-`port` - (Optional) Port. Single port (`Block`).
+`port` - (Optional) Port. Single port. See [Port](#stateful-service-advertise-options-advertise-in-cluster-port) below.
+
+<a id="stateful-service-advertise-options-advertise-in-cluster-multi-ports"></a>
+
+**Stateful Service Advertise Options Advertise In Cluster Multi Ports**
+
+`ports` - (Optional) Ports. Ports to advertise. See [Ports](#stateful-service-advertise-options-advertise-in-cluster-multi-ports-ports) below.
+
+<a id="stateful-service-advertise-options-advertise-in-cluster-multi-ports-ports"></a>
+
+**Stateful Service Advertise Options Advertise In Cluster Multi Ports Ports**
+
+`info` - (Optional) Port Information. Port information. See [Info](#stateful-service-advertise-options-advertise-in-cluster-multi-ports-ports-info) below.
+
+`name` - (Optional) Name. Name of the Port (`String`).
+
+<a id="stateful-service-advertise-options-advertise-in-cluster-multi-ports-ports-info"></a>
+
+**Stateful Service Advertise Options Advertise In Cluster Multi Ports Ports Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
+
+<a id="stateful-service-advertise-options-advertise-in-cluster-port"></a>
+
+**Stateful Service Advertise Options Advertise In Cluster Port**
+
+`info` - (Optional) Port Information. Port information. See [Info](#stateful-service-advertise-options-advertise-in-cluster-port-info) below.
+
+<a id="stateful-service-advertise-options-advertise-in-cluster-port-info"></a>
+
+**Stateful Service Advertise Options Advertise In Cluster Port Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
 
 <a id="stateful-service-advertise-options-advertise-on-public"></a>
 
 **Stateful Service Advertise Options Advertise On Public**
 
-`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports (`Block`).
+`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports. See [Multi Ports](#stateful-service-advertise-options-advertise-on-public-multi-ports) below.
 
-`port` - (Optional) Advertise Port. Advertise single port (`Block`).
+`port` - (Optional) Advertise Port. Advertise single port. See [Port](#stateful-service-advertise-options-advertise-on-public-port) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports**
+
+`ports` - (Optional) Ports. Ports to advertise. See [Ports](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports**
+
+`http_loadbalancer` - (Optional) HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer. See [HTTP Loadbalancer](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer) below.
+
+`port` - (Optional) Port. Port of the workload. See [Port](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-port) below.
+
+`tcp_loadbalancer` - (Optional) TCP Load Balancer. TCP loadbalancer. See [TCP Loadbalancer](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-tcp-loadbalancer) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer**
+
+`default_route` - (Optional) Default Route. Default route matching all APIs. See [Default Route](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-default-route) below.
+
+`domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy. See [HTTP](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-http) below.
+
+`https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https) below.
+
+`https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS Auto Cert](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert) below.
+
+`specific_routes` - (Optional) Route Type. This defines various options to define a route. See [Specific Routes](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-default-route"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Default Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-http"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTP**
+
+`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal (`Bool`).
+
+`port` - (Optional) HTTP Listen Port. HTTP port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [TLS Cert Params](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params) below.
+
+`tls_parameters` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [TLS Parameters](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-coalescing-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params**
+
+`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-certificates) below.
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-certificates"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters**
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates) below.
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Listen Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-coalescing-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes**
+
+`routes` - (Optional) Routes. Routes for this loadbalancer. See [Routes](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes**
+
+`custom_route_object` - (Optional) Custom Route Object. A custom route uses a route object created outside of this view. See [Custom Route Object](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object) below.
+
+`direct_response_route` - (Optional) Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic. See [Direct Response Route](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route) below.
+
+`redirect_route` - (Optional) Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL. See [Redirect Route](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route) below.
+
+`simple_route` - (Optional) Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside. See [Simple Route](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+
+`route_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Route Ref](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path) below.
+
+`route_direct_response` - (Optional) Direct Response. Send this direct response in case of route match action is direct response. See [Route Direct Response](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+
+`response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg== (`String`).
+
+`response_code` - (Optional) Response Code. response code to send (`Number`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-path) below.
+
+`route_redirect` - (Optional) Redirect. route redirect parameters when match action is redirect. See [Route Redirect](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+
+`host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
+
+`path_redirect` - (Optional) Path. swap path part of incoming URL in redirect URL (`String`).
+
+`prefix_rewrite` - (Optional) Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request (`String`).
+
+`proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done (`String`).
+
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`replace_params` - (Optional) Replace All Parameters (`String`).
+
+`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
+
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route-path) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-port"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports Port**
+
+`info` - (Optional) Port Information. Port information. See [Info](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-port-info) below.
+
+`name` - (Optional) Name. Name of the Port (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-port-info"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports Port Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-tcp-loadbalancer"></a>
+
+**Stateful Service Advertise Options Advertise On Public Multi Ports Ports TCP Loadbalancer**
+
+`domains` - (Optional) Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`with_sni` - (Optional) With SNI. Set to true to enable TCP loadbalancer with SNI (`Bool`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port**
+
+`http_loadbalancer` - (Optional) HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer. See [HTTP Loadbalancer](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer) below.
+
+`port` - (Optional) Port. Single port. See [Port](#stateful-service-advertise-options-advertise-on-public-port-port) below.
+
+`tcp_loadbalancer` - (Optional) TCP Load Balancer. TCP loadbalancer. See [TCP Loadbalancer](#stateful-service-advertise-options-advertise-on-public-port-tcp-loadbalancer) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer**
+
+`default_route` - (Optional) Default Route. Default route matching all APIs. See [Default Route](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-default-route) below.
+
+`domains` - (Optional) Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy. See [HTTP](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-http) below.
+
+`https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https) below.
+
+`https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates. See [HTTPS Auto Cert](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert) below.
+
+`specific_routes` - (Optional) Route Type. This defines various options to define a route. See [Specific Routes](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-default-route"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Default Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-http"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTP**
+
+`dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal (`Bool`).
+
+`port` - (Optional) HTTP Listen Port. HTTP port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [TLS Cert Params](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params) below.
+
+`tls_parameters` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [TLS Parameters](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-coalescing-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params**
+
+`certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-certificates) below.
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-certificates"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters**
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates) below.
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+
+`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
+
+`description` - (Optional) Description. Description for the certificate (`String`).
+
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key) below.
+
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert**
+
+`add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
+
+`append_server_name` - (Optional) Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is (`String`).
+
+`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-coalescing-options) below.
+
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options) below.
+
+`http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
+
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) HTTPS Listen Port. HTTPS port to Listen (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+
+`server_name` - (Optional) Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header (`String`).
+
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config) below.
+
+`use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-coalescing-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+
+`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
+
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
+
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+
+`cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
+
+`max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+`min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+
+`client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
+
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-crl) below.
+
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca) below.
+
+`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
+
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+
+`xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes**
+
+`routes` - (Optional) Routes. Routes for this loadbalancer. See [Routes](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes**
+
+`custom_route_object` - (Optional) Custom Route Object. A custom route uses a route object created outside of this view. See [Custom Route Object](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object) below.
+
+`direct_response_route` - (Optional) Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic. See [Direct Response Route](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route) below.
+
+`redirect_route` - (Optional) Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL. See [Redirect Route](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route) below.
+
+`simple_route` - (Optional) Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside. See [Simple Route](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+
+`route_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Route Ref](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-path) below.
+
+`route_direct_response` - (Optional) Direct Response. Send this direct response in case of route match action is direct response. See [Route Direct Response](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+
+`response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg== (`String`).
+
+`response_code` - (Optional) Response Code. response code to send (`Number`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route**
+
+`headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`incoming_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Incoming Port](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port) below.
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-path) below.
+
+`route_redirect` - (Optional) Redirect. route redirect parameters when match action is redirect. See [Route Redirect](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+
+`exact` - (Optional) Exact. Header value to match exactly (`String`).
+
+`invert_match` - (Optional) NOT of match. Invert the result of the match to detect missing header or non-matching value (`Bool`).
+
+`name` - (Optional) Name. Name of the header (`String`).
+
+`presence` - (Optional) Presence. If true, check for presence of header (`Bool`).
+
+`regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Exact Port to match (`Number`).
+
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+
+`host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
+
+`path_redirect` - (Optional) Path. swap path part of incoming URL in redirect URL (`String`).
+
+`prefix_rewrite` - (Optional) Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request (`String`).
+
+`proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done (`String`).
+
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`replace_params` - (Optional) Replace All Parameters (`String`).
+
+`response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
+
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route**
+
+`auto_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_host_rewrite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`host_rewrite` - (Optional) Host Rewrite Value. Host header will be swapped with this value (`String`).
+
+`http_method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+
+`path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route-path) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+
+`path` - (Optional) Exact. Exact path value to match (`String`).
+
+`prefix` - (Optional) Prefix. Path prefix to match (e.g. the value / will match on all paths) (`String`).
+
+`regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-port"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port Port**
+
+`info` - (Optional) Port Information. Port information. See [Info](#stateful-service-advertise-options-advertise-on-public-port-port-info) below.
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-port-info"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port Port Info**
+
+`port` - (Optional) Port. Port the workload can be reached on (`Number`).
+
+`protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
+
+`same_as_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`target_port` - (Optional) Different than Port. Port the workload is listening on (`Number`).
+
+<a id="stateful-service-advertise-options-advertise-on-public-port-tcp-loadbalancer"></a>
+
+**Stateful Service Advertise Options Advertise On Public Port TCP Loadbalancer**
+
+`domains` - (Optional) Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER (`List`).
+
+`with_sni` - (Optional) With SNI. Set to true to enable TCP loadbalancer with SNI (`Bool`).
 
 <a id="stateful-service-configuration"></a>
 
@@ -715,9 +5625,39 @@ In addition to all arguments above, the following attributes are exported:
 
 **Stateful Service Configuration Parameters**
 
-`env_var` - (Optional) Environment Variable. Environment Variable (`Block`).
+`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#stateful-service-configuration-parameters-env-var) below.
 
-`file` - (Optional) Configuration File. Configuration File for the workload (`Block`).
+`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#stateful-service-configuration-parameters-file) below.
+
+<a id="stateful-service-configuration-parameters-env-var"></a>
+
+**Stateful Service Configuration Parameters Env Var**
+
+`name` - (Optional) Name. Name of Environment Variable (`String`).
+
+`value` - (Optional) Value. Value of Environment Variable (`String`).
+
+<a id="stateful-service-configuration-parameters-file"></a>
+
+**Stateful Service Configuration Parameters File**
+
+`data` - (Optional) Data. File data (`String`).
+
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#stateful-service-configuration-parameters-file-mount) below.
+
+`name` - (Optional) Name. Name of the file (`String`).
+
+`volume_name` - (Optional) Volume Name. Name of the Volume (`String`).
+
+<a id="stateful-service-configuration-parameters-file-mount"></a>
+
+**Stateful Service Configuration Parameters File Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="stateful-service-containers"></a>
 
@@ -757,7 +5697,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Stateful Service Containers Image**
 
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#stateful-service-containers-image-container-registry) below.
 
 `name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed (`String`).
 
@@ -765,45 +5705,135 @@ In addition to all arguments above, the following attributes are exported:
 
 `pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
 
+<a id="stateful-service-containers-image-container-registry"></a>
+
+**Stateful Service Containers Image Container Registry**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
 <a id="stateful-service-containers-liveness-check"></a>
 
 **Stateful Service Containers Liveness Check**
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#stateful-service-containers-liveness-check-exec-health-check) below.
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#stateful-service-containers-liveness-check-http-health-check) below.
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#stateful-service-containers-liveness-check-tcp-health-check) below.
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
+
+<a id="stateful-service-containers-liveness-check-exec-health-check"></a>
+
+**Stateful Service Containers Liveness Check Exec Health Check**
+
+`command` - (Optional) Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell (`List`).
+
+<a id="stateful-service-containers-liveness-check-http-health-check"></a>
+
+**Stateful Service Containers Liveness Check HTTP Health Check**
+
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs (`Block`).
+
+`host_header` - (Optional) Host Header. The value of the host header in the HTTP health check request (`String`).
+
+`path` - (Optional) Path. Path to access on the HTTP server (`String`).
+
+`port` - (Optional) Port. Port. See [Port](#stateful-service-containers-liveness-check-http-health-check-port) below.
+
+<a id="stateful-service-containers-liveness-check-http-health-check-port"></a>
+
+**Stateful Service Containers Liveness Check HTTP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
+
+<a id="stateful-service-containers-liveness-check-tcp-health-check"></a>
+
+**Stateful Service Containers Liveness Check TCP Health Check**
+
+`port` - (Optional) Port. Port. See [Port](#stateful-service-containers-liveness-check-tcp-health-check-port) below.
+
+<a id="stateful-service-containers-liveness-check-tcp-health-check-port"></a>
+
+**Stateful Service Containers Liveness Check TCP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
 
 <a id="stateful-service-containers-readiness-check"></a>
 
 **Stateful Service Containers Readiness Check**
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#stateful-service-containers-readiness-check-exec-health-check) below.
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#stateful-service-containers-readiness-check-http-health-check) below.
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#stateful-service-containers-readiness-check-tcp-health-check) below.
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
+
+<a id="stateful-service-containers-readiness-check-exec-health-check"></a>
+
+**Stateful Service Containers Readiness Check Exec Health Check**
+
+`command` - (Optional) Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell (`List`).
+
+<a id="stateful-service-containers-readiness-check-http-health-check"></a>
+
+**Stateful Service Containers Readiness Check HTTP Health Check**
+
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs (`Block`).
+
+`host_header` - (Optional) Host Header. The value of the host header in the HTTP health check request (`String`).
+
+`path` - (Optional) Path. Path to access on the HTTP server (`String`).
+
+`port` - (Optional) Port. Port. See [Port](#stateful-service-containers-readiness-check-http-health-check-port) below.
+
+<a id="stateful-service-containers-readiness-check-http-health-check-port"></a>
+
+**Stateful Service Containers Readiness Check HTTP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
+
+<a id="stateful-service-containers-readiness-check-tcp-health-check"></a>
+
+**Stateful Service Containers Readiness Check TCP Health Check**
+
+`port` - (Optional) Port. Port. See [Port](#stateful-service-containers-readiness-check-tcp-health-check-port) below.
+
+<a id="stateful-service-containers-readiness-check-tcp-health-check-port"></a>
+
+**Stateful Service Containers Readiness Check TCP Health Check Port**
+
+`name` - (Optional) Port Name. Port Name (`String`).
+
+`num` - (Optional) Port Number. Port number (`Number`).
 
 <a id="stateful-service-deploy-options"></a>
 
@@ -825,25 +5855,65 @@ In addition to all arguments above, the following attributes are exported:
 
 **Stateful Service Deploy Options Deploy CE Sites**
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed (`Block`).
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#stateful-service-deploy-options-deploy-ce-sites-site) below.
+
+<a id="stateful-service-deploy-options-deploy-ce-sites-site"></a>
+
+**Stateful Service Deploy Options Deploy CE Sites Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="stateful-service-deploy-options-deploy-ce-virtual-sites"></a>
 
 **Stateful Service Deploy Options Deploy CE Virtual Sites**
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed (`Block`).
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#stateful-service-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
+
+<a id="stateful-service-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
+
+**Stateful Service Deploy Options Deploy CE Virtual Sites Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="stateful-service-deploy-options-deploy-re-sites"></a>
 
 **Stateful Service Deploy Options Deploy RE Sites**
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed (`Block`).
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#stateful-service-deploy-options-deploy-re-sites-site) below.
+
+<a id="stateful-service-deploy-options-deploy-re-sites-site"></a>
+
+**Stateful Service Deploy Options Deploy RE Sites Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="stateful-service-deploy-options-deploy-re-virtual-sites"></a>
 
 **Stateful Service Deploy Options Deploy RE Virtual Sites**
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed (`Block`).
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#stateful-service-deploy-options-deploy-re-virtual-sites-virtual-site) below.
+
+<a id="stateful-service-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
+
+**Stateful Service Deploy Options Deploy RE Virtual Sites Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="stateful-service-persistent-volumes"></a>
 
@@ -857,9 +5927,31 @@ In addition to all arguments above, the following attributes are exported:
 
 **Stateful Service Persistent Volumes Persistent Volume**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#stateful-service-persistent-volumes-persistent-volume-mount) below.
 
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC) (`Block`).
+`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#stateful-service-persistent-volumes-persistent-volume-storage) below.
+
+<a id="stateful-service-persistent-volumes-persistent-volume-mount"></a>
+
+**Stateful Service Persistent Volumes Persistent Volume Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
+
+<a id="stateful-service-persistent-volumes-persistent-volume-storage"></a>
+
+**Stateful Service Persistent Volumes Persistent Volume Storage**
+
+`access_mode` - (Optional) Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts. Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`. Defaults to `ACCESS_MODE_READ_WRITE_ONCE` (`String`).
+
+`class_name` - (Optional) Class Name. Use the specified class name (`String`).
+
+`default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`storage_size` - (Optional) Size (in GiB). Size in GiB of the persistent storage (`Number`).
 
 <a id="stateful-service-volumes"></a>
 
@@ -875,17 +5967,37 @@ In addition to all arguments above, the following attributes are exported:
 
 **Stateful Service Volumes Empty Dir**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#stateful-service-volumes-empty-dir-mount) below.
 
 `size_limit` - (Optional) Size Limit (in GiB) (`Number`).
+
+<a id="stateful-service-volumes-empty-dir-mount"></a>
+
+**Stateful Service Volumes Empty Dir Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="stateful-service-volumes-host-path"></a>
 
 **Stateful Service Volumes Host Path**
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#stateful-service-volumes-host-path-mount) below.
 
 `path` - (Optional) Path. Path of the directory on the host (`String`).
+
+<a id="stateful-service-volumes-host-path-mount"></a>
+
+**Stateful Service Volumes Host Path Mount**
+
+`mode` - (Optional) Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY` (`String`).
+
+`mount_path` - (Optional) Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':' (`String`).
+
+`sub_path` - (Optional) Sub Path. Path within the volume from which the workload's volume should be mounted. Defaults to '' (volume's root) (`String`).
 
 <a id="timeouts"></a>
 

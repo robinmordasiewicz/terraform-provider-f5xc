@@ -282,7 +282,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tunnel_dead_timeout` - (Optional) Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used (`Number`).
 
-`vip_vrrp_mode` - (Optional) VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE` (`String`).
+`vip_vrrp_mode` - (Optional) VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`. Defaults to `VIP_VRRP_INVALID` (`String`).
 
 <a id="custom-network-config-active-enhanced-firewall-policies"></a>
 
@@ -342,9 +342,41 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Network Config Global Network List Global Network Connections**
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) below.
+
+<a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr"></a>
+
+**Custom Network Config Global Network List Global Network Connections Sli To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
+
+<a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
+
+**Custom Network Config Global Network List Global Network Connections Sli To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="custom-network-config-global-network-list-global-network-connections-slo-to-global-dr"></a>
+
+**Custom Network Config Global Network List Global Network Connections Slo To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
+
+<a id="custom-network-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
+
+**Custom Network Config Global Network List Global Network Connections Slo To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="custom-network-config-interface-list"></a>
 
@@ -360,17 +392,317 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration (`Block`).
+`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration. See [Dedicated Interface](#custom-network-config-interface-list-interfaces-dedicated-interface) below.
 
-`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration (`Block`).
+`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration. See [Dedicated Management Interface](#custom-network-config-interface-list-interfaces-dedicated-management-interface) below.
 
 `description` - (Optional) Interface Description. Description for this Interface (`String`).
 
-`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration (`Block`).
+`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Ethernet Interface](#custom-network-config-interface-list-interfaces-ethernet-interface) below.
 
 `labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
 
-`tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration (`Block`).
+`tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration. See [Tunnel Interface](#custom-network-config-interface-list-interfaces-tunnel-interface) below.
+
+<a id="custom-network-config-interface-list-interfaces-dedicated-interface"></a>
+
+**Custom Network Config Interface List Interfaces Dedicated Interface**
+
+`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`device` - (Optional) Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE (`String`).
+
+`is_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`node` - (Optional) Specific Node. Configuration will apply to a device on the given node of the site (`String`).
+
+`not_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
+
+<a id="custom-network-config-interface-list-interfaces-dedicated-management-interface"></a>
+
+**Custom Network Config Interface List Interfaces Dedicated Management Interface**
+
+`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`device` - (Optional) Interface Device. Name of the device for which interface is configured (`String`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`node` - (Optional) Specific Node. Configuration will apply to a device on the given node of the site (`String`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface**
+
+`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`device` - (Optional) Ethernet Device. Interface configuration for the ethernet device (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_server` - (Optional) DHCPServerParametersType. See [DHCP Server](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config) below.
+
+`is_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`node` - (Optional) Specific Node. Configuration will apply to a device on the given node (`String`).
+
+`not_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address) below.
+
+`storage_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`untagged` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`vlan_id` - (Optional) VLAN Id. Configure a VLAN tagged ethernet interface (`Number`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses. See [DHCP Networks](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv4 Assignments. Specify static IPv4 addresses per node. See [Interface IP Map](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-interface-ip-map) below.
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks**
+
+`dgw_address` - (Optional) Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway (`String`).
+
+`dns_address` - (Optional) Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`network_prefix` - (Optional) Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24 (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools) below.
+
+`same_as_dgw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200 (`String`).
+
+`start_ip` - (Optional) Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5 (`String`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-interface-ip-map"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node (`Block`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router) below.
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful) below.
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ip"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface Static IP**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-node-static-ip) below.
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-cluster-static-ip"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface Static IP Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-node-static-ip"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface Static IP Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-node-static-ip) below.
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-cluster-static-ip"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-node-static-ip"></a>
+
+**Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="custom-network-config-interface-list-interfaces-tunnel-interface"></a>
+
+**Custom Network Config Interface List Interfaces Tunnel Interface**
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`node` - (Optional) Specific Node. Configuration will apply to a given device on the given node (`String`).
+
+`priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IP](#custom-network-config-interface-list-interfaces-tunnel-interface-static-ip) below.
+
+`tunnel` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Tunnel](#custom-network-config-interface-list-interfaces-tunnel-interface-tunnel) below.
+
+<a id="custom-network-config-interface-list-interfaces-tunnel-interface-static-ip"></a>
+
+**Custom Network Config Interface List Interfaces Tunnel Interface Static IP**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#custom-network-config-interface-list-interfaces-tunnel-interface-static-ip-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#custom-network-config-interface-list-interfaces-tunnel-interface-static-ip-node-static-ip) below.
+
+<a id="custom-network-config-interface-list-interfaces-tunnel-interface-static-ip-cluster-static-ip"></a>
+
+**Custom Network Config Interface List Interfaces Tunnel Interface Static IP Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="custom-network-config-interface-list-interfaces-tunnel-interface-static-ip-node-static-ip"></a>
+
+**Custom Network Config Interface List Interfaces Tunnel Interface Static IP Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="custom-network-config-interface-list-interfaces-tunnel-interface-tunnel"></a>
+
+**Custom Network Config Interface List Interfaces Tunnel Interface Tunnel**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="custom-network-config-sli-config"></a>
 
@@ -388,13 +720,97 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Network Config Sli Config Static Routes**
 
-`static_routes` - (Optional) Static Routes. List of static routes (`Block`).
+`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#custom-network-config-sli-config-static-routes-static-routes) below.
+
+<a id="custom-network-config-sli-config-static-routes-static-routes"></a>
+
+**Custom Network Config Sli Config Static Routes Static Routes**
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface) below.
+
+<a id="custom-network-config-sli-config-static-routes-static-routes-node-interface"></a>
+
+**Custom Network Config Sli Config Static Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) below.
+
+<a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list"></a>
+
+**Custom Network Config Sli Config Static Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface"></a>
+
+**Custom Network Config Sli Config Static Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="custom-network-config-sli-config-static-v6-routes"></a>
 
 **Custom Network Config Sli Config Static V6 Routes**
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#custom-network-config-sli-config-static-v6-routes-static-routes) below.
+
+<a id="custom-network-config-sli-config-static-v6-routes-static-routes"></a>
+
+**Custom Network Config Sli Config Static V6 Routes Static Routes**
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) below.
+
+<a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface"></a>
+
+**Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) below.
+
+<a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list"></a>
+
+**Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface"></a>
+
+**Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="custom-network-config-slo-config"></a>
 
@@ -428,13 +844,97 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Network Config Slo Config Static Routes**
 
-`static_routes` - (Optional) Static Routes. List of static routes (`Block`).
+`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#custom-network-config-slo-config-static-routes-static-routes) below.
+
+<a id="custom-network-config-slo-config-static-routes-static-routes"></a>
+
+**Custom Network Config Slo Config Static Routes Static Routes**
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-network-config-slo-config-static-routes-static-routes-node-interface) below.
+
+<a id="custom-network-config-slo-config-static-routes-static-routes-node-interface"></a>
+
+**Custom Network Config Slo Config Static Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list) below.
+
+<a id="custom-network-config-slo-config-static-routes-static-routes-node-interface-list"></a>
+
+**Custom Network Config Slo Config Static Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="custom-network-config-slo-config-static-routes-static-routes-node-interface-list-interface"></a>
+
+**Custom Network Config Slo Config Static Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="custom-network-config-slo-config-static-v6-routes"></a>
 
 **Custom Network Config Slo Config Static V6 Routes**
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#custom-network-config-slo-config-static-v6-routes-static-routes) below.
+
+<a id="custom-network-config-slo-config-static-v6-routes-static-routes"></a>
+
+**Custom Network Config Slo Config Static V6 Routes Static Routes**
+
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+
+`ip_prefixes` - (Optional) IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes (`List`).
+
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface) below.
+
+<a id="custom-network-config-slo-config-static-v6-routes-static-routes-node-interface"></a>
+
+**Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list) below.
+
+<a id="custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list"></a>
+
+**Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list-interface"></a>
+
+**Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="custom-storage-config"></a>
 
@@ -466,7 +966,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Storage Config Static Routes Static Routes**
 
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
 
 `default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -474,7 +974,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
 
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces (`Block`).
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-storage-config-static-routes-static-routes-node-interface) below.
+
+<a id="custom-storage-config-static-routes-static-routes-node-interface"></a>
+
+**Custom Storage Config Static Routes Static Routes Node Interface**
+
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-storage-config-static-routes-static-routes-node-interface-list) below.
+
+<a id="custom-storage-config-static-routes-static-routes-node-interface-list"></a>
+
+**Custom Storage Config Static Routes Static Routes Node Interface List**
+
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-storage-config-static-routes-static-routes-node-interface-list-interface) below.
+
+`node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="custom-storage-config-static-routes-static-routes-node-interface-list-interface"></a>
+
+**Custom Storage Config Static Routes Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="custom-storage-config-storage-class-list"></a>
 
@@ -490,23 +1018,83 @@ In addition to all arguments above, the following attributes are exported:
 
 `allow_volume_expansion` - (Optional) Allow Volume Expansion. Allow volume expansion (`Bool`).
 
-`custom_storage` - (Optional) Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site (`Block`).
+`custom_storage` - (Optional) Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site. See [Custom Storage](#custom-storage-config-storage-class-list-storage-classes-custom-storage) below.
 
 `default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
 
 `description` - (Optional) Storage Class Description. Description for this storage class (`String`).
 
-`hpe_storage` - (Optional) HPE Storage. Storage class Device configuration for HPE Storage (`Block`).
+`hpe_storage` - (Optional) HPE Storage. Storage class Device configuration for HPE Storage. See [Hpe Storage](#custom-storage-config-storage-class-list-storage-classes-hpe-storage) below.
 
-`netapp_trident` - (Optional) NetApp Trident Storage. Storage class Device configuration for NetApp Trident (`Block`).
+`netapp_trident` - (Optional) NetApp Trident Storage. Storage class Device configuration for NetApp Trident. See [Netapp Trident](#custom-storage-config-storage-class-list-storage-classes-netapp-trident) below.
 
-`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator (`Block`).
+`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator. See [Pure Service Orchestrator](#custom-storage-config-storage-class-list-storage-classes-pure-service-orchestrator) below.
 
 `reclaim_policy` - (Optional) Reclaim Policy. Reclaim Policy (`String`).
 
 `storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
 
 `storage_device` - (Optional) Storage Device. Storage device that this class will use. The Device name defined at previous step (`String`).
+
+<a id="custom-storage-config-storage-class-list-storage-classes-custom-storage"></a>
+
+**Custom Storage Config Storage Class List Storage Classes Custom Storage**
+
+`yaml` - (Optional) Storage Class YAML. K8s YAML for StorageClass (`String`).
+
+<a id="custom-storage-config-storage-class-list-storage-classes-hpe-storage"></a>
+
+**Custom Storage Config Storage Class List Storage Classes Hpe Storage**
+
+`allow_mutations` - (Optional) allowMutations. mutation can override specified parameters (`String`).
+
+`allow_overrides` - (Optional) allowOverrides. PVC can override specified parameters (`String`).
+
+`dedupe_enabled` - (Optional) dedupeEnabled. Indicates that the volume should enable deduplication (`Bool`).
+
+`description` - (Optional) Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information (`String`).
+
+`destroy_on_delete` - (Optional) destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted (`Bool`).
+
+`encrypted` - (Optional) encrypted. Indicates that the volume should be encrypted (`Bool`).
+
+`folder` - (Optional) folder. The name of the folder in which to place the volume (`String`).
+
+`limit_iops` - (Optional) limitIops. The IOPS limit of the volume (`String`).
+
+`limit_mbps` - (Optional) limitMbps. The IOPS limit of the volume (`String`).
+
+`performance_policy` - (Optional) performancePolicy. The name of the performance policy to assign to the volume (`String`).
+
+`pool` - (Optional) pool. The name of the pool in which to place the volume (`String`).
+
+`protection_template` - (Optional) protectionTemplate. The name of the performance policy to assign to the volume (`String`).
+
+`secret_name` - (Optional) Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information (`String`).
+
+`secret_namespace` - (Optional) Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides (`String`).
+
+`sync_on_detach` - (Optional) syncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node (`Bool`).
+
+`thick` - (Optional) thick. Indicates that the volume should be thick provisioned (`Bool`).
+
+<a id="custom-storage-config-storage-class-list-storage-classes-netapp-trident"></a>
+
+**Custom Storage Config Storage Class List Storage Classes Netapp Trident**
+
+`selector` - (Optional) Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool (`Block`).
+
+`storage_pools` - (Optional) Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes (`String`).
+
+<a id="custom-storage-config-storage-class-list-storage-classes-pure-service-orchestrator"></a>
+
+**Custom Storage Config Storage Class List Storage Classes Pure Service Orchestrator**
+
+`backend` - (Optional) Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool (`String`).
+
+`bandwidth_limit` - (Optional) Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB (`String`).
+
+`iops_limit` - (Optional) IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined (`Number`).
 
 <a id="custom-storage-config-storage-device-list"></a>
 
@@ -522,13 +1110,627 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_storage` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`hpe_storage` - (Optional) HPE Storage. Device configuration for HPE Storage (`Block`).
+`hpe_storage` - (Optional) HPE Storage. Device configuration for HPE Storage. See [Hpe Storage](#custom-storage-config-storage-device-list-storage-devices-hpe-storage) below.
 
-`netapp_trident` - (Optional) NetApp Trident. Device configuration for NetApp Trident Storage (`Block`).
+`netapp_trident` - (Optional) NetApp Trident. Device configuration for NetApp Trident Storage. See [Netapp Trident](#custom-storage-config-storage-device-list-storage-devices-netapp-trident) below.
 
-`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator (`Block`).
+`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator. See [Pure Service Orchestrator](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator) below.
 
 `storage_device` - (Optional) Storage Device. Storage device and device unit (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Hpe Storage**
+
+`api_server_port` - (Optional) Storage server Port. Enter Storage Server Port (`Number`).
+
+`iscsi_chap_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [iSCSI Chap Password](#custom-storage-config-storage-device-list-storage-devices-hpe-storage-iscsi-chap-password) below.
+
+`iscsi_chap_user` - (Optional) iSCSI chapUser. chap Username to connect to the HPE storage (`String`).
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#custom-storage-config-storage-device-list-storage-devices-hpe-storage-password) below.
+
+`storage_server_ip_address` - (Optional) Storage Server IP address. Enter storage server IP address (`String`).
+
+`storage_server_name` - (Optional) Storage Server Name. Enter storage server Name (`String`).
+
+`username` - (Optional) Username. Username to connect to the HPE storage management IP (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage-iscsi-chap-password"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Hpe Storage iSCSI Chap Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage-password"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Hpe Storage Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-hpe-storage-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-hpe-storage-password-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage-password-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Hpe Storage Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage-password-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Hpe Storage Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident**
+
+`netapp_backend_ontap_nas` - (Optional) Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS. See [Netapp Backend Ontap Nas](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas) below.
+
+`netapp_backend_ontap_san` - (Optional) Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN. See [Netapp Backend Ontap San](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas**
+
+`auto_export_cidrs` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Auto Export Cidrs](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) below.
+
+`auto_export_policy` - (Optional) Auto Export Policy. Enable automatic export policy creation and updating (`Bool`).
+
+`backend_name` - (Optional) Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF (`String`).
+
+`client_certificate` - (Optional) Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth (`String`).
+
+`client_private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Client Private Key](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key) below.
+
+`data_lif_dns_name` - (Optional) Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`data_lif_ip` - (Optional) Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address (`String`).
+
+`labels` - (Optional) Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection (`Block`).
+
+`limit_aggregate_usage` - (Optional) Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default (`String`).
+
+`limit_volume_size` - (Optional) Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default (`String`).
+
+`management_lif_dns_name` - (Optional) Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`management_lif_ip` - (Optional) Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address (`String`).
+
+`nfs_mount_options` - (Optional) NFS Mount Options. Comma-separated list of NFS mount options. Not enforced by default (`String`).
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password) below.
+
+`region` - (Optional) Backend Region. Virtual Pool Region (`String`).
+
+`storage` - (Optional) Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection. See [Storage](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage) below.
+
+`storage_driver_name` - (Optional) Storage Backend Driver. Configuration of Backend Name (`String`).
+
+`storage_prefix` - (Optional) Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated (`String`).
+
+`svm` - (Optional) Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified (`String`).
+
+`trusted_ca_certificate` - (Optional) Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth (`String`).
+
+`username` - (Optional) Username. Username to connect to the cluster/SVM (`String`).
+
+`volume_defaults` - (Optional) Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration. See [Volume Defaults](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Auto Export Cidrs**
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage**
+
+`labels` - (Optional) Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection (`Block`).
+
+`volume_defaults` - (Optional) Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration. See [Volume Defaults](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults) below.
+
+`zone` - (Optional) Virtual Pool Zone. Virtual Storage Pool zone definition (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage Volume Defaults**
+
+`adaptive_qos_policy` - (Optional) Adaptive QOS Policy name. Enter Adaptive QOS Policy Name (`String`).
+
+`encryption` - (Optional) Enable Encryption. Enable NetApp volume encryption (`Bool`).
+
+`export_policy` - (Optional) Export Policy. Export policy to use (`String`).
+
+`no_qos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`qos_policy` - (Optional) QOS Policy Name. Enter QOS Policy Name (`String`).
+
+`security_style` - (Optional) Security Style. Security style for new volumes (`String`).
+
+`snapshot_dir` - (Optional) Access to Snapshot Directory. Access to the .snapshot directory (`Bool`).
+
+`snapshot_policy` - (Optional) Snapshot Policy. Snapshot policy to use (`String`).
+
+`snapshot_reserve` - (Optional) Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else '' (`String`).
+
+`space_reserve` - (Optional) Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick) (`String`).
+
+`split_on_clone` - (Optional) Split on Clone. Split a clone from its parent upon creation (`Bool`).
+
+`tiering_policy` - (Optional) Tiering Policy. Tiering policy to use. 'none' is default (`String`).
+
+`unix_permissions` - (Optional) Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777 (`Number`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Volume Defaults**
+
+`adaptive_qos_policy` - (Optional) Adaptive QOS Policy name. Enter Adaptive QOS Policy Name (`String`).
+
+`encryption` - (Optional) Enable Encryption. Enable NetApp volume encryption (`Bool`).
+
+`export_policy` - (Optional) Export Policy. Export policy to use (`String`).
+
+`no_qos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`qos_policy` - (Optional) QOS Policy Name. Enter QOS Policy Name (`String`).
+
+`security_style` - (Optional) Security Style. Security style for new volumes (`String`).
+
+`snapshot_dir` - (Optional) Access to Snapshot Directory. Access to the .snapshot directory (`Bool`).
+
+`snapshot_policy` - (Optional) Snapshot Policy. Snapshot policy to use (`String`).
+
+`snapshot_reserve` - (Optional) Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else '' (`String`).
+
+`space_reserve` - (Optional) Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick) (`String`).
+
+`split_on_clone` - (Optional) Split on Clone. Split a clone from its parent upon creation (`Bool`).
+
+`tiering_policy` - (Optional) Tiering Policy. Tiering policy to use. 'none' is default (`String`).
+
+`unix_permissions` - (Optional) Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777 (`Number`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San**
+
+`client_certificate` - (Optional) Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth (`String`).
+
+`client_private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Client Private Key](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key) below.
+
+`data_lif_dns_name` - (Optional) Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`data_lif_ip` - (Optional) Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address (`String`).
+
+`igroup_name` - (Optional) iGroup Name. Name of the igroup for SAN volumes to use (`String`).
+
+`labels` - (Optional) Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection (`Block`).
+
+`limit_aggregate_usage` - (Optional) Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default (`Number`).
+
+`limit_volume_size` - (Optional) Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default (`Number`).
+
+`management_lif_dns_name` - (Optional) Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`management_lif_ip` - (Optional) Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address (`String`).
+
+`no_chap` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password) below.
+
+`region` - (Optional) Backend Region. Virtual Pool Region (`String`).
+
+`storage` - (Optional) Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection. See [Storage](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage) below.
+
+`storage_driver_name` - (Optional) Storage Backend Driver. Configuration of Backend Name (`String`).
+
+`storage_prefix` - (Optional) Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated (`String`).
+
+`svm` - (Optional) Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified (`String`).
+
+`trusted_ca_certificate` - (Optional) Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth (`String`).
+
+`use_chap` - (Optional) Device NetApp Backend ONTAP SAN CHAP Configuration. Device NetApp Backend ONTAP SAN CHAP configuration options for enabled CHAP. See [Use Chap](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap) below.
+
+`username` - (Optional) Username. Username to connect to the cluster/SVM (`String`).
+
+`volume_defaults` - (Optional) Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration. See [Volume Defaults](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage**
+
+`labels` - (Optional) Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection (`Block`).
+
+`volume_defaults` - (Optional) Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration. See [Volume Defaults](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults) below.
+
+`zone` - (Optional) Virtual Pool Zone. Virtual Storage Pool zone definition (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage Volume Defaults**
+
+`adaptive_qos_policy` - (Optional) Adaptive QOS Policy name. Enter Adaptive QOS Policy Name (`String`).
+
+`encryption` - (Optional) Enable Encryption. Enable NetApp volume encryption (`Bool`).
+
+`export_policy` - (Optional) Export Policy. Export policy to use (`String`).
+
+`no_qos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`qos_policy` - (Optional) QOS Policy Name. Enter QOS Policy Name (`String`).
+
+`security_style` - (Optional) Security Style. Security style for new volumes (`String`).
+
+`snapshot_dir` - (Optional) Access to Snapshot Directory. Access to the .snapshot directory (`Bool`).
+
+`snapshot_policy` - (Optional) Snapshot Policy. Snapshot policy to use (`String`).
+
+`snapshot_reserve` - (Optional) Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else '' (`String`).
+
+`space_reserve` - (Optional) Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick) (`String`).
+
+`split_on_clone` - (Optional) Split on Clone. Split a clone from its parent upon creation (`Bool`).
+
+`tiering_policy` - (Optional) Tiering Policy. Tiering policy to use. 'none' is default (`String`).
+
+`unix_permissions` - (Optional) Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777 (`Number`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap**
+
+`chap_initiator_secret` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Chap Initiator Secret](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret) below.
+
+`chap_target_initiator_secret` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Chap Target Initiator Secret](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret) below.
+
+`chap_target_username` - (Optional) CHAP Target Username. Target username. Required if useCHAP=true (`String`).
+
+`chap_username` - (Optional) CHAP Username. Inbound username. Required if useCHAP=true (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Volume Defaults**
+
+`adaptive_qos_policy` - (Optional) Adaptive QOS Policy name. Enter Adaptive QOS Policy Name (`String`).
+
+`encryption` - (Optional) Enable Encryption. Enable NetApp volume encryption (`Bool`).
+
+`export_policy` - (Optional) Export Policy. Export policy to use (`String`).
+
+`no_qos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`qos_policy` - (Optional) QOS Policy Name. Enter QOS Policy Name (`String`).
+
+`security_style` - (Optional) Security Style. Security style for new volumes (`String`).
+
+`snapshot_dir` - (Optional) Access to Snapshot Directory. Access to the .snapshot directory (`Bool`).
+
+`snapshot_policy` - (Optional) Snapshot Policy. Snapshot policy to use (`String`).
+
+`snapshot_reserve` - (Optional) Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else '' (`String`).
+
+`space_reserve` - (Optional) Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick) (`String`).
+
+`split_on_clone` - (Optional) Split on Clone. Split a clone from its parent upon creation (`Bool`).
+
+`tiering_policy` - (Optional) Tiering Policy. Tiering policy to use. 'none' is default (`String`).
+
+`unix_permissions` - (Optional) Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777 (`Number`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator**
+
+`arrays` - (Optional) Arrays Configuration. Device configuration for PSO Arrays. See [Arrays](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays) below.
+
+`cluster_id` - (Optional) Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores (`String`).
+
+`enable_storage_topology` - (Optional) Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi (`Bool`).
+
+`enable_strict_topology` - (Optional) Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi (`Bool`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays**
+
+`flash_array` - (Optional) Flash Arrays. Specify what storage flash arrays should be managed the plugin. See [Flash Array](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array) below.
+
+`flash_blade` - (Optional) Flash Blades. Specify what storage flash blades should be managed the plugin. See [Flash Blade](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array**
+
+`default_fs_opt` - (Optional) Default Filesystem Options. Block volume default mkfs options. Not recommended to change! (`String`).
+
+`default_fs_type` - (Optional) Default Filesystem Type. Block volume default filesystem type. Not recommended to change! (`String`).
+
+`default_mount_opts` - (Optional) Default Mount Options. Block volume default filesystem mount options. Not recommended to change! (`List`).
+
+`disable_preempt_attachments` - (Optional) Disable Preempt Attachments. Enable/Disable attachment preemption! (`Bool`).
+
+`flash_arrays` - (Optional) Flash Arrays. For FlashArrays you must set the 'mgmt_endpoint' and 'api_token'. See [Flash Arrays](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays) below.
+
+`iscsi_login_timeout` - (Optional) iSCSI Login Timeout. iSCSI login timeout in seconds. Not recommended to change! (`Number`).
+
+`san_type` - (Optional) SAN Type. Block volume access protocol, either iSCSI or FC (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays**
+
+`api_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [API Token](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token) below.
+
+`labels` - (Optional) Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner (`Block`).
+
+`mgmt_dns_name` - (Optional) Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`mgmt_ip` - (Optional) Management Endpoint IP Address. Management Endpoint is reachable at the given IP address (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade**
+
+`enable_snapshot_directory` - (Optional) Enable Snapshot Directory. Enable/Disable FlashBlade snapshots (`Bool`).
+
+`export_rules` - (Optional) NFS Export Rules. NFS Export rules (`String`).
+
+`flash_blades` - (Optional) Flash Blades. For FlashBlades you must set the 'mgmt_endpoint', 'api_token' and nfs_endpoint. See [Flash Blades](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades**
+
+`api_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [API Token](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token) below.
+
+`lables` - (Optional) Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner (`Block`).
+
+`mgmt_dns_name` - (Optional) Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`mgmt_ip` - (Optional) Management Endpoint IP Address. Management Endpoint is reachable at the given IP address (`String`).
+
+`nfs_endpoint_dns_name` - (Optional) NFS DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+
+`nfs_endpoint_ip` - (Optional) NFS IP Address. Endpoint is reachable at the given IP address (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-clear-secret-info) below.
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-blindfold-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-clear-secret-info"></a>
+
+**Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="custom-storage-config-storage-interface-list"></a>
 
@@ -544,7 +1746,223 @@ In addition to all arguments above, the following attributes are exported:
 
 `labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
 
-`storage_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration (`Block`).
+`storage_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Storage Interface](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface**
+
+`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`device` - (Optional) Ethernet Device. Interface configuration for the ethernet device (`String`).
+
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_server` - (Optional) DHCPServerParametersType. See [DHCP Server](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server) below.
+
+`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config) below.
+
+`is_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`node` - (Optional) Specific Node. Configuration will apply to a device on the given node (`String`).
+
+`not_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
+
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`static_ip` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IP](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip) below.
+
+`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address) below.
+
+`storage_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`untagged` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`vlan_id` - (Optional) VLAN Id. Configure a VLAN tagged ethernet interface (`Number`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses. See [DHCP Networks](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv4 Assignments. Specify static IPv4 addresses per node. See [Interface IP Map](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-interface-ip-map) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server DHCP Networks**
+
+`dgw_address` - (Optional) Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway (`String`).
+
+`dns_address` - (Optional) Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`network_prefix` - (Optional) Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24 (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pools) below.
+
+`same_as_dgw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-dhcp-networks-pools"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200 (`String`).
+
+`start_ip` - (Optional) Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5 (`String`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-dhcp-server-interface-ip-map"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node (`Block`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config**
+
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router**
+
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config) below.
+
+`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IP**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip-node-static-ip) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip-cluster-static-ip"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IP Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ip-node-static-ip"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IP Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IPv6 Address**
+
+`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address-cluster-static-ip) below.
+
+`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address-node-static-ip) below.
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address-cluster-static-ip"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IPv6 Address Cluster Static IP**
+
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-static-ipv6-address-node-static-ip"></a>
+
+**Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IPv6 Address Node Static IP**
+
+`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+
+`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
 
 <a id="enable-vgpu"></a>
 
@@ -610,21 +2028,157 @@ In addition to all arguments above, the following attributes are exported:
 
 `bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`bfd_enabled` - (Optional) BFD. BFD parameters (`Block`).
+`bfd_enabled` - (Optional) BFD. BFD parameters. See [Bfd Enabled](#local-control-plane-bgp-config-peers-bfd-enabled) below.
 
 `disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`external` - (Optional) External BGP Peer. External BGP Peer parameters (`Block`).
+`external` - (Optional) External BGP Peer. External BGP Peer parameters. See [External](#local-control-plane-bgp-config-peers-external) below.
 
 `label` - (Optional) Label. Specify whether this peer should be (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#local-control-plane-bgp-config-peers-metadata) below.
 
 `passive_mode_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `passive_mode_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`routing_policies` - (Optional) BGP Routing Policy. List of rules which can be applied on all or particular nodes (`Block`).
+`routing_policies` - (Optional) BGP Routing Policy. List of rules which can be applied on all or particular nodes. See [Routing Policies](#local-control-plane-bgp-config-peers-routing-policies) below.
+
+<a id="local-control-plane-bgp-config-peers-bfd-enabled"></a>
+
+**Local Control Plane BGP Config Peers Bfd Enabled**
+
+`multiplier` - (Optional) Multiplier. Specify Number of missed packets to bring session down' (`Number`).
+
+`receive_interval_milliseconds` - (Optional) Minimum Receive Interval. BFD receive interval timer, in milliseconds (`Number`).
+
+`transmit_interval_milliseconds` - (Optional) Transmit Interval. BFD transmit interval timer, in milliseconds (`Number`).
+
+<a id="local-control-plane-bgp-config-peers-external"></a>
+
+**Local Control Plane BGP Config Peers External**
+
+`address` - (Optional) Peer Address. Specify IPv4 peer address (`String`).
+
+`address_ipv6` - (Optional) Peer IPv6 Address. Specify peer IPv6 address (`String`).
+
+`asn` - (Optional) ASN. Autonomous System Number for BGP peer (`Number`).
+
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`default_gateway_v6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`disable_v6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`external_connector` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`family_inet` - (Optional) BGP Family Inet. Parameters for inet family. See [Family Inet](#local-control-plane-bgp-config-peers-external-family-inet) below.
+
+`from_site` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`from_site_v6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`interface` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Interface](#local-control-plane-bgp-config-peers-external-interface) below.
+
+`interface_list` - (Optional) Interface List. List of network interfaces. See [Interface List](#local-control-plane-bgp-config-peers-external-interface-list) below.
+
+`md5_auth_key` - (Optional) MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385) (`String`).
+
+`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Peer Port. Peer TCP port number (`Number`).
+
+`subnet_begin_offset` - (Optional) Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet (`Number`).
+
+`subnet_begin_offset_v6` - (Optional) Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet (`Number`).
+
+`subnet_end_offset` - (Optional) Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet (`Number`).
+
+`subnet_end_offset_v6` - (Optional) Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet (`Number`).
+
+<a id="local-control-plane-bgp-config-peers-external-family-inet"></a>
+
+**Local Control Plane BGP Config Peers External Family Inet**
+
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="local-control-plane-bgp-config-peers-external-interface"></a>
+
+**Local Control Plane BGP Config Peers External Interface**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="local-control-plane-bgp-config-peers-external-interface-list"></a>
+
+**Local Control Plane BGP Config Peers External Interface List**
+
+`interfaces` - (Optional) Interface List. List of network interfaces. See [Interfaces](#local-control-plane-bgp-config-peers-external-interface-list-interfaces) below.
+
+<a id="local-control-plane-bgp-config-peers-external-interface-list-interfaces"></a>
+
+**Local Control Plane BGP Config Peers External Interface List Interfaces**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="local-control-plane-bgp-config-peers-metadata"></a>
+
+**Local Control Plane BGP Config Peers Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="local-control-plane-bgp-config-peers-routing-policies"></a>
+
+**Local Control Plane BGP Config Peers Routing Policies**
+
+`route_policy` - (Optional) BGP Routing policy. Route policy to be applied. See [Route Policy](#local-control-plane-bgp-config-peers-routing-policies-route-policy) below.
+
+<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy"></a>
+
+**Local Control Plane BGP Config Peers Routing Policies Route Policy**
+
+`all_nodes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`inbound` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`node_name` - (Optional) Nodes. List of nodes on which BGP routing policy has to be applied. See [Node Name](#local-control-plane-bgp-config-peers-routing-policies-route-policy-node-name) below.
+
+`object_refs` - (Optional) BGP routing policy. Select route policy to apply. See [Object Refs](#local-control-plane-bgp-config-peers-routing-policies-route-policy-object-refs) below.
+
+`outbound` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-node-name"></a>
+
+**Local Control Plane BGP Config Peers Routing Policies Route Policy Node Name**
+
+`node` - (Optional) Node of choice. Select BGP Session on which policy will be applied (`List`).
+
+<a id="local-control-plane-bgp-config-peers-routing-policies-route-policy-object-refs"></a>
+
+**Local Control Plane BGP Config Peers Routing Policies Route Policy Object Refs**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="log-receiver"></a>
 

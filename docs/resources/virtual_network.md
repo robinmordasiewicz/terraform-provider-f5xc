@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Static Routes**
 
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
+`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
 
 `default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -106,9 +106,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Static Routes Node Interface List**
 
-`interface` - (Optional) Interface. Interface reference on this node (`Block`).
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#static-routes-node-interface-list-interface) below.
 
 `node` - (Optional) Node. Node name on this site (`String`).
+
+<a id="static-routes-node-interface-list-interface"></a>
+
+**Static Routes Node Interface List Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
 <a id="timeouts"></a>
 

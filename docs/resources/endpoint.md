@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Service Info**
 
-`discovery_type` - (Optional) Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic BIG-IP Clusters Discover for Third Party Application. Possible values are `INVALID_DISCOVERY`, `K8S`, `CONSUL`, `CLASSIC_BIGIP`, `THIRD_PARTY` (`String`).
+`discovery_type` - (Optional) Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic BIG-IP Clusters Discover for Third Party Application. Possible values are `INVALID_DISCOVERY`, `K8S`, `CONSUL`, `CLASSIC_BIGIP`, `THIRD_PARTY`. Defaults to `INVALID_DISCOVERY` (`String`).
 
 `service_name` - (Optional) Service Name. Name of the service to discover with an optional namespace and cluster identifier. The format is service_name.namespace_name:cluster_identifier for K8S and service_name:cluster_identifier for Consul Endpoint will be discovered in all discovery objects where the cluster identifier matches. If cluster identifier is not specified then discovery will be done in all discovery objects of the site (`String`).
 

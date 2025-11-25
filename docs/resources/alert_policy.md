@@ -184,7 +184,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Group**
 
-`groups` - (Optional) Groups. Name of groups to match the alert (`List`).
+`groups` - (Optional) Groups. Name of groups to match the alert. Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`. Defaults to `INFRASTRUCTURE` (`List`).
 
 <a id="routes-notification-parameters"></a>
 
@@ -214,7 +214,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Severity**
 
-`severities` - (Optional) Severities. List of severity levels (`List`).
+`severities` - (Optional) Severities. List of severity levels. Possible values are `MINOR`, `MAJOR`, `CRITICAL`. Defaults to `MINOR` (`List`).
 
 <a id="timeouts"></a>
 

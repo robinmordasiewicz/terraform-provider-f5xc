@@ -72,9 +72,9 @@ resource "f5xc_network_interface" "example" {
 
 `layer2_interface` - (Optional) Layer2 Interface. Layer2 Interface Configuration. See [Layer2 Interface](#layer2-interface) below for details.
 
-`tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration. See [Tunnel Interface](#tunnel-interface) below for details.
+`tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration (`Block`).
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+`timeouts` - (Optional) (`Block`).
 
 ### Attributes Reference
 
@@ -192,9 +192,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
 
-`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges (`Block`).
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#ethernet-interface-dhcp-server-dhcp-networks-pools) below.
 
 `same_as_dgw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ethernet-interface-dhcp-server-dhcp-networks-pools"></a>
+
+**Ethernet Interface DHCP Server DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200 (`String`).
+
+`start_ip` - (Optional) Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5 (`String`).
 
 <a id="ethernet-interface-dhcp-server-interface-ip-map"></a>
 
@@ -214,11 +222,73 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ethernet Interface IPv6 Auto Config Router**
 
-`dns_config` - (Optional) IPV6DnsConfig (`Block`).
+`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#ethernet-interface-ipv6-auto-config-router-dns-config) below.
 
 `network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
 
-`stateful` - (Optional) DHCPIPV6 Stateful Server (`Block`).
+`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#ethernet-interface-ipv6-auto-config-router-stateful) below.
+
+<a id="ethernet-interface-ipv6-auto-config-router-dns-config"></a>
+
+**Ethernet Interface IPv6 Auto Config Router DNS Config**
+
+`configured_list` - (Optional) IPV6DnsList. See [Configured List](#ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) below.
+
+`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#ethernet-interface-ipv6-auto-config-router-dns-config-local-dns) below.
+
+<a id="ethernet-interface-ipv6-auto-config-router-dns-config-configured-list"></a>
+
+**Ethernet Interface IPv6 Auto Config Router DNS Config Configured List**
+
+`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+
+<a id="ethernet-interface-ipv6-auto-config-router-dns-config-local-dns"></a>
+
+**Ethernet Interface IPv6 Auto Config Router DNS Config Local DNS**
+
+`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ethernet-interface-ipv6-auto-config-router-stateful"></a>
+
+**Ethernet Interface IPv6 Auto Config Router Stateful**
+
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) below.
+
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+
+`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) below.
+
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>
+
+**Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks**
+
+`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+
+`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
+
+**Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks Pools**
+
+`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+
+`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+
+<a id="ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map"></a>
+
+**Ethernet Interface IPv6 Auto Config Router Stateful Interface IP Map**
+
+`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
 
 <a id="ethernet-interface-static-ip"></a>
 

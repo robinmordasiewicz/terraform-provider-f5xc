@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dh Group Set**
 
-`dh_groups` - (Optional) Diffie Hellman Groups (`List`).
+`dh_groups` - (Optional) Diffie Hellman Groups. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT` (`List`).
 
 <a id="ike-keylifetime-hours"></a>
 

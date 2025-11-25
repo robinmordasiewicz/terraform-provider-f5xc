@@ -364,17 +364,49 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Egress Gw Az Nodes Inside Subnet**
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-egress-gw-az-nodes-inside-subnet-subnet) below.
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-az-nodes-inside-subnet-subnet-param) below.
+
+<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet"></a>
+
+**Ingress Egress Gw Az Nodes Inside Subnet Subnet**
+
+`subnet_name` - (Optional) Subnet Name. Name of existing subnet (`String`).
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-param"></a>
+
+**Ingress Egress Gw Az Nodes Inside Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="ingress-egress-gw-az-nodes-outside-subnet"></a>
 
 **Ingress Egress Gw Az Nodes Outside Subnet**
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-egress-gw-az-nodes-outside-subnet-subnet) below.
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-az-nodes-outside-subnet-subnet-param) below.
+
+<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet"></a>
+
+**Ingress Egress Gw Az Nodes Outside Subnet Subnet**
+
+`subnet_name` - (Optional) Subnet Name. Name of existing subnet (`String`).
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-param"></a>
+
+**Ingress Egress Gw Az Nodes Outside Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="ingress-egress-gw-dc-cluster-group-inside-vn"></a>
 
@@ -406,9 +438,41 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Egress Gw Global Network List Global Network Connections**
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) below.
+
+<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>
+
+**Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
+
+<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
+
+**Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr"></a>
+
+**Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
+
+<a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
+
+**Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="ingress-egress-gw-hub"></a>
 
@@ -428,17 +492,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `auto_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site (`Block`).
+`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site. See [Connections](#ingress-egress-gw-hub-express-route-enabled-connections) below.
 
 `custom_asn` - (Optional) Custom ASN. Set custom ASN for F5XC Site (`Number`).
 
 `do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Gateway Subnet](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) below.
 
-`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Route Server Subnet](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) below.
 
-`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config (`Block`).
+`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Express Route](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) below.
 
 `site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -450,6 +514,114 @@ In addition to all arguments above, the following attributes are exported:
 
 `sku_standard` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="ingress-egress-gw-hub-express-route-enabled-connections"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Connections**
+
+`circuit_id` - (Optional) Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site (`String`).
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#ingress-egress-gw-hub-express-route-enabled-connections-metadata) below.
+
+`other_subscription` - (Optional) Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription. See [Other Subscription](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription) below.
+
+`weight` - (Optional) Routing Weight. The weight (or priority) for the routes received from this connection. The default value is 10 (`Number`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-connections-metadata"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Connections Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription**
+
+`authorized_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Authorized Key](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key) below.
+
+`circuit_id` - (Optional) Circuit ID. Circuit ID (`String`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) below.
+
+<a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Gateway Subnet**
+
+`auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`subnet` - (Optional) Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet). See [Subnet](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-param) below.
+
+<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet**
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet-subnet-param"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Route Server Subnet**
+
+`auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`subnet` - (Optional) Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet). See [Subnet](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-param) below.
+
+<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet**
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet-subnet-param"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
+
+<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route"></a>
+
+**Ingress Egress Gw Hub Express Route Enabled Site Registration Over Express Route**
+
+`cloudlink_network_name` - (Optional) Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support (`String`).
+
 <a id="ingress-egress-gw-hub-spoke-vnets"></a>
 
 **Ingress Egress Gw Hub Spoke Vnets**
@@ -460,7 +632,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `manual` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet (`Block`).
+`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet. See [Vnet](#ingress-egress-gw-hub-spoke-vnets-vnet) below.
+
+<a id="ingress-egress-gw-hub-spoke-vnets-vnet"></a>
+
+**Ingress Egress Gw Hub Spoke Vnets Vnet**
+
+`f5_orchestrated_routing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`resource_group` - (Optional) Existing Vnet Resource Group. Resource group of existing Vnet (`String`).
+
+`vnet_name` - (Optional) Existing Vnet Name. Name of existing Vnet (`String`).
 
 <a id="ingress-egress-gw-inside-static-routes"></a>
 
@@ -472,9 +656,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Egress Gw Inside Static Routes Static Route List**
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route**
+
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
+
+`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop) below.
+
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets) below.
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop**
+
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
+
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
+
+`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) below.
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6) below.
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
+
+**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="ingress-egress-gw-outside-static-routes"></a>
 
@@ -486,9 +750,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Egress Gw Outside Static Routes Static Route List**
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route**
+
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
+
+`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop) below.
+
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets) below.
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop**
+
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
+
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
+
+`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) below.
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) below.
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
+
+**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="ingress-egress-gw-performance-enhancement-mode"></a>
 
@@ -642,9 +986,41 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Egress Gw Ar Global Network List Global Network Connections**
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
+
+<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>
+
+**Ingress Egress Gw Ar Global Network List Global Network Connections Sli To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
+
+<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
+
+**Ingress Egress Gw Ar Global Network List Global Network Connections Sli To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>
+
+**Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
+
+<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
+
+**Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="ingress-egress-gw-ar-hub"></a>
 
@@ -664,17 +1040,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `auto_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site (`Block`).
+`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site. See [Connections](#ingress-egress-gw-ar-hub-express-route-enabled-connections) below.
 
 `custom_asn` - (Optional) Custom ASN. Set custom ASN for F5XC Site (`Number`).
 
 `do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Gateway Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) below.
 
-`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Route Server Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) below.
 
-`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config (`Block`).
+`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Express Route](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) below.
 
 `site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -686,6 +1062,114 @@ In addition to all arguments above, the following attributes are exported:
 
 `sku_standard` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Connections**
+
+`circuit_id` - (Optional) Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site (`String`).
+
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata) below.
+
+`other_subscription` - (Optional) Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription. See [Other Subscription](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription) below.
+
+`weight` - (Optional) Routing Weight. The weight (or priority) for the routes received from this connection. The default value is 10 (`Number`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Connections Metadata**
+
+`description` - (Optional) Description. Human readable description (`String`).
+
+`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription**
+
+`authorized_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Authorized Key](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key) below.
+
+`circuit_id` - (Optional) Circuit ID. Circuit ID (`String`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info) below.
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-blindfold-secret-info"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription-authorized-key-clear-secret-info"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet**
+
+`auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`subnet` - (Optional) Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet). See [Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-param) below.
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet**
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet-subnet-param"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet**
+
+`auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`subnet` - (Optional) Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet). See [Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet) below.
+
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-param) below.
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet**
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet-subnet-param"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
+
+<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route"></a>
+
+**Ingress Egress Gw Ar Hub Express Route Enabled Site Registration Over Express Route**
+
+`cloudlink_network_name` - (Optional) Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support (`String`).
+
 <a id="ingress-egress-gw-ar-hub-spoke-vnets"></a>
 
 **Ingress Egress Gw Ar Hub Spoke Vnets**
@@ -696,7 +1180,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `manual` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet (`Block`).
+`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet. See [Vnet](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) below.
+
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet"></a>
+
+**Ingress Egress Gw Ar Hub Spoke Vnets Vnet**
+
+`f5_orchestrated_routing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`resource_group` - (Optional) Existing Vnet Resource Group. Resource group of existing Vnet (`String`).
+
+`vnet_name` - (Optional) Existing Vnet Name. Name of existing Vnet (`String`).
 
 <a id="ingress-egress-gw-ar-inside-static-routes"></a>
 
@@ -708,9 +1204,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Egress Gw Ar Inside Static Routes Static Route List**
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route**
+
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
+
+`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop) below.
+
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets) below.
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop**
+
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
+
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
+
+`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) below.
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6) below.
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
+
+**Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="ingress-egress-gw-ar-node"></a>
 
@@ -730,17 +1306,49 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Egress Gw Ar Node Inside Subnet**
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-egress-gw-ar-node-inside-subnet-subnet) below.
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-ar-node-inside-subnet-subnet-param) below.
+
+<a id="ingress-egress-gw-ar-node-inside-subnet-subnet"></a>
+
+**Ingress Egress Gw Ar Node Inside Subnet Subnet**
+
+`subnet_name` - (Optional) Subnet Name. Name of existing subnet (`String`).
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-egress-gw-ar-node-inside-subnet-subnet-param"></a>
+
+**Ingress Egress Gw Ar Node Inside Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="ingress-egress-gw-ar-node-outside-subnet"></a>
 
 **Ingress Egress Gw Ar Node Outside Subnet**
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-egress-gw-ar-node-outside-subnet-subnet) below.
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-ar-node-outside-subnet-subnet-param) below.
+
+<a id="ingress-egress-gw-ar-node-outside-subnet-subnet"></a>
+
+**Ingress Egress Gw Ar Node Outside Subnet Subnet**
+
+`subnet_name` - (Optional) Subnet Name. Name of existing subnet (`String`).
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-egress-gw-ar-node-outside-subnet-subnet-param"></a>
+
+**Ingress Egress Gw Ar Node Outside Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="ingress-egress-gw-ar-outside-static-routes"></a>
 
@@ -752,9 +1360,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Egress Gw Ar Outside Static Routes Static Route List**
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route**
+
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
+
+`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop) below.
+
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets) below.
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop**
+
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
+
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
+
+`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) below.
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) below.
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
+
+**Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="ingress-egress-gw-ar-performance-enhancement-mode"></a>
 
@@ -804,9 +1492,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Gw Az Nodes Local Subnet**
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-gw-az-nodes-local-subnet-subnet) below.
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-gw-az-nodes-local-subnet-subnet-param) below.
+
+<a id="ingress-gw-az-nodes-local-subnet-subnet"></a>
+
+**Ingress Gw Az Nodes Local Subnet Subnet**
+
+`subnet_name` - (Optional) Subnet Name. Name of existing subnet (`String`).
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-gw-az-nodes-local-subnet-subnet-param"></a>
+
+**Ingress Gw Az Nodes Local Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="ingress-gw-performance-enhancement-mode"></a>
 
@@ -860,9 +1564,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ingress Gw Ar Node Local Subnet**
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-gw-ar-node-local-subnet-subnet) below.
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-gw-ar-node-local-subnet-subnet-param) below.
+
+<a id="ingress-gw-ar-node-local-subnet-subnet"></a>
+
+**Ingress Gw Ar Node Local Subnet Subnet**
+
+`subnet_name` - (Optional) Subnet Name. Name of existing subnet (`String`).
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="ingress-gw-ar-node-local-subnet-subnet-param"></a>
+
+**Ingress Gw Ar Node Local Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="ingress-gw-ar-performance-enhancement-mode"></a>
 
@@ -1090,9 +1810,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Voltstack Cluster Az Nodes Local Subnet**
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#voltstack-cluster-az-nodes-local-subnet-subnet) below.
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#voltstack-cluster-az-nodes-local-subnet-subnet-param) below.
+
+<a id="voltstack-cluster-az-nodes-local-subnet-subnet"></a>
+
+**Voltstack Cluster Az Nodes Local Subnet Subnet**
+
+`subnet_name` - (Optional) Subnet Name. Name of existing subnet (`String`).
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="voltstack-cluster-az-nodes-local-subnet-subnet-param"></a>
+
+**Voltstack Cluster Az Nodes Local Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="voltstack-cluster-dc-cluster-group"></a>
 
@@ -1114,9 +1850,41 @@ In addition to all arguments above, the following attributes are exported:
 
 **Voltstack Cluster Global Network List Global Network Connections**
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) below.
+
+<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>
+
+**Voltstack Cluster Global Network List Global Network Connections Sli To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
+
+<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
+
+**Voltstack Cluster Global Network List Global Network Connections Sli To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr"></a>
+
+**Voltstack Cluster Global Network List Global Network Connections Slo To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
+
+<a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
+
+**Voltstack Cluster Global Network List Global Network Connections Slo To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="voltstack-cluster-k8s-cluster"></a>
 
@@ -1138,9 +1906,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **Voltstack Cluster Outside Static Routes Static Route List**
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route**
+
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
+
+`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop) below.
+
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets) below.
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop**
+
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
+
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
+
+`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) below.
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) below.
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
+
+**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="voltstack-cluster-storage-class-list"></a>
 
@@ -1278,9 +2126,41 @@ In addition to all arguments above, the following attributes are exported:
 
 **Voltstack Cluster Ar Global Network List Global Network Connections**
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
+
+<a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>
+
+**Voltstack Cluster Ar Global Network List Global Network Connections Sli To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
+
+<a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
+
+**Voltstack Cluster Ar Global Network List Global Network Connections Sli To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>
+
+**Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR**
+
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
+
+<a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
+
+**Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR Global Vn**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="voltstack-cluster-ar-k8s-cluster"></a>
 
@@ -1308,9 +2188,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Voltstack Cluster Ar Node Local Subnet**
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#voltstack-cluster-ar-node-local-subnet-subnet) below.
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#voltstack-cluster-ar-node-local-subnet-subnet-param) below.
+
+<a id="voltstack-cluster-ar-node-local-subnet-subnet"></a>
+
+**Voltstack Cluster Ar Node Local Subnet Subnet**
+
+`subnet_name` - (Optional) Subnet Name. Name of existing subnet (`String`).
+
+`subnet_resource_grp` - (Optional) Resource Group Name. Specify name of Resource Group (`String`).
+
+`vnet_resource_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="voltstack-cluster-ar-node-local-subnet-subnet-param"></a>
+
+**Voltstack Cluster Ar Node Local Subnet Subnet Param**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
 <a id="voltstack-cluster-ar-outside-static-routes"></a>
 
@@ -1322,9 +2218,89 @@ In addition to all arguments above, the following attributes are exported:
 
 **Voltstack Cluster Ar Outside Static Routes Static Route List**
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route**
+
+`attrs` - (Optional) Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
+
+`nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop) below.
+
+`subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets) below.
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop**
+
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
+
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address) below.
+
+`type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Interface**
+
+`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6) below.
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets**
+
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
+
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6) below.
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv4**
+
+`plen` - (Optional) Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation (`String`).
+
+<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
+
+**Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv6**
+
+`plen` - (Optional) Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128 (`Number`).
+
+`prefix` - (Optional) Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::' (`String`).
 
 <a id="voltstack-cluster-ar-storage-class-list"></a>
 

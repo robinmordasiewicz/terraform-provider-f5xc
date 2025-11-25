@@ -163,7 +163,45 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cluster Wide App List Cluster Wide Apps Argo Cd**
 
-`local_domain` - (Optional) Local Access Configuration. Parameters required to enable local access (`Block`).
+`local_domain` - (Optional) Local Access Configuration. Parameters required to enable local access. See [Local Domain](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) below.
+
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain"></a>
+
+**Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain**
+
+`default_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`local_domain` - (Optional) Local Domain. ArgoCD will be accessible at <site name>.<local domain> (`String`).
+
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password) below.
+
+`port` - (Optional) Custom ArgoCD Port. Use custom ArgoCD port. Available port range is less than 65000 except reserved ports (`Number`).
+
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password"></a>
+
+**Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) below.
+
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info"></a>
+
+**Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info"></a>
+
+**Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="insecure-registry-list"></a>
 

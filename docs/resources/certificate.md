@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Hash Algorithms**
 
-`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used (`List`).
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
 
 <a id="private-key"></a>
 

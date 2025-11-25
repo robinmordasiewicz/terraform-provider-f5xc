@@ -376,7 +376,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
-`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#datadog-receiver-use-tls-mtls-enable-key-url) below.
+
+<a id="datadog-receiver-use-tls-mtls-enable-key-url"></a>
+
+**Datadog Receiver Use TLS mTLS Enable Key URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+
+<a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
+
+**Datadog Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
+
+**Datadog Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="gcp-bucket-receiver"></a>
 
@@ -470,9 +496,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Receiver Auth Basic Password**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#http-receiver-auth-basic-password-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#http-receiver-auth-basic-password-clear-secret-info) below.
+
+<a id="http-receiver-auth-basic-password-blindfold-secret-info"></a>
+
+**HTTP Receiver Auth Basic Password Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="http-receiver-auth-basic-password-clear-secret-info"></a>
+
+**HTTP Receiver Auth Basic Password Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="http-receiver-auth-token"></a>
 
@@ -484,9 +528,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Receiver Auth Token Token**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#http-receiver-auth-token-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#http-receiver-auth-token-token-clear-secret-info) below.
+
+<a id="http-receiver-auth-token-token-blindfold-secret-info"></a>
+
+**HTTP Receiver Auth Token Token Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="http-receiver-auth-token-token-clear-secret-info"></a>
+
+**HTTP Receiver Auth Token Token Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="http-receiver-batch"></a>
 
@@ -540,7 +602,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
-`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#http-receiver-use-tls-mtls-enable-key-url) below.
+
+<a id="http-receiver-use-tls-mtls-enable-key-url"></a>
+
+**HTTP Receiver Use TLS mTLS Enable Key URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+
+<a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
+
+**HTTP Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
+
+**HTTP Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="kafka-receiver"></a>
 
@@ -610,7 +698,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
-`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#kafka-receiver-use-tls-mtls-enable-key-url) below.
+
+<a id="kafka-receiver-use-tls-mtls-enable-key-url"></a>
+
+**Kafka Receiver Use TLS mTLS Enable Key URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+
+<a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
+
+**Kafka Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
+
+**Kafka Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="new-relic-receiver"></a>
 
@@ -720,7 +834,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
-`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#qradar-receiver-use-tls-mtls-enable-key-url) below.
+
+<a id="qradar-receiver-use-tls-mtls-enable-key-url"></a>
+
+**Qradar Receiver Use TLS mTLS Enable Key URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+
+<a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
+
+**Qradar Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
+
+**Qradar Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="s3-receiver"></a>
 
@@ -878,7 +1018,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
-`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#splunk-receiver-use-tls-mtls-enable-key-url) below.
+
+<a id="splunk-receiver-use-tls-mtls-enable-key-url"></a>
+
+**Splunk Receiver Use TLS mTLS Enable Key URL**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
+
+<a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
+
+**Splunk Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
+
+**Splunk Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="sumo-logic-receiver"></a>
 

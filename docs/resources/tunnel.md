@@ -126,9 +126,21 @@ In addition to all arguments above, the following attributes are exported:
 
 **Local IP IP Address IP Address**
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation (`Block`).
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#local-ip-ip-address-ip-address-ipv4) below.
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':' (`Block`).
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#local-ip-ip-address-ip-address-ipv6) below.
+
+<a id="local-ip-ip-address-ip-address-ipv4"></a>
+
+**Local IP IP Address IP Address IPv4**
+
+`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+
+<a id="local-ip-ip-address-ip-address-ipv6"></a>
+
+**Local IP IP Address IP Address IPv6**
+
+`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
 
 <a id="local-ip-ip-address-virtual-network-type"></a>
 
@@ -156,9 +168,27 @@ In addition to all arguments above, the following attributes are exported:
 
 **Params Ipsec Ipsec Psk**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#params-ipsec-ipsec-psk-clear-secret-info) below.
+
+<a id="params-ipsec-ipsec-psk-blindfold-secret-info"></a>
+
+**Params Ipsec Ipsec Psk Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="params-ipsec-ipsec-psk-clear-secret-info"></a>
+
+**Params Ipsec Ipsec Psk Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="remote-ip"></a>
 

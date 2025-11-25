@@ -290,9 +290,29 @@ In addition to all arguments above, the following attributes are exported:
 
 **Origin Servers Consul Service Site Locator**
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#origin-servers-consul-service-site-locator-site) below.
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#origin-servers-consul-service-site-locator-virtual-site) below.
+
+<a id="origin-servers-consul-service-site-locator-site"></a>
+
+**Origin Servers Consul Service Site Locator Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="origin-servers-consul-service-site-locator-virtual-site"></a>
+
+**Origin Servers Consul Service Site Locator Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="origin-servers-consul-service-snat-pool"></a>
 
@@ -300,7 +320,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#origin-servers-consul-service-snat-pool-snat-pool) below.
+
+<a id="origin-servers-consul-service-snat-pool-snat-pool"></a>
+
+**Origin Servers Consul Service Snat Pool Snat Pool**
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="origin-servers-custom-endpoint-object"></a>
 
@@ -340,9 +366,29 @@ In addition to all arguments above, the following attributes are exported:
 
 **Origin Servers K8s Service Site Locator**
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#origin-servers-k8s-service-site-locator-site) below.
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#origin-servers-k8s-service-site-locator-virtual-site) below.
+
+<a id="origin-servers-k8s-service-site-locator-site"></a>
+
+**Origin Servers K8s Service Site Locator Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="origin-servers-k8s-service-site-locator-virtual-site"></a>
+
+**Origin Servers K8s Service Site Locator Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="origin-servers-k8s-service-snat-pool"></a>
 
@@ -350,7 +396,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#origin-servers-k8s-service-snat-pool-snat-pool) below.
+
+<a id="origin-servers-k8s-service-snat-pool-snat-pool"></a>
+
+**Origin Servers K8s Service Snat Pool Snat Pool**
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="origin-servers-private-ip"></a>
 
@@ -382,9 +434,29 @@ In addition to all arguments above, the following attributes are exported:
 
 **Origin Servers Private IP Site Locator**
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#origin-servers-private-ip-site-locator-site) below.
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#origin-servers-private-ip-site-locator-virtual-site) below.
+
+<a id="origin-servers-private-ip-site-locator-site"></a>
+
+**Origin Servers Private IP Site Locator Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="origin-servers-private-ip-site-locator-virtual-site"></a>
+
+**Origin Servers Private IP Site Locator Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="origin-servers-private-ip-snat-pool"></a>
 
@@ -392,7 +464,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#origin-servers-private-ip-snat-pool-snat-pool) below.
+
+<a id="origin-servers-private-ip-snat-pool-snat-pool"></a>
+
+**Origin Servers Private IP Snat Pool Snat Pool**
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="origin-servers-private-name"></a>
 
@@ -426,9 +504,29 @@ In addition to all arguments above, the following attributes are exported:
 
 **Origin Servers Private Name Site Locator**
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#origin-servers-private-name-site-locator-site) below.
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#origin-servers-private-name-site-locator-virtual-site) below.
+
+<a id="origin-servers-private-name-site-locator-site"></a>
+
+**Origin Servers Private Name Site Locator Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+<a id="origin-servers-private-name-site-locator-virtual-site"></a>
+
+**Origin Servers Private Name Site Locator Virtual Site**
+
+`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+
+`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+
+`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 <a id="origin-servers-private-name-snat-pool"></a>
 
@@ -436,7 +534,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#origin-servers-private-name-snat-pool-snat-pool) below.
+
+<a id="origin-servers-private-name-snat-pool-snat-pool"></a>
+
+**Origin Servers Private Name Snat Pool Snat Pool**
+
+`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="origin-servers-public-ip"></a>
 
@@ -572,15 +676,47 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#use-tls-use-mtls-tls-certificates-custom-hash-algorithms) below.
 
 `description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#use-tls-use-mtls-tls-certificates-private-key) below.
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+<a id="use-tls-use-mtls-tls-certificates-custom-hash-algorithms"></a>
+
+**Use TLS Use mTLS TLS Certificates Custom Hash Algorithms**
+
+`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+
+<a id="use-tls-use-mtls-tls-certificates-private-key"></a>
+
+**Use TLS Use mTLS TLS Certificates Private Key**
+
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info) below.
+
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#use-tls-use-mtls-tls-certificates-private-key-clear-secret-info) below.
+
+<a id="use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info"></a>
+
+**Use TLS Use mTLS TLS Certificates Private Key Blindfold Secret Info**
+
+`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+
+`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+
+`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+<a id="use-tls-use-mtls-tls-certificates-private-key-clear-secret-info"></a>
+
+**Use TLS Use mTLS TLS Certificates Private Key Clear Secret Info**
+
+`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+
+`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
 <a id="use-tls-use-mtls-obj"></a>
 

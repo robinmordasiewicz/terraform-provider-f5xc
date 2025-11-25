@@ -106,11 +106,11 @@ resource "f5xc_azure_vnet_site" "example" {
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
 
-`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Block All Services](#block-all-services) below for details.
+`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
@@ -138,13 +138,13 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
 
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `machine_type` - (Optional) Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options (`String`).
 
 > **Note:** One of the arguments from this list "no_worker_nodes, nodes_per_az, total_nodes" must be set.
 
-`no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Worker Nodes](#no-worker-nodes) below for details.
+`no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
 
@@ -160,7 +160,7 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
 
-`tags` - (Optional) Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console. See [Tags](#tags) below for details.
+`tags` - (Optional) Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -210,10 +210,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="block-all-services"></a>
-
-### Block All Services
-
 <a id="blocked-services"></a>
 
 ### Blocked Services
@@ -224,25 +220,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Blocked Services Blocked Sevice
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-blocked-sevice-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-blocked-sevice-ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-blocked-sevice-web-user-interface) below.
-
-<a id="blocked-services-blocked-sevice-dns"></a>
-
-### Blocked Services Blocked Sevice DNS
-
-<a id="blocked-services-blocked-sevice-ssh"></a>
-
-### Blocked Services Blocked Sevice SSH
-
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>
-
-### Blocked Services Blocked Sevice Web User Interface
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="coordinates"></a>
 
@@ -259,10 +243,6 @@ In addition to all arguments above, the following attributes are exported:
 `inside_nameserver` - (Optional) DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network (`String`).
 
 `outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
-
-<a id="default-blocked-services"></a>
-
-### Default Blocked Services
 
 <a id="ingress-egress-gw"></a>
 
@@ -284,7 +264,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group_outside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Outside Vn](#ingress-egress-gw-dc-cluster-group-outside-vn) below.
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#ingress-egress-gw-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#ingress-egress-gw-global-network-list) below.
 
@@ -292,43 +272,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `inside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Inside Static Routes](#ingress-egress-gw-inside-static-routes) below.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#ingress-egress-gw-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#ingress-egress-gw-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#ingress-egress-gw-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#ingress-egress-gw-no-inside-static-routes) below.
+`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#ingress-egress-gw-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#ingress-egress-gw-no-outside-static-routes) below.
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`not_hub` - (Optional) Empty. This can be used for messages where no values are needed. See [Not Hub](#ingress-egress-gw-not-hub) below.
+`not_hub` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#ingress-egress-gw-outside-static-routes) below.
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#ingress-egress-gw-performance-enhancement-mode) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#ingress-egress-gw-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#ingress-egress-gw-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-accelerated-networking"></a>
 
 ### Ingress Egress Gw Accelerated Networking
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#ingress-egress-gw-accelerated-networking-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#ingress-egress-gw-accelerated-networking-enable) below.
-
-<a id="ingress-egress-gw-accelerated-networking-disable"></a>
-
-### Ingress Egress Gw Accelerated Networking Disable
-
-<a id="ingress-egress-gw-accelerated-networking-enable"></a>
-
-### Ingress Egress Gw Accelerated Networking Enable
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-active-enhanced-firewall-policies"></a>
 
@@ -392,33 +364,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Az Nodes Inside Subnet
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-egress-gw-az-nodes-inside-subnet-subnet) below.
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-az-nodes-inside-subnet-subnet-param) below.
-
-<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet"></a>
-
-### Ingress Egress Gw Az Nodes Inside Subnet Subnet
-
-<a id="ingress-egress-gw-az-nodes-inside-subnet-subnet-param"></a>
-
-### Ingress Egress Gw Az Nodes Inside Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="ingress-egress-gw-az-nodes-outside-subnet"></a>
 
 ### Ingress Egress Gw Az Nodes Outside Subnet
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-egress-gw-az-nodes-outside-subnet-subnet) below.
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-az-nodes-outside-subnet-subnet-param) below.
-
-<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet"></a>
-
-### Ingress Egress Gw Az Nodes Outside Subnet Subnet
-
-<a id="ingress-egress-gw-az-nodes-outside-subnet-subnet-param"></a>
-
-### Ingress Egress Gw Az Nodes Outside Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="ingress-egress-gw-dc-cluster-group-inside-vn"></a>
 
@@ -440,10 +396,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="ingress-egress-gw-forward-proxy-allow-all"></a>
-
-### Ingress Egress Gw Forward Proxy Allow All
-
 <a id="ingress-egress-gw-global-network-list"></a>
 
 ### Ingress Egress Gw Global Network List
@@ -454,137 +406,61 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR
-
-<a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="ingress-egress-gw-hub"></a>
 
 ### Ingress Egress Gw Hub
 
-`express_route_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Express Route Disabled](#ingress-egress-gw-hub-express-route-disabled) below.
+`express_route_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `express_route_enabled` - (Optional) Express Route Configuration. Express Route Configuration. See [Express Route Enabled](#ingress-egress-gw-hub-express-route-enabled) below.
 
 `spoke_vnets` - (Optional) Spoke VNet Peering (Legacy). Spoke VNet Peering. See [Spoke Vnets](#ingress-egress-gw-hub-spoke-vnets) below.
 
-<a id="ingress-egress-gw-hub-express-route-disabled"></a>
-
-### Ingress Egress Gw Hub Express Route Disabled
-
 <a id="ingress-egress-gw-hub-express-route-enabled"></a>
 
 ### Ingress Egress Gw Hub Express Route Enabled
 
-`advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise To Route Server](#ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server) below.
+`advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#ingress-egress-gw-hub-express-route-enabled-auto-asn) below.
+`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site. See [Connections](#ingress-egress-gw-hub-express-route-enabled-connections) below.
+`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site (`Block`).
 
 `custom_asn` - (Optional) Custom ASN. Set custom ASN for F5XC Site (`Number`).
 
-`do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise To Route Server](#ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server) below.
+`do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Gateway Subnet](#ingress-egress-gw-hub-express-route-enabled-gateway-subnet) below.
+`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Route Server Subnet](#ingress-egress-gw-hub-express-route-enabled-route-server-subnet) below.
+`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Express Route](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route) below.
+`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config (`Block`).
 
-`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Registration Over Internet](#ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet) below.
+`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sku_ergw1az` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Ergw1az](#ingress-egress-gw-hub-express-route-enabled-sku-ergw1az) below.
+`sku_ergw1az` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sku_ergw2az` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Ergw2az](#ingress-egress-gw-hub-express-route-enabled-sku-ergw2az) below.
+`sku_ergw2az` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sku_high_perf` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku High Perf](#ingress-egress-gw-hub-express-route-enabled-sku-high-perf) below.
+`sku_high_perf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sku_standard` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Standard](#ingress-egress-gw-hub-express-route-enabled-sku-standard) below.
-
-<a id="ingress-egress-gw-hub-express-route-enabled-advertise-to-route-server"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Advertise To Route Server
-
-<a id="ingress-egress-gw-hub-express-route-enabled-auto-asn"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Auto Asn
-
-<a id="ingress-egress-gw-hub-express-route-enabled-connections"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Connections
-
-<a id="ingress-egress-gw-hub-express-route-enabled-do-not-advertise-to-route-server"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Do Not Advertise To Route Server
-
-<a id="ingress-egress-gw-hub-express-route-enabled-gateway-subnet"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet
-
-<a id="ingress-egress-gw-hub-express-route-enabled-route-server-subnet"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet
-
-<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-express-route"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Site Registration Over Express Route
-
-<a id="ingress-egress-gw-hub-express-route-enabled-site-registration-over-internet"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Site Registration Over Internet
-
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-ergw1az"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Sku Ergw1az
-
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-ergw2az"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Sku Ergw2az
-
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-high-perf"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Sku High Perf
-
-<a id="ingress-egress-gw-hub-express-route-enabled-sku-standard"></a>
-
-### Ingress Egress Gw Hub Express Route Enabled Sku Standard
+`sku_standard` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-hub-spoke-vnets"></a>
 
 ### Ingress Egress Gw Hub Spoke Vnets
 
-`auto` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto](#ingress-egress-gw-hub-spoke-vnets-auto) below.
+`auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`labels` - (Optional) Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace. See [Labels](#ingress-egress-gw-hub-spoke-vnets-labels) below.
+`labels` - (Optional) Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace (`Block`).
 
-`manual` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual](#ingress-egress-gw-hub-spoke-vnets-manual) below.
+`manual` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet. See [Vnet](#ingress-egress-gw-hub-spoke-vnets-vnet) below.
-
-<a id="ingress-egress-gw-hub-spoke-vnets-auto"></a>
-
-### Ingress Egress Gw Hub Spoke Vnets Auto
-
-<a id="ingress-egress-gw-hub-spoke-vnets-labels"></a>
-
-### Ingress Egress Gw Hub Spoke Vnets Labels
-
-<a id="ingress-egress-gw-hub-spoke-vnets-manual"></a>
-
-### Ingress Egress Gw Hub Spoke Vnets Manual
-
-<a id="ingress-egress-gw-hub-spoke-vnets-vnet"></a>
-
-### Ingress Egress Gw Hub Spoke Vnets Vnet
+`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet (`Block`).
 
 <a id="ingress-egress-gw-inside-static-routes"></a>
 
@@ -596,41 +472,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Inside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route"></a>
-
-### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route
-
-<a id="ingress-egress-gw-no-dc-cluster-group"></a>
-
-### Ingress Egress Gw No Dc Cluster Group
-
-<a id="ingress-egress-gw-no-forward-proxy"></a>
-
-### Ingress Egress Gw No Forward Proxy
-
-<a id="ingress-egress-gw-no-global-network"></a>
-
-### Ingress Egress Gw No Global Network
-
-<a id="ingress-egress-gw-no-inside-static-routes"></a>
-
-### Ingress Egress Gw No Inside Static Routes
-
-<a id="ingress-egress-gw-no-network-policy"></a>
-
-### Ingress Egress Gw No Network Policy
-
-<a id="ingress-egress-gw-no-outside-static-routes"></a>
-
-### Ingress Egress Gw No Outside Static Routes
-
-<a id="ingress-egress-gw-not-hub"></a>
-
-### Ingress Egress Gw Not Hub
 
 <a id="ingress-egress-gw-outside-static-routes"></a>
 
@@ -642,13 +486,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Outside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route"></a>
-
-### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route
 
 <a id="ingress-egress-gw-performance-enhancement-mode"></a>
 
@@ -656,35 +496,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Ingress Egress Gw Performance Enhancement Mode Perf Mode L7 Enhanced
-
-<a id="ingress-egress-gw-sm-connection-public-ip"></a>
-
-### Ingress Egress Gw Sm Connection Public IP
-
-<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>
-
-### Ingress Egress Gw Sm Connection Pvt IP
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-ar"></a>
 
@@ -704,7 +524,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group_outside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Outside Vn](#ingress-egress-gw-ar-dc-cluster-group-outside-vn) below.
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#ingress-egress-gw-ar-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#ingress-egress-gw-ar-global-network-list) below.
 
@@ -712,45 +532,37 @@ In addition to all arguments above, the following attributes are exported:
 
 `inside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Inside Static Routes](#ingress-egress-gw-ar-inside-static-routes) below.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#ingress-egress-gw-ar-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#ingress-egress-gw-ar-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#ingress-egress-gw-ar-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#ingress-egress-gw-ar-no-inside-static-routes) below.
+`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#ingress-egress-gw-ar-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#ingress-egress-gw-ar-no-outside-static-routes) below.
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `node` - (Optional) Two Interface Node. Parameters for creating two interface Node in one AZ. See [Node](#ingress-egress-gw-ar-node) below.
 
-`not_hub` - (Optional) Empty. This can be used for messages where no values are needed. See [Not Hub](#ingress-egress-gw-ar-not-hub) below.
+`not_hub` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#ingress-egress-gw-ar-outside-static-routes) below.
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#ingress-egress-gw-ar-performance-enhancement-mode) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#ingress-egress-gw-ar-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#ingress-egress-gw-ar-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-ar-accelerated-networking"></a>
 
 ### Ingress Egress Gw Ar Accelerated Networking
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#ingress-egress-gw-ar-accelerated-networking-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#ingress-egress-gw-ar-accelerated-networking-enable) below.
-
-<a id="ingress-egress-gw-ar-accelerated-networking-disable"></a>
-
-### Ingress Egress Gw Ar Accelerated Networking Disable
-
-<a id="ingress-egress-gw-ar-accelerated-networking-enable"></a>
-
-### Ingress Egress Gw Ar Accelerated Networking Enable
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-ar-active-enhanced-firewall-policies"></a>
 
@@ -820,10 +632,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="ingress-egress-gw-ar-forward-proxy-allow-all"></a>
-
-### Ingress Egress Gw Ar Forward Proxy Allow All
-
 <a id="ingress-egress-gw-ar-global-network-list"></a>
 
 ### Ingress Egress Gw Ar Global Network List
@@ -834,137 +642,61 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Ar Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Ingress Egress Gw Ar Global Network List Global Network Connections Sli To Global DR
-
-<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="ingress-egress-gw-ar-hub"></a>
 
 ### Ingress Egress Gw Ar Hub
 
-`express_route_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Express Route Disabled](#ingress-egress-gw-ar-hub-express-route-disabled) below.
+`express_route_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `express_route_enabled` - (Optional) Express Route Configuration. Express Route Configuration. See [Express Route Enabled](#ingress-egress-gw-ar-hub-express-route-enabled) below.
 
 `spoke_vnets` - (Optional) Spoke VNet Peering (Legacy). Spoke VNet Peering. See [Spoke Vnets](#ingress-egress-gw-ar-hub-spoke-vnets) below.
 
-<a id="ingress-egress-gw-ar-hub-express-route-disabled"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Disabled
-
 <a id="ingress-egress-gw-ar-hub-express-route-enabled"></a>
 
 ### Ingress Egress Gw Ar Hub Express Route Enabled
 
-`advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise To Route Server](#ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server) below.
+`advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#ingress-egress-gw-ar-hub-express-route-enabled-auto-asn) below.
+`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site. See [Connections](#ingress-egress-gw-ar-hub-express-route-enabled-connections) below.
+`connections` - (Optional) Connections. Add the ExpressRoute Circuit Connections to this site (`Block`).
 
 `custom_asn` - (Optional) Custom ASN. Set custom ASN for F5XC Site (`Number`).
 
-`do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise To Route Server](#ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server) below.
+`do_not_advertise_to_route_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Gateway Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet) below.
+`gateway_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Route Server Subnet](#ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet) below.
+`route_server_subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Express Route](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route) below.
+`site_registration_over_express_route` - (Optional) CloudLink ADN Network Config (`Block`).
 
-`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Registration Over Internet](#ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet) below.
+`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sku_ergw1az` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Ergw1az](#ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw1az) below.
+`sku_ergw1az` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sku_ergw2az` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Ergw2az](#ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw2az) below.
+`sku_ergw2az` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sku_high_perf` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku High Perf](#ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf) below.
+`sku_high_perf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sku_standard` - (Optional) Empty. This can be used for messages where no values are needed. See [Sku Standard](#ingress-egress-gw-ar-hub-express-route-enabled-sku-standard) below.
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-advertise-to-route-server"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Advertise To Route Server
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-auto-asn"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Auto Asn
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-connections"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Connections
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-do-not-advertise-to-route-server"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Do Not Advertise To Route Server
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-gateway-subnet"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-route-server-subnet"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-express-route"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Site Registration Over Express Route
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-site-registration-over-internet"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Site Registration Over Internet
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw1az"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Sku Ergw1az
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-ergw2az"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Sku Ergw2az
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-high-perf"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Sku High Perf
-
-<a id="ingress-egress-gw-ar-hub-express-route-enabled-sku-standard"></a>
-
-### Ingress Egress Gw Ar Hub Express Route Enabled Sku Standard
+`sku_standard` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets"></a>
 
 ### Ingress Egress Gw Ar Hub Spoke Vnets
 
-`auto` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto](#ingress-egress-gw-ar-hub-spoke-vnets-auto) below.
+`auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`labels` - (Optional) Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace. See [Labels](#ingress-egress-gw-ar-hub-spoke-vnets-labels) below.
+`labels` - (Optional) Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace (`Block`).
 
-`manual` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual](#ingress-egress-gw-ar-hub-spoke-vnets-manual) below.
+`manual` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet. See [Vnet](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) below.
-
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-auto"></a>
-
-### Ingress Egress Gw Ar Hub Spoke Vnets Auto
-
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-labels"></a>
-
-### Ingress Egress Gw Ar Hub Spoke Vnets Labels
-
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-manual"></a>
-
-### Ingress Egress Gw Ar Hub Spoke Vnets Manual
-
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet"></a>
-
-### Ingress Egress Gw Ar Hub Spoke Vnets Vnet
+`vnet` - (Optional) Azure Existing Vnet Type. Resource group and name of existing Azure Vnet (`Block`).
 
 <a id="ingress-egress-gw-ar-inside-static-routes"></a>
 
@@ -976,37 +708,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Ar Inside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="ingress-egress-gw-ar-inside-static-routes-static-route-list-custom-static-route"></a>
-
-### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route
-
-<a id="ingress-egress-gw-ar-no-dc-cluster-group"></a>
-
-### Ingress Egress Gw Ar No Dc Cluster Group
-
-<a id="ingress-egress-gw-ar-no-forward-proxy"></a>
-
-### Ingress Egress Gw Ar No Forward Proxy
-
-<a id="ingress-egress-gw-ar-no-global-network"></a>
-
-### Ingress Egress Gw Ar No Global Network
-
-<a id="ingress-egress-gw-ar-no-inside-static-routes"></a>
-
-### Ingress Egress Gw Ar No Inside Static Routes
-
-<a id="ingress-egress-gw-ar-no-network-policy"></a>
-
-### Ingress Egress Gw Ar No Network Policy
-
-<a id="ingress-egress-gw-ar-no-outside-static-routes"></a>
-
-### Ingress Egress Gw Ar No Outside Static Routes
 
 <a id="ingress-egress-gw-ar-node"></a>
 
@@ -1026,37 +730,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Ar Node Inside Subnet
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-egress-gw-ar-node-inside-subnet-subnet) below.
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-ar-node-inside-subnet-subnet-param) below.
-
-<a id="ingress-egress-gw-ar-node-inside-subnet-subnet"></a>
-
-### Ingress Egress Gw Ar Node Inside Subnet Subnet
-
-<a id="ingress-egress-gw-ar-node-inside-subnet-subnet-param"></a>
-
-### Ingress Egress Gw Ar Node Inside Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="ingress-egress-gw-ar-node-outside-subnet"></a>
 
 ### Ingress Egress Gw Ar Node Outside Subnet
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-egress-gw-ar-node-outside-subnet-subnet) below.
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-egress-gw-ar-node-outside-subnet-subnet-param) below.
-
-<a id="ingress-egress-gw-ar-node-outside-subnet-subnet"></a>
-
-### Ingress Egress Gw Ar Node Outside Subnet Subnet
-
-<a id="ingress-egress-gw-ar-node-outside-subnet-subnet-param"></a>
-
-### Ingress Egress Gw Ar Node Outside Subnet Subnet Param
-
-<a id="ingress-egress-gw-ar-not-hub"></a>
-
-### Ingress Egress Gw Ar Not Hub
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="ingress-egress-gw-ar-outside-static-routes"></a>
 
@@ -1068,13 +752,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Ar Outside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="ingress-egress-gw-ar-outside-static-routes-static-route-list-custom-static-route"></a>
-
-### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route
 
 <a id="ingress-egress-gw-ar-performance-enhancement-mode"></a>
 
@@ -1082,35 +762,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="ingress-egress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L7 Enhanced
-
-<a id="ingress-egress-gw-ar-sm-connection-public-ip"></a>
-
-### Ingress Egress Gw Ar Sm Connection Public IP
-
-<a id="ingress-egress-gw-ar-sm-connection-pvt-ip"></a>
-
-### Ingress Egress Gw Ar Sm Connection Pvt IP
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-gw"></a>
 
@@ -1128,17 +788,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Gw Accelerated Networking
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#ingress-gw-accelerated-networking-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#ingress-gw-accelerated-networking-enable) below.
-
-<a id="ingress-gw-accelerated-networking-disable"></a>
-
-### Ingress Gw Accelerated Networking Disable
-
-<a id="ingress-gw-accelerated-networking-enable"></a>
-
-### Ingress Gw Accelerated Networking Enable
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-gw-az-nodes"></a>
 
@@ -1152,17 +804,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Gw Az Nodes Local Subnet
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-gw-az-nodes-local-subnet-subnet) below.
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-gw-az-nodes-local-subnet-subnet-param) below.
-
-<a id="ingress-gw-az-nodes-local-subnet-subnet"></a>
-
-### Ingress Gw Az Nodes Local Subnet Subnet
-
-<a id="ingress-gw-az-nodes-local-subnet-subnet-param"></a>
-
-### Ingress Gw Az Nodes Local Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="ingress-gw-performance-enhancement-mode"></a>
 
@@ -1170,27 +814,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Ingress Gw Performance Enhancement Mode Perf Mode L7 Enhanced
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-gw-ar"></a>
 
@@ -1208,17 +840,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Gw Ar Accelerated Networking
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#ingress-gw-ar-accelerated-networking-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#ingress-gw-ar-accelerated-networking-enable) below.
-
-<a id="ingress-gw-ar-accelerated-networking-disable"></a>
-
-### Ingress Gw Ar Accelerated Networking Disable
-
-<a id="ingress-gw-ar-accelerated-networking-enable"></a>
-
-### Ingress Gw Ar Accelerated Networking Enable
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-gw-ar-node"></a>
 
@@ -1236,17 +860,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Gw Ar Node Local Subnet
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#ingress-gw-ar-node-local-subnet-subnet) below.
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#ingress-gw-ar-node-local-subnet-subnet-param) below.
-
-<a id="ingress-gw-ar-node-local-subnet-subnet"></a>
-
-### Ingress Gw Ar Node Local Subnet Subnet
-
-<a id="ingress-gw-ar-node-local-subnet-subnet-param"></a>
-
-### Ingress Gw Ar Node Local Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="ingress-gw-ar-performance-enhancement-mode"></a>
 
@@ -1254,59 +870,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="ingress-gw-ar-performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Ingress Gw Ar Performance Enhancement Mode Perf Mode L7 Enhanced
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="kubernetes-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#kubernetes-upgrade-drain-disable-upgrade-drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
-
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>
-
-### Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="log-receiver"></a>
 
@@ -1318,57 +910,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="logs-streaming-disabled"></a>
-
-### Logs Streaming Disabled
-
-<a id="no-worker-nodes"></a>
-
-### No Worker Nodes
-
 <a id="offline-survivability-mode"></a>
 
 ### Offline Survivability Mode
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#offline-survivability-mode-enable-offline-survivability-mode) below.
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#offline-survivability-mode-no-offline-survivability-mode) below.
-
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>
-
-### Offline Survivability Mode Enable Offline Survivability Mode
-
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>
-
-### Offline Survivability Mode No Offline Survivability Mode
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="os"></a>
 
 ### OS
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#os-default-os-version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
-
-<a id="os-default-os-version"></a>
-
-### OS Default OS Version
 
 <a id="sw"></a>
 
 ### Sw
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#sw-default-sw-version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
-
-<a id="sw-default-sw-version"></a>
-
-### Sw Default Sw Version
-
-<a id="tags"></a>
-
-### Tags
 
 <a id="timeouts"></a>
 
@@ -1394,35 +958,23 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Vnet Existing Vnet
 
-`f5_orchestrated_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 Orchestrated Routing](#vnet-existing-vnet-f5-orchestrated-routing) below.
+`f5_orchestrated_routing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#vnet-existing-vnet-manual-routing) below.
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `resource_group` - (Optional) Existing Vnet Resource Group. Resource group of existing Vnet (`String`).
 
 `vnet_name` - (Optional) Existing Vnet Name. Name of existing Vnet (`String`).
 
-<a id="vnet-existing-vnet-f5-orchestrated-routing"></a>
-
-### Vnet Existing Vnet F5 Orchestrated Routing
-
-<a id="vnet-existing-vnet-manual-routing"></a>
-
-### Vnet Existing Vnet Manual Routing
-
 <a id="vnet-new-vnet"></a>
 
 ### Vnet New Vnet
 
-`autogenerate` - (Optional) Empty. This can be used for messages where no values are needed. See [Autogenerate](#vnet-new-vnet-autogenerate) below.
+`autogenerate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `name` - (Optional) Choose Vnet Name. Specify the Vnet Name (`String`).
 
 `primary_ipv4` - (Optional) IPv4 CIDR block. IPv4 CIDR block for this Vnet. It has to be private address space (`String`).
-
-<a id="vnet-new-vnet-autogenerate"></a>
-
-### Vnet New Vnet Autogenerate
 
 <a id="voltstack-cluster"></a>
 
@@ -1442,31 +994,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
 
-`default_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage](#voltstack-cluster-default-storage) below.
+`default_storage` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#voltstack-cluster-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#voltstack-cluster-global-network-list) below.
 
 `k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#voltstack-cluster-k8s-cluster) below.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#voltstack-cluster-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#voltstack-cluster-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#voltstack-cluster-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#voltstack-cluster-no-k8s-cluster) below.
+`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#voltstack-cluster-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#voltstack-cluster-no-outside-static-routes) below.
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#voltstack-cluster-outside-static-routes) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#voltstack-cluster-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#voltstack-cluster-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this site. See [Storage Class List](#voltstack-cluster-storage-class-list) below.
 
@@ -1474,17 +1026,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Accelerated Networking
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#voltstack-cluster-accelerated-networking-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#voltstack-cluster-accelerated-networking-enable) below.
-
-<a id="voltstack-cluster-accelerated-networking-disable"></a>
-
-### Voltstack Cluster Accelerated Networking Disable
-
-<a id="voltstack-cluster-accelerated-networking-enable"></a>
-
-### Voltstack Cluster Accelerated Networking Enable
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="voltstack-cluster-active-enhanced-firewall-policies"></a>
 
@@ -1546,17 +1090,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Az Nodes Local Subnet
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#voltstack-cluster-az-nodes-local-subnet-subnet) below.
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#voltstack-cluster-az-nodes-local-subnet-subnet-param) below.
-
-<a id="voltstack-cluster-az-nodes-local-subnet-subnet"></a>
-
-### Voltstack Cluster Az Nodes Local Subnet Subnet
-
-<a id="voltstack-cluster-az-nodes-local-subnet-subnet-param"></a>
-
-### Voltstack Cluster Az Nodes Local Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="voltstack-cluster-dc-cluster-group"></a>
 
@@ -1568,14 +1104,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="voltstack-cluster-default-storage"></a>
-
-### Voltstack Cluster Default Storage
-
-<a id="voltstack-cluster-forward-proxy-allow-all"></a>
-
-### Voltstack Cluster Forward Proxy Allow All
-
 <a id="voltstack-cluster-global-network-list"></a>
 
 ### Voltstack Cluster Global Network List
@@ -1586,17 +1114,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Voltstack Cluster Global Network List Global Network Connections Sli To Global DR
-
-<a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Voltstack Cluster Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="voltstack-cluster-k8s-cluster"></a>
 
@@ -1608,30 +1128,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="voltstack-cluster-no-dc-cluster-group"></a>
-
-### Voltstack Cluster No Dc Cluster Group
-
-<a id="voltstack-cluster-no-forward-proxy"></a>
-
-### Voltstack Cluster No Forward Proxy
-
-<a id="voltstack-cluster-no-global-network"></a>
-
-### Voltstack Cluster No Global Network
-
-<a id="voltstack-cluster-no-k8s-cluster"></a>
-
-### Voltstack Cluster No K8s Cluster
-
-<a id="voltstack-cluster-no-network-policy"></a>
-
-### Voltstack Cluster No Network Policy
-
-<a id="voltstack-cluster-no-outside-static-routes"></a>
-
-### Voltstack Cluster No Outside Static Routes
-
 <a id="voltstack-cluster-outside-static-routes"></a>
 
 ### Voltstack Cluster Outside Static Routes
@@ -1642,21 +1138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Outside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route"></a>
-
-### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route
-
-<a id="voltstack-cluster-sm-connection-public-ip"></a>
-
-### Voltstack Cluster Sm Connection Public IP
-
-<a id="voltstack-cluster-sm-connection-pvt-ip"></a>
-
-### Voltstack Cluster Sm Connection Pvt IP
 
 <a id="voltstack-cluster-storage-class-list"></a>
 
@@ -1688,33 +1172,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#voltstack-cluster-ar-dc-cluster-group) below.
 
-`default_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage](#voltstack-cluster-ar-default-storage) below.
+`default_storage` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#voltstack-cluster-ar-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#voltstack-cluster-ar-global-network-list) below.
 
 `k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#voltstack-cluster-ar-k8s-cluster) below.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#voltstack-cluster-ar-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#voltstack-cluster-ar-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#voltstack-cluster-ar-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#voltstack-cluster-ar-no-k8s-cluster) below.
+`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#voltstack-cluster-ar-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#voltstack-cluster-ar-no-outside-static-routes) below.
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `node` - (Optional) Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region. See [Node](#voltstack-cluster-ar-node) below.
 
 `outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#voltstack-cluster-ar-outside-static-routes) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#voltstack-cluster-ar-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#voltstack-cluster-ar-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this site. See [Storage Class List](#voltstack-cluster-ar-storage-class-list) below.
 
@@ -1722,17 +1206,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Ar Accelerated Networking
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#voltstack-cluster-ar-accelerated-networking-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#voltstack-cluster-ar-accelerated-networking-enable) below.
-
-<a id="voltstack-cluster-ar-accelerated-networking-disable"></a>
-
-### Voltstack Cluster Ar Accelerated Networking Disable
-
-<a id="voltstack-cluster-ar-accelerated-networking-enable"></a>
-
-### Voltstack Cluster Ar Accelerated Networking Enable
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="voltstack-cluster-ar-active-enhanced-firewall-policies"></a>
 
@@ -1792,14 +1268,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="voltstack-cluster-ar-default-storage"></a>
-
-### Voltstack Cluster Ar Default Storage
-
-<a id="voltstack-cluster-ar-forward-proxy-allow-all"></a>
-
-### Voltstack Cluster Ar Forward Proxy Allow All
-
 <a id="voltstack-cluster-ar-global-network-list"></a>
 
 ### Voltstack Cluster Ar Global Network List
@@ -1810,17 +1278,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Ar Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Voltstack Cluster Ar Global Network List Global Network Connections Sli To Global DR
-
-<a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="voltstack-cluster-ar-k8s-cluster"></a>
 
@@ -1831,30 +1291,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="voltstack-cluster-ar-no-dc-cluster-group"></a>
-
-### Voltstack Cluster Ar No Dc Cluster Group
-
-<a id="voltstack-cluster-ar-no-forward-proxy"></a>
-
-### Voltstack Cluster Ar No Forward Proxy
-
-<a id="voltstack-cluster-ar-no-global-network"></a>
-
-### Voltstack Cluster Ar No Global Network
-
-<a id="voltstack-cluster-ar-no-k8s-cluster"></a>
-
-### Voltstack Cluster Ar No K8s Cluster
-
-<a id="voltstack-cluster-ar-no-network-policy"></a>
-
-### Voltstack Cluster Ar No Network Policy
-
-<a id="voltstack-cluster-ar-no-outside-static-routes"></a>
-
-### Voltstack Cluster Ar No Outside Static Routes
 
 <a id="voltstack-cluster-ar-node"></a>
 
@@ -1872,17 +1308,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Ar Node Local Subnet
 
-`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet. See [Subnet](#voltstack-cluster-ar-node-local-subnet-subnet) below.
+`subnet` - (Optional) Azure Subnet. Parameters for Azure subnet (`Block`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#voltstack-cluster-ar-node-local-subnet-subnet-param) below.
-
-<a id="voltstack-cluster-ar-node-local-subnet-subnet"></a>
-
-### Voltstack Cluster Ar Node Local Subnet Subnet
-
-<a id="voltstack-cluster-ar-node-local-subnet-subnet-param"></a>
-
-### Voltstack Cluster Ar Node Local Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="voltstack-cluster-ar-outside-static-routes"></a>
 
@@ -1894,21 +1322,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Ar Outside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="voltstack-cluster-ar-outside-static-routes-static-route-list-custom-static-route"></a>
-
-### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route
-
-<a id="voltstack-cluster-ar-sm-connection-public-ip"></a>
-
-### Voltstack Cluster Ar Sm Connection Public IP
-
-<a id="voltstack-cluster-ar-sm-connection-pvt-ip"></a>
-
-### Voltstack Cluster Ar Sm Connection Pvt IP
 
 <a id="voltstack-cluster-ar-storage-class-list"></a>
 

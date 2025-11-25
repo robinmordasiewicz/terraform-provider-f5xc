@@ -78,17 +78,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Cache Rules
 
-`cache_bypass` - (Optional) Empty. This can be used for messages where no values are needed. See [Cache Bypass](#cache-rules-cache-bypass) below.
+`cache_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `eligible_for_cache` - (Optional) Cache Action Options. List of options for Cache Action. See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
 
 `rule_expression_list` - (Optional) Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs. See [Rule Expression List](#cache-rules-rule-expression-list) below.
 
 `rule_name` - (Optional) Rule Name. Name of the Cache Rule (`String`).
-
-<a id="cache-rules-cache-bypass"></a>
-
-### Cache Rules Cache Bypass
 
 <a id="cache-rules-eligible-for-cache"></a>
 
@@ -130,29 +126,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Cache Rules Rule Expression List Cache Rule Expression
 
-`cache_headers` - (Optional) Cache Headers. Configure cache rule headers to match the criteria. See [Cache Headers](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) below.
+`cache_headers` - (Optional) Cache Headers. Configure cache rule headers to match the criteria (`Block`).
 
-`cookie_matcher` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matcher](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) below.
+`cookie_matcher` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
 
-`path_match` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path Match](#cache-rules-rule-expression-list-cache-rule-expression-path-match) below.
+`path_match` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match (`Block`).
 
-`query_parameters` - (Optional) Query Parameters. List of (key, value) query parameters. See [Query Parameters](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) below.
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers"></a>
-
-### Cache Rules Rule Expression List Cache Rule Expression Cache Headers
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher"></a>
-
-### Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match"></a>
-
-### Cache Rules Rule Expression List Cache Rule Expression Path Match
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters"></a>
-
-### Cache Rules Rule Expression List Cache Rule Expression Query Parameters
+`query_parameters` - (Optional) Query Parameters. List of (key, value) query parameters (`Block`).
 
 <a id="timeouts"></a>
 

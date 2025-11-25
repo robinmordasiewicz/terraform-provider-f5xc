@@ -114,23 +114,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_port_ranges` - (Optional) Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed (`String`).
 
-`no_allowed_capabilities` - (Optional) Empty. This can be used for messages where no values are needed. See [No Allowed Capabilities](#psp-spec-no-allowed-capabilities) below.
+`no_allowed_capabilities` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_default_capabilities` - (Optional) Empty. This can be used for messages where no values are needed. See [No Default Capabilities](#psp-spec-no-default-capabilities) below.
+`no_default_capabilities` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_drop_capabilities` - (Optional) Empty. This can be used for messages where no values are needed. See [No Drop Capabilities](#psp-spec-no-drop-capabilities) below.
+`no_drop_capabilities` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_fs_groups` - (Optional) Empty. This can be used for messages where no values are needed. See [No Fs Groups](#psp-spec-no-fs-groups) below.
+`no_fs_groups` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_run_as_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Run As Group](#psp-spec-no-run-as-group) below.
+`no_run_as_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_run_as_user` - (Optional) Empty. This can be used for messages where no values are needed. See [No Run As User](#psp-spec-no-run-as-user) below.
+`no_run_as_user` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_runtime_class` - (Optional) Empty. This can be used for messages where no values are needed. See [No Runtime Class](#psp-spec-no-runtime-class) below.
+`no_runtime_class` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_se_linux_options` - (Optional) Empty. This can be used for messages where no values are needed. See [No Se Linux Options](#psp-spec-no-se-linux-options) below.
+`no_se_linux_options` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_supplemental_groups` - (Optional) Empty. This can be used for messages where no values are needed. See [No Supplemental Groups](#psp-spec-no-supplemental-groups) below.
+`no_supplemental_groups` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `privileged` - (Optional) Privileged. Privileged determines if a pod can request to be run as privileged (`Bool`).
 
@@ -185,42 +185,6 @@ In addition to all arguments above, the following attributes are exported:
 `max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
 `min_id` - (Optional) Starting ID. Starting(minimum) ID for for ID range (`Number`).
-
-<a id="psp-spec-no-allowed-capabilities"></a>
-
-### Psp Spec No Allowed Capabilities
-
-<a id="psp-spec-no-default-capabilities"></a>
-
-### Psp Spec No Default Capabilities
-
-<a id="psp-spec-no-drop-capabilities"></a>
-
-### Psp Spec No Drop Capabilities
-
-<a id="psp-spec-no-fs-groups"></a>
-
-### Psp Spec No Fs Groups
-
-<a id="psp-spec-no-run-as-group"></a>
-
-### Psp Spec No Run As Group
-
-<a id="psp-spec-no-run-as-user"></a>
-
-### Psp Spec No Run As User
-
-<a id="psp-spec-no-runtime-class"></a>
-
-### Psp Spec No Runtime Class
-
-<a id="psp-spec-no-se-linux-options"></a>
-
-### Psp Spec No Se Linux Options
-
-<a id="psp-spec-no-supplemental-groups"></a>
-
-### Psp Spec No Supplemental Groups
 
 <a id="psp-spec-run-as-group"></a>
 

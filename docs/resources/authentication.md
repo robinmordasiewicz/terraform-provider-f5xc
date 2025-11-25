@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `cookie_refresh_interval` - (Optional) Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds (`Number`).
 
-`kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object. See [Kms Key HMAC](#cookie-params-kms-key-hmac) below.
+`kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object (`Block`).
 
 `session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
 
@@ -106,37 +106,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Cookie Params Auth HMAC Prim Key
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#cookie-params-auth-hmac-prim-key-clear-secret-info) below.
-
-<a id="cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
-
-### Cookie Params Auth HMAC Prim Key Blindfold Secret Info
-
-<a id="cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
-
-### Cookie Params Auth HMAC Prim Key Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="cookie-params-auth-hmac-sec-key"></a>
 
 ### Cookie Params Auth HMAC Sec Key
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#cookie-params-auth-hmac-sec-key-clear-secret-info) below.
-
-<a id="cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
-
-### Cookie Params Auth HMAC Sec Key Blindfold Secret Info
-
-<a id="cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
-
-### Cookie Params Auth HMAC Sec Key Clear Secret Info
-
-<a id="cookie-params-kms-key-hmac"></a>
-
-### Cookie Params Kms Key HMAC
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="oidc-auth"></a>
 

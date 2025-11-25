@@ -64,9 +64,9 @@ resource "f5xc_certificate" "example" {
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#disable-ocsp-stapling) below for details.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#use-system-defaults) below for details.
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#private-key) below for details.
 
@@ -95,10 +95,6 @@ In addition to all arguments above, the following attributes are exported:
 ### Custom Hash Algorithms
 
 `hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used (`List`).
-
-<a id="disable-ocsp-stapling"></a>
-
-### Disable OCSP Stapling
 
 <a id="private-key"></a>
 
@@ -137,10 +133,6 @@ In addition to all arguments above, the following attributes are exported:
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-<a id="use-system-defaults"></a>
-
-### Use System Defaults
 
 ## Import
 

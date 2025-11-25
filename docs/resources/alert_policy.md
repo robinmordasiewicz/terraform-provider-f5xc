@@ -90,35 +90,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom` - (Optional) Custom Group By. Specify list of custom labels to group/aggregate the alerts. See [Custom](#notification-parameters-custom) below.
 
-`default` - (Optional) Empty. This can be used for messages where no values are needed. See [Default](#notification-parameters-default) below.
+`default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `group_interval` - (Optional) Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m' (`String`).
 
 `group_wait` - (Optional) Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s' (`String`).
 
-`individual` - (Optional) Empty. This can be used for messages where no values are needed. See [Individual](#notification-parameters-individual) below.
+`individual` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `repeat_interval` - (Optional) Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h' (`String`).
 
-`ves_io_group` - (Optional) Empty. This can be used for messages where no values are needed. See [Ves Io Group](#notification-parameters-ves-io-group) below.
+`ves_io_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="notification-parameters-custom"></a>
 
 ### Notification Parameters Custom
 
 `labels` - (Optional) Labels. Name of labels to group/aggregate the alerts (`List`).
-
-<a id="notification-parameters-default"></a>
-
-### Notification Parameters Default
-
-<a id="notification-parameters-individual"></a>
-
-### Notification Parameters Individual
-
-<a id="notification-parameters-ves-io-group"></a>
-
-### Notification Parameters Ves Io Group
 
 <a id="receivers"></a>
 
@@ -142,39 +130,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `alertname_regex` - (Optional) Matching RegEx of Alertname. Regular Expression match for the alertname (`String`).
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#routes-any) below.
+`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `custom` - (Optional) Custom Matcher. A set of matchers an alert has to fulfill to match the route. See [Custom](#routes-custom) below.
 
-`dont_send` - (Optional) Empty. This can be used for messages where no values are needed. See [Dont Send](#routes-dont-send) below.
+`dont_send` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `group` - (Optional) Group Matcher. Select one or more known group names to match the incoming alert. See [Group](#routes-group) below.
 
 `notification_parameters` - (Optional) Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers. See [Notification Parameters](#routes-notification-parameters) below.
 
-`send` - (Optional) Empty. This can be used for messages where no values are needed. See [Send](#routes-send) below.
+`send` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `severity` - (Optional) Severity Matcher. Select one or more severity levels to match the incoming alert. See [Severity](#routes-severity) below.
-
-<a id="routes-any"></a>
-
-### Routes Any
 
 <a id="routes-custom"></a>
 
 ### Routes Custom
 
-`alertlabel` - (Optional) AlertLabel. AlertLabel to configure the alert policy rule. See [Alertlabel](#routes-custom-alertlabel) below.
+`alertlabel` - (Optional) AlertLabel. AlertLabel to configure the alert policy rule (`Block`).
 
 `alertname` - (Optional) Label Matcher. See [Alertname](#routes-custom-alertname) below.
 
 `group` - (Optional) Label Matcher. See [Group](#routes-custom-group) below.
 
 `severity` - (Optional) Label Matcher. See [Severity](#routes-custom-severity) below.
-
-<a id="routes-custom-alertlabel"></a>
-
-### Routes Custom Alertlabel
 
 <a id="routes-custom-alertname"></a>
 
@@ -200,10 +180,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `regex_match` - (Optional) RegEx Match. Regular expression match value for the label (`String`).
 
-<a id="routes-dont-send"></a>
-
-### Routes Dont Send
-
 <a id="routes-group"></a>
 
 ### Routes Group
@@ -216,39 +192,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom` - (Optional) Custom Group By. Specify list of custom labels to group/aggregate the alerts. See [Custom](#routes-notification-parameters-custom) below.
 
-`default` - (Optional) Empty. This can be used for messages where no values are needed. See [Default](#routes-notification-parameters-default) below.
+`default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `group_interval` - (Optional) Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m' (`String`).
 
 `group_wait` - (Optional) Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s' (`String`).
 
-`individual` - (Optional) Empty. This can be used for messages where no values are needed. See [Individual](#routes-notification-parameters-individual) below.
+`individual` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `repeat_interval` - (Optional) Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h' (`String`).
 
-`ves_io_group` - (Optional) Empty. This can be used for messages where no values are needed. See [Ves Io Group](#routes-notification-parameters-ves-io-group) below.
+`ves_io_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="routes-notification-parameters-custom"></a>
 
 ### Routes Notification Parameters Custom
 
 `labels` - (Optional) Labels. Name of labels to group/aggregate the alerts (`List`).
-
-<a id="routes-notification-parameters-default"></a>
-
-### Routes Notification Parameters Default
-
-<a id="routes-notification-parameters-individual"></a>
-
-### Routes Notification Parameters Individual
-
-<a id="routes-notification-parameters-ves-io-group"></a>
-
-### Routes Notification Parameters Ves Io Group
-
-<a id="routes-send"></a>
-
-### Routes Send
 
 <a id="routes-severity"></a>
 

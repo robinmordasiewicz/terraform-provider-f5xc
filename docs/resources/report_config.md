@@ -108,7 +108,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Waap
 
-`current_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Current Namespace](#waap-current-namespace) below.
+`current_namespace` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `daily` - (Optional) Report Frequency Daily. create report daily. See [Daily](#waap-daily) below.
 
@@ -117,10 +117,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespaces` - (Optional) Namespaces. namespaces. See [Namespaces](#waap-namespaces) below.
 
 `weekly` - (Optional) Report Frequency Weekly. create report weekly. See [Weekly](#waap-weekly) below.
-
-<a id="waap-current-namespace"></a>
-
-### Waap Current Namespace
 
 <a id="waap-daily"></a>
 

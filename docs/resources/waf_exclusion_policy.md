@@ -90,9 +90,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### WAF Exclusion Rules
 
-`any_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Domain](#waf-exclusion-rules-any-domain) below.
+`any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`any_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Path](#waf-exclusion-rules-any-path) below.
+`any_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria. See [App Firewall Detection Control](#waf-exclusion-rules-app-firewall-detection-control) below.
 
@@ -110,15 +110,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
-`waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [WAF Skip Processing](#waf-exclusion-rules-waf-skip-processing) below.
-
-<a id="waf-exclusion-rules-any-domain"></a>
-
-### WAF Exclusion Rules Any Domain
-
-<a id="waf-exclusion-rules-any-path"></a>
-
-### WAF Exclusion Rules Any Path
+`waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="waf-exclusion-rules-app-firewall-detection-control"></a>
 
@@ -175,10 +167,6 @@ In addition to all arguments above, the following attributes are exported:
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
-
-<a id="waf-exclusion-rules-waf-skip-processing"></a>
-
-### WAF Exclusion Rules WAF Skip Processing
 
 ## Import
 

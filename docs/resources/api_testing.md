@@ -68,11 +68,11 @@ resource "f5xc_api_testing" "example" {
 
 > **Note:** One of the arguments from this list "every_day, every_month, every_week" must be set.
 
-`every_day` - (Optional) Empty. This can be used for messages where no values are needed. See [Every Day](#every-day) below for details.
+`every_day` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`every_month` - (Optional) Empty. This can be used for messages where no values are needed. See [Every Month](#every-month) below for details.
+`every_month` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`every_week` - (Optional) Empty. This can be used for messages where no values are needed. See [Every Week](#every-week) below for details.
+`every_week` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Domains Credentials
 
-`admin` - (Optional) Empty. This can be used for messages where no values are needed. See [Admin](#domains-credentials-admin) below.
+`admin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `api_key` - (Optional) API Key. See [API Key](#domains-credentials-api-key) below.
 
@@ -110,11 +110,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `login_endpoint` - (Optional) Login Endpoint. See [Login Endpoint](#domains-credentials-login-endpoint) below.
 
-`standard` - (Optional) Empty. This can be used for messages where no values are needed. See [Standard](#domains-credentials-standard) below.
-
-<a id="domains-credentials-admin"></a>
-
-### Domains Credentials Admin
+`standard` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="domains-credentials-api-key"></a>
 
@@ -122,65 +118,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `key` - (Optional) Key (`String`).
 
-`value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Value](#domains-credentials-api-key-value) below.
-
-<a id="domains-credentials-api-key-value"></a>
-
-### Domains Credentials API Key Value
+`value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 <a id="domains-credentials-basic-auth"></a>
 
 ### Domains Credentials Basic Auth
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#domains-credentials-basic-auth-password) below.
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `user` - (Optional) User (`String`).
-
-<a id="domains-credentials-basic-auth-password"></a>
-
-### Domains Credentials Basic Auth Password
 
 <a id="domains-credentials-bearer-token"></a>
 
 ### Domains Credentials Bearer Token
 
-`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#domains-credentials-bearer-token-token) below.
-
-<a id="domains-credentials-bearer-token-token"></a>
-
-### Domains Credentials Bearer Token Token
+`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 <a id="domains-credentials-login-endpoint"></a>
 
 ### Domains Credentials Login Endpoint
 
-`json_payload` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [JSON Payload](#domains-credentials-login-endpoint-json-payload) below.
+`json_payload` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values include `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, and others. Defaults to `ANY` (`String`).
 
 `path` - (Optional) Path (`String`).
 
 `token_response_key` - (Optional) Token Response Key (`String`).
-
-<a id="domains-credentials-login-endpoint-json-payload"></a>
-
-### Domains Credentials Login Endpoint JSON Payload
-
-<a id="domains-credentials-standard"></a>
-
-### Domains Credentials Standard
-
-<a id="every-day"></a>
-
-### Every Day
-
-<a id="every-month"></a>
-
-### Every Month
-
-<a id="every-week"></a>
-
-### Every Week
 
 <a id="timeouts"></a>
 

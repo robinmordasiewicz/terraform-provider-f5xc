@@ -64,13 +64,13 @@ resource "f5xc_nfv_service" "example" {
 
 > **Note:** One of the arguments from this list "disable_https_management, https_management" must be set.
 
-`disable_https_management` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable HTTPS Management](#disable-https-management) below for details.
+`disable_https_management` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `https_management` - (Optional) HTTPS based management. HTTPS based configuration. See [HTTPS Management](#https-management) below for details.
 
 > **Note:** One of the arguments from this list "disable_ssh_access, enabled_ssh_access" must be set.
 
-`disable_ssh_access` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable SSH Access](#disable-ssh-access) below for details.
+`disable_ssh_access` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enabled_ssh_access` - (Optional) SSH based management. SSH based configuration. See [Enabled SSH Access](#enabled-ssh-access) below for details.
 
@@ -90,39 +90,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="disable-https-management"></a>
-
-### Disable HTTPS Management
-
-<a id="disable-ssh-access"></a>
-
-### Disable SSH Access
-
 <a id="enabled-ssh-access"></a>
 
 ### Enabled SSH Access
 
-`advertise_on_sli` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Sli](#enabled-ssh-access-advertise-on-sli) below.
+`advertise_on_sli` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`advertise_on_slo` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Slo](#enabled-ssh-access-advertise-on-slo) below.
+`advertise_on_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`advertise_on_slo_sli` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Slo Sli](#enabled-ssh-access-advertise-on-slo-sli) below.
+`advertise_on_slo_sli` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `domain_suffix` - (Optional) Domain Suffix. Domain suffix will be used along with node name to form the hostname for SSH node management (`String`).
 
 `node_ssh_ports` - (Optional) Management Node SSH Port. Enter TCP port and node name per node. See [Node SSH Ports](#enabled-ssh-access-node-ssh-ports) below.
-
-<a id="enabled-ssh-access-advertise-on-sli"></a>
-
-### Enabled SSH Access Advertise On Sli
-
-<a id="enabled-ssh-access-advertise-on-slo"></a>
-
-### Enabled SSH Access Advertise On Slo
-
-<a id="enabled-ssh-access-advertise-on-slo-sli"></a>
-
-### Enabled SSH Access Advertise On Slo Sli
 
 <a id="enabled-ssh-access-node-ssh-ports"></a>
 
@@ -150,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the Big IP nodes (`String`).
 
-`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. See [Tags](#f5-big-ip-aws-service-tags) below.
+`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console (`Block`).
 
 <a id="f5-big-ip-aws-service-admin-password"></a>
 
@@ -198,11 +178,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### F5 Big IP AWS Service Endpoint Service
 
-`advertise_on_slo_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Slo IP](#f5-big-ip-aws-service-endpoint-service-advertise-on-slo-ip) below.
+`advertise_on_slo_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`advertise_on_slo_ip_external` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Slo IP External](#f5-big-ip-aws-service-endpoint-service-advertise-on-slo-ip-external) below.
+`advertise_on_slo_ip_external` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`automatic_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic VIP](#f5-big-ip-aws-service-endpoint-service-automatic-vip) below.
+`automatic_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `configured_vip` - (Optional) Configured VIP. Enter IP address for the default VIP (`String`).
 
@@ -210,29 +190,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_udp_ports` - (Optional) Port Range List. List of port ranges. See [Custom UDP Ports](#f5-big-ip-aws-service-endpoint-service-custom-udp-ports) below.
 
-`default_tcp_ports` - (Optional) Empty. This can be used for messages where no values are needed. See [Default TCP Ports](#f5-big-ip-aws-service-endpoint-service-default-tcp-ports) below.
+`default_tcp_ports` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_advertise_on_slo_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Advertise On Slo IP](#f5-big-ip-aws-service-endpoint-service-disable-advertise-on-slo-ip) below.
+`disable_advertise_on_slo_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`http_port` - (Optional) Empty. This can be used for messages where no values are needed. See [HTTP Port](#f5-big-ip-aws-service-endpoint-service-http-port) below.
+`http_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [HTTPS Port](#f5-big-ip-aws-service-endpoint-service-https-port) below.
+`https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_tcp_ports` - (Optional) Empty. This can be used for messages where no values are needed. See [No TCP Ports](#f5-big-ip-aws-service-endpoint-service-no-tcp-ports) below.
+`no_tcp_ports` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_udp_ports` - (Optional) Empty. This can be used for messages where no values are needed. See [No UDP Ports](#f5-big-ip-aws-service-endpoint-service-no-udp-ports) below.
-
-<a id="f5-big-ip-aws-service-endpoint-service-advertise-on-slo-ip"></a>
-
-### F5 Big IP AWS Service Endpoint Service Advertise On Slo IP
-
-<a id="f5-big-ip-aws-service-endpoint-service-advertise-on-slo-ip-external"></a>
-
-### F5 Big IP AWS Service Endpoint Service Advertise On Slo IP External
-
-<a id="f5-big-ip-aws-service-endpoint-service-automatic-vip"></a>
-
-### F5 Big IP AWS Service Endpoint Service Automatic VIP
+`no_udp_ports` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="f5-big-ip-aws-service-endpoint-service-custom-tcp-ports"></a>
 
@@ -246,51 +214,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `ports` - (Optional) Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
 
-<a id="f5-big-ip-aws-service-endpoint-service-default-tcp-ports"></a>
-
-### F5 Big IP AWS Service Endpoint Service Default TCP Ports
-
-<a id="f5-big-ip-aws-service-endpoint-service-disable-advertise-on-slo-ip"></a>
-
-### F5 Big IP AWS Service Endpoint Service Disable Advertise On Slo IP
-
-<a id="f5-big-ip-aws-service-endpoint-service-http-port"></a>
-
-### F5 Big IP AWS Service Endpoint Service HTTP Port
-
-<a id="f5-big-ip-aws-service-endpoint-service-https-port"></a>
-
-### F5 Big IP AWS Service Endpoint Service HTTPS Port
-
-<a id="f5-big-ip-aws-service-endpoint-service-no-tcp-ports"></a>
-
-### F5 Big IP AWS Service Endpoint Service No TCP Ports
-
-<a id="f5-big-ip-aws-service-endpoint-service-no-udp-ports"></a>
-
-### F5 Big IP AWS Service Endpoint Service No UDP Ports
-
 <a id="f5-big-ip-aws-service-market-place-image"></a>
 
 ### F5 Big IP AWS Service Market Place Image
 
-`awafpay_g200_mbps` - (Optional) Empty. This can be used for messages where no values are needed. See [Awafpay G200 Mbps](#f5-big-ip-aws-service-market-place-image-awafpay-g200-mbps) below.
+`awafpay_g200_mbps` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`awafpay_g3_gbps` - (Optional) Empty. This can be used for messages where no values are needed. See [Awafpay G3 Gbps](#f5-big-ip-aws-service-market-place-image-awafpay-g3-gbps) below.
-
-<a id="f5-big-ip-aws-service-market-place-image-awafpay-g200-mbps"></a>
-
-### F5 Big IP AWS Service Market Place Image Awafpay G200 Mbps
-
-<a id="f5-big-ip-aws-service-market-place-image-awafpay-g3-gbps"></a>
-
-### F5 Big IP AWS Service Market Place Image Awafpay G3 Gbps
+`awafpay_g3_gbps` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="f5-big-ip-aws-service-nodes"></a>
 
 ### F5 Big IP AWS Service Nodes
 
-`automatic_prefix` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic Prefix](#f5-big-ip-aws-service-nodes-automatic-prefix) below.
+`automatic_prefix` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `aws_az_name` - (Optional) AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site (`String`).
 
@@ -298,13 +234,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service (`String`).
 
-`reserved_mgmt_subnet` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Mgmt Subnet](#f5-big-ip-aws-service-nodes-reserved-mgmt-subnet) below.
+`reserved_mgmt_subnet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tunnel_prefix` - (Optional) Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30 (`String`).
-
-<a id="f5-big-ip-aws-service-nodes-automatic-prefix"></a>
-
-### F5 Big IP AWS Service Nodes Automatic Prefix
 
 <a id="f5-big-ip-aws-service-nodes-mgmt-subnet"></a>
 
@@ -312,19 +244,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#f5-big-ip-aws-service-nodes-mgmt-subnet-subnet-param) below.
-
-<a id="f5-big-ip-aws-service-nodes-mgmt-subnet-subnet-param"></a>
-
-### F5 Big IP AWS Service Nodes Mgmt Subnet Subnet Param
-
-<a id="f5-big-ip-aws-service-nodes-reserved-mgmt-subnet"></a>
-
-### F5 Big IP AWS Service Nodes Reserved Mgmt Subnet
-
-<a id="f5-big-ip-aws-service-tags"></a>
-
-### F5 Big IP AWS Service Tags
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="https-management"></a>
 
@@ -332,7 +252,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `advertise_on_internet` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Internet](#https-management-advertise-on-internet) below.
 
-`advertise_on_internet_default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Internet Default VIP](#https-management-advertise-on-internet-default-vip) below.
+`advertise_on_internet_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `advertise_on_sli_vip` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [Advertise On Sli VIP](#https-management-advertise-on-sli-vip) below.
 
@@ -342,7 +262,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `advertise_on_slo_vip` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [Advertise On Slo VIP](#https-management-advertise-on-slo-vip) below.
 
-`default_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default HTTPS Port](#https-management-default-https-port) below.
+`default_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `domain_suffix` - (Optional) Domain Suffix. Domain suffix will be used along with node name to form URL to access node management (`String`).
 
@@ -364,15 +284,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="https-management-advertise-on-internet-default-vip"></a>
-
-### HTTPS Management Advertise On Internet Default VIP
-
 <a id="https-management-advertise-on-sli-vip"></a>
 
 ### HTTPS Management Advertise On Sli VIP
 
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No mTLS](#https-management-advertise-on-sli-vip-no-mtls) below.
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#https-management-advertise-on-sli-vip-tls-certificates) below.
 
@@ -380,69 +296,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-management-advertise-on-sli-vip-use-mtls) below.
 
-<a id="https-management-advertise-on-sli-vip-no-mtls"></a>
-
-### HTTPS Management Advertise On Sli VIP No mTLS
-
 <a id="https-management-advertise-on-sli-vip-tls-certificates"></a>
 
 ### HTTPS Management Advertise On Sli VIP TLS Certificates
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#https-management-advertise-on-sli-vip-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-management-advertise-on-sli-vip-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#https-management-advertise-on-sli-vip-tls-certificates-use-system-defaults) below.
-
-<a id="https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms"></a>
-
-### HTTPS Management Advertise On Sli VIP TLS Certificates Custom Hash Algorithms
-
-<a id="https-management-advertise-on-sli-vip-tls-certificates-disable-ocsp-stapling"></a>
-
-### HTTPS Management Advertise On Sli VIP TLS Certificates Disable OCSP Stapling
-
-<a id="https-management-advertise-on-sli-vip-tls-certificates-private-key"></a>
-
-### HTTPS Management Advertise On Sli VIP TLS Certificates Private Key
-
-<a id="https-management-advertise-on-sli-vip-tls-certificates-use-system-defaults"></a>
-
-### HTTPS Management Advertise On Sli VIP TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="https-management-advertise-on-sli-vip-tls-config"></a>
 
 ### HTTPS Management Advertise On Sli VIP TLS Config
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-management-advertise-on-sli-vip-tls-config-custom-security) below.
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#https-management-advertise-on-sli-vip-tls-config-default-security) below.
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#https-management-advertise-on-sli-vip-tls-config-low-security) below.
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#https-management-advertise-on-sli-vip-tls-config-medium-security) below.
-
-<a id="https-management-advertise-on-sli-vip-tls-config-custom-security"></a>
-
-### HTTPS Management Advertise On Sli VIP TLS Config Custom Security
-
-<a id="https-management-advertise-on-sli-vip-tls-config-default-security"></a>
-
-### HTTPS Management Advertise On Sli VIP TLS Config Default Security
-
-<a id="https-management-advertise-on-sli-vip-tls-config-low-security"></a>
-
-### HTTPS Management Advertise On Sli VIP TLS Config Low Security
-
-<a id="https-management-advertise-on-sli-vip-tls-config-medium-security"></a>
-
-### HTTPS Management Advertise On Sli VIP TLS Config Medium Security
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="https-management-advertise-on-sli-vip-use-mtls"></a>
 
@@ -450,43 +330,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-management-advertise-on-sli-vip-use-mtls-crl) below.
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No CRL](#https-management-advertise-on-sli-vip-use-mtls-no-crl) below.
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-management-advertise-on-sli-vip-use-mtls-trusted-ca) below.
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#https-management-advertise-on-sli-vip-use-mtls-xfcc-disabled) below.
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-management-advertise-on-sli-vip-use-mtls-xfcc-options) below.
-
-<a id="https-management-advertise-on-sli-vip-use-mtls-crl"></a>
-
-### HTTPS Management Advertise On Sli VIP Use mTLS CRL
-
-<a id="https-management-advertise-on-sli-vip-use-mtls-no-crl"></a>
-
-### HTTPS Management Advertise On Sli VIP Use mTLS No CRL
-
-<a id="https-management-advertise-on-sli-vip-use-mtls-trusted-ca"></a>
-
-### HTTPS Management Advertise On Sli VIP Use mTLS Trusted CA
-
-<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-disabled"></a>
-
-### HTTPS Management Advertise On Sli VIP Use mTLS Xfcc Disabled
-
-<a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-options"></a>
-
-### HTTPS Management Advertise On Sli VIP Use mTLS Xfcc Options
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
 
 <a id="https-management-advertise-on-slo-internet-vip"></a>
 
 ### HTTPS Management Advertise On Slo Internet VIP
 
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No mTLS](#https-management-advertise-on-slo-internet-vip-no-mtls) below.
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#https-management-advertise-on-slo-internet-vip-tls-certificates) below.
 
@@ -494,69 +354,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-management-advertise-on-slo-internet-vip-use-mtls) below.
 
-<a id="https-management-advertise-on-slo-internet-vip-no-mtls"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP No mTLS
-
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates"></a>
 
 ### HTTPS Management Advertise On Slo Internet VIP TLS Certificates
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#https-management-advertise-on-slo-internet-vip-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-management-advertise-on-slo-internet-vip-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#https-management-advertise-on-slo-internet-vip-tls-certificates-use-system-defaults) below.
-
-<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Custom Hash Algorithms
-
-<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-disable-ocsp-stapling"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Disable OCSP Stapling
-
-<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-private-key"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key
-
-<a id="https-management-advertise-on-slo-internet-vip-tls-certificates-use-system-defaults"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-config"></a>
 
 ### HTTPS Management Advertise On Slo Internet VIP TLS Config
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security) below.
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#https-management-advertise-on-slo-internet-vip-tls-config-default-security) below.
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#https-management-advertise-on-slo-internet-vip-tls-config-low-security) below.
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#https-management-advertise-on-slo-internet-vip-tls-config-medium-security) below.
-
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP TLS Config Custom Security
-
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-default-security"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP TLS Config Default Security
-
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-low-security"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP TLS Config Low Security
-
-<a id="https-management-advertise-on-slo-internet-vip-tls-config-medium-security"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP TLS Config Medium Security
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls"></a>
 
@@ -564,43 +388,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-management-advertise-on-slo-internet-vip-use-mtls-crl) below.
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No CRL](#https-management-advertise-on-slo-internet-vip-use-mtls-no-crl) below.
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca) below.
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-disabled) below.
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options) below.
-
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-crl"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP Use mTLS CRL
-
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-no-crl"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP Use mTLS No CRL
-
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP Use mTLS Trusted CA
-
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-disabled"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP Use mTLS Xfcc Disabled
-
-<a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options"></a>
-
-### HTTPS Management Advertise On Slo Internet VIP Use mTLS Xfcc Options
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
 
 <a id="https-management-advertise-on-slo-sli"></a>
 
 ### HTTPS Management Advertise On Slo Sli
 
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No mTLS](#https-management-advertise-on-slo-sli-no-mtls) below.
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#https-management-advertise-on-slo-sli-tls-certificates) below.
 
@@ -608,69 +412,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-management-advertise-on-slo-sli-use-mtls) below.
 
-<a id="https-management-advertise-on-slo-sli-no-mtls"></a>
-
-### HTTPS Management Advertise On Slo Sli No mTLS
-
 <a id="https-management-advertise-on-slo-sli-tls-certificates"></a>
 
 ### HTTPS Management Advertise On Slo Sli TLS Certificates
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#https-management-advertise-on-slo-sli-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-management-advertise-on-slo-sli-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#https-management-advertise-on-slo-sli-tls-certificates-use-system-defaults) below.
-
-<a id="https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms"></a>
-
-### HTTPS Management Advertise On Slo Sli TLS Certificates Custom Hash Algorithms
-
-<a id="https-management-advertise-on-slo-sli-tls-certificates-disable-ocsp-stapling"></a>
-
-### HTTPS Management Advertise On Slo Sli TLS Certificates Disable OCSP Stapling
-
-<a id="https-management-advertise-on-slo-sli-tls-certificates-private-key"></a>
-
-### HTTPS Management Advertise On Slo Sli TLS Certificates Private Key
-
-<a id="https-management-advertise-on-slo-sli-tls-certificates-use-system-defaults"></a>
-
-### HTTPS Management Advertise On Slo Sli TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="https-management-advertise-on-slo-sli-tls-config"></a>
 
 ### HTTPS Management Advertise On Slo Sli TLS Config
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-management-advertise-on-slo-sli-tls-config-custom-security) below.
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#https-management-advertise-on-slo-sli-tls-config-default-security) below.
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#https-management-advertise-on-slo-sli-tls-config-low-security) below.
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#https-management-advertise-on-slo-sli-tls-config-medium-security) below.
-
-<a id="https-management-advertise-on-slo-sli-tls-config-custom-security"></a>
-
-### HTTPS Management Advertise On Slo Sli TLS Config Custom Security
-
-<a id="https-management-advertise-on-slo-sli-tls-config-default-security"></a>
-
-### HTTPS Management Advertise On Slo Sli TLS Config Default Security
-
-<a id="https-management-advertise-on-slo-sli-tls-config-low-security"></a>
-
-### HTTPS Management Advertise On Slo Sli TLS Config Low Security
-
-<a id="https-management-advertise-on-slo-sli-tls-config-medium-security"></a>
-
-### HTTPS Management Advertise On Slo Sli TLS Config Medium Security
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="https-management-advertise-on-slo-sli-use-mtls"></a>
 
@@ -678,43 +446,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-management-advertise-on-slo-sli-use-mtls-crl) below.
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No CRL](#https-management-advertise-on-slo-sli-use-mtls-no-crl) below.
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-management-advertise-on-slo-sli-use-mtls-trusted-ca) below.
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#https-management-advertise-on-slo-sli-use-mtls-xfcc-disabled) below.
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-management-advertise-on-slo-sli-use-mtls-xfcc-options) below.
-
-<a id="https-management-advertise-on-slo-sli-use-mtls-crl"></a>
-
-### HTTPS Management Advertise On Slo Sli Use mTLS CRL
-
-<a id="https-management-advertise-on-slo-sli-use-mtls-no-crl"></a>
-
-### HTTPS Management Advertise On Slo Sli Use mTLS No CRL
-
-<a id="https-management-advertise-on-slo-sli-use-mtls-trusted-ca"></a>
-
-### HTTPS Management Advertise On Slo Sli Use mTLS Trusted CA
-
-<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-disabled"></a>
-
-### HTTPS Management Advertise On Slo Sli Use mTLS Xfcc Disabled
-
-<a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-options"></a>
-
-### HTTPS Management Advertise On Slo Sli Use mTLS Xfcc Options
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
 
 <a id="https-management-advertise-on-slo-vip"></a>
 
 ### HTTPS Management Advertise On Slo VIP
 
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No mTLS](#https-management-advertise-on-slo-vip-no-mtls) below.
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#https-management-advertise-on-slo-vip-tls-certificates) below.
 
@@ -722,69 +470,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-management-advertise-on-slo-vip-use-mtls) below.
 
-<a id="https-management-advertise-on-slo-vip-no-mtls"></a>
-
-### HTTPS Management Advertise On Slo VIP No mTLS
-
 <a id="https-management-advertise-on-slo-vip-tls-certificates"></a>
 
 ### HTTPS Management Advertise On Slo VIP TLS Certificates
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#https-management-advertise-on-slo-vip-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#https-management-advertise-on-slo-vip-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#https-management-advertise-on-slo-vip-tls-certificates-use-system-defaults) below.
-
-<a id="https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms"></a>
-
-### HTTPS Management Advertise On Slo VIP TLS Certificates Custom Hash Algorithms
-
-<a id="https-management-advertise-on-slo-vip-tls-certificates-disable-ocsp-stapling"></a>
-
-### HTTPS Management Advertise On Slo VIP TLS Certificates Disable OCSP Stapling
-
-<a id="https-management-advertise-on-slo-vip-tls-certificates-private-key"></a>
-
-### HTTPS Management Advertise On Slo VIP TLS Certificates Private Key
-
-<a id="https-management-advertise-on-slo-vip-tls-certificates-use-system-defaults"></a>
-
-### HTTPS Management Advertise On Slo VIP TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="https-management-advertise-on-slo-vip-tls-config"></a>
 
 ### HTTPS Management Advertise On Slo VIP TLS Config
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-management-advertise-on-slo-vip-tls-config-custom-security) below.
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#https-management-advertise-on-slo-vip-tls-config-default-security) below.
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#https-management-advertise-on-slo-vip-tls-config-low-security) below.
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#https-management-advertise-on-slo-vip-tls-config-medium-security) below.
-
-<a id="https-management-advertise-on-slo-vip-tls-config-custom-security"></a>
-
-### HTTPS Management Advertise On Slo VIP TLS Config Custom Security
-
-<a id="https-management-advertise-on-slo-vip-tls-config-default-security"></a>
-
-### HTTPS Management Advertise On Slo VIP TLS Config Default Security
-
-<a id="https-management-advertise-on-slo-vip-tls-config-low-security"></a>
-
-### HTTPS Management Advertise On Slo VIP TLS Config Low Security
-
-<a id="https-management-advertise-on-slo-vip-tls-config-medium-security"></a>
-
-### HTTPS Management Advertise On Slo VIP TLS Config Medium Security
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="https-management-advertise-on-slo-vip-use-mtls"></a>
 
@@ -792,41 +504,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#https-management-advertise-on-slo-vip-use-mtls-crl) below.
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No CRL](#https-management-advertise-on-slo-vip-use-mtls-no-crl) below.
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#https-management-advertise-on-slo-vip-use-mtls-trusted-ca) below.
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#https-management-advertise-on-slo-vip-use-mtls-xfcc-disabled) below.
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-management-advertise-on-slo-vip-use-mtls-xfcc-options) below.
-
-<a id="https-management-advertise-on-slo-vip-use-mtls-crl"></a>
-
-### HTTPS Management Advertise On Slo VIP Use mTLS CRL
-
-<a id="https-management-advertise-on-slo-vip-use-mtls-no-crl"></a>
-
-### HTTPS Management Advertise On Slo VIP Use mTLS No CRL
-
-<a id="https-management-advertise-on-slo-vip-use-mtls-trusted-ca"></a>
-
-### HTTPS Management Advertise On Slo VIP Use mTLS Trusted CA
-
-<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-disabled"></a>
-
-### HTTPS Management Advertise On Slo VIP Use mTLS Xfcc Disabled
-
-<a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-options"></a>
-
-### HTTPS Management Advertise On Slo VIP Use mTLS Xfcc Options
-
-<a id="https-management-default-https-port"></a>
-
-### HTTPS Management Default HTTPS Port
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
 
 <a id="palo-alto-fw-service"></a>
 
@@ -836,13 +524,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `aws_tgw_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Tgw Site](#palo-alto-fw-service-aws-tgw-site) below.
 
-`disable_panaroma` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Panaroma](#palo-alto-fw-service-disable-panaroma) below.
+`disable_panaroma` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `instance_type` - (Optional) Palo Alto Networks VM-Series Instance Typ. - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE: m4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE: m5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE: m5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE: m5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE: m5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE: m5.12xlarge - PALO_ALTO_... Possible values include `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE`, and others. Defaults to `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE` (`String`).
 
-`pan_ami_bundle1` - (Optional) Empty. This can be used for messages where no values are needed. See [Pan Ami Bundle1](#palo-alto-fw-service-pan-ami-bundle1) below.
+`pan_ami_bundle1` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`pan_ami_bundle2` - (Optional) Empty. This can be used for messages where no values are needed. See [Pan Ami Bundle2](#palo-alto-fw-service-pan-ami-bundle2) below.
+`pan_ami_bundle2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `panorama_server` - (Optional) Panorama Server Type. Panorama Server Type. See [Panorama Server](#palo-alto-fw-service-panorama-server) below.
 
@@ -850,7 +538,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ssh_key` - (Optional) Setup Authorized Public SSH key. Setup Authorized Public SSH key. User will be able to SSH to the vmseries nodes using its corresponding SSH private key (`String`).
 
-`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. See [Tags](#palo-alto-fw-service-tags) below.
+`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console (`Block`).
 
 `version` - (Optional) PAN VM-Series version. PAN-OS version (`String`).
 
@@ -868,29 +556,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Palo Alto Fw Service Auto Setup Admin Password
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#palo-alto-fw-service-auto-setup-admin-password-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#palo-alto-fw-service-auto-setup-admin-password-clear-secret-info) below.
-
-<a id="palo-alto-fw-service-auto-setup-admin-password-blindfold-secret-info"></a>
-
-### Palo Alto Fw Service Auto Setup Admin Password Blindfold Secret Info
-
-<a id="palo-alto-fw-service-auto-setup-admin-password-clear-secret-info"></a>
-
-### Palo Alto Fw Service Auto Setup Admin Password Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="palo-alto-fw-service-auto-setup-manual-ssh-keys"></a>
 
 ### Palo Alto Fw Service Auto Setup Manual SSH Keys
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `public_key` - (Optional) Public SSH key. Authorized Public SSH key which will be programmed on the node (`String`).
-
-<a id="palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key"></a>
-
-### Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key
 
 <a id="palo-alto-fw-service-aws-tgw-site"></a>
 
@@ -901,18 +577,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="palo-alto-fw-service-disable-panaroma"></a>
-
-### Palo Alto Fw Service Disable Panaroma
-
-<a id="palo-alto-fw-service-pan-ami-bundle1"></a>
-
-### Palo Alto Fw Service Pan Ami Bundle1
-
-<a id="palo-alto-fw-service-pan-ami-bundle2"></a>
-
-### Palo Alto Fw Service Pan Ami Bundle2
 
 <a id="palo-alto-fw-service-panorama-server"></a>
 
@@ -930,17 +594,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Palo Alto Fw Service Panorama Server Authorization Key
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#palo-alto-fw-service-panorama-server-authorization-key-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#palo-alto-fw-service-panorama-server-authorization-key-clear-secret-info) below.
-
-<a id="palo-alto-fw-service-panorama-server-authorization-key-blindfold-secret-info"></a>
-
-### Palo Alto Fw Service Panorama Server Authorization Key Blindfold Secret Info
-
-<a id="palo-alto-fw-service-panorama-server-authorization-key-clear-secret-info"></a>
-
-### Palo Alto Fw Service Panorama Server Authorization Key Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="palo-alto-fw-service-service-nodes"></a>
 
@@ -954,23 +610,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `aws_az_name` - (Optional) AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites (`String`).
 
-`mgmt_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Mgmt Subnet](#palo-alto-fw-service-service-nodes-nodes-mgmt-subnet) below.
+`mgmt_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet (`Block`).
 
 `node_name` - (Optional) Node Name. Node Name will be used to assign as hostname to the service (`String`).
 
-`reserved_mgmt_subnet` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Mgmt Subnet](#palo-alto-fw-service-service-nodes-nodes-reserved-mgmt-subnet) below.
-
-<a id="palo-alto-fw-service-service-nodes-nodes-mgmt-subnet"></a>
-
-### Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet
-
-<a id="palo-alto-fw-service-service-nodes-nodes-reserved-mgmt-subnet"></a>
-
-### Palo Alto Fw Service Service Nodes Nodes Reserved Mgmt Subnet
-
-<a id="palo-alto-fw-service-tags"></a>
-
-### Palo Alto Fw Service Tags
+`reserved_mgmt_subnet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="timeouts"></a>
 

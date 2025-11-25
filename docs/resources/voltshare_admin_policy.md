@@ -82,17 +82,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Author Restrictions
 
-`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#author-restrictions-allow-all) below.
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `allow_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Allow List](#author-restrictions-allow-list) below.
 
-`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#author-restrictions-deny-all) below.
+`deny_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `deny_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Deny List](#author-restrictions-deny-list) below.
-
-<a id="author-restrictions-allow-all"></a>
-
-### Author Restrictions Allow All
 
 <a id="author-restrictions-allow-list"></a>
 
@@ -107,10 +103,6 @@ In addition to all arguments above, the following attributes are exported:
 `exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
 
 `regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
-
-<a id="author-restrictions-deny-all"></a>
-
-### Author Restrictions Deny All
 
 <a id="author-restrictions-deny-list"></a>
 
@@ -142,61 +134,37 @@ In addition to all arguments above, the following attributes are exported:
 
 ### User Restrictions
 
-`all_tenants` - (Optional) Empty. This can be used for messages where no values are needed. See [All Tenants](#user-restrictions-all-tenants) below.
+`all_tenants` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`individual_users` - (Optional) Empty. This can be used for messages where no values are needed. See [Individual Users](#user-restrictions-individual-users) below.
+`individual_users` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tenant` - (Optional) Team/Tenant. Team/Tenant for which this rule is valid (`String`).
 
 `user_restrictions` - (Optional) User Matcher. user_matcher contains contains the allow/deny list of users/authors. See [User Restrictions](#user-restrictions-user-restrictions) below.
 
-<a id="user-restrictions-all-tenants"></a>
-
-### User Restrictions All Tenants
-
-<a id="user-restrictions-individual-users"></a>
-
-### User Restrictions Individual Users
-
 <a id="user-restrictions-user-restrictions"></a>
 
 ### User Restrictions User Restrictions
 
-`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#user-restrictions-user-restrictions-allow-all) below.
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `allow_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Allow List](#user-restrictions-user-restrictions-allow-list) below.
 
-`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#user-restrictions-user-restrictions-deny-all) below.
+`deny_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `deny_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Deny List](#user-restrictions-user-restrictions-deny-list) below.
-
-<a id="user-restrictions-user-restrictions-allow-all"></a>
-
-### User Restrictions User Restrictions Allow All
 
 <a id="user-restrictions-user-restrictions-allow-list"></a>
 
 ### User Restrictions User Restrictions Allow List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
-
-<a id="user-restrictions-user-restrictions-allow-list-custom-list"></a>
-
-### User Restrictions User Restrictions Allow List Custom List
-
-<a id="user-restrictions-user-restrictions-deny-all"></a>
-
-### User Restrictions User Restrictions Deny All
+`custom_list` - (Optional) List of User Id(s). List of user id(s) (`Block`).
 
 <a id="user-restrictions-user-restrictions-deny-list"></a>
 
 ### User Restrictions User Restrictions Deny List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
-
-<a id="user-restrictions-user-restrictions-deny-list-custom-list"></a>
-
-### User Restrictions User Restrictions Deny List Custom List
+`custom_list` - (Optional) List of User Id(s). List of user id(s) (`Block`).
 
 ## Import
 

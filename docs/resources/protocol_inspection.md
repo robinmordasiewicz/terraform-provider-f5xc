@@ -82,13 +82,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Enable Disable Compliance Checks
 
-`disable_compliance_checks` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Compliance Checks](#enable-disable-compliance-checks-disable-compliance-checks) below.
+`disable_compliance_checks` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_compliance_checks` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
-
-<a id="enable-disable-compliance-checks-disable-compliance-checks"></a>
-
-### Enable Disable Compliance Checks Disable Compliance Checks
 
 <a id="enable-disable-compliance-checks-enable-compliance-checks"></a>
 
@@ -104,17 +100,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Enable Disable Signatures
 
-`disable_signature` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Signature](#enable-disable-signatures-disable-signature) below.
+`disable_signature` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_signature` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Signature](#enable-disable-signatures-enable-signature) below.
-
-<a id="enable-disable-signatures-disable-signature"></a>
-
-### Enable Disable Signatures Disable Signature
-
-<a id="enable-disable-signatures-enable-signature"></a>
-
-### Enable Disable Signatures Enable Signature
+`enable_signature` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="timeouts"></a>
 

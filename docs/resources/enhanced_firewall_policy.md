@@ -70,7 +70,7 @@ resource "f5xc_enhanced_firewall_policy" "example" {
 
 > **Note:** One of the arguments from this list "allow_all, allowed_destinations, allowed_sources, denied_destinations, denied_sources, deny_all, rule_list" must be set.
 
-`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#allow-all) below for details.
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `allowed_destinations` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Allowed Destinations](#allowed-destinations) below for details.
 
@@ -80,7 +80,7 @@ resource "f5xc_enhanced_firewall_policy" "example" {
 
 `denied_sources` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Denied Sources](#denied-sources) below for details.
 
-`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#deny-all) below for details.
+`deny_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `rule_list` - (Optional) Custom Enhanced Firewall Policy Rules. Custom Enhanced Firewall Policy Rules. See [Rule List](#rule-list) below for details.
 
@@ -93,10 +93,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="allow-all"></a>
-
-### Allow All
 
 <a id="allowed-destinations"></a>
 
@@ -122,10 +118,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
-<a id="deny-all"></a>
-
-### Deny All
-
 <a id="rule-list"></a>
 
 ### Rule List
@@ -138,25 +130,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `advanced_action` - (Optional) Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction. See [Advanced Action](#rule-list-rules-advanced-action) below.
 
-`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [All Destinations](#rule-list-rules-all-destinations) below.
+`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_sli_vips` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sli Vips](#rule-list-rules-all-sli-vips) below.
+`all_sli_vips` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_slo_vips` - (Optional) Empty. This can be used for messages where no values are needed. See [All Slo Vips](#rule-list-rules-all-slo-vips) below.
+`all_slo_vips` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sources](#rule-list-rules-all-sources) below.
+`all_sources` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All TCP Traffic](#rule-list-rules-all-tcp-traffic) below.
+`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Traffic](#rule-list-rules-all-traffic) below.
+`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All UDP Traffic](#rule-list-rules-all-udp-traffic) below.
+`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow](#rule-list-rules-allow) below.
+`allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#rule-list-rules-applications) below.
 
-`deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny](#rule-list-rules-deny) below.
+`deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `destination_aws_vpc_ids` - (Optional) AWS VPC List. List of VPC Identifiers in AWS. See [Destination AWS Vpc Ids](#rule-list-rules-destination-aws-vpc-ids) below.
 
@@ -168,17 +160,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `insert_service` - (Optional) Policy Action to Forward Traffic to External Service. Action to forward traffic to external service. See [Insert Service](#rule-list-rules-insert-service) below.
 
-`inside_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Destinations](#rule-list-rules-inside-destinations) below.
+`inside_destinations` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`inside_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Sources](#rule-list-rules-inside-sources) below.
+`inside_sources` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name. See [Label Matcher](#rule-list-rules-label-matcher) below.
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#rule-list-rules-metadata) below.
 
-`outside_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Destinations](#rule-list-rules-outside-destinations) below.
+`outside_destinations` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`outside_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Sources](#rule-list-rules-outside-sources) below.
+`outside_sources` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `protocol_port_range` - (Optional) Protocol and Port. Protocol and Port ranges. See [Protocol Port Range](#rule-list-rules-protocol-port-range) below.
 
@@ -196,47 +188,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `action` - (Optional) Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG` (`String`).
 
-<a id="rule-list-rules-all-destinations"></a>
-
-### Rule List Rules All Destinations
-
-<a id="rule-list-rules-all-sli-vips"></a>
-
-### Rule List Rules All Sli Vips
-
-<a id="rule-list-rules-all-slo-vips"></a>
-
-### Rule List Rules All Slo Vips
-
-<a id="rule-list-rules-all-sources"></a>
-
-### Rule List Rules All Sources
-
-<a id="rule-list-rules-all-tcp-traffic"></a>
-
-### Rule List Rules All TCP Traffic
-
-<a id="rule-list-rules-all-traffic"></a>
-
-### Rule List Rules All Traffic
-
-<a id="rule-list-rules-all-udp-traffic"></a>
-
-### Rule List Rules All UDP Traffic
-
-<a id="rule-list-rules-allow"></a>
-
-### Rule List Rules Allow
-
 <a id="rule-list-rules-applications"></a>
 
 ### Rule List Rules Applications
 
 `applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
-
-<a id="rule-list-rules-deny"></a>
-
-### Rule List Rules Deny
 
 <a id="rule-list-rules-destination-aws-vpc-ids"></a>
 
@@ -248,11 +204,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rule List Rules Destination IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#rule-list-rules-destination-ip-prefix-set-ref) below.
-
-<a id="rule-list-rules-destination-ip-prefix-set-ref"></a>
-
-### Rule List Rules Destination IP Prefix Set Ref
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="rule-list-rules-destination-label-selector"></a>
 
@@ -270,19 +222,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rule List Rules Insert Service
 
-`nfv_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Nfv Service](#rule-list-rules-insert-service-nfv-service) below.
-
-<a id="rule-list-rules-insert-service-nfv-service"></a>
-
-### Rule List Rules Insert Service Nfv Service
-
-<a id="rule-list-rules-inside-destinations"></a>
-
-### Rule List Rules Inside Destinations
-
-<a id="rule-list-rules-inside-sources"></a>
-
-### Rule List Rules Inside Sources
+`nfv_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="rule-list-rules-label-matcher"></a>
 
@@ -297,14 +237,6 @@ In addition to all arguments above, the following attributes are exported:
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
-
-<a id="rule-list-rules-outside-destinations"></a>
-
-### Rule List Rules Outside Destinations
-
-<a id="rule-list-rules-outside-sources"></a>
-
-### Rule List Rules Outside Sources
 
 <a id="rule-list-rules-protocol-port-range"></a>
 
@@ -324,11 +256,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rule List Rules Source IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#rule-list-rules-source-ip-prefix-set-ref) below.
-
-<a id="rule-list-rules-source-ip-prefix-set-ref"></a>
-
-### Rule List Rules Source IP Prefix Set Ref
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="rule-list-rules-source-label-selector"></a>
 

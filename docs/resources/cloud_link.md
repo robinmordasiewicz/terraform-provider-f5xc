@@ -70,7 +70,7 @@ resource "f5xc_cloud_link" "example" {
 
 > **Note:** One of the arguments from this list "disabled, enabled" must be set.
 
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#disabled) below for details.
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enabled` - (Optional) CloudLink ADN Network Config. See [Enabled](#enabled) below for details.
 
@@ -114,51 +114,27 @@ In addition to all arguments above, the following attributes are exported:
 
 ### AWS Byoc Connections
 
-`auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Auth Key](#aws-byoc-connections-auth-key) below.
+`auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `bgp_asn` - (Optional) BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS (`Number`).
 
 `connection_id` - (Optional) Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection (`String`).
 
-`ipv4` - (Optional) IPv4 Peering. Configure BGP IPv4 peering for endpoints. See [IPv4](#aws-byoc-connections-ipv4) below.
+`ipv4` - (Optional) IPv4 Peering. Configure BGP IPv4 peering for endpoints (`Block`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#aws-byoc-connections-metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
 
 `region` - (Optional) Region. Region where the connection is setup (`String`).
 
-`system_generated_name` - (Optional) Empty. This can be used for messages where no values are needed. See [System Generated Name](#aws-byoc-connections-system-generated-name) below.
+`system_generated_name` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags. See [Tags](#aws-byoc-connections-tags) below.
+`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags (`Block`).
 
 `user_assigned_name` - (Optional) User Assigned. User is managing the AWS resource name (`String`).
 
 `virtual_interface_type` - (Optional) Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`. Defaults to `PRIVATE` (`String`).
 
 `vlan` - (Optional) Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection (`Number`).
-
-<a id="aws-byoc-connections-auth-key"></a>
-
-### AWS Byoc Connections Auth Key
-
-<a id="aws-byoc-connections-ipv4"></a>
-
-### AWS Byoc Connections IPv4
-
-<a id="aws-byoc-connections-metadata"></a>
-
-### AWS Byoc Connections Metadata
-
-<a id="aws-byoc-connections-system-generated-name"></a>
-
-### AWS Byoc Connections System Generated Name
-
-<a id="aws-byoc-connections-tags"></a>
-
-### AWS Byoc Connections Tags
-
-<a id="disabled"></a>
-
-### Disabled
 
 <a id="enabled"></a>
 
@@ -186,21 +162,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `interconnect_attachment_name` - (Optional) Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#gcp-byoc-connections-metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
 
 `project` - (Optional) Specified Project. Specify a GCP Project for the interconnect attachment (`String`).
 
 `region` - (Optional) Region. GCP Region in which the GCP Cloud Interconnect attachment is configured (`String`).
 
-`same_as_credential` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Credential](#gcp-byoc-connections-same-as-credential) below.
-
-<a id="gcp-byoc-connections-metadata"></a>
-
-### GCP Byoc Connections Metadata
-
-<a id="gcp-byoc-connections-same-as-credential"></a>
-
-### GCP Byoc Connections Same As Credential
+`same_as_credential` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="gcp-gcp-cred"></a>
 

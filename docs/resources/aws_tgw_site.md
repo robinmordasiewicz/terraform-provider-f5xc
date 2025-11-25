@@ -105,11 +105,11 @@ resource "f5xc_aws_tgw_site" "example" {
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
 
-`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Block All Services](#block-all-services) below for details.
+`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
@@ -117,7 +117,7 @@ resource "f5xc_aws_tgw_site" "example" {
 
 > **Note:** One of the arguments from this list "direct_connect_disabled, direct_connect_enabled, private_connectivity" must be set.
 
-`direct_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Direct Connect Disabled](#direct-connect-disabled) below for details.
+`direct_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](#direct-connect-enabled) below for details.
 
@@ -129,7 +129,7 @@ resource "f5xc_aws_tgw_site" "example" {
 
 `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
 
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handl. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
@@ -139,7 +139,7 @@ resource "f5xc_aws_tgw_site" "example" {
 
 `sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#sw) below for details.
 
-`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. See [Tags](#tags) below for details.
+`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console (`Block`).
 
 `tgw_security` - (Optional) TGW Security Configuration. Security Configuration for transit gateway. See [Tgw Security](#tgw-security) below for details.
 
@@ -171,15 +171,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_security_group` - (Optional) Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC. See [Custom Security Group](#aws-parameters-custom-security-group) below.
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#aws-parameters-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `disk_size` - (Optional) Node Disk Size. Node disk size for all node in the F5XC site. Unit is GiB (`Number`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#aws-parameters-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `existing_tgw` - (Optional) Existing TGW Type. Information needed for existing TGW. See [Existing Tgw](#aws-parameters-existing-tgw) below.
 
-`f5xc_security_group` - (Optional) Empty. This can be used for messages where no values are needed. See [F5xc Security Group](#aws-parameters-f5xc-security-group) below.
+`f5xc_security_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `instance_type` - (Optional) AWS Instance Type for Node. Instance size based on the performance (`String`).
 
@@ -187,11 +187,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `new_vpc` - (Optional) AWS VPC Parameters. Parameters to create new AWS VPC. See [New Vpc](#aws-parameters-new-vpc) below.
 
-`no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Worker Nodes](#aws-parameters-no-worker-nodes) below.
+`no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
 
-`reserved_tgw_cidr` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Tgw CIDR](#aws-parameters-reserved-tgw-cidr) below.
+`reserved_tgw_cidr` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ssh_key` - (Optional) Public SSH key. Public SSH key for accessing nodes of the site (`String`).
 
@@ -247,7 +247,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `outside_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Outside Subnet](#aws-parameters-az-nodes-outside-subnet) below.
 
-`reserved_inside_subnet` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Inside Subnet](#aws-parameters-az-nodes-reserved-inside-subnet) below.
+`reserved_inside_subnet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `workload_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Workload Subnet](#aws-parameters-az-nodes-workload-subnet) below.
 
@@ -257,11 +257,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-inside-subnet-subnet-param) below.
-
-<a id="aws-parameters-az-nodes-inside-subnet-subnet-param"></a>
-
-### AWS Parameters Az Nodes Inside Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="aws-parameters-az-nodes-outside-subnet"></a>
 
@@ -269,15 +265,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-outside-subnet-subnet-param) below.
-
-<a id="aws-parameters-az-nodes-outside-subnet-subnet-param"></a>
-
-### AWS Parameters Az Nodes Outside Subnet Subnet Param
-
-<a id="aws-parameters-az-nodes-reserved-inside-subnet"></a>
-
-### AWS Parameters Az Nodes Reserved Inside Subnet
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="aws-parameters-az-nodes-workload-subnet"></a>
 
@@ -285,11 +273,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-workload-subnet-subnet-param) below.
-
-<a id="aws-parameters-az-nodes-workload-subnet-subnet-param"></a>
-
-### AWS Parameters Az Nodes Workload Subnet Subnet Param
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
 <a id="aws-parameters-custom-security-group"></a>
 
@@ -298,14 +282,6 @@ In addition to all arguments above, the following attributes are exported:
 `inside_security_group_id` - (Optional) Inside Security Group ID. Security Group ID to be attached to SLI(Site Local Inside) Interface (`String`).
 
 `outside_security_group_id` - (Optional) Outside Security Group ID. Security Group ID to be attached to SLO(Site Local Outside) Interface (`String`).
-
-<a id="aws-parameters-disable-internet-vip"></a>
-
-### AWS Parameters Disable Internet VIP
-
-<a id="aws-parameters-enable-internet-vip"></a>
-
-### AWS Parameters Enable Internet VIP
 
 <a id="aws-parameters-existing-tgw"></a>
 
@@ -317,21 +293,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `volterra_site_asn` - (Optional) Enter F5XC Site ASN. F5XC Site ASN (`Number`).
 
-<a id="aws-parameters-f5xc-security-group"></a>
-
-### AWS Parameters F5xc Security Group
-
 <a id="aws-parameters-new-tgw"></a>
 
 ### AWS Parameters New Tgw
 
-`system_generated` - (Optional) Empty. This can be used for messages where no values are needed. See [System Generated](#aws-parameters-new-tgw-system-generated) below.
+`system_generated` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `user_assigned` - (Optional) TGW Assigned ASN Type. Information needed when ASNs are assigned by the user. See [User Assigned](#aws-parameters-new-tgw-user-assigned) below.
-
-<a id="aws-parameters-new-tgw-system-generated"></a>
-
-### AWS Parameters New Tgw System Generated
 
 <a id="aws-parameters-new-tgw-user-assigned"></a>
 
@@ -345,33 +313,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### AWS Parameters New Vpc
 
-`autogenerate` - (Optional) Empty. This can be used for messages where no values are needed. See [Autogenerate](#aws-parameters-new-vpc-autogenerate) below.
+`autogenerate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `name_tag` - (Optional) Choose VPC Name. Specify the VPC Name (`String`).
 
 `primary_ipv4` - (Optional) Primary IPv4 CIDR block. IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block (`String`).
-
-<a id="aws-parameters-new-vpc-autogenerate"></a>
-
-### AWS Parameters New Vpc Autogenerate
-
-<a id="aws-parameters-no-worker-nodes"></a>
-
-### AWS Parameters No Worker Nodes
-
-<a id="aws-parameters-reserved-tgw-cidr"></a>
-
-### AWS Parameters Reserved Tgw CIDR
 
 <a id="aws-parameters-tgw-cidr"></a>
 
 ### AWS Parameters Tgw CIDR
 
 `ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
-
-<a id="block-all-services"></a>
-
-### Block All Services
 
 <a id="blocked-services"></a>
 
@@ -383,25 +335,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Blocked Services Blocked Sevice
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-blocked-sevice-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-blocked-sevice-ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-blocked-sevice-web-user-interface) below.
-
-<a id="blocked-services-blocked-sevice-dns"></a>
-
-### Blocked Services Blocked Sevice DNS
-
-<a id="blocked-services-blocked-sevice-ssh"></a>
-
-### Blocked Services Blocked Sevice SSH
-
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>
-
-### Blocked Services Blocked Sevice Web User Interface
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="coordinates"></a>
 
@@ -419,29 +359,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
 
-<a id="default-blocked-services"></a>
-
-### Default Blocked Services
-
-<a id="direct-connect-disabled"></a>
-
-### Direct Connect Disabled
-
 <a id="direct-connect-enabled"></a>
 
 ### Direct Connect Enabled
 
-`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#direct-connect-enabled-auto-asn) below.
+`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `custom_asn` - (Optional) Custom ASN. Custom Autonomous System Number (`Number`).
 
 `hosted_vifs` - (Optional) AWS Direct Connect Hosted VIF Config. x-example: 'value' AWS Direct Connect Hosted VIF Configuration. See [Hosted Vifs](#direct-connect-enabled-hosted-vifs) below.
 
-`standard_vifs` - (Optional) Empty. This can be used for messages where no values are needed. See [Standard Vifs](#direct-connect-enabled-standard-vifs) below.
-
-<a id="direct-connect-enabled-auto-asn"></a>
-
-### Direct Connect Enabled Auto Asn
+`standard_vifs` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="direct-connect-enabled-hosted-vifs"></a>
 
@@ -449,7 +377,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `site_registration_over_direct_connect` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Direct Connect](#direct-connect-enabled-hosted-vifs-site-registration-over-direct-connect) below.
 
-`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Registration Over Internet](#direct-connect-enabled-hosted-vifs-site-registration-over-internet) below.
+`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `vif_list` - (Optional) List of Hosted VIF Config. List of Hosted VIF Config. See [Vif List](#direct-connect-enabled-hosted-vifs-vif-list) below.
 
@@ -459,59 +387,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `cloudlink_network_name` - (Optional) Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support (`String`).
 
-<a id="direct-connect-enabled-hosted-vifs-site-registration-over-internet"></a>
-
-### Direct Connect Enabled Hosted Vifs Site Registration Over Internet
-
 <a id="direct-connect-enabled-hosted-vifs-vif-list"></a>
 
 ### Direct Connect Enabled Hosted Vifs Vif List
 
 `other_region` - (Optional) Other Region. Other Region (`String`).
 
-`same_as_site_region` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Site Region](#direct-connect-enabled-hosted-vifs-vif-list-same-as-site-region) below.
+`same_as_site_region` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `vif_id` - (Optional) VIF ID. AWS Direct Connect VIF ID that needs to be connected to the site (`String`).
-
-<a id="direct-connect-enabled-hosted-vifs-vif-list-same-as-site-region"></a>
-
-### Direct Connect Enabled Hosted Vifs Vif List Same As Site Region
-
-<a id="direct-connect-enabled-standard-vifs"></a>
-
-### Direct Connect Enabled Standard Vifs
 
 <a id="kubernetes-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#kubernetes-upgrade-drain-disable-upgrade-drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
-
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>
-
-### Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="log-receiver"></a>
 
@@ -523,37 +427,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="logs-streaming-disabled"></a>
-
-### Logs Streaming Disabled
-
 <a id="offline-survivability-mode"></a>
 
 ### Offline Survivability Mode
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#offline-survivability-mode-enable-offline-survivability-mode) below.
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#offline-survivability-mode-no-offline-survivability-mode) below.
-
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>
-
-### Offline Survivability Mode Enable Offline Survivability Mode
-
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>
-
-### Offline Survivability Mode No Offline Survivability Mode
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="os"></a>
 
 ### OS
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#os-default-os-version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
-
-<a id="os-default-os-version"></a>
-
-### OS Default OS Version
 
 <a id="performance-enhancement-mode"></a>
 
@@ -561,27 +449,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Performance Enhancement Mode Perf Mode L7 Enhanced
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="private-connectivity"></a>
 
@@ -589,9 +465,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `cloud_link` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Link](#private-connectivity-cloud-link) below.
 
-`inside` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside](#private-connectivity-inside) below.
+`inside` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`outside` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside](#private-connectivity-outside) below.
+`outside` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="private-connectivity-cloud-link"></a>
 
@@ -603,29 +479,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="private-connectivity-inside"></a>
-
-### Private Connectivity Inside
-
-<a id="private-connectivity-outside"></a>
-
-### Private Connectivity Outside
-
 <a id="sw"></a>
 
 ### Sw
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#sw-default-sw-version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
-
-<a id="sw-default-sw-version"></a>
-
-### Sw Default Sw Version
-
-<a id="tags"></a>
-
-### Tags
 
 <a id="tgw-security"></a>
 
@@ -639,15 +499,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#tgw-security-active-network-policies) below.
 
-`east_west_service_policy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [East West Service Policy Allow All](#tgw-security-east-west-service-policy-allow-all) below.
+`east_west_service_policy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#tgw-security-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_east_west_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No East West Policy](#tgw-security-no-east-west-policy) below.
+`no_east_west_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#tgw-security-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#tgw-security-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tgw-security-active-east-west-service-policies"></a>
 
@@ -713,26 +573,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="tgw-security-east-west-service-policy-allow-all"></a>
-
-### Tgw Security East West Service Policy Allow All
-
-<a id="tgw-security-forward-proxy-allow-all"></a>
-
-### Tgw Security Forward Proxy Allow All
-
-<a id="tgw-security-no-east-west-policy"></a>
-
-### Tgw Security No East West Policy
-
-<a id="tgw-security-no-forward-proxy"></a>
-
-### Tgw Security No Forward Proxy
-
-<a id="tgw-security-no-network-policy"></a>
-
-### Tgw Security No Network Policy
-
 <a id="timeouts"></a>
 
 ### Timeouts
@@ -761,19 +601,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `inside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Inside Static Routes](#vn-config-inside-static-routes) below.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#vn-config-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#vn-config-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#vn-config-no-inside-static-routes) below.
+`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#vn-config-no-outside-static-routes) below.
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#vn-config-outside-static-routes) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#vn-config-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#vn-config-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="vn-config-allowed-vip-port"></a>
 
@@ -781,13 +621,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_ports` - (Optional) Custom Ports. List of Custom port. See [Custom Ports](#vn-config-allowed-vip-port-custom-ports) below.
 
-`disable_allowed_vip_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Allowed VIP Port](#vn-config-allowed-vip-port-disable-allowed-vip-port) below.
+`disable_allowed_vip_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_http_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP HTTPS Port](#vn-config-allowed-vip-port-use-http-https-port) below.
+`use_http_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_http_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP Port](#vn-config-allowed-vip-port-use-http-port) below.
+`use_http_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTPS Port](#vn-config-allowed-vip-port-use-https-port) below.
+`use_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="vn-config-allowed-vip-port-custom-ports"></a>
 
@@ -795,57 +635,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `port_ranges` - (Optional) Port Ranges. Port Ranges (`String`).
 
-<a id="vn-config-allowed-vip-port-disable-allowed-vip-port"></a>
-
-### Vn Config Allowed VIP Port Disable Allowed VIP Port
-
-<a id="vn-config-allowed-vip-port-use-http-https-port"></a>
-
-### Vn Config Allowed VIP Port Use HTTP HTTPS Port
-
-<a id="vn-config-allowed-vip-port-use-http-port"></a>
-
-### Vn Config Allowed VIP Port Use HTTP Port
-
-<a id="vn-config-allowed-vip-port-use-https-port"></a>
-
-### Vn Config Allowed VIP Port Use HTTPS Port
-
 <a id="vn-config-allowed-vip-port-sli"></a>
 
 ### Vn Config Allowed VIP Port Sli
 
 `custom_ports` - (Optional) Custom Ports. List of Custom port. See [Custom Ports](#vn-config-allowed-vip-port-sli-custom-ports) below.
 
-`disable_allowed_vip_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Allowed VIP Port](#vn-config-allowed-vip-port-sli-disable-allowed-vip-port) below.
+`disable_allowed_vip_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_http_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP HTTPS Port](#vn-config-allowed-vip-port-sli-use-http-https-port) below.
+`use_http_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_http_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP Port](#vn-config-allowed-vip-port-sli-use-http-port) below.
+`use_http_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTPS Port](#vn-config-allowed-vip-port-sli-use-https-port) below.
+`use_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="vn-config-allowed-vip-port-sli-custom-ports"></a>
 
 ### Vn Config Allowed VIP Port Sli Custom Ports
 
 `port_ranges` - (Optional) Port Ranges. Port Ranges (`String`).
-
-<a id="vn-config-allowed-vip-port-sli-disable-allowed-vip-port"></a>
-
-### Vn Config Allowed VIP Port Sli Disable Allowed VIP Port
-
-<a id="vn-config-allowed-vip-port-sli-use-http-https-port"></a>
-
-### Vn Config Allowed VIP Port Sli Use HTTP HTTPS Port
-
-<a id="vn-config-allowed-vip-port-sli-use-http-port"></a>
-
-### Vn Config Allowed VIP Port Sli Use HTTP Port
-
-<a id="vn-config-allowed-vip-port-sli-use-https-port"></a>
-
-### Vn Config Allowed VIP Port Sli Use HTTPS Port
 
 <a id="vn-config-dc-cluster-group-inside-vn"></a>
 
@@ -877,17 +685,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Vn Config Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#vn-config-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Vn Config Global Network List Global Network Connections Sli To Global DR
-
-<a id="vn-config-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Vn Config Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="vn-config-inside-static-routes"></a>
 
@@ -899,29 +699,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Vn Config Inside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#vn-config-inside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="vn-config-inside-static-routes-static-route-list-custom-static-route"></a>
-
-### Vn Config Inside Static Routes Static Route List Custom Static Route
-
-<a id="vn-config-no-dc-cluster-group"></a>
-
-### Vn Config No Dc Cluster Group
-
-<a id="vn-config-no-global-network"></a>
-
-### Vn Config No Global Network
-
-<a id="vn-config-no-inside-static-routes"></a>
-
-### Vn Config No Inside Static Routes
-
-<a id="vn-config-no-outside-static-routes"></a>
-
-### Vn Config No Outside Static Routes
 
 <a id="vn-config-outside-static-routes"></a>
 
@@ -933,21 +713,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Vn Config Outside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#vn-config-outside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="vn-config-outside-static-routes-static-route-list-custom-static-route"></a>
-
-### Vn Config Outside Static Routes Static Route List Custom Static Route
-
-<a id="vn-config-sm-connection-public-ip"></a>
-
-### Vn Config Sm Connection Public IP
-
-<a id="vn-config-sm-connection-pvt-ip"></a>
-
-### Vn Config Sm Connection Pvt IP
 
 <a id="vpc-attachments"></a>
 
@@ -959,13 +727,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Vpc Attachments Vpc List
 
-`labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall. See [Labels](#vpc-attachments-vpc-list-labels) below.
+`labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall (`Block`).
 
 `vpc_id` - (Optional) VPC ID. Information about existing VPC (`String`).
-
-<a id="vpc-attachments-vpc-list-labels"></a>
-
-### Vpc Attachments Vpc List Labels
 
 ## Import
 

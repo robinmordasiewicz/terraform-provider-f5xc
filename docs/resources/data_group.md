@@ -84,31 +84,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Address Records
 
-`records` - (Optional) Address records. See [Records](#address-records-records) below.
-
-<a id="address-records-records"></a>
-
-### Address Records Records
+`records` - (Optional) Address records (`Block`).
 
 <a id="integer-records"></a>
 
 ### Integer Records
 
-`records` - (Optional) Integer records. See [Records](#integer-records-records) below.
-
-<a id="integer-records-records"></a>
-
-### Integer Records Records
+`records` - (Optional) Integer records (`Block`).
 
 <a id="string-records"></a>
 
 ### String Records
 
-`records` - (Optional) String records. See [Records](#string-records-records) below.
-
-<a id="string-records-records"></a>
-
-### String Records Records
+`records` - (Optional) String records (`Block`).
 
 <a id="timeouts"></a>
 

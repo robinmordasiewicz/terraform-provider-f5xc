@@ -66,7 +66,7 @@ resource "f5xc_service_policy_rule" "example" {
 
 > **Note:** One of the arguments from this list "any_asn, asn_list, asn_matcher" must be set.
 
-`any_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Asn](#any-asn) below for details.
+`any_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#asn-list) below for details.
 
@@ -74,7 +74,7 @@ resource "f5xc_service_policy_rule" "example" {
 
 > **Note:** One of the arguments from this list "any_client, client_name, client_name_matcher, client_selector, ip_threat_category_list" must be set.
 
-`any_client` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Client](#any-client) below for details.
+`any_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `client_name` - (Optional) Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name (`String`).
 
@@ -86,7 +86,7 @@ resource "f5xc_service_policy_rule" "example" {
 
 > **Note:** One of the arguments from this list "any_ip, ip_matcher, ip_prefix_list" must be set.
 
-`any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any IP](#any-ip) below for details.
+`any_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#ip-matcher) below for details.
 
@@ -144,18 +144,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="any-asn"></a>
-
-### Any Asn
-
-<a id="any-client"></a>
-
-### Any Client
-
-<a id="any-ip"></a>
-
-### Any IP
-
 <a id="api-group-matcher"></a>
 
 ### API Group Matcher
@@ -168,23 +156,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Arg Matchers
 
-`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#arg-matchers-check-not-present) below.
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#arg-matchers-check-present) below.
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#arg-matchers-item) below.
 
 `name` - (Optional) Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body (`String`).
-
-<a id="arg-matchers-check-not-present"></a>
-
-### Arg Matchers Check Not Present
-
-<a id="arg-matchers-check-present"></a>
-
-### Arg Matchers Check Present
 
 <a id="arg-matchers-item"></a>
 
@@ -236,17 +216,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Bot Action
 
-`bot_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Bot Skip Processing](#bot-action-bot-skip-processing) below.
+`bot_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`none` - (Optional) Empty. This can be used for messages where no values are needed. See [None](#bot-action-none) below.
-
-<a id="bot-action-bot-skip-processing"></a>
-
-### Bot Action Bot Skip Processing
-
-<a id="bot-action-none"></a>
-
-### Bot Action None
+`none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="client-name-matcher"></a>
 
@@ -266,23 +238,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Cookie Matchers
 
-`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#cookie-matchers-check-not-present) below.
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#cookie-matchers-check-present) below.
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `invert_matcher` - (Optional) Invert Matcher. Invert Match of the expression defined (`Bool`).
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#cookie-matchers-item) below.
 
 `name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
-
-<a id="cookie-matchers-check-not-present"></a>
-
-### Cookie Matchers Check Not Present
-
-<a id="cookie-matchers-check-present"></a>
-
-### Cookie Matchers Check Present
 
 <a id="cookie-matchers-item"></a>
 
@@ -306,23 +270,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Headers
 
-`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#headers-check-not-present) below.
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#headers-check-present) below.
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#headers-item) below.
 
 `name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
-
-<a id="headers-check-not-present"></a>
-
-### Headers Check Not Present
-
-<a id="headers-check-present"></a>
-
-### Headers Check Present
 
 <a id="headers-item"></a>
 
@@ -388,23 +344,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### JWT Claims
 
-`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#jwt-claims-check-not-present) below.
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#jwt-claims-check-present) below.
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `invert_matcher` - (Optional) Invert Matcher. Invert the match result (`Bool`).
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#jwt-claims-item) below.
 
 `name` - (Optional) JWT Claim Name. JWT claim name (`String`).
-
-<a id="jwt-claims-check-not-present"></a>
-
-### JWT Claims Check Not Present
-
-<a id="jwt-claims-check-present"></a>
-
-### JWT Claims Check Present
 
 <a id="jwt-claims-item"></a>
 
@@ -426,17 +374,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Mum Action
 
-`default` - (Optional) Empty. This can be used for messages where no values are needed. See [Default](#mum-action-default) below.
+`default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Processing](#mum-action-skip-processing) below.
-
-<a id="mum-action-default"></a>
-
-### Mum Action Default
-
-<a id="mum-action-skip-processing"></a>
-
-### Mum Action Skip Processing
+`skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="path"></a>
 
@@ -466,23 +406,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Query Params
 
-`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#query-params-check-not-present) below.
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#query-params-check-present) below.
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `invert_matcher` - (Optional) Invert Query Parameter Matcher. Invert the match result (`Bool`).
 
 `item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#query-params-item) below.
 
 `key` - (Optional) Query Parameter Name. A case-sensitive HTTP query parameter name (`String`).
-
-<a id="query-params-check-not-present"></a>
-
-### Query Params Check Not Present
-
-<a id="query-params-check-present"></a>
-
-### Query Params Check Present
 
 <a id="query-params-item"></a>
 
@@ -500,125 +432,69 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_cookie_count_exceeds` - (Optional) Match on the Count for all Cookies that exceed this value (`Number`).
 
-`max_cookie_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Count None](#request-constraints-max-cookie-count-none) below.
+`max_cookie_count_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_cookie_key_size_exceeds` - (Optional) Match on the Name Size per Cookie that exceed this value (`Number`).
 
-`max_cookie_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Key Size None](#request-constraints-max-cookie-key-size-none) below.
+`max_cookie_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_cookie_value_size_exceeds` - (Optional) Match on the Value Size per Cookie that exceed this value (`Number`).
 
-`max_cookie_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Cookie Value Size None](#request-constraints-max-cookie-value-size-none) below.
+`max_cookie_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_header_count_exceeds` - (Optional) Match on the Count for all Headers that exceed this value (`Number`).
 
-`max_header_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Count None](#request-constraints-max-header-count-none) below.
+`max_header_count_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_header_key_size_exceeds` - (Optional) Match on the Name Size per Header that exceed this value (`Number`).
 
-`max_header_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Key Size None](#request-constraints-max-header-key-size-none) below.
+`max_header_key_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_header_value_size_exceeds` - (Optional) Match on the Value Size per Header that exceed this value (`Number`).
 
-`max_header_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Header Value Size None](#request-constraints-max-header-value-size-none) below.
+`max_header_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_parameter_count_exceeds` - (Optional) Match on the Parameter Count that exceed this value (`Number`).
 
-`max_parameter_count_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Count None](#request-constraints-max-parameter-count-none) below.
+`max_parameter_count_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_parameter_name_size_exceeds` - (Optional) Match on the Parameter Name Size that exceed this value (`Number`).
 
-`max_parameter_name_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Name Size None](#request-constraints-max-parameter-name-size-none) below.
+`max_parameter_name_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_parameter_value_size_exceeds` - (Optional) Match on the Parameter Value Size that exceed this value (`Number`).
 
-`max_parameter_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Parameter Value Size None](#request-constraints-max-parameter-value-size-none) below.
+`max_parameter_value_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_query_size_exceeds` - (Optional) Match on the URL Query Size that exceed this value (`Number`).
 
-`max_query_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Query Size None](#request-constraints-max-query-size-none) below.
+`max_query_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_request_line_size_exceeds` - (Optional) Match on the Request Line Size that exceed this value (`Number`).
 
-`max_request_line_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Request Line Size None](#request-constraints-max-request-line-size-none) below.
+`max_request_line_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_request_size_exceeds` - (Optional) Match on the Request Size that exceed this value (`Number`).
 
-`max_request_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max Request Size None](#request-constraints-max-request-size-none) below.
+`max_request_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_url_size_exceeds` - (Optional) Match on the URL Size that exceed this value (`Number`).
 
-`max_url_size_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Max URL Size None](#request-constraints-max-url-size-none) below.
-
-<a id="request-constraints-max-cookie-count-none"></a>
-
-### Request Constraints Max Cookie Count None
-
-<a id="request-constraints-max-cookie-key-size-none"></a>
-
-### Request Constraints Max Cookie Key Size None
-
-<a id="request-constraints-max-cookie-value-size-none"></a>
-
-### Request Constraints Max Cookie Value Size None
-
-<a id="request-constraints-max-header-count-none"></a>
-
-### Request Constraints Max Header Count None
-
-<a id="request-constraints-max-header-key-size-none"></a>
-
-### Request Constraints Max Header Key Size None
-
-<a id="request-constraints-max-header-value-size-none"></a>
-
-### Request Constraints Max Header Value Size None
-
-<a id="request-constraints-max-parameter-count-none"></a>
-
-### Request Constraints Max Parameter Count None
-
-<a id="request-constraints-max-parameter-name-size-none"></a>
-
-### Request Constraints Max Parameter Name Size None
-
-<a id="request-constraints-max-parameter-value-size-none"></a>
-
-### Request Constraints Max Parameter Value Size None
-
-<a id="request-constraints-max-query-size-none"></a>
-
-### Request Constraints Max Query Size None
-
-<a id="request-constraints-max-request-line-size-none"></a>
-
-### Request Constraints Max Request Line Size None
-
-<a id="request-constraints-max-request-size-none"></a>
-
-### Request Constraints Max Request Size None
-
-<a id="request-constraints-max-url-size-none"></a>
-
-### Request Constraints Max URL Size None
+`max_url_size_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="segment-policy"></a>
 
 ### Segment Policy
 
-`dst_any` - (Optional) Empty. This can be used for messages where no values are needed. See [Dst Any](#segment-policy-dst-any) below.
+`dst_any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dst_segments` - (Optional) Segment List. List of references to Segments. See [Dst Segments](#segment-policy-dst-segments) below.
 
-`intra_segment` - (Optional) Empty. This can be used for messages where no values are needed. See [Intra Segment](#segment-policy-intra-segment) below.
+`intra_segment` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`src_any` - (Optional) Empty. This can be used for messages where no values are needed. See [Src Any](#segment-policy-src-any) below.
+`src_any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `src_segments` - (Optional) Segment List. List of references to Segments. See [Src Segments](#segment-policy-src-segments) below.
-
-<a id="segment-policy-dst-any"></a>
-
-### Segment Policy Dst Any
 
 <a id="segment-policy-dst-segments"></a>
 
@@ -635,14 +511,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="segment-policy-intra-segment"></a>
-
-### Segment Policy Intra Segment
-
-<a id="segment-policy-src-any"></a>
-
-### Segment Policy Src Any
 
 <a id="segment-policy-src-segments"></a>
 
@@ -688,9 +556,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `app_firewall_detection_control` - (Optional) App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria. See [App Firewall Detection Control](#waf-action-app-firewall-detection-control) below.
 
-`none` - (Optional) Empty. This can be used for messages where no values are needed. See [None](#waf-action-none) below.
+`none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed. See [WAF Skip Processing](#waf-action-waf-skip-processing) below.
+`waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="waf-action-app-firewall-detection-control"></a>
 
@@ -739,14 +607,6 @@ In addition to all arguments above, the following attributes are exported:
 `context_name` - (Optional) Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*) (`String`).
 
 `exclude_violation` - (Optional) App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCO... Possible values include `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, and others (`String`).
-
-<a id="waf-action-none"></a>
-
-### WAF Action None
-
-<a id="waf-action-waf-skip-processing"></a>
-
-### WAF Action WAF Skip Processing
 
 ## Import
 

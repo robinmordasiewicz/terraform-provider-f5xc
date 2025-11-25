@@ -86,9 +86,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `criteria` - (Optional) Match Criteria. Match criteria of the packet to apply the NAT Rule. See [Criteria](#rules-criteria) below.
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#rules-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#rules-enable) below.
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `name` - (Optional) Name. Name of the Rule (`String`).
 
@@ -110,17 +110,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules Action Dynamic
 
-`elastic_ips` - (Optional) Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object. See [Elastic Ips](#rules-action-dynamic-elastic-ips) below.
+`elastic_ips` - (Optional) Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object (`Block`).
 
-`pools` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Pools](#rules-action-dynamic-pools) below.
-
-<a id="rules-action-dynamic-elastic-ips"></a>
-
-### Rules Action Dynamic Elastic Ips
-
-<a id="rules-action-dynamic-pools"></a>
-
-### Rules Action Dynamic Pools
+`pools` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
 
 <a id="rules-cloud-connect"></a>
 
@@ -146,13 +138,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules Criteria
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#rules-criteria-any) below.
+`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `destination_cidr` - (Optional) Destination IP. Destination IP of the packet to match (`List`).
 
 `destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#rules-criteria-destination-port) below.
 
-`icmp` - (Optional) Empty. This can be used for messages where no values are needed. See [ICMP](#rules-criteria-icmp) below.
+`icmp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `protocol` - (Optional) Protocols. Protocols like TCP, UDP. Possible values are `ALL`, `ICMP`, `TCP`, `UDP`. Defaults to `ALL` (`String`).
 
@@ -168,101 +160,53 @@ In addition to all arguments above, the following attributes are exported:
 
 `virtual_network` - (Optional) Virtual Network Reference Type. Carries the reference to virtual network. See [Virtual Network](#rules-criteria-virtual-network) below.
 
-<a id="rules-criteria-any"></a>
-
-### Rules Criteria Any
-
 <a id="rules-criteria-destination-port"></a>
 
 ### Rules Criteria Destination Port
 
-`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#rules-criteria-destination-port-no-port-match) below.
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
 `port_ranges` - (Optional) Configuration for port_ranges (`String`).
-
-<a id="rules-criteria-destination-port-no-port-match"></a>
-
-### Rules Criteria Destination Port No Port Match
-
-<a id="rules-criteria-icmp"></a>
-
-### Rules Criteria ICMP
 
 <a id="rules-criteria-segment"></a>
 
 ### Rules Criteria Segment
 
-`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#rules-criteria-segment-refs) below.
-
-<a id="rules-criteria-segment-refs"></a>
-
-### Rules Criteria Segment Refs
+`refs` - (Optional) Segment. Reference to Segment Object (`Block`).
 
 <a id="rules-criteria-source-port"></a>
 
 ### Rules Criteria Source Port
 
-`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#rules-criteria-source-port-no-port-match) below.
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
 `port_ranges` - (Optional) Configuration for port_ranges (`String`).
 
-<a id="rules-criteria-source-port-no-port-match"></a>
-
-### Rules Criteria Source Port No Port Match
-
 <a id="rules-criteria-tcp"></a>
 
 ### Rules Criteria TCP
 
-`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#rules-criteria-tcp-destination-port) below.
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
 
-`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#rules-criteria-tcp-source-port) below.
-
-<a id="rules-criteria-tcp-destination-port"></a>
-
-### Rules Criteria TCP Destination Port
-
-<a id="rules-criteria-tcp-source-port"></a>
-
-### Rules Criteria TCP Source Port
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
 
 <a id="rules-criteria-udp"></a>
 
 ### Rules Criteria UDP
 
-`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#rules-criteria-udp-destination-port) below.
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
 
-`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#rules-criteria-udp-source-port) below.
-
-<a id="rules-criteria-udp-destination-port"></a>
-
-### Rules Criteria UDP Destination Port
-
-<a id="rules-criteria-udp-source-port"></a>
-
-### Rules Criteria UDP Source Port
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
 
 <a id="rules-criteria-virtual-network"></a>
 
 ### Rules Criteria Virtual Network
 
-`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#rules-criteria-virtual-network-refs) below.
-
-<a id="rules-criteria-virtual-network-refs"></a>
-
-### Rules Criteria Virtual Network Refs
-
-<a id="rules-disable"></a>
-
-### Rules Disable
-
-<a id="rules-enable"></a>
-
-### Rules Enable
+`refs` - (Optional) Virtual Network Reference. Reference to virtual network (`Block`).
 
 <a id="rules-network-interface"></a>
 

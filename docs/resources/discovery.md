@@ -78,7 +78,7 @@ resource "f5xc_discovery" "example" {
 
 `cluster_id` - (Optional) Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object (`String`).
 
-`no_cluster_id` - (Optional) Empty. This can be used for messages where no values are needed. See [No Cluster Id](#no-cluster-id) below for details.
+`no_cluster_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "discovery_consul, discovery_k8s" must be set.
 
@@ -120,39 +120,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
-`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#discovery-consul-access-info-connection-info-tls-info) below.
-
-<a id="discovery-consul-access-info-connection-info-tls-info"></a>
-
-### Discovery Consul Access Info Connection Info TLS Info
+`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service (`Block`).
 
 <a id="discovery-consul-access-info-http-basic-auth-info"></a>
 
 ### Discovery Consul Access Info HTTP Basic Auth Info
 
-`passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd URL](#discovery-consul-access-info-http-basic-auth-info-passwd-url) below.
+`passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `user_name` - (Optional) User Name. username in consul (`String`).
-
-<a id="discovery-consul-access-info-http-basic-auth-info-passwd-url"></a>
-
-### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL
 
 <a id="discovery-consul-publish-info"></a>
 
 ### Discovery Consul Publish Info
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#discovery-consul-publish-info-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`publish` - (Optional) Empty. This can be used for messages where no values are needed. See [Publish](#discovery-consul-publish-info-publish) below.
-
-<a id="discovery-consul-publish-info-disable"></a>
-
-### Discovery Consul Publish Info Disable
-
-<a id="discovery-consul-publish-info-publish"></a>
-
-### Discovery Consul Publish Info Publish
+`publish` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="discovery-k8s"></a>
 
@@ -160,7 +144,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `access_info` - (Optional) K8s API Server. K8S API server access. See [Access Info](#discovery-k8s-access-info) below.
 
-`default_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Default All](#discovery-k8s-default-all) below.
+`default_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `namespace_mapping` - (Optional) K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared. See [Namespace Mapping](#discovery-k8s-namespace-mapping) below.
 
@@ -172,11 +156,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#discovery-k8s-access-info-connection-info) below.
 
-`isolated` - (Optional) Empty. This can be used for messages where no values are needed. See [Isolated](#discovery-k8s-access-info-isolated) below.
+`isolated` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `kubeconfig_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Kubeconfig URL](#discovery-k8s-access-info-kubeconfig-url) below.
 
-`reachable` - (Optional) Empty. This can be used for messages where no values are needed. See [Reachable](#discovery-k8s-access-info-reachable) below.
+`reachable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="discovery-k8s-access-info-connection-info"></a>
 
@@ -184,39 +168,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
-`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#discovery-k8s-access-info-connection-info-tls-info) below.
-
-<a id="discovery-k8s-access-info-connection-info-tls-info"></a>
-
-### Discovery K8s Access Info Connection Info TLS Info
-
-<a id="discovery-k8s-access-info-isolated"></a>
-
-### Discovery K8s Access Info Isolated
+`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service (`Block`).
 
 <a id="discovery-k8s-access-info-kubeconfig-url"></a>
 
 ### Discovery K8s Access Info Kubeconfig URL
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info) below.
-
-<a id="discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info"></a>
-
-### Discovery K8s Access Info Kubeconfig URL Blindfold Secret Info
-
-<a id="discovery-k8s-access-info-kubeconfig-url-clear-secret-info"></a>
-
-### Discovery K8s Access Info Kubeconfig URL Clear Secret Info
-
-<a id="discovery-k8s-access-info-reachable"></a>
-
-### Discovery K8s Access Info Reachable
-
-<a id="discovery-k8s-default-all"></a>
-
-### Discovery K8s Default All
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="discovery-k8s-namespace-mapping"></a>
 
@@ -236,17 +196,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Discovery K8s Publish Info
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#discovery-k8s-publish-info-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dns_delegation` - (Optional) K8SDelegationType. See [DNS Delegation](#discovery-k8s-publish-info-dns-delegation) below.
 
 `publish` - (Optional) K8SPublishType. See [Publish](#discovery-k8s-publish-info-publish) below.
 
-`publish_fqdns` - (Optional) Empty. This can be used for messages where no values are needed. See [Publish Fqdns](#discovery-k8s-publish-info-publish-fqdns) below.
-
-<a id="discovery-k8s-publish-info-disable"></a>
-
-### Discovery K8s Publish Info Disable
+`publish_fqdns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="discovery-k8s-publish-info-dns-delegation"></a>
 
@@ -261,14 +217,6 @@ In addition to all arguments above, the following attributes are exported:
 ### Discovery K8s Publish Info Publish
 
 `namespace` - (Optional) Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists (`String`).
-
-<a id="discovery-k8s-publish-info-publish-fqdns"></a>
-
-### Discovery K8s Publish Info Publish Fqdns
-
-<a id="no-cluster-id"></a>
-
-### No Cluster Id
 
 <a id="timeouts"></a>
 
@@ -296,21 +244,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A site direct reference. See [Ref](#where-site-ref) below.
-
-<a id="where-site-disable-internet-vip"></a>
-
-### Where Site Disable Internet VIP
-
-<a id="where-site-enable-internet-vip"></a>
-
-### Where Site Enable Internet VIP
 
 <a id="where-site-ref"></a>
 
@@ -350,21 +290,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Virtual Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-virtual-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-virtual-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#where-virtual-site-ref) below.
-
-<a id="where-virtual-site-disable-internet-vip"></a>
-
-### Where Virtual Site Disable Internet VIP
-
-<a id="where-virtual-site-enable-internet-vip"></a>
-
-### Where Virtual Site Enable Internet VIP
 
 <a id="where-virtual-site-ref"></a>
 

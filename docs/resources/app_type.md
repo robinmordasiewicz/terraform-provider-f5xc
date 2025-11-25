@@ -80,25 +80,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Business Logic Markup Setting
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#business-logic-markup-setting-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `discovered_api_settings` - (Optional) Discovered API Settings. x-example: '2' Configure Discovered API Settings. See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#business-logic-markup-setting-enable) below.
-
-<a id="business-logic-markup-setting-disable"></a>
-
-### Business Logic Markup Setting Disable
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="business-logic-markup-setting-discovered-api-settings"></a>
 
 ### Business Logic Markup Setting Discovered API Settings
 
 `purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
-
-<a id="business-logic-markup-setting-enable"></a>
-
-### Business Logic Markup Setting Enable
 
 <a id="features"></a>
 

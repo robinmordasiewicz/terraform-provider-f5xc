@@ -61,9 +61,9 @@ resource "f5xc_api_definition" "example" {
 
 > **Note:** One of the arguments from this list "mixed_schema_origin, strict_schema_origin" must be set.
 
-`mixed_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed. See [Mixed Schema Origin](#mixed-schema-origin) below for details.
+`mixed_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`strict_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed. See [Strict Schema Origin](#strict-schema-origin) below for details.
+`strict_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `non_api_endpoints` - (Optional) API Discovery Exclusion List. List of Non-API Endpoints. See [Non API Endpoints](#non-api-endpoints) below for details.
 
@@ -95,10 +95,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
-<a id="mixed-schema-origin"></a>
-
-### Mixed Schema Origin
-
 <a id="non-api-endpoints"></a>
 
 ### Non API Endpoints
@@ -106,10 +102,6 @@ In addition to all arguments above, the following attributes are exported:
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values include `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, and others. Defaults to `ANY` (`String`).
 
 `path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
-
-<a id="strict-schema-origin"></a>
-
-### Strict Schema Origin
 
 <a id="timeouts"></a>
 

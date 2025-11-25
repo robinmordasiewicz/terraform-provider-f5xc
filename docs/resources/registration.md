@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `instance_id` - (Optional) Instance ID. Instance id (assigned by infrastructure provider) (`String`).
 
-`interfaces` - (Optional) Interfaces. Machine interfaces present during registration time. See [Interfaces](#infra-interfaces) below.
+`interfaces` - (Optional) Interfaces. Machine interfaces present during registration time (`Block`).
 
 `internet_proxy` - (Optional) Internet Proxy Configuration. Proxy describes options for HTTP or HTTPS proxy configurations. See [Internet Proxy](#infra-internet-proxy) below.
 
@@ -202,11 +202,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `driver_version` - (Optional) Driver Version. GPU Driver Version (`String`).
 
-`gpu_device` - (Optional) GPU devices. List of GPU devices in server. See [GPU Device](#infra-hw-info-gpu-gpu-device) below.
-
-<a id="infra-hw-info-gpu-gpu-device"></a>
-
-### Infra Hw Info GPU GPU Device
+`gpu_device` - (Optional) GPU devices. List of GPU devices in server (`Block`).
 
 <a id="infra-hw-info-kernel"></a>
 
@@ -332,10 +328,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `vendor_name` - (Optional) Vendor name. Vendor ID translated to name (if available) (`String`).
 
-<a id="infra-interfaces"></a>
-
-### Infra Interfaces
-
 <a id="infra-internet-proxy"></a>
 
 ### Infra Internet Proxy
@@ -364,9 +356,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `cluster_type` - (Optional) Cluster Type (`String`).
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#passport-default-os-version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#passport-default-sw-version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `latitude` - (Optional) Latitude. Geographic location of this site (`Number`).
 
@@ -377,14 +369,6 @@ In addition to all arguments above, the following attributes are exported:
 `private_network_name` - (Optional) Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN (`String`).
 
 `volterra_software_version` - (Optional) F5XC Software Version. F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002 (`String`).
-
-<a id="passport-default-os-version"></a>
-
-### Passport Default OS Version
-
-<a id="passport-default-sw-version"></a>
-
-### Passport Default Sw Version
 
 <a id="timeouts"></a>
 

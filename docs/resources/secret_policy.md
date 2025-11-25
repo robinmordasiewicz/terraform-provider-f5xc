@@ -111,17 +111,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_name` - (Optional) Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name (`String`).
 
-`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Client Name Matcher](#rule-list-rules-spec-client-name-matcher) below.
+`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#rule-list-rules-spec-client-selector) below.
-
-<a id="rule-list-rules-spec-client-name-matcher"></a>
-
-### Rule List Rules Spec Client Name Matcher
-
-<a id="rule-list-rules-spec-client-selector"></a>
-
-### Rule List Rules Spec Client Selector
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar (`Block`).
 
 <a id="timeouts"></a>
 

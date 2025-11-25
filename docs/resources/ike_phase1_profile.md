@@ -74,13 +74,13 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 
-`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
+`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `prf` - (Optional) PseudoRandomFunction. Select PseudoRandomFunction for IKE SA (`List`).
 
 > **Note:** One of the arguments from this list "reauth_disabled, reauth_timeout_days, reauth_timeout_hours" must be set.
 
-`reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Reauth Disabled](#reauth-disabled) below for details.
+`reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `reauth_timeout_days` - (Optional) Days. Set Duration in days. See [Reauth Timeout Days](#reauth-timeout-days) below for details.
 
@@ -108,10 +108,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `duration` - (Optional) Duration (`Number`).
 
-<a id="reauth-disabled"></a>
-
-### Reauth Disabled
-
 <a id="reauth-timeout-days"></a>
 
 ### Reauth Timeout Days
@@ -135,10 +131,6 @@ In addition to all arguments above, the following attributes are exported:
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-<a id="use-default-keylifetime"></a>
-
-### Use Default Keylifetime
 
 ## Import
 

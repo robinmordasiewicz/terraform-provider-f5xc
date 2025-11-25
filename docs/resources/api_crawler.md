@@ -94,17 +94,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Domains Simple Login Password
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#domains-simple-login-password-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#domains-simple-login-password-clear-secret-info) below.
-
-<a id="domains-simple-login-password-blindfold-secret-info"></a>
-
-### Domains Simple Login Password Blindfold Secret Info
-
-<a id="domains-simple-login-password-clear-secret-info"></a>
-
-### Domains Simple Login Password Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="timeouts"></a>
 

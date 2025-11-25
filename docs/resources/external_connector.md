@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ipsec Ike Parameters
 
-`dpd_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Dpd Disabled](#ipsec-ike-parameters-dpd-disabled) below.
+`dpd_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dpd_keep_alive_timer` - (Optional) Keepalive Timer. See [Dpd Keep Alive Timer](#ipsec-ike-parameters-dpd-keep-alive-timer) below.
 
@@ -106,21 +106,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `ike_phase2_profile` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ike Phase2 Profile](#ipsec-ike-parameters-ike-phase2-profile) below.
 
-`initiator` - (Optional) Empty. This can be used for messages where no values are needed. See [Initiator](#ipsec-ike-parameters-initiator) below.
+`initiator` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`responder` - (Optional) Empty. This can be used for messages where no values are needed. See [Responder](#ipsec-ike-parameters-responder) below.
+`responder` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `rm_hostname` - (Optional) Hostname. Configure an hostname Remote IKE ID (`String`).
 
 `rm_ip_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Rm IP Address](#ipsec-ike-parameters-rm-ip-address) below.
 
-`use_default_local_ike_id` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Local Ike Id](#ipsec-ike-parameters-use-default-local-ike-id) below.
+`use_default_local_ike_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_default_remote_ike_id` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Remote Ike Id](#ipsec-ike-parameters-use-default-remote-ike-id) below.
-
-<a id="ipsec-ike-parameters-dpd-disabled"></a>
-
-### Ipsec Ike Parameters Dpd Disabled
+`use_default_remote_ike_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ipsec-ike-parameters-dpd-keep-alive-timer"></a>
 
@@ -148,37 +144,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="ipsec-ike-parameters-initiator"></a>
-
-### Ipsec Ike Parameters Initiator
-
-<a id="ipsec-ike-parameters-responder"></a>
-
-### Ipsec Ike Parameters Responder
-
 <a id="ipsec-ike-parameters-rm-ip-address"></a>
 
 ### Ipsec Ike Parameters Rm IP Address
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#ipsec-ike-parameters-rm-ip-address-ipv4) below.
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation (`Block`).
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#ipsec-ike-parameters-rm-ip-address-ipv6) below.
-
-<a id="ipsec-ike-parameters-rm-ip-address-ipv4"></a>
-
-### Ipsec Ike Parameters Rm IP Address IPv4
-
-<a id="ipsec-ike-parameters-rm-ip-address-ipv6"></a>
-
-### Ipsec Ike Parameters Rm IP Address IPv6
-
-<a id="ipsec-ike-parameters-use-default-local-ike-id"></a>
-
-### Ipsec Ike Parameters Use Default Local Ike Id
-
-<a id="ipsec-ike-parameters-use-default-remote-ike-id"></a>
-
-### Ipsec Ike Parameters Use Default Remote Ike Id
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':' (`Block`).
 
 <a id="ipsec-ipsec-tunnel-parameters"></a>
 
@@ -190,9 +162,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#ipsec-ipsec-tunnel-parameters-segment) below.
 
-`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside Network](#ipsec-ipsec-tunnel-parameters-site-local-inside-network) below.
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#ipsec-ipsec-tunnel-parameters-site-local-network) below.
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tunnel_eps` - (Optional) Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses. See [Tunnel Eps](#ipsec-ipsec-tunnel-parameters-tunnel-eps) below.
 
@@ -208,19 +180,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ipsec Ipsec Tunnel Parameters Segment
 
-`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#ipsec-ipsec-tunnel-parameters-segment-refs) below.
-
-<a id="ipsec-ipsec-tunnel-parameters-segment-refs"></a>
-
-### Ipsec Ipsec Tunnel Parameters Segment Refs
-
-<a id="ipsec-ipsec-tunnel-parameters-site-local-inside-network"></a>
-
-### Ipsec Ipsec Tunnel Parameters Site Local Inside Network
-
-<a id="ipsec-ipsec-tunnel-parameters-site-local-network"></a>
-
-### Ipsec Ipsec Tunnel Parameters Site Local Network
+`refs` - (Optional) Segment. Reference to Segment Object (`Block`).
 
 <a id="ipsec-ipsec-tunnel-parameters-tunnel-eps"></a>
 

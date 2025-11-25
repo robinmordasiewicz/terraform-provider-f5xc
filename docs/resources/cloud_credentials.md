@@ -89,27 +89,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `duration_seconds` - (Optional) Role Session Duration Seconds. The duration, in seconds of the role session (`Number`).
 
-`external_id_is_optional` - (Optional) Empty. This can be used for messages where no values are needed. See [External Id Is Optional](#aws-assume-role-external-id-is-optional) below.
+`external_id_is_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`external_id_is_tenant_id` - (Optional) Empty. This can be used for messages where no values are needed. See [External Id Is Tenant Id](#aws-assume-role-external-id-is-tenant-id) below.
+`external_id_is_tenant_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `role_arn` - (Optional) IAM Role ARN. IAM Role ARN to assume the role (`String`).
 
 `session_name` - (Optional) Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console (`String`).
 
-`session_tags` - (Optional) Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role. See [Session Tags](#aws-assume-role-session-tags) below.
-
-<a id="aws-assume-role-external-id-is-optional"></a>
-
-### AWS Assume Role External Id Is Optional
-
-<a id="aws-assume-role-external-id-is-tenant-id"></a>
-
-### AWS Assume Role External Id Is Tenant Id
-
-<a id="aws-assume-role-session-tags"></a>
-
-### AWS Assume Role Session Tags
+`session_tags` - (Optional) Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role (`Block`).
 
 <a id="aws-secret-key"></a>
 

@@ -78,41 +78,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Pod Security Admission Specs
 
-`audit` - (Optional) Empty. This can be used for messages where no values are needed. See [Audit](#pod-security-admission-specs-audit) below.
+`audit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`baseline` - (Optional) Empty. This can be used for messages where no values are needed. See [Baseline](#pod-security-admission-specs-baseline) below.
+`baseline` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enforce` - (Optional) Empty. This can be used for messages where no values are needed. See [Enforce](#pod-security-admission-specs-enforce) below.
+`enforce` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`privileged` - (Optional) Empty. This can be used for messages where no values are needed. See [Privileged](#pod-security-admission-specs-privileged) below.
+`privileged` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`restricted` - (Optional) Empty. This can be used for messages where no values are needed. See [Restricted](#pod-security-admission-specs-restricted) below.
+`restricted` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`warn` - (Optional) Empty. This can be used for messages where no values are needed. See [Warn](#pod-security-admission-specs-warn) below.
-
-<a id="pod-security-admission-specs-audit"></a>
-
-### Pod Security Admission Specs Audit
-
-<a id="pod-security-admission-specs-baseline"></a>
-
-### Pod Security Admission Specs Baseline
-
-<a id="pod-security-admission-specs-enforce"></a>
-
-### Pod Security Admission Specs Enforce
-
-<a id="pod-security-admission-specs-privileged"></a>
-
-### Pod Security Admission Specs Privileged
-
-<a id="pod-security-admission-specs-restricted"></a>
-
-### Pod Security Admission Specs Restricted
-
-<a id="pod-security-admission-specs-warn"></a>
-
-### Pod Security Admission Specs Warn
+`warn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="timeouts"></a>
 

@@ -64,7 +64,7 @@ resource "f5xc_cluster" "example" {
 
 > **Note:** One of the arguments from this list "auto_http_config, http1_config, http2_options" must be set.
 
-`auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto HTTP Config](#auto-http-config) below for details.
+`auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `http1_config` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections. See [Http1 Config](#http1-config) below for details.
 
@@ -74,15 +74,15 @@ resource "f5xc_cluster" "example" {
 
 `connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds (`Number`).
 
-`default_subset` - (Optional) Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists. See [Default Subset](#default-subset) below for details.
+`default_subset` - (Optional) Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists (`Block`).
 
 > **Note:** One of the arguments from this list "disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2" must be set.
 
-`disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Proxy Protocol](#disable-proxy-protocol) below for details.
+`disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V1](#proxy-protocol-v1) below for details.
+`proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V2](#proxy-protocol-v2) below for details.
+`proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED` (`String`).
 
@@ -100,7 +100,7 @@ resource "f5xc_cluster" "example" {
 
 > **Note:** One of the arguments from this list "no_panic_threshold, panic_threshold" must be set.
 
-`no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed. See [No Panic Threshold](#no-panic-threshold) below for details.
+`no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `panic_threshold` - (Optional) Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status (`Number`).
 
@@ -120,10 +120,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="auto-http-config"></a>
-
-### Auto HTTP Config
-
 <a id="circuit-breaker"></a>
 
 ### Circuit Breaker
@@ -137,14 +133,6 @@ In addition to all arguments above, the following attributes are exported:
 `priority` - (Optional) Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism. Possible values are `DEFAULT`, `HIGH`. Defaults to `DEFAULT` (`String`).
 
 `retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
-
-<a id="default-subset"></a>
-
-### Default Subset
-
-<a id="disable-proxy-protocol"></a>
-
-### Disable Proxy Protocol
 
 <a id="endpoint-subsets"></a>
 
@@ -190,39 +178,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Http1 Config Header Transformation
 
-`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header Transformation](#http1-config-header-transformation-default-header-transformation) below.
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Legacy Header Transformation](#http1-config-header-transformation-legacy-header-transformation) below.
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Preserve Case Header Transformation](#http1-config-header-transformation-preserve-case-header-transformation) below.
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Proper Case Header Transformation](#http1-config-header-transformation-proper-case-header-transformation) below.
-
-<a id="http1-config-header-transformation-default-header-transformation"></a>
-
-### Http1 Config Header Transformation Default Header Transformation
-
-<a id="http1-config-header-transformation-legacy-header-transformation"></a>
-
-### Http1 Config Header Transformation Legacy Header Transformation
-
-<a id="http1-config-header-transformation-preserve-case-header-transformation"></a>
-
-### Http1 Config Header Transformation Preserve Case Header Transformation
-
-<a id="http1-config-header-transformation-proper-case-header-transformation"></a>
-
-### Http1 Config Header Transformation Proper Case Header Transformation
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="http2-options"></a>
 
 ### Http2 Options
 
 `enabled` - (Optional) HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections (`Bool`).
-
-<a id="no-panic-threshold"></a>
-
-### No Panic Threshold
 
 <a id="outlier-detection"></a>
 
@@ -237,14 +205,6 @@ In addition to all arguments above, the following attributes are exported:
 `interval` - (Optional) Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds (`Number`).
 
 `max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
-
-<a id="proxy-protocol-v1"></a>
-
-### Proxy Protocol V1
-
-<a id="proxy-protocol-v2"></a>
-
-### Proxy Protocol V2
 
 <a id="timeouts"></a>
 
@@ -266,17 +226,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#tls-parameters-common-params) below.
 
-`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Session Key Caching](#tls-parameters-default-session-key-caching) below.
+`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Session Key Caching](#tls-parameters-disable-session-key-caching) below.
+`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#tls-parameters-disable-sni) below.
+`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
 
 `sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
-`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#tls-parameters-use-host-header-as-sni) below.
+`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tls-parameters-cert-params"></a>
 
@@ -312,15 +272,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-parameters-cert-params-validation-params-trusted-ca) below.
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
-
-<a id="tls-parameters-cert-params-validation-params-trusted-ca"></a>
-
-### TLS Parameters Cert Params Validation Params Trusted CA
 
 <a id="tls-parameters-common-params"></a>
 
@@ -342,31 +298,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#tls-parameters-common-params-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#tls-parameters-common-params-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#tls-parameters-common-params-tls-certificates-use-system-defaults) below.
-
-<a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
-
-### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
-
-<a id="tls-parameters-common-params-tls-certificates-disable-ocsp-stapling"></a>
-
-### TLS Parameters Common Params TLS Certificates Disable OCSP Stapling
-
-<a id="tls-parameters-common-params-tls-certificates-private-key"></a>
-
-### TLS Parameters Common Params TLS Certificates Private Key
-
-<a id="tls-parameters-common-params-tls-certificates-use-system-defaults"></a>
-
-### TLS Parameters Common Params TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
@@ -374,47 +314,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-parameters-common-params-validation-params-trusted-ca) below.
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
 
-<a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
-
-### TLS Parameters Common Params Validation Params Trusted CA
-
-<a id="tls-parameters-default-session-key-caching"></a>
-
-### TLS Parameters Default Session Key Caching
-
-<a id="tls-parameters-disable-session-key-caching"></a>
-
-### TLS Parameters Disable Session Key Caching
-
-<a id="tls-parameters-disable-sni"></a>
-
-### TLS Parameters Disable Sni
-
-<a id="tls-parameters-use-host-header-as-sni"></a>
-
-### TLS Parameters Use Host Header As Sni
-
 <a id="upstream-conn-pool-reuse-type"></a>
 
 ### Upstream Conn Pool Reuse Type
 
-`disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Conn Pool Reuse](#upstream-conn-pool-reuse-type-disable-conn-pool-reuse) below.
+`disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Conn Pool Reuse](#upstream-conn-pool-reuse-type-enable-conn-pool-reuse) below.
-
-<a id="upstream-conn-pool-reuse-type-disable-conn-pool-reuse"></a>
-
-### Upstream Conn Pool Reuse Type Disable Conn Pool Reuse
-
-<a id="upstream-conn-pool-reuse-type-enable-conn-pool-reuse"></a>
-
-### Upstream Conn Pool Reuse Type Enable Conn Pool Reuse
+`enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 ## Import
 

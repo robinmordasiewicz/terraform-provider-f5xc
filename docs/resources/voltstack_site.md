@@ -76,9 +76,9 @@ resource "f5xc_voltstack_site" "example" {
 
 > **Note:** One of the arguments from this list "allow_all_usb, deny_all_usb, usb_policy" must be set.
 
-`allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Usb](#allow-all-usb) below for details.
+`allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
+`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
 
@@ -86,13 +86,13 @@ resource "f5xc_voltstack_site" "example" {
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "bond_device_list, no_bond_devices" must be set.
 
 `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
 
-`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
@@ -102,39 +102,39 @@ resource "f5xc_voltstack_site" "example" {
 
 `custom_network_config` - (Optional) VssNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
 
-`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Network Config](#default-network-config) below for details.
+`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "custom_storage_config, default_storage_config" must be set.
 
 `custom_storage_config` - (Optional) VssStorageConfiguration. See [Custom Storage Config](#custom-storage-config) below for details.
 
-`default_storage_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Config](#default-storage-config) below for details.
+`default_storage_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "default_sriov_interface, sriov_interfaces" must be set.
 
-`default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sriov Interface](#default-sriov-interface) below for details.
+`default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
 
 > **Note:** One of the arguments from this list "disable_gpu, enable_gpu, enable_vgpu" must be set.
 
-`disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable GPU](#disable-gpu) below for details.
+`disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable GPU](#enable-gpu) below for details.
+`enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU. See [Enable Vgpu](#enable-vgpu) below for details.
 
 > **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
 
-`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable VM](#disable-vm) below for details.
+`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_vm` - (Optional) VM Configuration. VMs support configuration. See [Enable VM](#enable-vm) below for details.
+`enable_vm` - (Optional) VM Configuration. VMs support configuration (`Block`).
 
 > **Note:** One of the arguments from this list "k8s_cluster, no_k8s_cluster" must be set.
 
 `k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#k8s-cluster) below for details.
 
-`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#no-k8s-cluster) below for details.
+`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
@@ -142,13 +142,13 @@ resource "f5xc_voltstack_site" "example" {
 
 `local_control_plane` - (Optional) Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc. See [Local Control Plane](#local-control-plane) below for details.
 
-`no_local_control_plane` - (Optional) Empty. This can be used for messages where no values are needed. See [No Local Control Plane](#no-local-control-plane) below for details.
+`no_local_control_plane` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
 
 `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
 
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes. See [Master Node Configuration](#master-node-configuration) below for details.
 
@@ -172,10 +172,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="allow-all-usb"></a>
-
-### Allow All Usb
-
 <a id="blocked-services"></a>
 
 ### Blocked Services
@@ -186,25 +182,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Blocked Services Blocked Sevice
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-blocked-sevice-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-blocked-sevice-ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-blocked-sevice-web-user-interface) below.
-
-<a id="blocked-services-blocked-sevice-dns"></a>
-
-### Blocked Services Blocked Sevice DNS
-
-<a id="blocked-services-blocked-sevice-ssh"></a>
-
-### Blocked Services Blocked Sevice SSH
-
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>
-
-### Blocked Services Blocked Sevice Web User Interface
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="bond-device-list"></a>
 
@@ -216,7 +200,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Bond Device List Bond Devices
 
-`active_backup` - (Optional) Empty. This can be used for messages where no values are needed. See [Active Backup](#bond-device-list-bond-devices-active-backup) below.
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
 
@@ -227,10 +211,6 @@ In addition to all arguments above, the following attributes are exported:
 `link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
 
 `name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
-
-<a id="bond-device-list-bond-devices-active-backup"></a>
-
-### Bond Device List Bond Devices Active Backup
 
 <a id="bond-device-list-bond-devices-lacp"></a>
 
@@ -268,23 +248,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `bgp_router_id` - (Optional) BGP Router ID. Optional BGP router id that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object (`String`).
 
-`default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#custom-network-config-default-config) below.
+`default_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_interface_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Interface Config](#custom-network-config-default-interface-config) below.
+`default_interface_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sli Config](#custom-network-config-default-sli-config) below.
+`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#custom-network-config-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#custom-network-config-global-network-list) below.
 
 `interface_list` - (Optional) List of Interface. Configure network interfaces for this App Stack site. See [Interface List](#custom-network-config-interface-list) below.
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#custom-network-config-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#custom-network-config-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#custom-network-config-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `outside_nameserver` - (Optional) DNS V4 Server for Local Network. Optional DNS server V4 IP to be used for name resolution in local network (`String`).
 
@@ -296,9 +276,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `slo_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Slo Config](#custom-network-config-slo-config) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#custom-network-config-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#custom-network-config-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tunnel_dead_timeout` - (Optional) Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used (`Number`).
 
@@ -352,22 +332,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="custom-network-config-default-config"></a>
-
-### Custom Network Config Default Config
-
-<a id="custom-network-config-default-interface-config"></a>
-
-### Custom Network Config Default Interface Config
-
-<a id="custom-network-config-default-sli-config"></a>
-
-### Custom Network Config Default Sli Config
-
-<a id="custom-network-config-forward-proxy-allow-all"></a>
-
-### Custom Network Config Forward Proxy Allow All
-
 <a id="custom-network-config-global-network-list"></a>
 
 ### Custom Network Config Global Network List
@@ -378,17 +342,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Custom Network Config Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Custom Network Config Global Network List Global Network Connections Sli To Global DR
-
-<a id="custom-network-config-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Custom Network Config Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="custom-network-config-interface-list"></a>
 
@@ -400,101 +356,45 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Custom Network Config Interface List Interfaces
 
-`dc_cluster_group_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Dc Cluster Group Connectivity Interface Disabled](#custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-disabled) below.
+`dc_cluster_group_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dc_cluster_group_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Dc Cluster Group Connectivity Interface Enabled](#custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-enabled) below.
+`dc_cluster_group_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration. See [Dedicated Interface](#custom-network-config-interface-list-interfaces-dedicated-interface) below.
+`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration (`Block`).
 
-`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration. See [Dedicated Management Interface](#custom-network-config-interface-list-interfaces-dedicated-management-interface) below.
+`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration (`Block`).
 
 `description` - (Optional) Interface Description. Description for this Interface (`String`).
 
-`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Ethernet Interface](#custom-network-config-interface-list-interfaces-ethernet-interface) below.
+`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration (`Block`).
 
-`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy. See [Labels](#custom-network-config-interface-list-interfaces-labels) below.
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
 
-`tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration. See [Tunnel Interface](#custom-network-config-interface-list-interfaces-tunnel-interface) below.
-
-<a id="custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-disabled"></a>
-
-### Custom Network Config Interface List Interfaces Dc Cluster Group Connectivity Interface Disabled
-
-<a id="custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-enabled"></a>
-
-### Custom Network Config Interface List Interfaces Dc Cluster Group Connectivity Interface Enabled
-
-<a id="custom-network-config-interface-list-interfaces-dedicated-interface"></a>
-
-### Custom Network Config Interface List Interfaces Dedicated Interface
-
-<a id="custom-network-config-interface-list-interfaces-dedicated-management-interface"></a>
-
-### Custom Network Config Interface List Interfaces Dedicated Management Interface
-
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface"></a>
-
-### Custom Network Config Interface List Interfaces Ethernet Interface
-
-<a id="custom-network-config-interface-list-interfaces-labels"></a>
-
-### Custom Network Config Interface List Interfaces Labels
-
-<a id="custom-network-config-interface-list-interfaces-tunnel-interface"></a>
-
-### Custom Network Config Interface List Interfaces Tunnel Interface
-
-<a id="custom-network-config-no-forward-proxy"></a>
-
-### Custom Network Config No Forward Proxy
-
-<a id="custom-network-config-no-global-network"></a>
-
-### Custom Network Config No Global Network
-
-<a id="custom-network-config-no-network-policy"></a>
-
-### Custom Network Config No Network Policy
+`tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration (`Block`).
 
 <a id="custom-network-config-sli-config"></a>
 
 ### Custom Network Config Sli Config
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#custom-network-config-sli-config-no-static-routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#custom-network-config-sli-config-no-v6-static-routes) below.
+`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#custom-network-config-sli-config-static-routes) below.
 
 `static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#custom-network-config-sli-config-static-v6-routes) below.
 
-<a id="custom-network-config-sli-config-no-static-routes"></a>
-
-### Custom Network Config Sli Config No Static Routes
-
-<a id="custom-network-config-sli-config-no-v6-static-routes"></a>
-
-### Custom Network Config Sli Config No V6 Static Routes
-
 <a id="custom-network-config-sli-config-static-routes"></a>
 
 ### Custom Network Config Sli Config Static Routes
 
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#custom-network-config-sli-config-static-routes-static-routes) below.
-
-<a id="custom-network-config-sli-config-static-routes-static-routes"></a>
-
-### Custom Network Config Sli Config Static Routes Static Routes
+`static_routes` - (Optional) Static Routes. List of static routes (`Block`).
 
 <a id="custom-network-config-sli-config-static-v6-routes"></a>
 
 ### Custom Network Config Sli Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#custom-network-config-sli-config-static-v6-routes-static-routes) below.
-
-<a id="custom-network-config-sli-config-static-v6-routes-static-routes"></a>
-
-### Custom Network Config Sli Config Static V6 Routes Static Routes
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
 
 <a id="custom-network-config-slo-config"></a>
 
@@ -502,13 +402,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#custom-network-config-slo-config-dc-cluster-group) below.
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#custom-network-config-slo-config-labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy (`Block`).
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#custom-network-config-slo-config-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#custom-network-config-slo-config-no-static-routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_static_v6_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static V6 Routes](#custom-network-config-slo-config-no-static-v6-routes) below.
+`no_static_v6_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#custom-network-config-slo-config-static-routes) below.
 
@@ -524,61 +424,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="custom-network-config-slo-config-labels"></a>
-
-### Custom Network Config Slo Config Labels
-
-<a id="custom-network-config-slo-config-no-dc-cluster-group"></a>
-
-### Custom Network Config Slo Config No Dc Cluster Group
-
-<a id="custom-network-config-slo-config-no-static-routes"></a>
-
-### Custom Network Config Slo Config No Static Routes
-
-<a id="custom-network-config-slo-config-no-static-v6-routes"></a>
-
-### Custom Network Config Slo Config No Static V6 Routes
-
 <a id="custom-network-config-slo-config-static-routes"></a>
 
 ### Custom Network Config Slo Config Static Routes
 
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#custom-network-config-slo-config-static-routes-static-routes) below.
-
-<a id="custom-network-config-slo-config-static-routes-static-routes"></a>
-
-### Custom Network Config Slo Config Static Routes Static Routes
+`static_routes` - (Optional) Static Routes. List of static routes (`Block`).
 
 <a id="custom-network-config-slo-config-static-v6-routes"></a>
 
 ### Custom Network Config Slo Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#custom-network-config-slo-config-static-v6-routes-static-routes) below.
-
-<a id="custom-network-config-slo-config-static-v6-routes-static-routes"></a>
-
-### Custom Network Config Slo Config Static V6 Routes Static Routes
-
-<a id="custom-network-config-sm-connection-public-ip"></a>
-
-### Custom Network Config Sm Connection Public IP
-
-<a id="custom-network-config-sm-connection-pvt-ip"></a>
-
-### Custom Network Config Sm Connection Pvt IP
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
 
 <a id="custom-storage-config"></a>
 
 ### Custom Storage Config
 
-`default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Class](#custom-storage-config-default-storage-class) below.
+`default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#custom-storage-config-no-static-routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Device](#custom-storage-config-no-storage-device) below.
+`no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Interfaces](#custom-storage-config-no-storage-interfaces) below.
+`no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#custom-storage-config-static-routes) below.
 
@@ -587,22 +455,6 @@ In addition to all arguments above, the following attributes are exported:
 `storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Device List](#custom-storage-config-storage-device-list) below.
 
 `storage_interface_list` - (Optional) List of Interface. Configure storage interfaces for this App Stack site. See [Storage Interface List](#custom-storage-config-storage-interface-list) below.
-
-<a id="custom-storage-config-default-storage-class"></a>
-
-### Custom Storage Config Default Storage Class
-
-<a id="custom-storage-config-no-static-routes"></a>
-
-### Custom Storage Config No Static Routes
-
-<a id="custom-storage-config-no-storage-device"></a>
-
-### Custom Storage Config No Storage Device
-
-<a id="custom-storage-config-no-storage-interfaces"></a>
-
-### Custom Storage Config No Storage Interfaces
 
 <a id="custom-storage-config-static-routes"></a>
 
@@ -616,21 +468,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#custom-storage-config-static-routes-static-routes-default-gateway) below.
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
 
 `ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
 
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-storage-config-static-routes-static-routes-node-interface) below.
-
-<a id="custom-storage-config-static-routes-static-routes-default-gateway"></a>
-
-### Custom Storage Config Static Routes Static Routes Default Gateway
-
-<a id="custom-storage-config-static-routes-static-routes-node-interface"></a>
-
-### Custom Storage Config Static Routes Static Routes Node Interface
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces (`Block`).
 
 <a id="custom-storage-config-storage-class-list"></a>
 
@@ -642,47 +486,27 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Custom Storage Config Storage Class List Storage Classes
 
-`advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Storage Parameters](#custom-storage-config-storage-class-list-storage-classes-advanced-storage-parameters) below.
+`advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value (`Block`).
 
 `allow_volume_expansion` - (Optional) Allow Volume Expansion. Allow volume expansion (`Bool`).
 
-`custom_storage` - (Optional) Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site. See [Custom Storage](#custom-storage-config-storage-class-list-storage-classes-custom-storage) below.
+`custom_storage` - (Optional) Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site (`Block`).
 
 `default_storage_class` - (Optional) Default Storage Class. Make this storage class default storage class for the K8s cluster (`Bool`).
 
 `description` - (Optional) Storage Class Description. Description for this storage class (`String`).
 
-`hpe_storage` - (Optional) HPE Storage. Storage class Device configuration for HPE Storage. See [Hpe Storage](#custom-storage-config-storage-class-list-storage-classes-hpe-storage) below.
+`hpe_storage` - (Optional) HPE Storage. Storage class Device configuration for HPE Storage (`Block`).
 
-`netapp_trident` - (Optional) NetApp Trident Storage. Storage class Device configuration for NetApp Trident. See [Netapp Trident](#custom-storage-config-storage-class-list-storage-classes-netapp-trident) below.
+`netapp_trident` - (Optional) NetApp Trident Storage. Storage class Device configuration for NetApp Trident (`Block`).
 
-`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator. See [Pure Service Orchestrator](#custom-storage-config-storage-class-list-storage-classes-pure-service-orchestrator) below.
+`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator (`Block`).
 
 `reclaim_policy` - (Optional) Reclaim Policy. Reclaim Policy (`String`).
 
 `storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
 
 `storage_device` - (Optional) Storage Device. Storage device that this class will use. The Device name defined at previous step (`String`).
-
-<a id="custom-storage-config-storage-class-list-storage-classes-advanced-storage-parameters"></a>
-
-### Custom Storage Config Storage Class List Storage Classes Advanced Storage Parameters
-
-<a id="custom-storage-config-storage-class-list-storage-classes-custom-storage"></a>
-
-### Custom Storage Config Storage Class List Storage Classes Custom Storage
-
-<a id="custom-storage-config-storage-class-list-storage-classes-hpe-storage"></a>
-
-### Custom Storage Config Storage Class List Storage Classes Hpe Storage
-
-<a id="custom-storage-config-storage-class-list-storage-classes-netapp-trident"></a>
-
-### Custom Storage Config Storage Class List Storage Classes Netapp Trident
-
-<a id="custom-storage-config-storage-class-list-storage-classes-pure-service-orchestrator"></a>
-
-### Custom Storage Config Storage Class List Storage Classes Pure Service Orchestrator
 
 <a id="custom-storage-config-storage-device-list"></a>
 
@@ -694,37 +518,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Custom Storage Config Storage Device List Storage Devices
 
-`advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Advanced Parameters](#custom-storage-config-storage-device-list-storage-devices-advanced-advanced-parameters) below.
+`advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value (`Block`).
 
-`custom_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Custom Storage](#custom-storage-config-storage-device-list-storage-devices-custom-storage) below.
+`custom_storage` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`hpe_storage` - (Optional) HPE Storage. Device configuration for HPE Storage. See [Hpe Storage](#custom-storage-config-storage-device-list-storage-devices-hpe-storage) below.
+`hpe_storage` - (Optional) HPE Storage. Device configuration for HPE Storage (`Block`).
 
-`netapp_trident` - (Optional) NetApp Trident. Device configuration for NetApp Trident Storage. See [Netapp Trident](#custom-storage-config-storage-device-list-storage-devices-netapp-trident) below.
+`netapp_trident` - (Optional) NetApp Trident. Device configuration for NetApp Trident Storage (`Block`).
 
-`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator. See [Pure Service Orchestrator](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator) below.
+`pure_service_orchestrator` - (Optional) Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator (`Block`).
 
 `storage_device` - (Optional) Storage Device. Storage device and device unit (`String`).
-
-<a id="custom-storage-config-storage-device-list-storage-devices-advanced-advanced-parameters"></a>
-
-### Custom Storage Config Storage Device List Storage Devices Advanced Advanced Parameters
-
-<a id="custom-storage-config-storage-device-list-storage-devices-custom-storage"></a>
-
-### Custom Storage Config Storage Device List Storage Devices Custom Storage
-
-<a id="custom-storage-config-storage-device-list-storage-devices-hpe-storage"></a>
-
-### Custom Storage Config Storage Device List Storage Devices Hpe Storage
-
-<a id="custom-storage-config-storage-device-list-storage-devices-netapp-trident"></a>
-
-### Custom Storage Config Storage Device List Storage Devices Netapp Trident
-
-<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator"></a>
-
-### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator
 
 <a id="custom-storage-config-storage-interface-list"></a>
 
@@ -738,49 +542,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `description` - (Optional) Interface Description. Description for this Interface (`String`).
 
-`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy. See [Labels](#custom-storage-config-storage-interface-list-storage-interfaces-labels) below.
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
 
-`storage_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Storage Interface](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface) below.
-
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-labels"></a>
-
-### Custom Storage Config Storage Interface List Storage Interfaces Labels
-
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface"></a>
-
-### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface
-
-<a id="default-blocked-services"></a>
-
-### Default Blocked Services
-
-<a id="default-network-config"></a>
-
-### Default Network Config
-
-<a id="default-sriov-interface"></a>
-
-### Default Sriov Interface
-
-<a id="default-storage-config"></a>
-
-### Default Storage Config
-
-<a id="deny-all-usb"></a>
-
-### Deny All Usb
-
-<a id="disable-gpu"></a>
-
-### Disable GPU
-
-<a id="disable-vm"></a>
-
-### Disable VM
-
-<a id="enable-gpu"></a>
-
-### Enable GPU
+`storage_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration (`Block`).
 
 <a id="enable-vgpu"></a>
 
@@ -791,10 +555,6 @@ In addition to all arguments above, the following attributes are exported:
 `server_address` - (Optional) License Server Address. Set License Server Address (`String`).
 
 `server_port` - (Optional) License Server Port Number. Set License Server port number (`Number`).
-
-<a id="enable-vm"></a>
-
-### Enable VM
 
 <a id="k8s-cluster"></a>
 
@@ -810,33 +570,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#kubernetes-upgrade-drain-disable-upgrade-drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
-
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>
-
-### Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="local-control-plane"></a>
 
@@ -844,9 +592,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `bgp_config` - (Optional) BGP Configuration. BGP configuration parameters. See [BGP Config](#local-control-plane-bgp-config) below.
 
-`inside_vn` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Vn](#local-control-plane-inside-vn) below.
+`inside_vn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`outside_vn` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Vn](#local-control-plane-outside-vn) below.
+`outside_vn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="local-control-plane-bgp-config"></a>
 
@@ -860,63 +608,23 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Local Control Plane BGP Config Peers
 
-`bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Bfd Disabled](#local-control-plane-bgp-config-peers-bfd-disabled) below.
+`bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`bfd_enabled` - (Optional) BFD. BFD parameters. See [Bfd Enabled](#local-control-plane-bgp-config-peers-bfd-enabled) below.
+`bfd_enabled` - (Optional) BFD. BFD parameters (`Block`).
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#local-control-plane-bgp-config-peers-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`external` - (Optional) External BGP Peer. External BGP Peer parameters. See [External](#local-control-plane-bgp-config-peers-external) below.
+`external` - (Optional) External BGP Peer. External BGP Peer parameters (`Block`).
 
 `label` - (Optional) Label. Specify whether this peer should be (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#local-control-plane-bgp-config-peers-metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
 
-`passive_mode_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Disabled](#local-control-plane-bgp-config-peers-passive-mode-disabled) below.
+`passive_mode_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`passive_mode_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Enabled](#local-control-plane-bgp-config-peers-passive-mode-enabled) below.
+`passive_mode_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`routing_policies` - (Optional) BGP Routing Policy. List of rules which can be applied on all or particular nodes. See [Routing Policies](#local-control-plane-bgp-config-peers-routing-policies) below.
-
-<a id="local-control-plane-bgp-config-peers-bfd-disabled"></a>
-
-### Local Control Plane BGP Config Peers Bfd Disabled
-
-<a id="local-control-plane-bgp-config-peers-bfd-enabled"></a>
-
-### Local Control Plane BGP Config Peers Bfd Enabled
-
-<a id="local-control-plane-bgp-config-peers-disable"></a>
-
-### Local Control Plane BGP Config Peers Disable
-
-<a id="local-control-plane-bgp-config-peers-external"></a>
-
-### Local Control Plane BGP Config Peers External
-
-<a id="local-control-plane-bgp-config-peers-metadata"></a>
-
-### Local Control Plane BGP Config Peers Metadata
-
-<a id="local-control-plane-bgp-config-peers-passive-mode-disabled"></a>
-
-### Local Control Plane BGP Config Peers Passive Mode Disabled
-
-<a id="local-control-plane-bgp-config-peers-passive-mode-enabled"></a>
-
-### Local Control Plane BGP Config Peers Passive Mode Enabled
-
-<a id="local-control-plane-bgp-config-peers-routing-policies"></a>
-
-### Local Control Plane BGP Config Peers Routing Policies
-
-<a id="local-control-plane-inside-vn"></a>
-
-### Local Control Plane Inside Vn
-
-<a id="local-control-plane-outside-vn"></a>
-
-### Local Control Plane Outside Vn
+`routing_policies` - (Optional) BGP Routing Policy. List of rules which can be applied on all or particular nodes (`Block`).
 
 <a id="log-receiver"></a>
 
@@ -928,10 +636,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="logs-streaming-disabled"></a>
-
-### Logs Streaming Disabled
-
 <a id="master-node-configuration"></a>
 
 ### Master Node Configuration
@@ -940,45 +644,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `public_ip` - (Optional) Public IP. IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group (`String`).
 
-<a id="no-bond-devices"></a>
-
-### No Bond Devices
-
-<a id="no-k8s-cluster"></a>
-
-### No K8s Cluster
-
-<a id="no-local-control-plane"></a>
-
-### No Local Control Plane
-
 <a id="offline-survivability-mode"></a>
 
 ### Offline Survivability Mode
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#offline-survivability-mode-enable-offline-survivability-mode) below.
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#offline-survivability-mode-no-offline-survivability-mode) below.
-
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>
-
-### Offline Survivability Mode Enable Offline Survivability Mode
-
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>
-
-### Offline Survivability Mode No Offline Survivability Mode
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="os"></a>
 
 ### OS
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#os-default-os-version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
-
-<a id="os-default-os-version"></a>
-
-### OS Default OS Version
 
 <a id="sriov-interfaces"></a>
 
@@ -1000,13 +680,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Sw
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#sw-default-sw-version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
-
-<a id="sw-default-sw-version"></a>
-
-### Sw Default Sw Version
 
 <a id="timeouts"></a>
 

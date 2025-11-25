@@ -86,37 +86,25 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules Action
 
-`aggregate` - (Optional) Empty. This can be used for messages where no values are needed. See [Aggregate](#rules-action-aggregate) below.
+`aggregate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow](#rules-action-allow) below.
+`allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `as_path` - (Optional) AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic (`String`).
 
 `community` - (Optional) BGP Community list. List of BGP communities. See [Community](#rules-action-community) below.
 
-`deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny](#rules-action-deny) below.
+`deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `local_preference` - (Optional) Local preference. BGP Local Preference is generally used to influence outgoing traffic (`Number`).
 
 `metric` - (Optional) MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS (`Number`).
-
-<a id="rules-action-aggregate"></a>
-
-### Rules Action Aggregate
-
-<a id="rules-action-allow"></a>
-
-### Rules Action Allow
 
 <a id="rules-action-community"></a>
 
 ### Rules Action Community
 
 `community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
-
-<a id="rules-action-deny"></a>
-
-### Rules Action Deny
 
 <a id="rules-match"></a>
 
@@ -138,11 +126,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules Match IP Prefixes
 
-`prefixes` - (Optional) Prefix list. List of IP prefix. See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
-
-<a id="rules-match-ip-prefixes-prefixes"></a>
-
-### Rules Match IP Prefixes Prefixes
+`prefixes` - (Optional) Prefix list. List of IP prefix (`Block`).
 
 <a id="timeouts"></a>
 

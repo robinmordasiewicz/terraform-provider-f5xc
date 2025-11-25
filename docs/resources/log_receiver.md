@@ -61,7 +61,7 @@ resource "f5xc_log_receiver" "example" {
 
 ### Spec Argument Reference
 
-`site_local` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local](#site-local) below for details.
+`site_local` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `syslog` - (Optional) Syslog Server Configuration. Configuration for syslog server. See [Syslog](#syslog) below for details.
 
@@ -74,10 +74,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="site-local"></a>
-
-### Site Local
 
 <a id="syslog"></a>
 
@@ -103,11 +99,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Syslog TLS Server
 
-`default_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default HTTPS Port](#syslog-tls-server-default-https-port) below.
+`default_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_syslog_tls_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Syslog TLS Port](#syslog-tls-server-default-syslog-tls-port) below.
+`default_syslog_tls_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [mTLS Disabled](#syslog-tls-server-mtls-disabled) below.
+`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `mtls_enable` - (Optional) mTLS Client Config. TLS config for client. See [mTLS Enable](#syslog-tls-server-mtls-enable) below.
 
@@ -117,19 +113,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
-`volterra_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra CA](#syslog-tls-server-volterra-ca) below.
-
-<a id="syslog-tls-server-default-https-port"></a>
-
-### Syslog TLS Server Default HTTPS Port
-
-<a id="syslog-tls-server-default-syslog-tls-port"></a>
-
-### Syslog TLS Server Default Syslog TLS Port
-
-<a id="syslog-tls-server-mtls-disabled"></a>
-
-### Syslog TLS Server mTLS Disabled
+`volterra_ca` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="syslog-tls-server-mtls-enable"></a>
 
@@ -137,15 +121,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
-`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#syslog-tls-server-mtls-enable-key-url) below.
-
-<a id="syslog-tls-server-mtls-enable-key-url"></a>
-
-### Syslog TLS Server mTLS Enable Key URL
-
-<a id="syslog-tls-server-volterra-ca"></a>
-
-### Syslog TLS Server Volterra CA
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 <a id="syslog-udp-server"></a>
 

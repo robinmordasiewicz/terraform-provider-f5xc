@@ -62,11 +62,11 @@ resource "f5xc_quota" "example" {
 
 ### Spec Argument Reference
 
-`api_limits` - (Optional) API Limits. API Limits defines ratelimit parameters for an API at the stdlib service The key of the api_limits map is rpc FQN e.g. 'ves.io.schema.advertise_policy.API.Create'. See [API Limits](#api-limits) below for details.
+`api_limits` - (Optional) API Limits. API Limits defines ratelimit parameters for an API at the stdlib service The key of the api_limits map is rpc FQN e.g. 'ves.io.schema.advertise_policy.API.Create' (`Block`).
 
-`object_limits` - (Optional) Object Limits. Object Limits define maximum number of instances that can be present per object kind for the tenant The key of the object_limits map is object kind e.g. 'virtual_host'. See [Object Limits](#object-limits) below for details.
+`object_limits` - (Optional) Object Limits. Object Limits define maximum number of instances that can be present per object kind for the tenant The key of the object_limits map is object kind e.g. 'virtual_host' (`Block`).
 
-`resource_limits` - (Optional) Resource Limits. Resource Limits define maximum value of resources in the appropriate units that can be present. The key of the resource limits is the resource name. See [Resource Limits](#resource-limits) below for details.
+`resource_limits` - (Optional) Resource Limits. Resource Limits define maximum value of resources in the appropriate units that can be present. The key of the resource limits is the resource name (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -77,18 +77,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="api-limits"></a>
-
-### API Limits
-
-<a id="object-limits"></a>
-
-### Object Limits
-
-<a id="resource-limits"></a>
-
-### Resource Limits
 
 <a id="timeouts"></a>
 

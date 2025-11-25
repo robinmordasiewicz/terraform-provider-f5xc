@@ -94,21 +94,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### RE ACL
 
-`all_public_vips` - (Optional) Empty. This can be used for messages where no values are needed. See [All Public Vips](#re-acl-all-public-vips) below.
+`all_public_vips` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_tenant_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Tenant VIP](#re-acl-default-tenant-vip) below.
+`default_tenant_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `fast_acl_rules` - (Optional) Rules. Fast ACL rules to match. See [Fast ACL Rules](#re-acl-fast-acl-rules) below.
 
 `selected_tenant_vip` - (Optional) Specific Tenant VIP. Select various tenant public VIP(s). See [Selected Tenant VIP](#re-acl-selected-tenant-vip) below.
-
-<a id="re-acl-all-public-vips"></a>
-
-### RE ACL All Public Vips
-
-<a id="re-acl-default-tenant-vip"></a>
-
-### RE ACL Default Tenant VIP
 
 <a id="re-acl-fast-acl-rules"></a>
 
@@ -128,29 +120,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### RE ACL Fast ACL Rules Action
 
-`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#re-acl-fast-acl-rules-action-policer-action) below.
+`policer_action` - (Optional) Policer Reference. Reference to policer object (`Block`).
 
-`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#re-acl-fast-acl-rules-action-protocol-policer-action) below.
+`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object (`Block`).
 
 `simple_action` - (Optional) Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY` (`String`).
-
-<a id="re-acl-fast-acl-rules-action-policer-action"></a>
-
-### RE ACL Fast ACL Rules Action Policer Action
-
-<a id="re-acl-fast-acl-rules-action-protocol-policer-action"></a>
-
-### RE ACL Fast ACL Rules Action Protocol Policer Action
 
 <a id="re-acl-fast-acl-rules-ip-prefix-set"></a>
 
 ### RE ACL Fast ACL Rules IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#re-acl-fast-acl-rules-ip-prefix-set-ref) below.
-
-<a id="re-acl-fast-acl-rules-ip-prefix-set-ref"></a>
-
-### RE ACL Fast ACL Rules IP Prefix Set Ref
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="re-acl-fast-acl-rules-metadata"></a>
 
@@ -164,19 +144,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### RE ACL Fast ACL Rules Port
 
-`all` - (Optional) Empty. This can be used for messages where no values are needed. See [All](#re-acl-fast-acl-rules-port-all) below.
+`all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#re-acl-fast-acl-rules-port-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `user_defined` - (Optional) Configuration for user_defined (`Number`).
-
-<a id="re-acl-fast-acl-rules-port-all"></a>
-
-### RE ACL Fast ACL Rules Port All
-
-<a id="re-acl-fast-acl-rules-port-dns"></a>
-
-### RE ACL Fast ACL Rules Port DNS
 
 <a id="re-acl-fast-acl-rules-prefix"></a>
 
@@ -206,21 +178,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Site ACL
 
-`all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [All Services](#site-acl-all-services) below.
+`all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `fast_acl_rules` - (Optional) Rules. Fast ACL rules to match. See [Fast ACL Rules](#site-acl-fast-acl-rules) below.
 
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#site-acl-inside-network) below.
+`inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`interface_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Interface Services](#site-acl-interface-services) below.
+`interface_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#site-acl-outside-network) below.
+`outside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`vip_services` - (Optional) Empty. This can be used for messages where no values are needed. See [VIP Services](#site-acl-vip-services) below.
-
-<a id="site-acl-all-services"></a>
-
-### Site ACL All Services
+`vip_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="site-acl-fast-acl-rules"></a>
 
@@ -240,29 +208,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Site ACL Fast ACL Rules Action
 
-`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#site-acl-fast-acl-rules-action-policer-action) below.
+`policer_action` - (Optional) Policer Reference. Reference to policer object (`Block`).
 
-`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#site-acl-fast-acl-rules-action-protocol-policer-action) below.
+`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object (`Block`).
 
 `simple_action` - (Optional) Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY` (`String`).
-
-<a id="site-acl-fast-acl-rules-action-policer-action"></a>
-
-### Site ACL Fast ACL Rules Action Policer Action
-
-<a id="site-acl-fast-acl-rules-action-protocol-policer-action"></a>
-
-### Site ACL Fast ACL Rules Action Protocol Policer Action
 
 <a id="site-acl-fast-acl-rules-ip-prefix-set"></a>
 
 ### Site ACL Fast ACL Rules IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#site-acl-fast-acl-rules-ip-prefix-set-ref) below.
-
-<a id="site-acl-fast-acl-rules-ip-prefix-set-ref"></a>
-
-### Site ACL Fast ACL Rules IP Prefix Set Ref
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="site-acl-fast-acl-rules-metadata"></a>
 
@@ -276,41 +232,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Site ACL Fast ACL Rules Port
 
-`all` - (Optional) Empty. This can be used for messages where no values are needed. See [All](#site-acl-fast-acl-rules-port-all) below.
+`all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#site-acl-fast-acl-rules-port-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `user_defined` - (Optional) Configuration for user_defined (`Number`).
-
-<a id="site-acl-fast-acl-rules-port-all"></a>
-
-### Site ACL Fast ACL Rules Port All
-
-<a id="site-acl-fast-acl-rules-port-dns"></a>
-
-### Site ACL Fast ACL Rules Port DNS
 
 <a id="site-acl-fast-acl-rules-prefix"></a>
 
 ### Site ACL Fast ACL Rules Prefix
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
-
-<a id="site-acl-inside-network"></a>
-
-### Site ACL Inside Network
-
-<a id="site-acl-interface-services"></a>
-
-### Site ACL Interface Services
-
-<a id="site-acl-outside-network"></a>
-
-### Site ACL Outside Network
-
-<a id="site-acl-vip-services"></a>
-
-### Site ACL VIP Services
 
 <a id="timeouts"></a>
 

@@ -62,7 +62,7 @@ resource "f5xc_network_connector" "example" {
 
 > **Note:** One of the arguments from this list "disable_forward_proxy, enable_forward_proxy" must be set.
 
-`disable_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Forward Proxy](#disable-forward-proxy) below for details.
+`disable_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_forward_proxy` - (Optional) Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connectio. See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
@@ -84,10 +84,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="disable-forward-proxy"></a>
-
-### Disable Forward Proxy
-
 <a id="enable-forward-proxy"></a>
 
 ### Enable Forward Proxy
@@ -96,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_connect_attempts` - (Optional) Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1 (`Number`).
 
-`no_interception` - (Optional) Empty. This can be used for messages where no values are needed. See [No Interception](#enable-forward-proxy-no-interception) below.
+`no_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception. See [TLS Intercept](#enable-forward-proxy-tls-intercept) below.
 
@@ -104,25 +100,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `white_listed_prefixes` - (Optional) IP Prefixes to Skip Protocol Parsing. Traffic to these destination IP prefixes is not subjected to protocol parsing Example 'tmate' server IP (`List`).
 
-<a id="enable-forward-proxy-no-interception"></a>
-
-### Enable Forward Proxy No Interception
-
 <a id="enable-forward-proxy-tls-intercept"></a>
 
 ### Enable Forward Proxy TLS Intercept
 
 `custom_certificate` - (Optional) TLS Certificate. Handle to fetch certificate and key. See [Custom Certificate](#enable-forward-proxy-tls-intercept-custom-certificate) below.
 
-`enable_for_all_domains` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable For All Domains](#enable-forward-proxy-tls-intercept-enable-for-all-domains) below.
+`enable_for_all_domains` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `policy` - (Optional) TLS Interception Policy. Policy to enable or disable TLS interception. See [Policy](#enable-forward-proxy-tls-intercept-policy) below.
 
 `trusted_ca_url` - (Optional) Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate (`String`).
 
-`volterra_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Certificate](#enable-forward-proxy-tls-intercept-volterra-certificate) below.
+`volterra_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Trusted CA](#enable-forward-proxy-tls-intercept-volterra-trusted-ca) below.
+`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate"></a>
 
@@ -130,53 +122,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults) below.
-
-<a id="enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms"></a>
-
-### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
-
-<a id="enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling"></a>
-
-### Enable Forward Proxy TLS Intercept Custom Certificate Disable OCSP Stapling
-
-<a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key"></a>
-
-### Enable Forward Proxy TLS Intercept Custom Certificate Private Key
-
-<a id="enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults"></a>
-
-### Enable Forward Proxy TLS Intercept Custom Certificate Use System Defaults
-
-<a id="enable-forward-proxy-tls-intercept-enable-for-all-domains"></a>
-
-### Enable Forward Proxy TLS Intercept Enable For All Domains
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="enable-forward-proxy-tls-intercept-policy"></a>
 
 ### Enable Forward Proxy TLS Intercept Policy
 
-`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception. See [Interception Rules](#enable-forward-proxy-tls-intercept-policy-interception-rules) below.
-
-<a id="enable-forward-proxy-tls-intercept-policy-interception-rules"></a>
-
-### Enable Forward Proxy TLS Intercept Policy Interception Rules
-
-<a id="enable-forward-proxy-tls-intercept-volterra-certificate"></a>
-
-### Enable Forward Proxy TLS Intercept Volterra Certificate
-
-<a id="enable-forward-proxy-tls-intercept-volterra-trusted-ca"></a>
-
-### Enable Forward Proxy TLS Intercept Volterra Trusted CA
+`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception (`Block`).
 
 <a id="sli-to-global-dr"></a>
 
@@ -198,17 +158,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Sli To Slo Snat
 
-`default_gw_snat` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gw Snat](#sli-to-slo-snat-default-gw-snat) below.
+`default_gw_snat` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`interface_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Interface IP](#sli-to-slo-snat-interface-ip) below.
-
-<a id="sli-to-slo-snat-default-gw-snat"></a>
-
-### Sli To Slo Snat Default Gw Snat
-
-<a id="sli-to-slo-snat-interface-ip"></a>
-
-### Sli To Slo Snat Interface IP
+`interface_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="slo-to-global-dr"></a>
 

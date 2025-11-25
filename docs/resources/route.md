@@ -86,9 +86,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_location_add` - (Optional) Disable Location Addition. disables append of x-volterra-location = <RE-site-name> at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites (`Bool`).
 
-`inherited_bot_defense_javascript_injection` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherited Bot Defense Javascript Injection](#routes-inherited-bot-defense-javascript-injection) below.
+`inherited_bot_defense_javascript_injection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`inherited_waf_exclusion` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherited WAF Exclusion](#routes-inherited-waf-exclusion) below.
+`inherited_waf_exclusion` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `match` - (Optional) Match. route match condition. See [Match](#routes-match) below.
 
@@ -134,19 +134,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `javascript_url` - (Optional) URL. Please enter the full URL (include domain and path), or relative path (`String`).
 
-`tag_attributes` - (Optional) Tag Attributes. Add the tag attributes you want to include in your Javascript tag. See [Tag Attributes](#routes-bot-defense-javascript-injection-javascript-tags-tag-attributes) below.
-
-<a id="routes-bot-defense-javascript-injection-javascript-tags-tag-attributes"></a>
-
-### Routes Bot Defense Javascript Injection Javascript Tags Tag Attributes
-
-<a id="routes-inherited-bot-defense-javascript-injection"></a>
-
-### Routes Inherited Bot Defense Javascript Injection
-
-<a id="routes-inherited-waf-exclusion"></a>
-
-### Routes Inherited WAF Exclusion
+`tag_attributes` - (Optional) Tag Attributes. Add the tag attributes you want to include in your Javascript tag (`Block`).
 
 <a id="routes-match"></a>
 
@@ -180,15 +168,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Routes Match Incoming Port
 
-`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#routes-match-incoming-port-no-port-match) below.
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
 `port_ranges` - (Optional) Configuration for port_ranges (`String`).
-
-<a id="routes-match-incoming-port-no-port-match"></a>
-
-### Routes Match Incoming Port No Port Match
 
 <a id="routes-match-path"></a>
 
@@ -226,17 +210,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Routes Request Cookies To Add Secret Value
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#routes-request-cookies-to-add-secret-value-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#routes-request-cookies-to-add-secret-value-clear-secret-info) below.
-
-<a id="routes-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
-
-### Routes Request Cookies To Add Secret Value Blindfold Secret Info
-
-<a id="routes-request-cookies-to-add-secret-value-clear-secret-info"></a>
-
-### Routes Request Cookies To Add Secret Value Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="routes-request-headers-to-add"></a>
 
@@ -254,17 +230,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Routes Request Headers To Add Secret Value
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#routes-request-headers-to-add-secret-value-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#routes-request-headers-to-add-secret-value-clear-secret-info) below.
-
-<a id="routes-request-headers-to-add-secret-value-blindfold-secret-info"></a>
-
-### Routes Request Headers To Add Secret Value Blindfold Secret Info
-
-<a id="routes-request-headers-to-add-secret-value-clear-secret-info"></a>
-
-### Routes Request Headers To Add Secret Value Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="routes-response-cookies-to-add"></a>
 
@@ -274,31 +242,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `add_expiry` - (Optional) Configuration for add_expiry (`String`).
 
-`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#routes-response-cookies-to-add-add-httponly) below.
+`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#routes-response-cookies-to-add-add-partitioned) below.
+`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `add_path` - (Optional) Configuration for add_path (`String`).
 
-`add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#routes-response-cookies-to-add-add-secure) below.
+`add_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Domain](#routes-response-cookies-to-add-ignore-domain) below.
+`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Expiry](#routes-response-cookies-to-add-ignore-expiry) below.
+`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Httponly](#routes-response-cookies-to-add-ignore-httponly) below.
+`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Max Age](#routes-response-cookies-to-add-ignore-max-age) below.
+`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Partitioned](#routes-response-cookies-to-add-ignore-partitioned) below.
+`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Path](#routes-response-cookies-to-add-ignore-path) below.
+`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Samesite](#routes-response-cookies-to-add-ignore-samesite) below.
+`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Secure](#routes-response-cookies-to-add-ignore-secure) below.
+`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Value](#routes-response-cookies-to-add-ignore-value) below.
+`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
 
@@ -306,91 +274,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
 
-`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Lax](#routes-response-cookies-to-add-samesite-lax) below.
+`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite None](#routes-response-cookies-to-add-samesite-none) below.
+`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Strict](#routes-response-cookies-to-add-samesite-strict) below.
+`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#routes-response-cookies-to-add-secret-value) below.
 
 `value` - (Optional) Value. Value of the Cookie header (`String`).
 
-<a id="routes-response-cookies-to-add-add-httponly"></a>
-
-### Routes Response Cookies To Add Add Httponly
-
-<a id="routes-response-cookies-to-add-add-partitioned"></a>
-
-### Routes Response Cookies To Add Add Partitioned
-
-<a id="routes-response-cookies-to-add-add-secure"></a>
-
-### Routes Response Cookies To Add Add Secure
-
-<a id="routes-response-cookies-to-add-ignore-domain"></a>
-
-### Routes Response Cookies To Add Ignore Domain
-
-<a id="routes-response-cookies-to-add-ignore-expiry"></a>
-
-### Routes Response Cookies To Add Ignore Expiry
-
-<a id="routes-response-cookies-to-add-ignore-httponly"></a>
-
-### Routes Response Cookies To Add Ignore Httponly
-
-<a id="routes-response-cookies-to-add-ignore-max-age"></a>
-
-### Routes Response Cookies To Add Ignore Max Age
-
-<a id="routes-response-cookies-to-add-ignore-partitioned"></a>
-
-### Routes Response Cookies To Add Ignore Partitioned
-
-<a id="routes-response-cookies-to-add-ignore-path"></a>
-
-### Routes Response Cookies To Add Ignore Path
-
-<a id="routes-response-cookies-to-add-ignore-samesite"></a>
-
-### Routes Response Cookies To Add Ignore Samesite
-
-<a id="routes-response-cookies-to-add-ignore-secure"></a>
-
-### Routes Response Cookies To Add Ignore Secure
-
-<a id="routes-response-cookies-to-add-ignore-value"></a>
-
-### Routes Response Cookies To Add Ignore Value
-
-<a id="routes-response-cookies-to-add-samesite-lax"></a>
-
-### Routes Response Cookies To Add Samesite Lax
-
-<a id="routes-response-cookies-to-add-samesite-none"></a>
-
-### Routes Response Cookies To Add Samesite None
-
-<a id="routes-response-cookies-to-add-samesite-strict"></a>
-
-### Routes Response Cookies To Add Samesite Strict
-
 <a id="routes-response-cookies-to-add-secret-value"></a>
 
 ### Routes Response Cookies To Add Secret Value
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#routes-response-cookies-to-add-secret-value-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#routes-response-cookies-to-add-secret-value-clear-secret-info) below.
-
-<a id="routes-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
-
-### Routes Response Cookies To Add Secret Value Blindfold Secret Info
-
-<a id="routes-response-cookies-to-add-secret-value-clear-secret-info"></a>
-
-### Routes Response Cookies To Add Secret Value Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="routes-response-headers-to-add"></a>
 
@@ -408,17 +308,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Routes Response Headers To Add Secret Value
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#routes-response-headers-to-add-secret-value-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#routes-response-headers-to-add-secret-value-clear-secret-info) below.
-
-<a id="routes-response-headers-to-add-secret-value-blindfold-secret-info"></a>
-
-### Routes Response Headers To Add Secret Value Blindfold Secret Info
-
-<a id="routes-response-headers-to-add-secret-value-clear-secret-info"></a>
-
-### Routes Response Headers To Add Secret Value Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="routes-route-destination"></a>
 
@@ -434,9 +326,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `destinations` - (Optional) Destination Origin pools (clusters). When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 w. See [Destinations](#routes-route-destination-destinations) below.
 
-`do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Retract Cluster](#routes-route-destination-do-not-retract-cluster) below.
+`do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`endpoint_subsets` - (Optional) Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoint's which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. See [Endpoint Subsets](#routes-route-destination-endpoint-subsets) below.
+`endpoint_subsets` - (Optional) Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoint's which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field (`Block`).
 
 `hash_policy` - (Optional) Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request. See [Hash Policy](#routes-route-destination-hash-policy) below.
 
@@ -452,7 +344,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `regex_rewrite` - (Optional) Regex Match Rewrite. RegexMatchRewrite describes how to match a string and then produce a new string using a regular expression and a substitution string. See [Regex Rewrite](#routes-route-destination-regex-rewrite) below.
 
-`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Retract Cluster](#routes-route-destination-retract-cluster) below.
+`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `retry_policy` - (Optional) Retry Policy. Retry policy configuration for route destination. See [Retry Policy](#routes-route-destination-retry-policy) below.
 
@@ -494,57 +386,29 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Routes Route Destination CSRF Policy
 
-`all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed. See [All Load Balancer Domains](#routes-route-destination-csrf-policy-all-load-balancer-domains) below.
+`all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`custom_domain_list` - (Optional) Domain name list. List of domain names used for Host header matching. See [Custom Domain List](#routes-route-destination-csrf-policy-custom-domain-list) below.
+`custom_domain_list` - (Optional) Domain name list. List of domain names used for Host header matching (`Block`).
 
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#routes-route-destination-csrf-policy-disabled) below.
-
-<a id="routes-route-destination-csrf-policy-all-load-balancer-domains"></a>
-
-### Routes Route Destination CSRF Policy All Load Balancer Domains
-
-<a id="routes-route-destination-csrf-policy-custom-domain-list"></a>
-
-### Routes Route Destination CSRF Policy Custom Domain List
-
-<a id="routes-route-destination-csrf-policy-disabled"></a>
-
-### Routes Route Destination CSRF Policy Disabled
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="routes-route-destination-destinations"></a>
 
 ### Routes Route Destination Destinations
 
-`cluster` - (Optional) Cluster. Indicates the upstream cluster to which the request should be sent. If the cluster does not exist ServiceUnavailable response will be sent. See [Cluster](#routes-route-destination-destinations-cluster) below.
+`cluster` - (Optional) Cluster. Indicates the upstream cluster to which the request should be sent. If the cluster does not exist ServiceUnavailable response will be sent (`Block`).
 
-`endpoint_subsets` - (Optional) Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoints which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. See [Endpoint Subsets](#routes-route-destination-destinations-endpoint-subsets) below.
+`endpoint_subsets` - (Optional) Endpoint Subsets. Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset matching. For endpoints which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field (`Block`).
 
 `priority` - (Optional) Priority. Priority of this cluster, valid only with multiple destinations are configured. Value of 0 will make the cluster as lowest priority upstream cluster Priority of 1 means highest priority and is considered active. When active cluster is not available, lower priority clusters are made active as per the increasing priority (`Number`).
 
 `weight` - (Optional) Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 weight: 10 This indicates that (`Number`).
 
-<a id="routes-route-destination-destinations-cluster"></a>
-
-### Routes Route Destination Destinations Cluster
-
-<a id="routes-route-destination-destinations-endpoint-subsets"></a>
-
-### Routes Route Destination Destinations Endpoint Subsets
-
-<a id="routes-route-destination-do-not-retract-cluster"></a>
-
-### Routes Route Destination Do Not Retract Cluster
-
-<a id="routes-route-destination-endpoint-subsets"></a>
-
-### Routes Route Destination Endpoint Subsets
-
 <a id="routes-route-destination-hash-policy"></a>
 
 ### Routes Route Destination Hash Policy
 
-`cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g. See [Cookie](#routes-route-destination-hash-policy-cookie) below.
+`cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is g (`Block`).
 
 `header_name` - (Optional) Header Name. The name or key of the request header that will be used to obtain the hash key (`String`).
 
@@ -552,43 +416,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `terminal` - (Optional) Terminal. Specify if its a terminal policy (`Bool`).
 
-<a id="routes-route-destination-hash-policy-cookie"></a>
-
-### Routes Route Destination Hash Policy Cookie
-
 <a id="routes-route-destination-mirror-policy"></a>
 
 ### Routes Route Destination Mirror Policy
 
-`cluster` - (Optional) Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present. See [Cluster](#routes-route-destination-mirror-policy-cluster) below.
+`cluster` - (Optional) Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present (`Block`).
 
-`percent` - (Optional) Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests. See [Percent](#routes-route-destination-mirror-policy-percent) below.
-
-<a id="routes-route-destination-mirror-policy-cluster"></a>
-
-### Routes Route Destination Mirror Policy Cluster
-
-<a id="routes-route-destination-mirror-policy-percent"></a>
-
-### Routes Route Destination Mirror Policy Percent
+`percent` - (Optional) Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests (`Block`).
 
 <a id="routes-route-destination-query-params"></a>
 
 ### Routes Route Destination Query Params
 
-`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Remove All Params](#routes-route-destination-query-params-remove-all-params) below.
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `replace_params` - (Optional) Replace All Parameters (`String`).
 
-`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Retain All Params](#routes-route-destination-query-params-retain-all-params) below.
-
-<a id="routes-route-destination-query-params-remove-all-params"></a>
-
-### Routes Route Destination Query Params Remove All Params
-
-<a id="routes-route-destination-query-params-retain-all-params"></a>
-
-### Routes Route Destination Query Params Retain All Params
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="routes-route-destination-regex-rewrite"></a>
 
@@ -598,15 +442,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `substitution` - (Optional) Substitution. The string that should be substituted into matching portions of the subject string during a substitution operation to produce a new string (`String`).
 
-<a id="routes-route-destination-retract-cluster"></a>
-
-### Routes Route Destination Retract Cluster
-
 <a id="routes-route-destination-retry-policy"></a>
 
 ### Routes Route Destination Retry Policy
 
-`back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#routes-route-destination-retry-policy-back-off) below.
+`back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off (`Block`).
 
 `num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry (`Number`).
 
@@ -615,10 +455,6 @@ In addition to all arguments above, the following attributes are exported:
 `retriable_status_codes` - (Optional) Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on (`List`).
 
 `retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with (`List`).
-
-<a id="routes-route-destination-retry-policy-back-off"></a>
-
-### Routes Route Destination Retry Policy Back Off
 
 <a id="routes-route-destination-spdy-config"></a>
 
@@ -652,21 +488,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `proto_redirect` - (Optional) Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done (`String`).
 
-`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Remove All Params](#routes-route-redirect-remove-all-params) below.
+`remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `replace_params` - (Optional) Replace All Parameters (`String`).
 
 `response_code` - (Optional) Response Code. The HTTP status code to use in the redirect response (`Number`).
 
-`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed. See [Retain All Params](#routes-route-redirect-retain-all-params) below.
-
-<a id="routes-route-redirect-remove-all-params"></a>
-
-### Routes Route Redirect Remove All Params
-
-<a id="routes-route-redirect-retain-all-params"></a>
-
-### Routes Route Redirect Retain All Params
+`retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="routes-service-policy"></a>
 
@@ -690,27 +518,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `app_firewall` - (Optional) App Firewall Reference. A list of references to the app_firewall configuration objects. See [App Firewall](#routes-waf-type-app-firewall) below.
 
-`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable WAF](#routes-waf-type-disable-waf) below.
+`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`inherit_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherit WAF](#routes-waf-type-inherit-waf) below.
+`inherit_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="routes-waf-type-app-firewall"></a>
 
 ### Routes WAF Type App Firewall
 
-`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object. See [App Firewall](#routes-waf-type-app-firewall-app-firewall) below.
-
-<a id="routes-waf-type-app-firewall-app-firewall"></a>
-
-### Routes WAF Type App Firewall App Firewall
-
-<a id="routes-waf-type-disable-waf"></a>
-
-### Routes WAF Type Disable WAF
-
-<a id="routes-waf-type-inherit-waf"></a>
-
-### Routes WAF Type Inherit WAF
+`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object (`Block`).
 
 <a id="timeouts"></a>
 

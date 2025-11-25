@@ -67,9 +67,9 @@ resource "f5xc_fleet" "example" {
 
 > **Note:** One of the arguments from this list "allow_all_usb, deny_all_usb, usb_policy" must be set.
 
-`allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Usb](#allow-all-usb) below for details.
+`allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Usb](#deny-all-usb) below for details.
+`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
 
@@ -79,7 +79,7 @@ resource "f5xc_fleet" "example" {
 
 `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
 
-`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group, dc_cluster_group_inside, no_dc_cluster_group" must be set.
 
@@ -87,11 +87,11 @@ resource "f5xc_fleet" "example" {
 
 `dc_cluster_group_inside` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#no-dc-cluster-group) below for details.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "default_config, device_list, interface_list" must be set.
 
-`default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#default-config) below for details.
+`default_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `device_list` - (Optional) List of Devices. Add device for all interfaces belonging to this fleet. See [Device List](#device-list) below for details.
 
@@ -99,29 +99,29 @@ resource "f5xc_fleet" "example" {
 
 > **Note:** One of the arguments from this list "default_sriov_interface, sriov_interfaces" must be set.
 
-`default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sriov Interface](#default-sriov-interface) below for details.
+`default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
 
 > **Note:** One of the arguments from this list "default_storage_class, storage_class_list" must be set.
 
-`default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage Class](#default-storage-class) below for details.
+`default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Class List](#storage-class-list) below for details.
 
 > **Note:** One of the arguments from this list "disable_gpu, enable_gpu, enable_vgpu" must be set.
 
-`disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable GPU](#disable-gpu) below for details.
+`disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable GPU](#enable-gpu) below for details.
+`enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU. See [Enable Vgpu](#enable-vgpu) below for details.
 
 > **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
 
-`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable VM](#disable-vm) below for details.
+`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_vm` - (Optional) VM Configuration. VMs support configuration. See [Enable VM](#enable-vm) below for details.
+`enable_vm` - (Optional) VM Configuration. VMs support configuration (`Block`).
 
 `enable_default_fleet_config_download` - (Optional) Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config (`Bool`).
 
@@ -135,7 +135,7 @@ resource "f5xc_fleet" "example" {
 
 `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
 
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_connectors` - (Optional) Network Connectors. Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet. See [Network Connectors](#network-connectors) below for details.
 
@@ -143,19 +143,19 @@ resource "f5xc_fleet" "example" {
 
 > **Note:** One of the arguments from this list "no_storage_device, storage_device_list" must be set.
 
-`no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Device](#no-storage-device) below for details.
+`no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Device List](#storage-device-list) below for details.
 
 > **Note:** One of the arguments from this list "no_storage_interfaces, storage_interface_list" must be set.
 
-`no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Interfaces](#no-storage-interfaces) below for details.
+`no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Storage Interface List](#storage-interface-list) below for details.
 
 > **Note:** One of the arguments from this list "no_storage_static_routes, storage_static_routes" must be set.
 
-`no_storage_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Storage Static Routes](#no-storage-static-routes) below for details.
+`no_storage_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes. See [Storage Static Routes](#storage-static-routes) below for details.
 
@@ -177,33 +177,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="allow-all-usb"></a>
-
-### Allow All Usb
-
 <a id="blocked-services"></a>
 
 ### Blocked Services
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-web-user-interface) below.
-
-<a id="blocked-services-dns"></a>
-
-### Blocked Services DNS
-
-<a id="blocked-services-ssh"></a>
-
-### Blocked Services SSH
-
-<a id="blocked-services-web-user-interface"></a>
-
-### Blocked Services Web User Interface
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="bond-device-list"></a>
 
@@ -215,7 +199,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Bond Device List Bond Devices
 
-`active_backup` - (Optional) Empty. This can be used for messages where no values are needed. See [Active Backup](#bond-device-list-bond-devices-active-backup) below.
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
 
@@ -226,10 +210,6 @@ In addition to all arguments above, the following attributes are exported:
 `link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
 
 `name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
-
-<a id="bond-device-list-bond-devices-active-backup"></a>
-
-### Bond Device List Bond Devices Active Backup
 
 <a id="bond-device-list-bond-devices-lacp"></a>
 
@@ -257,22 +237,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="default-config"></a>
-
-### Default Config
-
-<a id="default-sriov-interface"></a>
-
-### Default Sriov Interface
-
-<a id="default-storage-class"></a>
-
-### Default Storage Class
-
-<a id="deny-all-usb"></a>
-
-### Deny All Usb
-
 <a id="device-list"></a>
 
 ### Device List
@@ -293,25 +257,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Device List Devices Network Device
 
-`interface` - (Optional) Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if us. See [Interface](#device-list-devices-network-device-interface) below.
+`interface` - (Optional) Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if us (`Block`).
 
 `use` - (Optional) Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network. Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`. Defaults to `NETWORK_INTERFACE_USE_REGULAR` (`String`).
-
-<a id="device-list-devices-network-device-interface"></a>
-
-### Device List Devices Network Device Interface
-
-<a id="disable-gpu"></a>
-
-### Disable GPU
-
-<a id="disable-vm"></a>
-
-### Disable VM
-
-<a id="enable-gpu"></a>
-
-### Enable GPU
 
 <a id="enable-vgpu"></a>
 
@@ -322,10 +270,6 @@ In addition to all arguments above, the following attributes are exported:
 `server_address` - (Optional) License Server Address. Set License Server Address (`String`).
 
 `server_port` - (Optional) License Server Port Number. Set License Server port number (`Number`).
-
-<a id="enable-vm"></a>
-
-### Enable VM
 
 <a id="inside-virtual-network"></a>
 
@@ -361,33 +305,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#kubernetes-upgrade-drain-disable-upgrade-drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
-
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>
-
-### Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="log-receiver"></a>
 
@@ -398,10 +330,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="logs-streaming-disabled"></a>
-
-### Logs Streaming Disabled
 
 <a id="network-connectors"></a>
 
@@ -431,26 +359,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="no-bond-devices"></a>
-
-### No Bond Devices
-
-<a id="no-dc-cluster-group"></a>
-
-### No Dc Cluster Group
-
-<a id="no-storage-device"></a>
-
-### No Storage Device
-
-<a id="no-storage-interfaces"></a>
-
-### No Storage Interfaces
-
-<a id="no-storage-static-routes"></a>
-
-### No Storage Static Routes
-
 <a id="outside-virtual-network"></a>
 
 ### Outside Virtual Network
@@ -471,27 +379,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Performance Enhancement Mode Perf Mode L7 Enhanced
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="sriov-interfaces"></a>
 
@@ -519,7 +415,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Storage Class List Storage Classes
 
-`advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Storage Parameters](#storage-class-list-storage-classes-advanced-storage-parameters) below.
+`advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value (`Block`).
 
 `allow_volume_expansion` - (Optional) Allow Volume Expansion. Allow volume expansion (`Bool`).
 
@@ -540,10 +436,6 @@ In addition to all arguments above, the following attributes are exported:
 `storage_class_name` - (Optional) Storage Class Name. Name of the storage class as it will appear in K8s (`String`).
 
 `storage_device` - (Optional) Storage Device. Storage device that this class will use. The Device name defined at previous step (`String`).
-
-<a id="storage-class-list-storage-classes-advanced-storage-parameters"></a>
-
-### Storage Class List Storage Classes Advanced Storage Parameters
 
 <a id="storage-class-list-storage-classes-custom-storage"></a>
 
@@ -591,13 +483,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Storage Class List Storage Classes Netapp Trident
 
-`selector` - (Optional) Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool. See [Selector](#storage-class-list-storage-classes-netapp-trident-selector) below.
+`selector` - (Optional) Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool (`Block`).
 
 `storage_pools` - (Optional) Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes (`String`).
-
-<a id="storage-class-list-storage-classes-netapp-trident-selector"></a>
-
-### Storage Class List Storage Classes Netapp Trident Selector
 
 <a id="storage-class-list-storage-classes-pure-service-orchestrator"></a>
 
@@ -619,9 +507,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Storage Device List Storage Devices
 
-`advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value. See [Advanced Advanced Parameters](#storage-device-list-storage-devices-advanced-advanced-parameters) below.
+`advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value (`Block`).
 
-`custom_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Custom Storage](#storage-device-list-storage-devices-custom-storage) below.
+`custom_storage` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `hpe_storage` - (Optional) HPE Storage. Device configuration for HPE Storage. See [Hpe Storage](#storage-device-list-storage-devices-hpe-storage) below.
 
@@ -631,25 +519,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `storage_device` - (Optional) Storage Device. Storage device and device unit (`String`).
 
-<a id="storage-device-list-storage-devices-advanced-advanced-parameters"></a>
-
-### Storage Device List Storage Devices Advanced Advanced Parameters
-
-<a id="storage-device-list-storage-devices-custom-storage"></a>
-
-### Storage Device List Storage Devices Custom Storage
-
 <a id="storage-device-list-storage-devices-hpe-storage"></a>
 
 ### Storage Device List Storage Devices Hpe Storage
 
 `api_server_port` - (Optional) Storage server Port. Enter Storage Server Port (`Number`).
 
-`iscsi_chap_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [iSCSI Chap Password](#storage-device-list-storage-devices-hpe-storage-iscsi-chap-password) below.
+`iscsi_chap_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `iscsi_chap_user` - (Optional) iSCSI chapUser. chap Username to connect to the HPE storage (`String`).
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#storage-device-list-storage-devices-hpe-storage-password) below.
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `storage_server_ip_address` - (Optional) Storage Server IP address. Enter storage server IP address (`String`).
 
@@ -657,45 +537,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `username` - (Optional) Username. Username to connect to the HPE storage management IP (`String`).
 
-<a id="storage-device-list-storage-devices-hpe-storage-iscsi-chap-password"></a>
-
-### Storage Device List Storage Devices Hpe Storage iSCSI Chap Password
-
-<a id="storage-device-list-storage-devices-hpe-storage-password"></a>
-
-### Storage Device List Storage Devices Hpe Storage Password
-
 <a id="storage-device-list-storage-devices-netapp-trident"></a>
 
 ### Storage Device List Storage Devices Netapp Trident
 
-`netapp_backend_ontap_nas` - (Optional) Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS. See [Netapp Backend Ontap Nas](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas) below.
+`netapp_backend_ontap_nas` - (Optional) Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS (`Block`).
 
-`netapp_backend_ontap_san` - (Optional) Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN. See [Netapp Backend Ontap San](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san) below.
-
-<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas"></a>
-
-### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas
-
-<a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san"></a>
-
-### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San
+`netapp_backend_ontap_san` - (Optional) Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN (`Block`).
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator"></a>
 
 ### Storage Device List Storage Devices Pure Service Orchestrator
 
-`arrays` - (Optional) Arrays Configuration. Device configuration for PSO Arrays. See [Arrays](#storage-device-list-storage-devices-pure-service-orchestrator-arrays) below.
+`arrays` - (Optional) Arrays Configuration. Device configuration for PSO Arrays (`Block`).
 
 `cluster_id` - (Optional) Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores (`String`).
 
 `enable_storage_topology` - (Optional) Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi (`Bool`).
 
 `enable_strict_topology` - (Optional) Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi (`Bool`).
-
-<a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays"></a>
-
-### Storage Device List Storage Devices Pure Service Orchestrator Arrays
 
 <a id="storage-interface-list"></a>
 
@@ -725,49 +585,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `attrs` - (Optional) Attributes. List of route attributes associated with the static route (`List`).
 
-`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy. See [Labels](#storage-static-routes-storage-routes-labels) below.
+`labels` - (Optional) Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy (`Block`).
 
 `nexthop` - (Optional) Nexthop. Identifies the next-hop for a route. See [Nexthop](#storage-static-routes-storage-routes-nexthop) below.
 
 `subnets` - (Optional) Subnets. List of route prefixes. See [Subnets](#storage-static-routes-storage-routes-subnets) below.
 
-<a id="storage-static-routes-storage-routes-labels"></a>
-
-### Storage Static Routes Storage Routes Labels
-
 <a id="storage-static-routes-storage-routes-nexthop"></a>
 
 ### Storage Static Routes Storage Routes Nexthop
 
-`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface'. See [Interface](#storage-static-routes-storage-routes-nexthop-interface) below.
+`interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface' (`Block`).
 
-`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Nexthop Address](#storage-static-routes-storage-routes-nexthop-nexthop-address) below.
+`nexthop_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address (`Block`).
 
 `type` - (Optional) Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY` (`String`).
-
-<a id="storage-static-routes-storage-routes-nexthop-interface"></a>
-
-### Storage Static Routes Storage Routes Nexthop Interface
-
-<a id="storage-static-routes-storage-routes-nexthop-nexthop-address"></a>
-
-### Storage Static Routes Storage Routes Nexthop Nexthop Address
 
 <a id="storage-static-routes-storage-routes-subnets"></a>
 
 ### Storage Static Routes Storage Routes Subnets
 
-`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32. See [IPv4](#storage-static-routes-storage-routes-subnets-ipv4) below.
+`ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32 (`Block`).
 
-`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128. See [IPv6](#storage-static-routes-storage-routes-subnets-ipv6) below.
-
-<a id="storage-static-routes-storage-routes-subnets-ipv4"></a>
-
-### Storage Static Routes Storage Routes Subnets IPv4
-
-<a id="storage-static-routes-storage-routes-subnets-ipv6"></a>
-
-### Storage Static Routes Storage Routes Subnets IPv6
+`ipv6` - (Optional) IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128 (`Block`).
 
 <a id="timeouts"></a>
 

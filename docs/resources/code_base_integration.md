@@ -102,17 +102,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Code Base Integration Azure Repos Access Token
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-azure-repos-access-token-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-azure-repos-access-token-clear-secret-info) below.
-
-<a id="code-base-integration-azure-repos-access-token-blindfold-secret-info"></a>
-
-### Code Base Integration Azure Repos Access Token Blindfold Secret Info
-
-<a id="code-base-integration-azure-repos-access-token-clear-secret-info"></a>
-
-### Code Base Integration Azure Repos Access Token Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="code-base-integration-bitbucket"></a>
 
@@ -126,17 +118,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Code Base Integration Bitbucket Passwd
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-bitbucket-passwd-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-bitbucket-passwd-clear-secret-info) below.
-
-<a id="code-base-integration-bitbucket-passwd-blindfold-secret-info"></a>
-
-### Code Base Integration Bitbucket Passwd Blindfold Secret Info
-
-<a id="code-base-integration-bitbucket-passwd-clear-secret-info"></a>
-
-### Code Base Integration Bitbucket Passwd Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="code-base-integration-bitbucket-server"></a>
 
@@ -154,17 +138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Code Base Integration Bitbucket Server Passwd
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-bitbucket-server-passwd-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-bitbucket-server-passwd-clear-secret-info) below.
-
-<a id="code-base-integration-bitbucket-server-passwd-blindfold-secret-info"></a>
-
-### Code Base Integration Bitbucket Server Passwd Blindfold Secret Info
-
-<a id="code-base-integration-bitbucket-server-passwd-clear-secret-info"></a>
-
-### Code Base Integration Bitbucket Server Passwd Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="code-base-integration-github"></a>
 
@@ -180,17 +156,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Code Base Integration Github Access Token
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-github-access-token-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-github-access-token-clear-secret-info) below.
-
-<a id="code-base-integration-github-access-token-blindfold-secret-info"></a>
-
-### Code Base Integration Github Access Token Blindfold Secret Info
-
-<a id="code-base-integration-github-access-token-clear-secret-info"></a>
-
-### Code Base Integration Github Access Token Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="code-base-integration-github-enterprise"></a>
 
@@ -206,17 +174,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Code Base Integration Github Enterprise Access Token
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-github-enterprise-access-token-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-github-enterprise-access-token-clear-secret-info) below.
-
-<a id="code-base-integration-github-enterprise-access-token-blindfold-secret-info"></a>
-
-### Code Base Integration Github Enterprise Access Token Blindfold Secret Info
-
-<a id="code-base-integration-github-enterprise-access-token-clear-secret-info"></a>
-
-### Code Base Integration Github Enterprise Access Token Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="code-base-integration-gitlab"></a>
 
@@ -228,17 +188,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Code Base Integration Gitlab Access Token
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-gitlab-access-token-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-gitlab-access-token-clear-secret-info) below.
-
-<a id="code-base-integration-gitlab-access-token-blindfold-secret-info"></a>
-
-### Code Base Integration Gitlab Access Token Blindfold Secret Info
-
-<a id="code-base-integration-gitlab-access-token-clear-secret-info"></a>
-
-### Code Base Integration Gitlab Access Token Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="code-base-integration-gitlab-enterprise"></a>
 
@@ -252,17 +204,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Code Base Integration Gitlab Enterprise Access Token
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-gitlab-enterprise-access-token-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-gitlab-enterprise-access-token-clear-secret-info) below.
-
-<a id="code-base-integration-gitlab-enterprise-access-token-blindfold-secret-info"></a>
-
-### Code Base Integration Gitlab Enterprise Access Token Blindfold Secret Info
-
-<a id="code-base-integration-gitlab-enterprise-access-token-clear-secret-info"></a>
-
-### Code Base Integration Gitlab Enterprise Access Token Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="timeouts"></a>
 

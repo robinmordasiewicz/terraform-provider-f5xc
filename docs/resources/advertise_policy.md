@@ -120,23 +120,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### TLS Parameters
 
-`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Optional](#tls-parameters-client-certificate-optional) below.
+`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Required](#tls-parameters-client-certificate-required) below.
+`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#tls-parameters-common-params) below.
 
-`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [No Client Certificate](#tls-parameters-no-client-certificate) below.
+`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
-
-<a id="tls-parameters-client-certificate-optional"></a>
-
-### TLS Parameters Client Certificate Optional
-
-<a id="tls-parameters-client-certificate-required"></a>
-
-### TLS Parameters Client Certificate Required
 
 <a id="tls-parameters-common-params"></a>
 
@@ -158,31 +150,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#tls-parameters-common-params-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#tls-parameters-common-params-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#tls-parameters-common-params-tls-certificates-use-system-defaults) below.
-
-<a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
-
-### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
-
-<a id="tls-parameters-common-params-tls-certificates-disable-ocsp-stapling"></a>
-
-### TLS Parameters Common Params TLS Certificates Disable OCSP Stapling
-
-<a id="tls-parameters-common-params-tls-certificates-private-key"></a>
-
-### TLS Parameters Common Params TLS Certificates Private Key
-
-<a id="tls-parameters-common-params-tls-certificates-use-system-defaults"></a>
-
-### TLS Parameters Common Params TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
@@ -190,19 +166,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-parameters-common-params-validation-params-trusted-ca) below.
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
-
-<a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
-
-### TLS Parameters Common Params Validation Params Trusted CA
-
-<a id="tls-parameters-no-client-certificate"></a>
-
-### TLS Parameters No Client Certificate
 
 <a id="where"></a>
 
@@ -218,21 +186,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A site direct reference. See [Ref](#where-site-ref) below.
-
-<a id="where-site-disable-internet-vip"></a>
-
-### Where Site Disable Internet VIP
-
-<a id="where-site-enable-internet-vip"></a>
-
-### Where Site Enable Internet VIP
 
 <a id="where-site-ref"></a>
 
@@ -272,21 +232,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Virtual Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-virtual-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-virtual-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#where-virtual-site-ref) below.
-
-<a id="where-virtual-site-disable-internet-vip"></a>
-
-### Where Virtual Site Disable Internet VIP
-
-<a id="where-virtual-site-enable-internet-vip"></a>
-
-### Where Virtual Site Enable Internet VIP
 
 <a id="where-virtual-site-ref"></a>
 

@@ -219,7 +219,8 @@ This repository uses CI/CD automation extensively. Respect the automation - do n
 | `docs/data-sources/*.md` | `tfplugindocs` + `transform-docs.go` | `docs.yml` |
 | `docs/api/*.md` | `generate-api-docs.go` | `pages.yml` |
 | `docs/nav-api.yml` | `generate-api-docs.go` | `pages.yml` |
-| `internal/provider/*_resource.go` | `generate-resources.go` | `generate.yml` |
+| `internal/provider/*_resource.go` | `generate-all-schemas.go` | `generate.yml` |
+| `internal/provider/*_data_source.go` | `generate-all-schemas.go` | `generate.yml` |
 | `site/` | `mkdocs build` | `pages.yml` |
 
 **Correct behavior**: Commit only source/tool changes. Let workflows generate artifacts.
@@ -370,6 +371,7 @@ git commit -m "docs: update namespace"
 - `docs/nav-api.yml` - API navigation structure
 - `site/` - Built MkDocs site
 - `internal/provider/*_resource.go` - Generated resource implementations
+- `internal/provider/*_data_source.go` - Generated data source implementations
 
 #### Layer 2: CI/CD Checks (Remote)
 

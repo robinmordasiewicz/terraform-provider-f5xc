@@ -150,7 +150,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "File. Contains file data",
 				Attributes: map[string]schema.Attribute{
 					"content": schema.StringAttribute{
-						MarkdownDescription: "Configuration for content.",
+						MarkdownDescription: "Content. Content of the file",
 						Optional: true,
 					},
 					"content_type": schema.StringAttribute{
@@ -169,7 +169,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "File. Contains file data",
 				Attributes: map[string]schema.Attribute{
 					"content": schema.StringAttribute{
-						MarkdownDescription: "Configuration for content.",
+						MarkdownDescription: "Content. Content of the file",
 						Optional: true,
 					},
 					"content_type": schema.StringAttribute{

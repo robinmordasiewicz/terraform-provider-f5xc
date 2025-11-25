@@ -111,7 +111,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "[OneOf: email, opsgenie, pagerduty, slack, sms, webhook] Email Configuration.",
 				Attributes: map[string]schema.Attribute{
 					"email": schema.StringAttribute{
-						MarkdownDescription: "Configuration for email.",
+						MarkdownDescription: "Email. Email id of the user",
 						Optional: true,
 					},
 				},

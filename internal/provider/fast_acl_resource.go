@@ -190,7 +190,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"user_defined": schema.Int64Attribute{
-												MarkdownDescription: "Configuration for user_defined.",
+												MarkdownDescription: "User defined port. Matches the user defined port",
 												Optional: true,
 											},
 										},
@@ -312,7 +312,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"user_defined": schema.Int64Attribute{
-												MarkdownDescription: "Configuration for user_defined.",
+												MarkdownDescription: "User defined port. Matches the user defined port",
 												Optional: true,
 											},
 										},

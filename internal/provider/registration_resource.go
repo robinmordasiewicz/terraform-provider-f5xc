@@ -140,7 +140,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						Optional: true,
 					},
 					"provider_ref": schema.StringAttribute{
-						MarkdownDescription: "Infrastructure Provider. Infrastructure provider enum for registration. It describes where is instance running. Provider was not detected AWS cloud instance Google cloud instance Azure cloud instance VMWare VM KVM VM Other provider, which was not identified by system. F5XC HW device. IBM Cloud instance. Kubernetes cluster in AWS Kubernetes cluster in GCP Kubernetes cluster in Azure Kubernetes cluster in Vmware Kubernetes cluster in VMware Kubernetes cluster in Other provider Kubernetes cluste... Possible values include `UNKNOWN`, `AWS`, `GOOGLE`, `AZURE`, `VMWARE`, `KVM`, `OTHER`, `VOLTERRA`, `IBMCLOUD`, `UNKNOWN_K8S`, and others.",
+						MarkdownDescription: "Infrastructure Provider. Infrastructure provider enum for registration. It describes where is instance running. Provider was not detected AWS cloud instance Google cloud instance Azure cloud instance VMWare VM KVM VM Other provider, which was not identified by system. F5XC HW device. IBM Cloud instance. Kubernetes cluster in AWS Kubernetes cluster in GCP Kubernetes cluster in Azure Kubernetes cluster in Vmware Kubernetes cluster in VMware Kubernetes cluster in Other provider Kubernetes cluster in Volterra Kubernetes cluster in IBM Cloud F5OS HW device. RSeries Device OCI Cloud Instance Nutanix instance Openstack Instance Equinix Instance. Possible values are `UNKNOWN`, `AWS`, `GOOGLE`, `AZURE`, `VMWARE`, `KVM`, `OTHER`, `VOLTERRA`, `IBMCLOUD`, `UNKNOWN_K8S`, `AWS_K8S`, `GCP_K8S`, `AZURE_K8S`, `VMWARE_K8S`, `KVM_K8S`, `OTHER_K8S`, `VOLTERRA_K8S`, `IBMCLOUD_K8S`, `F5OS`, `RSERIES`, `OCI`, `NUTANIX`, `OPENSTACK`, `EQUINIX`.",
 						Optional: true,
 					},
 					"timestamp": schema.StringAttribute{
@@ -284,7 +284,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								},
 							},
 							"kernel": schema.SingleNestedBlock{
-								MarkdownDescription: "Configuration for kernel.",
+								MarkdownDescription: "Kernel. Kernel information",
 								Attributes: map[string]schema.Attribute{
 									"architecture": schema.StringAttribute{
 										MarkdownDescription: "Architecture. kernel architecture",
@@ -471,15 +471,15 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 											Optional: true,
 										},
 										"description": schema.StringAttribute{
-											MarkdownDescription: "Configuration for description.",
+											MarkdownDescription: "Description. Device description",
 											Optional: true,
 										},
 										"i_manufacturer": schema.StringAttribute{
-											MarkdownDescription: "Configuration for i_manufacturer.",
+											MarkdownDescription: "Manufacturer. Manufacturer name",
 											Optional: true,
 										},
 										"i_product": schema.StringAttribute{
-											MarkdownDescription: "Configuration for i_product.",
+											MarkdownDescription: "Device product. Product name reported by device",
 											Optional: true,
 										},
 										"i_serial": schema.StringAttribute{
@@ -534,7 +534,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Optional: true,
 							},
 							"no_proxy": schema.StringAttribute{
-								MarkdownDescription: "NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo.",
+								MarkdownDescription: "NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo.com' matches 'foo.com' and 'bar.foo.com'; '.y.com' matches 'x.y.com' but not 'y.com'. A single asterisk (*) indicates that no proxying should be done.",
 								Optional: true,
 							},
 							"proxy_cacert_url": schema.StringAttribute{

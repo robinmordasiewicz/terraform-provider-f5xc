@@ -108,7 +108,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 				Delete: true,
 			}),
 			"report_recipients": schema.SingleNestedBlock{
-				MarkdownDescription: "Configuration for report_recipients.",
+				MarkdownDescription: "Report recipients. Report recipients",
 				Attributes: map[string]schema.Attribute{
 				},
 				Blocks: map[string]schema.Block{
@@ -155,7 +155,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Report Frequency Monthly. create report monthly",
 						Attributes: map[string]schema.Attribute{
 							"date": schema.StringAttribute{
-								MarkdownDescription: "Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values include `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, and others.",
+								MarkdownDescription: "Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`.",
 								Optional: true,
 							},
 							"report_generation_time": schema.StringAttribute{

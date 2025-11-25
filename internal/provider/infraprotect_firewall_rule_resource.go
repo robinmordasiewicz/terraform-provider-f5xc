@@ -90,7 +90,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				ElementType: types.StringType,
 			},
 			"destination_prefix_single": schema.StringAttribute{
-				MarkdownDescription: "Configuration for destination_prefix_single.",
+				MarkdownDescription: "Prefix. Prefix",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
@@ -99,7 +99,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				ElementType: types.StringType,
 			},
 			"source_prefix_single": schema.StringAttribute{
-				MarkdownDescription: "Configuration for source_prefix_single.",
+				MarkdownDescription: "Prefix. Prefix",
 				Optional: true,
 			},
 			"id": schema.StringAttribute{
@@ -160,7 +160,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 						Optional: true,
 					},
 					"redirect": schema.BoolAttribute{
-						MarkdownDescription: "Configuration for redirect.",
+						MarkdownDescription: "Redirect. Redirect",
 						Optional: true,
 					},
 					"source_quench": schema.BoolAttribute{
@@ -172,7 +172,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 						Optional: true,
 					},
 					"unreachable": schema.BoolAttribute{
-						MarkdownDescription: "Configuration for unreachable.",
+						MarkdownDescription: "Unreachable. Unreachable",
 						Optional: true,
 					},
 				},
@@ -210,7 +210,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 						Optional: true,
 					},
 					"redirect": schema.BoolAttribute{
-						MarkdownDescription: "Configuration for redirect.",
+						MarkdownDescription: "Redirect. Redirect",
 						Optional: true,
 					},
 					"router_advertisement": schema.BoolAttribute{
@@ -235,7 +235,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				MarkdownDescription: "TCP Protocol. x-required TCP Protocol",
 				Attributes: map[string]schema.Attribute{
 					"description": schema.StringAttribute{
-						MarkdownDescription: "Configuration for description.",
+						MarkdownDescription: "Description. Description",
 						Optional: true,
 					},
 					"destination_port_range": schema.StringAttribute{
@@ -261,7 +261,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				MarkdownDescription: "UDP Protocol. x-required UDP Protocol",
 				Attributes: map[string]schema.Attribute{
 					"description": schema.StringAttribute{
-						MarkdownDescription: "Configuration for description.",
+						MarkdownDescription: "Description. Description",
 						Optional: true,
 					},
 					"destination_port_range": schema.StringAttribute{

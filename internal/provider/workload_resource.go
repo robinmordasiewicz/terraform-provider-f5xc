@@ -122,7 +122,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Configuration for parameters.",
+								MarkdownDescription: "Parameters. Parameters for the workload",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -161,7 +161,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Configuration for name.",
+									MarkdownDescription: "Name. Name of the container",
 									Optional: true,
 								},
 							},
@@ -194,7 +194,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
+											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
 											Optional: true,
 										},
 									},
@@ -348,11 +348,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Configuration for volumes.",
+						MarkdownDescription: "Volumes. Volumes for the job",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Configuration for name.",
+									MarkdownDescription: "Name. Name of the volume",
 									Optional: true,
 								},
 							},
@@ -430,7 +430,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"ports": schema.ListNestedBlock{
-										MarkdownDescription: "Configuration for ports.",
+										MarkdownDescription: "Ports. Ports to advertise",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -446,7 +446,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										MarkdownDescription: "Multiple Ports. Multiple ports",
 									},
 									"port": schema.SingleNestedBlock{
-										MarkdownDescription: "Configuration for port.",
+										MarkdownDescription: "Port. Single port",
 									},
 								},
 							},
@@ -474,7 +474,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Configuration for parameters.",
+								MarkdownDescription: "Parameters. Parameters for the workload",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -513,7 +513,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Configuration for name.",
+									MarkdownDescription: "Name. Name of the container",
 									Optional: true,
 								},
 							},
@@ -546,7 +546,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
+											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
 											Optional: true,
 										},
 									},
@@ -703,11 +703,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Configuration for volumes.",
+						MarkdownDescription: "Volumes. Volumes for the service",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Configuration for name.",
+									MarkdownDescription: "Name. Name of the volume",
 									Optional: true,
 								},
 							},
@@ -774,7 +774,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Configuration for parameters.",
+								MarkdownDescription: "Parameters. Parameters for the workload",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -812,7 +812,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								Optional: true,
 							},
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Configuration for name.",
+								MarkdownDescription: "Name. Name of the container",
 								Optional: true,
 							},
 						},
@@ -845,7 +845,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										Optional: true,
 									},
 									"pull_policy": schema.StringAttribute{
-										MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
+										MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
 										Optional: true,
 									},
 								},
@@ -942,7 +942,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Persistent Storage Volume. Persistent storage volume configuration for the workload",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Configuration for name.",
+								MarkdownDescription: "Name. Name of the volume",
 								Optional: true,
 							},
 						},
@@ -966,7 +966,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Advertise Options For Simple Service. Advertise options for Simple Service",
 						Attributes: map[string]schema.Attribute{
 							"domains": schema.ListAttribute{
-								MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, a.",
+								MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Load Balancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system.",
 								Optional: true,
 								ElementType: types.StringType,
 							},
@@ -1005,7 +1005,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"ports": schema.ListNestedBlock{
-										MarkdownDescription: "Configuration for ports.",
+										MarkdownDescription: "Ports. Ports to advertise",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 										},
@@ -1021,7 +1021,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										MarkdownDescription: "Multiple Ports. Multiple ports",
 									},
 									"port": schema.SingleNestedBlock{
-										MarkdownDescription: "Configuration for port.",
+										MarkdownDescription: "Port. Single port",
 									},
 								},
 							},
@@ -1049,7 +1049,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Configuration for parameters.",
+								MarkdownDescription: "Parameters. Parameters for the workload",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 									},
@@ -1088,7 +1088,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional: true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Configuration for name.",
+									MarkdownDescription: "Name. Name of the container",
 									Optional: true,
 								},
 							},
@@ -1121,7 +1121,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											Optional: true,
 										},
 										"pull_policy": schema.StringAttribute{
-											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
+											MarkdownDescription: "Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT`.",
 											Optional: true,
 										},
 									},
@@ -1279,7 +1279,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Configuration for name.",
+									MarkdownDescription: "Name. Name of the volume",
 									Optional: true,
 								},
 							},
@@ -1308,7 +1308,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Configuration for name.",
+									MarkdownDescription: "Name. Name of the volume",
 									Optional: true,
 								},
 							},

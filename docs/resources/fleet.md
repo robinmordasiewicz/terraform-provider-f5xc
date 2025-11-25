@@ -71,7 +71,7 @@ resource "f5xc_fleet" "example" {
 
 `deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Usb Policy](#usb-policy) below for details.
+`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. See [Blocked Services](#blocked-services) below for details.
 
@@ -145,19 +145,19 @@ resource "f5xc_fleet" "example" {
 
 `no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Device List](#storage-device-list) below for details.
+`storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet (`Block`).
 
 > **Note:** One of the arguments from this list "no_storage_interfaces, storage_interface_list" must be set.
 
 `no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Storage Interface List](#storage-interface-list) below for details.
+`storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet (`Block`).
 
 > **Note:** One of the arguments from this list "no_storage_static_routes, storage_static_routes" must be set.
 
 `no_storage_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes. See [Storage Static Routes](#storage-static-routes) below for details.
+`storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config (`String`).
 
@@ -165,7 +165,7 @@ resource "f5xc_fleet" "example" {
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+`timeouts` - (Optional) (`Block`).
 
 `volterra_software_version` - (Optional) Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config (`String`).
 

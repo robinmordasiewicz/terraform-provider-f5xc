@@ -581,7 +581,7 @@ For the main resource documentation, see [f5xc_securemesh_site_v2](/docs/resourc
 
 ### Performance Enhancement Mode
 
-`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options.
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
 `perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -599,7 +599,7 @@ For the main resource documentation, see [f5xc_securemesh_site_v2](/docs/resourc
 
 `geo_proximity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`specific_re` - (Optional) Specific RE. Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs.
+`specific_re` - (Optional) Specific RE. Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs. See [Specific RE](#re-select-specific-re) below.
 
 <a id="re-select-specific-re"></a>
 
@@ -613,7 +613,7 @@ For the main resource documentation, see [f5xc_securemesh_site_v2](/docs/resourc
 
 `no_site_mesh_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`site_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site Mesh Group](#site-mesh-group-on-slo-site-mesh-group) below.
 
 `sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -633,9 +633,9 @@ For the main resource documentation, see [f5xc_securemesh_site_v2](/docs/resourc
 
 ### Software Settings
 
-`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.
+`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](#software-settings-os) below.
 
-`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.
+`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#software-settings-sw) below.
 
 <a id="software-settings-os"></a>
 
@@ -669,7 +669,7 @@ For the main resource documentation, see [f5xc_securemesh_site_v2](/docs/resourc
 
 ### Upgrade Settings
 
-`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.
+`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#upgrade-settings-kubernetes-upgrade-drain) below.
 
 <a id="upgrade-settings-kubernetes-upgrade-drain"></a>
 
@@ -677,7 +677,7 @@ For the main resource documentation, see [f5xc_securemesh_site_v2](/docs/resourc
 
 `disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.
+`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
 <a id="upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
@@ -695,13 +695,13 @@ For the main resource documentation, see [f5xc_securemesh_site_v2](/docs/resourc
 
 ### Vmware
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#vmware-not-managed) below.
 
 <a id="vmware-not-managed"></a>
 
 ### Vmware Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#vmware-not-managed-node-list) below.
 
 <a id="vmware-not-managed-node-list"></a>
 

@@ -64,71 +64,71 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 > **Note:** One of the arguments from this list "active_enhanced_firewall_policies, no_network_policy" must be set.
 
-`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
 
 `no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "active_forward_proxy_policies, no_forward_proxy" must be set.
 
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
 
 `no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`admin_user_credentials` - (Optional) Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access.
+`admin_user_credentials` - (Optional) Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access. See [Admin User Credentials](#admin-user-credentials) below for details.
 
 > **Note:** One of the arguments from this list "aws, azure, baremetal, equinix, gcp, kvm, nutanix, oci, openstack, vmware" must be set.
 
-`aws` - (Optional) AWS Provider Type. AWS Provider Type.
+`aws` - (Optional) AWS Provider Type. AWS Provider Type. See [AWS](#aws) below for details.
 
-`azure` - (Optional) Azure Provider Type. Azure Provider Type.
+`azure` - (Optional) Azure Provider Type. Azure Provider Type. See [Azure](#azure) below for details.
 
-`baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type.
+`baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type. See [Baremetal](#baremetal) below for details.
 
-`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type.
+`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type. See [Equinix](#equinix) below for details.
 
-`gcp` - (Optional) GCP Provider Type. GCP Provider Type.
+`gcp` - (Optional) GCP Provider Type. GCP Provider Type. See [GCP](#gcp) below for details.
 
-`kvm` - (Optional) KVM Provider Type. KVM Provider Type.
+`kvm` - (Optional) KVM Provider Type. KVM Provider Type. See [Kvm](#kvm) below for details.
 
-`nutanix` - (Optional) Nutanix Provider Type. Nutanix Provider Type.
+`nutanix` - (Optional) Nutanix Provider Type. Nutanix Provider Type (`Block`).
 
-`oci` - (Optional) OCI Provider Type. OCI Provider Type.
+`oci` - (Optional) OCI Provider Type. OCI Provider Type (`Block`).
 
-`openstack` - (Optional) Openstack Provider Type. Openstack Provider Type.
+`openstack` - (Optional) Openstack Provider Type. Openstack Provider Type (`Block`).
 
-`vmware` - (Optional) VMware Provider Type. VMware Provider Type.
+`vmware` - (Optional) VMware Provider Type. VMware Provider Type (`Block`).
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services" must be set.
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
 > **Note:** One of the arguments from this list "custom_proxy, f5_proxy" must be set.
 
-`custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy.
+`custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy. See [Custom Proxy](#custom-proxy) below for details.
 
 `f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "custom_proxy_bypass, no_proxy_bypass" must be set.
 
-`custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy.
+`custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy. See [Custom Proxy Bypass](#custom-proxy-bypass) below for details.
 
 `no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group_sli, no_s2s_connectivity_sli" must be set.
 
-`dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Sli](#dc-cluster-group-sli) below for details.
 
 `no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group_slo, no_s2s_connectivity_slo, site_mesh_group_on_slo" must be set.
 
-`dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Slo](#dc-cluster-group-slo) below for details.
 
 `no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_mesh_group_on_slo` - (Optional) Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used.
+`site_mesh_group_on_slo` - (Optional) Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used (`Block`).
 
 > **Note:** One of the arguments from this list "disable_ha, enable_ha" must be set.
 
@@ -142,33 +142,33 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `enable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site.
+`dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site. See [DNS NTP Config](#dns-ntp-config) below for details.
 
-`load_balancing` - (Optional) Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality.
+`load_balancing` - (Optional) Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality (`Block`).
 
-`local_vrf` - (Optional) Local VRF Settings. There can be two local VRFs on each site. The Site Local Outside (SLO) local VRF is used to connect WAN side workloads to this site and to connect the site to F5 Distributed Cloud for management. All sites are required to have an SLO local VRF. The Site Local Inside (SLI) local VRF is used to connect LAN side workloads to this site. SLI local VRF is optional.
+`local_vrf` - (Optional) Local VRF Settings. There can be two local VRFs on each site. The Site Local Outside (SLO) local VRF is used to connect WAN side workloads to this site and to connect the site to F5 Distributed Cloud for management. All sites are required to have an SLO local VRF. The Site Local Inside (SLI) local VRF is used to connect LAN side workloads to this site. SLI local VRF is optional (`Block`).
 
 > **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
 
-`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.
+`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen (`Block`).
 
-`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.
+`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default (`Block`).
 
-`re_select` - (Optional) Regional Edge Selection. Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s).
+`re_select` - (Optional) Regional Edge Selection. Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s) (`Block`).
 
-`software_settings` - (Optional) F5XC Software Settings. Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created.
+`software_settings` - (Optional) F5XC Software Settings. Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created (`Block`).
 
-`timeouts` - (Optional)
+`timeouts` - (Optional) (`Block`).
 
 `tunnel_dead_timeout` - (Optional) Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used (`Number`).
 
 `tunnel_type` - (Optional) Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL. Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`. Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL` (`String`).
 
-`upgrade_settings` - (Optional) Upgrade Settings. Specify how a site will be upgraded.
+`upgrade_settings` - (Optional) Upgrade Settings. Specify how a site will be upgraded (`Block`).
 
 ### Attributes Reference
 

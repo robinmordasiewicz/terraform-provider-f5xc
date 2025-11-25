@@ -63,7 +63,7 @@ resource "f5xc_proxy" "example" {
 
 `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_virtual_sites` - (Optional) Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites. See [Site Virtual Sites](#site-virtual-sites) below for details.
+`site_virtual_sites` - (Optional) Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites (`Block`).
 
 > **Note:** One of the arguments from this list "dynamic_proxy, http_proxy" must be set.
 
@@ -75,7 +75,7 @@ resource "f5xc_proxy" "example" {
 
 `no_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception. See [TLS Intercept](#tls-intercept) below for details.
+`tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception (`Block`).
 
 > **Note:** One of the arguments from this list "site_local_inside_network, site_local_network" must be set.
 
@@ -83,7 +83,7 @@ resource "f5xc_proxy" "example" {
 
 `site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+`timeouts` - (Optional) (`Block`).
 
 ### Attributes Reference
 

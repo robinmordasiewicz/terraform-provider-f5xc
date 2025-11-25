@@ -74,29 +74,29 @@ resource "f5xc_global_log_receiver" "example" {
 
 > **Note:** One of the arguments from this list "aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver" must be set.
 
-`aws_cloud_watch_receiver` - (Optional) AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver.
+`aws_cloud_watch_receiver` - (Optional) AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver. See [AWS Cloud Watch Receiver](#aws-cloud-watch-receiver) below for details.
 
-`azure_event_hubs_receiver` - (Optional) Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver.
+`azure_event_hubs_receiver` - (Optional) Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver. See [Azure Event Hubs Receiver](#azure-event-hubs-receiver) below for details.
 
-`azure_receiver` - (Optional) Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver.
+`azure_receiver` - (Optional) Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver. See [Azure Receiver](#azure-receiver) below for details.
 
-`datadog_receiver` - (Optional) Datadog Configuration. Configuration for Datadog endpoint.
+`datadog_receiver` - (Optional) Datadog Configuration. Configuration for Datadog endpoint. See [Datadog Receiver](#datadog-receiver) below for details.
 
-`gcp_bucket_receiver` - (Optional) GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver.
+`gcp_bucket_receiver` - (Optional) GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver. See [GCP Bucket Receiver](#gcp-bucket-receiver) below for details.
 
-`http_receiver` - (Optional) HTTP Configuration. Configuration for HTTP endpoint.
+`http_receiver` - (Optional) HTTP Configuration. Configuration for HTTP endpoint (`Block`).
 
-`kafka_receiver` - (Optional) Kafka Configuration. Kafka Configuration for Global Log Receiver.
+`kafka_receiver` - (Optional) Kafka Configuration. Kafka Configuration for Global Log Receiver (`Block`).
 
-`new_relic_receiver` - (Optional) NewRelic Configuration. Configuration for NewRelic endpoint.
+`new_relic_receiver` - (Optional) NewRelic Configuration. Configuration for NewRelic endpoint (`Block`).
 
-`qradar_receiver` - (Optional) IBM QRadar Configuration. Configuration for IBM QRadar endpoint.
+`qradar_receiver` - (Optional) IBM QRadar Configuration. Configuration for IBM QRadar endpoint (`Block`).
 
-`s3_receiver` - (Optional) S3 Configuration. S3 Configuration for Global Log Receiver.
+`s3_receiver` - (Optional) S3 Configuration. S3 Configuration for Global Log Receiver (`Block`).
 
-`splunk_receiver` - (Optional) Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint.
+`splunk_receiver` - (Optional) Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint (`Block`).
 
-`sumo_logic_receiver` - (Optional) SumoLogic Configuration. Configuration for SumoLogic endpoint.
+`sumo_logic_receiver` - (Optional) SumoLogic Configuration. Configuration for SumoLogic endpoint (`Block`).
 
 > **Note:** One of the arguments from this list "ns_all, ns_current, ns_list" must be set.
 
@@ -104,9 +104,9 @@ resource "f5xc_global_log_receiver" "example" {
 
 `ns_current` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ns_list` - (Optional) Namespace List. Namespace List.
+`ns_list` - (Optional) Namespace List. Namespace List (`Block`).
 
-`timeouts` - (Optional)
+`timeouts` - (Optional) (`Block`).
 
 ### Attributes Reference
 

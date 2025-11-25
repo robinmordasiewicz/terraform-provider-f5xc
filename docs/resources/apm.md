@@ -70,7 +70,7 @@ resource "f5xc_apm" "example" {
 
 `https_management` - (Optional) HTTPS based management. HTTPS based configuration. See [HTTPS Management](#https-management) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+`timeouts` - (Optional) (`Block`).
 
 ### Attributes Reference
 

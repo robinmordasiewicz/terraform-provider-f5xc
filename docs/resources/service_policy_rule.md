@@ -114,7 +114,7 @@ resource "f5xc_service_policy_rule" "example" {
 
 `ja4_tls_fingerprint` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 TLS Fingerprint](#ja4-tls-fingerprint) below for details.
 
-`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#tls-fingerprint-matcher) below for details.
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
 
 `jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. See [JWT Claims](#jwt-claims) below for details.
 
@@ -130,11 +130,11 @@ resource "f5xc_service_policy_rule" "example" {
 
 `request_constraints` - (Optional) Request Constraints. See [Request Constraints](#request-constraints) below for details.
 
-`segment_policy` - (Optional) Configure Segments. Configure source and destination segment for policy. See [Segment Policy](#segment-policy) below for details.
+`segment_policy` - (Optional) Configure Segments. Configure source and destination segment for policy (`Block`).
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+`timeouts` - (Optional) (`Block`).
 
-`waf_action` - (Optional) App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings. See [WAF Action](#waf-action) below for details.
+`waf_action` - (Optional) App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings (`Block`).
 
 ### Attributes Reference
 

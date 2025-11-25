@@ -96,13 +96,13 @@ resource "f5xc_origin_pool" "example" {
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters. See [Use TLS](#use-tls) below for details.
+`use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters (`Block`).
 
 `origin_servers` - (Optional) Origin Servers. List of origin servers in this pool. See [Origin Servers](#origin-servers) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+`timeouts` - (Optional) (`Block`).
 
-`upstream_conn_pool_reuse_type` - (Optional) Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only. See [Upstream Conn Pool Reuse Type](#upstream-conn-pool-reuse-type) below for details.
+`upstream_conn_pool_reuse_type` - (Optional) Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only (`Block`).
 
 ### Attributes Reference
 

@@ -80,33 +80,33 @@ resource "f5xc_voltstack_site" "example" {
 
 `deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 > **Note:** One of the arguments from this list "blocked_services, default_blocked_services" must be set.
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
 `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "bond_device_list, no_bond_devices" must be set.
 
-`bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet.
+`bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
 
 `no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location.
+`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
-`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site.
+`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
 
 > **Note:** One of the arguments from this list "custom_network_config, default_network_config" must be set.
 
-`custom_network_config` - (Optional) VssNetworkConfiguration.
+`custom_network_config` - (Optional) VssNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
 
 `default_network_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "custom_storage_config, default_storage_config" must be set.
 
-`custom_storage_config` - (Optional) VssStorageConfiguration.
+`custom_storage_config` - (Optional) VssStorageConfiguration (`Block`).
 
 `default_storage_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -114,7 +114,7 @@ resource "f5xc_voltstack_site" "example" {
 
 `default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration.
+`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration (`Block`).
 
 > **Note:** One of the arguments from this list "disable_gpu, enable_gpu, enable_vgpu" must be set.
 
@@ -122,7 +122,7 @@ resource "f5xc_voltstack_site" "example" {
 
 `enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU.
+`enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU (`Block`).
 
 > **Note:** One of the arguments from this list "disable_vm, enable_vm" must be set.
 
@@ -132,33 +132,33 @@ resource "f5xc_voltstack_site" "example" {
 
 > **Note:** One of the arguments from this list "k8s_cluster, no_k8s_cluster" must be set.
 
-`k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.
+`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded (`Block`).
 
 > **Note:** One of the arguments from this list "local_control_plane, no_local_control_plane" must be set.
 
-`local_control_plane` - (Optional) Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc.
+`local_control_plane` - (Optional) Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc (`Block`).
 
 `no_local_control_plane` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
 
-`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes.
+`master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes (`Block`).
 
-`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.
+`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen (`Block`).
 
-`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.
+`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions (`Block`).
 
-`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.
+`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions (`Block`).
 
-`timeouts` - (Optional)
+`timeouts` - (Optional) (`Block`).
 
 `volterra_certified_hw` - (Optional) Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site (`String`).
 

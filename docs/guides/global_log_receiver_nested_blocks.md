@@ -758,17 +758,17 @@ For the main resource documentation, see [f5xc_global_log_receiver](/docs/resour
 
 ### Splunk Receiver
 
-`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint.
+`batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#splunk-receiver-batch) below.
 
-`compression` - (Optional) Compression Type. Compression Type.
+`compression` - (Optional) Compression Type. Compression Type. See [Compression](#splunk-receiver-compression) below.
 
 `endpoint` - (Optional) Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `HTTPS://HTTP-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`) (`String`).
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`splunk_hec_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field.
+`splunk_hec_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Splunk Hec Token](#splunk-receiver-splunk-hec-token) below.
 
-`use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint.
+`use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use TLS](#splunk-receiver-use-tls) below.
 
 <a id="splunk-receiver-batch"></a>
 
@@ -800,9 +800,9 @@ For the main resource documentation, see [f5xc_global_log_receiver](/docs/resour
 
 ### Splunk Receiver Splunk Hec Token
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#splunk-receiver-splunk-hec-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#splunk-receiver-splunk-hec-token-clear-secret-info) below.
 
 <a id="splunk-receiver-splunk-hec-token-blindfold-secret-info"></a>
 
@@ -836,7 +836,7 @@ For the main resource documentation, see [f5xc_global_log_receiver](/docs/resour
 
 `mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`mtls_enable` - (Optional) mTLS Client Config. mTLS Client config allows configuration of mTLS client options.
+`mtls_enable` - (Optional) mTLS Client Config. mTLS Client config allows configuration of mTLS client options. See [mTLS Enable](#splunk-receiver-use-tls-mtls-enable) below.
 
 `no_ca` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -854,15 +854,15 @@ For the main resource documentation, see [f5xc_global_log_receiver](/docs/resour
 
 ### Sumo Logic Receiver
 
-`url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field.
+`url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [URL](#sumo-logic-receiver-url) below.
 
 <a id="sumo-logic-receiver-url"></a>
 
 ### Sumo Logic Receiver URL
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#sumo-logic-receiver-url-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#sumo-logic-receiver-url-clear-secret-info) below.
 
 <a id="sumo-logic-receiver-url-blindfold-secret-info"></a>
 

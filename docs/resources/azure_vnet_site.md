@@ -94,7 +94,7 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
 
-`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field.
+`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
 
 > **Note:** One of the arguments from this list "alternate_region, azure_region" must be set.
 
@@ -102,41 +102,41 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `azure_region` - (Optional) Recommended Azure Region Name. Name of the azure region which supports availability zones (`String`).
 
-`azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Azure Cred](#azure-cred) below for details.
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
 `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location.
+`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
-`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site.
+`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
 
 `disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
 > **Note:** One of the arguments from this list "ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar" must be set.
 
-`ingress_egress_gw` - (Optional) Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site.
+`ingress_egress_gw` - (Optional) Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
 
-`ingress_egress_gw_ar` - (Optional) Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones.
+`ingress_egress_gw_ar` - (Optional) Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones (`Block`).
 
-`ingress_gw` - (Optional) Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region.
+`ingress_gw` - (Optional) Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region (`Block`).
 
-`ingress_gw_ar` - (Optional) Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site.
+`ingress_gw_ar` - (Optional) Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site (`Block`).
 
-`voltstack_cluster` - (Optional) Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes.
+`voltstack_cluster` - (Optional) Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes (`Block`).
 
-`voltstack_cluster_ar` - (Optional) Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes.
+`voltstack_cluster_ar` - (Optional) Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes (`Block`).
 
-`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.
+`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded (`Block`).
 
 > **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
 
-`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -150,21 +150,21 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
 
-`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.
+`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen (`Block`).
 
-`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.
+`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions (`Block`).
 
 `resource_group` - (Optional) Resource Group. Azure resource group for resources that will be created (`String`).
 
 `ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the site (`String`).
 
-`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.
+`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions (`Block`).
 
 `tags` - (Optional) Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console (`Block`).
 
-`timeouts` - (Optional)
+`timeouts` - (Optional) (`Block`).
 
-`vnet` - (Optional) Azure Vnet choice. This defines choice about Azure Vnet for a view.
+`vnet` - (Optional) Azure Vnet choice. This defines choice about Azure Vnet for a view (`Block`).
 
 ### Attributes Reference
 

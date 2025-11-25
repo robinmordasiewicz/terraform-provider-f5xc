@@ -75,7 +75,7 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "active_service_policies, no_service_policies, service_policies_from_namespace" must be set.
 
-`active_service_policies` - (Optional) Service Policy List. List of service policies.
+`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
 
 `no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -83,75 +83,75 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "api_rate_limit, disable_rate_limit, rate_limit" must be set.
 
-`api_rate_limit` - (Optional) APIRateLimit.
+`api_rate_limit` - (Optional) APIRateLimit. See [API Rate Limit](#api-rate-limit) below for details.
 
 `disable_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`rate_limit` - (Optional) RateLimitConfigType.
+`rate_limit` - (Optional) RateLimitConfigType (`Block`).
 
 > **Note:** One of the arguments from this list "api_specification, disable_api_definition" must be set.
 
-`api_specification` - (Optional) API Specification and Validation. Settings for API specification (API definition, OpenAPI validation, etc.).
+`api_specification` - (Optional) API Specification and Validation. Settings for API specification (API definition, OpenAPI validation, etc.) (`Block`).
 
 `disable_api_definition` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "app_firewall, disable_waf" must be set.
 
-`app_firewall` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`app_firewall` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `disable_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_clients` - (Optional) Client Blocking Rules. Define rules to block IP Prefixes or AS numbers.
+`blocked_clients` - (Optional) Client Blocking Rules. Define rules to block IP Prefixes or AS numbers (`Block`).
 
-`bot_defense` - (Optional) Bot Defense. This defines various configuration options for Bot Defense Policy.
+`bot_defense` - (Optional) Bot Defense. This defines various configuration options for Bot Defense Policy (`Block`).
 
 > **Note:** One of the arguments from this list "captcha_challenge, enable_challenge, js_challenge, no_challenge, policy_based_challenge" must be set.
 
-`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host.
+`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
 
-`enable_challenge` - (Optional) Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users.
+`enable_challenge` - (Optional) Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users (`Block`).
 
-`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host.
+`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
 
 `no_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`policy_based_challenge` - (Optional) Policy Based Challenge. Specifies the settings for policy rule based challenge.
+`policy_based_challenge` - (Optional) Policy Based Challenge. Specifies the settings for policy rule based challenge (`Block`).
 
 > **Note:** One of the arguments from this list "client_side_defense, disable_client_side_defense" must be set.
 
-`client_side_defense` - (Optional) Client-Side Defense. This defines various configuration options for Client-Side Defense Policy.
+`client_side_defense` - (Optional) Client-Side Defense. This defines various configuration options for Client-Side Defense Policy (`Block`).
 
 `disable_client_side_defense` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: `HTTP://foo.example/examples/access-control/simpleXSInvocation.HTML` Origin: `HTTP://foo.example` HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: * Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/XML An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: `HTTP://foo.example` Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: `HTTP://foo.example` Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive.
+`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: `HTTP://foo.example/examples/access-control/simpleXSInvocation.HTML` Origin: `HTTP://foo.example` HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: * Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/XML An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: `HTTP://foo.example` Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: `HTTP://foo.example` Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive (`Block`).
 
-`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.).
+`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.) (`Block`).
 
-`custom_cache_rule` - (Optional) Custom Cache Rules. Caching policies for CDN.
+`custom_cache_rule` - (Optional) Custom Cache Rules. Caching policies for CDN (`Block`).
 
-`data_guard_rules` - (Optional) Data Guard Rules. Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the HTTP response with a string of asterisks (*). Note: App Firewall should be enabled, to use Data Guard feature.
+`data_guard_rules` - (Optional) Data Guard Rules. Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the HTTP response with a string of asterisks (*). Note: App Firewall should be enabled, to use Data Guard feature (`Block`).
 
-`ddos_mitigation_rules` - (Optional) DDOS Mitigation Rules. Define manual mitigation rules to block L7 DDOS attacks.
+`ddos_mitigation_rules` - (Optional) DDOS Mitigation Rules. Define manual mitigation rules to block L7 DDOS attacks (`Block`).
 
-`default_cache_action` - (Optional) Default Cache Behaviour. This defines a Default Cache Action.
+`default_cache_action` - (Optional) Default Cache Behaviour. This defines a Default Cache Action (`Block`).
 
 > **Note:** One of the arguments from this list "default_sensitive_data_policy, sensitive_data_policy" must be set.
 
 `default_sensitive_data_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sensitive_data_policy` - (Optional) Sensitive Data Discovery. Settings for data type policy.
+`sensitive_data_policy` - (Optional) Sensitive Data Discovery. Settings for data type policy (`Block`).
 
 > **Note:** One of the arguments from this list "disable_api_discovery, enable_api_discovery" must be set.
 
 `disable_api_discovery` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_api_discovery` - (Optional) API Discovery Setting. Specifies the settings used for API discovery.
+`enable_api_discovery` - (Optional) API Discovery Setting. Specifies the settings used for API discovery (`Block`).
 
 > **Note:** One of the arguments from this list "disable_ip_reputation, enable_ip_reputation" must be set.
 
 `disable_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_ip_reputation` - (Optional) IP Threat Category List. List of IP threat categories.
+`enable_ip_reputation` - (Optional) IP Threat Category List. List of IP threat categories (`Block`).
 
 > **Note:** One of the arguments from this list "disable_malicious_user_detection, enable_malicious_user_detection" must be set.
 
@@ -167,17 +167,17 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 `domains` - (Optional) Domains. A list of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain] (`List`).
 
-`graphql_rules` - (Optional) GraphQL Inspection. GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy configuration to analyze GraphQL queries and prevent GraphQL tailored attacks.
+`graphql_rules` - (Optional) GraphQL Inspection. GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy configuration to analyze GraphQL queries and prevent GraphQL tailored attacks (`Block`).
 
 > **Note:** One of the arguments from this list "http, https, https_auto_cert" must be set.
 
-`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy.
+`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy (`Block`).
 
-`https` - (Optional) BYOC HTTPS Choice. Choice for selecting CDN Distribution with bring your own certificates.
+`https` - (Optional) BYOC HTTPS Choice. Choice for selecting CDN Distribution with bring your own certificates (`Block`).
 
-`https_auto_cert` - (Optional) HTTPS with Automatic Certificate. Choice for selecting HTTPS CDN distribution with bring your own certificates.
+`https_auto_cert` - (Optional) HTTPS with Automatic Certificate. Choice for selecting HTTPS CDN distribution with bring your own certificates (`Block`).
 
-`jwt_validation` - (Optional) JWT Validation. JWT Validation stops JWT replay attacks and JWT tampering by cryptographically verifying incoming JWTs before they are passed to your API origin. JWT Validation will also stop requests with expired tokens or tokens that are not yet valid.
+`jwt_validation` - (Optional) JWT Validation. JWT Validation stops JWT replay attacks and JWT tampering by cryptographically verifying incoming JWTs before they are passed to your API origin. JWT Validation will also stop requests with expired tokens or tokens that are not yet valid (`Block`).
 
 > **Note:** One of the arguments from this list "l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge" must be set.
 
@@ -185,31 +185,31 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 `l7_ddos_action_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`l7_ddos_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host.
+`l7_ddos_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
 
-`origin_pool` - (Optional) CDN Origin Pool. Origin Pool for the CDN distribution.
+`origin_pool` - (Optional) CDN Origin Pool. Origin Pool for the CDN distribution (`Block`).
 
-`other_settings` - (Optional) Other Settings. Other Settings.
+`other_settings` - (Optional) Other Settings. Other Settings (`Block`).
 
-`protected_cookies` - (Optional) Cookie Protection. Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite. The configured mode of WAF (monitoring or blocking) will be enforced on the request when cookie tampering is identified. Note: We recommend enabling Secure and HttpOnly attributes along with cookie tampering protection.
+`protected_cookies` - (Optional) Cookie Protection. Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite. The configured mode of WAF (monitoring or blocking) will be enforced on the request when cookie tampering is identified. Note: We recommend enabling Secure and HttpOnly attributes along with cookie tampering protection (`Block`).
 
 > **Note:** One of the arguments from this list "slow_ddos_mitigation, system_default_timeouts" must be set.
 
-`slow_ddos_mitigation` - (Optional) Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users.
+`slow_ddos_mitigation` - (Optional) Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users (`Block`).
 
 `system_default_timeouts` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`timeouts` - (Optional)
+`timeouts` - (Optional) (`Block`).
 
-`trusted_clients` - (Optional) Trusted Client Rules. Define rules to skip processing of one or more features such as WAF, Bot Defense etc. for clients.
+`trusted_clients` - (Optional) Trusted Client Rules. Define rules to skip processing of one or more features such as WAF, Bot Defense etc. for clients (`Block`).
 
 > **Note:** One of the arguments from this list "user_id_client_ip, user_identification" must be set.
 
 `user_id_client_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`user_identification` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`user_identification` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`waf_exclusion` - (Optional) WAF Exclusion.
+`waf_exclusion` - (Optional) WAF Exclusion (`Block`).
 
 ### Attributes Reference
 

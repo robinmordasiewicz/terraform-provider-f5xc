@@ -660,15 +660,15 @@ For the main resource documentation, see [f5xc_workload](/docs/resources/workloa
 
 `containers` - (Optional) Containers. Containers to use for service. See [Containers](#stateful-service-containers) below.
 
-`deploy_options` - (Optional) Deploy Options. Deploy Options are used to configure the workload deployment options.
+`deploy_options` - (Optional) Deploy Options. Deploy Options are used to configure the workload deployment options. See [Deploy Options](#stateful-service-deploy-options) below.
 
 `num_replicas` - (Optional) Number of Replicas. Number of replicas of service to spawn per site (`Number`).
 
-`persistent_volumes` - (Optional) Persistent Storage Configuration. Persistent storage configuration for the service.
+`persistent_volumes` - (Optional) Persistent Storage Configuration. Persistent storage configuration for the service. See [Persistent Volumes](#stateful-service-persistent-volumes) below.
 
 `scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`volumes` - (Optional) Ephemeral Volumes. Ephemeral volumes for the service.
+`volumes` - (Optional) Ephemeral Volumes. Ephemeral volumes for the service. See [Volumes](#stateful-service-volumes) below.
 
 <a id="stateful-service-advertise-options"></a>
 
@@ -728,21 +728,21 @@ For the main resource documentation, see [f5xc_workload](/docs/resources/workloa
 
 `command` - (Optional) Command. Command to execute. Overrides the docker image's ENTRYPOINT (`List`).
 
-`custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#stateful-service-containers-custom-flavor) below.
 
 `default_flavor` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY` (`String`).
 
-`image` - (Optional) Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any.
+`image` - (Optional) Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any. See [Image](#stateful-service-containers-image) below.
 
 `init_container` - (Optional) Initialization Container. Specialized container that runs before application container and runs to completion (`Bool`).
 
-`liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.
+`liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#stateful-service-containers-liveness-check) below.
 
 `name` - (Optional) Name. Name of the container (`String`).
 
-`readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.
+`readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#stateful-service-containers-readiness-check) below.
 
 <a id="stateful-service-containers-custom-flavor"></a>
 
@@ -814,13 +814,13 @@ For the main resource documentation, see [f5xc_workload](/docs/resources/workloa
 
 `default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`deploy_ce_sites` - (Optional) Customer Sites. This defines a way to deploy a workload on specific Customer sites.
+`deploy_ce_sites` - (Optional) Customer Sites. This defines a way to deploy a workload on specific Customer sites. See [Deploy CE Sites](#stateful-service-deploy-options-deploy-ce-sites) below.
 
-`deploy_ce_virtual_sites` - (Optional) Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites.
+`deploy_ce_virtual_sites` - (Optional) Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites. See [Deploy CE Virtual Sites](#stateful-service-deploy-options-deploy-ce-virtual-sites) below.
 
-`deploy_re_sites` - (Optional) Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites.
+`deploy_re_sites` - (Optional) Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites. See [Deploy RE Sites](#stateful-service-deploy-options-deploy-re-sites) below.
 
-`deploy_re_virtual_sites` - (Optional) Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites.
+`deploy_re_virtual_sites` - (Optional) Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites. See [Deploy RE Virtual Sites](#stateful-service-deploy-options-deploy-re-virtual-sites) below.
 
 <a id="stateful-service-deploy-options-deploy-ce-sites"></a>
 
@@ -852,7 +852,7 @@ For the main resource documentation, see [f5xc_workload](/docs/resources/workloa
 
 `name` - (Optional) Name. Name of the volume (`String`).
 
-`persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload.
+`persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#stateful-service-persistent-volumes-persistent-volume) below.
 
 <a id="stateful-service-persistent-volumes-persistent-volume"></a>
 
@@ -866,9 +866,9 @@ For the main resource documentation, see [f5xc_workload](/docs/resources/workloa
 
 ### Stateful Service Volumes
 
-`empty_dir` - (Optional) Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload.
+`empty_dir` - (Optional) Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload. See [Empty Dir](#stateful-service-volumes-empty-dir) below.
 
-`host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload.
+`host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#stateful-service-volumes-host-path) below.
 
 `name` - (Optional) Name. Name of the volume (`String`).
 

@@ -133,7 +133,7 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 `tls_tcp` - (Optional) BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates. See [TLS TCP](#tls-tcp) below for details.
 
-`tls_tcp_auto_cert` - (Optional) TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates. See [TLS TCP Auto Cert](#tls-tcp-auto-cert) below for details.
+`tls_tcp_auto_cert` - (Optional) TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

@@ -814,9 +814,9 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore (`String`).
 
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against.
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#ddos-mitigation-rules-ip-prefix-list) below.
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#ddos-mitigation-rules-metadata) below.
 
 <a id="ddos-mitigation-rules-ddos-client-source"></a>
 
@@ -826,9 +826,9 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `country_list` - (Optional) Country List. Sources that are located in one of the countries in the given list (`List`).
 
-`ja4_tls_fingerprint_matcher` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length.
+`ja4_tls_fingerprint_matcher` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 TLS Fingerprint Matcher](#ddos-mitigation-rules-ddos-client-source-ja4-tls-fingerprint-matcher) below.
 
-`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#ddos-mitigation-rules-ddos-client-source-tls-fingerprint-matcher) below.
 
 <a id="ddos-mitigation-rules-ddos-client-source-asn-list"></a>
 
@@ -882,17 +882,17 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Enable API Discovery
 
-`api_crawler` - (Optional) API Crawling. API Crawler message.
+`api_crawler` - (Optional) API Crawling. API Crawler message. See [API Crawler](#enable-api-discovery-api-crawler) below.
 
-`api_discovery_from_code_scan` - (Optional) Select Code Base and Repositories. x-required.
+`api_discovery_from_code_scan` - (Optional) Select Code Base and Repositories. x-required. See [API Discovery From Code Scan](#enable-api-discovery-api-discovery-from-code-scan) below.
 
-`custom_api_auth_discovery` - (Optional) API Discovery Advanced Settings. API Discovery Advanced settings.
+`custom_api_auth_discovery` - (Optional) API Discovery Advanced Settings. API Discovery Advanced settings. See [Custom API Auth Discovery](#enable-api-discovery-custom-api-auth-discovery) below.
 
 `default_api_auth_discovery` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `disable_learn_from_redirect_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`discovered_api_settings` - (Optional) Discovered API Settings. x-example: '2' Configure Discovered API Settings.
+`discovered_api_settings` - (Optional) Discovered API Settings. x-example: '2' Configure Discovered API Settings. See [Discovered API Settings](#enable-api-discovery-discovered-api-settings) below.
 
 `enable_learn_from_redirect_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -900,7 +900,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Enable API Discovery API Crawler
 
-`api_crawler_config` - (Optional) Crawler Configure.
+`api_crawler_config` - (Optional) Crawler Configure. See [API Crawler Config](#enable-api-discovery-api-crawler-api-crawler-config) below.
 
 `disable_api_crawler` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -914,7 +914,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Enable API Discovery API Discovery From Code Scan
 
-`code_base_integrations` - (Optional) Select Code Base Integrations.
+`code_base_integrations` - (Optional) Select Code Base Integrations. See [Code Base Integrations](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations) below.
 
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations"></a>
 
@@ -930,7 +930,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Enable API Discovery Custom API Auth Discovery
 
-`api_discovery_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`api_discovery_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [API Discovery Ref](#enable-api-discovery-custom-api-auth-discovery-api-discovery-ref) below.
 
 <a id="enable-api-discovery-custom-api-auth-discovery-api-discovery-ref"></a>
 
@@ -952,7 +952,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Enable Challenge
 
-`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host.
+`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host. See [Captcha Challenge Parameters](#enable-challenge-captcha-challenge-parameters) below.
 
 `default_captcha_challenge_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -960,9 +960,9 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `default_mitigation_settings` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host.
+`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host. See [Js Challenge Parameters](#enable-challenge-js-challenge-parameters) below.
 
-`malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Malicious User Mitigation](#enable-challenge-malicious-user-mitigation) below.
 
 <a id="enable-challenge-captcha-challenge-parameters"></a>
 
@@ -1008,9 +1008,9 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
-`graphql_settings` - (Optional) GraphQL Settings. GraphQL configuration.
+`graphql_settings` - (Optional) GraphQL Settings. GraphQL configuration. See [GraphQL Settings](#graphql-rules-graphql-settings) below.
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#graphql-rules-metadata) below.
 
 `method_get` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1058,15 +1058,15 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
 
-`tls_cert_options` - (Optional) TLS Options. TLS Certificate Options.
+`tls_cert_options` - (Optional) TLS Options. TLS Certificate Options. See [TLS Cert Options](#https-tls-cert-options) below.
 
 <a id="https-tls-cert-options"></a>
 
 ### HTTPS TLS Cert Options
 
-`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates.
+`tls_cert_params` - (Optional) TLS Parameters. Select TLS Parameters and Certificates. See [TLS Cert Params](#https-tls-cert-options-tls-cert-params) below.
 
-`tls_inline_params` - (Optional) Inline TLS Parameters. Inline TLS parameters.
+`tls_inline_params` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [TLS Inline Params](#https-tls-cert-options-tls-inline-params) below.
 
 <a id="https-tls-cert-options-tls-cert-params"></a>
 
@@ -1100,7 +1100,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `http_redirect` - (Optional) HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS (`Bool`).
 
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters.
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#https-auto-cert-tls-config) below.
 
 <a id="https-auto-cert-tls-config"></a>
 
@@ -1124,17 +1124,17 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### JWT Validation
 
-`action` - (Optional) Action.
+`action` - (Optional) Action. See [Action](#jwt-validation-action) below.
 
-`jwks_config` - (Optional) JSON Web Key Set (JWKS). The JSON Web Key Set (JWKS) is a set of keys used to verify JSON Web Token (JWT) issued by the Authorization Server. See RFC 7517 for more details.
+`jwks_config` - (Optional) JSON Web Key Set (JWKS). The JSON Web Key Set (JWKS) is a set of keys used to verify JSON Web Token (JWT) issued by the Authorization Server. See RFC 7517 for more details. See [Jwks Config](#jwt-validation-jwks-config) below.
 
-`mandatory_claims` - (Optional) Mandatory Claims. Configurable Validation of mandatory Claims.
+`mandatory_claims` - (Optional) Mandatory Claims. Configurable Validation of mandatory Claims. See [Mandatory Claims](#jwt-validation-mandatory-claims) below.
 
-`reserved_claims` - (Optional) Reserved claims configuration. Configurable Validation of reserved Claims.
+`reserved_claims` - (Optional) Reserved claims configuration. Configurable Validation of reserved Claims. See [Reserved Claims](#jwt-validation-reserved-claims) below.
 
-`target` - (Optional) Target. Define endpoints for which JWT token validation will be performed.
+`target` - (Optional) Target. Define endpoints for which JWT token validation will be performed. See [Target](#jwt-validation-target) below.
 
-`token_location` - (Optional) Token Location. Location of JWT in HTTP request.
+`token_location` - (Optional) Token Location. Location of JWT in HTTP request. See [Token Location](#jwt-validation-token-location) below.
 
 <a id="jwt-validation-action"></a>
 
@@ -1160,7 +1160,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### JWT Validation Reserved Claims
 
-`audience` - (Optional) Audiences.
+`audience` - (Optional) Audiences. See [Audience](#jwt-validation-reserved-claims-audience) below.
 
 `audience_disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1184,9 +1184,9 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `all_endpoint` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`api_groups` - (Optional) API Groups.
+`api_groups` - (Optional) API Groups. See [API Groups](#jwt-validation-target-api-groups) below.
 
-`base_paths` - (Optional) Base Paths.
+`base_paths` - (Optional) Base Paths. See [Base Paths](#jwt-validation-target-base-paths) below.
 
 <a id="jwt-validation-target-api-groups"></a>
 
@@ -1220,17 +1220,17 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Origin Pool
 
-`more_origin_options` - (Optional) Origin Byte Range Request Config.
+`more_origin_options` - (Optional) Origin Byte Range Request Config. See [More Origin Options](#origin-pool-more-origin-options) below.
 
 `no_tls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `origin_request_timeout` - (Optional) Origin Request Timeout Duration. Configures the time after which a request to the origin will time out waiting for a response (`String`).
 
-`origin_servers` - (Optional) List Of Origin Servers. List of original servers.
+`origin_servers` - (Optional) List Of Origin Servers. List of original servers. See [Origin Servers](#origin-pool-origin-servers) below.
 
-`public_name` - (Optional) Public DNS Name. Specify origin server with public DNS name.
+`public_name` - (Optional) Public DNS Name. Specify origin server with public DNS name. See [Public Name](#origin-pool-public-name) below.
 
-`use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters.
+`use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters. See [Use TLS](#origin-pool-use-tls) below.
 
 <a id="origin-pool-more-origin-options"></a>
 
@@ -1246,9 +1246,9 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `port` - (Optional) Origin Server Port. Port the workload can be reached on (`Number`).
 
-`public_ip` - (Optional) Public IP. Specify origin server with public IP address.
+`public_ip` - (Optional) Public IP. Specify origin server with public IP address. See [Public IP](#origin-pool-origin-servers-public-ip) below.
 
-`public_name` - (Optional) Public DNS Name. Specify origin server with public DNS name.
+`public_name` - (Optional) Public DNS Name. Specify origin server with public DNS name. See [Public Name](#origin-pool-origin-servers-public-name) below.
 
 <a id="origin-pool-origin-servers-public-ip"></a>
 
@@ -1290,15 +1290,15 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
-`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters.
+`tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#origin-pool-use-tls-tls-config) below.
 
 `use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`use_mtls` - (Optional) mTLS Certificate. mTLS Client Certificate.
+`use_mtls` - (Optional) mTLS Certificate. mTLS Client Certificate. See [Use mTLS](#origin-pool-use-tls-use-mtls) below.
 
-`use_mtls_obj` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`use_mtls_obj` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Use mTLS Obj](#origin-pool-use-tls-use-mtls-obj) below.
 
-`use_server_verification` - (Optional) TLS Validation Context for Origin Servers. Upstream TLS Validation Context.
+`use_server_verification` - (Optional) TLS Validation Context for Origin Servers. Upstream TLS Validation Context. See [Use Server Verification](#origin-pool-use-tls-use-server-verification) below.
 
 `volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1344,19 +1344,19 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `add_location` - (Optional) Add Location. x-example: true Appends header x-volterra-location = <RE-site-name> in responses (`Bool`).
 
-`header_options` - (Optional) Header Control. This defines various options related to request/response headers.
+`header_options` - (Optional) Header Control. This defines various options related to request/response headers. See [Header Options](#other-settings-header-options) below.
 
-`logging_options` - (Optional) Logging Options. This defines various options related to logging.
+`logging_options` - (Optional) Logging Options. This defines various options related to logging. See [Logging Options](#other-settings-logging-options) below.
 
 <a id="other-settings-header-options"></a>
 
 ### Other Settings Header Options
 
-`request_headers_to_add` - (Optional) Add Origin Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied.
+`request_headers_to_add` - (Optional) Add Origin Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied. See [Request Headers To Add](#other-settings-header-options-request-headers-to-add) below.
 
 `request_headers_to_remove` - (Optional) Remove Origin Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
 
-`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied.
+`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied. See [Response Headers To Add](#other-settings-header-options-response-headers-to-add) below.
 
 `response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
 
@@ -1388,9 +1388,9 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Other Settings Logging Options
 
-`client_log_options` - (Optional) Headers to Log. List of headers to Log.
+`client_log_options` - (Optional) Headers to Log. List of headers to Log. See [Client Log Options](#other-settings-logging-options-client-log-options) below.
 
-`origin_log_options` - (Optional) Headers to Log. List of headers to Log.
+`origin_log_options` - (Optional) Headers to Log. List of headers to Log. See [Origin Log Options](#other-settings-logging-options-origin-log-options) below.
 
 <a id="other-settings-logging-options-client-log-options"></a>
 
@@ -1412,7 +1412,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `always_enable_js_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host.
+`captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host. See [Captcha Challenge Parameters](#policy-based-challenge-captcha-challenge-parameters) below.
 
 `default_captcha_challenge_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1422,15 +1422,15 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `default_temporary_blocking_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host.
+`js_challenge_parameters` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host. See [Js Challenge Parameters](#policy-based-challenge-js-challenge-parameters) below.
 
-`malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Malicious User Mitigation](#policy-based-challenge-malicious-user-mitigation) below.
 
 `no_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`rule_list` - (Optional) Challenge Rule List. List of challenge rules to be used in policy based challenge.
+`rule_list` - (Optional) Challenge Rule List. List of challenge rules to be used in policy based challenge. See [Rule List](#policy-based-challenge-rule-list) below.
 
-`temporary_user_blocking` - (Optional) Temporary User Blocking. Specifies configuration for temporary user blocking resulting from user behavior analysis. When Malicious User Mitigation is enabled from service policy rules, users' accessing the application will be analyzed for malicious activity and the configured mitigation actions will be taken on identified malicious users. These mitigation actions include setting up temporary blocking on that user. This configuration specifies settings on how that blocking should be done by the loadbalancer.
+`temporary_user_blocking` - (Optional) Temporary User Blocking. Specifies configuration for temporary user blocking resulting from user behavior analysis. When Malicious User Mitigation is enabled from service policy rules, users' accessing the application will be analyzed for malicious activity and the configured mitigation actions will be taken on identified malicious users. These mitigation actions include setting up temporary blocking on that user. This configuration specifies settings on how that blocking should be done by the loadbalancer. See [Temporary User Blocking](#policy-based-challenge-temporary-user-blocking) below.
 
 <a id="policy-based-challenge-captcha-challenge-parameters"></a>
 
@@ -1464,7 +1464,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Policy Based Challenge Rule List
 
-`rules` - (Optional) Rules. Rules that specify the match conditions and challenge type to be launched. When a challenge type is selected to be always enabled, these rules can be used to disable challenge or launch a different challenge for requests that match the specified conditions.
+`rules` - (Optional) Rules. Rules that specify the match conditions and challenge type to be launched. When a challenge type is selected to be always enabled, these rules can be used to disable challenge or launch a different challenge for requests that match the specified conditions. See [Rules](#policy-based-challenge-rule-list-rules) below.
 
 <a id="policy-based-challenge-rule-list-rules"></a>
 
@@ -1514,23 +1514,23 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Rate Limit
 
-`custom_ip_allowed_list` - (Optional) Custom IP Allowed List. IP Allowed list using existing ip_prefix_set objects.
+`custom_ip_allowed_list` - (Optional) Custom IP Allowed List. IP Allowed list using existing ip_prefix_set objects. See [Custom IP Allowed List](#rate-limit-custom-ip-allowed-list) below.
 
-`ip_allowed_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint.
+`ip_allowed_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [IP Allowed List](#rate-limit-ip-allowed-list) below.
 
 `no_ip_allowed_list` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `no_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`policies` - (Optional) Rate Limiter Policy List. List of rate limiter policies to be applied.
+`policies` - (Optional) Rate Limiter Policy List. List of rate limiter policies to be applied. See [Policies](#rate-limit-policies) below.
 
-`rate_limiter` - (Optional) Rate Limit Value. A tuple consisting of a rate limit period unit and the total number of allowed requests for that period.
+`rate_limiter` - (Optional) Rate Limit Value. A tuple consisting of a rate limit period unit and the total number of allowed requests for that period. See [Rate Limiter](#rate-limit-rate-limiter) below.
 
 <a id="rate-limit-custom-ip-allowed-list"></a>
 
 ### Rate Limit Custom IP Allowed List
 
-`rate_limiter_allowed_prefixes` - (Optional) List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting.
+`rate_limiter_allowed_prefixes` - (Optional) List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. See [Rate Limiter Allowed Prefixes](#rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes) below.
 
 <a id="rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes"></a>
 
@@ -1552,7 +1552,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Rate Limit Policies
 
-`policies` - (Optional) Rate Limiter Policies. Ordered list of rate limiter policies.
+`policies` - (Optional) Rate Limiter Policies. Ordered list of rate limiter policies. See [Policies](#rate-limit-policies-policies) below.
 
 <a id="rate-limit-policies-policies"></a>
 
@@ -1568,7 +1568,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Rate Limit Rate Limiter
 
-`action_block` - (Optional) Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold.
+`action_block` - (Optional) Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold. See [Action Block](#rate-limit-rate-limiter-action-block) below.
 
 `burst_multiplier` - (Optional) Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate (`Number`).
 
@@ -1598,7 +1598,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Sensitive Data Policy
 
-`sensitive_data_policy_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`sensitive_data_policy_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Sensitive Data Policy Ref](#sensitive-data-policy-sensitive-data-policy-ref) below.
 
 <a id="sensitive-data-policy-sensitive-data-policy-ref"></a>
 
@@ -1644,13 +1644,13 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 `expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore (`String`).
 
-`http_header` - (Optional) HTTP Header. Request header name and value pairs.
+`http_header` - (Optional) HTTP Header. Request header name and value pairs. See [HTTP Header](#trusted-clients-http-header) below.
 
 `ip_prefix` - (Optional) IPv4 Prefix. IPv4 prefix string (`String`).
 
 `ipv6_prefix` - (Optional) IPv6 Prefix. IPv6 prefix string (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#trusted-clients-metadata) below.
 
 `skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1662,7 +1662,7 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### Trusted Clients HTTP Header
 
-`headers` - (Optional) HTTP Headers. List of HTTP header name and value pairs.
+`headers` - (Optional) HTTP Headers. List of HTTP header name and value pairs. See [Headers](#trusted-clients-http-header-headers) below.
 
 <a id="trusted-clients-http-header-headers"></a>
 
@@ -1700,15 +1700,15 @@ For the main resource documentation, see [f5xc_cdn_loadbalancer](/docs/resources
 
 ### WAF Exclusion
 
-`waf_exclusion_inline_rules` - (Optional) WAF Exclusion Inline Rules. A list of WAF exclusion rules that will be applied inline.
+`waf_exclusion_inline_rules` - (Optional) WAF Exclusion Inline Rules. A list of WAF exclusion rules that will be applied inline. See [WAF Exclusion Inline Rules](#waf-exclusion-waf-exclusion-inline-rules) below.
 
-`waf_exclusion_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.
+`waf_exclusion_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [WAF Exclusion Policy](#waf-exclusion-waf-exclusion-policy) below.
 
 <a id="waf-exclusion-waf-exclusion-inline-rules"></a>
 
 ### WAF Exclusion WAF Exclusion Inline Rules
 
-`rules` - (Optional) WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer.
+`rules` - (Optional) WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer. See [Rules](#waf-exclusion-waf-exclusion-inline-rules-rules) below.
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules"></a>
 

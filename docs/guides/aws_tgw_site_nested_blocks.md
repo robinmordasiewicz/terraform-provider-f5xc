@@ -638,7 +638,7 @@ For the main resource documentation, see [f5xc_aws_tgw_site](/docs/resources/aws
 
 ### Vpc Attachments
 
-`vpc_list` - (Optional) VPC List. List of VPC attachments to transit gateway.
+`vpc_list` - (Optional) VPC List. List of VPC attachments to transit gateway. See [Vpc List](#vpc-attachments-vpc-list) below.
 
 <a id="vpc-attachments-vpc-list"></a>
 

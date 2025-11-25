@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `account_email` - (Optional) Account Email. Username (email) for the Atlassian account (`String`).
 
-`api_token` - (Optional) API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value a (`String`).
+`api_token` - (Optional) API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value as an empty string (`String`).
 
 `organization_domain` - (Optional) Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034 (`String`).
 

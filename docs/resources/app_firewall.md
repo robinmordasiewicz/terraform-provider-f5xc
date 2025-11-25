@@ -70,7 +70,7 @@ resource "f5xc_app_firewall" "example" {
 
 `default_detection_settings` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`detection_settings` - (Optional) Configuration for WAF attack detection sensitivity and signature coverage. Controls which attack signatures are enabled and how they detect potential threats. See [Detection Settings](#detection-settings) below for details.
+`detection_settings` - (Optional) Detection Settings. Specifies detection settings to be used by WAF. See [Detection Settings](#detection-settings) below for details.
 
 > **Note:** One of the arguments from this list "allow_all_response_codes, allowed_response_codes" must be set.
 
@@ -90,7 +90,11 @@ resource "f5xc_app_firewall" "example" {
 
 `use_default_blocking_page` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`bot_protection_setting` - (Optional) Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation. See [Bot Protection Setting](#bot-protection-setting) below for details.
+> **Note:** One of the arguments from this list "bot_protection_setting, default_bot_setting" must be set.
+
+`bot_protection_setting` - (Optional) Bot Protection. Configuration of WAF Bot Protection. See [Bot Protection Setting](#bot-protection-setting) below for details.
+
+`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "custom_anonymization, default_anonymization, disable_anonymization" must be set.
 
@@ -99,8 +103,6 @@ resource "f5xc_app_firewall" "example" {
 `default_anonymization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `disable_anonymization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -134,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `blocking_page` - (Optional) Blocking Response Page Body. Define the content of the response page (e.g., an HTML document or a JSON object), use the {{request_id}} placeholder to provide users with a unique identifier to be able to trace the blocked request in the logs. The maximum allowed size of response body is 4096 bytes after base64 encoding, which would be about 3070 bytes in plain text (`String`).
 
-`response_code` - (Optional) HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code U... Possible values include `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, and others. Defaults to `EmptyStatusCode` (`String`).
+`response_code` - (Optional) HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode` (`String`).
 
 <a id="bot-protection-setting"></a>
 
@@ -184,7 +186,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Detection Settings
 
-`bot_protection_setting` - (Optional) Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation. See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
+`bot_protection_setting` - (Optional) Bot Protection. Configuration of WAF Bot Protection. See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
 
 `default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 

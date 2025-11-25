@@ -62,7 +62,7 @@ resource "f5xc_report_config" "example" {
 
 ### Spec Argument Reference
 
-`report_recipients` - (Optional) Configuration for report_recipients. See [Report Recipients](#report-recipients) below for details.
+`report_recipients` - (Optional) Report recipients. Report recipients. See [Report Recipients](#report-recipients) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -128,7 +128,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Waap Monthly
 
-`date` - (Optional) Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values include `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, and others (`String`).
+`date` - (Optional) Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST` (`String`).
 
 `report_generation_time` - (Optional) Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 

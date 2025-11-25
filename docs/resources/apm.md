@@ -300,7 +300,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
-`description` - (Optional) Configuration for description (`String`).
+`description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -358,7 +358,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
-`description` - (Optional) Configuration for description (`String`).
+`description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -416,7 +416,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
-`description` - (Optional) Configuration for description (`String`).
+`description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -474,7 +474,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
-`description` - (Optional) Configuration for description (`String`).
+`description` - (Optional) Description. Description for the certificate (`String`).
 
 `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 

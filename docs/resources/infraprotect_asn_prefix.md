@@ -56,7 +56,7 @@ resource "f5xc_infraprotect_asn_prefix" "example" {
 
 `asn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Asn](#asn) below for details.
 
-`prefix` - (Optional) Configuration for prefix (`String`).
+`prefix` - (Optional) Prefix. Prefix (`String`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

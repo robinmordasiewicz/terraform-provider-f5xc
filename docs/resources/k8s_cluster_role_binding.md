@@ -90,11 +90,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Subjects
 
-`group` - (Optional) Configuration for group (`String`).
+`group` - (Optional) Group. Group id of the user group (`String`).
 
 `service_account` - (Optional) ServiceAccountType. See [Service Account](#subjects-service-account) below.
 
-`user` - (Optional) Configuration for user (`String`).
+`user` - (Optional) User. User id of the user (`String`).
 
 <a id="subjects-service-account"></a>
 

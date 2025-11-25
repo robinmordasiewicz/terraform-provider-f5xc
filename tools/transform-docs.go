@@ -1012,24 +1012,19 @@ func transformDoc(filePath string) error {
 		output.WriteString("\n\n")
 	}
 
-	// Helper function to write a OneOf group with info callout and attribute descriptions
+	// Helper function to write a OneOf group with info callout and bullet list
 	writeOneOfGroup := func(attrs []attrInfo) {
 		if len(attrs) == 0 {
 			return
 		}
-		// Build list of attribute names for the callout
-		var attrNames []string
+		// Write generic info callout title (no attribute names to avoid redundancy)
+		// -> creates light blue informational style callout
+		output.WriteString("-> **Note:** Only one of the following may be set:\n\n")
+		// Write attributes as a bullet list (no indentation to avoid code block rendering)
 		for _, attr := range attrs {
-			attrNames = append(attrNames, fmt.Sprintf("`%s`", attr.name))
+			output.WriteString(fmt.Sprintf("- %s\n", formatAttrLine(attr, "")))
 		}
-		// Write single-line info callout with attribute names
-		// -> creates light blue informational style callout (must be single paragraph)
-		output.WriteString(fmt.Sprintf("-> **Note:** Only one of the following may be set: %s\n\n", strings.Join(attrNames, ", ")))
-		// Write full attribute descriptions as regular paragraphs below
-		for _, attr := range attrs {
-			output.WriteString(formatAttrLine(attr, ""))
-			output.WriteString("\n\n")
-		}
+		output.WriteString("\n")
 	}
 
 	// Write Metadata Argument Reference section (if we have metadata attrs)

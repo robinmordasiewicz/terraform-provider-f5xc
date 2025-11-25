@@ -506,21 +506,36 @@ func convertNestedBlockAnchor(nestedPath string) string {
 // transformAnchorsOnly handles already-transformed files by:
 // 1. Converting any remaining nestedblock anchor IDs to simplified format
 // 2. Removing empty sections (anchor + header with no content)
-// 3. Removing "See...below" links that point to empty sections
+// 3. Removing "See...below" links that point to empty or out-of-range sections
 func transformAnchorsOnly(filePath string, content string) error {
 	lines := strings.Split(content, "\n")
 
-	// First pass: identify which anchors have content
+	// Maximum number of H3 headings that Terraform Registry reliably renders
+	// Registry truncates large pages around heading ~66, so we use 60 as safe threshold
+	const maxSafeHeadings = 60
+
+	// First pass: identify which anchors have content and which are within safe range
 	anchorsWithContent := make(map[string]bool)
+	safeAnchors := make(map[string]bool) // track anchors within safe rendering range
 	allAnchors := make(map[string]bool)
 	anchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
 	attrLineRegex := regexp.MustCompile("^`[^`]+` - \\((Required|Optional)\\)")
 	var currentAnchor string
+	h3HeadingCount := 0
 
 	for _, line := range lines {
+		// Count H3 headings to track position for safe rendering threshold
+		if strings.HasPrefix(line, "### ") {
+			h3HeadingCount++
+		}
+
 		if m := anchorRegex.FindStringSubmatch(line); m != nil {
 			currentAnchor = m[1]
 			allAnchors[currentAnchor] = true
+			// Mark as safe if within rendering threshold
+			if h3HeadingCount < maxSafeHeadings {
+				safeAnchors[currentAnchor] = true
+			}
 		} else if currentAnchor != "" && attrLineRegex.MatchString(line) {
 			anchorsWithContent[currentAnchor] = true
 		}
@@ -569,11 +584,14 @@ func transformAnchorsOnly(filePath string, content string) error {
 			continue
 		}
 
-		// Process attribute lines to remove links to empty anchors
+		// Process attribute lines to remove links to anchors that either:
+		// 1. Have no content (empty blocks)
+		// 2. Are beyond the safe rendering threshold (Terraform Registry truncates large pages)
 		if attrLineRegex.MatchString(line) {
 			if m := seeRefRegex.FindStringSubmatch(line); m != nil {
 				anchorRef := m[2]
-				if !anchorsWithContent[anchorRef] {
+				// Only keep link if anchor has content AND is within safe range
+				if !anchorsWithContent[anchorRef] || !safeAnchors[anchorRef] {
 					// Remove the "See...below" reference
 					line = seeRefRegex.ReplaceAllString(line, "")
 					line = strings.TrimSpace(line)
@@ -610,12 +628,17 @@ func transformDoc(filePath string) error {
 
 	lines := strings.Split(contentStr, "\n")
 
+	// Maximum number of H3 headings that Terraform Registry reliably renders
+	// Registry truncates large pages around heading ~66, so we use 60 as safe threshold
+	const maxSafeHeadings = 60
+
 	// Find key sections and collect all anchor names, tracking which have content
 	schemaStart := -1
 	importStart := -1
 	firstNestedAnchor := -1
 	existingAnchors := make(map[string]bool)
-	anchorsWithContent := make(map[string]bool) // NEW: track anchors that have actual attributes
+	anchorsWithContent := make(map[string]bool) // track anchors that have actual attributes
+	safeAnchors := make(map[string]bool)        // track anchors within safe rendering range
 	// Match both original tfplugindocs format (nestedblock--xxx) and already-transformed format (xxx-yyy)
 	anchorRegexOriginal := regexp.MustCompile(`<a id="nestedblock--([^"]+)"></a>`)
 	anchorRegexSimplified := regexp.MustCompile(`<a id="([a-z0-9-]+)"></a>`)
@@ -624,7 +647,9 @@ func transformDoc(filePath string) error {
 	transformedAttrLineRegex := regexp.MustCompile("^`[^`]+` - \\((Required|Optional)\\)")
 
 	// First pass: identify all anchors and which ones have content
+	// Also count H3 headings to determine safe rendering range
 	var currentAnchorName string
+	h3HeadingCount := 0
 	for i, line := range lines {
 		// Handle both original tfplugindocs format (## Schema) and already-transformed format (## Argument Reference)
 		if strings.HasPrefix(line, "## Schema") || strings.HasPrefix(line, "## Argument Reference") {
@@ -633,6 +658,12 @@ func transformDoc(filePath string) error {
 		if strings.HasPrefix(line, "## Import") {
 			importStart = i
 		}
+
+		// Count H3 headings (### ) to track position for safe rendering threshold
+		if strings.HasPrefix(line, "### ") {
+			h3HeadingCount++
+		}
+
 		// Check for original tfplugindocs anchor format
 		if strings.HasPrefix(line, "<a id=\"nestedblock--") {
 			if firstNestedAnchor < 0 {
@@ -644,6 +675,10 @@ func transformDoc(filePath string) error {
 				anchorName := strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(m[1], "_", "-"), "--", "-"))
 				existingAnchors[anchorName] = true
 				currentAnchorName = anchorName
+				// Mark as safe if within rendering threshold
+				if h3HeadingCount < maxSafeHeadings {
+					safeAnchors[anchorName] = true
+				}
 			}
 		} else if strings.HasPrefix(line, "<a id=\"") && !strings.Contains(line, "nestedblock") {
 			// Check for already-transformed simplified anchor format
@@ -653,6 +688,10 @@ func transformDoc(filePath string) error {
 				}
 				existingAnchors[m[1]] = true
 				currentAnchorName = m[1]
+				// Mark as safe if within rendering threshold
+				if h3HeadingCount < maxSafeHeadings {
+					safeAnchors[m[1]] = true
+				}
 			}
 		}
 		// Check if current line is an attribute line (indicates the current anchor has content)
@@ -832,15 +871,16 @@ func transformDoc(filePath string) error {
 
 		// Clean any existing "See [X](#x) below" references from description to avoid duplication
 		desc := attr.desc
-		// Simple approach: remove any "See [...](...) below..." patterns
 		seeRefRegex := regexp.MustCompile(`See \[.+?\]\(#.+?\) below[^.]*\.?\s*`)
 		desc = seeRefRegex.ReplaceAllString(desc, "")
 		desc = strings.TrimSpace(desc)
 		desc = strings.TrimSuffix(desc, ".")
 
 		anchorName := toAnchorName(attr.name)
-		// Only generate "See ... below" links if the anchor has actual content (not empty blocks)
-		if attr.hasNested && anchorsWithContent[anchorName] {
+		// Only generate "See ... below" links if:
+		// 1. The anchor has actual content (not empty blocks)
+		// 2. The anchor is within safe rendering range (Terraform Registry truncates large pages)
+		if attr.hasNested && anchorsWithContent[anchorName] && safeAnchors[anchorName] {
 			if desc != "" {
 				output.WriteString(fmt.Sprintf("`%s` - %s %s. See [%s](#%s) below for details.\n\n",
 					attr.name, attr.reqStr, desc, toTitleCase(attr.name), anchorName))

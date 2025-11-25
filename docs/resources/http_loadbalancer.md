@@ -299,7 +299,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [HTTP Loadbalancer Nested Blocks Guide](/docs/guides/http_loadbalancer_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [HTTP Loadbalancer Nested Blocks](./http_loadbalancer_nested_blocks).
 
 ## Import
 

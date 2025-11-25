@@ -195,7 +195,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [AWS Vpc Site Nested Blocks Guide](/docs/guides/aws_vpc_site_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [AWS Vpc Site Nested Blocks](./aws_vpc_site_nested_blocks).
 
 ## Import
 

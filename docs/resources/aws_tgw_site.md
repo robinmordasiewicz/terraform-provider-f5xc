@@ -159,7 +159,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [AWS Tgw Site Nested Blocks Guide](/docs/guides/aws_tgw_site_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [AWS Tgw Site Nested Blocks](./aws_tgw_site_nested_blocks).
 
 ## Import
 

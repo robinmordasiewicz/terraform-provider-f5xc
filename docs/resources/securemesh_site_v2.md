@@ -180,7 +180,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [Securemesh Site V2 Nested Blocks Guide](/docs/guides/securemesh_site_v2_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [Securemesh Site V2 Nested Blocks](./securemesh_site_v2_nested_blocks).
 
 ## Import
 

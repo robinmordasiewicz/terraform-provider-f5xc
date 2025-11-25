@@ -221,7 +221,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [CDN Loadbalancer Nested Blocks Guide](/docs/guides/cdn_loadbalancer_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [CDN Loadbalancer Nested Blocks](./cdn_loadbalancer_nested_blocks).
 
 ## Import
 

@@ -180,7 +180,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [Virtual Host Nested Blocks Guide](/docs/guides/virtual_host_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [Virtual Host Nested Blocks](./virtual_host_nested_blocks).
 
 ## Import
 

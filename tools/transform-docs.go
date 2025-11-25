@@ -1019,14 +1019,15 @@ func transformDoc(filePath string) error {
 		}
 		// Write callout with bold title (no redundant "Note:" label - icon indicates it)
 		// All content stays inside the callout box using <br> for line breaks
-		output.WriteString("-> **Only one of the following may be set:**\n")
+		// Use HTML bullet points (&#x2022;) for each line item
+		output.WriteString("-> **One of the following:**\n")
 		for i, attr := range attrs {
 			if i == 0 {
-				// First attribute on next line (continuation of callout)
-				output.WriteString(fmt.Sprintf("%s\n", formatAttrLine(attr, "")))
+				// First attribute on next line (continuation of callout) with bullet
+				output.WriteString(fmt.Sprintf("&#x2022; %s\n", formatAttrLine(attr, "")))
 			} else {
-				// Subsequent attributes with <br> prefix for line breaks inside callout
-				output.WriteString(fmt.Sprintf("<br>%s\n", formatAttrLine(attr, "")))
+				// Subsequent attributes with <br> prefix and bullet for line breaks inside callout
+				output.WriteString(fmt.Sprintf("<br>&#x2022; %s\n", formatAttrLine(attr, "")))
 			}
 		}
 		output.WriteString("\n")
@@ -1208,7 +1209,7 @@ func transformDoc(filePath string) error {
 						formattedAttrs = append(formattedAttrs, fmt.Sprintf("`%s`", strings.TrimSpace(attrName)))
 					}
 					// Use Terraform Registry info callout syntax (single paragraph for light blue style)
-					output.WriteString(fmt.Sprintf("-> **Note:** Only one of the following may be set: %s\n\n", strings.Join(formattedAttrs, ", ")))
+					output.WriteString(fmt.Sprintf("-> **One of the following:** %s\n\n", strings.Join(formattedAttrs, ", ")))
 				}
 				continue
 			}

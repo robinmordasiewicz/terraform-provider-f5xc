@@ -64,11 +64,10 @@ resource "f5xc_fast_acl" "example" {
 
 `protocol_policer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Protocol Policer](#protocol-policer) below for details.
 
-> **Note:** One of the arguments from this list "re_acl, site_acl" must be set.
+-> **Note:** Only one of the following may be set:
 
-`re_acl` - (Optional) Fast ACL for RE. Fast ACL definition for RE. See [RE ACL](#re-acl) below for details.
-
-`site_acl` - (Optional) Fast ACL for Site. Fast ACL definition for Site. See [Site ACL](#site-acl) below for details.
+    - `re_acl` - (Optional) Fast ACL for RE. Fast ACL definition for RE. See [RE ACL](#re-acl) below for details.
+    - `site_acl` - (Optional) Fast ACL for Site. Fast ACL definition for Site. See [Site ACL](#site-acl) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

@@ -77,101 +77,78 @@ resource "f5xc_http_loadbalancer" "example" {
 
 ### Spec Argument Reference
 
-> **Note:** One of the arguments from this list "active_service_policies, no_service_policies, service_policies_from_namespace" must be set.
+-> **Note:** Only one of the following may be set:
 
-`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
-
-`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
+    - `no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `add_location` - (Optional) Add Location. x-example: true Appends header x-volterra-location = <RE-site-name> in responses. This configuration is ignored on CE sites (`Bool`).
 
-> **Note:** One of the arguments from this list "advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise" must be set.
+-> **Note:** Only one of the following may be set:
 
-`advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
-
-`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
-
-`advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
+    - `advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
+    - `advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `api_protection_rules` - (Optional) API Protection Rules. API Protection Rules. See [API Protection Rules](#api-protection-rules) below for details.
 
-> **Note:** One of the arguments from this list "api_rate_limit, disable_rate_limit, rate_limit" must be set.
+-> **Note:** Only one of the following may be set:
 
-`api_rate_limit` - (Optional) APIRateLimit (`Block`).
+    - `api_rate_limit` - (Optional) APIRateLimit (`Block`).
+    - `disable_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `rate_limit` - (Optional) RateLimitConfigType (`Block`).
 
-`disable_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`rate_limit` - (Optional) RateLimitConfigType (`Block`).
+    - `api_specification` - (Optional) API Specification and Validation. Settings for API specification (API definition, OpenAPI validation, etc.) (`Block`).
+    - `disable_api_definition` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-> **Note:** One of the arguments from this list "api_specification, disable_api_definition" must be set.
+-> **Note:** Only one of the following may be set:
 
-`api_specification` - (Optional) API Specification and Validation. Settings for API specification (API definition, OpenAPI validation, etc.) (`Block`).
+    - `api_testing` - (Optional) API Testing (`Block`).
+    - `disable_api_testing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_api_definition` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
 
-> **Note:** One of the arguments from this list "api_testing, disable_api_testing" must be set.
-
-`api_testing` - (Optional) API Testing (`Block`).
-
-`disable_api_testing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-> **Note:** One of the arguments from this list "app_firewall, disable_waf" must be set.
-
-`app_firewall` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-
-`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `app_firewall` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+    - `disable_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `blocked_clients` - (Optional) Client Blocking Rules. Define rules to block IP Prefixes or AS numbers (`Block`).
 
-> **Note:** One of the arguments from this list "bot_defense, bot_defense_advanced, disable_bot_defense" must be set.
+-> **Note:** Only one of the following may be set:
 
-`bot_defense` - (Optional) Bot Defense. This defines various configuration options for Bot Defense Policy (`Block`).
+    - `bot_defense` - (Optional) Bot Defense. This defines various configuration options for Bot Defense Policy (`Block`).
+    - `bot_defense_advanced` - (Optional) Bot Defense Advanced. Bot Defense Advanced (`Block`).
+    - `disable_bot_defense` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`bot_defense_advanced` - (Optional) Bot Defense Advanced. Bot Defense Advanced (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`disable_bot_defense` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `caching_policy` - (Optional) Caching Policies. x-required Caching Policies for the CDN (`Block`).
+    - `disable_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-> **Note:** One of the arguments from this list "caching_policy, disable_caching" must be set.
+-> **Note:** Only one of the following may be set:
 
-`caching_policy` - (Optional) Caching Policies. x-required Caching Policies for the CDN (`Block`).
+    - `captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
+    - `enable_challenge` - (Optional) Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users (`Block`).
+    - `js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
+    - `no_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `policy_based_challenge` - (Optional) Policy Based Challenge. Specifies the settings for policy rule based challenge (`Block`).
 
-`disable_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
 
-> **Note:** One of the arguments from this list "captcha_challenge, enable_challenge, js_challenge, no_challenge, policy_based_challenge" must be set.
+    - `client_side_defense` - (Optional) Client-Side Defense. This defines various configuration options for Client-Side Defense Policy (`Block`).
+    - `disable_client_side_defense` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`enable_challenge` - (Optional) Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users (`Block`).
-
-`js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
-
-`no_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`policy_based_challenge` - (Optional) Policy Based Challenge. Specifies the settings for policy rule based challenge (`Block`).
-
-> **Note:** One of the arguments from this list "client_side_defense, disable_client_side_defense" must be set.
-
-`client_side_defense` - (Optional) Client-Side Defense. This defines various configuration options for Client-Side Defense Policy (`Block`).
-
-`disable_client_side_defense` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-> **Note:** One of the arguments from this list "cookie_stickiness, least_active, random, ring_hash, round_robin, source_ip_stickiness" must be set.
-
-`cookie_stickiness` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously (`Block`).
-
-`least_active` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`random` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`ring_hash` - (Optional) Hash Policy List. List of hash policy rules (`Block`).
-
-`round_robin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `cookie_stickiness` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously (`Block`).
+    - `least_active` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `random` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `ring_hash` - (Optional) Hash Policy List. List of hash policy rules (`Block`).
+    - `round_robin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: `HTTP://foo.example/examples/access-control/simpleXSInvocation.HTML` Origin: `HTTP://foo.example` HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: * Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/XML An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: `HTTP://foo.example` Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: `HTTP://foo.example` Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive (`Block`).
 
@@ -181,87 +158,74 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `ddos_mitigation_rules` - (Optional) DDOS Mitigation Rules. Define manual mitigation rules to block L7 DDOS attacks (`Block`).
 
-> **Note:** One of the arguments from this list "default_pool, default_pool_list" must be set.
+-> **Note:** Only one of the following may be set:
 
-`default_pool` - (Optional) Global Specification. Shape of the origin pool specification (`Block`).
-
-`default_pool_list` - (Optional) Origin Pool List Type. List of Origin Pools (`Block`).
+    - `default_pool` - (Optional) Global Specification. Shape of the origin pool specification (`Block`).
+    - `default_pool_list` - (Optional) Origin Pool List Type. List of Origin Pools (`Block`).
 
 `default_route_pools` - (Optional) Origin Pools. Origin Pools used when no route is specified (default route) (`Block`).
 
-> **Note:** One of the arguments from this list "default_sensitive_data_policy, sensitive_data_policy" must be set.
+-> **Note:** Only one of the following may be set:
 
-`default_sensitive_data_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `default_sensitive_data_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `sensitive_data_policy` - (Optional) Sensitive Data Discovery. Settings for data type policy (`Block`).
 
-`sensitive_data_policy` - (Optional) Sensitive Data Discovery. Settings for data type policy (`Block`).
+-> **Note:** Only one of the following may be set:
 
-> **Note:** One of the arguments from this list "disable_api_discovery, enable_api_discovery" must be set.
+    - `disable_api_discovery` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `enable_api_discovery` - (Optional) API Discovery Setting. Specifies the settings used for API discovery (`Block`).
 
-`disable_api_discovery` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`enable_api_discovery` - (Optional) API Discovery Setting. Specifies the settings used for API discovery (`Block`).
+    - `disable_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `enable_ip_reputation` - (Optional) IP Threat Category List. List of IP threat categories (`Block`).
 
-> **Note:** One of the arguments from this list "disable_ip_reputation, enable_ip_reputation" must be set.
+-> **Note:** Only one of the following may be set:
 
-`disable_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `disable_malicious_user_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `enable_malicious_user_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_ip_reputation` - (Optional) IP Threat Category List. List of IP threat categories (`Block`).
+-> **Note:** Only one of the following may be set:
 
-> **Note:** One of the arguments from this list "disable_malicious_user_detection, enable_malicious_user_detection" must be set.
+    - `disable_malware_protection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `malware_protection_settings` - (Optional) Malware Protection Policy. Malware Protection protects Web Apps and APIs, from malicious file uploads by scanning files in real-time (`Block`).
 
-`disable_malicious_user_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`enable_malicious_user_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `disable_threat_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `enable_threat_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-> **Note:** One of the arguments from this list "disable_malware_protection, malware_protection_settings" must be set.
+-> **Note:** Only one of the following may be set:
 
-`disable_malware_protection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`malware_protection_settings` - (Optional) Malware Protection Policy. Malware Protection protects Web Apps and APIs, from malicious file uploads by scanning files in real-time (`Block`).
-
-> **Note:** One of the arguments from this list "disable_threat_mesh, enable_threat_mesh" must be set.
-
-`disable_threat_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`enable_threat_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-> **Note:** One of the arguments from this list "disable_trust_client_ip_headers, enable_trust_client_ip_headers" must be set.
-
-`disable_trust_client_ip_headers` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`enable_trust_client_ip_headers` - (Optional) Trust Client IP Headers List. List of Client IP Headers (`Block`).
+    - `disable_trust_client_ip_headers` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `enable_trust_client_ip_headers` - (Optional) Trust Client IP Headers List. List of Client IP Headers (`Block`).
 
 `domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Loadbalancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system (`List`).
 
 `graphql_rules` - (Optional) GraphQL Inspection. GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy configuration to analyze GraphQL queries and prevent GraphQL tailored attacks (`Block`).
 
-> **Note:** One of the arguments from this list "http, https, https_auto_cert" must be set.
+-> **Note:** Only one of the following may be set:
 
-`http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy (`Block`).
-
-`https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates (`Block`).
-
-`https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates (`Block`).
+    - `http` - (Optional) HTTP Choice. Choice for selecting HTTP proxy (`Block`).
+    - `https` - (Optional) BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates (`Block`).
+    - `https_auto_cert` - (Optional) HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates (`Block`).
 
 `jwt_validation` - (Optional) JWT Validation. JWT Validation stops JWT replay attacks and JWT tampering by cryptographically verifying incoming JWTs before they are passed to your API origin. JWT Validation will also stop requests with expired tokens or tokens that are not yet valid (`Block`).
 
-> **Note:** One of the arguments from this list "l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge" must be set.
+-> **Note:** Only one of the following may be set:
 
-`l7_ddos_action_block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`l7_ddos_action_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`l7_ddos_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
+    - `l7_ddos_action_block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `l7_ddos_action_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `l7_ddos_action_js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host (`Block`).
 
 `l7_ddos_protection` - (Optional) L7 DDOS Protection Settings. L7 DDOS protection is critical for safeguarding web applications, APIs, and services that are exposed to the internet from sophisticated, volumetric, application-level threats. Configure actions, thresholds and policies to apply during L7 DDOS attack (`Block`).
 
 `more_option` - (Optional) Advanced Options. This defines various options to define a route (`Block`).
 
-> **Note:** One of the arguments from this list "multi_lb_app, single_lb_app" must be set.
+-> **Note:** Only one of the following may be set:
 
-`multi_lb_app` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`single_lb_app` - (Optional) Single Load Balancer App Setting. Specific settings for Machine learning analysis on this HTTP LB, independently from other LBs (`Block`).
+    - `multi_lb_app` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `single_lb_app` - (Optional) Single Load Balancer App Setting. Specific settings for Machine learning analysis on this HTTP LB, independently from other LBs (`Block`).
 
 `origin_server_subset_rule_list` - (Optional) Origin Server Subset Rule List Type. List of Origin Pools (`Block`).
 
@@ -271,21 +235,19 @@ resource "f5xc_http_loadbalancer" "example" {
 
 `sensitive_data_disclosure_rules` - (Optional) Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses (`Block`).
 
-> **Note:** One of the arguments from this list "slow_ddos_mitigation, system_default_timeouts" must be set.
+-> **Note:** Only one of the following may be set:
 
-`slow_ddos_mitigation` - (Optional) Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users (`Block`).
-
-`system_default_timeouts` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `slow_ddos_mitigation` - (Optional) Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users (`Block`).
+    - `system_default_timeouts` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) (`Block`).
 
 `trusted_clients` - (Optional) Trusted Client Rules. Define rules to skip processing of one or more features such as WAF, Bot Defense etc. for clients (`Block`).
 
-> **Note:** One of the arguments from this list "user_id_client_ip, user_identification" must be set.
+-> **Note:** Only one of the following may be set:
 
-`user_id_client_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`user_identification` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+    - `user_id_client_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `user_identification` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `waf_exclusion` - (Optional) WAF Exclusion (`Block`).
 

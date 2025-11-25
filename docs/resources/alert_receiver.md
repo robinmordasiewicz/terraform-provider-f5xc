@@ -54,19 +54,14 @@ resource "f5xc_alert_receiver" "example" {
 
 ### Spec Argument Reference
 
-> **Note:** One of the arguments from this list "email, opsgenie, pagerduty, slack, sms, webhook" must be set.
+-> **Note:** Only one of the following may be set:
 
-`email` - (Optional) Email Configuration. See [Email](#email) below for details.
-
-`opsgenie` - (Optional) OpsGenie Config. OpsGenie configuration to send alert notifications. See [Opsgenie](#opsgenie) below for details.
-
-`pagerduty` - (Optional) PagerDuty Config. PagerDuty configuration to send alert notifications. See [Pagerduty](#pagerduty) below for details.
-
-`slack` - (Optional) Slack Config. Slack configuration to send alert notifications. See [Slack](#slack) below for details.
-
-`sms` - (Optional) SMS Configuration. See [Sms](#sms) below for details.
-
-`webhook` - (Optional) Webhook Config. Webhook configuration to send alert notifications. See [Webhook](#webhook) below for details.
+    - `email` - (Optional) Email Configuration. See [Email](#email) below for details.
+    - `opsgenie` - (Optional) OpsGenie Config. OpsGenie configuration to send alert notifications. See [Opsgenie](#opsgenie) below for details.
+    - `pagerduty` - (Optional) PagerDuty Config. PagerDuty configuration to send alert notifications. See [Pagerduty](#pagerduty) below for details.
+    - `slack` - (Optional) Slack Config. Slack configuration to send alert notifications. See [Slack](#slack) below for details.
+    - `sms` - (Optional) SMS Configuration. See [Sms](#sms) below for details.
+    - `webhook` - (Optional) Webhook Config. Webhook configuration to send alert notifications. See [Webhook](#webhook) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

@@ -62,13 +62,11 @@ resource "f5xc_data_group" "example" {
 
 ### Spec Argument Reference
 
-> **Note:** One of the arguments from this list "address_records, integer_records, string_records" must be set.
+-> **Note:** Only one of the following may be set:
 
-`address_records` - (Optional) Address Record. Data group with address record List. See [Address Records](#address-records) below for details.
-
-`integer_records` - (Optional) Integer record List. Data group with integer record List. See [Integer Records](#integer-records) below for details.
-
-`string_records` - (Optional) String record List. Data group with strings record List. See [String Records](#string-records) below for details.
+    - `address_records` - (Optional) Address Record. Data group with address record List. See [Address Records](#address-records) below for details.
+    - `integer_records` - (Optional) Integer record List. Data group with integer record List. See [Integer Records](#integer-records) below for details.
+    - `string_records` - (Optional) String record List. Data group with strings record List. See [String Records](#string-records) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

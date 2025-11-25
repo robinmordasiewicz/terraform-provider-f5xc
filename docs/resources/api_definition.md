@@ -59,11 +59,10 @@ resource "f5xc_api_definition" "example" {
 
 `api_inventory_inclusion_list` - (Optional) API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list. See [API Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
 
-> **Note:** One of the arguments from this list "mixed_schema_origin, strict_schema_origin" must be set.
+-> **Note:** Only one of the following may be set:
 
-`mixed_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`strict_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `mixed_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `strict_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `non_api_endpoints` - (Optional) API Discovery Exclusion List. List of Non-API Endpoints. See [Non API Endpoints](#non-api-endpoints) below for details.
 

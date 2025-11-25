@@ -54,15 +54,15 @@ resource "f5xc_segment" "example" {
 
 `annotations` - (Optional) Annotations to apply to this resource (`Map`).
 
-> **Note:** One of the arguments from this list "disable, enable" must be set.
-
 `disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
 ### Spec Argument Reference
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
+
+    - `enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

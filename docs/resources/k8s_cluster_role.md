@@ -62,13 +62,11 @@ resource "f5xc_k8s_cluster_role" "example" {
 
 ### Spec Argument Reference
 
-> **Note:** One of the arguments from this list "k8s_cluster_role_selector, policy_rule_list, yaml" must be set.
+-> **Note:** Only one of the following may be set:
 
-`k8s_cluster_role_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
-
-`policy_rule_list` - (Optional) Policy Rule List. List of rules for role permissions. See [Policy Rule List](#policy-rule-list) below for details.
-
-`yaml` - (Optional) K8s YAML. K8s YAML for ClusterRole (`String`).
+    - `k8s_cluster_role_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
+    - `policy_rule_list` - (Optional) Policy Rule List. List of rules for role permissions. See [Policy Rule List](#policy-rule-list) below for details.
+    - `yaml` - (Optional) K8s YAML. K8s YAML for ClusterRole (`String`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

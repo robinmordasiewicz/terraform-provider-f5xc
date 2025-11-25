@@ -63,13 +63,11 @@ resource "f5xc_healthcheck" "example" {
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy (`Number`).
 
-> **Note:** One of the arguments from this list "http_health_check, tcp_health_check, udp_icmp_health_check" must be set.
+-> **Note:** Only one of the following may be set:
 
-`http_health_check` - (Optional) HTTP Health Check. Healthy if 'get' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request. See [HTTP Health Check](#http-health-check) below for details.
-
-`tcp_health_check` - (Optional) TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>. See [TCP Health Check](#tcp-health-check) below for details.
-
-`udp_icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+    - `http_health_check` - (Optional) HTTP Health Check. Healthy if 'get' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request. See [HTTP Health Check](#http-health-check) below for details.
+    - `tcp_health_check` - (Optional) TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>. See [TCP Health Check](#tcp-health-check) below for details.
+    - `udp_icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two healthcheck requests (`Number`).
 

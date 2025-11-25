@@ -243,20 +243,16 @@ func getSubcategory(filename string) string {
 }
 
 // Terraform Registry limits
+// NOTE: Testing confirmed NO hard limits on file size, H2 headers, bold sections, or code blocks.
+// The previous truncation issue was caused by complex nesting with H3 headings, NOT count limits.
+// Solution: Convert H3 headings to bold text for nested blocks (single-page rendering).
 const (
 	// File size limit - documents exceeding this will be truncated
 	maxDocSizeBytes = 500 * 1024 // 500KB
 
-	// H3 heading threshold - Registry truncates rendering around 65 headings
-	// We use 60 as the safe threshold for generating anchor links
+	// These thresholds are for documentation only - H3→bold conversion prevents truncation
 	maxSafeH3Headings = 60
-
-	// Warning threshold - warn if document has many headings (likely truncated)
-	warnH3Headings = 50
-
-	// Splitting threshold - split to guides when document exceeds this many H3 headings
-	// Using 50 (same as warning threshold) to ensure all potentially truncated docs are split
-	splitH3Threshold = 50
+	warnH3Headings    = 50
 )
 
 // docWarning tracks documentation files that may have issues
@@ -268,25 +264,12 @@ type docWarning struct {
 	willTruncate bool // has too many H3 headings
 }
 
-// nestedBlockInfo holds information about a nested block section
-type nestedBlockInfo struct {
-	anchorName  string   // simplified anchor name (e.g., "active-service-policies")
-	displayName string   // human-readable name (e.g., "Active Service Policies")
-	content     []string // lines of content for this block
-	h3Count     int      // number of H3 headings in this block
-}
-
-// guidePageInfo holds information for generating a guide page
-type guidePageInfo struct {
-	resourceName string            // e.g., "http_loadbalancer"
-	subcategory  string            // e.g., "Load Balancing"
-	blocks       []nestedBlockInfo // nested blocks to include in the guide
-}
+// NOTE: nestedBlockInfo and guidePageInfo structs removed - single-page rendering mode
+// eliminates the need for page splitting functionality
 
 func main() {
 	docsDir := "docs/resources"
 	var docWarnings []docWarning
-	var splitDocs []string // Track which docs were split to guides
 
 	files, err := filepath.Glob(filepath.Join(docsDir, "*.md"))
 	if err != nil {
@@ -295,30 +278,19 @@ func main() {
 	}
 
 	for _, file := range files {
+		// Skip _nested_blocks files - they will be deleted since we now use single-page rendering
+		if strings.Contains(file, "_nested_blocks") {
+			// Delete existing nested_blocks files (cleanup from previous pagination approach)
+			if err := os.Remove(file); err == nil {
+				fmt.Printf("Removed (single-page mode): %s\n", file)
+			}
+			continue
+		}
+
 		if err := transformDoc(file); err != nil {
 			fmt.Fprintf(os.Stderr, "Error transforming %s: %v\n", file, err)
 		} else {
 			fmt.Printf("Transformed: %s\n", file)
-		}
-
-		// Check if document should be split (after initial transformation)
-		if shouldSplitToGuides(file) {
-			content, err := os.ReadFile(file)
-			if err == nil {
-				newContent, err := splitLargeDocument(file, string(content))
-				if err != nil {
-					fmt.Fprintf(os.Stderr, "Error splitting %s: %v\n", file, err)
-				} else if newContent != string(content) {
-					if err := os.WriteFile(file, []byte(newContent), 0644); err != nil {
-						fmt.Fprintf(os.Stderr, "Error writing split doc %s: %v\n", file, err)
-					} else {
-						baseName := filepath.Base(file)
-						resourceName := strings.TrimSuffix(baseName, ".md")
-						splitDocs = append(splitDocs, resourceName)
-						fmt.Printf("Split to guide: %s\n", file)
-					}
-				}
-			}
 		}
 
 		// Check for potential Registry issues after transformation
@@ -348,15 +320,6 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error transforming docs/index.md: %v\n", err)
 	} else {
 		fmt.Printf("Transformed: docs/index.md\n")
-	}
-
-	// Report documents that were split into nested blocks pages
-	if len(splitDocs) > 0 {
-		fmt.Fprintf(os.Stderr, "\n📚 INFO: %d document(s) were split into nested blocks pages:\n", len(splitDocs))
-		for _, doc := range splitDocs {
-			fmt.Fprintf(os.Stderr, "   • docs/resources/%s_nested_blocks.md\n", doc)
-		}
-		fmt.Fprintf(os.Stderr, "\n")
 	}
 
 	// Report documents with potential issues
@@ -668,25 +631,10 @@ func convertNestedBlockAnchor(nestedPath string) string {
 // transformAnchorsOnly handles already-transformed files by:
 // 1. Converting any remaining nestedblock anchor IDs to simplified format
 // 2. Removing empty sections (anchor + header with no content)
-// 3. Updating links to point to nested_blocks file if it exists
-// 4. Removing "See...below" links that point to truly empty sections
+// 3. Removing "See...below" links that point to truly empty sections
+// Note: Single-page rendering mode - no external nested_blocks files
 func transformAnchorsOnly(filePath string, content string) error {
 	lines := strings.Split(content, "\n")
-
-	// Check if a nested_blocks file exists for this resource
-	baseName := filepath.Base(filePath)
-	resourceName := strings.TrimSuffix(baseName, ".md")
-	dir := filepath.Dir(filePath)
-	nestedBlocksPath := filepath.Join(dir, resourceName+"_nested_blocks.md")
-	nestedBlocksAnchors := make(map[string]bool)
-
-	if nestedContent, err := os.ReadFile(nestedBlocksPath); err == nil {
-		// Read anchors from the nested_blocks file
-		nestedAnchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
-		for _, match := range nestedAnchorRegex.FindAllStringSubmatch(string(nestedContent), -1) {
-			nestedBlocksAnchors[match[1]] = true
-		}
-	}
 
 	// First pass: identify which anchors have content in this file
 	anchorsWithContent := make(map[string]bool)
@@ -748,19 +696,15 @@ func transformAnchorsOnly(filePath string, content string) error {
 		}
 
 		// Process attribute lines to update or remove anchor links
+		// Single-page mode: all anchors are in same file, remove links to empty anchors
 		if attrLineRegex.MatchString(line) {
 			if m := seeRefRegex.FindStringSubmatch(line); m != nil {
 				anchorRef := m[2]
-				linkText := m[1]
 
-				if nestedBlocksAnchors[anchorRef] {
-					// Anchor is in nested_blocks file - update link to point there
-					newLink := fmt.Sprintf(" See [%s](./%s_nested_blocks#%s) for details.", linkText, resourceName, anchorRef)
-					line = seeRefRegex.ReplaceAllString(line, newLink)
-				} else if anchorsWithContent[anchorRef] {
+				if anchorsWithContent[anchorRef] {
 					// Anchor exists in this file with content - keep link as is
 				} else {
-					// Anchor doesn't exist anywhere - remove the link
+					// Anchor doesn't exist or is empty - remove the link
 					line = seeRefRegex.ReplaceAllString(line, "")
 					line = strings.TrimSpace(line)
 					// Ensure proper ending punctuation
@@ -780,40 +724,7 @@ func transformAnchorsOnly(filePath string, content string) error {
 	return os.WriteFile(filePath, []byte(result), 0644)
 }
 
-// convertNestedBlocksHeadings converts H3 headers to bold text in nested_blocks files
-// This reduces the heading count so the Registry can render the full content without truncation
-func convertNestedBlocksHeadings(filePath string, content string) error {
-	lines := strings.Split(content, "\n")
-	var output strings.Builder
-
-	h3Regex := regexp.MustCompile(`^### (.+)$`)
-	prevWasAnchor := false
-
-	for _, line := range lines {
-		// Convert ### Header to **Header**
-		if m := h3Regex.FindStringSubmatch(line); m != nil {
-			output.WriteString(fmt.Sprintf("**%s**\n", m[1]))
-			// Add separator after header if previous line wasn't an anchor
-			if !prevWasAnchor {
-				output.WriteString("\n")
-			}
-			prevWasAnchor = false
-			continue
-		}
-
-		// Track anchor lines (they come before headers)
-		if strings.HasPrefix(line, "<a id=") {
-			prevWasAnchor = true
-		} else if strings.TrimSpace(line) != "" {
-			prevWasAnchor = false
-		}
-
-		output.WriteString(line + "\n")
-	}
-
-	result := normalizeBlankLines(output.String())
-	return os.WriteFile(filePath, []byte(result), 0644)
-}
+// NOTE: convertNestedBlocksHeadings function removed - single-page mode handles H3→bold inline
 
 func transformDoc(filePath string) error {
 	content, err := os.ReadFile(filePath)
@@ -823,9 +734,9 @@ func transformDoc(filePath string) error {
 
 	contentStr := string(content)
 
-	// For nested_blocks files, convert H3 headers to bold text to reduce heading count
+	// Skip nested_blocks files - they are deleted in single-page mode
 	if strings.Contains(filePath, "_nested_blocks") {
-		return convertNestedBlocksHeadings(filePath, contentStr)
+		return nil
 	}
 
 	// Check if file is already transformed (has "## Argument Reference" instead of "## Schema")
@@ -1210,17 +1121,20 @@ func transformDoc(filePath string) error {
 				continue
 			}
 
-			// Transform nested schema headers - handle both original and already-transformed formats
+			// Transform nested schema headers to BOLD text (not H3) to prevent Registry truncation
+			// Single-page rendering: H3→bold conversion allows full content to render
 			if strings.HasPrefix(line, "### Nested Schema for") {
 				headerRegex := regexp.MustCompile(`### Nested Schema for \x60([^\x60]+)\x60`)
 				if m := headerRegex.FindStringSubmatch(line); m != nil {
 					displayName := toTitleCase(strings.ReplaceAll(m[1], ".", " "))
-					output.WriteString(fmt.Sprintf("### %s\n\n", displayName))
+					// Use bold text instead of H3 to prevent truncation
+					output.WriteString(fmt.Sprintf("**%s**\n\n", displayName))
 				}
 				continue
 			} else if strings.HasPrefix(line, "### ") && !strings.HasPrefix(line, "### Nested") && inNestedBlock {
-				// Already-transformed header format: preserve as-is
-				output.WriteString(line + "\n\n")
+				// Convert any H3 headers in nested blocks to bold text
+				headerText := strings.TrimPrefix(line, "### ")
+				output.WriteString(fmt.Sprintf("**%s**\n\n", headerText))
 				continue
 			}
 
@@ -1519,244 +1433,8 @@ func normalizeOneOfKey(constraint string) string {
 	return strings.Join(fields, ", ")
 }
 
-// countH3Headings counts the number of H3 headings in content
-func countH3Headings(content string) int {
-	count := 0
-	for _, line := range strings.Split(content, "\n") {
-		if strings.HasPrefix(line, "### ") {
-			count++
-		}
-	}
-	return count
-}
+// NOTE: countH3Headings and shouldSplitToGuides functions removed
+// Single-page rendering mode uses H3→bold conversion instead of splitting
 
-// shouldSplitToGuides determines if a document should be split into guides
-func shouldSplitToGuides(filePath string) bool {
-	content, err := os.ReadFile(filePath)
-	if err != nil {
-		return false
-	}
-	return countH3Headings(string(content)) > splitH3Threshold
-}
-
-// extractNestedBlocks parses a document and extracts nested block sections
-func extractNestedBlocks(content string) []nestedBlockInfo {
-	lines := strings.Split(content, "\n")
-	var blocks []nestedBlockInfo
-
-	anchorRegex := regexp.MustCompile(`<a id="([a-z0-9-]+)"></a>`)
-	headerRegex := regexp.MustCompile(`^### (.+)$`)
-
-	var currentBlock *nestedBlockInfo
-	inNestedSection := false
-
-	for i, line := range lines {
-		// Detect start of nested block by anchor
-		if m := anchorRegex.FindStringSubmatch(line); m != nil {
-			// Save previous block if exists
-			if currentBlock != nil && len(currentBlock.content) > 0 {
-				blocks = append(blocks, *currentBlock)
-			}
-
-			// Check if next line is a header
-			displayName := m[1]
-			if i+1 < len(lines) {
-				if hm := headerRegex.FindStringSubmatch(lines[i+1]); hm != nil {
-					displayName = hm[1]
-				}
-			}
-
-			currentBlock = &nestedBlockInfo{
-				anchorName:  m[1],
-				displayName: displayName,
-				content:     []string{line},
-				h3Count:     0,
-			}
-			inNestedSection = true
-			continue
-		}
-
-		// Track H3 headings within block
-		if inNestedSection && strings.HasPrefix(line, "### ") {
-			if currentBlock != nil {
-				currentBlock.h3Count++
-			}
-		}
-
-		// Accumulate content
-		if inNestedSection && currentBlock != nil {
-			currentBlock.content = append(currentBlock.content, line)
-		}
-	}
-
-	// Save last block
-	if currentBlock != nil && len(currentBlock.content) > 0 {
-		blocks = append(blocks, *currentBlock)
-	}
-
-	return blocks
-}
-
-// generateNestedBlocksPage creates a nested blocks page in docs/resources/
-func generateNestedBlocksPage(resourceName, subcategory string, blocks []nestedBlockInfo) error {
-	if len(blocks) == 0 {
-		return nil
-	}
-
-	// Output to docs/resources/ to keep related files together
-	// (docs/guides/ is reserved for tutorials)
-	resourcesDir := "docs/resources"
-
-	// Generate nested blocks filename
-	nestedFile := filepath.Join(resourcesDir, resourceName+"_nested_blocks.md")
-
-	// Build nested blocks page content
-	var content strings.Builder
-
-	// Write frontmatter
-	displayName := toTitleCase(resourceName)
-	content.WriteString("---\n")
-	content.WriteString(fmt.Sprintf("page_title: \"%s Nested Blocks - f5xc Provider\"\n", displayName))
-	content.WriteString(fmt.Sprintf("subcategory: \"%s\"\n", subcategory))
-	content.WriteString(fmt.Sprintf("description: |-\n  Nested block reference for the %s resource.\n", displayName))
-	content.WriteString("---\n\n")
-
-	// Write header
-	content.WriteString(fmt.Sprintf("# %s Nested Blocks\n\n", displayName))
-	content.WriteString(fmt.Sprintf("This page contains detailed documentation for nested blocks in the `f5xc_%s` resource.\n\n", resourceName))
-	content.WriteString(fmt.Sprintf("For the main resource documentation, see [f5xc_%s](./resources/%s).\n\n", resourceName, resourceName))
-
-	// Write table of contents
-	content.WriteString("## Contents\n\n")
-	for _, block := range blocks {
-		content.WriteString(fmt.Sprintf("- [%s](#%s)\n", block.displayName, block.anchorName))
-	}
-	content.WriteString("\n---\n\n")
-
-	// Write each nested block, converting H3 headers to bold text to reduce heading count
-	// This allows the Registry to render the full content without truncation
-	h3ToBoldRegex := regexp.MustCompile(`^### (.+)$`)
-	for _, block := range blocks {
-		for _, line := range block.content {
-			// Convert ### Header to **Header** (keeps anchor, reduces heading count)
-			if m := h3ToBoldRegex.FindStringSubmatch(line); m != nil {
-				line = fmt.Sprintf("**%s**", m[1])
-			}
-			content.WriteString(line + "\n")
-		}
-		content.WriteString("---\n\n") // Add separator between blocks for visual distinction
-	}
-
-	// Normalize blank lines
-	result := normalizeBlankLines(content.String())
-
-	return os.WriteFile(nestedFile, []byte(result), 0644)
-}
-
-// splitLargeDocument splits a large document into main page + nested blocks page
-// Returns the modified main content and generates guide pages
-func splitLargeDocument(filePath string, content string) (string, error) {
-	// Skip files that are already nested_blocks pages (prevent double-splitting)
-	if strings.Contains(filePath, "_nested_blocks") {
-		return content, nil
-	}
-
-	lines := strings.Split(content, "\n")
-
-	// Find where nested blocks start (look for --- separator followed by anchors)
-	nestedStart := -1
-	importStart := -1
-
-	for i, line := range lines {
-		if line == "---" && i > 0 {
-			// Check if followed by anchor
-			for j := i + 1; j < len(lines) && j < i+5; j++ {
-				if strings.HasPrefix(lines[j], "<a id=\"") {
-					nestedStart = i
-					break
-				}
-			}
-		}
-		if strings.HasPrefix(line, "## Import") {
-			importStart = i
-			break
-		}
-	}
-
-	if nestedStart < 0 {
-		// No nested blocks to split
-		return content, nil
-	}
-
-	// Extract nested block content
-	nestedEnd := importStart
-	if nestedEnd < 0 {
-		nestedEnd = len(lines)
-	}
-
-	nestedContent := strings.Join(lines[nestedStart:nestedEnd], "\n")
-	blocks := extractNestedBlocks(nestedContent)
-
-	if len(blocks) == 0 {
-		return content, nil
-	}
-
-	// Get resource name and subcategory
-	baseName := filepath.Base(filePath)
-	resourceName := strings.TrimSuffix(baseName, ".md")
-	subcategory := getSubcategory(filePath)
-
-	// Generate nested blocks page in docs/resources/
-	if err := generateNestedBlocksPage(resourceName, subcategory, blocks); err != nil {
-		return content, fmt.Errorf("failed to generate nested blocks page: %w", err)
-	}
-
-	// Build set of anchor names that are being moved to nested blocks file
-	nestedAnchors := make(map[string]bool)
-	for _, block := range blocks {
-		nestedAnchors[block.anchorName] = true
-	}
-
-	// Regex to find "See [Title](#anchor) below for details." patterns
-	seeRefRegex := regexp.MustCompile(`See \[([^\]]+)\]\(#([a-z0-9-]+)\) below[^.]*\.?`)
-
-	// Build modified main content with link to guide
-	var output strings.Builder
-
-	// Write content before nested blocks, updating anchor links to point to nested_blocks file
-	for i := 0; i < nestedStart; i++ {
-		line := lines[i]
-		// Check if this line contains anchor references that need updating
-		if matches := seeRefRegex.FindAllStringSubmatchIndex(line, -1); matches != nil {
-			// Process matches in reverse order to preserve indices
-			for j := len(matches) - 1; j >= 0; j-- {
-				match := matches[j]
-				// Extract the anchor name (group 2: indices 4 and 5)
-				anchorName := line[match[4]:match[5]]
-				if nestedAnchors[anchorName] {
-					// Extract the link text (group 1: indices 2 and 3)
-					linkText := line[match[2]:match[3]]
-					// Replace with link to nested_blocks file
-					newLink := fmt.Sprintf("See [%s](./%s_nested_blocks#%s) for details.", linkText, resourceName, anchorName)
-					line = line[:match[0]] + newLink + line[match[1]:]
-				}
-			}
-		}
-		output.WriteString(line + "\n")
-	}
-
-	// Add link to nested blocks page instead of inline nested blocks
-	output.WriteString("\n---\n\n")
-	output.WriteString("## Nested Block Reference\n\n")
-	output.WriteString(fmt.Sprintf("This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [%s Nested Blocks](./%s_nested_blocks).\n\n",
-		toTitleCase(resourceName), resourceName))
-
-	// Write import section if exists
-	if importStart > 0 {
-		for i := importStart; i < len(lines); i++ {
-			output.WriteString(lines[i] + "\n")
-		}
-	}
-
-	return normalizeBlankLines(output.String()), nil
-}
+// NOTE: extractNestedBlocks, generateNestedBlocksPage, and splitLargeDocument functions removed
+// Single-page rendering mode renders all content inline with H3→bold conversion for nested blocks

@@ -493,18 +493,72 @@ func indexOf(slice []string, target string) int {
 	return -1
 }
 
+// convertNestedBlockAnchor converts nestedblock--xxx_yyy to xxx-yyy format
+func convertNestedBlockAnchor(nestedPath string) string {
+	// nestedPath is like "no_service_policies" or "active_service_policies--policies"
+	// Convert underscores to hyphens, and -- to single hyphen
+	result := strings.ToLower(nestedPath)
+	result = strings.ReplaceAll(result, "_", "-")
+	result = strings.ReplaceAll(result, "--", "-")
+	return result
+}
+
+// transformAnchorsOnly handles already-transformed files by just updating anchor IDs and references
+// This preserves all existing content while fixing the anchor format mismatch
+func transformAnchorsOnly(filePath string, content string) error {
+	// Regex to match nestedblock anchor IDs: <a id="nestedblock--xxx"></a>
+	anchorRegex := regexp.MustCompile(`<a id="nestedblock--([^"]+)"></a>`)
+
+	// Regex to match nestedblock references in links: (#nestedblock--xxx)
+	linkRegex := regexp.MustCompile(`\(#nestedblock--([^)]+)\)`)
+
+	// Convert anchor IDs
+	result := anchorRegex.ReplaceAllStringFunc(content, func(match string) string {
+		m := anchorRegex.FindStringSubmatch(match)
+		if m != nil {
+			newAnchor := convertNestedBlockAnchor(m[1])
+			return fmt.Sprintf(`<a id="%s"></a>`, newAnchor)
+		}
+		return match
+	})
+
+	// Convert link references
+	result = linkRegex.ReplaceAllStringFunc(result, func(match string) string {
+		m := linkRegex.FindStringSubmatch(match)
+		if m != nil {
+			newAnchor := convertNestedBlockAnchor(m[1])
+			return fmt.Sprintf(`(#%s)`, newAnchor)
+		}
+		return match
+	})
+
+	return os.WriteFile(filePath, []byte(result), 0644)
+}
+
 func transformDoc(filePath string) error {
 	content, err := os.ReadFile(filePath)
 	if err != nil {
 		return err
 	}
 
-	lines := strings.Split(string(content), "\n")
+	contentStr := string(content)
 
-	// Find key sections
+	// Check if file is already transformed (has "## Argument Reference" instead of "## Schema")
+	// For already-transformed files, just do anchor/link conversion without full restructuring
+	if strings.Contains(contentStr, "## Argument Reference") && !strings.Contains(contentStr, "## Schema") {
+		return transformAnchorsOnly(filePath, contentStr)
+	}
+
+	lines := strings.Split(contentStr, "\n")
+
+	// Find key sections and collect all anchor names
 	schemaStart := -1
 	importStart := -1
 	firstNestedAnchor := -1
+	existingAnchors := make(map[string]bool)
+	// Match both original tfplugindocs format (nestedblock--xxx) and already-transformed format (xxx-yyy)
+	anchorRegexOriginal := regexp.MustCompile(`<a id="nestedblock--([^"]+)"></a>`)
+	anchorRegexSimplified := regexp.MustCompile(`<a id="([a-z0-9-]+)"></a>`)
 
 	for i, line := range lines {
 		// Handle both original tfplugindocs format (## Schema) and already-transformed format (## Argument Reference)
@@ -514,8 +568,25 @@ func transformDoc(filePath string) error {
 		if strings.HasPrefix(line, "## Import") {
 			importStart = i
 		}
-		if firstNestedAnchor < 0 && strings.HasPrefix(line, "<a id=\"nestedblock--") {
-			firstNestedAnchor = i
+		// Check for original tfplugindocs anchor format
+		if strings.HasPrefix(line, "<a id=\"nestedblock--") {
+			if firstNestedAnchor < 0 {
+				firstNestedAnchor = i
+			}
+			// Collect anchor names for later validation
+			if m := anchorRegexOriginal.FindStringSubmatch(line); m != nil {
+				// Store the simplified anchor name that will be generated
+				anchorName := strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(m[1], "_", "-"), "--", "-"))
+				existingAnchors[anchorName] = true
+			}
+		} else if strings.HasPrefix(line, "<a id=\"") && !strings.Contains(line, "nestedblock") {
+			// Check for already-transformed simplified anchor format
+			if m := anchorRegexSimplified.FindStringSubmatch(line); m != nil {
+				if firstNestedAnchor < 0 {
+					firstNestedAnchor = i
+				}
+				existingAnchors[m[1]] = true
+			}
 		}
 	}
 
@@ -696,8 +767,9 @@ func transformDoc(filePath string) error {
 		desc = strings.TrimSpace(desc)
 		desc = strings.TrimSuffix(desc, ".")
 
-		if attr.hasNested {
-			anchorName := toAnchorName(attr.name)
+		anchorName := toAnchorName(attr.name)
+		// Only generate "See ... below" links if the anchor actually exists in the file
+		if attr.hasNested && existingAnchors[anchorName] {
 			if desc != "" {
 				output.WriteString(fmt.Sprintf("`%s` - %s %s. See [%s](#%s) below for details.\n\n",
 					attr.name, attr.reqStr, desc, toTitleCase(attr.name), anchorName))
@@ -756,30 +828,48 @@ func transformDoc(filePath string) error {
 		currentBlockName := ""
 		inNestedBlock := false
 
+		// Regex patterns for anchor detection
+		anchorRegexOriginal := regexp.MustCompile(`<a id="nestedblock--([^"]+)"></a>`)
+		anchorRegexSimplified := regexp.MustCompile(`<a id="([a-z0-9-]+)"></a>`)
+
 		for i := firstNestedAnchor; i < nestedEnd; i++ {
 			line := lines[i]
 
-			// Detect anchor
+			// Detect anchor - handle both original tfplugindocs format and already-transformed format
 			if strings.HasPrefix(line, "<a id=\"nestedblock--") {
-				// Extract anchor ID
-				anchorRegex := regexp.MustCompile(`<a id="(nestedblock--[^"]+)"></a>`)
-				if m := anchorRegex.FindStringSubmatch(line); m != nil {
-					anchorID := m[1]
-					currentBlockName = strings.ReplaceAll(strings.TrimPrefix(anchorID, "nestedblock--"), "--", ".")
+				// Original tfplugindocs format: convert to simplified
+				if m := anchorRegexOriginal.FindStringSubmatch(line); m != nil {
+					attrPath := m[1] // e.g., "no_service_policies" or "active_service_policies--policies"
+					currentBlockName = strings.ReplaceAll(attrPath, "--", ".")
+					// Convert to simplified anchor: underscores and -- become hyphens
+					anchorName := strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(attrPath, "_", "-"), "--", "-"))
 					// Add blank line before anchor for proper markdown formatting
-					output.WriteString(fmt.Sprintf("\n<a id=\"%s\"></a>\n\n", anchorID))
+					output.WriteString(fmt.Sprintf("\n<a id=\"%s\"></a>\n\n", anchorName))
+					inNestedBlock = true
+				}
+				continue
+			} else if strings.HasPrefix(line, "<a id=\"") && !strings.Contains(line, "nestedblock") {
+				// Already-transformed simplified format: preserve as-is
+				if m := anchorRegexSimplified.FindStringSubmatch(line); m != nil {
+					currentBlockName = strings.ReplaceAll(m[1], "-", ".")
+					// Write anchor as-is (already in simplified format)
+					output.WriteString(fmt.Sprintf("\n<a id=\"%s\"></a>\n\n", m[1]))
 					inNestedBlock = true
 				}
 				continue
 			}
 
-			// Transform nested schema headers
+			// Transform nested schema headers - handle both original and already-transformed formats
 			if strings.HasPrefix(line, "### Nested Schema for") {
 				headerRegex := regexp.MustCompile(`### Nested Schema for \x60([^\x60]+)\x60`)
 				if m := headerRegex.FindStringSubmatch(line); m != nil {
 					displayName := toTitleCase(strings.ReplaceAll(m[1], ".", " "))
 					output.WriteString(fmt.Sprintf("### %s\n\n", displayName))
 				}
+				continue
+			} else if strings.HasPrefix(line, "### ") && !strings.HasPrefix(line, "### Nested") && inNestedBlock {
+				// Already-transformed header format: preserve as-is
+				output.WriteString(line + "\n\n")
 				continue
 			}
 
@@ -797,7 +887,7 @@ func transformDoc(filePath string) error {
 				continue
 			}
 
-			// Transform attribute lines in nested blocks
+			// Transform attribute lines in nested blocks - original tfplugindocs format
 			if inNestedBlock && strings.HasPrefix(line, "- `") {
 				if matches := attrRegex.FindStringSubmatch(line); matches != nil {
 					name := matches[1]
@@ -811,11 +901,12 @@ func transformDoc(filePath string) error {
 					typeStr := extractSimpleType(typeInfo)
 
 					if hasNested {
-						// Extract the nested anchor
-						nestedAnchorRegex := regexp.MustCompile(`#(nestedblock--[^)]+)`)
+						// Extract the nested anchor and convert to simplified format
+						nestedAnchorRegex := regexp.MustCompile(`#nestedblock--([^)]+)`)
 						nestedAnchor := ""
 						if am := nestedAnchorRegex.FindStringSubmatch(matches[3]); am != nil {
-							nestedAnchor = am[1]
+							// Convert to simplified anchor: underscores and -- become hyphens
+							nestedAnchor = strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(am[1], "_", "-"), "--", "-"))
 						}
 
 						if nestedAnchor != "" && desc != "" {
@@ -835,6 +926,13 @@ func transformDoc(filePath string) error {
 						}
 					}
 				}
+				continue
+			}
+
+			// Handle already-transformed attribute lines - format: `name` - (Optional) ...
+			if inNestedBlock && strings.HasPrefix(line, "`") && strings.Contains(line, "` - (") {
+				// Already-transformed format: preserve as-is
+				output.WriteString(line + "\n\n")
 				continue
 			}
 

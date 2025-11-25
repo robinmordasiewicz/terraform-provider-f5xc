@@ -95,11 +95,32 @@ jobs:
           gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} \
             --auto --squash
 
+      - name: Check if generator tools modified
+        id: generator-check
+        if: github.event_name == 'pull_request'
+        run: |
+          # Get changed files in this PR
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+          # Check if generator tools are modified
+          if echo "$CHANGED_FILES" | grep -qE "^tools/transform-docs\.go$|^tools/generate-|^templates/"; then
+            echo "Generator tools modified - docs regeneration expected after merge"
+            echo "generator_modified=true" >> $GITHUB_OUTPUT
+          else
+            echo "generator_modified=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Fail if docs are out of date on PR
-        # Skip for auto-generate/* branches - docs are expected to be out of date
-        # because resources were just regenerated. Docs will be updated when the
-        # auto-generate PR merges and triggers this workflow on push to main.
-        if: steps.changes.outputs.changed == 'true' && github.event_name == 'pull_request' && !startsWith(github.head_ref, 'auto-generate/')
+        # Skip for:
+        # - auto-generate/* branches: resources were just regenerated
+        # - PRs modifying generator tools: docs regeneration expected after merge
+        # In both cases, docs will be updated when the PR merges and triggers
+        # this workflow on push to main.
+        if: |
+          steps.changes.outputs.changed == 'true' &&
+          github.event_name == 'pull_request' &&
+          !startsWith(github.head_ref, 'auto-generate/') &&
+          steps.generator-check.outputs.generator_modified != 'true'
         run: |
           echo "::error::Provider documentation is out of date. Please run 'tfplugindocs generate && go run tools/transform-docs.go' locally and commit the changes."
           git diff docs/

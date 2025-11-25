@@ -75,7 +75,7 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "active_service_policies, no_service_policies, service_policies_from_namespace" must be set.
 
-`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
+`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](./cdn_loadbalancer_nested_blocks#active-service-policies) for details.
 
 `no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -83,7 +83,7 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "api_rate_limit, disable_rate_limit, rate_limit" must be set.
 
-`api_rate_limit` - (Optional) APIRateLimit. See [API Rate Limit](#api-rate-limit) below for details.
+`api_rate_limit` - (Optional) APIRateLimit. See [API Rate Limit](./cdn_loadbalancer_nested_blocks#api-rate-limit) for details.
 
 `disable_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 

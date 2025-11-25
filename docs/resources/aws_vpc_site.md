@@ -91,9 +91,9 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
 
-`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
+`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](./aws_vpc_site_nested_blocks#admin-password) for details.
 
-`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#aws-cred) below for details.
+`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](./aws_vpc_site_nested_blocks#aws-cred) for details.
 
 `aws_region` - (Optional) AWS Region. Name for AWS Region (`String`).
 
@@ -101,17 +101,17 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](./aws_vpc_site_nested_blocks#blocked-services) for details.
 
 `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
+`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](./aws_vpc_site_nested_blocks#coordinates) for details.
 
-`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
+`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](./aws_vpc_site_nested_blocks#custom-dns) for details.
 
 > **Note:** One of the arguments from this list "custom_security_group, f5xc_security_group" must be set.
 
-`custom_security_group` - (Optional) Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC. See [Custom Security Group](#custom-security-group) below for details.
+`custom_security_group` - (Optional) Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC. See [Custom Security Group](./aws_vpc_site_nested_blocks#custom-security-group) for details.
 
 `f5xc_security_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -119,7 +119,7 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `direct_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](#direct-connect-enabled) below for details.
+`direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](./aws_vpc_site_nested_blocks#direct-connect-enabled) for details.
 
 `private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration (`Block`).
 
@@ -135,9 +135,9 @@ resource "f5xc_aws_vpc_site" "example" {
 
 `egress_gateway_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`egress_nat_gw` - (Optional) AWS NAT Gateway choice. With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway. See [Egress NAT Gw](#egress-nat-gw) below for details.
+`egress_nat_gw` - (Optional) AWS NAT Gateway choice. With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway. See [Egress NAT Gw](./aws_vpc_site_nested_blocks#egress-nat-gw) for details.
 
-`egress_virtual_private_gateway` - (Optional) AWS Virtual Private Gateway choice. With this option, egress site traffic will be routed through an Virtual Private Gateway. See [Egress Virtual Private Gateway](#egress-virtual-private-gateway) below for details.
+`egress_virtual_private_gateway` - (Optional) AWS Virtual Private Gateway choice. With this option, egress site traffic will be routed through an Virtual Private Gateway. See [Egress Virtual Private Gateway](./aws_vpc_site_nested_blocks#egress-virtual-private-gateway) for details.
 
 > **Note:** One of the arguments from this list "f5_orchestrated_routing, manual_routing" must be set.
 
@@ -147,7 +147,7 @@ resource "f5xc_aws_vpc_site" "example" {
 
 > **Note:** One of the arguments from this list "ingress_egress_gw, ingress_gw, voltstack_cluster" must be set.
 
-`ingress_egress_gw` - (Optional) AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+`ingress_egress_gw` - (Optional) AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site. See [Ingress Egress Gw](./aws_vpc_site_nested_blocks#ingress-egress-gw) for details.
 
 `ingress_gw` - (Optional) AWS Ingress Gateway. Single interface AWS ingress site (`Block`).
 

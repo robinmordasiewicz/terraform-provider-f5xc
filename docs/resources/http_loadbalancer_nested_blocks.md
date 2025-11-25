@@ -296,13 +296,15 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 <a id="active-service-policies"></a>
 
-### Active Service Policies
+**Active Service Policies**
 
 `policies` - (Optional) Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are evaluated. Otherwise, the next policy is evaluated. If all policies are evaluated and none match, then the request will be denied by default. See [Policies](#active-service-policies-policies) below.
 
+---
+
 <a id="active-service-policies-policies"></a>
 
-### Active Service Policies Policies
+**Active Service Policies Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -310,15 +312,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="advertise-custom"></a>
 
-### Advertise Custom
+**Advertise Custom**
 
 `advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#advertise-custom-advertise-where) below.
 
+---
+
 <a id="advertise-custom-advertise-where"></a>
 
-### Advertise Custom Advertise Where
+**Advertise Custom Advertise Where**
 
 `advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-custom-advertise-where-advertise-on-public) below.
 
@@ -338,15 +344,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `vk8s_service` - (Optional) vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network. See [Vk8s Service](#advertise-custom-advertise-where-vk8s-service) below.
 
+---
+
 <a id="advertise-custom-advertise-where-advertise-on-public"></a>
 
-### Advertise Custom Advertise Where Advertise On Public
+**Advertise Custom Advertise Where Advertise On Public**
 
 `public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="advertise-custom-advertise-where-site"></a>
 
-### Advertise Custom Advertise Where Site
+**Advertise Custom Advertise Where Site**
 
 `ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
 
@@ -354,9 +364,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="advertise-custom-advertise-where-virtual-network"></a>
 
-### Advertise Custom Advertise Where Virtual Network
+**Advertise Custom Advertise Where Virtual Network**
 
 `default_v6_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -368,17 +380,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="advertise-custom-advertise-where-virtual-site"></a>
 
-### Advertise Custom Advertise Where Virtual Site
+**Advertise Custom Advertise Where Virtual Site**
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
 `virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="advertise-custom-advertise-where-virtual-site-with-vip"></a>
 
-### Advertise Custom Advertise Where Virtual Site With VIP
+**Advertise Custom Advertise Where Virtual Site With VIP**
 
 `ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
 
@@ -386,23 +402,29 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="advertise-custom-advertise-where-vk8s-service"></a>
 
-### Advertise Custom Advertise Where Vk8s Service
+**Advertise Custom Advertise Where Vk8s Service**
 
 `site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="advertise-on-public"></a>
 
-### Advertise On Public
+**Advertise On Public**
 
 `public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public IP](#advertise-on-public-public-ip) below.
 
+---
+
 <a id="advertise-on-public-public-ip"></a>
 
-### Advertise On Public Public IP
+**Advertise On Public Public IP**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -410,17 +432,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="api-protection-rules"></a>
 
-### API Protection Rules
+**API Protection Rules**
 
 `api_endpoint_rules` - (Optional) API Endpoints. This category defines specific rules per API endpoints. If request matches any of these rules, skipping second category rules. See [API Endpoint Rules](#api-protection-rules-api-endpoint-rules) below.
 
 `api_groups_rules` - (Optional) Server URLs and API Groups. This category includes rules per API group or Server URL. For API groups, refer to API Definition which includes API groups derived from uploaded swaggers. See [API Groups Rules](#api-protection-rules-api-groups-rules) below.
 
+---
+
 <a id="api-protection-rules-api-endpoint-rules"></a>
 
-### API Protection Rules API Endpoint Rules
+**API Protection Rules API Endpoint Rules**
 
 `action` - (Optional) API Protection Rule Action. The action to take if the input request matches the rule. See [Action](#api-protection-rules-api-endpoint-rules-action) below.
 
@@ -438,25 +464,31 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain. For example: API.example.com (`String`).
 
+---
+
 <a id="api-protection-rules-api-endpoint-rules-action"></a>
 
-### API Protection Rules API Endpoint Rules Action
+**API Protection Rules API Endpoint Rules Action**
 
 `allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="api-protection-rules-api-endpoint-rules-api-endpoint-method"></a>
 
-### API Protection Rules API Endpoint Rules API Endpoint Method
+**API Protection Rules API Endpoint Rules API Endpoint Method**
 
 `invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
 
 `methods` - (Optional) Method List. List of methods values to match against (`List`).
 
+---
+
 <a id="api-protection-rules-api-endpoint-rules-client-matcher"></a>
 
-### API Protection Rules API Endpoint Rules Client Matcher
+**API Protection Rules API Endpoint Rules Client Matcher**
 
 `any_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -476,17 +508,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
 
+---
+
 <a id="api-protection-rules-api-endpoint-rules-metadata"></a>
 
-### API Protection Rules API Endpoint Rules Metadata
+**API Protection Rules API Endpoint Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="api-protection-rules-api-endpoint-rules-request-matcher"></a>
 
-### API Protection Rules API Endpoint Rules Request Matcher
+**API Protection Rules API Endpoint Rules Request Matcher**
 
 `cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
 
@@ -496,9 +532,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
 
+---
+
 <a id="api-protection-rules-api-groups-rules"></a>
 
-### API Protection Rules API Groups Rules
+**API Protection Rules API Groups Rules**
 
 `action` - (Optional) API Protection Rule Action. The action to take if the input request matches the rule. See [Action](#api-protection-rules-api-groups-rules-action) below.
 
@@ -516,17 +554,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain. For example: API.example.com (`String`).
 
+---
+
 <a id="api-protection-rules-api-groups-rules-action"></a>
 
-### API Protection Rules API Groups Rules Action
+**API Protection Rules API Groups Rules Action**
 
 `allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="api-protection-rules-api-groups-rules-client-matcher"></a>
 
-### API Protection Rules API Groups Rules Client Matcher
+**API Protection Rules API Groups Rules Client Matcher**
 
 `any_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -546,17 +588,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
 
+---
+
 <a id="api-protection-rules-api-groups-rules-metadata"></a>
 
-### API Protection Rules API Groups Rules Metadata
+**API Protection Rules API Groups Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="api-protection-rules-api-groups-rules-request-matcher"></a>
 
-### API Protection Rules API Groups Rules Request Matcher
+**API Protection Rules API Groups Rules Request Matcher**
 
 `cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
 
@@ -566,9 +612,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
 
+---
+
 <a id="api-rate-limit"></a>
 
-### API Rate Limit
+**API Rate Limit**
 
 `api_endpoint_rules` - (Optional) API Endpoints. Sets of rules for a specific endpoints. Order is matter as it uses first match policy. For creating rule that contain a whole domain or group of endpoints, please use the server URL rules above. See [API Endpoint Rules](#api-rate-limit-api-endpoint-rules) below.
 
@@ -582,9 +630,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `server_url_rules` - (Optional) Server URLs. Set of rules for entire domain or base path that contain multiple endpoints. Order is matter as it uses first match policy. For matching also specific endpoints you can use the API endpoint rules set bellow. See [Server URL Rules](#api-rate-limit-server-url-rules) below.
 
+---
+
 <a id="api-rate-limit-api-endpoint-rules"></a>
 
-### API Rate Limit API Endpoint Rules
+**API Rate Limit API Endpoint Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -602,17 +652,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain (`String`).
 
+---
+
 <a id="api-rate-limit-api-endpoint-rules-api-endpoint-method"></a>
 
-### API Rate Limit API Endpoint Rules API Endpoint Method
+**API Rate Limit API Endpoint Rules API Endpoint Method**
 
 `invert_matcher` - (Optional) Invert Method Matcher. Invert the match result (`Bool`).
 
 `methods` - (Optional) Method List. List of methods values to match against (`List`).
 
+---
+
 <a id="api-rate-limit-api-endpoint-rules-client-matcher"></a>
 
-### API Rate Limit API Endpoint Rules Client Matcher
+**API Rate Limit API Endpoint Rules Client Matcher**
 
 `any_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -632,9 +686,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
 
+---
+
 <a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter"></a>
 
-### API Rate Limit API Endpoint Rules Inline Rate Limiter
+**API Rate Limit API Endpoint Rules Inline Rate Limiter**
 
 `ref_user_id` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
@@ -644,9 +700,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `use_http_lb_user_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="api-rate-limit-api-endpoint-rules-ref-rate-limiter"></a>
 
-### API Rate Limit API Endpoint Rules Ref Rate Limiter
+**API Rate Limit API Endpoint Rules Ref Rate Limiter**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -654,9 +712,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="api-rate-limit-api-endpoint-rules-request-matcher"></a>
 
-### API Rate Limit API Endpoint Rules Request Matcher
+**API Rate Limit API Endpoint Rules Request Matcher**
 
 `cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
 
@@ -666,15 +726,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
 
+---
+
 <a id="api-rate-limit-bypass-rate-limiting-rules"></a>
 
-### API Rate Limit Bypass Rate Limiting Rules
+**API Rate Limit Bypass Rate Limiting Rules**
 
 `bypass_rate_limiting_rules` - (Optional) Bypass Rate Limiting. This category defines rules per URL or API group. If request matches any of these rules, skip Rate Limiting. See [Bypass Rate Limiting Rules](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules) below.
 
+---
+
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules"></a>
 
-### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules
+**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -692,15 +756,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain. For example: API.example.com (`String`).
 
+---
+
 <a id="api-rate-limit-custom-ip-allowed-list"></a>
 
-### API Rate Limit Custom IP Allowed List
+**API Rate Limit Custom IP Allowed List**
 
 `rate_limiter_allowed_prefixes` - (Optional) List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. See [Rate Limiter Allowed Prefixes](#api-rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes) below.
 
+---
+
 <a id="api-rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes"></a>
 
-### API Rate Limit Custom IP Allowed List Rate Limiter Allowed Prefixes
+**API Rate Limit Custom IP Allowed List Rate Limiter Allowed Prefixes**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -708,15 +776,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="api-rate-limit-ip-allowed-list"></a>
 
-### API Rate Limit IP Allowed List
+**API Rate Limit IP Allowed List**
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
+---
+
 <a id="api-rate-limit-server-url-rules"></a>
 
-### API Rate Limit Server URL Rules
+**API Rate Limit Server URL Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -734,9 +806,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `specific_domain` - (Optional) Specific Domain. The rule will apply for a specific domain (`String`).
 
+---
+
 <a id="api-rate-limit-server-url-rules-client-matcher"></a>
 
-### API Rate Limit Server URL Rules Client Matcher
+**API Rate Limit Server URL Rules Client Matcher**
 
 `any_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -756,9 +830,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
 
+---
+
 <a id="api-rate-limit-server-url-rules-inline-rate-limiter"></a>
 
-### API Rate Limit Server URL Rules Inline Rate Limiter
+**API Rate Limit Server URL Rules Inline Rate Limiter**
 
 `ref_user_id` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
@@ -768,9 +844,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `use_http_lb_user_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="api-rate-limit-server-url-rules-ref-rate-limiter"></a>
 
-### API Rate Limit Server URL Rules Ref Rate Limiter
+**API Rate Limit Server URL Rules Ref Rate Limiter**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -778,9 +856,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="api-rate-limit-server-url-rules-request-matcher"></a>
 
-### API Rate Limit Server URL Rules Request Matcher
+**API Rate Limit Server URL Rules Request Matcher**
 
 `cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
 
@@ -790,9 +870,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
 
+---
+
 <a id="api-specification"></a>
 
-### API Specification
+**API Specification**
 
 `api_definition` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [API Definition](#api-specification-api-definition) below.
 
@@ -802,9 +884,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `validation_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="api-specification-api-definition"></a>
 
-### API Specification API Definition
+**API Specification API Definition**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -812,9 +896,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="api-specification-validation-all-spec-endpoints"></a>
 
-### API Specification Validation All Spec Endpoints
+**API Specification Validation All Spec Endpoints**
 
 `fall_through_mode` - (Optional) Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules). See [Fall Through Mode](#api-specification-validation-all-spec-endpoints-fall-through-mode) below.
 
@@ -822,17 +908,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `validation_mode` - (Optional) Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger). See [Validation Mode](#api-specification-validation-all-spec-endpoints-validation-mode) below.
 
+---
+
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode"></a>
 
-### API Specification Validation All Spec Endpoints Fall Through Mode
+**API Specification Validation All Spec Endpoints Fall Through Mode**
 
 `fall_through_mode_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `fall_through_mode_custom` - (Optional) Custom Fall Through Mode. Define the fall through settings (`Block`).
 
+---
+
 <a id="api-specification-validation-all-spec-endpoints-settings"></a>
 
-### API Specification Validation All Spec Endpoints Settings
+**API Specification Validation All Spec Endpoints Settings**
 
 `oversized_body_fail_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -842,9 +932,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `property_validation_settings_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="api-specification-validation-all-spec-endpoints-validation-mode"></a>
 
-### API Specification Validation All Spec Endpoints Validation Mode
+**API Specification Validation All Spec Endpoints Validation Mode**
 
 `response_validation_mode_active` - (Optional) Open API Validation Mode Active. Validation mode properties of response (`Block`).
 
@@ -854,9 +946,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `validation_mode_active` - (Optional) Open API Validation Mode Active. Validation mode properties of request (`Block`).
 
+---
+
 <a id="api-specification-validation-custom-list"></a>
 
-### API Specification Validation Custom List
+**API Specification Validation Custom List**
 
 `fall_through_mode` - (Optional) Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules). See [Fall Through Mode](#api-specification-validation-custom-list-fall-through-mode) below.
 
@@ -864,17 +958,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `settings` - (Optional) Common Settings. OpenAPI specification validation settings relevant for 'API Inventory' enforcement and for 'Custom list' enforcement. See [Settings](#api-specification-validation-custom-list-settings) below.
 
+---
+
 <a id="api-specification-validation-custom-list-fall-through-mode"></a>
 
-### API Specification Validation Custom List Fall Through Mode
+**API Specification Validation Custom List Fall Through Mode**
 
 `fall_through_mode_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `fall_through_mode_custom` - (Optional) Custom Fall Through Mode. Define the fall through settings (`Block`).
 
+---
+
 <a id="api-specification-validation-custom-list-open-api-validation-rules"></a>
 
-### API Specification Validation Custom List Open API Validation Rules
+**API Specification Validation Custom List Open API Validation Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -890,9 +988,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `validation_mode` - (Optional) Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger) (`Block`).
 
+---
+
 <a id="api-specification-validation-custom-list-settings"></a>
 
-### API Specification Validation Custom List Settings
+**API Specification Validation Custom List Settings**
 
 `oversized_body_fail_validation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -902,9 +1002,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `property_validation_settings_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="api-testing"></a>
 
-### API Testing
+**API Testing**
 
 `custom_header_value` - (Optional) Custom Header. Add x-f5-API-testing-identifier header value to prevent security flags on API testing traffic (`String`).
 
@@ -916,9 +1018,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `every_week` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="api-testing-domains"></a>
 
-### API Testing Domains
+**API Testing Domains**
 
 `allow_destructive_methods` - (Optional) Use Destructive Methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data (`Bool`).
 
@@ -926,9 +1030,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `domain` - (Optional) Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments (`String`).
 
+---
+
 <a id="api-testing-domains-credentials"></a>
 
-### API Testing Domains Credentials
+**API Testing Domains Credentials**
 
 `admin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -944,9 +1050,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `standard` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="app-firewall"></a>
 
-### App Firewall
+**App Firewall**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -954,9 +1062,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="blocked-clients"></a>
 
-### Blocked Clients
+**Blocked Clients**
 
 `actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule (`List`).
 
@@ -980,15 +1090,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="blocked-clients-http-header"></a>
 
-### Blocked Clients HTTP Header
+**Blocked Clients HTTP Header**
 
 `headers` - (Optional) HTTP Headers. List of HTTP header name and value pairs. See [Headers](#blocked-clients-http-header-headers) below.
 
+---
+
 <a id="blocked-clients-http-header-headers"></a>
 
-### Blocked Clients HTTP Header Headers
+**Blocked Clients HTTP Header Headers**
 
 `exact` - (Optional) Exact. Header value to match exactly (`String`).
 
@@ -1000,17 +1114,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
+---
+
 <a id="blocked-clients-metadata"></a>
 
-### Blocked Clients Metadata
+**Blocked Clients Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="bot-defense"></a>
 
-### Bot Defense
+**Bot Defense**
 
 `disable_cors_support` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1022,9 +1140,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `timeout` - (Optional) Timeout. The timeout for the inference check, in milliseconds (`Number`).
 
+---
+
 <a id="bot-defense-policy"></a>
 
-### Bot Defense Policy
+**Bot Defense Policy**
 
 `disable_js_insert` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1044,37 +1164,47 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `protected_app_endpoints` - (Optional) App Endpoint Type. List of protected endpoints. Limit: Approx '128 endpoints per Load Balancer (LB)' upto 4 LBs, '32 endpoints per LB' after 4 LBs. See [Protected App Endpoints](#bot-defense-policy-protected-app-endpoints) below.
 
+---
+
 <a id="bot-defense-policy-js-insert-all-pages"></a>
 
-### Bot Defense Policy Js Insert All Pages
+**Bot Defense Policy Js Insert All Pages**
 
 `javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD` (`String`).
 
+---
+
 <a id="bot-defense-policy-js-insert-all-pages-except"></a>
 
-### Bot Defense Policy Js Insert All Pages Except
+**Bot Defense Policy Js Insert All Pages Except**
 
 `exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers (`Block`).
 
 `javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD` (`String`).
 
+---
+
 <a id="bot-defense-policy-js-insertion-rules"></a>
 
-### Bot Defense Policy Js Insertion Rules
+**Bot Defense Policy Js Insertion Rules**
 
 `exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers (`Block`).
 
 `rules` - (Optional) JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript (`Block`).
 
+---
+
 <a id="bot-defense-policy-mobile-sdk-config"></a>
 
-### Bot Defense Policy Mobile Sdk Config
+**Bot Defense Policy Mobile Sdk Config**
 
 `mobile_identifier` - (Optional) Mobile Traffic Identifier. Mobile traffic identifier type (`Block`).
 
+---
+
 <a id="bot-defense-policy-protected-app-endpoints"></a>
 
-### Bot Defense Policy Protected App Endpoints
+**Bot Defense Policy Protected App Endpoints**
 
 `allow_good_bots` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1108,9 +1238,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `web_mobile` - (Optional) Web and Mobile traffic type. Web and Mobile traffic type (`Block`).
 
+---
+
 <a id="bot-defense-advanced"></a>
 
-### Bot Defense Advanced
+**Bot Defense Advanced**
 
 `disable_js_insert` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1128,23 +1260,29 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `web` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Web](#bot-defense-advanced-web) below.
 
+---
+
 <a id="bot-defense-advanced-js-insert-all-pages"></a>
 
-### Bot Defense Advanced Js Insert All Pages
+**Bot Defense Advanced Js Insert All Pages**
 
 `javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD` (`String`).
 
+---
+
 <a id="bot-defense-advanced-js-insert-all-pages-except"></a>
 
-### Bot Defense Advanced Js Insert All Pages Except
+**Bot Defense Advanced Js Insert All Pages Except**
 
 `exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#bot-defense-advanced-js-insert-all-pages-except-exclude-list) below.
 
 `javascript_location` - (Optional) JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD` (`String`).
 
+---
+
 <a id="bot-defense-advanced-js-insert-all-pages-except-exclude-list"></a>
 
-### Bot Defense Advanced Js Insert All Pages Except Exclude List
+**Bot Defense Advanced Js Insert All Pages Except Exclude List**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1154,17 +1292,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match (`Block`).
 
+---
+
 <a id="bot-defense-advanced-js-insertion-rules"></a>
 
-### Bot Defense Advanced Js Insertion Rules
+**Bot Defense Advanced Js Insertion Rules**
 
 `exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers. See [Exclude List](#bot-defense-advanced-js-insertion-rules-exclude-list) below.
 
 `rules` - (Optional) JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript. See [Rules](#bot-defense-advanced-js-insertion-rules-rules) below.
 
+---
+
 <a id="bot-defense-advanced-js-insertion-rules-exclude-list"></a>
 
-### Bot Defense Advanced Js Insertion Rules Exclude List
+**Bot Defense Advanced Js Insertion Rules Exclude List**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1174,9 +1316,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match (`Block`).
 
+---
+
 <a id="bot-defense-advanced-js-insertion-rules-rules"></a>
 
-### Bot Defense Advanced Js Insertion Rules Rules
+**Bot Defense Advanced Js Insertion Rules Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1188,31 +1332,39 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match (`Block`).
 
+---
+
 <a id="bot-defense-advanced-mobile"></a>
 
-### Bot Defense Advanced Mobile
+**Bot Defense Advanced Mobile**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="bot-defense-advanced-mobile-sdk-config"></a>
 
-### Bot Defense Advanced Mobile Sdk Config
+**Bot Defense Advanced Mobile Sdk Config**
 
 `mobile_identifier` - (Optional) Mobile Traffic Identifier. Mobile traffic identifier type. See [Mobile Identifier](#bot-defense-advanced-mobile-sdk-config-mobile-identifier) below.
 
+---
+
 <a id="bot-defense-advanced-mobile-sdk-config-mobile-identifier"></a>
 
-### Bot Defense Advanced Mobile Sdk Config Mobile Identifier
+**Bot Defense Advanced Mobile Sdk Config Mobile Identifier**
 
 `headers` - (Optional) Headers. Headers that can be used to identify mobile traffic (`Block`).
 
+---
+
 <a id="bot-defense-advanced-web"></a>
 
-### Bot Defense Advanced Web
+**Bot Defense Advanced Web**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1220,23 +1372,29 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="caching-policy"></a>
 
-### Caching Policy
+**Caching Policy**
 
 `custom_cache_rule` - (Optional) Custom Cache Rules. Caching policies for CDN. See [Custom Cache Rule](#caching-policy-custom-cache-rule) below.
 
 `default_cache_action` - (Optional) Default Cache Behaviour. This defines a Default Cache Action. See [Default Cache Action](#caching-policy-default-cache-action) below.
 
+---
+
 <a id="caching-policy-custom-cache-rule"></a>
 
-### Caching Policy Custom Cache Rule
+**Caching Policy Custom Cache Rule**
 
 `cdn_cache_rules` - (Optional) CDN Cache Rule. Reference to CDN Cache Rule configuration object. See [CDN Cache Rules](#caching-policy-custom-cache-rule-cdn-cache-rules) below.
 
+---
+
 <a id="caching-policy-custom-cache-rule-cdn-cache-rules"></a>
 
-### Caching Policy Custom Cache Rule CDN Cache Rules
+**Caching Policy Custom Cache Rule CDN Cache Rules**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1244,9 +1402,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="caching-policy-default-cache-action"></a>
 
-### Caching Policy Default Cache Action
+**Caching Policy Default Cache Action**
 
 `cache_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1254,23 +1414,29 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `cache_ttl_override` - (Optional) Override Cache TTL (d/ h/ m/ s). Always override the Cahce TTL provided by Origin (`String`).
 
+---
+
 <a id="captcha-challenge"></a>
 
-### Captcha Challenge
+**Captcha Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
 
+---
+
 <a id="client-side-defense"></a>
 
-### Client Side Defense
+**Client Side Defense**
 
 `policy` - (Optional) Client-Side Defense Policy. This defines various configuration options for Client-Side Defense policy. See [Policy](#client-side-defense-policy) below.
 
+---
+
 <a id="client-side-defense-policy"></a>
 
-### Client Side Defense Policy
+**Client Side Defense Policy**
 
 `disable_js_insert` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1280,23 +1446,29 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `js_insertion_rules` - (Optional) JavaScript Custom Insertion Rules. This defines custom JavaScript insertion rules for Client-Side Defense Policy. See [Js Insertion Rules](#client-side-defense-policy-js-insertion-rules) below.
 
+---
+
 <a id="client-side-defense-policy-js-insert-all-pages-except"></a>
 
-### Client Side Defense Policy Js Insert All Pages Except
+**Client Side Defense Policy Js Insert All Pages Except**
 
 `exclude_list` - (Optional) Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers (`Block`).
 
+---
+
 <a id="client-side-defense-policy-js-insertion-rules"></a>
 
-### Client Side Defense Policy Js Insertion Rules
+**Client Side Defense Policy Js Insertion Rules**
 
 `exclude_list` - (Optional) Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers (`Block`).
 
 `rules` - (Optional) JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript (`Block`).
 
+---
+
 <a id="cookie-stickiness"></a>
 
-### Cookie Stickiness
+**Cookie Stickiness**
 
 `add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1320,9 +1492,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `ttl` - (Optional) TTL. If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds (`Number`).
 
+---
+
 <a id="cors-policy"></a>
 
-### CORS Policy
+**CORS Policy**
 
 `allow_credentials` - (Optional) Allow Credentials. Specifies whether the resource allows credentials (`Bool`).
 
@@ -1340,9 +1514,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `maximum_age` - (Optional) Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours) (`Number`).
 
+---
+
 <a id="csrf-policy"></a>
 
-### CSRF Policy
+**CSRF Policy**
 
 `all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1350,15 +1526,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="csrf-policy-custom-domain-list"></a>
 
-### CSRF Policy Custom Domain List
+**CSRF Policy Custom Domain List**
 
 `domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form (`List`).
 
+---
+
 <a id="data-guard-rules"></a>
 
-### Data Guard Rules
+**Data Guard Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1374,17 +1554,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
+---
+
 <a id="data-guard-rules-metadata"></a>
 
-### Data Guard Rules Metadata
+**Data Guard Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="data-guard-rules-path"></a>
 
-### Data Guard Rules Path
+**Data Guard Rules Path**
 
 `path` - (Optional) Exact. Exact path value to match (`String`).
 
@@ -1392,9 +1576,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
+---
+
 <a id="ddos-mitigation-rules"></a>
 
-### DDOS Mitigation Rules
+**DDOS Mitigation Rules**
 
 `block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1406,9 +1592,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#ddos-mitigation-rules-metadata) below.
 
+---
+
 <a id="ddos-mitigation-rules-ddos-client-source"></a>
 
-### DDOS Mitigation Rules DDOS Client Source
+**DDOS Mitigation Rules DDOS Client Source**
 
 `asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#ddos-mitigation-rules-ddos-client-source-asn-list) below.
 
@@ -1418,21 +1606,27 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#ddos-mitigation-rules-ddos-client-source-tls-fingerprint-matcher) below.
 
+---
+
 <a id="ddos-mitigation-rules-ddos-client-source-asn-list"></a>
 
-### DDOS Mitigation Rules DDOS Client Source Asn List
+**DDOS Mitigation Rules DDOS Client Source Asn List**
 
 `as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
 
+---
+
 <a id="ddos-mitigation-rules-ddos-client-source-ja4-tls-fingerprint-matcher"></a>
 
-### DDOS Mitigation Rules DDOS Client Source Ja4 TLS Fingerprint Matcher
+**DDOS Mitigation Rules DDOS Client Source Ja4 TLS Fingerprint Matcher**
 
 `exact_values` - (Optional) Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against (`List`).
 
+---
+
 <a id="ddos-mitigation-rules-ddos-client-source-tls-fingerprint-matcher"></a>
 
-### DDOS Mitigation Rules DDOS Client Source TLS Fingerprint Matcher
+**DDOS Mitigation Rules DDOS Client Source TLS Fingerprint Matcher**
 
 `classes` - (Optional) TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against (`List`).
 
@@ -1440,25 +1634,31 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `excluded_values` - (Optional) Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher (`List`).
 
+---
+
 <a id="ddos-mitigation-rules-ip-prefix-list"></a>
 
-### DDOS Mitigation Rules IP Prefix List
+**DDOS Mitigation Rules IP Prefix List**
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
 `ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
+---
+
 <a id="ddos-mitigation-rules-metadata"></a>
 
-### DDOS Mitigation Rules Metadata
+**DDOS Mitigation Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="default-pool"></a>
 
-### Default Pool
+**Default Pool**
 
 `advanced_options` - (Optional) Origin Pool Advanced Options. Configure Advanced options for origin pool. See [Advanced Options](#default-pool-advanced-options) below.
 
@@ -1488,9 +1688,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `view_internal` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [View Internal](#default-pool-view-internal) below.
 
+---
+
 <a id="default-pool-advanced-options"></a>
 
-### Default Pool Advanced Options
+**Default Pool Advanced Options**
 
 `auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1530,9 +1732,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="default-pool-advanced-options-circuit-breaker"></a>
 
-### Default Pool Advanced Options Circuit Breaker
+**Default Pool Advanced Options Circuit Breaker**
 
 `connection_limit` - (Optional) Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit (`Number`).
 
@@ -1544,9 +1748,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
 
+---
+
 <a id="default-pool-advanced-options-enable-subsets"></a>
 
-### Default Pool Advanced Options Enable Subsets
+**Default Pool Advanced Options Enable Subsets**
 
 `any_endpoint` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1556,21 +1762,27 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `fail_request` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="default-pool-advanced-options-http1-config"></a>
 
-### Default Pool Advanced Options Http1 Config
+**Default Pool Advanced Options Http1 Config**
 
 `header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers (`Block`).
 
+---
+
 <a id="default-pool-advanced-options-http2-options"></a>
 
-### Default Pool Advanced Options Http2 Options
+**Default Pool Advanced Options Http2 Options**
 
 `enabled` - (Optional) HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections (`Bool`).
 
+---
+
 <a id="default-pool-advanced-options-outlier-detection"></a>
 
-### Default Pool Advanced Options Outlier Detection
+**Default Pool Advanced Options Outlier Detection**
 
 `base_ejection_time` - (Optional) Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds (`Number`).
 
@@ -1582,9 +1794,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
 
+---
+
 <a id="default-pool-healthcheck"></a>
 
-### Default Pool Healthcheck
+**Default Pool Healthcheck**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1592,9 +1806,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="default-pool-origin-servers"></a>
 
-### Default Pool Origin Servers
+**Default Pool Origin Servers**
 
 `cbip_service` - (Optional) Discovered Classic BIG-IP Service Name. Specify origin server with Classic BIG-IP Service (Virtual Server). See [Cbip Service](#default-pool-origin-servers-cbip-service) below.
 
@@ -1618,15 +1834,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `vn_private_name` - (Optional) DNS Name on Virtual Network. Specify origin server with DNS name on Virtual Network. See [Vn Private Name](#default-pool-origin-servers-vn-private-name) below.
 
+---
+
 <a id="default-pool-origin-servers-cbip-service"></a>
 
-### Default Pool Origin Servers Cbip Service
+**Default Pool Origin Servers Cbip Service**
 
 `service_name` - (Optional) Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin (`String`).
 
+---
+
 <a id="default-pool-origin-servers-consul-service"></a>
 
-### Default Pool Origin Servers Consul Service
+**Default Pool Origin Servers Consul Service**
 
 `inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1638,15 +1858,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `snat_pool` - (Optional) Snat Pool. Snat Pool configuration (`Block`).
 
+---
+
 <a id="default-pool-origin-servers-custom-endpoint-object"></a>
 
-### Default Pool Origin Servers Custom Endpoint Object
+**Default Pool Origin Servers Custom Endpoint Object**
 
 `endpoint` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="default-pool-origin-servers-k8s-service"></a>
 
-### Default Pool Origin Servers K8s Service
+**Default Pool Origin Servers K8s Service**
 
 `inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1662,9 +1886,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `vk8s_networks` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="default-pool-origin-servers-private-ip"></a>
 
-### Default Pool Origin Servers Private IP
+**Default Pool Origin Servers Private IP**
 
 `inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1678,9 +1904,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `snat_pool` - (Optional) Snat Pool. Snat Pool configuration (`Block`).
 
+---
+
 <a id="default-pool-origin-servers-private-name"></a>
 
-### Default Pool Origin Servers Private Name
+**Default Pool Origin Servers Private Name**
 
 `dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
@@ -1696,47 +1924,59 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `snat_pool` - (Optional) Snat Pool. Snat Pool configuration (`Block`).
 
+---
+
 <a id="default-pool-origin-servers-public-ip"></a>
 
-### Default Pool Origin Servers Public IP
+**Default Pool Origin Servers Public IP**
 
 `ip` - (Optional) Public IPv4. Public IPv4 address (`String`).
 
+---
+
 <a id="default-pool-origin-servers-public-name"></a>
 
-### Default Pool Origin Servers Public Name
+**Default Pool Origin Servers Public Name**
 
 `dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
 `refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767` (`Number`).
 
+---
+
 <a id="default-pool-origin-servers-vn-private-ip"></a>
 
-### Default Pool Origin Servers Vn Private IP
+**Default Pool Origin Servers Vn Private IP**
 
 `ip` - (Optional) IPv4. IPv4 address (`String`).
 
 `virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="default-pool-origin-servers-vn-private-name"></a>
 
-### Default Pool Origin Servers Vn Private Name
+**Default Pool Origin Servers Vn Private Name**
 
 `dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
 `private_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="default-pool-upstream-conn-pool-reuse-type"></a>
 
-### Default Pool Upstream Conn Pool Reuse Type
+**Default Pool Upstream Conn Pool Reuse Type**
 
 `disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="default-pool-use-tls"></a>
 
-### Default Pool Use TLS
+**Default Pool Use TLS**
 
 `default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1764,9 +2004,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="default-pool-use-tls-tls-config"></a>
 
-### Default Pool Use TLS TLS Config
+**Default Pool Use TLS TLS Config**
 
 `custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
@@ -1776,15 +2018,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="default-pool-use-tls-use-mtls"></a>
 
-### Default Pool Use TLS Use mTLS
+**Default Pool Use TLS Use mTLS**
 
 `tls_certificates` - (Optional) mTLS Client Certificate. mTLS Client Certificate (`Block`).
 
+---
+
 <a id="default-pool-use-tls-use-mtls-obj"></a>
 
-### Default Pool Use TLS Use mTLS Obj
+**Default Pool Use TLS Use mTLS Obj**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1792,17 +2038,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="default-pool-use-tls-use-server-verification"></a>
 
-### Default Pool Use TLS Use Server Verification
+**Default Pool Use TLS Use Server Verification**
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate (`String`).
 
+---
+
 <a id="default-pool-view-internal"></a>
 
-### Default Pool View Internal
+**Default Pool View Internal**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1810,15 +2060,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="default-pool-list"></a>
 
-### Default Pool List
+**Default Pool List**
 
 `pools` - (Optional) Origin Pools. List of Origin Pools. See [Pools](#default-pool-list-pools) below.
 
+---
+
 <a id="default-pool-list-pools"></a>
 
-### Default Pool List Pools
+**Default Pool List Pools**
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#default-pool-list-pools-cluster) below.
 
@@ -1830,19 +2084,23 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `weight` - (Optional) Weight. Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool (`Number`).
 
+---
+
 <a id="default-pool-list-pools-cluster"></a>
 
-### Default Pool List Pools Cluster
+**Default Pool List Pools Cluster**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="default-pool-list-pools-pool"></a>
 
-### Default Pool List Pools Pool
+**Default Pool List Pools Pool**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1850,9 +2108,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="default-route-pools"></a>
 
-### Default Route Pools
+**Default Route Pools**
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#default-route-pools-cluster) below.
 
@@ -1864,19 +2124,23 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `weight` - (Optional) Weight. Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool (`Number`).
 
+---
+
 <a id="default-route-pools-cluster"></a>
 
-### Default Route Pools Cluster
+**Default Route Pools Cluster**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="default-route-pools-pool"></a>
 
-### Default Route Pools Pool
+**Default Route Pools Pool**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1884,9 +2148,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="enable-api-discovery"></a>
 
-### Enable API Discovery
+**Enable API Discovery**
 
 `api_crawler` - (Optional) API Crawling. API Crawler message. See [API Crawler](#enable-api-discovery-api-crawler) below.
 
@@ -1902,29 +2168,37 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `enable_learn_from_redirect_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="enable-api-discovery-api-crawler"></a>
 
-### Enable API Discovery API Crawler
+**Enable API Discovery API Crawler**
 
 `api_crawler_config` - (Optional) Crawler Configure. See [API Crawler Config](#enable-api-discovery-api-crawler-api-crawler-config) below.
 
 `disable_api_crawler` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="enable-api-discovery-api-crawler-api-crawler-config"></a>
 
-### Enable API Discovery API Crawler API Crawler Config
+**Enable API Discovery API Crawler API Crawler Config**
 
 `domains` - (Optional) Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer (`Block`).
 
+---
+
 <a id="enable-api-discovery-api-discovery-from-code-scan"></a>
 
-### Enable API Discovery API Discovery From Code Scan
+**Enable API Discovery API Discovery From Code Scan**
 
 `code_base_integrations` - (Optional) Select Code Base Integrations. See [Code Base Integrations](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations) below.
 
+---
+
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations"></a>
 
-### Enable API Discovery API Discovery From Code Scan Code Base Integrations
+**Enable API Discovery API Discovery From Code Scan Code Base Integrations**
 
 `all_repos` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -1932,15 +2206,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `selected_repos` - (Optional) API Code Repositories. Select which API repositories represent the LB applications (`Block`).
 
+---
+
 <a id="enable-api-discovery-custom-api-auth-discovery"></a>
 
-### Enable API Discovery Custom API Auth Discovery
+**Enable API Discovery Custom API Auth Discovery**
 
 `api_discovery_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [API Discovery Ref](#enable-api-discovery-custom-api-auth-discovery-api-discovery-ref) below.
 
+---
+
 <a id="enable-api-discovery-custom-api-auth-discovery-api-discovery-ref"></a>
 
-### Enable API Discovery Custom API Auth Discovery API Discovery Ref
+**Enable API Discovery Custom API Auth Discovery API Discovery Ref**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1948,15 +2226,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="enable-api-discovery-discovered-api-settings"></a>
 
-### Enable API Discovery Discovered API Settings
+**Enable API Discovery Discovered API Settings**
 
 `purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
 
+---
+
 <a id="enable-challenge"></a>
 
-### Enable Challenge
+**Enable Challenge**
 
 `captcha_challenge_parameters` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host. See [Captcha Challenge Parameters](#enable-challenge-captcha-challenge-parameters) below.
 
@@ -1970,17 +2252,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `malicious_user_mitigation` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Malicious User Mitigation](#enable-challenge-malicious-user-mitigation) below.
 
+---
+
 <a id="enable-challenge-captcha-challenge-parameters"></a>
 
-### Enable Challenge Captcha Challenge Parameters
+**Enable Challenge Captcha Challenge Parameters**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
 
+---
+
 <a id="enable-challenge-js-challenge-parameters"></a>
 
-### Enable Challenge Js Challenge Parameters
+**Enable Challenge Js Challenge Parameters**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
@@ -1988,9 +2274,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
+---
+
 <a id="enable-challenge-malicious-user-mitigation"></a>
 
-### Enable Challenge Malicious User Mitigation
+**Enable Challenge Malicious User Mitigation**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -1998,21 +2286,27 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="enable-ip-reputation"></a>
 
-### Enable IP Reputation
+**Enable IP Reputation**
 
 `ip_threat_categories` - (Optional) List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied (`List`).
 
+---
+
 <a id="enable-trust-client-ip-headers"></a>
 
-### Enable Trust Client IP Headers
+**Enable Trust Client IP Headers**
 
 `client_ip_headers` - (Optional) Client IP Headers. Define the list of one or more Client IP Headers. Headers will be used in order from top to bottom, meaning if the first header is not present in the request, the system will proceed to check for the second header, and so on, until one of the listed headers is found. If none of the defined headers exist, or the value is not an IP address, then the system will use the source IP of the packet. If multiple defined headers with different names are present in the request, the value of the first header name in the configuration will be used. If multiple defined headers with the same name are present in the request, values of all those headers will be combined. The system will read the right-most IP address from header, if there are multiple IP addresses in the header value. For X-Forwarded-For header, the system will read the IP address(rightmost - 1), as the client IP (`List`).
 
+---
+
 <a id="graphql-rules"></a>
 
-### GraphQL Rules
+**GraphQL Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -2030,9 +2324,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
+---
+
 <a id="graphql-rules-graphql-settings"></a>
 
-### GraphQL Rules GraphQL Settings
+**GraphQL Rules GraphQL Settings**
 
 `disable_introspection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -2044,17 +2340,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `max_total_length` - (Optional) Maximum Total Length. Specify maximum length in bytes for the GraphQL query (`Number`).
 
+---
+
 <a id="graphql-rules-metadata"></a>
 
-### GraphQL Rules Metadata
+**GraphQL Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="http"></a>
 
-### HTTP
+**HTTP**
 
 `dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal (`Bool`).
 
@@ -2062,9 +2362,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
+---
+
 <a id="https"></a>
 
-### HTTPS
+**HTTPS**
 
 `add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
 
@@ -2100,17 +2402,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tls_parameters` - (Optional) Inline TLS Parameters. Inline TLS parameters. See [TLS Parameters](#https-tls-parameters) below.
 
+---
+
 <a id="https-coalescing-options"></a>
 
-### HTTPS Coalescing Options
+**HTTPS Coalescing Options**
 
 `default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="https-http-protocol-options"></a>
 
-### HTTPS HTTP Protocol Options
+**HTTPS HTTP Protocol Options**
 
 `http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#https-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -2118,15 +2424,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="https-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-### HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
+**HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
 
 `header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers (`Block`).
 
+---
+
 <a id="https-tls-cert-params"></a>
 
-### HTTPS TLS Cert Params
+**HTTPS TLS Cert Params**
 
 `certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#https-tls-cert-params-certificates) below.
 
@@ -2136,9 +2446,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-tls-cert-params-use-mtls) below.
 
+---
+
 <a id="https-tls-cert-params-certificates"></a>
 
-### HTTPS TLS Cert Params Certificates
+**HTTPS TLS Cert Params Certificates**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -2146,9 +2458,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="https-tls-cert-params-tls-config"></a>
 
-### HTTPS TLS Cert Params TLS Config
+**HTTPS TLS Cert Params TLS Config**
 
 `custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
@@ -2158,9 +2472,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="https-tls-cert-params-use-mtls"></a>
 
-### HTTPS TLS Cert Params Use mTLS
+**HTTPS TLS Cert Params Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
@@ -2176,9 +2492,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
 
+---
+
 <a id="https-tls-parameters"></a>
 
-### HTTPS TLS Parameters
+**HTTPS TLS Parameters**
 
 `no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -2188,9 +2506,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-tls-parameters-use-mtls) below.
 
+---
+
 <a id="https-tls-parameters-tls-certificates"></a>
 
-### HTTPS TLS Parameters TLS Certificates
+**HTTPS TLS Parameters TLS Certificates**
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
@@ -2204,9 +2524,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="https-tls-parameters-tls-config"></a>
 
-### HTTPS TLS Parameters TLS Config
+**HTTPS TLS Parameters TLS Config**
 
 `custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
@@ -2216,9 +2538,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="https-tls-parameters-use-mtls"></a>
 
-### HTTPS TLS Parameters Use mTLS
+**HTTPS TLS Parameters Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
@@ -2234,9 +2558,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
 
+---
+
 <a id="https-auto-cert"></a>
 
-### HTTPS Auto Cert
+**HTTPS Auto Cert**
 
 `add_hsts` - (Optional) Add HSTS Header. Add HTTP Strict-Transport-Security response header (`Bool`).
 
@@ -2274,17 +2600,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#https-auto-cert-use-mtls) below.
 
+---
+
 <a id="https-auto-cert-coalescing-options"></a>
 
-### HTTPS Auto Cert Coalescing Options
+**HTTPS Auto Cert Coalescing Options**
 
 `default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="https-auto-cert-http-protocol-options"></a>
 
-### HTTPS Auto Cert HTTP Protocol Options
+**HTTPS Auto Cert HTTP Protocol Options**
 
 `http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -2292,15 +2622,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-### HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
+**HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
 
 `header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers (`Block`).
 
+---
+
 <a id="https-auto-cert-tls-config"></a>
 
-### HTTPS Auto Cert TLS Config
+**HTTPS Auto Cert TLS Config**
 
 `custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#https-auto-cert-tls-config-custom-security) below.
 
@@ -2310,9 +2644,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="https-auto-cert-tls-config-custom-security"></a>
 
-### HTTPS Auto Cert TLS Config Custom Security
+**HTTPS Auto Cert TLS Config Custom Security**
 
 `cipher_suites` - (Optional) Cipher Suites. The TLS listener will only support the specified cipher list (`List`).
 
@@ -2320,9 +2656,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
+---
+
 <a id="https-auto-cert-use-mtls"></a>
 
-### HTTPS Auto Cert Use mTLS
+**HTTPS Auto Cert Use mTLS**
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
@@ -2338,19 +2676,23 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#https-auto-cert-use-mtls-xfcc-options) below.
 
+---
+
 <a id="https-auto-cert-use-mtls-crl"></a>
 
-### HTTPS Auto Cert Use mTLS CRL
+**HTTPS Auto Cert Use mTLS CRL**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="https-auto-cert-use-mtls-trusted-ca"></a>
 
-### HTTPS Auto Cert Use mTLS Trusted CA
+**HTTPS Auto Cert Use mTLS Trusted CA**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -2358,15 +2700,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="https-auto-cert-use-mtls-xfcc-options"></a>
 
-### HTTPS Auto Cert Use mTLS Xfcc Options
+**HTTPS Auto Cert Use mTLS Xfcc Options**
 
 `xfcc_header_elements` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`List`).
 
+---
+
 <a id="js-challenge"></a>
 
-### Js Challenge
+**Js Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
@@ -2374,9 +2720,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
+---
+
 <a id="jwt-validation"></a>
 
-### JWT Validation
+**JWT Validation**
 
 `action` - (Optional) Action. See [Action](#jwt-validation-action) below.
 
@@ -2390,29 +2738,37 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `token_location` - (Optional) Token Location. Location of JWT in HTTP request. See [Token Location](#jwt-validation-token-location) below.
 
+---
+
 <a id="jwt-validation-action"></a>
 
-### JWT Validation Action
+**JWT Validation Action**
 
 `block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="jwt-validation-jwks-config"></a>
 
-### JWT Validation Jwks Config
+**JWT Validation Jwks Config**
 
 `cleartext` - (Optional) JSON Web Key Set (JWKS). The JSON Web Key Set (JWKS) is a set of keys used to verify JSON Web Token (JWT) issued by the Authorization Server. See RFC 7517 for more details (`String`).
 
+---
+
 <a id="jwt-validation-mandatory-claims"></a>
 
-### JWT Validation Mandatory Claims
+**JWT Validation Mandatory Claims**
 
 `claim_names` - (Optional) Claim Names (`List`).
 
+---
+
 <a id="jwt-validation-reserved-claims"></a>
 
-### JWT Validation Reserved Claims
+**JWT Validation Reserved Claims**
 
 `audience` - (Optional) Audiences. See [Audience](#jwt-validation-reserved-claims-audience) below.
 
@@ -2426,15 +2782,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `validate_period_enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="jwt-validation-reserved-claims-audience"></a>
 
-### JWT Validation Reserved Claims Audience
+**JWT Validation Reserved Claims Audience**
 
 `audiences` - (Optional) Values (`List`).
 
+---
+
 <a id="jwt-validation-target"></a>
 
-### JWT Validation Target
+**JWT Validation Target**
 
 `all_endpoint` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -2442,27 +2802,35 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `base_paths` - (Optional) Base Paths. See [Base Paths](#jwt-validation-target-base-paths) below.
 
+---
+
 <a id="jwt-validation-target-api-groups"></a>
 
-### JWT Validation Target API Groups
+**JWT Validation Target API Groups**
 
 `api_groups` - (Optional) API Groups (`List`).
 
+---
+
 <a id="jwt-validation-target-base-paths"></a>
 
-### JWT Validation Target Base Paths
+**JWT Validation Target Base Paths**
 
 `base_paths` - (Optional) Prefix Values (`List`).
 
+---
+
 <a id="jwt-validation-token-location"></a>
 
-### JWT Validation Token Location
+**JWT Validation Token Location**
 
 `bearer_token` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="l7-ddos-action-js-challenge"></a>
 
-### L7 DDOS Action Js Challenge
+**L7 DDOS Action Js Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
@@ -2470,9 +2838,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
+---
+
 <a id="l7-ddos-protection"></a>
 
-### L7 DDOS Protection
+**L7 DDOS Protection**
 
 `clientside_action_captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host. See [Clientside Action Captcha Challenge](#l7-ddos-protection-clientside-action-captcha-challenge) below.
 
@@ -2494,17 +2864,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `rps_threshold` - (Optional) Custom. Configure custom RPS threshold (`Number`).
 
+---
+
 <a id="l7-ddos-protection-clientside-action-captcha-challenge"></a>
 
-### L7 DDOS Protection Clientside Action Captcha Challenge
+**L7 DDOS Protection Clientside Action Captcha Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
 
+---
+
 <a id="l7-ddos-protection-clientside-action-js-challenge"></a>
 
-### L7 DDOS Protection Clientside Action Js Challenge
+**L7 DDOS Protection Clientside Action Js Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
@@ -2512,9 +2886,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
+---
+
 <a id="l7-ddos-protection-ddos-policy-custom"></a>
 
-### L7 DDOS Protection DDOS Policy Custom
+**L7 DDOS Protection DDOS Policy Custom**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -2522,17 +2898,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="l7-ddos-protection-mitigation-captcha-challenge"></a>
 
-### L7 DDOS Protection Mitigation Captcha Challenge
+**L7 DDOS Protection Mitigation Captcha Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
 
+---
+
 <a id="l7-ddos-protection-mitigation-js-challenge"></a>
 
-### L7 DDOS Protection Mitigation Js Challenge
+**L7 DDOS Protection Mitigation Js Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
@@ -2540,15 +2920,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
+---
+
 <a id="malware-protection-settings"></a>
 
-### Malware Protection Settings
+**Malware Protection Settings**
 
 `malware_protection_rules` - (Optional) Malware Detection Rules. Configure the match criteria to trigger Malware Protection Scan. See [Malware Protection Rules](#malware-protection-settings-malware-protection-rules) below.
 
+---
+
 <a id="malware-protection-settings-malware-protection-rules"></a>
 
-### Malware Protection Settings Malware Protection Rules
+**Malware Protection Settings Malware Protection Rules**
 
 `action` - (Optional) Action. See [Action](#malware-protection-settings-malware-protection-rules-action) below.
 
@@ -2560,33 +2944,41 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `path` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path](#malware-protection-settings-malware-protection-rules-path) below.
 
+---
+
 <a id="malware-protection-settings-malware-protection-rules-action"></a>
 
-### Malware Protection Settings Malware Protection Rules Action
+**Malware Protection Settings Malware Protection Rules Action**
 
 `block` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="malware-protection-settings-malware-protection-rules-domain"></a>
 
-### Malware Protection Settings Malware Protection Rules Domain
+**Malware Protection Settings Malware Protection Rules Domain**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `domain` - (Optional) Domains. Domains names (`Block`).
 
+---
+
 <a id="malware-protection-settings-malware-protection-rules-metadata"></a>
 
-### Malware Protection Settings Malware Protection Rules Metadata
+**Malware Protection Settings Malware Protection Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="malware-protection-settings-malware-protection-rules-path"></a>
 
-### Malware Protection Settings Malware Protection Rules Path
+**Malware Protection Settings Malware Protection Rules Path**
 
 `path` - (Optional) Exact. Exact path value to match (`String`).
 
@@ -2594,9 +2986,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
+---
+
 <a id="more-option"></a>
 
-### More Option
+**More Option**
 
 `buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#more-option-buffer-policy) below.
 
@@ -2630,17 +3024,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
 
+---
+
 <a id="more-option-buffer-policy"></a>
 
-### More Option Buffer Policy
+**More Option Buffer Policy**
 
 `disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
 
 `max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
 
+---
+
 <a id="more-option-compression-params"></a>
 
-### More Option Compression Params
+**More Option Compression Params**
 
 `content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
 
@@ -2650,9 +3048,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `remove_accept_encoding_header` - (Optional) Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter (`Bool`).
 
+---
+
 <a id="more-option-request-cookies-to-add"></a>
 
-### More Option Request Cookies To Add
+**More Option Request Cookies To Add**
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
@@ -2662,17 +3062,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `value` - (Optional) Value. Value of the Cookie header (`String`).
 
+---
+
 <a id="more-option-request-cookies-to-add-secret-value"></a>
 
-### More Option Request Cookies To Add Secret Value
+**More Option Request Cookies To Add Secret Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
+---
+
 <a id="more-option-request-headers-to-add"></a>
 
-### More Option Request Headers To Add
+**More Option Request Headers To Add**
 
 `append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
 
@@ -2682,17 +3086,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `value` - (Optional) Value. Value of the HTTP header (`String`).
 
+---
+
 <a id="more-option-request-headers-to-add-secret-value"></a>
 
-### More Option Request Headers To Add Secret Value
+**More Option Request Headers To Add Secret Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
+---
+
 <a id="more-option-response-cookies-to-add"></a>
 
-### More Option Response Cookies To Add
+**More Option Response Cookies To Add**
 
 `add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
 
@@ -2740,17 +3148,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `value` - (Optional) Value. Value of the Cookie header (`String`).
 
+---
+
 <a id="more-option-response-cookies-to-add-secret-value"></a>
 
-### More Option Response Cookies To Add Secret Value
+**More Option Response Cookies To Add Secret Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
+---
+
 <a id="more-option-response-headers-to-add"></a>
 
-### More Option Response Headers To Add
+**More Option Response Headers To Add**
 
 `append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
 
@@ -2760,23 +3172,29 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `value` - (Optional) Value. Value of the HTTP header (`String`).
 
+---
+
 <a id="more-option-response-headers-to-add-secret-value"></a>
 
-### More Option Response Headers To Add Secret Value
+**More Option Response Headers To Add Secret Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
+---
+
 <a id="origin-server-subset-rule-list"></a>
 
-### Origin Server Subset Rule List
+**Origin Server Subset Rule List**
 
 `origin_server_subset_rules` - (Optional) Origin Server Subset Rules. Origin Server Subset Rules allow users to define match condition on Client (IP address, ASN, Country), IP Reputation, Regional Edge names, Request for subset selection of origin servers. Origin Server Subset is a sequential engine where rules are evaluated one after the other. It's important to define the correct order for Origin Server Subset to get the intended result, rules are evaluated from top to bottom in the list. When an Origin server subset rule is matched, then this selection rule takes effect and no more rules are evaluated. See [Origin Server Subset Rules](#origin-server-subset-rule-list-origin-server-subset-rules) below.
 
+---
+
 <a id="origin-server-subset-rule-list-origin-server-subset-rules"></a>
 
-### Origin Server Subset Rule List Origin Server Subset Rules
+**Origin Server Subset Rule List Origin Server Subset Rules**
 
 `any_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -2802,51 +3220,65 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `re_name_list` - (Optional) RE Names. List of RE names for match (`List`).
 
+---
+
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-asn-list"></a>
 
-### Origin Server Subset Rule List Origin Server Subset Rules Asn List
+**Origin Server Subset Rule List Origin Server Subset Rules Asn List**
 
 `as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
 
+---
+
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-asn-matcher"></a>
 
-### Origin Server Subset Rule List Origin Server Subset Rules Asn Matcher
+**Origin Server Subset Rule List Origin Server Subset Rules Asn Matcher**
 
 `asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects (`Block`).
 
+---
+
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-client-selector"></a>
 
-### Origin Server Subset Rule List Origin Server Subset Rules Client Selector
+**Origin Server Subset Rule List Origin Server Subset Rules Client Selector**
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
+---
+
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-ip-matcher"></a>
 
-### Origin Server Subset Rule List Origin Server Subset Rules IP Matcher
+**Origin Server Subset Rule List Origin Server Subset Rules IP Matcher**
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
 `prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects (`Block`).
 
+---
+
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-ip-prefix-list"></a>
 
-### Origin Server Subset Rule List Origin Server Subset Rules IP Prefix List
+**Origin Server Subset Rule List Origin Server Subset Rules IP Prefix List**
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
 `ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
+---
+
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-metadata"></a>
 
-### Origin Server Subset Rule List Origin Server Subset Rules Metadata
+**Origin Server Subset Rule List Origin Server Subset Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="policy-based-challenge"></a>
 
-### Policy Based Challenge
+**Policy Based Challenge**
 
 `always_enable_captcha_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -2872,17 +3304,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `temporary_user_blocking` - (Optional) Temporary User Blocking. Specifies configuration for temporary user blocking resulting from user behavior analysis. When Malicious User Mitigation is enabled from service policy rules, users' accessing the application will be analyzed for malicious activity and the configured mitigation actions will be taken on identified malicious users. These mitigation actions include setting up temporary blocking on that user. This configuration specifies settings on how that blocking should be done by the loadbalancer. See [Temporary User Blocking](#policy-based-challenge-temporary-user-blocking) below.
 
+---
+
 <a id="policy-based-challenge-captcha-challenge-parameters"></a>
 
-### Policy Based Challenge Captcha Challenge Parameters
+**Policy Based Challenge Captcha Challenge Parameters**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
 
+---
+
 <a id="policy-based-challenge-js-challenge-parameters"></a>
 
-### Policy Based Challenge Js Challenge Parameters
+**Policy Based Challenge Js Challenge Parameters**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
@@ -2890,9 +3326,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
+---
+
 <a id="policy-based-challenge-malicious-user-mitigation"></a>
 
-### Policy Based Challenge Malicious User Mitigation
+**Policy Based Challenge Malicious User Mitigation**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -2900,29 +3338,37 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="policy-based-challenge-rule-list"></a>
 
-### Policy Based Challenge Rule List
+**Policy Based Challenge Rule List**
 
 `rules` - (Optional) Rules. Rules that specify the match conditions and challenge type to be launched. When a challenge type is selected to be always enabled, these rules can be used to disable challenge or launch a different challenge for requests that match the specified conditions. See [Rules](#policy-based-challenge-rule-list-rules) below.
 
+---
+
 <a id="policy-based-challenge-rule-list-rules"></a>
 
-### Policy Based Challenge Rule List Rules
+**Policy Based Challenge Rule List Rules**
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs (`Block`).
 
 `spec` - (Optional) Challenge Rule Specification. A Challenge Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the rule if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a request API matches a challenge rule, the configured challenge is enforced (`Block`).
 
+---
+
 <a id="policy-based-challenge-temporary-user-blocking"></a>
 
-### Policy Based Challenge Temporary User Blocking
+**Policy Based Challenge Temporary User Blocking**
 
 `custom_page` - (Optional) Custom Message for Temporary Blocking. Custom message is of type `uri_ref`. Currently supported URL schemes is `string:///`. For `string:///` scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Blocked.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Blocked </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
 
+---
+
 <a id="protected-cookies"></a>
 
-### Protected Cookies
+**Protected Cookies**
 
 `add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -2950,9 +3396,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="rate-limit"></a>
 
-### Rate Limit
+**Rate Limit**
 
 `custom_ip_allowed_list` - (Optional) Custom IP Allowed List. IP Allowed list using existing ip_prefix_set objects. See [Custom IP Allowed List](#rate-limit-custom-ip-allowed-list) below.
 
@@ -2966,37 +3414,47 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `rate_limiter` - (Optional) Rate Limit Value. A tuple consisting of a rate limit period unit and the total number of allowed requests for that period. See [Rate Limiter](#rate-limit-rate-limiter) below.
 
+---
+
 <a id="rate-limit-custom-ip-allowed-list"></a>
 
-### Rate Limit Custom IP Allowed List
+**Rate Limit Custom IP Allowed List**
 
 `rate_limiter_allowed_prefixes` - (Optional) List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. See [Rate Limiter Allowed Prefixes](#rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes) below.
 
+---
+
 <a id="rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes"></a>
 
-### Rate Limit Custom IP Allowed List Rate Limiter Allowed Prefixes
+**Rate Limit Custom IP Allowed List Rate Limiter Allowed Prefixes**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="rate-limit-ip-allowed-list"></a>
 
-### Rate Limit IP Allowed List
+**Rate Limit IP Allowed List**
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
+---
+
 <a id="rate-limit-policies"></a>
 
-### Rate Limit Policies
+**Rate Limit Policies**
 
 `policies` - (Optional) Rate Limiter Policies. Ordered list of rate limiter policies. See [Policies](#rate-limit-policies-policies) below.
 
+---
+
 <a id="rate-limit-policies-policies"></a>
 
-### Rate Limit Policies Policies
+**Rate Limit Policies Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -3004,9 +3462,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="rate-limit-rate-limiter"></a>
 
-### Rate Limit Rate Limiter
+**Rate Limit Rate Limiter**
 
 `action_block` - (Optional) Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold. See [Action Block](#rate-limit-rate-limiter-action-block) below.
 
@@ -3024,9 +3484,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `unit` - (Optional) Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND` (`String`).
 
+---
+
 <a id="rate-limit-rate-limiter-action-block"></a>
 
-### Rate Limit Rate Limiter Action Block
+**Rate Limit Rate Limiter Action Block**
 
 `hours` - (Optional) Hours. Input Duration Hours (`Block`).
 
@@ -3034,15 +3496,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `seconds` - (Optional) Seconds. Input Duration Seconds (`Block`).
 
+---
+
 <a id="ring-hash"></a>
 
-### Ring Hash
+**Ring Hash**
 
 `hash_policy` - (Optional) Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request. See [Hash Policy](#ring-hash-hash-policy) below.
 
+---
+
 <a id="ring-hash-hash-policy"></a>
 
-### Ring Hash Hash Policy
+**Ring Hash Hash Policy**
 
 `cookie` - (Optional) Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously. See [Cookie](#ring-hash-hash-policy-cookie) below.
 
@@ -3052,9 +3518,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `terminal` - (Optional) Terminal. Specify if its a terminal policy (`Bool`).
 
+---
+
 <a id="ring-hash-hash-policy-cookie"></a>
 
-### Ring Hash Hash Policy Cookie
+**Ring Hash Hash Policy Cookie**
 
 `add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3078,9 +3546,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `ttl` - (Optional) TTL. If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds (`Number`).
 
+---
+
 <a id="routes"></a>
 
-### Routes
+**Routes**
 
 `custom_route_object` - (Optional) Custom Route Object. A custom route uses a route object created outside of this view. See [Custom Route Object](#routes-custom-route-object) below.
 
@@ -3090,15 +3560,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `simple_route` - (Optional) Simple Route. A simple route matches on path, incoming header, incoming port and/or HTTP method and forwards the matching traffic to the associated pools. See [Simple Route](#routes-simple-route) below.
 
+---
+
 <a id="routes-custom-route-object"></a>
 
-### Routes Custom Route Object
+**Routes Custom Route Object**
 
 `route_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Route Ref](#routes-custom-route-object-route-ref) below.
 
+---
+
 <a id="routes-custom-route-object-route-ref"></a>
 
-### Routes Custom Route Object Route Ref
+**Routes Custom Route Object Route Ref**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -3106,9 +3580,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="routes-direct-response-route"></a>
 
-### Routes Direct Response Route
+**Routes Direct Response Route**
 
 `headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#routes-direct-response-route-headers) below.
 
@@ -3120,9 +3596,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `route_direct_response` - (Optional) Direct Response. Send this direct response in case of route match action is direct response. See [Route Direct Response](#routes-direct-response-route-route-direct-response) below.
 
+---
+
 <a id="routes-direct-response-route-headers"></a>
 
-### Routes Direct Response Route Headers
+**Routes Direct Response Route Headers**
 
 `exact` - (Optional) Exact. Header value to match exactly (`String`).
 
@@ -3134,9 +3612,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
+---
+
 <a id="routes-direct-response-route-incoming-port"></a>
 
-### Routes Direct Response Route Incoming Port
+**Routes Direct Response Route Incoming Port**
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3144,9 +3624,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `port_ranges` - (Optional) Port range. Port range to match (`String`).
 
+---
+
 <a id="routes-direct-response-route-path"></a>
 
-### Routes Direct Response Route Path
+**Routes Direct Response Route Path**
 
 `path` - (Optional) Exact. Exact path value to match (`String`).
 
@@ -3154,17 +3636,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
+---
+
 <a id="routes-direct-response-route-route-direct-response"></a>
 
-### Routes Direct Response Route Route Direct Response
+**Routes Direct Response Route Route Direct Response**
 
 `response_body_encoded` - (Optional) Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg== (`String`).
 
 `response_code` - (Optional) Response Code. response code to send (`Number`).
 
+---
+
 <a id="routes-redirect-route"></a>
 
-### Routes Redirect Route
+**Routes Redirect Route**
 
 `headers` - (Optional) Headers. List of (key, value) headers. See [Headers](#routes-redirect-route-headers) below.
 
@@ -3176,9 +3662,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `route_redirect` - (Optional) Redirect. route redirect parameters when match action is redirect. See [Route Redirect](#routes-redirect-route-route-redirect) below.
 
+---
+
 <a id="routes-redirect-route-headers"></a>
 
-### Routes Redirect Route Headers
+**Routes Redirect Route Headers**
 
 `exact` - (Optional) Exact. Header value to match exactly (`String`).
 
@@ -3190,9 +3678,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
+---
+
 <a id="routes-redirect-route-incoming-port"></a>
 
-### Routes Redirect Route Incoming Port
+**Routes Redirect Route Incoming Port**
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3200,9 +3690,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `port_ranges` - (Optional) Port range. Port range to match (`String`).
 
+---
+
 <a id="routes-redirect-route-path"></a>
 
-### Routes Redirect Route Path
+**Routes Redirect Route Path**
 
 `path` - (Optional) Exact. Exact path value to match (`String`).
 
@@ -3210,9 +3702,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
+---
+
 <a id="routes-redirect-route-route-redirect"></a>
 
-### Routes Redirect Route Route Redirect
+**Routes Redirect Route Route Redirect**
 
 `host_redirect` - (Optional) Host. swap host part of incoming URL in redirect URL (`String`).
 
@@ -3230,9 +3724,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="routes-simple-route"></a>
 
-### Routes Simple Route
+**Routes Simple Route**
 
 `advanced_options` - (Optional) Advanced Route Options. Configure advanced options for route like path rewrite, hash policy, etc. See [Advanced Options](#routes-simple-route-advanced-options) below.
 
@@ -3254,9 +3750,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `query_params` - (Optional) Query Parameters. Handling of incoming query parameters in simple route. See [Query Params](#routes-simple-route-query-params) below.
 
+---
+
 <a id="routes-simple-route-advanced-options"></a>
 
-### Routes Simple Route Advanced Options
+**Routes Simple Route Advanced Options**
 
 `app_firewall` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
@@ -3336,9 +3834,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `web_socket_config` - (Optional) WebSocket Configuration. Configuration to allow WebSocket Request headers of such upgrade looks like below 'connection', 'Upgrade' 'upgrade', 'WebSocket' With configuration to allow WebSocket upgrade, ADC will produce following response 'HTTP/1.1 101 Switching Protocols 'Upgrade': 'WebSocket' 'Connection': 'Upgrade' (`Block`).
 
+---
+
 <a id="routes-simple-route-headers"></a>
 
-### Routes Simple Route Headers
+**Routes Simple Route Headers**
 
 `exact` - (Optional) Exact. Header value to match exactly (`String`).
 
@@ -3350,9 +3850,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
+---
+
 <a id="routes-simple-route-incoming-port"></a>
 
-### Routes Simple Route Incoming Port
+**Routes Simple Route Incoming Port**
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3360,9 +3862,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `port_ranges` - (Optional) Port range. Port range to match (`String`).
 
+---
+
 <a id="routes-simple-route-origin-pools"></a>
 
-### Routes Simple Route Origin Pools
+**Routes Simple Route Origin Pools**
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
@@ -3374,9 +3878,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `weight` - (Optional) Weight. Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool (`Number`).
 
+---
+
 <a id="routes-simple-route-path"></a>
 
-### Routes Simple Route Path
+**Routes Simple Route Path**
 
 `path` - (Optional) Exact. Exact path value to match (`String`).
 
@@ -3384,9 +3890,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regular expression of path match (e.g. the value .* will match on all paths) (`String`).
 
+---
+
 <a id="routes-simple-route-query-params"></a>
 
-### Routes Simple Route Query Params
+**Routes Simple Route Query Params**
 
 `remove_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3394,15 +3902,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `retain_all_params` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="sensitive-data-disclosure-rules"></a>
 
-### Sensitive Data Disclosure Rules
+**Sensitive Data Disclosure Rules**
 
 `sensitive_data_types_in_response` - (Optional) Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses. See [Sensitive Data Types In Response](#sensitive-data-disclosure-rules-sensitive-data-types-in-response) below.
 
+---
+
 <a id="sensitive-data-disclosure-rules-sensitive-data-types-in-response"></a>
 
-### Sensitive Data Disclosure Rules Sensitive Data Types In Response
+**Sensitive Data Disclosure Rules Sensitive Data Types In Response**
 
 `api_endpoint` - (Optional) API Endpoint. This defines API endpoint. See [API Endpoint](#sensitive-data-disclosure-rules-sensitive-data-types-in-response-api-endpoint) below.
 
@@ -3412,29 +3924,37 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `report` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="sensitive-data-disclosure-rules-sensitive-data-types-in-response-api-endpoint"></a>
 
-### Sensitive Data Disclosure Rules Sensitive Data Types In Response API Endpoint
+**Sensitive Data Disclosure Rules Sensitive Data Types In Response API Endpoint**
 
 `methods` - (Optional) Methods. Methods to be matched (`List`).
 
 `path` - (Optional) Path. Path to be matched (`String`).
 
+---
+
 <a id="sensitive-data-disclosure-rules-sensitive-data-types-in-response-body"></a>
 
-### Sensitive Data Disclosure Rules Sensitive Data Types In Response Body
+**Sensitive Data Disclosure Rules Sensitive Data Types In Response Body**
 
 `fields` - (Optional) Values. List of JSON Path field values. Use square brackets with an underscore [_] to indicate array elements (e.g., person.emails[_]). To reference JSON keys that contain spaces, enclose the entire path in double quotes. For example: 'person.first name' (`List`).
 
+---
+
 <a id="sensitive-data-policy"></a>
 
-### Sensitive Data Policy
+**Sensitive Data Policy**
 
 `sensitive_data_policy_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Sensitive Data Policy Ref](#sensitive-data-policy-sensitive-data-policy-ref) below.
 
+---
+
 <a id="sensitive-data-policy-sensitive-data-policy-ref"></a>
 
-### Sensitive Data Policy Sensitive Data Policy Ref
+**Sensitive Data Policy Sensitive Data Policy Ref**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -3442,9 +3962,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="single-lb-app"></a>
 
-### Single LB App
+**Single LB App**
 
 `disable_discovery` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3454,9 +3976,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `enable_malicious_user_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="single-lb-app-enable-discovery"></a>
 
-### Single LB App Enable Discovery
+**Single LB App Enable Discovery**
 
 `api_crawler` - (Optional) API Crawling. API Crawler message. See [API Crawler](#single-lb-app-enable-discovery-api-crawler) below.
 
@@ -3472,35 +3996,45 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `enable_learn_from_redirect_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="single-lb-app-enable-discovery-api-crawler"></a>
 
-### Single LB App Enable Discovery API Crawler
+**Single LB App Enable Discovery API Crawler**
 
 `api_crawler_config` - (Optional) Crawler Configure (`Block`).
 
 `disable_api_crawler` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="single-lb-app-enable-discovery-api-discovery-from-code-scan"></a>
 
-### Single LB App Enable Discovery API Discovery From Code Scan
+**Single LB App Enable Discovery API Discovery From Code Scan**
 
 `code_base_integrations` - (Optional) Select Code Base Integrations (`Block`).
 
+---
+
 <a id="single-lb-app-enable-discovery-custom-api-auth-discovery"></a>
 
-### Single LB App Enable Discovery Custom API Auth Discovery
+**Single LB App Enable Discovery Custom API Auth Discovery**
 
 `api_discovery_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
+---
+
 <a id="single-lb-app-enable-discovery-discovered-api-settings"></a>
 
-### Single LB App Enable Discovery Discovered API Settings
+**Single LB App Enable Discovery Discovered API Settings**
 
 `purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
 
+---
+
 <a id="slow-ddos-mitigation"></a>
 
-### Slow DDOS Mitigation
+**Slow DDOS Mitigation**
 
 `disable_request_timeout` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3508,9 +4042,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `request_timeout` - (Optional) Custom Timeout (`Number`).
 
+---
+
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -3520,9 +4056,11 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
+---
+
 <a id="trusted-clients"></a>
 
-### Trusted Clients
+**Trusted Clients**
 
 `actions` - (Optional) Actions. Actions that should be taken when client identifier matches the rule (`List`).
 
@@ -3546,15 +4084,19 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="trusted-clients-http-header"></a>
 
-### Trusted Clients HTTP Header
+**Trusted Clients HTTP Header**
 
 `headers` - (Optional) HTTP Headers. List of HTTP header name and value pairs. See [Headers](#trusted-clients-http-header-headers) below.
 
+---
+
 <a id="trusted-clients-http-header-headers"></a>
 
-### Trusted Clients HTTP Header Headers
+**Trusted Clients HTTP Header Headers**
 
 `exact` - (Optional) Exact. Header value to match exactly (`String`).
 
@@ -3566,17 +4108,21 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `regex` - (Optional) Regex. Regex match of the header value in re2 format (`String`).
 
+---
+
 <a id="trusted-clients-metadata"></a>
 
-### Trusted Clients Metadata
+**Trusted Clients Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
+---
+
 <a id="user-identification"></a>
 
-### User Identification
+**User Identification**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -3584,23 +4130,29 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="waf-exclusion"></a>
 
-### WAF Exclusion
+**WAF Exclusion**
 
 `waf_exclusion_inline_rules` - (Optional) WAF Exclusion Inline Rules. A list of WAF exclusion rules that will be applied inline. See [WAF Exclusion Inline Rules](#waf-exclusion-waf-exclusion-inline-rules) below.
 
 `waf_exclusion_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [WAF Exclusion Policy](#waf-exclusion-waf-exclusion-policy) below.
 
+---
+
 <a id="waf-exclusion-waf-exclusion-inline-rules"></a>
 
-### WAF Exclusion WAF Exclusion Inline Rules
+**WAF Exclusion WAF Exclusion Inline Rules**
 
 `rules` - (Optional) WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer. See [Rules](#waf-exclusion-waf-exclusion-inline-rules-rules) below.
 
+---
+
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules"></a>
 
-### WAF Exclusion WAF Exclusion Inline Rules Rules
+**WAF Exclusion WAF Exclusion Inline Rules Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3624,12 +4176,16 @@ For the main resource documentation, see [f5xc_http_loadbalancer](./resources/ht
 
 `waf_skip_processing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="waf-exclusion-waf-exclusion-policy"></a>
 
-### WAF Exclusion WAF Exclusion Policy
+**WAF Exclusion WAF Exclusion Policy**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---

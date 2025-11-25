@@ -74,13 +74,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--http_access"></a>
+<a id="http-access"></a>
 
 ### HTTP Access
 
 `path` - (Optional) CRL File path. CRL file location (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

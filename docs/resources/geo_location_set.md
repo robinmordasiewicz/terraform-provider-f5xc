@@ -67,17 +67,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--custom_geo_location_selector"></a>
+<a id="custom-geo-location-selector"></a>
 
 ### Custom Geo Location Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--global"></a>
+<a id="global"></a>
 
 ### Global
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

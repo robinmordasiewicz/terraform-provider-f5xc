@@ -84,21 +84,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--local_ip"></a>
+<a id="local-ip"></a>
 
 ### Local IP
 
-`intf` - (Optional) Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet. See [Intf](#nestedblock--local_ip--intf) below.
+`intf` - (Optional) Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet. See [Intf](#local-ip-intf) below.
 
-`ip_address` - (Optional) Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet. See [IP Address](#nestedblock--local_ip--ip_address) below.
+`ip_address` - (Optional) Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet. See [IP Address](#local-ip-ip-address) below.
 
-<a id="nestedblock--local_ip--intf"></a>
+<a id="local-ip-intf"></a>
 
 ### Local IP Intf
 
-`local_intf` - (Optional) Local Interface. Local interface to be used for filling in source information of IP and network for transport. See [Local Intf](#nestedblock--local_ip--intf--local_intf) below.
+`local_intf` - (Optional) Local Interface. Local interface to be used for filling in source information of IP and network for transport. See [Local Intf](#local-ip-intf-local-intf) below.
 
-<a id="nestedblock--local_ip--intf--local_intf"></a>
+<a id="local-ip-intf-local-intf"></a>
 
 ### Local IP Intf Local Intf
 
@@ -112,125 +112,125 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--local_ip--ip_address"></a>
+<a id="local-ip-ip-address"></a>
 
 ### Local IP IP Address
 
-`auto` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto](#nestedblock--local_ip--ip_address--auto) below.
+`auto` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto](#local-ip-ip-address-auto) below.
 
-`ip_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [IP Address](#nestedblock--local_ip--ip_address--ip_address) below.
+`ip_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [IP Address](#local-ip-ip-address-ip-address) below.
 
-`virtual_network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system. See [Virtual Network Type](#nestedblock--local_ip--ip_address--virtual_network_type) below.
+`virtual_network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system. See [Virtual Network Type](#local-ip-ip-address-virtual-network-type) below.
 
-<a id="nestedblock--local_ip--ip_address--auto"></a>
+<a id="local-ip-ip-address-auto"></a>
 
 ### Local IP IP Address Auto
 
-<a id="nestedblock--local_ip--ip_address--ip_address"></a>
+<a id="local-ip-ip-address-ip-address"></a>
 
 ### Local IP IP Address IP Address
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#nestedblock--local_ip--ip_address--ip_address--ipv4) below.
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#local-ip-ip-address-ip-address-ipv4) below.
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#nestedblock--local_ip--ip_address--ip_address--ipv6) below.
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#local-ip-ip-address-ip-address-ipv6) below.
 
-<a id="nestedblock--local_ip--ip_address--ip_address--ipv4"></a>
+<a id="local-ip-ip-address-ip-address-ipv4"></a>
 
 ### Local IP IP Address IP Address IPv4
 
-<a id="nestedblock--local_ip--ip_address--ip_address--ipv6"></a>
+<a id="local-ip-ip-address-ip-address-ipv6"></a>
 
 ### Local IP IP Address IP Address IPv6
 
-<a id="nestedblock--local_ip--ip_address--virtual_network_type"></a>
+<a id="local-ip-ip-address-virtual-network-type"></a>
 
 ### Local IP IP Address Virtual Network Type
 
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#nestedblock--local_ip--ip_address--virtual_network_type--public) below.
+`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#local-ip-ip-address-virtual-network-type-public) below.
 
-`site_local` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local](#nestedblock--local_ip--ip_address--virtual_network_type--site_local) below.
+`site_local` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local](#local-ip-ip-address-virtual-network-type-site-local) below.
 
-`site_local_inside` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside](#nestedblock--local_ip--ip_address--virtual_network_type--site_local_inside) below.
+`site_local_inside` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside](#local-ip-ip-address-virtual-network-type-site-local-inside) below.
 
-<a id="nestedblock--local_ip--ip_address--virtual_network_type--public"></a>
+<a id="local-ip-ip-address-virtual-network-type-public"></a>
 
 ### Local IP IP Address Virtual Network Type Public
 
-<a id="nestedblock--local_ip--ip_address--virtual_network_type--site_local"></a>
+<a id="local-ip-ip-address-virtual-network-type-site-local"></a>
 
 ### Local IP IP Address Virtual Network Type Site Local
 
-<a id="nestedblock--local_ip--ip_address--virtual_network_type--site_local_inside"></a>
+<a id="local-ip-ip-address-virtual-network-type-site-local-inside"></a>
 
 ### Local IP IP Address Virtual Network Type Site Local Inside
 
-<a id="nestedblock--params"></a>
+<a id="params"></a>
 
 ### Params
 
-`ipsec` - (Optional) IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE. See [Ipsec](#nestedblock--params--ipsec) below.
+`ipsec` - (Optional) IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE. See [Ipsec](#params-ipsec) below.
 
-<a id="nestedblock--params--ipsec"></a>
+<a id="params-ipsec"></a>
 
 ### Params Ipsec
 
-`ipsec_psk` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Ipsec Psk](#nestedblock--params--ipsec--ipsec_psk) below.
+`ipsec_psk` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
 
-<a id="nestedblock--params--ipsec--ipsec_psk"></a>
+<a id="params-ipsec-ipsec-psk"></a>
 
 ### Params Ipsec Ipsec Psk
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--params--ipsec--ipsec_psk--blindfold_secret_info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--params--ipsec--ipsec_psk--clear_secret_info) below.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#params-ipsec-ipsec-psk-clear-secret-info) below.
 
-<a id="nestedblock--params--ipsec--ipsec_psk--blindfold_secret_info"></a>
+<a id="params-ipsec-ipsec-psk-blindfold-secret-info"></a>
 
 ### Params Ipsec Ipsec Psk Blindfold Secret Info
 
-<a id="nestedblock--params--ipsec--ipsec_psk--clear_secret_info"></a>
+<a id="params-ipsec-ipsec-psk-clear-secret-info"></a>
 
 ### Params Ipsec Ipsec Psk Clear Secret Info
 
-<a id="nestedblock--remote_ip"></a>
+<a id="remote-ip"></a>
 
 ### Remote IP
 
-`endpoints` - (Optional) Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel. See [Endpoints](#nestedblock--remote_ip--endpoints) below.
+`endpoints` - (Optional) Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel. See [Endpoints](#remote-ip-endpoints) below.
 
-`ip` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [IP](#nestedblock--remote_ip--ip) below.
+`ip` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [IP](#remote-ip-ip) below.
 
-<a id="nestedblock--remote_ip--endpoints"></a>
+<a id="remote-ip-endpoints"></a>
 
 ### Remote IP Endpoints
 
-`endpoints` - (Optional) Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes. See [Endpoints](#nestedblock--remote_ip--endpoints--endpoints) below.
+`endpoints` - (Optional) Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes. See [Endpoints](#remote-ip-endpoints-endpoints) below.
 
-<a id="nestedblock--remote_ip--endpoints--endpoints"></a>
+<a id="remote-ip-endpoints-endpoints"></a>
 
 ### Remote IP Endpoints Endpoints
 
-<a id="nestedblock--remote_ip--ip"></a>
+<a id="remote-ip-ip"></a>
 
 ### Remote IP IP
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#nestedblock--remote_ip--ip--ipv4) below.
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#remote-ip-ip-ipv4) below.
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#nestedblock--remote_ip--ip--ipv6) below.
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#remote-ip-ip-ipv6) below.
 
-<a id="nestedblock--remote_ip--ip--ipv4"></a>
+<a id="remote-ip-ip-ipv4"></a>
 
 ### Remote IP IP IPv4
 
 `addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
 
-<a id="nestedblock--remote_ip--ip--ipv6"></a>
+<a id="remote-ip-ip-ipv6"></a>
 
 ### Remote IP IP IPv6
 
 `addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

@@ -78,29 +78,29 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--author_restrictions"></a>
+<a id="author-restrictions"></a>
 
 ### Author Restrictions
 
-`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#nestedblock--author_restrictions--allow_all) below.
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#author-restrictions-allow-all) below.
 
-`allow_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Allow List](#nestedblock--author_restrictions--allow_list) below.
+`allow_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Allow List](#author-restrictions-allow-list) below.
 
-`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#nestedblock--author_restrictions--deny_all) below.
+`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#author-restrictions-deny-all) below.
 
-`deny_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Deny List](#nestedblock--author_restrictions--deny_list) below.
+`deny_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Deny List](#author-restrictions-deny-list) below.
 
-<a id="nestedblock--author_restrictions--allow_all"></a>
+<a id="author-restrictions-allow-all"></a>
 
 ### Author Restrictions Allow All
 
-<a id="nestedblock--author_restrictions--allow_list"></a>
+<a id="author-restrictions-allow-list"></a>
 
 ### Author Restrictions Allow List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--author_restrictions--allow_list--custom_list) below.
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#author-restrictions-allow-list-custom-list) below.
 
-<a id="nestedblock--author_restrictions--allow_list--custom_list"></a>
+<a id="author-restrictions-allow-list-custom-list"></a>
 
 ### Author Restrictions Allow List Custom List
 
@@ -108,17 +108,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
 
-<a id="nestedblock--author_restrictions--deny_all"></a>
+<a id="author-restrictions-deny-all"></a>
 
 ### Author Restrictions Deny All
 
-<a id="nestedblock--author_restrictions--deny_list"></a>
+<a id="author-restrictions-deny-list"></a>
 
 ### Author Restrictions Deny List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--author_restrictions--deny_list--custom_list) below.
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#author-restrictions-deny-list-custom-list) below.
 
-<a id="nestedblock--author_restrictions--deny_list--custom_list"></a>
+<a id="author-restrictions-deny-list-custom-list"></a>
 
 ### Author Restrictions Deny List Custom List
 
@@ -126,7 +126,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `regex_pattern` - (Optional) Regex For User Id. regex_values contains a regex pattern to match against (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -138,63 +138,63 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--user_restrictions"></a>
+<a id="user-restrictions"></a>
 
 ### User Restrictions
 
-`all_tenants` - (Optional) Empty. This can be used for messages where no values are needed. See [All Tenants](#nestedblock--user_restrictions--all_tenants) below.
+`all_tenants` - (Optional) Empty. This can be used for messages where no values are needed. See [All Tenants](#user-restrictions-all-tenants) below.
 
-`individual_users` - (Optional) Empty. This can be used for messages where no values are needed. See [Individual Users](#nestedblock--user_restrictions--individual_users) below.
+`individual_users` - (Optional) Empty. This can be used for messages where no values are needed. See [Individual Users](#user-restrictions-individual-users) below.
 
 `tenant` - (Optional) Team/Tenant. Team/Tenant for which this rule is valid (`String`).
 
-`user_restrictions` - (Optional) User Matcher. user_matcher contains contains the allow/deny list of users/authors. See [User Restrictions](#nestedblock--user_restrictions--user_restrictions) below.
+`user_restrictions` - (Optional) User Matcher. user_matcher contains contains the allow/deny list of users/authors. See [User Restrictions](#user-restrictions-user-restrictions) below.
 
-<a id="nestedblock--user_restrictions--all_tenants"></a>
+<a id="user-restrictions-all-tenants"></a>
 
 ### User Restrictions All Tenants
 
-<a id="nestedblock--user_restrictions--individual_users"></a>
+<a id="user-restrictions-individual-users"></a>
 
 ### User Restrictions Individual Users
 
-<a id="nestedblock--user_restrictions--user_restrictions"></a>
+<a id="user-restrictions-user-restrictions"></a>
 
 ### User Restrictions User Restrictions
 
-`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#nestedblock--user_restrictions--user_restrictions--allow_all) below.
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#user-restrictions-user-restrictions-allow-all) below.
 
-`allow_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Allow List](#nestedblock--user_restrictions--user_restrictions--allow_list) below.
+`allow_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Allow List](#user-restrictions-user-restrictions-allow-list) below.
 
-`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#nestedblock--user_restrictions--user_restrictions--deny_all) below.
+`deny_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All](#user-restrictions-user-restrictions-deny-all) below.
 
-`deny_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Deny List](#nestedblock--user_restrictions--user_restrictions--deny_list) below.
+`deny_list` - (Optional) Custom List. Custom List contains user customized list of matcher values. See [Deny List](#user-restrictions-user-restrictions-deny-list) below.
 
-<a id="nestedblock--user_restrictions--user_restrictions--allow_all"></a>
+<a id="user-restrictions-user-restrictions-allow-all"></a>
 
 ### User Restrictions User Restrictions Allow All
 
-<a id="nestedblock--user_restrictions--user_restrictions--allow_list"></a>
+<a id="user-restrictions-user-restrictions-allow-list"></a>
 
 ### User Restrictions User Restrictions Allow List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--user_restrictions--user_restrictions--allow_list--custom_list) below.
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
 
-<a id="nestedblock--user_restrictions--user_restrictions--allow_list--custom_list"></a>
+<a id="user-restrictions-user-restrictions-allow-list-custom-list"></a>
 
 ### User Restrictions User Restrictions Allow List Custom List
 
-<a id="nestedblock--user_restrictions--user_restrictions--deny_all"></a>
+<a id="user-restrictions-user-restrictions-deny-all"></a>
 
 ### User Restrictions User Restrictions Deny All
 
-<a id="nestedblock--user_restrictions--user_restrictions--deny_list"></a>
+<a id="user-restrictions-user-restrictions-deny-list"></a>
 
 ### User Restrictions User Restrictions Deny List
 
-`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#nestedblock--user_restrictions--user_restrictions--deny_list--custom_list) below.
+`custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
 
-<a id="nestedblock--user_restrictions--user_restrictions--deny_list--custom_list"></a>
+<a id="user-restrictions-user-restrictions-deny-list-custom-list"></a>
 
 ### User Restrictions User Restrictions Deny List Custom List
 

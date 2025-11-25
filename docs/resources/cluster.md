@@ -120,11 +120,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--auto_http_config"></a>
+<a id="auto-http-config"></a>
 
 ### Auto HTTP Config
 
-<a id="nestedblock--circuit_breaker"></a>
+<a id="circuit-breaker"></a>
 
 ### Circuit Breaker
 
@@ -138,21 +138,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
 
-<a id="nestedblock--default_subset"></a>
+<a id="default-subset"></a>
 
 ### Default Subset
 
-<a id="nestedblock--disable_proxy_protocol"></a>
+<a id="disable-proxy-protocol"></a>
 
 ### Disable Proxy Protocol
 
-<a id="nestedblock--endpoint_subsets"></a>
+<a id="endpoint-subsets"></a>
 
 ### Endpoint Subsets
 
 `keys` - (Optional) Keys. List of keys that define a cluster subset class (`List`).
 
-<a id="nestedblock--endpoints"></a>
+<a id="endpoints"></a>
 
 ### Endpoints
 
@@ -166,7 +166,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--health_checks"></a>
+<a id="health-checks"></a>
 
 ### Health Checks
 
@@ -180,51 +180,51 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--http1_config"></a>
+<a id="http1-config"></a>
 
 ### Http1 Config
 
-`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#nestedblock--http1_config--header_transformation) below.
+`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#http1-config-header-transformation) below.
 
-<a id="nestedblock--http1_config--header_transformation"></a>
+<a id="http1-config-header-transformation"></a>
 
 ### Http1 Config Header Transformation
 
-`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header Transformation](#nestedblock--http1_config--header_transformation--default_header_transformation) below.
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header Transformation](#http1-config-header-transformation-default-header-transformation) below.
 
-`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Legacy Header Transformation](#nestedblock--http1_config--header_transformation--legacy_header_transformation) below.
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Legacy Header Transformation](#http1-config-header-transformation-legacy-header-transformation) below.
 
-`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Preserve Case Header Transformation](#nestedblock--http1_config--header_transformation--preserve_case_header_transformation) below.
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Preserve Case Header Transformation](#http1-config-header-transformation-preserve-case-header-transformation) below.
 
-`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Proper Case Header Transformation](#nestedblock--http1_config--header_transformation--proper_case_header_transformation) below.
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Proper Case Header Transformation](#http1-config-header-transformation-proper-case-header-transformation) below.
 
-<a id="nestedblock--http1_config--header_transformation--default_header_transformation"></a>
+<a id="http1-config-header-transformation-default-header-transformation"></a>
 
 ### Http1 Config Header Transformation Default Header Transformation
 
-<a id="nestedblock--http1_config--header_transformation--legacy_header_transformation"></a>
+<a id="http1-config-header-transformation-legacy-header-transformation"></a>
 
 ### Http1 Config Header Transformation Legacy Header Transformation
 
-<a id="nestedblock--http1_config--header_transformation--preserve_case_header_transformation"></a>
+<a id="http1-config-header-transformation-preserve-case-header-transformation"></a>
 
 ### Http1 Config Header Transformation Preserve Case Header Transformation
 
-<a id="nestedblock--http1_config--header_transformation--proper_case_header_transformation"></a>
+<a id="http1-config-header-transformation-proper-case-header-transformation"></a>
 
 ### Http1 Config Header Transformation Proper Case Header Transformation
 
-<a id="nestedblock--http2_options"></a>
+<a id="http2-options"></a>
 
 ### Http2 Options
 
 `enabled` - (Optional) HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections (`Bool`).
 
-<a id="nestedblock--no_panic_threshold"></a>
+<a id="no-panic-threshold"></a>
 
 ### No Panic Threshold
 
-<a id="nestedblock--outlier_detection"></a>
+<a id="outlier-detection"></a>
 
 ### Outlier Detection
 
@@ -238,15 +238,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
 
-<a id="nestedblock--proxy_protocol_v1"></a>
+<a id="proxy-protocol-v1"></a>
 
 ### Proxy Protocol V1
 
-<a id="nestedblock--proxy_protocol_v2"></a>
+<a id="proxy-protocol-v2"></a>
 
 ### Proxy Protocol V2
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -258,31 +258,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--tls_parameters"></a>
+<a id="tls-parameters"></a>
 
 ### TLS Parameters
 
-`cert_params` - (Optional) Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store. See [Cert Params](#nestedblock--tls_parameters--cert_params) below.
+`cert_params` - (Optional) Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store. See [Cert Params](#tls-parameters-cert-params) below.
 
-`common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#nestedblock--tls_parameters--common_params) below.
+`common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#tls-parameters-common-params) below.
 
-`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Session Key Caching](#nestedblock--tls_parameters--default_session_key_caching) below.
+`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Session Key Caching](#tls-parameters-default-session-key-caching) below.
 
-`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Session Key Caching](#nestedblock--tls_parameters--disable_session_key_caching) below.
+`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Session Key Caching](#tls-parameters-disable-session-key-caching) below.
 
-`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#nestedblock--tls_parameters--disable_sni) below.
+`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#tls-parameters-disable-sni) below.
 
 `max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
 
 `sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
-`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#nestedblock--tls_parameters--use_host_header_as_sni) below.
+`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#tls-parameters-use-host-header-as-sni) below.
 
-<a id="nestedblock--tls_parameters--cert_params"></a>
+<a id="tls-parameters-cert-params"></a>
 
 ### TLS Parameters Cert Params
 
-`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication. See [Certificates](#nestedblock--tls_parameters--cert_params--certificates) below.
+`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication. See [Certificates](#tls-parameters-cert-params-certificates) below.
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_ (`List`).
 
@@ -290,9 +290,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
-`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#nestedblock--tls_parameters--cert_params--validation_params) below.
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#tls-parameters-cert-params-validation-params) below.
 
-<a id="nestedblock--tls_parameters--cert_params--certificates"></a>
+<a id="tls-parameters-cert-params-certificates"></a>
 
 ### TLS Parameters Cert Params Certificates
 
@@ -306,23 +306,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--tls_parameters--cert_params--validation_params"></a>
+<a id="tls-parameters-cert-params-validation-params"></a>
 
 ### TLS Parameters Cert Params Validation Params
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#nestedblock--tls_parameters--cert_params--validation_params--trusted_ca) below.
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-parameters-cert-params-validation-params-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
 
-<a id="nestedblock--tls_parameters--cert_params--validation_params--trusted_ca"></a>
+<a id="tls-parameters-cert-params-validation-params-trusted-ca"></a>
 
 ### TLS Parameters Cert Params Validation Params Trusted CA
 
-<a id="nestedblock--tls_parameters--common_params"></a>
+<a id="tls-parameters-common-params"></a>
 
 ### TLS Parameters Common Params
 
@@ -332,87 +332,87 @@ In addition to all arguments above, the following attributes are exported:
 
 `minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
-`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates. See [TLS Certificates](#nestedblock--tls_parameters--common_params--tls_certificates) below.
+`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates. See [TLS Certificates](#tls-parameters-common-params-tls-certificates) below.
 
-`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#nestedblock--tls_parameters--common_params--validation_params) below.
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#tls-parameters-common-params-validation-params) below.
 
-<a id="nestedblock--tls_parameters--common_params--tls_certificates"></a>
+<a id="tls-parameters-common-params-tls-certificates"></a>
 
 ### TLS Parameters Common Params TLS Certificates
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) below.
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--tls_parameters--common_params--tls_certificates--disable_ocsp_stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#tls-parameters-common-params-tls-certificates-disable-ocsp-stapling) below.
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--tls_parameters--common_params--tls_certificates--private_key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#tls-parameters-common-params-tls-certificates-private-key) below.
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--tls_parameters--common_params--tls_certificates--use_system_defaults) below.
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#tls-parameters-common-params-tls-certificates-use-system-defaults) below.
 
-<a id="nestedblock--tls_parameters--common_params--tls_certificates--custom_hash_algorithms"></a>
+<a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
 
 ### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
 
-<a id="nestedblock--tls_parameters--common_params--tls_certificates--disable_ocsp_stapling"></a>
+<a id="tls-parameters-common-params-tls-certificates-disable-ocsp-stapling"></a>
 
 ### TLS Parameters Common Params TLS Certificates Disable OCSP Stapling
 
-<a id="nestedblock--tls_parameters--common_params--tls_certificates--private_key"></a>
+<a id="tls-parameters-common-params-tls-certificates-private-key"></a>
 
 ### TLS Parameters Common Params TLS Certificates Private Key
 
-<a id="nestedblock--tls_parameters--common_params--tls_certificates--use_system_defaults"></a>
+<a id="tls-parameters-common-params-tls-certificates-use-system-defaults"></a>
 
 ### TLS Parameters Common Params TLS Certificates Use System Defaults
 
-<a id="nestedblock--tls_parameters--common_params--validation_params"></a>
+<a id="tls-parameters-common-params-validation-params"></a>
 
 ### TLS Parameters Common Params Validation Params
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#nestedblock--tls_parameters--common_params--validation_params--trusted_ca) below.
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-parameters-common-params-validation-params-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
 
-<a id="nestedblock--tls_parameters--common_params--validation_params--trusted_ca"></a>
+<a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
 
 ### TLS Parameters Common Params Validation Params Trusted CA
 
-<a id="nestedblock--tls_parameters--default_session_key_caching"></a>
+<a id="tls-parameters-default-session-key-caching"></a>
 
 ### TLS Parameters Default Session Key Caching
 
-<a id="nestedblock--tls_parameters--disable_session_key_caching"></a>
+<a id="tls-parameters-disable-session-key-caching"></a>
 
 ### TLS Parameters Disable Session Key Caching
 
-<a id="nestedblock--tls_parameters--disable_sni"></a>
+<a id="tls-parameters-disable-sni"></a>
 
 ### TLS Parameters Disable Sni
 
-<a id="nestedblock--tls_parameters--use_host_header_as_sni"></a>
+<a id="tls-parameters-use-host-header-as-sni"></a>
 
 ### TLS Parameters Use Host Header As Sni
 
-<a id="nestedblock--upstream_conn_pool_reuse_type"></a>
+<a id="upstream-conn-pool-reuse-type"></a>
 
 ### Upstream Conn Pool Reuse Type
 
-`disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Conn Pool Reuse](#nestedblock--upstream_conn_pool_reuse_type--disable_conn_pool_reuse) below.
+`disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Conn Pool Reuse](#upstream-conn-pool-reuse-type-disable-conn-pool-reuse) below.
 
-`enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Conn Pool Reuse](#nestedblock--upstream_conn_pool_reuse_type--enable_conn_pool_reuse) below.
+`enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Conn Pool Reuse](#upstream-conn-pool-reuse-type-enable-conn-pool-reuse) below.
 
-<a id="nestedblock--upstream_conn_pool_reuse_type--disable_conn_pool_reuse"></a>
+<a id="upstream-conn-pool-reuse-type-disable-conn-pool-reuse"></a>
 
 ### Upstream Conn Pool Reuse Type Disable Conn Pool Reuse
 
-<a id="nestedblock--upstream_conn_pool_reuse_type--enable_conn_pool_reuse"></a>
+<a id="upstream-conn-pool-reuse-type-enable-conn-pool-reuse"></a>
 
 ### Upstream Conn Pool Reuse Type Enable Conn Pool Reuse
 

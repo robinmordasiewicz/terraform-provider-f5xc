@@ -68,7 +68,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--asn"></a>
+<a id="asn"></a>
 
 ### Asn
 
@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

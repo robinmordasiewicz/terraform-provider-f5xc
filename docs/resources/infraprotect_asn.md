@@ -76,15 +76,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--bgp_session_disabled"></a>
+<a id="bgp-session-disabled"></a>
 
 ### BGP Session Disabled
 
-<a id="nestedblock--bgp_session_enabled"></a>
+<a id="bgp-session-enabled"></a>
 
 ### BGP Session Enabled
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

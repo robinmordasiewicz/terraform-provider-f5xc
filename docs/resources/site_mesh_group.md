@@ -91,65 +91,65 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--disable_re_fallback"></a>
+<a id="disable-re-fallback"></a>
 
 ### Disable RE Fallback
 
-<a id="nestedblock--enable_re_fallback"></a>
+<a id="enable-re-fallback"></a>
 
 ### Enable RE Fallback
 
-<a id="nestedblock--full_mesh"></a>
+<a id="full-mesh"></a>
 
 ### Full Mesh
 
-`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#nestedblock--full_mesh--control_and_data_plane_mesh) below.
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#full-mesh-control-and-data-plane-mesh) below.
 
-`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#nestedblock--full_mesh--data_plane_mesh) below.
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#full-mesh-data-plane-mesh) below.
 
-<a id="nestedblock--full_mesh--control_and_data_plane_mesh"></a>
+<a id="full-mesh-control-and-data-plane-mesh"></a>
 
 ### Full Mesh Control And Data Plane Mesh
 
-<a id="nestedblock--full_mesh--data_plane_mesh"></a>
+<a id="full-mesh-data-plane-mesh"></a>
 
 ### Full Mesh Data Plane Mesh
 
-<a id="nestedblock--hub_mesh"></a>
+<a id="hub-mesh"></a>
 
 ### Hub Mesh
 
-`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#nestedblock--hub_mesh--control_and_data_plane_mesh) below.
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#hub-mesh-control-and-data-plane-mesh) below.
 
-`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#nestedblock--hub_mesh--data_plane_mesh) below.
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#hub-mesh-data-plane-mesh) below.
 
-<a id="nestedblock--hub_mesh--control_and_data_plane_mesh"></a>
+<a id="hub-mesh-control-and-data-plane-mesh"></a>
 
 ### Hub Mesh Control And Data Plane Mesh
 
-<a id="nestedblock--hub_mesh--data_plane_mesh"></a>
+<a id="hub-mesh-data-plane-mesh"></a>
 
 ### Hub Mesh Data Plane Mesh
 
-<a id="nestedblock--spoke_mesh"></a>
+<a id="spoke-mesh"></a>
 
 ### Spoke Mesh
 
-`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#nestedblock--spoke_mesh--control_and_data_plane_mesh) below.
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#spoke-mesh-control-and-data-plane-mesh) below.
 
-`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#nestedblock--spoke_mesh--data_plane_mesh) below.
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#spoke-mesh-data-plane-mesh) below.
 
-`hub_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Hub Mesh Group](#nestedblock--spoke_mesh--hub_mesh_group) below.
+`hub_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Hub Mesh Group](#spoke-mesh-hub-mesh-group) below.
 
-<a id="nestedblock--spoke_mesh--control_and_data_plane_mesh"></a>
+<a id="spoke-mesh-control-and-data-plane-mesh"></a>
 
 ### Spoke Mesh Control And Data Plane Mesh
 
-<a id="nestedblock--spoke_mesh--data_plane_mesh"></a>
+<a id="spoke-mesh-data-plane-mesh"></a>
 
 ### Spoke Mesh Data Plane Mesh
 
-<a id="nestedblock--spoke_mesh--hub_mesh_group"></a>
+<a id="spoke-mesh-hub-mesh-group"></a>
 
 ### Spoke Mesh Hub Mesh Group
 
@@ -159,7 +159,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -171,7 +171,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--virtual_site"></a>
+<a id="virtual-site"></a>
 
 ### Virtual Site
 

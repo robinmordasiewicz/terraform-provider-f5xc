@@ -100,13 +100,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--comments"></a>
+<a id="comments"></a>
 
 ### Comments
 
 `attachment_ids` - (Optional) Attachment IDs. Third party id of any attachment related to this ticket comment (`List`).
 
-`attachments_info` - (Optional) Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have. See [Attachments Info](#nestedblock--comments--attachments_info) below.
+`attachments_info` - (Optional) Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have. See [Attachments Info](#comments-attachments-info) below.
 
 `author_email` - (Optional) Email. Email of the author of the comment (`String`).
 
@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `plain_text` - (Optional) Comment. Comment body as plain text (`String`).
 
-<a id="nestedblock--comments--attachments_info"></a>
+<a id="comments-attachments-info"></a>
 
 ### Comments Attachments Info
 
@@ -130,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tp_id` - (Optional) 3rd party ID. Optional ID as assigned by the 3rd party actually storing the data (`String`).
 
-<a id="nestedblock--relates_to"></a>
+<a id="relates-to"></a>
 
 ### Relates To
 
@@ -144,7 +144,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

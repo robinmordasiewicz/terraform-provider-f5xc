@@ -128,43 +128,43 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--action_allow"></a>
+<a id="action-allow"></a>
 
 ### Action Allow
 
-<a id="nestedblock--action_deny"></a>
+<a id="action-deny"></a>
 
 ### Action Deny
 
-<a id="nestedblock--destination_prefix_all"></a>
+<a id="destination-prefix-all"></a>
 
 ### Destination Prefix All
 
-<a id="nestedblock--fragments_allow"></a>
+<a id="fragments-allow"></a>
 
 ### Fragments Allow
 
-<a id="nestedblock--fragments_deny"></a>
+<a id="fragments-deny"></a>
 
 ### Fragments Deny
 
-<a id="nestedblock--protocol_ah"></a>
+<a id="protocol-ah"></a>
 
 ### Protocol Ah
 
-<a id="nestedblock--protocol_all"></a>
+<a id="protocol-all"></a>
 
 ### Protocol All
 
-<a id="nestedblock--protocol_esp"></a>
+<a id="protocol-esp"></a>
 
 ### Protocol Esp
 
-<a id="nestedblock--protocol_gre"></a>
+<a id="protocol-gre"></a>
 
 ### Protocol Gre
 
-<a id="nestedblock--protocol_icmp"></a>
+<a id="protocol-icmp"></a>
 
 ### Protocol ICMP
 
@@ -182,7 +182,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `unreachable` - (Optional) Configuration for unreachable (`Bool`).
 
-<a id="nestedblock--protocol_icmp6"></a>
+<a id="protocol-icmp6"></a>
 
 ### Protocol Icmp6
 
@@ -208,67 +208,67 @@ In addition to all arguments above, the following attributes are exported:
 
 `time_exceeded` - (Optional) Time-Exceeded. Time-Exceeded (`Bool`).
 
-<a id="nestedblock--protocol_ipv6"></a>
+<a id="protocol-ipv6"></a>
 
 ### Protocol IPv6
 
-<a id="nestedblock--protocol_tcp"></a>
+<a id="protocol-tcp"></a>
 
 ### Protocol TCP
 
 `description` - (Optional) Configuration for description (`String`).
 
-`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#nestedblock--protocol_tcp--destination_port_all) below.
+`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#protocol-tcp-destination-port-all) below.
 
 `destination_port_range` - (Optional) Port Range. Port Range (`String`).
 
-`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#nestedblock--protocol_tcp--source_port_all) below.
+`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#protocol-tcp-source-port-all) below.
 
 `source_port_range` - (Optional) Port Range. Port Range (`String`).
 
-<a id="nestedblock--protocol_tcp--destination_port_all"></a>
+<a id="protocol-tcp-destination-port-all"></a>
 
 ### Protocol TCP Destination Port All
 
-<a id="nestedblock--protocol_tcp--source_port_all"></a>
+<a id="protocol-tcp-source-port-all"></a>
 
 ### Protocol TCP Source Port All
 
-<a id="nestedblock--protocol_udp"></a>
+<a id="protocol-udp"></a>
 
 ### Protocol UDP
 
 `description` - (Optional) Configuration for description (`String`).
 
-`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#nestedblock--protocol_udp--destination_port_all) below.
+`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#protocol-udp-destination-port-all) below.
 
 `destination_port_range` - (Optional) Port Range. Port Range (`String`).
 
-`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#nestedblock--protocol_udp--source_port_all) below.
+`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#protocol-udp-source-port-all) below.
 
 `source_port_range` - (Optional) Port Range. Port Range (`String`).
 
-<a id="nestedblock--protocol_udp--destination_port_all"></a>
+<a id="protocol-udp-destination-port-all"></a>
 
 ### Protocol UDP Destination Port All
 
-<a id="nestedblock--protocol_udp--source_port_all"></a>
+<a id="protocol-udp-source-port-all"></a>
 
 ### Protocol UDP Source Port All
 
-<a id="nestedblock--source_prefix_all"></a>
+<a id="source-prefix-all"></a>
 
 ### Source Prefix All
 
-<a id="nestedblock--state_off"></a>
+<a id="state-off"></a>
 
 ### State Off
 
-<a id="nestedblock--state_on"></a>
+<a id="state-on"></a>
 
 ### State On
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -280,11 +280,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--version_ipv4"></a>
+<a id="version-ipv4"></a>
 
 ### Version IPv4
 
-<a id="nestedblock--version_ipv6"></a>
+<a id="version-ipv6"></a>
 
 ### Version IPv6
 

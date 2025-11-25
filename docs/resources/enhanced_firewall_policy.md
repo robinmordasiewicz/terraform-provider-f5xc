@@ -94,203 +94,203 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--allow_all"></a>
+<a id="allow-all"></a>
 
 ### Allow All
 
-<a id="nestedblock--allowed_destinations"></a>
+<a id="allowed-destinations"></a>
 
 ### Allowed Destinations
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
-<a id="nestedblock--allowed_sources"></a>
+<a id="allowed-sources"></a>
 
 ### Allowed Sources
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
-<a id="nestedblock--denied_destinations"></a>
+<a id="denied-destinations"></a>
 
 ### Denied Destinations
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
-<a id="nestedblock--denied_sources"></a>
+<a id="denied-sources"></a>
 
 ### Denied Sources
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
-<a id="nestedblock--deny_all"></a>
+<a id="deny-all"></a>
 
 ### Deny All
 
-<a id="nestedblock--rule_list"></a>
+<a id="rule-list"></a>
 
 ### Rule List
 
-`rules` - (Optional) List of Enhanced Firewall Policy Rules. Ordered List of Enhanced Firewall Policy Rules. See [Rules](#nestedblock--rule_list--rules) below.
+`rules` - (Optional) List of Enhanced Firewall Policy Rules. Ordered List of Enhanced Firewall Policy Rules. See [Rules](#rule-list-rules) below.
 
-<a id="nestedblock--rule_list--rules"></a>
+<a id="rule-list-rules"></a>
 
 ### Rule List Rules
 
-`advanced_action` - (Optional) Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction. See [Advanced Action](#nestedblock--rule_list--rules--advanced_action) below.
+`advanced_action` - (Optional) Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction. See [Advanced Action](#rule-list-rules-advanced-action) below.
 
-`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [All Destinations](#nestedblock--rule_list--rules--all_destinations) below.
+`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [All Destinations](#rule-list-rules-all-destinations) below.
 
-`all_sli_vips` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sli Vips](#nestedblock--rule_list--rules--all_sli_vips) below.
+`all_sli_vips` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sli Vips](#rule-list-rules-all-sli-vips) below.
 
-`all_slo_vips` - (Optional) Empty. This can be used for messages where no values are needed. See [All Slo Vips](#nestedblock--rule_list--rules--all_slo_vips) below.
+`all_slo_vips` - (Optional) Empty. This can be used for messages where no values are needed. See [All Slo Vips](#rule-list-rules-all-slo-vips) below.
 
-`all_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sources](#nestedblock--rule_list--rules--all_sources) below.
+`all_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sources](#rule-list-rules-all-sources) below.
 
-`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All TCP Traffic](#nestedblock--rule_list--rules--all_tcp_traffic) below.
+`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All TCP Traffic](#rule-list-rules-all-tcp-traffic) below.
 
-`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Traffic](#nestedblock--rule_list--rules--all_traffic) below.
+`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Traffic](#rule-list-rules-all-traffic) below.
 
-`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All UDP Traffic](#nestedblock--rule_list--rules--all_udp_traffic) below.
+`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All UDP Traffic](#rule-list-rules-all-udp-traffic) below.
 
-`allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow](#nestedblock--rule_list--rules--allow) below.
+`allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow](#rule-list-rules-allow) below.
 
-`applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#nestedblock--rule_list--rules--applications) below.
+`applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#rule-list-rules-applications) below.
 
-`deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny](#nestedblock--rule_list--rules--deny) below.
+`deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny](#rule-list-rules-deny) below.
 
-`destination_aws_vpc_ids` - (Optional) AWS VPC List. List of VPC Identifiers in AWS. See [Destination AWS Vpc Ids](#nestedblock--rule_list--rules--destination_aws_vpc_ids) below.
+`destination_aws_vpc_ids` - (Optional) AWS VPC List. List of VPC Identifiers in AWS. See [Destination AWS Vpc Ids](#rule-list-rules-destination-aws-vpc-ids) below.
 
-`destination_ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [Destination IP Prefix Set](#nestedblock--rule_list--rules--destination_ip_prefix_set) below.
+`destination_ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [Destination IP Prefix Set](#rule-list-rules-destination-ip-prefix-set) below.
 
-`destination_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Destination Label Selector](#nestedblock--rule_list--rules--destination_label_selector) below.
+`destination_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Destination Label Selector](#rule-list-rules-destination-label-selector) below.
 
-`destination_prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Destination Prefix List](#nestedblock--rule_list--rules--destination_prefix_list) below.
+`destination_prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Destination Prefix List](#rule-list-rules-destination-prefix-list) below.
 
-`insert_service` - (Optional) Policy Action to Forward Traffic to External Service. Action to forward traffic to external service. See [Insert Service](#nestedblock--rule_list--rules--insert_service) below.
+`insert_service` - (Optional) Policy Action to Forward Traffic to External Service. Action to forward traffic to external service. See [Insert Service](#rule-list-rules-insert-service) below.
 
-`inside_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Destinations](#nestedblock--rule_list--rules--inside_destinations) below.
+`inside_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Destinations](#rule-list-rules-inside-destinations) below.
 
-`inside_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Sources](#nestedblock--rule_list--rules--inside_sources) below.
+`inside_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Sources](#rule-list-rules-inside-sources) below.
 
-`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name. See [Label Matcher](#nestedblock--rule_list--rules--label_matcher) below.
+`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name. See [Label Matcher](#rule-list-rules-label-matcher) below.
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--rule_list--rules--metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#rule-list-rules-metadata) below.
 
-`outside_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Destinations](#nestedblock--rule_list--rules--outside_destinations) below.
+`outside_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Destinations](#rule-list-rules-outside-destinations) below.
 
-`outside_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Sources](#nestedblock--rule_list--rules--outside_sources) below.
+`outside_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Sources](#rule-list-rules-outside-sources) below.
 
-`protocol_port_range` - (Optional) Protocol and Port. Protocol and Port ranges. See [Protocol Port Range](#nestedblock--rule_list--rules--protocol_port_range) below.
+`protocol_port_range` - (Optional) Protocol and Port. Protocol and Port ranges. See [Protocol Port Range](#rule-list-rules-protocol-port-range) below.
 
-`source_aws_vpc_ids` - (Optional) AWS VPC List. List of VPC Identifiers in AWS. See [Source AWS Vpc Ids](#nestedblock--rule_list--rules--source_aws_vpc_ids) below.
+`source_aws_vpc_ids` - (Optional) AWS VPC List. List of VPC Identifiers in AWS. See [Source AWS Vpc Ids](#rule-list-rules-source-aws-vpc-ids) below.
 
-`source_ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [Source IP Prefix Set](#nestedblock--rule_list--rules--source_ip_prefix_set) below.
+`source_ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [Source IP Prefix Set](#rule-list-rules-source-ip-prefix-set) below.
 
-`source_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Source Label Selector](#nestedblock--rule_list--rules--source_label_selector) below.
+`source_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Source Label Selector](#rule-list-rules-source-label-selector) below.
 
-`source_prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Source Prefix List](#nestedblock--rule_list--rules--source_prefix_list) below.
+`source_prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Source Prefix List](#rule-list-rules-source-prefix-list) below.
 
-<a id="nestedblock--rule_list--rules--advanced_action"></a>
+<a id="rule-list-rules-advanced-action"></a>
 
 ### Rule List Rules Advanced Action
 
 `action` - (Optional) Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG` (`String`).
 
-<a id="nestedblock--rule_list--rules--all_destinations"></a>
+<a id="rule-list-rules-all-destinations"></a>
 
 ### Rule List Rules All Destinations
 
-<a id="nestedblock--rule_list--rules--all_sli_vips"></a>
+<a id="rule-list-rules-all-sli-vips"></a>
 
 ### Rule List Rules All Sli Vips
 
-<a id="nestedblock--rule_list--rules--all_slo_vips"></a>
+<a id="rule-list-rules-all-slo-vips"></a>
 
 ### Rule List Rules All Slo Vips
 
-<a id="nestedblock--rule_list--rules--all_sources"></a>
+<a id="rule-list-rules-all-sources"></a>
 
 ### Rule List Rules All Sources
 
-<a id="nestedblock--rule_list--rules--all_tcp_traffic"></a>
+<a id="rule-list-rules-all-tcp-traffic"></a>
 
 ### Rule List Rules All TCP Traffic
 
-<a id="nestedblock--rule_list--rules--all_traffic"></a>
+<a id="rule-list-rules-all-traffic"></a>
 
 ### Rule List Rules All Traffic
 
-<a id="nestedblock--rule_list--rules--all_udp_traffic"></a>
+<a id="rule-list-rules-all-udp-traffic"></a>
 
 ### Rule List Rules All UDP Traffic
 
-<a id="nestedblock--rule_list--rules--allow"></a>
+<a id="rule-list-rules-allow"></a>
 
 ### Rule List Rules Allow
 
-<a id="nestedblock--rule_list--rules--applications"></a>
+<a id="rule-list-rules-applications"></a>
 
 ### Rule List Rules Applications
 
 `applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
 
-<a id="nestedblock--rule_list--rules--deny"></a>
+<a id="rule-list-rules-deny"></a>
 
 ### Rule List Rules Deny
 
-<a id="nestedblock--rule_list--rules--destination_aws_vpc_ids"></a>
+<a id="rule-list-rules-destination-aws-vpc-ids"></a>
 
 ### Rule List Rules Destination AWS Vpc Ids
 
 `vpc_id` - (Optional) AWS VPC List. List of VPC Identifiers in AWS (`List`).
 
-<a id="nestedblock--rule_list--rules--destination_ip_prefix_set"></a>
+<a id="rule-list-rules-destination-ip-prefix-set"></a>
 
 ### Rule List Rules Destination IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--rule_list--rules--destination_ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#rule-list-rules-destination-ip-prefix-set-ref) below.
 
-<a id="nestedblock--rule_list--rules--destination_ip_prefix_set--ref"></a>
+<a id="rule-list-rules-destination-ip-prefix-set-ref"></a>
 
 ### Rule List Rules Destination IP Prefix Set Ref
 
-<a id="nestedblock--rule_list--rules--destination_label_selector"></a>
+<a id="rule-list-rules-destination-label-selector"></a>
 
 ### Rule List Rules Destination Label Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--rule_list--rules--destination_prefix_list"></a>
+<a id="rule-list-rules-destination-prefix-list"></a>
 
 ### Rule List Rules Destination Prefix List
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
-<a id="nestedblock--rule_list--rules--insert_service"></a>
+<a id="rule-list-rules-insert-service"></a>
 
 ### Rule List Rules Insert Service
 
-`nfv_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Nfv Service](#nestedblock--rule_list--rules--insert_service--nfv_service) below.
+`nfv_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Nfv Service](#rule-list-rules-insert-service-nfv-service) below.
 
-<a id="nestedblock--rule_list--rules--insert_service--nfv_service"></a>
+<a id="rule-list-rules-insert-service-nfv-service"></a>
 
 ### Rule List Rules Insert Service Nfv Service
 
-<a id="nestedblock--rule_list--rules--inside_destinations"></a>
+<a id="rule-list-rules-inside-destinations"></a>
 
 ### Rule List Rules Inside Destinations
 
-<a id="nestedblock--rule_list--rules--inside_sources"></a>
+<a id="rule-list-rules-inside-sources"></a>
 
 ### Rule List Rules Inside Sources
 
-<a id="nestedblock--rule_list--rules--label_matcher"></a>
+<a id="rule-list-rules-label-matcher"></a>
 
 ### Rule List Rules Label Matcher
 
 `keys` - (Optional) Keys. The list of label key names that have to match (`List`).
 
-<a id="nestedblock--rule_list--rules--metadata"></a>
+<a id="rule-list-rules-metadata"></a>
 
 ### Rule List Rules Metadata
 
@@ -298,15 +298,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
-<a id="nestedblock--rule_list--rules--outside_destinations"></a>
+<a id="rule-list-rules-outside-destinations"></a>
 
 ### Rule List Rules Outside Destinations
 
-<a id="nestedblock--rule_list--rules--outside_sources"></a>
+<a id="rule-list-rules-outside-sources"></a>
 
 ### Rule List Rules Outside Sources
 
-<a id="nestedblock--rule_list--rules--protocol_port_range"></a>
+<a id="rule-list-rules-protocol-port-range"></a>
 
 ### Rule List Rules Protocol Port Range
 
@@ -314,35 +314,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `protocol` - (Optional) Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP (`String`).
 
-<a id="nestedblock--rule_list--rules--source_aws_vpc_ids"></a>
+<a id="rule-list-rules-source-aws-vpc-ids"></a>
 
 ### Rule List Rules Source AWS Vpc Ids
 
 `vpc_id` - (Optional) AWS VPC List. List of VPC Identifiers in AWS (`List`).
 
-<a id="nestedblock--rule_list--rules--source_ip_prefix_set"></a>
+<a id="rule-list-rules-source-ip-prefix-set"></a>
 
 ### Rule List Rules Source IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--rule_list--rules--source_ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#rule-list-rules-source-ip-prefix-set-ref) below.
 
-<a id="nestedblock--rule_list--rules--source_ip_prefix_set--ref"></a>
+<a id="rule-list-rules-source-ip-prefix-set-ref"></a>
 
 ### Rule List Rules Source IP Prefix Set Ref
 
-<a id="nestedblock--rule_list--rules--source_label_selector"></a>
+<a id="rule-list-rules-source-label-selector"></a>
 
 ### Rule List Rules Source Label Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--rule_list--rules--source_prefix_list"></a>
+<a id="rule-list-rules-source-prefix-list"></a>
 
 ### Rule List Rules Source Prefix List
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

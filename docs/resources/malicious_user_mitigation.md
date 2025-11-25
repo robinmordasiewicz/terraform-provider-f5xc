@@ -72,65 +72,65 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--mitigation_type"></a>
+<a id="mitigation-type"></a>
 
 ### Mitigation Type
 
-`rules` - (Optional) Rules. Define the threat levels and the corresponding mitigation actions to be taken. See [Rules](#nestedblock--mitigation_type--rules) below.
+`rules` - (Optional) Rules. Define the threat levels and the corresponding mitigation actions to be taken. See [Rules](#mitigation-type-rules) below.
 
-<a id="nestedblock--mitigation_type--rules"></a>
+<a id="mitigation-type-rules"></a>
 
 ### Mitigation Type Rules
 
-`mitigation_action` - (Optional) Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user. See [Mitigation Action](#nestedblock--mitigation_type--rules--mitigation_action) below.
+`mitigation_action` - (Optional) Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user. See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
 
-`threat_level` - (Optional) Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation. See [Threat Level](#nestedblock--mitigation_type--rules--threat_level) below.
+`threat_level` - (Optional) Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation. See [Threat Level](#mitigation-type-rules-threat-level) below.
 
-<a id="nestedblock--mitigation_type--rules--mitigation_action"></a>
+<a id="mitigation-type-rules-mitigation-action"></a>
 
 ### Mitigation Type Rules Mitigation Action
 
-`block_temporarily` - (Optional) Empty. This can be used for messages where no values are needed. See [Block Temporarily](#nestedblock--mitigation_type--rules--mitigation_action--block_temporarily) below.
+`block_temporarily` - (Optional) Empty. This can be used for messages where no values are needed. See [Block Temporarily](#mitigation-type-rules-mitigation-action-block-temporarily) below.
 
-`captcha_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Captcha Challenge](#nestedblock--mitigation_type--rules--mitigation_action--captcha_challenge) below.
+`captcha_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Captcha Challenge](#mitigation-type-rules-mitigation-action-captcha-challenge) below.
 
-`javascript_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Javascript Challenge](#nestedblock--mitigation_type--rules--mitigation_action--javascript_challenge) below.
+`javascript_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Javascript Challenge](#mitigation-type-rules-mitigation-action-javascript-challenge) below.
 
-<a id="nestedblock--mitigation_type--rules--mitigation_action--block_temporarily"></a>
+<a id="mitigation-type-rules-mitigation-action-block-temporarily"></a>
 
 ### Mitigation Type Rules Mitigation Action Block Temporarily
 
-<a id="nestedblock--mitigation_type--rules--mitigation_action--captcha_challenge"></a>
+<a id="mitigation-type-rules-mitigation-action-captcha-challenge"></a>
 
 ### Mitigation Type Rules Mitigation Action Captcha Challenge
 
-<a id="nestedblock--mitigation_type--rules--mitigation_action--javascript_challenge"></a>
+<a id="mitigation-type-rules-mitigation-action-javascript-challenge"></a>
 
 ### Mitigation Type Rules Mitigation Action Javascript Challenge
 
-<a id="nestedblock--mitigation_type--rules--threat_level"></a>
+<a id="mitigation-type-rules-threat-level"></a>
 
 ### Mitigation Type Rules Threat Level
 
-`high` - (Optional) Empty. This can be used for messages where no values are needed. See [High](#nestedblock--mitigation_type--rules--threat_level--high) below.
+`high` - (Optional) Empty. This can be used for messages where no values are needed. See [High](#mitigation-type-rules-threat-level-high) below.
 
-`low` - (Optional) Empty. This can be used for messages where no values are needed. See [Low](#nestedblock--mitigation_type--rules--threat_level--low) below.
+`low` - (Optional) Empty. This can be used for messages where no values are needed. See [Low](#mitigation-type-rules-threat-level-low) below.
 
-`medium` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium](#nestedblock--mitigation_type--rules--threat_level--medium) below.
+`medium` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium](#mitigation-type-rules-threat-level-medium) below.
 
-<a id="nestedblock--mitigation_type--rules--threat_level--high"></a>
+<a id="mitigation-type-rules-threat-level-high"></a>
 
 ### Mitigation Type Rules Threat Level High
 
-<a id="nestedblock--mitigation_type--rules--threat_level--low"></a>
+<a id="mitigation-type-rules-threat-level-low"></a>
 
 ### Mitigation Type Rules Threat Level Low
 
-<a id="nestedblock--mitigation_type--rules--threat_level--medium"></a>
+<a id="mitigation-type-rules-threat-level-medium"></a>
 
 ### Mitigation Type Rules Threat Level Medium
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

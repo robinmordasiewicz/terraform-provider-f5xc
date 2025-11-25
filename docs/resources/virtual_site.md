@@ -70,13 +70,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--site_selector"></a>
+<a id="site-selector"></a>
 
 ### Site Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

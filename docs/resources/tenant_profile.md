@@ -84,15 +84,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--ct_groups"></a>
+<a id="ct-groups"></a>
 
 ### Ct Groups
 
 `name` - (Optional) Name. Name of the child tenant user group (`String`).
 
-`namespace_roles` - (Optional) Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant. See [Namespace Roles](#nestedblock--ct_groups--namespace_roles) below.
+`namespace_roles` - (Optional) Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant. See [Namespace Roles](#ct-groups-namespace-roles) below.
 
-<a id="nestedblock--ct_groups--namespace_roles"></a>
+<a id="ct-groups-namespace-roles"></a>
 
 ### Ct Groups Namespace Roles
 
@@ -100,35 +100,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `role` - (Optional) Role. User role that users in the newly created group will inherit (`String`).
 
-<a id="nestedblock--favicon"></a>
+<a id="favicon"></a>
 
 ### Favicon
 
-`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [AWS S3](#nestedblock--favicon--aws_s3) below.
+`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [AWS S3](#favicon-aws-s3) below.
 
 `content` - (Optional) Configuration for content (`String`).
 
 `content_type` - (Optional) Content Type. Content type of the file (MIME type) (`String`).
 
-<a id="nestedblock--favicon--aws_s3"></a>
+<a id="favicon-aws-s3"></a>
 
 ### Favicon AWS S3
 
-<a id="nestedblock--logo"></a>
+<a id="logo"></a>
 
 ### Logo
 
-`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [AWS S3](#nestedblock--logo--aws_s3) below.
+`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [AWS S3](#logo-aws-s3) below.
 
 `content` - (Optional) Configuration for content (`String`).
 
 `content_type` - (Optional) Content Type. Content type of the file (MIME type) (`String`).
 
-<a id="nestedblock--logo--aws_s3"></a>
+<a id="logo-aws-s3"></a>
 
 ### Logo AWS S3
 
-<a id="nestedblock--plan"></a>
+<a id="plan"></a>
 
 ### Plan
 
@@ -138,7 +138,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

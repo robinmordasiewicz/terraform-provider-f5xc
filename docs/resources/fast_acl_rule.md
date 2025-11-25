@@ -82,23 +82,23 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--action"></a>
+<a id="action"></a>
 
 ### Action
 
-`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#nestedblock--action--policer_action) below.
+`policer_action` - (Optional) Policer Reference. Reference to policer object. See [Policer Action](#action-policer-action) below.
 
-`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#nestedblock--action--protocol_policer_action) below.
+`protocol_policer_action` - (Optional) Protocol Policer Reference. Reference to policer object. See [Protocol Policer Action](#action-protocol-policer-action) below.
 
 `simple_action` - (Optional) Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY` (`String`).
 
-<a id="nestedblock--action--policer_action"></a>
+<a id="action-policer-action"></a>
 
 ### Action Policer Action
 
-`ref` - (Optional) Reference. A policer direct reference. See [Ref](#nestedblock--action--policer_action--ref) below.
+`ref` - (Optional) Reference. A policer direct reference. See [Ref](#action-policer-action-ref) below.
 
-<a id="nestedblock--action--policer_action--ref"></a>
+<a id="action-policer-action-ref"></a>
 
 ### Action Policer Action Ref
 
@@ -112,13 +112,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--action--protocol_policer_action"></a>
+<a id="action-protocol-policer-action"></a>
 
 ### Action Protocol Policer Action
 
-`ref` - (Optional) Protocol policer Reference. Reference to protocol policer object. See [Ref](#nestedblock--action--protocol_policer_action--ref) below.
+`ref` - (Optional) Protocol policer Reference. Reference to protocol policer object. See [Ref](#action-protocol-policer-action-ref) below.
 
-<a id="nestedblock--action--protocol_policer_action--ref"></a>
+<a id="action-protocol-policer-action-ref"></a>
 
 ### Action Protocol Policer Action Ref
 
@@ -132,13 +132,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--ip_prefix_set"></a>
+<a id="ip-prefix-set"></a>
 
 ### IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#ip-prefix-set-ref) below.
 
-<a id="nestedblock--ip_prefix_set--ref"></a>
+<a id="ip-prefix-set-ref"></a>
 
 ### IP Prefix Set Ref
 
@@ -152,31 +152,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--port"></a>
+<a id="port"></a>
 
 ### Port
 
-`all` - (Optional) Empty. This can be used for messages where no values are needed. See [All](#nestedblock--port--all) below.
+`all` - (Optional) Empty. This can be used for messages where no values are needed. See [All](#port-all) below.
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--port--dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#port-dns) below.
 
 `user_defined` - (Optional) Configuration for user_defined (`Number`).
 
-<a id="nestedblock--port--all"></a>
+<a id="port-all"></a>
 
 ### Port All
 
-<a id="nestedblock--port--dns"></a>
+<a id="port-dns"></a>
 
 ### Port DNS
 
-<a id="nestedblock--prefix"></a>
+<a id="prefix"></a>
 
 ### Prefix
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

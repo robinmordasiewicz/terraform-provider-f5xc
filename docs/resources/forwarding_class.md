@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--dscp"></a>
+<a id="dscp"></a>
 
 ### Dscp
 
@@ -102,19 +102,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `dscp_class` - (Optional) Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT` (`String`).
 
-<a id="nestedblock--dscp_based_queue"></a>
+<a id="dscp-based-queue"></a>
 
 ### Dscp Based Queue
 
-<a id="nestedblock--no_marking"></a>
+<a id="no-marking"></a>
 
 ### No Marking
 
-<a id="nestedblock--no_policer"></a>
+<a id="no-policer"></a>
 
 ### No Policer
 
-<a id="nestedblock--policer"></a>
+<a id="policer"></a>
 
 ### Policer
 
@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

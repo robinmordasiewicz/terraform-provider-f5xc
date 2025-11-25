@@ -70,13 +70,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--jira_config"></a>
+<a id="jira-config"></a>
 
 ### Jira Config
 
-`adhoc_rest_api` - (Optional) JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message. See [Adhoc REST API](#nestedblock--jira_config--adhoc_rest_api) below.
+`adhoc_rest_api` - (Optional) JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message. See [Adhoc REST API](#jira-config-adhoc-rest-api) below.
 
-<a id="nestedblock--jira_config--adhoc_rest_api"></a>
+<a id="jira-config-adhoc-rest-api"></a>
 
 ### Jira Config Adhoc REST API
 
@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `organization_domain` - (Optional) Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034 (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

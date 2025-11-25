@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--client_name_matcher"></a>
+<a id="client-name-matcher"></a>
 
 ### Client Name Matcher
 
@@ -86,13 +86,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-<a id="nestedblock--client_selector"></a>
+<a id="client-selector"></a>
 
 ### Client Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

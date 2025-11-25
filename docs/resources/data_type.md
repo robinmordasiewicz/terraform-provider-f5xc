@@ -80,85 +80,85 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--rules"></a>
+<a id="rules"></a>
 
 ### Rules
 
-`key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#nestedblock--rules--key_pattern) below.
+`key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#rules-key-pattern) below.
 
-`key_value_pattern` - (Optional) Key & Value Pattern. Search for specific key & value patterns in the specified sections. See [Key Value Pattern](#nestedblock--rules--key_value_pattern) below.
+`key_value_pattern` - (Optional) Key & Value Pattern. Search for specific key & value patterns in the specified sections. See [Key Value Pattern](#rules-key-value-pattern) below.
 
-`value_pattern` - (Optional) Rule Pattern Type. test. See [Value Pattern](#nestedblock--rules--value_pattern) below.
+`value_pattern` - (Optional) Rule Pattern Type. test. See [Value Pattern](#rules-value-pattern) below.
 
-<a id="nestedblock--rules--key_pattern"></a>
+<a id="rules-key-pattern"></a>
 
 ### Rules Key Pattern
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_pattern--exact_values) below.
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-pattern-exact-values) below.
 
 `regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
 `substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
-<a id="nestedblock--rules--key_pattern--exact_values"></a>
+<a id="rules-key-pattern-exact-values"></a>
 
 ### Rules Key Pattern Exact Values
 
 `exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
 
-<a id="nestedblock--rules--key_value_pattern"></a>
+<a id="rules-key-value-pattern"></a>
 
 ### Rules Key Value Pattern
 
-`key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#nestedblock--rules--key_value_pattern--key_pattern) below.
+`key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
-`value_pattern` - (Optional) Rule Pattern Type. test. See [Value Pattern](#nestedblock--rules--key_value_pattern--value_pattern) below.
+`value_pattern` - (Optional) Rule Pattern Type. test. See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
 
-<a id="nestedblock--rules--key_value_pattern--key_pattern"></a>
+<a id="rules-key-value-pattern-key-pattern"></a>
 
 ### Rules Key Value Pattern Key Pattern
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_value_pattern--key_pattern--exact_values) below.
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
 
 `regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
 `substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
-<a id="nestedblock--rules--key_value_pattern--key_pattern--exact_values"></a>
+<a id="rules-key-value-pattern-key-pattern-exact-values"></a>
 
 ### Rules Key Value Pattern Key Pattern Exact Values
 
-<a id="nestedblock--rules--key_value_pattern--value_pattern"></a>
+<a id="rules-key-value-pattern-value-pattern"></a>
 
 ### Rules Key Value Pattern Value Pattern
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--key_value_pattern--value_pattern--exact_values) below.
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
 
 `regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
 `substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
-<a id="nestedblock--rules--key_value_pattern--value_pattern--exact_values"></a>
+<a id="rules-key-value-pattern-value-pattern-exact-values"></a>
 
 ### Rules Key Value Pattern Value Pattern Exact Values
 
-<a id="nestedblock--rules--value_pattern"></a>
+<a id="rules-value-pattern"></a>
 
 ### Rules Value Pattern
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#nestedblock--rules--value_pattern--exact_values) below.
+`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-value-pattern-exact-values) below.
 
 `regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
 `substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
 
-<a id="nestedblock--rules--value_pattern--exact_values"></a>
+<a id="rules-value-pattern-exact-values"></a>
 
 ### Rules Value Pattern Exact Values
 
 `exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

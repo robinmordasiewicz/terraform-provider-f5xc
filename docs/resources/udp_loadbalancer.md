@@ -114,45 +114,45 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--advertise_custom"></a>
+<a id="advertise-custom"></a>
 
 ### Advertise Custom
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#nestedblock--advertise_custom--advertise_where) below.
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#advertise-custom-advertise-where) below.
 
-<a id="nestedblock--advertise_custom--advertise_where"></a>
+<a id="advertise-custom-advertise-where"></a>
 
 ### Advertise Custom Advertise Where
 
-`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#nestedblock--advertise_custom--advertise_where--advertise_on_public) below.
+`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-custom-advertise-where-advertise-on-public) below.
 
 `port` - (Optional) Listen Port. Port to Listen (`Number`).
 
 `port_ranges` - (Optional) Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
-`site` - (Optional) Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised. See [Site](#nestedblock--advertise_custom--advertise_where--site) below.
+`site` - (Optional) Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised. See [Site](#advertise-custom-advertise-where-site) below.
 
-`use_default_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Port](#nestedblock--advertise_custom--advertise_where--use_default_port) below.
+`use_default_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Port](#advertise-custom-advertise-where-use-default-port) below.
 
-`virtual_network` - (Optional) Virtual Network. Parameters to advertise on a given virtual network. See [Virtual Network](#nestedblock--advertise_custom--advertise_where--virtual_network) below.
+`virtual_network` - (Optional) Virtual Network. Parameters to advertise on a given virtual network. See [Virtual Network](#advertise-custom-advertise-where-virtual-network) below.
 
-`virtual_site` - (Optional) Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised. See [Virtual Site](#nestedblock--advertise_custom--advertise_where--virtual_site) below.
+`virtual_site` - (Optional) Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised. See [Virtual Site](#advertise-custom-advertise-where-virtual-site) below.
 
-`virtual_site_with_vip` - (Optional) Virtual Site with Specified VIP. This defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised. See [Virtual Site With VIP](#nestedblock--advertise_custom--advertise_where--virtual_site_with_vip) below.
+`virtual_site_with_vip` - (Optional) Virtual Site with Specified VIP. This defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised. See [Virtual Site With VIP](#advertise-custom-advertise-where-virtual-site-with-vip) below.
 
-`vk8s_service` - (Optional) vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network. See [Vk8s Service](#nestedblock--advertise_custom--advertise_where--vk8s_service) below.
+`vk8s_service` - (Optional) vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network. See [Vk8s Service](#advertise-custom-advertise-where-vk8s-service) below.
 
-<a id="nestedblock--advertise_custom--advertise_where--advertise_on_public"></a>
+<a id="advertise-custom-advertise-where-advertise-on-public"></a>
 
 ### Advertise Custom Advertise Where Advertise On Public
 
-`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public IP](#nestedblock--advertise_custom--advertise_where--advertise_on_public--public_ip) below.
+`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public IP](#advertise-custom-advertise-where-advertise-on-public-public-ip) below.
 
-<a id="nestedblock--advertise_custom--advertise_where--advertise_on_public--public_ip"></a>
+<a id="advertise-custom-advertise-where-advertise-on-public-public-ip"></a>
 
 ### Advertise Custom Advertise Where Advertise On Public Public IP
 
-<a id="nestedblock--advertise_custom--advertise_where--site"></a>
+<a id="advertise-custom-advertise-where-site"></a>
 
 ### Advertise Custom Advertise Where Site
 
@@ -160,55 +160,55 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--advertise_custom--advertise_where--site--site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#advertise-custom-advertise-where-site-site) below.
 
-<a id="nestedblock--advertise_custom--advertise_where--site--site"></a>
+<a id="advertise-custom-advertise-where-site-site"></a>
 
 ### Advertise Custom Advertise Where Site Site
 
-<a id="nestedblock--advertise_custom--advertise_where--use_default_port"></a>
+<a id="advertise-custom-advertise-where-use-default-port"></a>
 
 ### Advertise Custom Advertise Where Use Default Port
 
-<a id="nestedblock--advertise_custom--advertise_where--virtual_network"></a>
+<a id="advertise-custom-advertise-where-virtual-network"></a>
 
 ### Advertise Custom Advertise Where Virtual Network
 
-`default_v6_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default V6 VIP](#nestedblock--advertise_custom--advertise_where--virtual_network--default_v6_vip) below.
+`default_v6_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default V6 VIP](#advertise-custom-advertise-where-virtual-network-default-v6-vip) below.
 
-`default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default VIP](#nestedblock--advertise_custom--advertise_where--virtual_network--default_vip) below.
+`default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default VIP](#advertise-custom-advertise-where-virtual-network-default-vip) below.
 
 `specific_v6_vip` - (Optional) Specific V6 VIP. Use given IPv6 address as VIP on virtual Network (`String`).
 
 `specific_vip` - (Optional) Specific V4 VIP. Use given IPv4 address as VIP on virtual Network (`String`).
 
-`virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#nestedblock--advertise_custom--advertise_where--virtual_network--virtual_network) below.
+`virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#advertise-custom-advertise-where-virtual-network-virtual-network) below.
 
-<a id="nestedblock--advertise_custom--advertise_where--virtual_network--default_v6_vip"></a>
+<a id="advertise-custom-advertise-where-virtual-network-default-v6-vip"></a>
 
 ### Advertise Custom Advertise Where Virtual Network Default V6 VIP
 
-<a id="nestedblock--advertise_custom--advertise_where--virtual_network--default_vip"></a>
+<a id="advertise-custom-advertise-where-virtual-network-default-vip"></a>
 
 ### Advertise Custom Advertise Where Virtual Network Default VIP
 
-<a id="nestedblock--advertise_custom--advertise_where--virtual_network--virtual_network"></a>
+<a id="advertise-custom-advertise-where-virtual-network-virtual-network"></a>
 
 ### Advertise Custom Advertise Where Virtual Network Virtual Network
 
-<a id="nestedblock--advertise_custom--advertise_where--virtual_site"></a>
+<a id="advertise-custom-advertise-where-virtual-site"></a>
 
 ### Advertise Custom Advertise Where Virtual Site
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--advertise_custom--advertise_where--virtual_site--virtual_site) below.
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-virtual-site-virtual-site) below.
 
-<a id="nestedblock--advertise_custom--advertise_where--virtual_site--virtual_site"></a>
+<a id="advertise-custom-advertise-where-virtual-site-virtual-site"></a>
 
 ### Advertise Custom Advertise Where Virtual Site Virtual Site
 
-<a id="nestedblock--advertise_custom--advertise_where--virtual_site_with_vip"></a>
+<a id="advertise-custom-advertise-where-virtual-site-with-vip"></a>
 
 ### Advertise Custom Advertise Where Virtual Site With VIP
 
@@ -216,35 +216,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks. Possible values are `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`, `SITE_NETWORK_SPECIFIED_VIP_INSIDE`. Defaults to `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE` (`String`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--advertise_custom--advertise_where--virtual_site_with_vip--virtual_site) below.
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-virtual-site-with-vip-virtual-site) below.
 
-<a id="nestedblock--advertise_custom--advertise_where--virtual_site_with_vip--virtual_site"></a>
+<a id="advertise-custom-advertise-where-virtual-site-with-vip-virtual-site"></a>
 
 ### Advertise Custom Advertise Where Virtual Site With VIP Virtual Site
 
-<a id="nestedblock--advertise_custom--advertise_where--vk8s_service"></a>
+<a id="advertise-custom-advertise-where-vk8s-service"></a>
 
 ### Advertise Custom Advertise Where Vk8s Service
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--advertise_custom--advertise_where--vk8s_service--site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#advertise-custom-advertise-where-vk8s-service-site) below.
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#nestedblock--advertise_custom--advertise_where--vk8s_service--virtual_site) below.
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-vk8s-service-virtual-site) below.
 
-<a id="nestedblock--advertise_custom--advertise_where--vk8s_service--site"></a>
+<a id="advertise-custom-advertise-where-vk8s-service-site"></a>
 
 ### Advertise Custom Advertise Where Vk8s Service Site
 
-<a id="nestedblock--advertise_custom--advertise_where--vk8s_service--virtual_site"></a>
+<a id="advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
 
 ### Advertise Custom Advertise Where Vk8s Service Virtual Site
 
-<a id="nestedblock--advertise_on_public"></a>
+<a id="advertise-on-public"></a>
 
 ### Advertise On Public
 
-`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public IP](#nestedblock--advertise_on_public--public_ip) below.
+`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public IP](#advertise-on-public-public-ip) below.
 
-<a id="nestedblock--advertise_on_public--public_ip"></a>
+<a id="advertise-on-public-public-ip"></a>
 
 ### Advertise On Public Public IP
 
@@ -254,41 +254,41 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--advertise_on_public_default_vip"></a>
+<a id="advertise-on-public-default-vip"></a>
 
 ### Advertise On Public Default VIP
 
-<a id="nestedblock--do_not_advertise"></a>
+<a id="do-not-advertise"></a>
 
 ### Do Not Advertise
 
-<a id="nestedblock--hash_policy_choice_random"></a>
+<a id="hash-policy-choice-random"></a>
 
 ### Hash Policy Choice Random
 
-<a id="nestedblock--hash_policy_choice_round_robin"></a>
+<a id="hash-policy-choice-round-robin"></a>
 
 ### Hash Policy Choice Round Robin
 
-<a id="nestedblock--hash_policy_choice_source_ip_stickiness"></a>
+<a id="hash-policy-choice-source-ip-stickiness"></a>
 
 ### Hash Policy Choice Source IP Stickiness
 
-<a id="nestedblock--origin_pools_weights"></a>
+<a id="origin-pools-weights"></a>
 
 ### Origin Pools Weights
 
-`cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#nestedblock--origin_pools_weights--cluster) below.
+`cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#origin-pools-weights-cluster) below.
 
-`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured. See [Endpoint Subsets](#nestedblock--origin_pools_weights--endpoint_subsets) below.
+`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured. See [Endpoint Subsets](#origin-pools-weights-endpoint-subsets) below.
 
-`pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--origin_pools_weights--pool) below.
+`pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#origin-pools-weights-pool) below.
 
 `priority` - (Optional) Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority (`Number`).
 
 `weight` - (Optional) Weight. Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool (`Number`).
 
-<a id="nestedblock--origin_pools_weights--cluster"></a>
+<a id="origin-pools-weights-cluster"></a>
 
 ### Origin Pools Weights Cluster
 
@@ -298,11 +298,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--origin_pools_weights--endpoint_subsets"></a>
+<a id="origin-pools-weights-endpoint-subsets"></a>
 
 ### Origin Pools Weights Endpoint Subsets
 
-<a id="nestedblock--origin_pools_weights--pool"></a>
+<a id="origin-pools-weights-pool"></a>
 
 ### Origin Pools Weights Pool
 
@@ -312,7 +312,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -324,7 +324,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--udp"></a>
+<a id="udp"></a>
 
 ### UDP
 

@@ -81,21 +81,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--rule_list"></a>
+<a id="rule-list"></a>
 
 ### Rule List
 
-`rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. See [Rules](#nestedblock--rule_list--rules) below.
+`rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. See [Rules](#rule-list-rules) below.
 
-<a id="nestedblock--rule_list--rules"></a>
+<a id="rule-list-rules"></a>
 
 ### Rule List Rules
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--rule_list--rules--metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#rule-list-rules-metadata) below.
 
-`spec` - (Optional) Global Specifications. A secret_policy_rule object consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from client certificate. A rule is considered to match if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a rule is matched, the action specified for the rule is enforced for that request. A secret_policy_r. See [Spec](#nestedblock--rule_list--rules--spec) below.
+`spec` - (Optional) Global Specifications. A secret_policy_rule object consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from client certificate. A rule is considered to match if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a rule is matched, the action specified for the rule is enforced for that request. A secret_policy_r. See [Spec](#rule-list-rules-spec) below.
 
-<a id="nestedblock--rule_list--rules--metadata"></a>
+<a id="rule-list-rules-metadata"></a>
 
 ### Rule List Rules Metadata
 
@@ -103,7 +103,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
-<a id="nestedblock--rule_list--rules--spec"></a>
+<a id="rule-list-rules-spec"></a>
 
 ### Rule List Rules Spec
 
@@ -111,19 +111,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_name` - (Optional) Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name (`String`).
 
-`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Client Name Matcher](#nestedblock--rule_list--rules--spec--client_name_matcher) below.
+`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Client Name Matcher](#rule-list-rules-spec-client-name-matcher) below.
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#nestedblock--rule_list--rules--spec--client_selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#rule-list-rules-spec-client-selector) below.
 
-<a id="nestedblock--rule_list--rules--spec--client_name_matcher"></a>
+<a id="rule-list-rules-spec-client-name-matcher"></a>
 
 ### Rule List Rules Spec Client Name Matcher
 
-<a id="nestedblock--rule_list--rules--spec--client_selector"></a>
+<a id="rule-list-rules-spec-client-selector"></a>
 
 ### Rule List Rules Spec Client Selector
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

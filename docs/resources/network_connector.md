@@ -84,11 +84,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--disable_forward_proxy"></a>
+<a id="disable-forward-proxy"></a>
 
 ### Disable Forward Proxy
 
-<a id="nestedblock--enable_forward_proxy"></a>
+<a id="enable-forward-proxy"></a>
 
 ### Enable Forward Proxy
 
@@ -96,95 +96,95 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_connect_attempts` - (Optional) Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1 (`Number`).
 
-`no_interception` - (Optional) Empty. This can be used for messages where no values are needed. See [No Interception](#nestedblock--enable_forward_proxy--no_interception) below.
+`no_interception` - (Optional) Empty. This can be used for messages where no values are needed. See [No Interception](#enable-forward-proxy-no-interception) below.
 
-`tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception. See [TLS Intercept](#nestedblock--enable_forward_proxy--tls_intercept) below.
+`tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception. See [TLS Intercept](#enable-forward-proxy-tls-intercept) below.
 
 `white_listed_ports` - (Optional) TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port (`List`).
 
 `white_listed_prefixes` - (Optional) IP Prefixes to Skip Protocol Parsing. Traffic to these destination IP prefixes is not subjected to protocol parsing Example 'tmate' server IP (`List`).
 
-<a id="nestedblock--enable_forward_proxy--no_interception"></a>
+<a id="enable-forward-proxy-no-interception"></a>
 
 ### Enable Forward Proxy No Interception
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept"></a>
+<a id="enable-forward-proxy-tls-intercept"></a>
 
 ### Enable Forward Proxy TLS Intercept
 
-`custom_certificate` - (Optional) TLS Certificate. Handle to fetch certificate and key. See [Custom Certificate](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate) below.
+`custom_certificate` - (Optional) TLS Certificate. Handle to fetch certificate and key. See [Custom Certificate](#enable-forward-proxy-tls-intercept-custom-certificate) below.
 
-`enable_for_all_domains` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable For All Domains](#nestedblock--enable_forward_proxy--tls_intercept--enable_for_all_domains) below.
+`enable_for_all_domains` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable For All Domains](#enable-forward-proxy-tls-intercept-enable-for-all-domains) below.
 
-`policy` - (Optional) TLS Interception Policy. Policy to enable or disable TLS interception. See [Policy](#nestedblock--enable_forward_proxy--tls_intercept--policy) below.
+`policy` - (Optional) TLS Interception Policy. Policy to enable or disable TLS interception. See [Policy](#enable-forward-proxy-tls-intercept-policy) below.
 
 `trusted_ca_url` - (Optional) Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate (`String`).
 
-`volterra_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Certificate](#nestedblock--enable_forward_proxy--tls_intercept--volterra_certificate) below.
+`volterra_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Certificate](#enable-forward-proxy-tls-intercept-volterra-certificate) below.
 
-`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Trusted CA](#nestedblock--enable_forward_proxy--tls_intercept--volterra_trusted_ca) below.
+`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Trusted CA](#enable-forward-proxy-tls-intercept-volterra-trusted-ca) below.
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate"></a>
+<a id="enable-forward-proxy-tls-intercept-custom-certificate"></a>
 
 ### Enable Forward Proxy TLS Intercept Custom Certificate
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--custom_hash_algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) below.
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--disable_ocsp_stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling) below.
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--private_key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) below.
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--use_system_defaults) below.
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults) below.
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--custom_hash_algorithms"></a>
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms"></a>
 
 ### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--disable_ocsp_stapling"></a>
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling"></a>
 
 ### Enable Forward Proxy TLS Intercept Custom Certificate Disable OCSP Stapling
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--private_key"></a>
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key"></a>
 
 ### Enable Forward Proxy TLS Intercept Custom Certificate Private Key
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--custom_certificate--use_system_defaults"></a>
+<a id="enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults"></a>
 
 ### Enable Forward Proxy TLS Intercept Custom Certificate Use System Defaults
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--enable_for_all_domains"></a>
+<a id="enable-forward-proxy-tls-intercept-enable-for-all-domains"></a>
 
 ### Enable Forward Proxy TLS Intercept Enable For All Domains
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--policy"></a>
+<a id="enable-forward-proxy-tls-intercept-policy"></a>
 
 ### Enable Forward Proxy TLS Intercept Policy
 
-`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception. See [Interception Rules](#nestedblock--enable_forward_proxy--tls_intercept--policy--interception_rules) below.
+`interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception. See [Interception Rules](#enable-forward-proxy-tls-intercept-policy-interception-rules) below.
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--policy--interception_rules"></a>
+<a id="enable-forward-proxy-tls-intercept-policy-interception-rules"></a>
 
 ### Enable Forward Proxy TLS Intercept Policy Interception Rules
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--volterra_certificate"></a>
+<a id="enable-forward-proxy-tls-intercept-volterra-certificate"></a>
 
 ### Enable Forward Proxy TLS Intercept Volterra Certificate
 
-<a id="nestedblock--enable_forward_proxy--tls_intercept--volterra_trusted_ca"></a>
+<a id="enable-forward-proxy-tls-intercept-volterra-trusted-ca"></a>
 
 ### Enable Forward Proxy TLS Intercept Volterra Trusted CA
 
-<a id="nestedblock--sli_to_global_dr"></a>
+<a id="sli-to-global-dr"></a>
 
 ### Sli To Global DR
 
-`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#nestedblock--sli_to_global_dr--global_vn) below.
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#sli-to-global-dr-global-vn) below.
 
-<a id="nestedblock--sli_to_global_dr--global_vn"></a>
+<a id="sli-to-global-dr-global-vn"></a>
 
 ### Sli To Global DR Global Vn
 
@@ -194,29 +194,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--sli_to_slo_snat"></a>
+<a id="sli-to-slo-snat"></a>
 
 ### Sli To Slo Snat
 
-`default_gw_snat` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gw Snat](#nestedblock--sli_to_slo_snat--default_gw_snat) below.
+`default_gw_snat` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gw Snat](#sli-to-slo-snat-default-gw-snat) below.
 
-`interface_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Interface IP](#nestedblock--sli_to_slo_snat--interface_ip) below.
+`interface_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Interface IP](#sli-to-slo-snat-interface-ip) below.
 
-<a id="nestedblock--sli_to_slo_snat--default_gw_snat"></a>
+<a id="sli-to-slo-snat-default-gw-snat"></a>
 
 ### Sli To Slo Snat Default Gw Snat
 
-<a id="nestedblock--sli_to_slo_snat--interface_ip"></a>
+<a id="sli-to-slo-snat-interface-ip"></a>
 
 ### Sli To Slo Snat Interface IP
 
-<a id="nestedblock--slo_to_global_dr"></a>
+<a id="slo-to-global-dr"></a>
 
 ### Slo To Global DR
 
-`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#nestedblock--slo_to_global_dr--global_vn) below.
+`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#slo-to-global-dr-global-vn) below.
 
-<a id="nestedblock--slo_to_global_dr--global_vn"></a>
+<a id="slo-to-global-dr-global-vn"></a>
 
 ### Slo To Global DR Global Vn
 
@@ -226,7 +226,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

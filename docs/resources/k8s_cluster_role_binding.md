@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--k8s_cluster_role"></a>
+<a id="k8s-cluster-role"></a>
 
 ### K8s Cluster Role
 
@@ -86,17 +86,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--subjects"></a>
+<a id="subjects"></a>
 
 ### Subjects
 
 `group` - (Optional) Configuration for group (`String`).
 
-`service_account` - (Optional) ServiceAccountType. See [Service Account](#nestedblock--subjects--service_account) below.
+`service_account` - (Optional) ServiceAccountType. See [Service Account](#subjects-service-account) below.
 
 `user` - (Optional) Configuration for user (`String`).
 
-<a id="nestedblock--subjects--service_account"></a>
+<a id="subjects-service-account"></a>
 
 ### Subjects Service Account
 
@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `namespace` - (Optional) Namespace. Namespace of the service account (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

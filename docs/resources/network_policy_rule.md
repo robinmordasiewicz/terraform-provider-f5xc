@@ -90,19 +90,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--advanced_action"></a>
+<a id="advanced-action"></a>
 
 ### Advanced Action
 
 `action` - (Optional) Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG` (`String`).
 
-<a id="nestedblock--ip_prefix_set"></a>
+<a id="ip-prefix-set"></a>
 
 ### IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#nestedblock--ip_prefix_set--ref) below.
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#ip-prefix-set-ref) below.
 
-<a id="nestedblock--ip_prefix_set--ref"></a>
+<a id="ip-prefix-set-ref"></a>
 
 ### IP Prefix Set Ref
 
@@ -116,25 +116,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--label_matcher"></a>
+<a id="label-matcher"></a>
 
 ### Label Matcher
 
 `keys` - (Optional) Keys. The list of label key names that have to match (`List`).
 
-<a id="nestedblock--prefix"></a>
+<a id="prefix"></a>
 
 ### Prefix
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
-<a id="nestedblock--prefix_selector"></a>
+<a id="prefix-selector"></a>
 
 ### Prefix Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

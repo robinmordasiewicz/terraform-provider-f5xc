@@ -85,53 +85,53 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--bgp_parameters"></a>
+<a id="bgp-parameters"></a>
 
 ### BGP Parameters
 
 `asn` - (Optional) ASN. Autonomous System Number (`Number`).
 
-`from_site` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site](#nestedblock--bgp_parameters--from_site) below.
+`from_site` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site](#bgp-parameters-from-site) below.
 
 `ip_address` - (Optional) IP Address. Use the configured IPv4 Address as Router ID (`String`).
 
-`local_address` - (Optional) Empty. This can be used for messages where no values are needed. See [Local Address](#nestedblock--bgp_parameters--local_address) below.
+`local_address` - (Optional) Empty. This can be used for messages where no values are needed. See [Local Address](#bgp-parameters-local-address) below.
 
-<a id="nestedblock--bgp_parameters--from_site"></a>
+<a id="bgp-parameters-from-site"></a>
 
 ### BGP Parameters From Site
 
-<a id="nestedblock--bgp_parameters--local_address"></a>
+<a id="bgp-parameters-local-address"></a>
 
 ### BGP Parameters Local Address
 
-<a id="nestedblock--peers"></a>
+<a id="peers"></a>
 
 ### Peers
 
-`bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Bfd Disabled](#nestedblock--peers--bfd_disabled) below.
+`bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Bfd Disabled](#peers-bfd-disabled) below.
 
-`bfd_enabled` - (Optional) BFD. BFD parameters. See [Bfd Enabled](#nestedblock--peers--bfd_enabled) below.
+`bfd_enabled` - (Optional) BFD. BFD parameters. See [Bfd Enabled](#peers-bfd-enabled) below.
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--peers--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#peers-disable) below.
 
-`external` - (Optional) External BGP Peer. External BGP Peer parameters. See [External](#nestedblock--peers--external) below.
+`external` - (Optional) External BGP Peer. External BGP Peer parameters. See [External](#peers-external) below.
 
 `label` - (Optional) Label. Specify whether this peer should be (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--peers--metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#peers-metadata) below.
 
-`passive_mode_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Disabled](#nestedblock--peers--passive_mode_disabled) below.
+`passive_mode_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Disabled](#peers-passive-mode-disabled) below.
 
-`passive_mode_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Enabled](#nestedblock--peers--passive_mode_enabled) below.
+`passive_mode_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Enabled](#peers-passive-mode-enabled) below.
 
-`routing_policies` - (Optional) BGP Routing Policy. List of rules which can be applied on all or particular nodes. See [Routing Policies](#nestedblock--peers--routing_policies) below.
+`routing_policies` - (Optional) BGP Routing Policy. List of rules which can be applied on all or particular nodes. See [Routing Policies](#peers-routing-policies) below.
 
-<a id="nestedblock--peers--bfd_disabled"></a>
+<a id="peers-bfd-disabled"></a>
 
 ### Peers Bfd Disabled
 
-<a id="nestedblock--peers--bfd_enabled"></a>
+<a id="peers-bfd-enabled"></a>
 
 ### Peers Bfd Enabled
 
@@ -141,11 +141,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `transmit_interval_milliseconds` - (Optional) Transmit Interval. BFD transmit interval timer, in milliseconds (`Number`).
 
-<a id="nestedblock--peers--disable"></a>
+<a id="peers-disable"></a>
 
 ### Peers Disable
 
-<a id="nestedblock--peers--external"></a>
+<a id="peers-external"></a>
 
 ### Peers External
 
@@ -155,29 +155,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn` - (Optional) ASN. Autonomous System Number for BGP peer (`Number`).
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#nestedblock--peers--external--default_gateway) below.
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#peers-external-default-gateway) below.
 
-`default_gateway_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway V6](#nestedblock--peers--external--default_gateway_v6) below.
+`default_gateway_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway V6](#peers-external-default-gateway-v6) below.
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--peers--external--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#peers-external-disable) below.
 
-`disable_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable V6](#nestedblock--peers--external--disable_v6) below.
+`disable_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable V6](#peers-external-disable-v6) below.
 
-`external_connector` - (Optional) Empty. This can be used for messages where no values are needed. See [External Connector](#nestedblock--peers--external--external_connector) below.
+`external_connector` - (Optional) Empty. This can be used for messages where no values are needed. See [External Connector](#peers-external-external-connector) below.
 
-`family_inet` - (Optional) BGP Family Inet. Parameters for inet family. See [Family Inet](#nestedblock--peers--external--family_inet) below.
+`family_inet` - (Optional) BGP Family Inet. Parameters for inet family. See [Family Inet](#peers-external-family-inet) below.
 
-`from_site` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site](#nestedblock--peers--external--from_site) below.
+`from_site` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site](#peers-external-from-site) below.
 
-`from_site_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site V6](#nestedblock--peers--external--from_site_v6) below.
+`from_site_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site V6](#peers-external-from-site-v6) below.
 
-`interface` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Interface](#nestedblock--peers--external--interface) below.
+`interface` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Interface](#peers-external-interface) below.
 
-`interface_list` - (Optional) Interface List. List of network interfaces. See [Interface List](#nestedblock--peers--external--interface_list) below.
+`interface_list` - (Optional) Interface List. List of network interfaces. See [Interface List](#peers-external-interface-list) below.
 
 `md5_auth_key` - (Optional) MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385) (`String`).
 
-`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authentication](#nestedblock--peers--external--no_authentication) below.
+`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authentication](#peers-external-no-authentication) below.
 
 `port` - (Optional) Peer Port. Peer TCP port number (`Number`).
 
@@ -189,51 +189,51 @@ In addition to all arguments above, the following attributes are exported:
 
 `subnet_end_offset_v6` - (Optional) Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet (`Number`).
 
-<a id="nestedblock--peers--external--default_gateway"></a>
+<a id="peers-external-default-gateway"></a>
 
 ### Peers External Default Gateway
 
-<a id="nestedblock--peers--external--default_gateway_v6"></a>
+<a id="peers-external-default-gateway-v6"></a>
 
 ### Peers External Default Gateway V6
 
-<a id="nestedblock--peers--external--disable"></a>
+<a id="peers-external-disable"></a>
 
 ### Peers External Disable
 
-<a id="nestedblock--peers--external--disable_v6"></a>
+<a id="peers-external-disable-v6"></a>
 
 ### Peers External Disable V6
 
-<a id="nestedblock--peers--external--external_connector"></a>
+<a id="peers-external-external-connector"></a>
 
 ### Peers External External Connector
 
-<a id="nestedblock--peers--external--family_inet"></a>
+<a id="peers-external-family-inet"></a>
 
 ### Peers External Family Inet
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--peers--external--family_inet--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#peers-external-family-inet-disable) below.
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--peers--external--family_inet--enable) below.
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#peers-external-family-inet-enable) below.
 
-<a id="nestedblock--peers--external--family_inet--disable"></a>
+<a id="peers-external-family-inet-disable"></a>
 
 ### Peers External Family Inet Disable
 
-<a id="nestedblock--peers--external--family_inet--enable"></a>
+<a id="peers-external-family-inet-enable"></a>
 
 ### Peers External Family Inet Enable
 
-<a id="nestedblock--peers--external--from_site"></a>
+<a id="peers-external-from-site"></a>
 
 ### Peers External From Site
 
-<a id="nestedblock--peers--external--from_site_v6"></a>
+<a id="peers-external-from-site-v6"></a>
 
 ### Peers External From Site V6
 
-<a id="nestedblock--peers--external--interface"></a>
+<a id="peers-external-interface"></a>
 
 ### Peers External Interface
 
@@ -243,21 +243,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--peers--external--interface_list"></a>
+<a id="peers-external-interface-list"></a>
 
 ### Peers External Interface List
 
-`interfaces` - (Optional) Interface List. List of network interfaces. See [Interfaces](#nestedblock--peers--external--interface_list--interfaces) below.
+`interfaces` - (Optional) Interface List. List of network interfaces. See [Interfaces](#peers-external-interface-list-interfaces) below.
 
-<a id="nestedblock--peers--external--interface_list--interfaces"></a>
+<a id="peers-external-interface-list-interfaces"></a>
 
 ### Peers External Interface List Interfaces
 
-<a id="nestedblock--peers--external--no_authentication"></a>
+<a id="peers-external-no-authentication"></a>
 
 ### Peers External No Authentication
 
-<a id="nestedblock--peers--metadata"></a>
+<a id="peers-metadata"></a>
 
 ### Peers Metadata
 
@@ -265,55 +265,55 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
-<a id="nestedblock--peers--passive_mode_disabled"></a>
+<a id="peers-passive-mode-disabled"></a>
 
 ### Peers Passive Mode Disabled
 
-<a id="nestedblock--peers--passive_mode_enabled"></a>
+<a id="peers-passive-mode-enabled"></a>
 
 ### Peers Passive Mode Enabled
 
-<a id="nestedblock--peers--routing_policies"></a>
+<a id="peers-routing-policies"></a>
 
 ### Peers Routing Policies
 
-`route_policy` - (Optional) BGP Routing policy. Route policy to be applied. See [Route Policy](#nestedblock--peers--routing_policies--route_policy) below.
+`route_policy` - (Optional) BGP Routing policy. Route policy to be applied. See [Route Policy](#peers-routing-policies-route-policy) below.
 
-<a id="nestedblock--peers--routing_policies--route_policy"></a>
+<a id="peers-routing-policies-route-policy"></a>
 
 ### Peers Routing Policies Route Policy
 
-`all_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [All Nodes](#nestedblock--peers--routing_policies--route_policy--all_nodes) below.
+`all_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [All Nodes](#peers-routing-policies-route-policy-all-nodes) below.
 
-`inbound` - (Optional) Empty. This can be used for messages where no values are needed. See [Inbound](#nestedblock--peers--routing_policies--route_policy--inbound) below.
+`inbound` - (Optional) Empty. This can be used for messages where no values are needed. See [Inbound](#peers-routing-policies-route-policy-inbound) below.
 
-`node_name` - (Optional) Nodes. List of nodes on which BGP routing policy has to be applied. See [Node Name](#nestedblock--peers--routing_policies--route_policy--node_name) below.
+`node_name` - (Optional) Nodes. List of nodes on which BGP routing policy has to be applied. See [Node Name](#peers-routing-policies-route-policy-node-name) below.
 
-`object_refs` - (Optional) BGP routing policy. Select route policy to apply. See [Object Refs](#nestedblock--peers--routing_policies--route_policy--object_refs) below.
+`object_refs` - (Optional) BGP routing policy. Select route policy to apply. See [Object Refs](#peers-routing-policies-route-policy-object-refs) below.
 
-`outbound` - (Optional) Empty. This can be used for messages where no values are needed. See [Outbound](#nestedblock--peers--routing_policies--route_policy--outbound) below.
+`outbound` - (Optional) Empty. This can be used for messages where no values are needed. See [Outbound](#peers-routing-policies-route-policy-outbound) below.
 
-<a id="nestedblock--peers--routing_policies--route_policy--all_nodes"></a>
+<a id="peers-routing-policies-route-policy-all-nodes"></a>
 
 ### Peers Routing Policies Route Policy All Nodes
 
-<a id="nestedblock--peers--routing_policies--route_policy--inbound"></a>
+<a id="peers-routing-policies-route-policy-inbound"></a>
 
 ### Peers Routing Policies Route Policy Inbound
 
-<a id="nestedblock--peers--routing_policies--route_policy--node_name"></a>
+<a id="peers-routing-policies-route-policy-node-name"></a>
 
 ### Peers Routing Policies Route Policy Node Name
 
-<a id="nestedblock--peers--routing_policies--route_policy--object_refs"></a>
+<a id="peers-routing-policies-route-policy-object-refs"></a>
 
 ### Peers Routing Policies Route Policy Object Refs
 
-<a id="nestedblock--peers--routing_policies--route_policy--outbound"></a>
+<a id="peers-routing-policies-route-policy-outbound"></a>
 
 ### Peers Routing Policies Route Policy Outbound
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -325,35 +325,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--where"></a>
+<a id="where"></a>
 
 ### Where
 
-`site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#nestedblock--where--site) below.
+`site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#where-site) below.
 
-`virtual_site` - (Optional) Virtual Site. A reference to virtual_site object. See [Virtual Site](#nestedblock--where--virtual_site) below.
+`virtual_site` - (Optional) Virtual Site. A reference to virtual_site object. See [Virtual Site](#where-virtual-site) below.
 
-<a id="nestedblock--where--site"></a>
+<a id="where-site"></a>
 
 ### Where Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#nestedblock--where--site--disable_internet_vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-site-disable-internet-vip) below.
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#nestedblock--where--site--enable_internet_vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-site-enable-internet-vip) below.
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#where-site-ref) below.
 
-<a id="nestedblock--where--site--disable_internet_vip"></a>
+<a id="where-site-disable-internet-vip"></a>
 
 ### Where Site Disable Internet VIP
 
-<a id="nestedblock--where--site--enable_internet_vip"></a>
+<a id="where-site-enable-internet-vip"></a>
 
 ### Where Site Enable Internet VIP
 
-<a id="nestedblock--where--site--ref"></a>
+<a id="where-site-ref"></a>
 
 ### Where Site Ref
 
@@ -367,27 +367,27 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--where--virtual_site"></a>
+<a id="where-virtual-site"></a>
 
 ### Where Virtual Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#nestedblock--where--virtual_site--disable_internet_vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-virtual-site-disable-internet-vip) below.
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#nestedblock--where--virtual_site--enable_internet_vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-virtual-site-enable-internet-vip) below.
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#where-virtual-site-ref) below.
 
-<a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
+<a id="where-virtual-site-disable-internet-vip"></a>
 
 ### Where Virtual Site Disable Internet VIP
 
-<a id="nestedblock--where--virtual_site--enable_internet_vip"></a>
+<a id="where-virtual-site-enable-internet-vip"></a>
 
 ### Where Virtual Site Enable Internet VIP
 
-<a id="nestedblock--where--virtual_site--ref"></a>
+<a id="where-virtual-site-ref"></a>
 
 ### Where Virtual Site Ref
 

@@ -68,7 +68,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--category_ref"></a>
+<a id="category-ref"></a>
 
 ### Category Ref
 
@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

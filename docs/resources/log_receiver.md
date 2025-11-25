@@ -75,23 +75,23 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--site_local"></a>
+<a id="site-local"></a>
 
 ### Site Local
 
-<a id="nestedblock--syslog"></a>
+<a id="syslog"></a>
 
 ### Syslog
 
 `syslog_rfc5424` - (Optional) Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length (`Number`).
 
-`tcp_server` - (Optional) TCP Server name and Port Number. Name and port number for a TCP server. See [TCP Server](#nestedblock--syslog--tcp_server) below.
+`tcp_server` - (Optional) TCP Server name and Port Number. Name and port number for a TCP server. See [TCP Server](#syslog-tcp-server) below.
 
-`tls_server` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Server](#nestedblock--syslog--tls_server) below.
+`tls_server` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Server](#syslog-tls-server) below.
 
-`udp_server` - (Optional) UDP Server Name and Port Number. Name and port number for a UDP server. See [UDP Server](#nestedblock--syslog--udp_server) below.
+`udp_server` - (Optional) UDP Server Name and Port Number. Name and port number for a UDP server. See [UDP Server](#syslog-udp-server) below.
 
-<a id="nestedblock--syslog--tcp_server"></a>
+<a id="syslog-tcp-server"></a>
 
 ### Syslog TCP Server
 
@@ -99,17 +99,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `server_name` - (Optional) Server name. Server name is fully qualified domain name or IP address of the server (`String`).
 
-<a id="nestedblock--syslog--tls_server"></a>
+<a id="syslog-tls-server"></a>
 
 ### Syslog TLS Server
 
-`default_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default HTTPS Port](#nestedblock--syslog--tls_server--default_https_port) below.
+`default_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default HTTPS Port](#syslog-tls-server-default-https-port) below.
 
-`default_syslog_tls_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Syslog TLS Port](#nestedblock--syslog--tls_server--default_syslog_tls_port) below.
+`default_syslog_tls_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Syslog TLS Port](#syslog-tls-server-default-syslog-tls-port) below.
 
-`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [mTLS Disabled](#nestedblock--syslog--tls_server--mtls_disabled) below.
+`mtls_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [mTLS Disabled](#syslog-tls-server-mtls-disabled) below.
 
-`mtls_enable` - (Optional) mTLS Client Config. TLS config for client. See [mTLS Enable](#nestedblock--syslog--tls_server--mtls_enable) below.
+`mtls_enable` - (Optional) mTLS Client Config. TLS config for client. See [mTLS Enable](#syslog-tls-server-mtls-enable) below.
 
 `port` - (Optional) TCP Port Number. Custom port number used for communication (`Number`).
 
@@ -117,37 +117,37 @@ In addition to all arguments above, the following attributes are exported:
 
 `trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
-`volterra_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra CA](#nestedblock--syslog--tls_server--volterra_ca) below.
+`volterra_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra CA](#syslog-tls-server-volterra-ca) below.
 
-<a id="nestedblock--syslog--tls_server--default_https_port"></a>
+<a id="syslog-tls-server-default-https-port"></a>
 
 ### Syslog TLS Server Default HTTPS Port
 
-<a id="nestedblock--syslog--tls_server--default_syslog_tls_port"></a>
+<a id="syslog-tls-server-default-syslog-tls-port"></a>
 
 ### Syslog TLS Server Default Syslog TLS Port
 
-<a id="nestedblock--syslog--tls_server--mtls_disabled"></a>
+<a id="syslog-tls-server-mtls-disabled"></a>
 
 ### Syslog TLS Server mTLS Disabled
 
-<a id="nestedblock--syslog--tls_server--mtls_enable"></a>
+<a id="syslog-tls-server-mtls-enable"></a>
 
 ### Syslog TLS Server mTLS Enable
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
-`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#nestedblock--syslog--tls_server--mtls_enable--key_url) below.
+`key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Key URL](#syslog-tls-server-mtls-enable-key-url) below.
 
-<a id="nestedblock--syslog--tls_server--mtls_enable--key_url"></a>
+<a id="syslog-tls-server-mtls-enable-key-url"></a>
 
 ### Syslog TLS Server mTLS Enable Key URL
 
-<a id="nestedblock--syslog--tls_server--volterra_ca"></a>
+<a id="syslog-tls-server-volterra-ca"></a>
 
 ### Syslog TLS Server Volterra CA
 
-<a id="nestedblock--syslog--udp_server"></a>
+<a id="syslog-udp-server"></a>
 
 ### Syslog UDP Server
 
@@ -155,7 +155,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `server_name` - (Optional) Server name. Server name is fully qualified domain name or IP address of the server (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

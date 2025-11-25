@@ -98,133 +98,133 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--discovery_consul"></a>
+<a id="discovery-consul"></a>
 
 ### Discovery Consul
 
-`access_info` - (Optional) Hashicorp Consul Parameters. Hashicorp Consul API server information. See [Access Info](#nestedblock--discovery_consul--access_info) below.
+`access_info` - (Optional) Hashicorp Consul Parameters. Hashicorp Consul API server information. See [Access Info](#discovery-consul-access-info) below.
 
-`publish_info` - (Optional) VIP Publish Configuration. Consul Configuration to publish VIPs. See [Publish Info](#nestedblock--discovery_consul--publish_info) below.
+`publish_info` - (Optional) VIP Publish Configuration. Consul Configuration to publish VIPs. See [Publish Info](#discovery-consul-publish-info) below.
 
-<a id="nestedblock--discovery_consul--access_info"></a>
+<a id="discovery-consul-access-info"></a>
 
 ### Discovery Consul Access Info
 
-`connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#nestedblock--discovery_consul--access_info--connection_info) below.
+`connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#discovery-consul-access-info-connection-info) below.
 
-`http_basic_auth_info` - (Optional) Hashicorp Consul Credentials. Authentication parameters to access Hashicorp Consul. See [HTTP Basic Auth Info](#nestedblock--discovery_consul--access_info--http_basic_auth_info) below.
+`http_basic_auth_info` - (Optional) Hashicorp Consul Credentials. Authentication parameters to access Hashicorp Consul. See [HTTP Basic Auth Info](#discovery-consul-access-info-http-basic-auth-info) below.
 
-<a id="nestedblock--discovery_consul--access_info--connection_info"></a>
+<a id="discovery-consul-access-info-connection-info"></a>
 
 ### Discovery Consul Access Info Connection Info
 
 `api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
-`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#nestedblock--discovery_consul--access_info--connection_info--tls_info) below.
+`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#discovery-consul-access-info-connection-info-tls-info) below.
 
-<a id="nestedblock--discovery_consul--access_info--connection_info--tls_info"></a>
+<a id="discovery-consul-access-info-connection-info-tls-info"></a>
 
 ### Discovery Consul Access Info Connection Info TLS Info
 
-<a id="nestedblock--discovery_consul--access_info--http_basic_auth_info"></a>
+<a id="discovery-consul-access-info-http-basic-auth-info"></a>
 
 ### Discovery Consul Access Info HTTP Basic Auth Info
 
-`passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd URL](#nestedblock--discovery_consul--access_info--http_basic_auth_info--passwd_url) below.
+`passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd URL](#discovery-consul-access-info-http-basic-auth-info-passwd-url) below.
 
 `user_name` - (Optional) User Name. username in consul (`String`).
 
-<a id="nestedblock--discovery_consul--access_info--http_basic_auth_info--passwd_url"></a>
+<a id="discovery-consul-access-info-http-basic-auth-info-passwd-url"></a>
 
 ### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL
 
-<a id="nestedblock--discovery_consul--publish_info"></a>
+<a id="discovery-consul-publish-info"></a>
 
 ### Discovery Consul Publish Info
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--discovery_consul--publish_info--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#discovery-consul-publish-info-disable) below.
 
-`publish` - (Optional) Empty. This can be used for messages where no values are needed. See [Publish](#nestedblock--discovery_consul--publish_info--publish) below.
+`publish` - (Optional) Empty. This can be used for messages where no values are needed. See [Publish](#discovery-consul-publish-info-publish) below.
 
-<a id="nestedblock--discovery_consul--publish_info--disable"></a>
+<a id="discovery-consul-publish-info-disable"></a>
 
 ### Discovery Consul Publish Info Disable
 
-<a id="nestedblock--discovery_consul--publish_info--publish"></a>
+<a id="discovery-consul-publish-info-publish"></a>
 
 ### Discovery Consul Publish Info Publish
 
-<a id="nestedblock--discovery_k8s"></a>
+<a id="discovery-k8s"></a>
 
 ### Discovery K8s
 
-`access_info` - (Optional) K8s API Server. K8S API server access. See [Access Info](#nestedblock--discovery_k8s--access_info) below.
+`access_info` - (Optional) K8s API Server. K8S API server access. See [Access Info](#discovery-k8s-access-info) below.
 
-`default_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Default All](#nestedblock--discovery_k8s--default_all) below.
+`default_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Default All](#discovery-k8s-default-all) below.
 
-`namespace_mapping` - (Optional) K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared. See [Namespace Mapping](#nestedblock--discovery_k8s--namespace_mapping) below.
+`namespace_mapping` - (Optional) K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared. See [Namespace Mapping](#discovery-k8s-namespace-mapping) below.
 
-`publish_info` - (Optional) VIP Publish Configurations. K8S Configuration to publish VIPs. See [Publish Info](#nestedblock--discovery_k8s--publish_info) below.
+`publish_info` - (Optional) VIP Publish Configurations. K8S Configuration to publish VIPs. See [Publish Info](#discovery-k8s-publish-info) below.
 
-<a id="nestedblock--discovery_k8s--access_info"></a>
+<a id="discovery-k8s-access-info"></a>
 
 ### Discovery K8s Access Info
 
-`connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#nestedblock--discovery_k8s--access_info--connection_info) below.
+`connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#discovery-k8s-access-info-connection-info) below.
 
-`isolated` - (Optional) Empty. This can be used for messages where no values are needed. See [Isolated](#nestedblock--discovery_k8s--access_info--isolated) below.
+`isolated` - (Optional) Empty. This can be used for messages where no values are needed. See [Isolated](#discovery-k8s-access-info-isolated) below.
 
-`kubeconfig_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Kubeconfig URL](#nestedblock--discovery_k8s--access_info--kubeconfig_url) below.
+`kubeconfig_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Kubeconfig URL](#discovery-k8s-access-info-kubeconfig-url) below.
 
-`reachable` - (Optional) Empty. This can be used for messages where no values are needed. See [Reachable](#nestedblock--discovery_k8s--access_info--reachable) below.
+`reachable` - (Optional) Empty. This can be used for messages where no values are needed. See [Reachable](#discovery-k8s-access-info-reachable) below.
 
-<a id="nestedblock--discovery_k8s--access_info--connection_info"></a>
+<a id="discovery-k8s-access-info-connection-info"></a>
 
 ### Discovery K8s Access Info Connection Info
 
 `api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
-`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#nestedblock--discovery_k8s--access_info--connection_info--tls_info) below.
+`tls_info` - (Optional) Client TLS Config. TLS config for client of discovery service. See [TLS Info](#discovery-k8s-access-info-connection-info-tls-info) below.
 
-<a id="nestedblock--discovery_k8s--access_info--connection_info--tls_info"></a>
+<a id="discovery-k8s-access-info-connection-info-tls-info"></a>
 
 ### Discovery K8s Access Info Connection Info TLS Info
 
-<a id="nestedblock--discovery_k8s--access_info--isolated"></a>
+<a id="discovery-k8s-access-info-isolated"></a>
 
 ### Discovery K8s Access Info Isolated
 
-<a id="nestedblock--discovery_k8s--access_info--kubeconfig_url"></a>
+<a id="discovery-k8s-access-info-kubeconfig-url"></a>
 
 ### Discovery K8s Access Info Kubeconfig URL
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--discovery_k8s--access_info--kubeconfig_url--blindfold_secret_info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--discovery_k8s--access_info--kubeconfig_url--clear_secret_info) below.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info) below.
 
-<a id="nestedblock--discovery_k8s--access_info--kubeconfig_url--blindfold_secret_info"></a>
+<a id="discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info"></a>
 
 ### Discovery K8s Access Info Kubeconfig URL Blindfold Secret Info
 
-<a id="nestedblock--discovery_k8s--access_info--kubeconfig_url--clear_secret_info"></a>
+<a id="discovery-k8s-access-info-kubeconfig-url-clear-secret-info"></a>
 
 ### Discovery K8s Access Info Kubeconfig URL Clear Secret Info
 
-<a id="nestedblock--discovery_k8s--access_info--reachable"></a>
+<a id="discovery-k8s-access-info-reachable"></a>
 
 ### Discovery K8s Access Info Reachable
 
-<a id="nestedblock--discovery_k8s--default_all"></a>
+<a id="discovery-k8s-default-all"></a>
 
 ### Discovery K8s Default All
 
-<a id="nestedblock--discovery_k8s--namespace_mapping"></a>
+<a id="discovery-k8s-namespace-mapping"></a>
 
 ### Discovery K8s Namespace Mapping
 
-`items` - (Optional) Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex. See [Items](#nestedblock--discovery_k8s--namespace_mapping--items) below.
+`items` - (Optional) Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex. See [Items](#discovery-k8s-namespace-mapping-items) below.
 
-<a id="nestedblock--discovery_k8s--namespace_mapping--items"></a>
+<a id="discovery-k8s-namespace-mapping-items"></a>
 
 ### Discovery K8s Namespace Mapping Items
 
@@ -232,23 +232,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `namespace_regex` - (Optional) K8S Namespaces. The regex here will be used to match K8s namespace(s) (`String`).
 
-<a id="nestedblock--discovery_k8s--publish_info"></a>
+<a id="discovery-k8s-publish-info"></a>
 
 ### Discovery K8s Publish Info
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--discovery_k8s--publish_info--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#discovery-k8s-publish-info-disable) below.
 
-`dns_delegation` - (Optional) K8SDelegationType. See [DNS Delegation](#nestedblock--discovery_k8s--publish_info--dns_delegation) below.
+`dns_delegation` - (Optional) K8SDelegationType. See [DNS Delegation](#discovery-k8s-publish-info-dns-delegation) below.
 
-`publish` - (Optional) K8SPublishType. See [Publish](#nestedblock--discovery_k8s--publish_info--publish) below.
+`publish` - (Optional) K8SPublishType. See [Publish](#discovery-k8s-publish-info-publish) below.
 
-`publish_fqdns` - (Optional) Empty. This can be used for messages where no values are needed. See [Publish Fqdns](#nestedblock--discovery_k8s--publish_info--publish_fqdns) below.
+`publish_fqdns` - (Optional) Empty. This can be used for messages where no values are needed. See [Publish Fqdns](#discovery-k8s-publish-info-publish-fqdns) below.
 
-<a id="nestedblock--discovery_k8s--publish_info--disable"></a>
+<a id="discovery-k8s-publish-info-disable"></a>
 
 ### Discovery K8s Publish Info Disable
 
-<a id="nestedblock--discovery_k8s--publish_info--dns_delegation"></a>
+<a id="discovery-k8s-publish-info-dns-delegation"></a>
 
 ### Discovery K8s Publish Info DNS Delegation
 
@@ -256,21 +256,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `subdomain` - (Optional) Subdomain. The DNS subdomain for which F5XC will respond to DNS queries (`String`).
 
-<a id="nestedblock--discovery_k8s--publish_info--publish"></a>
+<a id="discovery-k8s-publish-info-publish"></a>
 
 ### Discovery K8s Publish Info Publish
 
 `namespace` - (Optional) Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists (`String`).
 
-<a id="nestedblock--discovery_k8s--publish_info--publish_fqdns"></a>
+<a id="discovery-k8s-publish-info-publish-fqdns"></a>
 
 ### Discovery K8s Publish Info Publish Fqdns
 
-<a id="nestedblock--no_cluster_id"></a>
+<a id="no-cluster-id"></a>
 
 ### No Cluster Id
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -282,37 +282,37 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--where"></a>
+<a id="where"></a>
 
 ### Where
 
-`site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#nestedblock--where--site) below.
+`site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#where-site) below.
 
-`virtual_network` - (Optional) Network Reference. This specifies a direct reference to a network configuration object. See [Virtual Network](#nestedblock--where--virtual_network) below.
+`virtual_network` - (Optional) Network Reference. This specifies a direct reference to a network configuration object. See [Virtual Network](#where-virtual-network) below.
 
-`virtual_site` - (Optional) Virtual Site. A reference to virtual_site object. See [Virtual Site](#nestedblock--where--virtual_site) below.
+`virtual_site` - (Optional) Virtual Site. A reference to virtual_site object. See [Virtual Site](#where-virtual-site) below.
 
-<a id="nestedblock--where--site"></a>
+<a id="where-site"></a>
 
 ### Where Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#nestedblock--where--site--disable_internet_vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-site-disable-internet-vip) below.
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#nestedblock--where--site--enable_internet_vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-site-enable-internet-vip) below.
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ref` - (Optional) Reference. A site direct reference. See [Ref](#nestedblock--where--site--ref) below.
+`ref` - (Optional) Reference. A site direct reference. See [Ref](#where-site-ref) below.
 
-<a id="nestedblock--where--site--disable_internet_vip"></a>
+<a id="where-site-disable-internet-vip"></a>
 
 ### Where Site Disable Internet VIP
 
-<a id="nestedblock--where--site--enable_internet_vip"></a>
+<a id="where-site-enable-internet-vip"></a>
 
 ### Where Site Enable Internet VIP
 
-<a id="nestedblock--where--site--ref"></a>
+<a id="where-site-ref"></a>
 
 ### Where Site Ref
 
@@ -326,13 +326,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--where--virtual_network"></a>
+<a id="where-virtual-network"></a>
 
 ### Where Virtual Network
 
-`ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#nestedblock--where--virtual_network--ref) below.
+`ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#where-virtual-network-ref) below.
 
-<a id="nestedblock--where--virtual_network--ref"></a>
+<a id="where-virtual-network-ref"></a>
 
 ### Where Virtual Network Ref
 
@@ -346,27 +346,27 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--where--virtual_site"></a>
+<a id="where-virtual-site"></a>
 
 ### Where Virtual Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#nestedblock--where--virtual_site--disable_internet_vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-virtual-site-disable-internet-vip) below.
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#nestedblock--where--virtual_site--enable_internet_vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-virtual-site-enable-internet-vip) below.
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#nestedblock--where--virtual_site--ref) below.
+`ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#where-virtual-site-ref) below.
 
-<a id="nestedblock--where--virtual_site--disable_internet_vip"></a>
+<a id="where-virtual-site-disable-internet-vip"></a>
 
 ### Where Virtual Site Disable Internet VIP
 
-<a id="nestedblock--where--virtual_site--enable_internet_vip"></a>
+<a id="where-virtual-site-enable-internet-vip"></a>
 
 ### Where Virtual Site Enable Internet VIP
 
-<a id="nestedblock--where--virtual_site--ref"></a>
+<a id="where-virtual-site-ref"></a>
 
 ### Where Virtual Site Ref
 

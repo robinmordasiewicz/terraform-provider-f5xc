@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--http_health_check"></a>
+<a id="http-health-check"></a>
 
 ### HTTP Health Check
 
@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `send` - (Optional) Send String. HTTP payload to send to the target (`String`).
 
-<a id="nestedblock--https_health_check"></a>
+<a id="https-health-check"></a>
 
 ### HTTPS Health Check
 
@@ -110,11 +110,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `send` - (Optional) Send String. HTTP payload to send to the target (`String`).
 
-<a id="nestedblock--icmp_health_check"></a>
+<a id="icmp-health-check"></a>
 
 ### ICMP Health Check
 
-<a id="nestedblock--tcp_health_check"></a>
+<a id="tcp-health-check"></a>
 
 ### TCP Health Check
 
@@ -126,7 +126,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `send` - (Optional) Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS) (`String`).
 
-<a id="nestedblock--tcp_hex_health_check"></a>
+<a id="tcp-hex-health-check"></a>
 
 ### TCP Hex Health Check
 
@@ -138,7 +138,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `send` - (Optional) Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -150,7 +150,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--udp_health_check"></a>
+<a id="udp-health-check"></a>
 
 ### UDP Health Check
 

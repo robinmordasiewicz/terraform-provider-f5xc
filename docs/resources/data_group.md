@@ -80,37 +80,37 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--address_records"></a>
+<a id="address-records"></a>
 
 ### Address Records
 
-`records` - (Optional) Address records. See [Records](#nestedblock--address_records--records) below.
+`records` - (Optional) Address records. See [Records](#address-records-records) below.
 
-<a id="nestedblock--address_records--records"></a>
+<a id="address-records-records"></a>
 
 ### Address Records Records
 
-<a id="nestedblock--integer_records"></a>
+<a id="integer-records"></a>
 
 ### Integer Records
 
-`records` - (Optional) Integer records. See [Records](#nestedblock--integer_records--records) below.
+`records` - (Optional) Integer records. See [Records](#integer-records-records) below.
 
-<a id="nestedblock--integer_records--records"></a>
+<a id="integer-records-records"></a>
 
 ### Integer Records Records
 
-<a id="nestedblock--string_records"></a>
+<a id="string-records"></a>
 
 ### String Records
 
-`records` - (Optional) String records. See [Records](#nestedblock--string_records--records) below.
+`records` - (Optional) String records. See [Records](#string-records-records) below.
 
-<a id="nestedblock--string_records--records"></a>
+<a id="string-records-records"></a>
 
 ### String Records Records
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

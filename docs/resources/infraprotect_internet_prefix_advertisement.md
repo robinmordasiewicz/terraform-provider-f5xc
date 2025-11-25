@@ -86,19 +86,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--activation_announce"></a>
+<a id="activation-announce"></a>
 
 ### Activation Announce
 
-<a id="nestedblock--activation_withdraw"></a>
+<a id="activation-withdraw"></a>
 
 ### Activation Withdraw
 
-<a id="nestedblock--expiration_never"></a>
+<a id="expiration-never"></a>
 
 ### Expiration Never
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

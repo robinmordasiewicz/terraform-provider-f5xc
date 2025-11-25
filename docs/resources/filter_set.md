@@ -76,27 +76,27 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--filter_fields"></a>
+<a id="filter-fields"></a>
 
 ### Filter Fields
 
-`date_field` - (Optional) Filter Date/Time Range Field. either an absolute time range or a relative time interval. See [Date Field](#nestedblock--filter_fields--date_field) below.
+`date_field` - (Optional) Filter Date/Time Range Field. either an absolute time range or a relative time interval. See [Date Field](#filter-fields-date-field) below.
 
 `field_id` - (Optional) Field ID. an identifier for the field that maps to some UI filter component (`String`).
 
-`filter_expression_field` - (Optional) Filter Expression Field. See [Filter Expression Field](#nestedblock--filter_fields--filter_expression_field) below.
+`filter_expression_field` - (Optional) Filter Expression Field. See [Filter Expression Field](#filter-fields-filter-expression-field) below.
 
-`string_field` - (Optional) Filter String Field. See [String Field](#nestedblock--filter_fields--string_field) below.
+`string_field` - (Optional) Filter String Field. See [String Field](#filter-fields-string-field) below.
 
-<a id="nestedblock--filter_fields--date_field"></a>
+<a id="filter-fields-date-field"></a>
 
 ### Filter Fields Date Field
 
-`absolute` - (Optional) Date Range. Date range is for selecting a date range. See [Absolute](#nestedblock--filter_fields--date_field--absolute) below.
+`absolute` - (Optional) Date Range. Date range is for selecting a date range. See [Absolute](#filter-fields-date-field-absolute) below.
 
 `relative` - (Optional) Relative. relative time duration (`String`).
 
-<a id="nestedblock--filter_fields--date_field--absolute"></a>
+<a id="filter-fields-date-field-absolute"></a>
 
 ### Filter Fields Date Field Absolute
 
@@ -104,19 +104,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `start_date` - (Optional) Start Date. Contains start date (`String`).
 
-<a id="nestedblock--filter_fields--filter_expression_field"></a>
+<a id="filter-fields-filter-expression-field"></a>
 
 ### Filter Fields Filter Expression Field
 
 `expression` - (Optional) Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values (`String`).
 
-<a id="nestedblock--filter_fields--string_field"></a>
+<a id="filter-fields-string-field"></a>
 
 ### Filter Fields String Field
 
 `field_values` - (Optional) String Value(s) (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

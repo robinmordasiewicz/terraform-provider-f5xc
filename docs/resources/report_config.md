@@ -76,13 +76,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--report_recipients"></a>
+<a id="report-recipients"></a>
 
 ### Report Recipients
 
-`user_groups` - (Optional) User Groups. Select one or more user groups, to which the report should be sent via email. See [User Groups](#nestedblock--report_recipients--user_groups) below.
+`user_groups` - (Optional) User Groups. Select one or more user groups, to which the report should be sent via email. See [User Groups](#report-recipients-user-groups) below.
 
-<a id="nestedblock--report_recipients--user_groups"></a>
+<a id="report-recipients-user-groups"></a>
 
 ### Report Recipients User Groups
 
@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -104,31 +104,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--waap"></a>
+<a id="waap"></a>
 
 ### Waap
 
-`current_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Current Namespace](#nestedblock--waap--current_namespace) below.
+`current_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Current Namespace](#waap-current-namespace) below.
 
-`daily` - (Optional) Report Frequency Daily. create report daily. See [Daily](#nestedblock--waap--daily) below.
+`daily` - (Optional) Report Frequency Daily. create report daily. See [Daily](#waap-daily) below.
 
-`monthly` - (Optional) Report Frequency Monthly. create report monthly. See [Monthly](#nestedblock--waap--monthly) below.
+`monthly` - (Optional) Report Frequency Monthly. create report monthly. See [Monthly](#waap-monthly) below.
 
-`namespaces` - (Optional) Namespaces. namespaces. See [Namespaces](#nestedblock--waap--namespaces) below.
+`namespaces` - (Optional) Namespaces. namespaces. See [Namespaces](#waap-namespaces) below.
 
-`weekly` - (Optional) Report Frequency Weekly. create report weekly. See [Weekly](#nestedblock--waap--weekly) below.
+`weekly` - (Optional) Report Frequency Weekly. create report weekly. See [Weekly](#waap-weekly) below.
 
-<a id="nestedblock--waap--current_namespace"></a>
+<a id="waap-current-namespace"></a>
 
 ### Waap Current Namespace
 
-<a id="nestedblock--waap--daily"></a>
+<a id="waap-daily"></a>
 
 ### Waap Daily
 
 `report_generation_time` - (Optional) Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
-<a id="nestedblock--waap--monthly"></a>
+<a id="waap-monthly"></a>
 
 ### Waap Monthly
 
@@ -136,13 +136,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `report_generation_time` - (Optional) Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set (`String`).
 
-<a id="nestedblock--waap--namespaces"></a>
+<a id="waap-namespaces"></a>
 
 ### Waap Namespaces
 
 `namespaces` - (Optional) Namespaces. list of namespaces for which user wants to generate report (`List`).
 
-<a id="nestedblock--waap--weekly"></a>
+<a id="waap-weekly"></a>
 
 ### Waap Weekly
 

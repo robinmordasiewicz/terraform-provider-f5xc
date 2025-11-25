@@ -79,7 +79,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--api_inventory_exclusion_list"></a>
+<a id="api-inventory-exclusion-list"></a>
 
 ### API Inventory Exclusion List
 
@@ -87,7 +87,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
-<a id="nestedblock--api_inventory_inclusion_list"></a>
+<a id="api-inventory-inclusion-list"></a>
 
 ### API Inventory Inclusion List
 
@@ -95,11 +95,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
-<a id="nestedblock--mixed_schema_origin"></a>
+<a id="mixed-schema-origin"></a>
 
 ### Mixed Schema Origin
 
-<a id="nestedblock--non_api_endpoints"></a>
+<a id="non-api-endpoints"></a>
 
 ### Non API Endpoints
 
@@ -107,11 +107,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
 
-<a id="nestedblock--strict_schema_origin"></a>
+<a id="strict-schema-origin"></a>
 
 ### Strict Schema Origin
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

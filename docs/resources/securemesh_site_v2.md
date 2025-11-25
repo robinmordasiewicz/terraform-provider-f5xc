@@ -178,13 +178,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--active_enhanced_firewall_policies"></a>
+<a id="active-enhanced-firewall-policies"></a>
 
 ### Active Enhanced Firewall Policies
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
-<a id="nestedblock--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
+<a id="active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
 ### Active Enhanced Firewall Policies Enhanced Firewall Policies
 
@@ -194,13 +194,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--active_forward_proxy_policies"></a>
+<a id="active-forward-proxy-policies"></a>
 
 ### Active Forward Proxy Policies
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--active_forward_proxy_policies--forward_proxy_policies) below.
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
-<a id="nestedblock--active_forward_proxy_policies--forward_proxy_policies"></a>
+<a id="active-forward-proxy-policies-forward-proxy-policies"></a>
 
 ### Active Forward Proxy Policies Forward Proxy Policies
 
@@ -210,23 +210,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--admin_user_credentials"></a>
+<a id="admin-user-credentials"></a>
 
 ### Admin User Credentials
 
-`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#nestedblock--admin_user_credentials--admin_password) below.
+`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-user-credentials-admin-password) below.
 
 `ssh_key` - (Optional) Public SSH key. Provided Public SSH key can be used for accessing nodes of the site. When provided, customers can SSH to the nodes of this Customer Edge site using admin as the user (`String`).
 
-<a id="nestedblock--admin_user_credentials--admin_password"></a>
+<a id="admin-user-credentials-admin-password"></a>
 
 ### Admin User Credentials Admin Password
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--admin_user_credentials--admin_password--blindfold_secret_info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#admin-user-credentials-admin-password-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--admin_user_credentials--admin_password--clear_secret_info) below.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#admin-user-credentials-admin-password-clear-secret-info) below.
 
-<a id="nestedblock--admin_user_credentials--admin_password--blindfold_secret_info"></a>
+<a id="admin-user-credentials-admin-password-blindfold-secret-info"></a>
 
 ### Admin User Credentials Admin Password Blindfold Secret Info
 
@@ -236,7 +236,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
-<a id="nestedblock--admin_user_credentials--admin_password--clear_secret_info"></a>
+<a id="admin-user-credentials-admin-password-clear-secret-info"></a>
 
 ### Admin User Credentials Admin Password Clear Secret Info
 
@@ -244,133 +244,133 @@ In addition to all arguments above, the following attributes are exported:
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
-<a id="nestedblock--aws"></a>
+<a id="aws"></a>
 
 ### AWS
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--aws--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#aws-not-managed) below.
 
-<a id="nestedblock--aws--not_managed"></a>
+<a id="aws-not-managed"></a>
 
 ### AWS Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--aws--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#aws-not-managed-node-list) below.
 
-<a id="nestedblock--aws--not_managed--node_list"></a>
+<a id="aws-not-managed-node-list"></a>
 
 ### AWS Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--aws--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#aws-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--aws--not_managed--node_list--interface_list"></a>
+<a id="aws-not-managed-node-list-interface-list"></a>
 
 ### AWS Not Managed Node List Interface List
 
-<a id="nestedblock--azure"></a>
+<a id="azure"></a>
 
 ### Azure
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--azure--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#azure-not-managed) below.
 
-<a id="nestedblock--azure--not_managed"></a>
+<a id="azure-not-managed"></a>
 
 ### Azure Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--azure--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#azure-not-managed-node-list) below.
 
-<a id="nestedblock--azure--not_managed--node_list"></a>
+<a id="azure-not-managed-node-list"></a>
 
 ### Azure Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--azure--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#azure-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--azure--not_managed--node_list--interface_list"></a>
+<a id="azure-not-managed-node-list-interface-list"></a>
 
 ### Azure Not Managed Node List Interface List
 
-<a id="nestedblock--baremetal"></a>
+<a id="baremetal"></a>
 
 ### Baremetal
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--baremetal--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#baremetal-not-managed) below.
 
-<a id="nestedblock--baremetal--not_managed"></a>
+<a id="baremetal-not-managed"></a>
 
 ### Baremetal Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--baremetal--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#baremetal-not-managed-node-list) below.
 
-<a id="nestedblock--baremetal--not_managed--node_list"></a>
+<a id="baremetal-not-managed-node-list"></a>
 
 ### Baremetal Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--baremetal--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#baremetal-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--baremetal--not_managed--node_list--interface_list"></a>
+<a id="baremetal-not-managed-node-list-interface-list"></a>
 
 ### Baremetal Not Managed Node List Interface List
 
-<a id="nestedblock--block_all_services"></a>
+<a id="block-all-services"></a>
 
 ### Block All Services
 
-<a id="nestedblock--blocked_services"></a>
+<a id="blocked-services"></a>
 
 ### Blocked Services
 
-`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
+`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
-<a id="nestedblock--blocked_services--blocked_sevice"></a>
+<a id="blocked-services-blocked-sevice"></a>
 
 ### Blocked Services Blocked Sevice
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--blocked_services--blocked_sevice--dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-blocked-sevice-dns) below.
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#nestedblock--blocked_services--blocked_sevice--ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-blocked-sevice-ssh) below.
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#nestedblock--blocked_services--blocked_sevice--web_user_interface) below.
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-blocked-sevice-web-user-interface) below.
 
-<a id="nestedblock--blocked_services--blocked_sevice--dns"></a>
+<a id="blocked-services-blocked-sevice-dns"></a>
 
 ### Blocked Services Blocked Sevice DNS
 
-<a id="nestedblock--blocked_services--blocked_sevice--ssh"></a>
+<a id="blocked-services-blocked-sevice-ssh"></a>
 
 ### Blocked Services Blocked Sevice SSH
 
-<a id="nestedblock--blocked_services--blocked_sevice--web_user_interface"></a>
+<a id="blocked-services-blocked-sevice-web-user-interface"></a>
 
 ### Blocked Services Blocked Sevice Web User Interface
 
-<a id="nestedblock--custom_proxy"></a>
+<a id="custom-proxy"></a>
 
 ### Custom Proxy
 
-`disable_re_tunnel` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable RE Tunnel](#nestedblock--custom_proxy--disable_re_tunnel) below.
+`disable_re_tunnel` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable RE Tunnel](#custom-proxy-disable-re-tunnel) below.
 
-`enable_re_tunnel` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable RE Tunnel](#nestedblock--custom_proxy--enable_re_tunnel) below.
+`enable_re_tunnel` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable RE Tunnel](#custom-proxy-enable-re-tunnel) below.
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--custom_proxy--password) below.
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#custom-proxy-password) below.
 
 `proxy_ip_address` - (Optional) Proxy IPv4 Address. Specify the IPv4 Address of the internal Enterprise Proxy (`String`).
 
@@ -378,23 +378,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `username` - (Optional) Username. If the internal Enterprise Proxy is using basic authentication, specify the username. This is an optional field (`String`).
 
-<a id="nestedblock--custom_proxy--disable_re_tunnel"></a>
+<a id="custom-proxy-disable-re-tunnel"></a>
 
 ### Custom Proxy Disable RE Tunnel
 
-<a id="nestedblock--custom_proxy--enable_re_tunnel"></a>
+<a id="custom-proxy-enable-re-tunnel"></a>
 
 ### Custom Proxy Enable RE Tunnel
 
-<a id="nestedblock--custom_proxy--password"></a>
+<a id="custom-proxy-password"></a>
 
 ### Custom Proxy Password
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--custom_proxy--password--blindfold_secret_info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#custom-proxy-password-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--custom_proxy--password--clear_secret_info) below.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#custom-proxy-password-clear-secret-info) below.
 
-<a id="nestedblock--custom_proxy--password--blindfold_secret_info"></a>
+<a id="custom-proxy-password-blindfold-secret-info"></a>
 
 ### Custom Proxy Password Blindfold Secret Info
 
@@ -404,7 +404,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
-<a id="nestedblock--custom_proxy--password--clear_secret_info"></a>
+<a id="custom-proxy-password-clear-secret-info"></a>
 
 ### Custom Proxy Password Clear Secret Info
 
@@ -412,13 +412,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
-<a id="nestedblock--custom_proxy_bypass"></a>
+<a id="custom-proxy-bypass"></a>
 
 ### Custom Proxy Bypass
 
 `proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy (`List`).
 
-<a id="nestedblock--dc_cluster_group_sli"></a>
+<a id="dc-cluster-group-sli"></a>
 
 ### Dc Cluster Group Sli
 
@@ -428,7 +428,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--dc_cluster_group_slo"></a>
+<a id="dc-cluster-group-slo"></a>
 
 ### Dc Cluster Group Slo
 
@@ -438,269 +438,269 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--disable_ha"></a>
+<a id="disable-ha"></a>
 
 ### Disable HA
 
-<a id="nestedblock--disable_url_categorization"></a>
+<a id="disable-url-categorization"></a>
 
 ### Disable URL Categorization
 
-<a id="nestedblock--dns_ntp_config"></a>
+<a id="dns-ntp-config"></a>
 
 ### DNS NTP Config
 
-`custom_dns` - (Optional) DNS Servers. DNS Servers. See [Custom DNS](#nestedblock--dns_ntp_config--custom_dns) below.
+`custom_dns` - (Optional) DNS Servers. DNS Servers. See [Custom DNS](#dns-ntp-config-custom-dns) below.
 
-`custom_ntp` - (Optional) NTP Servers. NTP Servers. See [Custom NTP](#nestedblock--dns_ntp_config--custom_ntp) below.
+`custom_ntp` - (Optional) NTP Servers. NTP Servers. See [Custom NTP](#dns-ntp-config-custom-ntp) below.
 
-`f5_dns_default` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 DNS Default](#nestedblock--dns_ntp_config--f5_dns_default) below.
+`f5_dns_default` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 DNS Default](#dns-ntp-config-f5-dns-default) below.
 
-`f5_ntp_default` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 NTP Default](#nestedblock--dns_ntp_config--f5_ntp_default) below.
+`f5_ntp_default` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 NTP Default](#dns-ntp-config-f5-ntp-default) below.
 
-<a id="nestedblock--dns_ntp_config--custom_dns"></a>
+<a id="dns-ntp-config-custom-dns"></a>
 
 ### DNS NTP Config Custom DNS
 
 `dns_servers` - (Optional) DNS Servers. DNS Servers (`List`).
 
-<a id="nestedblock--dns_ntp_config--custom_ntp"></a>
+<a id="dns-ntp-config-custom-ntp"></a>
 
 ### DNS NTP Config Custom NTP
 
 `ntp_servers` - (Optional) NTP Servers. NTP Servers (`List`).
 
-<a id="nestedblock--dns_ntp_config--f5_dns_default"></a>
+<a id="dns-ntp-config-f5-dns-default"></a>
 
 ### DNS NTP Config F5 DNS Default
 
-<a id="nestedblock--dns_ntp_config--f5_ntp_default"></a>
+<a id="dns-ntp-config-f5-ntp-default"></a>
 
 ### DNS NTP Config F5 NTP Default
 
-<a id="nestedblock--enable_ha"></a>
+<a id="enable-ha"></a>
 
 ### Enable HA
 
-<a id="nestedblock--enable_url_categorization"></a>
+<a id="enable-url-categorization"></a>
 
 ### Enable URL Categorization
 
-<a id="nestedblock--equinix"></a>
+<a id="equinix"></a>
 
 ### Equinix
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--equinix--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#equinix-not-managed) below.
 
-<a id="nestedblock--equinix--not_managed"></a>
+<a id="equinix-not-managed"></a>
 
 ### Equinix Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--equinix--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#equinix-not-managed-node-list) below.
 
-<a id="nestedblock--equinix--not_managed--node_list"></a>
+<a id="equinix-not-managed-node-list"></a>
 
 ### Equinix Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--equinix--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#equinix-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--equinix--not_managed--node_list--interface_list"></a>
+<a id="equinix-not-managed-node-list-interface-list"></a>
 
 ### Equinix Not Managed Node List Interface List
 
-<a id="nestedblock--f5_proxy"></a>
+<a id="f5-proxy"></a>
 
 ### F5 Proxy
 
-<a id="nestedblock--gcp"></a>
+<a id="gcp"></a>
 
 ### GCP
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--gcp--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#gcp-not-managed) below.
 
-<a id="nestedblock--gcp--not_managed"></a>
+<a id="gcp-not-managed"></a>
 
 ### GCP Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--gcp--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#gcp-not-managed-node-list) below.
 
-<a id="nestedblock--gcp--not_managed--node_list"></a>
+<a id="gcp-not-managed-node-list"></a>
 
 ### GCP Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--gcp--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#gcp-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--gcp--not_managed--node_list--interface_list"></a>
+<a id="gcp-not-managed-node-list-interface-list"></a>
 
 ### GCP Not Managed Node List Interface List
 
-<a id="nestedblock--kvm"></a>
+<a id="kvm"></a>
 
 ### Kvm
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--kvm--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#kvm-not-managed) below.
 
-<a id="nestedblock--kvm--not_managed"></a>
+<a id="kvm-not-managed"></a>
 
 ### Kvm Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--kvm--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#kvm-not-managed-node-list) below.
 
-<a id="nestedblock--kvm--not_managed--node_list"></a>
+<a id="kvm-not-managed-node-list"></a>
 
 ### Kvm Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--kvm--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#kvm-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--kvm--not_managed--node_list--interface_list"></a>
+<a id="kvm-not-managed-node-list-interface-list"></a>
 
 ### Kvm Not Managed Node List Interface List
 
-<a id="nestedblock--load_balancing"></a>
+<a id="load-balancing"></a>
 
 ### Load Balancing
 
 `vip_vrrp_mode` - (Optional) VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE` (`String`).
 
-<a id="nestedblock--local_vrf"></a>
+<a id="local-vrf"></a>
 
 ### Local Vrf
 
-`default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#nestedblock--local_vrf--default_config) below.
+`default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#local-vrf-default-config) below.
 
-`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sli Config](#nestedblock--local_vrf--default_sli_config) below.
+`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sli Config](#local-vrf-default-sli-config) below.
 
-`sli_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Sli Config](#nestedblock--local_vrf--sli_config) below.
+`sli_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Sli Config](#local-vrf-sli-config) below.
 
-`slo_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Slo Config](#nestedblock--local_vrf--slo_config) below.
+`slo_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Slo Config](#local-vrf-slo-config) below.
 
-<a id="nestedblock--local_vrf--default_config"></a>
+<a id="local-vrf-default-config"></a>
 
 ### Local Vrf Default Config
 
-<a id="nestedblock--local_vrf--default_sli_config"></a>
+<a id="local-vrf-default-sli-config"></a>
 
 ### Local Vrf Default Sli Config
 
-<a id="nestedblock--local_vrf--sli_config"></a>
+<a id="local-vrf-sli-config"></a>
 
 ### Local Vrf Sli Config
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#nestedblock--local_vrf--sli_config--labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#local-vrf-sli-config-labels) below.
 
 `nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#nestedblock--local_vrf--sli_config--no_static_routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#local-vrf-sli-config-no-static-routes) below.
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#nestedblock--local_vrf--sli_config--no_v6_static_routes) below.
+`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#local-vrf-sli-config-no-v6-static-routes) below.
 
-`static_routes` - (Optional) Static Routes List. See [Static Routes](#nestedblock--local_vrf--sli_config--static_routes) below.
+`static_routes` - (Optional) Static Routes List. See [Static Routes](#local-vrf-sli-config-static-routes) below.
 
-`static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#nestedblock--local_vrf--sli_config--static_v6_routes) below.
+`static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#local-vrf-sli-config-static-v6-routes) below.
 
 `vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
 
-<a id="nestedblock--local_vrf--sli_config--labels"></a>
+<a id="local-vrf-sli-config-labels"></a>
 
 ### Local Vrf Sli Config Labels
 
-<a id="nestedblock--local_vrf--sli_config--no_static_routes"></a>
+<a id="local-vrf-sli-config-no-static-routes"></a>
 
 ### Local Vrf Sli Config No Static Routes
 
-<a id="nestedblock--local_vrf--sli_config--no_v6_static_routes"></a>
+<a id="local-vrf-sli-config-no-v6-static-routes"></a>
 
 ### Local Vrf Sli Config No V6 Static Routes
 
-<a id="nestedblock--local_vrf--sli_config--static_routes"></a>
+<a id="local-vrf-sli-config-static-routes"></a>
 
 ### Local Vrf Sli Config Static Routes
 
-`static_routes` - (Optional) Static Routes. See [Static Routes](#nestedblock--local_vrf--sli_config--static_routes--static_routes) below.
+`static_routes` - (Optional) Static Routes. See [Static Routes](#local-vrf-sli-config-static-routes-static-routes) below.
 
-<a id="nestedblock--local_vrf--sli_config--static_routes--static_routes"></a>
+<a id="local-vrf-sli-config-static-routes-static-routes"></a>
 
 ### Local Vrf Sli Config Static Routes Static Routes
 
-<a id="nestedblock--local_vrf--sli_config--static_v6_routes"></a>
+<a id="local-vrf-sli-config-static-v6-routes"></a>
 
 ### Local Vrf Sli Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#nestedblock--local_vrf--sli_config--static_v6_routes--static_routes) below.
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#local-vrf-sli-config-static-v6-routes-static-routes) below.
 
-<a id="nestedblock--local_vrf--sli_config--static_v6_routes--static_routes"></a>
+<a id="local-vrf-sli-config-static-v6-routes-static-routes"></a>
 
 ### Local Vrf Sli Config Static V6 Routes Static Routes
 
-<a id="nestedblock--local_vrf--slo_config"></a>
+<a id="local-vrf-slo-config"></a>
 
 ### Local Vrf Slo Config
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#nestedblock--local_vrf--slo_config--labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#local-vrf-slo-config-labels) below.
 
 `nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#nestedblock--local_vrf--slo_config--no_static_routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#local-vrf-slo-config-no-static-routes) below.
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#nestedblock--local_vrf--slo_config--no_v6_static_routes) below.
+`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#local-vrf-slo-config-no-v6-static-routes) below.
 
-`static_routes` - (Optional) Static Routes List. See [Static Routes](#nestedblock--local_vrf--slo_config--static_routes) below.
+`static_routes` - (Optional) Static Routes List. See [Static Routes](#local-vrf-slo-config-static-routes) below.
 
-`static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#nestedblock--local_vrf--slo_config--static_v6_routes) below.
+`static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#local-vrf-slo-config-static-v6-routes) below.
 
 `vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
 
-<a id="nestedblock--local_vrf--slo_config--labels"></a>
+<a id="local-vrf-slo-config-labels"></a>
 
 ### Local Vrf Slo Config Labels
 
-<a id="nestedblock--local_vrf--slo_config--no_static_routes"></a>
+<a id="local-vrf-slo-config-no-static-routes"></a>
 
 ### Local Vrf Slo Config No Static Routes
 
-<a id="nestedblock--local_vrf--slo_config--no_v6_static_routes"></a>
+<a id="local-vrf-slo-config-no-v6-static-routes"></a>
 
 ### Local Vrf Slo Config No V6 Static Routes
 
-<a id="nestedblock--local_vrf--slo_config--static_routes"></a>
+<a id="local-vrf-slo-config-static-routes"></a>
 
 ### Local Vrf Slo Config Static Routes
 
-`static_routes` - (Optional) Static Routes. See [Static Routes](#nestedblock--local_vrf--slo_config--static_routes--static_routes) below.
+`static_routes` - (Optional) Static Routes. See [Static Routes](#local-vrf-slo-config-static-routes-static-routes) below.
 
-<a id="nestedblock--local_vrf--slo_config--static_routes--static_routes"></a>
+<a id="local-vrf-slo-config-static-routes-static-routes"></a>
 
 ### Local Vrf Slo Config Static Routes Static Routes
 
-<a id="nestedblock--local_vrf--slo_config--static_v6_routes"></a>
+<a id="local-vrf-slo-config-static-v6-routes"></a>
 
 ### Local Vrf Slo Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#nestedblock--local_vrf--slo_config--static_v6_routes--static_routes) below.
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#local-vrf-slo-config-static-v6-routes-static-routes) below.
 
-<a id="nestedblock--local_vrf--slo_config--static_v6_routes--static_routes"></a>
+<a id="local-vrf-slo-config-static-v6-routes-static-routes"></a>
 
 ### Local Vrf Slo Config Static V6 Routes Static Routes
 
-<a id="nestedblock--log_receiver"></a>
+<a id="log-receiver"></a>
 
 ### Log Receiver
 
@@ -710,193 +710,193 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--logs_streaming_disabled"></a>
+<a id="logs-streaming-disabled"></a>
 
 ### Logs Streaming Disabled
 
-<a id="nestedblock--no_forward_proxy"></a>
+<a id="no-forward-proxy"></a>
 
 ### No Forward Proxy
 
-<a id="nestedblock--no_network_policy"></a>
+<a id="no-network-policy"></a>
 
 ### No Network Policy
 
-<a id="nestedblock--no_proxy_bypass"></a>
+<a id="no-proxy-bypass"></a>
 
 ### No Proxy Bypass
 
-<a id="nestedblock--no_s2s_connectivity_sli"></a>
+<a id="no-s2s-connectivity-sli"></a>
 
 ### No S2s Connectivity Sli
 
-<a id="nestedblock--no_s2s_connectivity_slo"></a>
+<a id="no-s2s-connectivity-slo"></a>
 
 ### No S2s Connectivity Slo
 
-<a id="nestedblock--nutanix"></a>
+<a id="nutanix"></a>
 
 ### Nutanix
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--nutanix--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nutanix-not-managed) below.
 
-<a id="nestedblock--nutanix--not_managed"></a>
+<a id="nutanix-not-managed"></a>
 
 ### Nutanix Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--nutanix--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nutanix-not-managed-node-list) below.
 
-<a id="nestedblock--nutanix--not_managed--node_list"></a>
+<a id="nutanix-not-managed-node-list"></a>
 
 ### Nutanix Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--nutanix--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nutanix-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--nutanix--not_managed--node_list--interface_list"></a>
+<a id="nutanix-not-managed-node-list-interface-list"></a>
 
 ### Nutanix Not Managed Node List Interface List
 
-<a id="nestedblock--oci"></a>
+<a id="oci"></a>
 
 ### Oci
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--oci--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#oci-not-managed) below.
 
-<a id="nestedblock--oci--not_managed"></a>
+<a id="oci-not-managed"></a>
 
 ### Oci Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--oci--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#oci-not-managed-node-list) below.
 
-<a id="nestedblock--oci--not_managed--node_list"></a>
+<a id="oci-not-managed-node-list"></a>
 
 ### Oci Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--oci--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#oci-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--oci--not_managed--node_list--interface_list"></a>
+<a id="oci-not-managed-node-list-interface-list"></a>
 
 ### Oci Not Managed Node List Interface List
 
-<a id="nestedblock--offline_survivability_mode"></a>
+<a id="offline-survivability-mode"></a>
 
 ### Offline Survivability Mode
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#nestedblock--offline_survivability_mode--enable_offline_survivability_mode) below.
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#offline-survivability-mode-enable-offline-survivability-mode) below.
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#nestedblock--offline_survivability_mode--no_offline_survivability_mode) below.
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#offline-survivability-mode-no-offline-survivability-mode) below.
 
-<a id="nestedblock--offline_survivability_mode--enable_offline_survivability_mode"></a>
+<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>
 
 ### Offline Survivability Mode Enable Offline Survivability Mode
 
-<a id="nestedblock--offline_survivability_mode--no_offline_survivability_mode"></a>
+<a id="offline-survivability-mode-no-offline-survivability-mode"></a>
 
 ### Offline Survivability Mode No Offline Survivability Mode
 
-<a id="nestedblock--openstack"></a>
+<a id="openstack"></a>
 
 ### Openstack
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--openstack--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#openstack-not-managed) below.
 
-<a id="nestedblock--openstack--not_managed"></a>
+<a id="openstack-not-managed"></a>
 
 ### Openstack Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--openstack--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#openstack-not-managed-node-list) below.
 
-<a id="nestedblock--openstack--not_managed--node_list"></a>
+<a id="openstack-not-managed-node-list"></a>
 
 ### Openstack Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--openstack--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#openstack-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--openstack--not_managed--node_list--interface_list"></a>
+<a id="openstack-not-managed-node-list-interface-list"></a>
 
 ### Openstack Not Managed Node List Interface List
 
-<a id="nestedblock--performance_enhancement_mode"></a>
+<a id="performance-enhancement-mode"></a>
 
 ### Performance Enhancement Mode
 
-`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced) below.
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--performance_enhancement_mode--perf_mode_l7_enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#performance-enhancement-mode-perf-mode-l7-enhanced) below.
 
-<a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
 
-<a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
 
-<a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
 
-<a id="nestedblock--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
+<a id="performance-enhancement-mode-perf-mode-l7-enhanced"></a>
 
 ### Performance Enhancement Mode Perf Mode L7 Enhanced
 
-<a id="nestedblock--re_select"></a>
+<a id="re-select"></a>
 
 ### RE Select
 
-`geo_proximity` - (Optional) Empty. This can be used for messages where no values are needed. See [Geo Proximity](#nestedblock--re_select--geo_proximity) below.
+`geo_proximity` - (Optional) Empty. This can be used for messages where no values are needed. See [Geo Proximity](#re-select-geo-proximity) below.
 
-`specific_re` - (Optional) Specific RE. Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs. See [Specific RE](#nestedblock--re_select--specific_re) below.
+`specific_re` - (Optional) Specific RE. Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs. See [Specific RE](#re-select-specific-re) below.
 
-<a id="nestedblock--re_select--geo_proximity"></a>
+<a id="re-select-geo-proximity"></a>
 
 ### RE Select Geo Proximity
 
-<a id="nestedblock--re_select--specific_re"></a>
+<a id="re-select-specific-re"></a>
 
 ### RE Select Specific RE
 
 `primary_re` - (Optional) Primary RE Geography. Select primary RE for this site (`String`).
 
-<a id="nestedblock--site_mesh_group_on_slo"></a>
+<a id="site-mesh-group-on-slo"></a>
 
 ### Site Mesh Group On Slo
 
-`no_site_mesh_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Site Mesh Group](#nestedblock--site_mesh_group_on_slo--no_site_mesh_group) below.
+`no_site_mesh_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Site Mesh Group](#site-mesh-group-on-slo-no-site-mesh-group) below.
 
-`site_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site Mesh Group](#nestedblock--site_mesh_group_on_slo--site_mesh_group) below.
+`site_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site Mesh Group](#site-mesh-group-on-slo-site-mesh-group) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#nestedblock--site_mesh_group_on_slo--sm_connection_public_ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#site-mesh-group-on-slo-sm-connection-public-ip) below.
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#nestedblock--site_mesh_group_on_slo--sm_connection_pvt_ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#site-mesh-group-on-slo-sm-connection-pvt-ip) below.
 
-<a id="nestedblock--site_mesh_group_on_slo--no_site_mesh_group"></a>
+<a id="site-mesh-group-on-slo-no-site-mesh-group"></a>
 
 ### Site Mesh Group On Slo No Site Mesh Group
 
-<a id="nestedblock--site_mesh_group_on_slo--site_mesh_group"></a>
+<a id="site-mesh-group-on-slo-site-mesh-group"></a>
 
 ### Site Mesh Group On Slo Site Mesh Group
 
@@ -906,47 +906,47 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--site_mesh_group_on_slo--sm_connection_public_ip"></a>
+<a id="site-mesh-group-on-slo-sm-connection-public-ip"></a>
 
 ### Site Mesh Group On Slo Sm Connection Public IP
 
-<a id="nestedblock--site_mesh_group_on_slo--sm_connection_pvt_ip"></a>
+<a id="site-mesh-group-on-slo-sm-connection-pvt-ip"></a>
 
 ### Site Mesh Group On Slo Sm Connection Pvt IP
 
-<a id="nestedblock--software_settings"></a>
+<a id="software-settings"></a>
 
 ### Software Settings
 
-`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](#nestedblock--software_settings--os) below.
+`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](#software-settings-os) below.
 
-`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#nestedblock--software_settings--sw) below.
+`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions. See [Sw](#software-settings-sw) below.
 
-<a id="nestedblock--software_settings--os"></a>
+<a id="software-settings-os"></a>
 
 ### Software Settings OS
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#nestedblock--software_settings--os--default_os_version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#software-settings-os-default-os-version) below.
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
 
-<a id="nestedblock--software_settings--os--default_os_version"></a>
+<a id="software-settings-os-default-os-version"></a>
 
 ### Software Settings OS Default OS Version
 
-<a id="nestedblock--software_settings--sw"></a>
+<a id="software-settings-sw"></a>
 
 ### Software Settings Sw
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--software_settings--sw--default_sw_version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#software-settings-sw-default-sw-version) below.
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
 
-<a id="nestedblock--software_settings--sw--default_sw_version"></a>
+<a id="software-settings-sw-default-sw-version"></a>
 
 ### Software Settings Sw Default Sw Version
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -958,69 +958,69 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--upgrade_settings"></a>
+<a id="upgrade-settings"></a>
 
 ### Upgrade Settings
 
-`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#nestedblock--upgrade_settings--kubernetes_upgrade_drain) below.
+`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#upgrade-settings-kubernetes-upgrade-drain) below.
 
-<a id="nestedblock--upgrade_settings--kubernetes_upgrade_drain"></a>
+<a id="upgrade-settings-kubernetes-upgrade-drain"></a>
 
 ### Upgrade Settings Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#nestedblock--upgrade_settings--kubernetes_upgrade_drain--disable_upgrade_drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#upgrade-settings-kubernetes-upgrade-drain-disable-upgrade-drain) below.
 
-`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#nestedblock--upgrade_settings--kubernetes_upgrade_drain--enable_upgrade_drain) below.
+`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
-<a id="nestedblock--upgrade_settings--kubernetes_upgrade_drain--disable_upgrade_drain"></a>
+<a id="upgrade-settings-kubernetes-upgrade-drain-disable-upgrade-drain"></a>
 
 ### Upgrade Settings Kubernetes Upgrade Drain Disable Upgrade Drain
 
-<a id="nestedblock--upgrade_settings--kubernetes_upgrade_drain--enable_upgrade_drain"></a>
+<a id="upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--upgrade_settings--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#nestedblock--upgrade_settings--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode) below.
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
 
-<a id="nestedblock--upgrade_settings--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode"></a>
+<a id="upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
 
 ### Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
 
-<a id="nestedblock--upgrade_settings--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode"></a>
+<a id="upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
 
 ### Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
 
-<a id="nestedblock--vmware"></a>
+<a id="vmware"></a>
 
 ### Vmware
 
-`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#nestedblock--vmware--not_managed) below.
+`not_managed` - (Optional) List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Not Managed](#vmware-not-managed) below.
 
-<a id="nestedblock--vmware--not_managed"></a>
+<a id="vmware-not-managed"></a>
 
 ### Vmware Not Managed
 
-`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#nestedblock--vmware--not_managed--node_list) below.
+`node_list` - (Optional) Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section. See [Node List](#vmware-not-managed-node-list) below.
 
-<a id="nestedblock--vmware--not_managed--node_list"></a>
+<a id="vmware-not-managed-node-list"></a>
 
 ### Vmware Not Managed Node List
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nestedblock--vmware--not_managed--node_list--interface_list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#vmware-not-managed-node-list-interface-list) below.
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="nestedblock--vmware--not_managed--node_list--interface_list"></a>
+<a id="vmware-not-managed-node-list-interface-list"></a>
 
 ### Vmware Not Managed Node List Interface List
 

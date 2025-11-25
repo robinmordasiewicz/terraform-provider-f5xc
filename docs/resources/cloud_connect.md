@@ -80,17 +80,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--aws_tgw_site"></a>
+<a id="aws-tgw-site"></a>
 
 ### AWS Tgw Site
 
-`cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cred](#nestedblock--aws_tgw_site--cred) below.
+`cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cred](#aws-tgw-site-cred) below.
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--aws_tgw_site--site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#aws-tgw-site-site) below.
 
-`vpc_attachments` - (Optional) VPC Attachments. See [Vpc Attachments](#nestedblock--aws_tgw_site--vpc_attachments) below.
+`vpc_attachments` - (Optional) VPC Attachments. See [Vpc Attachments](#aws-tgw-site-vpc-attachments) below.
 
-<a id="nestedblock--aws_tgw_site--cred"></a>
+<a id="aws-tgw-site-cred"></a>
 
 ### AWS Tgw Site Cred
 
@@ -100,7 +100,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--aws_tgw_site--site"></a>
+<a id="aws-tgw-site-site"></a>
 
 ### AWS Tgw Site Site
 
@@ -110,51 +110,51 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--aws_tgw_site--vpc_attachments"></a>
+<a id="aws-tgw-site-vpc-attachments"></a>
 
 ### AWS Tgw Site Vpc Attachments
 
-`vpc_list` - (Optional) VPC List. See [Vpc List](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list) below.
+`vpc_list` - (Optional) VPC List. See [Vpc List](#aws-tgw-site-vpc-attachments-vpc-list) below.
 
-<a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list"></a>
+<a id="aws-tgw-site-vpc-attachments-vpc-list"></a>
 
 ### AWS Tgw Site Vpc Attachments Vpc List
 
-`custom_routing` - (Optional) AWS Route Table List. AWS Route Table List. See [Custom Routing](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--custom_routing) below.
+`custom_routing` - (Optional) AWS Route Table List. AWS Route Table List. See [Custom Routing](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) below.
 
-`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice. See [Default Route](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--default_route) below.
+`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice. See [Default Route](#aws-tgw-site-vpc-attachments-vpc-list-default-route) below.
 
-`labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall. See [Labels](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--labels) below.
+`labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall. See [Labels](#aws-tgw-site-vpc-attachments-vpc-list-labels) below.
 
-`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#nestedblock--aws_tgw_site--vpc_attachments--vpc_list--manual_routing) below.
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#aws-tgw-site-vpc-attachments-vpc-list-manual-routing) below.
 
 `vpc_id` - (Optional) VPC ID. Enter the VPC ID of the VPC to be attached (`String`).
 
-<a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--custom_routing"></a>
+<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing"></a>
 
 ### AWS Tgw Site Vpc Attachments Vpc List Custom Routing
 
-<a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--default_route"></a>
+<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route"></a>
 
 ### AWS Tgw Site Vpc Attachments Vpc List Default Route
 
-<a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--labels"></a>
+<a id="aws-tgw-site-vpc-attachments-vpc-list-labels"></a>
 
 ### AWS Tgw Site Vpc Attachments Vpc List Labels
 
-<a id="nestedblock--aws_tgw_site--vpc_attachments--vpc_list--manual_routing"></a>
+<a id="aws-tgw-site-vpc-attachments-vpc-list-manual-routing"></a>
 
 ### AWS Tgw Site Vpc Attachments Vpc List Manual Routing
 
-<a id="nestedblock--azure_vnet_site"></a>
+<a id="azure-vnet-site"></a>
 
 ### Azure Vnet Site
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--azure_vnet_site--site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#azure-vnet-site-site) below.
 
-`vnet_attachments` - (Optional) VNET Attachments. See [Vnet Attachments](#nestedblock--azure_vnet_site--vnet_attachments) below.
+`vnet_attachments` - (Optional) VNET Attachments. See [Vnet Attachments](#azure-vnet-site-vnet-attachments) below.
 
-<a id="nestedblock--azure_vnet_site--site"></a>
+<a id="azure-vnet-site-site"></a>
 
 ### Azure Vnet Site Site
 
@@ -164,45 +164,45 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--azure_vnet_site--vnet_attachments"></a>
+<a id="azure-vnet-site-vnet-attachments"></a>
 
 ### Azure Vnet Site Vnet Attachments
 
-`vnet_list` - (Optional) VNET List. See [Vnet List](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list) below.
+`vnet_list` - (Optional) VNET List. See [Vnet List](#azure-vnet-site-vnet-attachments-vnet-list) below.
 
-<a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list"></a>
+<a id="azure-vnet-site-vnet-attachments-vnet-list"></a>
 
 ### Azure Vnet Site Vnet Attachments Vnet List
 
-`custom_routing` - (Optional) List Azure Route Table with Static Route. List Azure Route Table with Static Route. See [Custom Routing](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--custom_routing) below.
+`custom_routing` - (Optional) List Azure Route Table with Static Route. List Azure Route Table with Static Route. See [Custom Routing](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) below.
 
-`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice. See [Default Route](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--default_route) below.
+`default_route` - (Optional) Override Default Route Choice. Select Override Default Route Choice. See [Default Route](#azure-vnet-site-vnet-attachments-vnet-list-default-route) below.
 
-`labels` - (Optional) Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies. See [Labels](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--labels) below.
+`labels` - (Optional) Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies. See [Labels](#azure-vnet-site-vnet-attachments-vnet-list-labels) below.
 
-`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#nestedblock--azure_vnet_site--vnet_attachments--vnet_list--manual_routing) below.
+`manual_routing` - (Optional) Empty. This can be used for messages where no values are needed. See [Manual Routing](#azure-vnet-site-vnet-attachments-vnet-list-manual-routing) below.
 
 `subscription_id` - (Optional) Subscription ID. Enter the Subscription ID of the VNET to be attached (`String`).
 
 `vnet_id` - (Optional) VNET ID. Enter the vnet ID of the VNET to be attached in format /<resource-group-name>/<vnet-name> (`String`).
 
-<a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--custom_routing"></a>
+<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing"></a>
 
 ### Azure Vnet Site Vnet Attachments Vnet List Custom Routing
 
-<a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--default_route"></a>
+<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route"></a>
 
 ### Azure Vnet Site Vnet Attachments Vnet List Default Route
 
-<a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--labels"></a>
+<a id="azure-vnet-site-vnet-attachments-vnet-list-labels"></a>
 
 ### Azure Vnet Site Vnet Attachments Vnet List Labels
 
-<a id="nestedblock--azure_vnet_site--vnet_attachments--vnet_list--manual_routing"></a>
+<a id="azure-vnet-site-vnet-attachments-vnet-list-manual-routing"></a>
 
 ### Azure Vnet Site Vnet Attachments Vnet List Manual Routing
 
-<a id="nestedblock--segment"></a>
+<a id="segment"></a>
 
 ### Segment
 
@@ -212,7 +212,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

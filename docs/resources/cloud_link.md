@@ -84,17 +84,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--aws"></a>
+<a id="aws"></a>
 
 ### AWS
 
-`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#nestedblock--aws--aws_cred) below.
+`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#aws-aws-cred) below.
 
-`byoc` - (Optional) Bring Your Own Connections. List of Bring You Own Connection. See [Byoc](#nestedblock--aws--byoc) below.
+`byoc` - (Optional) Bring Your Own Connections. List of Bring You Own Connection. See [Byoc](#aws-byoc) below.
 
 `custom_asn` - (Optional) Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294 (`Number`).
 
-<a id="nestedblock--aws--aws_cred"></a>
+<a id="aws-aws-cred"></a>
 
 ### AWS AWS Cred
 
@@ -104,31 +104,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--aws--byoc"></a>
+<a id="aws-byoc"></a>
 
 ### AWS Byoc
 
-`connections` - (Optional) Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs. See [Connections](#nestedblock--aws--byoc--connections) below.
+`connections` - (Optional) Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs. See [Connections](#aws-byoc-connections) below.
 
-<a id="nestedblock--aws--byoc--connections"></a>
+<a id="aws-byoc-connections"></a>
 
 ### AWS Byoc Connections
 
-`auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Auth Key](#nestedblock--aws--byoc--connections--auth_key) below.
+`auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Auth Key](#aws-byoc-connections-auth-key) below.
 
 `bgp_asn` - (Optional) BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS (`Number`).
 
 `connection_id` - (Optional) Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection (`String`).
 
-`ipv4` - (Optional) IPv4 Peering. Configure BGP IPv4 peering for endpoints. See [IPv4](#nestedblock--aws--byoc--connections--ipv4) below.
+`ipv4` - (Optional) IPv4 Peering. Configure BGP IPv4 peering for endpoints. See [IPv4](#aws-byoc-connections-ipv4) below.
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--aws--byoc--connections--metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#aws-byoc-connections-metadata) below.
 
 `region` - (Optional) Region. Region where the connection is setup (`String`).
 
-`system_generated_name` - (Optional) Empty. This can be used for messages where no values are needed. See [System Generated Name](#nestedblock--aws--byoc--connections--system_generated_name) below.
+`system_generated_name` - (Optional) Empty. This can be used for messages where no values are needed. See [System Generated Name](#aws-byoc-connections-system-generated-name) below.
 
-`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags. See [Tags](#nestedblock--aws--byoc--connections--tags) below.
+`tags` - (Optional) AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags. See [Tags](#aws-byoc-connections-tags) below.
 
 `user_assigned_name` - (Optional) User Assigned. User is managing the AWS resource name (`String`).
 
@@ -136,73 +136,73 @@ In addition to all arguments above, the following attributes are exported:
 
 `vlan` - (Optional) Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection (`Number`).
 
-<a id="nestedblock--aws--byoc--connections--auth_key"></a>
+<a id="aws-byoc-connections-auth-key"></a>
 
 ### AWS Byoc Connections Auth Key
 
-<a id="nestedblock--aws--byoc--connections--ipv4"></a>
+<a id="aws-byoc-connections-ipv4"></a>
 
 ### AWS Byoc Connections IPv4
 
-<a id="nestedblock--aws--byoc--connections--metadata"></a>
+<a id="aws-byoc-connections-metadata"></a>
 
 ### AWS Byoc Connections Metadata
 
-<a id="nestedblock--aws--byoc--connections--system_generated_name"></a>
+<a id="aws-byoc-connections-system-generated-name"></a>
 
 ### AWS Byoc Connections System Generated Name
 
-<a id="nestedblock--aws--byoc--connections--tags"></a>
+<a id="aws-byoc-connections-tags"></a>
 
 ### AWS Byoc Connections Tags
 
-<a id="nestedblock--disabled"></a>
+<a id="disabled"></a>
 
 ### Disabled
 
-<a id="nestedblock--enabled"></a>
+<a id="enabled"></a>
 
 ### Enabled
 
 `cloudlink_network_name` - (Optional) Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support (`String`).
 
-<a id="nestedblock--gcp"></a>
+<a id="gcp"></a>
 
 ### GCP
 
-`byoc` - (Optional) GCP Bring Your Own Connections. List of GCP Bring You Own Connections. See [Byoc](#nestedblock--gcp--byoc) below.
+`byoc` - (Optional) GCP Bring Your Own Connections. List of GCP Bring You Own Connections. See [Byoc](#gcp-byoc) below.
 
-`gcp_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [GCP Cred](#nestedblock--gcp--gcp_cred) below.
+`gcp_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [GCP Cred](#gcp-gcp-cred) below.
 
-<a id="nestedblock--gcp--byoc"></a>
+<a id="gcp-byoc"></a>
 
 ### GCP Byoc
 
-`connections` - (Optional) Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity. See [Connections](#nestedblock--gcp--byoc--connections) below.
+`connections` - (Optional) Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity. See [Connections](#gcp-byoc-connections) below.
 
-<a id="nestedblock--gcp--byoc--connections"></a>
+<a id="gcp-byoc-connections"></a>
 
 ### GCP Byoc Connections
 
 `interconnect_attachment_name` - (Optional) Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment (`String`).
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--gcp--byoc--connections--metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#gcp-byoc-connections-metadata) below.
 
 `project` - (Optional) Specified Project. Specify a GCP Project for the interconnect attachment (`String`).
 
 `region` - (Optional) Region. GCP Region in which the GCP Cloud Interconnect attachment is configured (`String`).
 
-`same_as_credential` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Credential](#nestedblock--gcp--byoc--connections--same_as_credential) below.
+`same_as_credential` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Credential](#gcp-byoc-connections-same-as-credential) below.
 
-<a id="nestedblock--gcp--byoc--connections--metadata"></a>
+<a id="gcp-byoc-connections-metadata"></a>
 
 ### GCP Byoc Connections Metadata
 
-<a id="nestedblock--gcp--byoc--connections--same_as_credential"></a>
+<a id="gcp-byoc-connections-same-as-credential"></a>
 
 ### GCP Byoc Connections Same As Credential
 
-<a id="nestedblock--gcp--gcp_cred"></a>
+<a id="gcp-gcp-cred"></a>
 
 ### GCP GCP Cred
 
@@ -212,7 +212,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

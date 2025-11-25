@@ -81,73 +81,73 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--primary"></a>
+<a id="primary"></a>
 
 ### Primary
 
 `allow_http_lb_managed_records` - (Optional) Option to allow user-created HTTP, TCP, and CDN load balancer related resource records to be automatically managed in a protected RRset (`Bool`).
 
-`default_rr_set_group` - (Optional) Add and manage DNS resource record sets part of Default set group. See [Default Rr Set Group](#nestedblock--primary--default_rr_set_group) below.
+`default_rr_set_group` - (Optional) Add and manage DNS resource record sets part of Default set group. See [Default Rr Set Group](#primary-default-rr-set-group) below.
 
-`default_soa_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Soa Parameters](#nestedblock--primary--default_soa_parameters) below.
+`default_soa_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Soa Parameters](#primary-default-soa-parameters) below.
 
-`dnssec_mode` - (Optional) Disable. See [Dnssec Mode](#nestedblock--primary--dnssec_mode) below.
+`dnssec_mode` - (Optional) Disable. See [Dnssec Mode](#primary-dnssec-mode) below.
 
-`rr_set_group` - (Optional) Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5. See [Rr Set Group](#nestedblock--primary--rr_set_group) below.
+`rr_set_group` - (Optional) Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5. See [Rr Set Group](#primary-rr-set-group) below.
 
-`soa_parameters` - (Optional) SOARecordParameterConfig. See [Soa Parameters](#nestedblock--primary--soa_parameters) below.
+`soa_parameters` - (Optional) SOARecordParameterConfig. See [Soa Parameters](#primary-soa-parameters) below.
 
-<a id="nestedblock--primary--default_rr_set_group"></a>
+<a id="primary-default-rr-set-group"></a>
 
 ### Primary Default Rr Set Group
 
-`a_record` - (Optional) DNSAResourceRecord. A Records. See [A Record](#nestedblock--primary--default_rr_set_group--a_record) below.
+`a_record` - (Optional) DNSAResourceRecord. A Records. See [A Record](#primary-default-rr-set-group-a-record) below.
 
-`aaaa_record` - (Optional) DNSAAAAResourceRecord. RecordSet for AAAA Records. See [Aaaa Record](#nestedblock--primary--default_rr_set_group--aaaa_record) below.
+`aaaa_record` - (Optional) DNSAAAAResourceRecord. RecordSet for AAAA Records. See [Aaaa Record](#primary-default-rr-set-group-aaaa-record) below.
 
-`afsdb_record` - (Optional) DNS AFSDB Record. DNS AFSDB Record. See [Afsdb Record](#nestedblock--primary--default_rr_set_group--afsdb_record) below.
+`afsdb_record` - (Optional) DNS AFSDB Record. DNS AFSDB Record. See [Afsdb Record](#primary-default-rr-set-group-afsdb-record) below.
 
-`alias_record` - (Optional) DNSAliasResourceRecord. See [Alias Record](#nestedblock--primary--default_rr_set_group--alias_record) below.
+`alias_record` - (Optional) DNSAliasResourceRecord. See [Alias Record](#primary-default-rr-set-group-alias-record) below.
 
-`caa_record` - (Optional) DNSCAAResourceRecord. See [Caa Record](#nestedblock--primary--default_rr_set_group--caa_record) below.
+`caa_record` - (Optional) DNSCAAResourceRecord. See [Caa Record](#primary-default-rr-set-group-caa-record) below.
 
-`cds_record` - (Optional) DNS CDS Record. DNS CDS Record. See [Cds Record](#nestedblock--primary--default_rr_set_group--cds_record) below.
+`cds_record` - (Optional) DNS CDS Record. DNS CDS Record. See [Cds Record](#primary-default-rr-set-group-cds-record) below.
 
-`cert_record` - (Optional) DNS CERT Record. DNS CERT Record. See [Cert Record](#nestedblock--primary--default_rr_set_group--cert_record) below.
+`cert_record` - (Optional) DNS CERT Record. DNS CERT Record. See [Cert Record](#primary-default-rr-set-group-cert-record) below.
 
-`cname_record` - (Optional) DNSCNAMEResourceRecord. See [Cname Record](#nestedblock--primary--default_rr_set_group--cname_record) below.
+`cname_record` - (Optional) DNSCNAMEResourceRecord. See [Cname Record](#primary-default-rr-set-group-cname-record) below.
 
 `description` - (Optional) Comment (`String`).
 
-`ds_record` - (Optional) DNS DS Record. DNS DS Record. See [Ds Record](#nestedblock--primary--default_rr_set_group--ds_record) below.
+`ds_record` - (Optional) DNS DS Record. DNS DS Record. See [Ds Record](#primary-default-rr-set-group-ds-record) below.
 
-`eui48_record` - (Optional) DNS EUI48 Record. DNS EUI48 Record. See [Eui48 Record](#nestedblock--primary--default_rr_set_group--eui48_record) below.
+`eui48_record` - (Optional) DNS EUI48 Record. DNS EUI48 Record. See [Eui48 Record](#primary-default-rr-set-group-eui48-record) below.
 
-`eui64_record` - (Optional) DNS EUI64 Record. DNS EUI64 Record. See [Eui64 Record](#nestedblock--primary--default_rr_set_group--eui64_record) below.
+`eui64_record` - (Optional) DNS EUI64 Record. DNS EUI64 Record. See [Eui64 Record](#primary-default-rr-set-group-eui64-record) below.
 
-`lb_record` - (Optional) DNS Load Balancer Record. DNS Load Balancer Record. See [LB Record](#nestedblock--primary--default_rr_set_group--lb_record) below.
+`lb_record` - (Optional) DNS Load Balancer Record. DNS Load Balancer Record. See [LB Record](#primary-default-rr-set-group-lb-record) below.
 
-`loc_record` - (Optional) DNS LOC Record. DNS LOC Record. See [Loc Record](#nestedblock--primary--default_rr_set_group--loc_record) below.
+`loc_record` - (Optional) DNS LOC Record. DNS LOC Record. See [Loc Record](#primary-default-rr-set-group-loc-record) below.
 
-`mx_record` - (Optional) DNSMXResourceRecord. See [Mx Record](#nestedblock--primary--default_rr_set_group--mx_record) below.
+`mx_record` - (Optional) DNSMXResourceRecord. See [Mx Record](#primary-default-rr-set-group-mx-record) below.
 
-`naptr_record` - (Optional) DNS NAPTR Record. DNS NAPTR Record. See [Naptr Record](#nestedblock--primary--default_rr_set_group--naptr_record) below.
+`naptr_record` - (Optional) DNS NAPTR Record. DNS NAPTR Record. See [Naptr Record](#primary-default-rr-set-group-naptr-record) below.
 
-`ns_record` - (Optional) DNSNSResourceRecord. See [Ns Record](#nestedblock--primary--default_rr_set_group--ns_record) below.
+`ns_record` - (Optional) DNSNSResourceRecord. See [Ns Record](#primary-default-rr-set-group-ns-record) below.
 
-`ptr_record` - (Optional) DNSPTRResourceRecord. See [Ptr Record](#nestedblock--primary--default_rr_set_group--ptr_record) below.
+`ptr_record` - (Optional) DNSPTRResourceRecord. See [Ptr Record](#primary-default-rr-set-group-ptr-record) below.
 
-`srv_record` - (Optional) DNSSRVResourceRecord. See [Srv Record](#nestedblock--primary--default_rr_set_group--srv_record) below.
+`srv_record` - (Optional) DNSSRVResourceRecord. See [Srv Record](#primary-default-rr-set-group-srv-record) below.
 
-`sshfp_record` - (Optional) DNS SSHFP Record. DNS SSHFP Record. See [Sshfp Record](#nestedblock--primary--default_rr_set_group--sshfp_record) below.
+`sshfp_record` - (Optional) DNS SSHFP Record. DNS SSHFP Record. See [Sshfp Record](#primary-default-rr-set-group-sshfp-record) below.
 
-`tlsa_record` - (Optional) DNS TLSA Record. DNS TLSA Record. See [Tlsa Record](#nestedblock--primary--default_rr_set_group--tlsa_record) below.
+`tlsa_record` - (Optional) DNS TLSA Record. DNS TLSA Record. See [Tlsa Record](#primary-default-rr-set-group-tlsa-record) below.
 
 `ttl` - (Optional) Time to live (`Number`).
 
-`txt_record` - (Optional) DNSTXTResourceRecord. See [Txt Record](#nestedblock--primary--default_rr_set_group--txt_record) below.
+`txt_record` - (Optional) DNSTXTResourceRecord. See [Txt Record](#primary-default-rr-set-group-txt-record) below.
 
-<a id="nestedblock--primary--default_rr_set_group--a_record"></a>
+<a id="primary-default-rr-set-group-a-record"></a>
 
 ### Primary Default Rr Set Group A Record
 
@@ -155,7 +155,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `values` - (Optional) IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1 (`List`).
 
-<a id="nestedblock--primary--default_rr_set_group--aaaa_record"></a>
+<a id="primary-default-rr-set-group-aaaa-record"></a>
 
 ### Primary Default Rr Set Group Aaaa Record
 
@@ -163,61 +163,61 @@ In addition to all arguments above, the following attributes are exported:
 
 `values` - (Optional) IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334 (`List`).
 
-<a id="nestedblock--primary--default_rr_set_group--afsdb_record"></a>
+<a id="primary-default-rr-set-group-afsdb-record"></a>
 
 ### Primary Default Rr Set Group Afsdb Record
 
 `name` - (Optional) Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) AFSDB Value. See [Values](#nestedblock--primary--default_rr_set_group--afsdb_record--values) below.
+`values` - (Optional) AFSDB Value. See [Values](#primary-default-rr-set-group-afsdb-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--afsdb_record--values"></a>
+<a id="primary-default-rr-set-group-afsdb-record-values"></a>
 
 ### Primary Default Rr Set Group Afsdb Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--alias_record"></a>
+<a id="primary-default-rr-set-group-alias-record"></a>
 
 ### Primary Default Rr Set Group Alias Record
 
 `value` - (Optional) Domain. A valid domain name, for example: example.com (`String`).
 
-<a id="nestedblock--primary--default_rr_set_group--caa_record"></a>
+<a id="primary-default-rr-set-group-caa-record"></a>
 
 ### Primary Default Rr Set Group Caa Record
 
 `name` - (Optional) Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) CAA Record Value. See [Values](#nestedblock--primary--default_rr_set_group--caa_record--values) below.
+`values` - (Optional) CAA Record Value. See [Values](#primary-default-rr-set-group-caa-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--caa_record--values"></a>
+<a id="primary-default-rr-set-group-caa-record-values"></a>
 
 ### Primary Default Rr Set Group Caa Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--cds_record"></a>
+<a id="primary-default-rr-set-group-cds-record"></a>
 
 ### Primary Default Rr Set Group Cds Record
 
 `name` - (Optional) Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) DS Value. See [Values](#nestedblock--primary--default_rr_set_group--cds_record--values) below.
+`values` - (Optional) DS Value. See [Values](#primary-default-rr-set-group-cds-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--cds_record--values"></a>
+<a id="primary-default-rr-set-group-cds-record-values"></a>
 
 ### Primary Default Rr Set Group Cds Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--cert_record"></a>
+<a id="primary-default-rr-set-group-cert-record"></a>
 
 ### Primary Default Rr Set Group Cert Record
 
 `name` - (Optional) Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) CERT Value. See [Values](#nestedblock--primary--default_rr_set_group--cert_record--values) below.
+`values` - (Optional) CERT Value. See [Values](#primary-default-rr-set-group-cert-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--cert_record--values"></a>
+<a id="primary-default-rr-set-group-cert-record-values"></a>
 
 ### Primary Default Rr Set Group Cert Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--cname_record"></a>
+<a id="primary-default-rr-set-group-cname-record"></a>
 
 ### Primary Default Rr Set Group Cname Record
 
@@ -225,19 +225,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `value` - (Optional) Domain (`String`).
 
-<a id="nestedblock--primary--default_rr_set_group--ds_record"></a>
+<a id="primary-default-rr-set-group-ds-record"></a>
 
 ### Primary Default Rr Set Group Ds Record
 
 `name` - (Optional) Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) DS Value. See [Values](#nestedblock--primary--default_rr_set_group--ds_record--values) below.
+`values` - (Optional) DS Value. See [Values](#primary-default-rr-set-group-ds-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--ds_record--values"></a>
+<a id="primary-default-rr-set-group-ds-record-values"></a>
 
 ### Primary Default Rr Set Group Ds Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--eui48_record"></a>
+<a id="primary-default-rr-set-group-eui48-record"></a>
 
 ### Primary Default Rr Set Group Eui48 Record
 
@@ -245,7 +245,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `value` - (Optional) EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab (`String`).
 
-<a id="nestedblock--primary--default_rr_set_group--eui64_record"></a>
+<a id="primary-default-rr-set-group-eui64-record"></a>
 
 ### Primary Default Rr Set Group Eui64 Record
 
@@ -253,55 +253,55 @@ In addition to all arguments above, the following attributes are exported:
 
 `value` - (Optional) EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef (`String`).
 
-<a id="nestedblock--primary--default_rr_set_group--lb_record"></a>
+<a id="primary-default-rr-set-group-lb-record"></a>
 
 ### Primary Default Rr Set Group LB Record
 
 `name` - (Optional) Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain (`String`).
 
-`value` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Value](#nestedblock--primary--default_rr_set_group--lb_record--value) below.
+`value` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Value](#primary-default-rr-set-group-lb-record-value) below.
 
-<a id="nestedblock--primary--default_rr_set_group--lb_record--value"></a>
+<a id="primary-default-rr-set-group-lb-record-value"></a>
 
 ### Primary Default Rr Set Group LB Record Value
 
-<a id="nestedblock--primary--default_rr_set_group--loc_record"></a>
+<a id="primary-default-rr-set-group-loc-record"></a>
 
 ### Primary Default Rr Set Group Loc Record
 
 `name` - (Optional) Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) LOC Value. See [Values](#nestedblock--primary--default_rr_set_group--loc_record--values) below.
+`values` - (Optional) LOC Value. See [Values](#primary-default-rr-set-group-loc-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--loc_record--values"></a>
+<a id="primary-default-rr-set-group-loc-record-values"></a>
 
 ### Primary Default Rr Set Group Loc Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--mx_record"></a>
+<a id="primary-default-rr-set-group-mx-record"></a>
 
 ### Primary Default Rr Set Group Mx Record
 
 `name` - (Optional) Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) MX Record Value. See [Values](#nestedblock--primary--default_rr_set_group--mx_record--values) below.
+`values` - (Optional) MX Record Value. See [Values](#primary-default-rr-set-group-mx-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--mx_record--values"></a>
+<a id="primary-default-rr-set-group-mx-record-values"></a>
 
 ### Primary Default Rr Set Group Mx Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--naptr_record"></a>
+<a id="primary-default-rr-set-group-naptr-record"></a>
 
 ### Primary Default Rr Set Group Naptr Record
 
 `name` - (Optional) Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) NAPTR Value. See [Values](#nestedblock--primary--default_rr_set_group--naptr_record--values) below.
+`values` - (Optional) NAPTR Value. See [Values](#primary-default-rr-set-group-naptr-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--naptr_record--values"></a>
+<a id="primary-default-rr-set-group-naptr-record-values"></a>
 
 ### Primary Default Rr Set Group Naptr Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--ns_record"></a>
+<a id="primary-default-rr-set-group-ns-record"></a>
 
 ### Primary Default Rr Set Group Ns Record
 
@@ -309,7 +309,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `values` - (Optional) Name Servers (`List`).
 
-<a id="nestedblock--primary--default_rr_set_group--ptr_record"></a>
+<a id="primary-default-rr-set-group-ptr-record"></a>
 
 ### Primary Default Rr Set Group Ptr Record
 
@@ -317,43 +317,43 @@ In addition to all arguments above, the following attributes are exported:
 
 `values` - (Optional) Domain Name (`List`).
 
-<a id="nestedblock--primary--default_rr_set_group--srv_record"></a>
+<a id="primary-default-rr-set-group-srv-record"></a>
 
 ### Primary Default Rr Set Group Srv Record
 
 `name` - (Optional) Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) SRV Value. See [Values](#nestedblock--primary--default_rr_set_group--srv_record--values) below.
+`values` - (Optional) SRV Value. See [Values](#primary-default-rr-set-group-srv-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--srv_record--values"></a>
+<a id="primary-default-rr-set-group-srv-record-values"></a>
 
 ### Primary Default Rr Set Group Srv Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--sshfp_record"></a>
+<a id="primary-default-rr-set-group-sshfp-record"></a>
 
 ### Primary Default Rr Set Group Sshfp Record
 
 `name` - (Optional) Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) SSHFP Value. See [Values](#nestedblock--primary--default_rr_set_group--sshfp_record--values) below.
+`values` - (Optional) SSHFP Value. See [Values](#primary-default-rr-set-group-sshfp-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--sshfp_record--values"></a>
+<a id="primary-default-rr-set-group-sshfp-record-values"></a>
 
 ### Primary Default Rr Set Group Sshfp Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--tlsa_record"></a>
+<a id="primary-default-rr-set-group-tlsa-record"></a>
 
 ### Primary Default Rr Set Group Tlsa Record
 
 `name` - (Optional) Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) TLSA Value. See [Values](#nestedblock--primary--default_rr_set_group--tlsa_record--values) below.
+`values` - (Optional) TLSA Value. See [Values](#primary-default-rr-set-group-tlsa-record-values) below.
 
-<a id="nestedblock--primary--default_rr_set_group--tlsa_record--values"></a>
+<a id="primary-default-rr-set-group-tlsa-record-values"></a>
 
 ### Primary Default Rr Set Group Tlsa Record Values
 
-<a id="nestedblock--primary--default_rr_set_group--txt_record"></a>
+<a id="primary-default-rr-set-group-txt-record"></a>
 
 ### Primary Default Rr Set Group Txt Record
 
@@ -361,35 +361,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `values` - (Optional) Text (`List`).
 
-<a id="nestedblock--primary--default_soa_parameters"></a>
+<a id="primary-default-soa-parameters"></a>
 
 ### Primary Default Soa Parameters
 
-<a id="nestedblock--primary--dnssec_mode"></a>
+<a id="primary-dnssec-mode"></a>
 
 ### Primary Dnssec Mode
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--primary--dnssec_mode--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#primary-dnssec-mode-disable) below.
 
-`enable` - (Optional) Enable. DNSSEC enable. See [Enable](#nestedblock--primary--dnssec_mode--enable) below.
+`enable` - (Optional) Enable. DNSSEC enable. See [Enable](#primary-dnssec-mode-enable) below.
 
-<a id="nestedblock--primary--dnssec_mode--disable"></a>
+<a id="primary-dnssec-mode-disable"></a>
 
 ### Primary Dnssec Mode Disable
 
-<a id="nestedblock--primary--dnssec_mode--enable"></a>
+<a id="primary-dnssec-mode-enable"></a>
 
 ### Primary Dnssec Mode Enable
 
-<a id="nestedblock--primary--rr_set_group"></a>
+<a id="primary-rr-set-group"></a>
 
 ### Primary Rr Set Group
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--primary--rr_set_group--metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#primary-rr-set-group-metadata) below.
 
-`rr_set` - (Optional) Resource Record Sets. Collection of DNS resource record sets. See [Rr Set](#nestedblock--primary--rr_set_group--rr_set) below.
+`rr_set` - (Optional) Resource Record Sets. Collection of DNS resource record sets. See [Rr Set](#primary-rr-set-group-rr-set) below.
 
-<a id="nestedblock--primary--rr_set_group--metadata"></a>
+<a id="primary-rr-set-group-metadata"></a>
 
 ### Primary Rr Set Group Metadata
 
@@ -397,141 +397,141 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
-<a id="nestedblock--primary--rr_set_group--rr_set"></a>
+<a id="primary-rr-set-group-rr-set"></a>
 
 ### Primary Rr Set Group Rr Set
 
-`a_record` - (Optional) DNSAResourceRecord. A Records. See [A Record](#nestedblock--primary--rr_set_group--rr_set--a_record) below.
+`a_record` - (Optional) DNSAResourceRecord. A Records. See [A Record](#primary-rr-set-group-rr-set-a-record) below.
 
-`aaaa_record` - (Optional) DNSAAAAResourceRecord. RecordSet for AAAA Records. See [Aaaa Record](#nestedblock--primary--rr_set_group--rr_set--aaaa_record) below.
+`aaaa_record` - (Optional) DNSAAAAResourceRecord. RecordSet for AAAA Records. See [Aaaa Record](#primary-rr-set-group-rr-set-aaaa-record) below.
 
-`afsdb_record` - (Optional) DNS AFSDB Record. DNS AFSDB Record. See [Afsdb Record](#nestedblock--primary--rr_set_group--rr_set--afsdb_record) below.
+`afsdb_record` - (Optional) DNS AFSDB Record. DNS AFSDB Record. See [Afsdb Record](#primary-rr-set-group-rr-set-afsdb-record) below.
 
-`alias_record` - (Optional) DNSAliasResourceRecord. See [Alias Record](#nestedblock--primary--rr_set_group--rr_set--alias_record) below.
+`alias_record` - (Optional) DNSAliasResourceRecord. See [Alias Record](#primary-rr-set-group-rr-set-alias-record) below.
 
-`caa_record` - (Optional) DNSCAAResourceRecord. See [Caa Record](#nestedblock--primary--rr_set_group--rr_set--caa_record) below.
+`caa_record` - (Optional) DNSCAAResourceRecord. See [Caa Record](#primary-rr-set-group-rr-set-caa-record) below.
 
-`cds_record` - (Optional) DNS CDS Record. DNS CDS Record. See [Cds Record](#nestedblock--primary--rr_set_group--rr_set--cds_record) below.
+`cds_record` - (Optional) DNS CDS Record. DNS CDS Record. See [Cds Record](#primary-rr-set-group-rr-set-cds-record) below.
 
-`cert_record` - (Optional) DNS CERT Record. DNS CERT Record. See [Cert Record](#nestedblock--primary--rr_set_group--rr_set--cert_record) below.
+`cert_record` - (Optional) DNS CERT Record. DNS CERT Record. See [Cert Record](#primary-rr-set-group-rr-set-cert-record) below.
 
-`cname_record` - (Optional) DNSCNAMEResourceRecord. See [Cname Record](#nestedblock--primary--rr_set_group--rr_set--cname_record) below.
+`cname_record` - (Optional) DNSCNAMEResourceRecord. See [Cname Record](#primary-rr-set-group-rr-set-cname-record) below.
 
 `description` - (Optional) Comment (`String`).
 
-`ds_record` - (Optional) DNS DS Record. DNS DS Record. See [Ds Record](#nestedblock--primary--rr_set_group--rr_set--ds_record) below.
+`ds_record` - (Optional) DNS DS Record. DNS DS Record. See [Ds Record](#primary-rr-set-group-rr-set-ds-record) below.
 
-`eui48_record` - (Optional) DNS EUI48 Record. DNS EUI48 Record. See [Eui48 Record](#nestedblock--primary--rr_set_group--rr_set--eui48_record) below.
+`eui48_record` - (Optional) DNS EUI48 Record. DNS EUI48 Record. See [Eui48 Record](#primary-rr-set-group-rr-set-eui48-record) below.
 
-`eui64_record` - (Optional) DNS EUI64 Record. DNS EUI64 Record. See [Eui64 Record](#nestedblock--primary--rr_set_group--rr_set--eui64_record) below.
+`eui64_record` - (Optional) DNS EUI64 Record. DNS EUI64 Record. See [Eui64 Record](#primary-rr-set-group-rr-set-eui64-record) below.
 
-`lb_record` - (Optional) DNS Load Balancer Record. DNS Load Balancer Record. See [LB Record](#nestedblock--primary--rr_set_group--rr_set--lb_record) below.
+`lb_record` - (Optional) DNS Load Balancer Record. DNS Load Balancer Record. See [LB Record](#primary-rr-set-group-rr-set-lb-record) below.
 
-`loc_record` - (Optional) DNS LOC Record. DNS LOC Record. See [Loc Record](#nestedblock--primary--rr_set_group--rr_set--loc_record) below.
+`loc_record` - (Optional) DNS LOC Record. DNS LOC Record. See [Loc Record](#primary-rr-set-group-rr-set-loc-record) below.
 
-`mx_record` - (Optional) DNSMXResourceRecord. See [Mx Record](#nestedblock--primary--rr_set_group--rr_set--mx_record) below.
+`mx_record` - (Optional) DNSMXResourceRecord. See [Mx Record](#primary-rr-set-group-rr-set-mx-record) below.
 
-`naptr_record` - (Optional) DNS NAPTR Record. DNS NAPTR Record. See [Naptr Record](#nestedblock--primary--rr_set_group--rr_set--naptr_record) below.
+`naptr_record` - (Optional) DNS NAPTR Record. DNS NAPTR Record. See [Naptr Record](#primary-rr-set-group-rr-set-naptr-record) below.
 
-`ns_record` - (Optional) DNSNSResourceRecord. See [Ns Record](#nestedblock--primary--rr_set_group--rr_set--ns_record) below.
+`ns_record` - (Optional) DNSNSResourceRecord. See [Ns Record](#primary-rr-set-group-rr-set-ns-record) below.
 
-`ptr_record` - (Optional) DNSPTRResourceRecord. See [Ptr Record](#nestedblock--primary--rr_set_group--rr_set--ptr_record) below.
+`ptr_record` - (Optional) DNSPTRResourceRecord. See [Ptr Record](#primary-rr-set-group-rr-set-ptr-record) below.
 
-`srv_record` - (Optional) DNSSRVResourceRecord. See [Srv Record](#nestedblock--primary--rr_set_group--rr_set--srv_record) below.
+`srv_record` - (Optional) DNSSRVResourceRecord. See [Srv Record](#primary-rr-set-group-rr-set-srv-record) below.
 
-`sshfp_record` - (Optional) DNS SSHFP Record. DNS SSHFP Record. See [Sshfp Record](#nestedblock--primary--rr_set_group--rr_set--sshfp_record) below.
+`sshfp_record` - (Optional) DNS SSHFP Record. DNS SSHFP Record. See [Sshfp Record](#primary-rr-set-group-rr-set-sshfp-record) below.
 
-`tlsa_record` - (Optional) DNS TLSA Record. DNS TLSA Record. See [Tlsa Record](#nestedblock--primary--rr_set_group--rr_set--tlsa_record) below.
+`tlsa_record` - (Optional) DNS TLSA Record. DNS TLSA Record. See [Tlsa Record](#primary-rr-set-group-rr-set-tlsa-record) below.
 
 `ttl` - (Optional) Time to live (`Number`).
 
-`txt_record` - (Optional) DNSTXTResourceRecord. See [Txt Record](#nestedblock--primary--rr_set_group--rr_set--txt_record) below.
+`txt_record` - (Optional) DNSTXTResourceRecord. See [Txt Record](#primary-rr-set-group-rr-set-txt-record) below.
 
-<a id="nestedblock--primary--rr_set_group--rr_set--a_record"></a>
+<a id="primary-rr-set-group-rr-set-a-record"></a>
 
 ### Primary Rr Set Group Rr Set A Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--aaaa_record"></a>
+<a id="primary-rr-set-group-rr-set-aaaa-record"></a>
 
 ### Primary Rr Set Group Rr Set Aaaa Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--afsdb_record"></a>
+<a id="primary-rr-set-group-rr-set-afsdb-record"></a>
 
 ### Primary Rr Set Group Rr Set Afsdb Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--alias_record"></a>
+<a id="primary-rr-set-group-rr-set-alias-record"></a>
 
 ### Primary Rr Set Group Rr Set Alias Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--caa_record"></a>
+<a id="primary-rr-set-group-rr-set-caa-record"></a>
 
 ### Primary Rr Set Group Rr Set Caa Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--cds_record"></a>
+<a id="primary-rr-set-group-rr-set-cds-record"></a>
 
 ### Primary Rr Set Group Rr Set Cds Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--cert_record"></a>
+<a id="primary-rr-set-group-rr-set-cert-record"></a>
 
 ### Primary Rr Set Group Rr Set Cert Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--cname_record"></a>
+<a id="primary-rr-set-group-rr-set-cname-record"></a>
 
 ### Primary Rr Set Group Rr Set Cname Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--ds_record"></a>
+<a id="primary-rr-set-group-rr-set-ds-record"></a>
 
 ### Primary Rr Set Group Rr Set Ds Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--eui48_record"></a>
+<a id="primary-rr-set-group-rr-set-eui48-record"></a>
 
 ### Primary Rr Set Group Rr Set Eui48 Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--eui64_record"></a>
+<a id="primary-rr-set-group-rr-set-eui64-record"></a>
 
 ### Primary Rr Set Group Rr Set Eui64 Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--lb_record"></a>
+<a id="primary-rr-set-group-rr-set-lb-record"></a>
 
 ### Primary Rr Set Group Rr Set LB Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--loc_record"></a>
+<a id="primary-rr-set-group-rr-set-loc-record"></a>
 
 ### Primary Rr Set Group Rr Set Loc Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--mx_record"></a>
+<a id="primary-rr-set-group-rr-set-mx-record"></a>
 
 ### Primary Rr Set Group Rr Set Mx Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--naptr_record"></a>
+<a id="primary-rr-set-group-rr-set-naptr-record"></a>
 
 ### Primary Rr Set Group Rr Set Naptr Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--ns_record"></a>
+<a id="primary-rr-set-group-rr-set-ns-record"></a>
 
 ### Primary Rr Set Group Rr Set Ns Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--ptr_record"></a>
+<a id="primary-rr-set-group-rr-set-ptr-record"></a>
 
 ### Primary Rr Set Group Rr Set Ptr Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--srv_record"></a>
+<a id="primary-rr-set-group-rr-set-srv-record"></a>
 
 ### Primary Rr Set Group Rr Set Srv Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--sshfp_record"></a>
+<a id="primary-rr-set-group-rr-set-sshfp-record"></a>
 
 ### Primary Rr Set Group Rr Set Sshfp Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--tlsa_record"></a>
+<a id="primary-rr-set-group-rr-set-tlsa-record"></a>
 
 ### Primary Rr Set Group Rr Set Tlsa Record
 
-<a id="nestedblock--primary--rr_set_group--rr_set--txt_record"></a>
+<a id="primary-rr-set-group-rr-set-txt-record"></a>
 
 ### Primary Rr Set Group Rr Set Txt Record
 
-<a id="nestedblock--primary--soa_parameters"></a>
+<a id="primary-soa-parameters"></a>
 
 ### Primary Soa Parameters
 
@@ -545,7 +545,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ttl` - (Optional) TTL. SOA record time to live (in seconds) (`Number`).
 
-<a id="nestedblock--secondary"></a>
+<a id="secondary"></a>
 
 ### Secondary
 
@@ -555,17 +555,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `tsig_key_name` - (Optional) TSIG Key Name. TSIG key name as used in TSIG protocol extension (`String`).
 
-`tsig_key_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Tsig Key Value](#nestedblock--secondary--tsig_key_value) below.
+`tsig_key_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Tsig Key Value](#secondary-tsig-key-value) below.
 
-<a id="nestedblock--secondary--tsig_key_value"></a>
+<a id="secondary-tsig-key-value"></a>
 
 ### Secondary Tsig Key Value
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--secondary--tsig_key_value--blindfold_secret_info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#secondary-tsig-key-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--secondary--tsig_key_value--clear_secret_info) below.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#secondary-tsig-key-value-clear-secret-info) below.
 
-<a id="nestedblock--secondary--tsig_key_value--blindfold_secret_info"></a>
+<a id="secondary-tsig-key-value-blindfold-secret-info"></a>
 
 ### Secondary Tsig Key Value Blindfold Secret Info
 
@@ -575,7 +575,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
-<a id="nestedblock--secondary--tsig_key_value--clear_secret_info"></a>
+<a id="secondary-tsig-key-value-clear-secret-info"></a>
 
 ### Secondary Tsig Key Value Clear Secret Info
 
@@ -583,7 +583,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

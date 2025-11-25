@@ -78,19 +78,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--basic_configuration"></a>
+<a id="basic-configuration"></a>
 
 ### Basic Configuration
 
 `display_name` - (Optional) Display Name. Tenant display name in the login screen (`String`).
 
-<a id="nestedblock--brute_force_detection_settings"></a>
+<a id="brute-force-detection-settings"></a>
 
 ### Brute Force Detection Settings
 
 `max_login_failures` - (Optional) Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes (`Number`).
 
-<a id="nestedblock--password_policy"></a>
+<a id="password-policy"></a>
 
 ### Password Policy
 
@@ -110,7 +110,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `uppercase_characters` - (Optional) Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string (`Number`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

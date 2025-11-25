@@ -70,7 +70,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--address_allocation_scheme"></a>
+<a id="address-allocation-scheme"></a>
 
 ### Address Allocation Scheme
 
@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `local_interface_address_type` - (Optional) Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local inte... Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`. Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN` (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

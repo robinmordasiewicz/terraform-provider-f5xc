@@ -74,15 +74,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--disable"></a>
+<a id="disable"></a>
 
 ### Disable
 
-<a id="nestedblock--enable"></a>
+<a id="enable"></a>
 
 ### Enable
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

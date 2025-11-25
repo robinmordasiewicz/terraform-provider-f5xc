@@ -89,13 +89,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--http_health_check"></a>
+<a id="http-health-check"></a>
 
 ### HTTP Health Check
 
 `expected_status_codes` - (Optional) Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-' (`List`).
 
-`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. See [Headers](#nestedblock--http_health_check--headers) below.
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. See [Headers](#http-health-check-headers) below.
 
 `host_header` - (Optional) Host Header Value. The value of the host header (`String`).
 
@@ -105,17 +105,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `use_http2` - (Optional) Use HTTP2. If set, health checks will be made using HTTP/2 (`Bool`).
 
-`use_origin_server_name` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Origin Server Name](#nestedblock--http_health_check--use_origin_server_name) below.
+`use_origin_server_name` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Origin Server Name](#http-health-check-use-origin-server-name) below.
 
-<a id="nestedblock--http_health_check--headers"></a>
+<a id="http-health-check-headers"></a>
 
 ### HTTP Health Check Headers
 
-<a id="nestedblock--http_health_check--use_origin_server_name"></a>
+<a id="http-health-check-use-origin-server-name"></a>
 
 ### HTTP Health Check Use Origin Server Name
 
-<a id="nestedblock--tcp_health_check"></a>
+<a id="tcp-health-check"></a>
 
 ### TCP Health Check
 
@@ -123,7 +123,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `send_payload` - (Optional) Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -135,7 +135,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--udp_icmp_health_check"></a>
+<a id="udp-icmp-health-check"></a>
 
 ### UDP ICMP Health Check
 

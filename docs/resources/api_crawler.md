@@ -74,39 +74,39 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--domains"></a>
+<a id="domains"></a>
 
 ### Domains
 
 `domain` - (Optional) Domains to Crawl. Select the domain to execute API Crawling with given credentials (`String`).
 
-`simple_login` - (Optional) Simple Login. See [Simple Login](#nestedblock--domains--simple_login) below.
+`simple_login` - (Optional) Simple Login. See [Simple Login](#domains-simple-login) below.
 
-<a id="nestedblock--domains--simple_login"></a>
+<a id="domains-simple-login"></a>
 
 ### Domains Simple Login
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--domains--simple_login--password) below.
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#domains-simple-login-password) below.
 
 `user` - (Optional) User. Enter the username to assign credentials for the selected domain to crawl (`String`).
 
-<a id="nestedblock--domains--simple_login--password"></a>
+<a id="domains-simple-login-password"></a>
 
 ### Domains Simple Login Password
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--domains--simple_login--password--blindfold_secret_info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#domains-simple-login-password-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--domains--simple_login--password--clear_secret_info) below.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#domains-simple-login-password-clear-secret-info) below.
 
-<a id="nestedblock--domains--simple_login--password--blindfold_secret_info"></a>
+<a id="domains-simple-login-password-blindfold-secret-info"></a>
 
 ### Domains Simple Login Password Blindfold Secret Info
 
-<a id="nestedblock--domains--simple_login--password--clear_secret_info"></a>
+<a id="domains-simple-login-password-clear-secret-info"></a>
 
 ### Domains Simple Login Password Clear Secret Info
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

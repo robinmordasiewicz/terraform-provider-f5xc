@@ -92,23 +92,23 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--a_pool"></a>
+<a id="a-pool"></a>
 
 ### A Pool
 
-`disable_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Health Check](#nestedblock--a_pool--disable_health_check) below.
+`disable_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Health Check](#a-pool-disable-health-check) below.
 
-`health_check` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Health Check](#nestedblock--a_pool--health_check) below.
+`health_check` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Health Check](#a-pool-health-check) below.
 
 `max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
-`members` - (Optional) Pool Members. See [Members](#nestedblock--a_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#a-pool-members) below.
 
-<a id="nestedblock--a_pool--disable_health_check"></a>
+<a id="a-pool-disable-health-check"></a>
 
 ### A Pool Disable Health Check
 
-<a id="nestedblock--a_pool--health_check"></a>
+<a id="a-pool-health-check"></a>
 
 ### A Pool Health Check
 
@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--a_pool--members"></a>
+<a id="a-pool-members"></a>
 
 ### A Pool Members
 
@@ -132,15 +132,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `ratio` - (Optional) Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member (`Number`).
 
-<a id="nestedblock--aaaa_pool"></a>
+<a id="aaaa-pool"></a>
 
 ### Aaaa Pool
 
 `max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
-`members` - (Optional) Pool Members. See [Members](#nestedblock--aaaa_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#aaaa-pool-members) below.
 
-<a id="nestedblock--aaaa_pool--members"></a>
+<a id="aaaa-pool-members"></a>
 
 ### Aaaa Pool Members
 
@@ -154,13 +154,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `ratio` - (Optional) Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member (`Number`).
 
-<a id="nestedblock--cname_pool"></a>
+<a id="cname-pool"></a>
 
 ### Cname Pool
 
-`members` - (Optional) Pool Members. See [Members](#nestedblock--cname_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#cname-pool-members) below.
 
-<a id="nestedblock--cname_pool--members"></a>
+<a id="cname-pool-members"></a>
 
 ### Cname Pool Members
 
@@ -172,15 +172,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `ratio` - (Optional) Load Balancing Ratio. Ratio (`Number`).
 
-<a id="nestedblock--mx_pool"></a>
+<a id="mx-pool"></a>
 
 ### Mx Pool
 
 `max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
-`members` - (Optional) Pool Members. See [Members](#nestedblock--mx_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#mx-pool-members) below.
 
-<a id="nestedblock--mx_pool--members"></a>
+<a id="mx-pool-members"></a>
 
 ### Mx Pool Members
 
@@ -192,15 +192,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `ratio` - (Optional) Load Balancing Ratio. Load Balancing Ratio (`Number`).
 
-<a id="nestedblock--srv_pool"></a>
+<a id="srv-pool"></a>
 
 ### Srv Pool
 
 `max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
-`members` - (Optional) Pool Members. See [Members](#nestedblock--srv_pool--members) below.
+`members` - (Optional) Pool Members. See [Members](#srv-pool-members) below.
 
-<a id="nestedblock--srv_pool--members"></a>
+<a id="srv-pool-members"></a>
 
 ### Srv Pool Members
 
@@ -218,7 +218,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `weight` - (Optional) Weight. Weight of the target. A higher number indicates a higher preference (`Number`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -230,7 +230,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--use_rrset_ttl"></a>
+<a id="use-rrset-ttl"></a>
 
 ### Use Rrset TTL
 

@@ -82,19 +82,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--cloud_hosted"></a>
+<a id="cloud-hosted"></a>
 
 ### Cloud Hosted
 
-`egress` - (Optional) Configuration for egress. See [Egress](#nestedblock--cloud_hosted--egress) below.
+`egress` - (Optional) Configuration for egress. See [Egress](#cloud-hosted-egress) below.
 
 `infra_host_name` - (Optional) Infra Host Name. Infra Host Name (`String`).
 
-`ingress` - (Optional) Configuration for ingress. See [Ingress](#nestedblock--cloud_hosted--ingress) below.
+`ingress` - (Optional) Configuration for ingress. See [Ingress](#cloud-hosted-ingress) below.
 
 `region` - (Optional) Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`. Defaults to `US` (`String`).
 
-<a id="nestedblock--cloud_hosted--egress"></a>
+<a id="cloud-hosted-egress"></a>
 
 ### Cloud Hosted Egress
 
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2... Possible values include `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, and others. Defaults to `AWS_AP_NORTHEAST_1` (`String`).
 
-<a id="nestedblock--cloud_hosted--ingress"></a>
+<a id="cloud-hosted-ingress"></a>
 
 ### Cloud Hosted Ingress
 
@@ -112,19 +112,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2... Possible values include `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, and others. Defaults to `AWS_AP_NORTHEAST_1` (`String`).
 
-<a id="nestedblock--data_center_hosted"></a>
+<a id="data-center-hosted"></a>
 
 ### Data Center Hosted
 
-`egress` - (Optional) Configuration for egress. See [Egress](#nestedblock--data_center_hosted--egress) below.
+`egress` - (Optional) Configuration for egress. See [Egress](#data-center-hosted-egress) below.
 
 `infra_host_name` - (Optional) Infra Host Name. Infra Host Name (`String`).
 
-`ingress` - (Optional) Configuration for ingress. See [Ingress](#nestedblock--data_center_hosted--ingress) below.
+`ingress` - (Optional) Configuration for ingress. See [Ingress](#data-center-hosted-ingress) below.
 
 `region` - (Optional) Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`. Defaults to `US` (`String`).
 
-<a id="nestedblock--data_center_hosted--egress"></a>
+<a id="data-center-hosted-egress"></a>
 
 ### Data Center Hosted Egress
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2... Possible values include `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, and others. Defaults to `AWS_AP_NORTHEAST_1` (`String`).
 
-<a id="nestedblock--data_center_hosted--ingress"></a>
+<a id="data-center-hosted-ingress"></a>
 
 ### Data Center Hosted Ingress
 
@@ -142,7 +142,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2... Possible values include `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, and others. Defaults to `AWS_AP_NORTHEAST_1` (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

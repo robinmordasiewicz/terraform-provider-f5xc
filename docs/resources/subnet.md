@@ -82,13 +82,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--connect_to_layer2"></a>
+<a id="connect-to-layer2"></a>
 
 ### Connect To Layer2
 
-`layer2_intf_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Layer2 Intf Ref](#nestedblock--connect_to_layer2--layer2_intf_ref) below.
+`layer2_intf_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Layer2 Intf Ref](#connect-to-layer2-layer2-intf-ref) below.
 
-<a id="nestedblock--connect_to_layer2--layer2_intf_ref"></a>
+<a id="connect-to-layer2-layer2-intf-ref"></a>
 
 ### Connect To Layer2 Layer2 Intf Ref
 
@@ -98,31 +98,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--connect_to_slo"></a>
+<a id="connect-to-slo"></a>
 
 ### Connect To Slo
 
-<a id="nestedblock--isolated_nw"></a>
+<a id="isolated-nw"></a>
 
 ### Isolated Nw
 
-<a id="nestedblock--site_subnet_params"></a>
+<a id="site-subnet-params"></a>
 
 ### Site Subnet Params
 
-`dhcp` - (Optional) Empty. This can be used for messages where no values are needed. See [DHCP](#nestedblock--site_subnet_params--dhcp) below.
+`dhcp` - (Optional) Empty. This can be used for messages where no values are needed. See [DHCP](#site-subnet-params-dhcp) below.
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#nestedblock--site_subnet_params--site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#site-subnet-params-site) below.
 
-`static_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Static IP](#nestedblock--site_subnet_params--static_ip) below.
+`static_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Static IP](#site-subnet-params-static-ip) below.
 
-`subnet_dhcp_server_params` - (Optional) Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet. See [Subnet DHCP Server Params](#nestedblock--site_subnet_params--subnet_dhcp_server_params) below.
+`subnet_dhcp_server_params` - (Optional) Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet. See [Subnet DHCP Server Params](#site-subnet-params-subnet-dhcp-server-params) below.
 
-<a id="nestedblock--site_subnet_params--dhcp"></a>
+<a id="site-subnet-params-dhcp"></a>
 
 ### Site Subnet Params DHCP
 
-<a id="nestedblock--site_subnet_params--site"></a>
+<a id="site-subnet-params-site"></a>
 
 ### Site Subnet Params Site
 
@@ -132,23 +132,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--site_subnet_params--static_ip"></a>
+<a id="site-subnet-params-static-ip"></a>
 
 ### Site Subnet Params Static IP
 
-<a id="nestedblock--site_subnet_params--subnet_dhcp_server_params"></a>
+<a id="site-subnet-params-subnet-dhcp-server-params"></a>
 
 ### Site Subnet Params Subnet DHCP Server Params
 
-`dhcp_networks` - (Optional) Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#nestedblock--site_subnet_params--subnet_dhcp_server_params--dhcp_networks) below.
+`dhcp_networks` - (Optional) Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) below.
 
-<a id="nestedblock--site_subnet_params--subnet_dhcp_server_params--dhcp_networks"></a>
+<a id="site-subnet-params-subnet-dhcp-server-params-dhcp-networks"></a>
 
 ### Site Subnet Params Subnet DHCP Server Params DHCP Networks
 
 `network_prefix` - (Optional) Network Prefix. Network prefix for subnet (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

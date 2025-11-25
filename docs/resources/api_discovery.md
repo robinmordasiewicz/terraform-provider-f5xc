@@ -66,7 +66,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--custom_auth_types"></a>
+<a id="custom-auth-types"></a>
 
 ### Custom Auth Types
 
@@ -74,7 +74,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `parameter_type` - (Optional) Authentication Parameter Type. Enumeration for authentication parameter types. Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`. Defaults to `QUERY_PARAMETER` (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

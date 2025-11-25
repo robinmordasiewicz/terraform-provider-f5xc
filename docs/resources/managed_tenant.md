@@ -72,15 +72,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--groups"></a>
+<a id="groups"></a>
 
 ### Groups
 
-`group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Group](#nestedblock--groups--group) below.
+`group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Group](#groups-group) below.
 
 `managed_tenant_groups` - (Optional) Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user (`List`).
 
-<a id="nestedblock--groups--group"></a>
+<a id="groups-group"></a>
 
 ### Groups Group
 
@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

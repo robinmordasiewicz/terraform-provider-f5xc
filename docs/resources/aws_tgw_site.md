@@ -157,59 +157,59 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--aws_parameters"></a>
+<a id="aws-parameters"></a>
 
 ### AWS Parameters
 
-`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#nestedblock--aws_parameters--admin_password) below.
+`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#aws-parameters-admin-password) below.
 
-`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#nestedblock--aws_parameters--aws_cred) below.
+`aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#aws-parameters-aws-cred) below.
 
 `aws_region` - (Optional) AWS Region. AWS Region of your services vpc, where F5XC site will be deployed (`String`).
 
-`az_nodes` - (Optional) Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. See [Az Nodes](#nestedblock--aws_parameters--az_nodes) below.
+`az_nodes` - (Optional) Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently. See [Az Nodes](#aws-parameters-az-nodes) below.
 
-`custom_security_group` - (Optional) Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC. See [Custom Security Group](#nestedblock--aws_parameters--custom_security_group) below.
+`custom_security_group` - (Optional) Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC. See [Custom Security Group](#aws-parameters-custom-security-group) below.
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#nestedblock--aws_parameters--disable_internet_vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#aws-parameters-disable-internet-vip) below.
 
 `disk_size` - (Optional) Node Disk Size. Node disk size for all node in the F5XC site. Unit is GiB (`Number`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#nestedblock--aws_parameters--enable_internet_vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#aws-parameters-enable-internet-vip) below.
 
-`existing_tgw` - (Optional) Existing TGW Type. Information needed for existing TGW. See [Existing Tgw](#nestedblock--aws_parameters--existing_tgw) below.
+`existing_tgw` - (Optional) Existing TGW Type. Information needed for existing TGW. See [Existing Tgw](#aws-parameters-existing-tgw) below.
 
-`f5xc_security_group` - (Optional) Empty. This can be used for messages where no values are needed. See [F5xc Security Group](#nestedblock--aws_parameters--f5xc_security_group) below.
+`f5xc_security_group` - (Optional) Empty. This can be used for messages where no values are needed. See [F5xc Security Group](#aws-parameters-f5xc-security-group) below.
 
 `instance_type` - (Optional) AWS Instance Type for Node. Instance size based on the performance (`String`).
 
-`new_tgw` - (Optional) TGWParamsType. See [New Tgw](#nestedblock--aws_parameters--new_tgw) below.
+`new_tgw` - (Optional) TGWParamsType. See [New Tgw](#aws-parameters-new-tgw) below.
 
-`new_vpc` - (Optional) AWS VPC Parameters. Parameters to create new AWS VPC. See [New Vpc](#nestedblock--aws_parameters--new_vpc) below.
+`new_vpc` - (Optional) AWS VPC Parameters. Parameters to create new AWS VPC. See [New Vpc](#aws-parameters-new-vpc) below.
 
-`no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Worker Nodes](#nestedblock--aws_parameters--no_worker_nodes) below.
+`no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Worker Nodes](#aws-parameters-no-worker-nodes) below.
 
 `nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
 
-`reserved_tgw_cidr` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Tgw CIDR](#nestedblock--aws_parameters--reserved_tgw_cidr) below.
+`reserved_tgw_cidr` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Tgw CIDR](#aws-parameters-reserved-tgw-cidr) below.
 
 `ssh_key` - (Optional) Public SSH key. Public SSH key for accessing nodes of the site (`String`).
 
-`tgw_cidr` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Tgw CIDR](#nestedblock--aws_parameters--tgw_cidr) below.
+`tgw_cidr` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Tgw CIDR](#aws-parameters-tgw-cidr) below.
 
 `total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
 
 `vpc_id` - (Optional) Existing VPC ID. Existing VPC ID (`String`).
 
-<a id="nestedblock--aws_parameters--admin_password"></a>
+<a id="aws-parameters-admin-password"></a>
 
 ### AWS Parameters Admin Password
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--aws_parameters--admin_password--blindfold_secret_info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#aws-parameters-admin-password-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--aws_parameters--admin_password--clear_secret_info) below.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#aws-parameters-admin-password-clear-secret-info) below.
 
-<a id="nestedblock--aws_parameters--admin_password--blindfold_secret_info"></a>
+<a id="aws-parameters-admin-password-blindfold-secret-info"></a>
 
 ### AWS Parameters Admin Password Blindfold Secret Info
 
@@ -219,7 +219,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
-<a id="nestedblock--aws_parameters--admin_password--clear_secret_info"></a>
+<a id="aws-parameters-admin-password-clear-secret-info"></a>
 
 ### AWS Parameters Admin Password Clear Secret Info
 
@@ -227,7 +227,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
-<a id="nestedblock--aws_parameters--aws_cred"></a>
+<a id="aws-parameters-aws-cred"></a>
 
 ### AWS Parameters AWS Cred
 
@@ -237,61 +237,61 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--aws_parameters--az_nodes"></a>
+<a id="aws-parameters-az-nodes"></a>
 
 ### AWS Parameters Az Nodes
 
 `aws_az_name` - (Optional) AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region (`String`).
 
-`inside_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Inside Subnet](#nestedblock--aws_parameters--az_nodes--inside_subnet) below.
+`inside_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Inside Subnet](#aws-parameters-az-nodes-inside-subnet) below.
 
-`outside_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Outside Subnet](#nestedblock--aws_parameters--az_nodes--outside_subnet) below.
+`outside_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Outside Subnet](#aws-parameters-az-nodes-outside-subnet) below.
 
-`reserved_inside_subnet` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Inside Subnet](#nestedblock--aws_parameters--az_nodes--reserved_inside_subnet) below.
+`reserved_inside_subnet` - (Optional) Empty. This can be used for messages where no values are needed. See [Reserved Inside Subnet](#aws-parameters-az-nodes-reserved-inside-subnet) below.
 
-`workload_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Workload Subnet](#nestedblock--aws_parameters--az_nodes--workload_subnet) below.
+`workload_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Workload Subnet](#aws-parameters-az-nodes-workload-subnet) below.
 
-<a id="nestedblock--aws_parameters--az_nodes--inside_subnet"></a>
+<a id="aws-parameters-az-nodes-inside-subnet"></a>
 
 ### AWS Parameters Az Nodes Inside Subnet
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--aws_parameters--az_nodes--inside_subnet--subnet_param) below.
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-inside-subnet-subnet-param) below.
 
-<a id="nestedblock--aws_parameters--az_nodes--inside_subnet--subnet_param"></a>
+<a id="aws-parameters-az-nodes-inside-subnet-subnet-param"></a>
 
 ### AWS Parameters Az Nodes Inside Subnet Subnet Param
 
-<a id="nestedblock--aws_parameters--az_nodes--outside_subnet"></a>
+<a id="aws-parameters-az-nodes-outside-subnet"></a>
 
 ### AWS Parameters Az Nodes Outside Subnet
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--aws_parameters--az_nodes--outside_subnet--subnet_param) below.
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-outside-subnet-subnet-param) below.
 
-<a id="nestedblock--aws_parameters--az_nodes--outside_subnet--subnet_param"></a>
+<a id="aws-parameters-az-nodes-outside-subnet-subnet-param"></a>
 
 ### AWS Parameters Az Nodes Outside Subnet Subnet Param
 
-<a id="nestedblock--aws_parameters--az_nodes--reserved_inside_subnet"></a>
+<a id="aws-parameters-az-nodes-reserved-inside-subnet"></a>
 
 ### AWS Parameters Az Nodes Reserved Inside Subnet
 
-<a id="nestedblock--aws_parameters--az_nodes--workload_subnet"></a>
+<a id="aws-parameters-az-nodes-workload-subnet"></a>
 
 ### AWS Parameters Az Nodes Workload Subnet
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
-`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#nestedblock--aws_parameters--az_nodes--workload_subnet--subnet_param) below.
+`subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet. See [Subnet Param](#aws-parameters-az-nodes-workload-subnet-subnet-param) below.
 
-<a id="nestedblock--aws_parameters--az_nodes--workload_subnet--subnet_param"></a>
+<a id="aws-parameters-az-nodes-workload-subnet-subnet-param"></a>
 
 ### AWS Parameters Az Nodes Workload Subnet Subnet Param
 
-<a id="nestedblock--aws_parameters--custom_security_group"></a>
+<a id="aws-parameters-custom-security-group"></a>
 
 ### AWS Parameters Custom Security Group
 
@@ -299,15 +299,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `outside_security_group_id` - (Optional) Outside Security Group ID. Security Group ID to be attached to SLO(Site Local Outside) Interface (`String`).
 
-<a id="nestedblock--aws_parameters--disable_internet_vip"></a>
+<a id="aws-parameters-disable-internet-vip"></a>
 
 ### AWS Parameters Disable Internet VIP
 
-<a id="nestedblock--aws_parameters--enable_internet_vip"></a>
+<a id="aws-parameters-enable-internet-vip"></a>
 
 ### AWS Parameters Enable Internet VIP
 
-<a id="nestedblock--aws_parameters--existing_tgw"></a>
+<a id="aws-parameters-existing-tgw"></a>
 
 ### AWS Parameters Existing Tgw
 
@@ -317,23 +317,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `volterra_site_asn` - (Optional) Enter F5XC Site ASN. F5XC Site ASN (`Number`).
 
-<a id="nestedblock--aws_parameters--f5xc_security_group"></a>
+<a id="aws-parameters-f5xc-security-group"></a>
 
 ### AWS Parameters F5xc Security Group
 
-<a id="nestedblock--aws_parameters--new_tgw"></a>
+<a id="aws-parameters-new-tgw"></a>
 
 ### AWS Parameters New Tgw
 
-`system_generated` - (Optional) Empty. This can be used for messages where no values are needed. See [System Generated](#nestedblock--aws_parameters--new_tgw--system_generated) below.
+`system_generated` - (Optional) Empty. This can be used for messages where no values are needed. See [System Generated](#aws-parameters-new-tgw-system-generated) below.
 
-`user_assigned` - (Optional) TGW Assigned ASN Type. Information needed when ASNs are assigned by the user. See [User Assigned](#nestedblock--aws_parameters--new_tgw--user_assigned) below.
+`user_assigned` - (Optional) TGW Assigned ASN Type. Information needed when ASNs are assigned by the user. See [User Assigned](#aws-parameters-new-tgw-user-assigned) below.
 
-<a id="nestedblock--aws_parameters--new_tgw--system_generated"></a>
+<a id="aws-parameters-new-tgw-system-generated"></a>
 
 ### AWS Parameters New Tgw System Generated
 
-<a id="nestedblock--aws_parameters--new_tgw--user_assigned"></a>
+<a id="aws-parameters-new-tgw-user-assigned"></a>
 
 ### AWS Parameters New Tgw User Assigned
 
@@ -341,69 +341,69 @@ In addition to all arguments above, the following attributes are exported:
 
 `volterra_site_asn` - (Optional) Enter F5XC Site ASN. F5XC Site ASN (`Number`).
 
-<a id="nestedblock--aws_parameters--new_vpc"></a>
+<a id="aws-parameters-new-vpc"></a>
 
 ### AWS Parameters New Vpc
 
-`autogenerate` - (Optional) Empty. This can be used for messages where no values are needed. See [Autogenerate](#nestedblock--aws_parameters--new_vpc--autogenerate) below.
+`autogenerate` - (Optional) Empty. This can be used for messages where no values are needed. See [Autogenerate](#aws-parameters-new-vpc-autogenerate) below.
 
 `name_tag` - (Optional) Choose VPC Name. Specify the VPC Name (`String`).
 
 `primary_ipv4` - (Optional) Primary IPv4 CIDR block. IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block (`String`).
 
-<a id="nestedblock--aws_parameters--new_vpc--autogenerate"></a>
+<a id="aws-parameters-new-vpc-autogenerate"></a>
 
 ### AWS Parameters New Vpc Autogenerate
 
-<a id="nestedblock--aws_parameters--no_worker_nodes"></a>
+<a id="aws-parameters-no-worker-nodes"></a>
 
 ### AWS Parameters No Worker Nodes
 
-<a id="nestedblock--aws_parameters--reserved_tgw_cidr"></a>
+<a id="aws-parameters-reserved-tgw-cidr"></a>
 
 ### AWS Parameters Reserved Tgw CIDR
 
-<a id="nestedblock--aws_parameters--tgw_cidr"></a>
+<a id="aws-parameters-tgw-cidr"></a>
 
 ### AWS Parameters Tgw CIDR
 
 `ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
-<a id="nestedblock--block_all_services"></a>
+<a id="block-all-services"></a>
 
 ### Block All Services
 
-<a id="nestedblock--blocked_services"></a>
+<a id="blocked-services"></a>
 
 ### Blocked Services
 
-`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#nestedblock--blocked_services--blocked_sevice) below.
+`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
-<a id="nestedblock--blocked_services--blocked_sevice"></a>
+<a id="blocked-services-blocked-sevice"></a>
 
 ### Blocked Services Blocked Sevice
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#nestedblock--blocked_services--blocked_sevice--dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-blocked-sevice-dns) below.
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#nestedblock--blocked_services--blocked_sevice--ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-blocked-sevice-ssh) below.
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#nestedblock--blocked_services--blocked_sevice--web_user_interface) below.
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-blocked-sevice-web-user-interface) below.
 
-<a id="nestedblock--blocked_services--blocked_sevice--dns"></a>
+<a id="blocked-services-blocked-sevice-dns"></a>
 
 ### Blocked Services Blocked Sevice DNS
 
-<a id="nestedblock--blocked_services--blocked_sevice--ssh"></a>
+<a id="blocked-services-blocked-sevice-ssh"></a>
 
 ### Blocked Services Blocked Sevice SSH
 
-<a id="nestedblock--blocked_services--blocked_sevice--web_user_interface"></a>
+<a id="blocked-services-blocked-sevice-web-user-interface"></a>
 
 ### Blocked Services Blocked Sevice Web User Interface
 
-<a id="nestedblock--coordinates"></a>
+<a id="coordinates"></a>
 
 ### Coordinates
 
@@ -411,7 +411,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `longitude` - (Optional) Longitude. longitude of site location (`Number`).
 
-<a id="nestedblock--custom_dns"></a>
+<a id="custom-dns"></a>
 
 ### Custom DNS
 
@@ -419,101 +419,101 @@ In addition to all arguments above, the following attributes are exported:
 
 `outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
 
-<a id="nestedblock--default_blocked_services"></a>
+<a id="default-blocked-services"></a>
 
 ### Default Blocked Services
 
-<a id="nestedblock--direct_connect_disabled"></a>
+<a id="direct-connect-disabled"></a>
 
 ### Direct Connect Disabled
 
-<a id="nestedblock--direct_connect_enabled"></a>
+<a id="direct-connect-enabled"></a>
 
 ### Direct Connect Enabled
 
-`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#nestedblock--direct_connect_enabled--auto_asn) below.
+`auto_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto Asn](#direct-connect-enabled-auto-asn) below.
 
 `custom_asn` - (Optional) Custom ASN. Custom Autonomous System Number (`Number`).
 
-`hosted_vifs` - (Optional) AWS Direct Connect Hosted VIF Config. x-example: 'value' AWS Direct Connect Hosted VIF Configuration. See [Hosted Vifs](#nestedblock--direct_connect_enabled--hosted_vifs) below.
+`hosted_vifs` - (Optional) AWS Direct Connect Hosted VIF Config. x-example: 'value' AWS Direct Connect Hosted VIF Configuration. See [Hosted Vifs](#direct-connect-enabled-hosted-vifs) below.
 
-`standard_vifs` - (Optional) Empty. This can be used for messages where no values are needed. See [Standard Vifs](#nestedblock--direct_connect_enabled--standard_vifs) below.
+`standard_vifs` - (Optional) Empty. This can be used for messages where no values are needed. See [Standard Vifs](#direct-connect-enabled-standard-vifs) below.
 
-<a id="nestedblock--direct_connect_enabled--auto_asn"></a>
+<a id="direct-connect-enabled-auto-asn"></a>
 
 ### Direct Connect Enabled Auto Asn
 
-<a id="nestedblock--direct_connect_enabled--hosted_vifs"></a>
+<a id="direct-connect-enabled-hosted-vifs"></a>
 
 ### Direct Connect Enabled Hosted Vifs
 
-`site_registration_over_direct_connect` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Direct Connect](#nestedblock--direct_connect_enabled--hosted_vifs--site_registration_over_direct_connect) below.
+`site_registration_over_direct_connect` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Direct Connect](#direct-connect-enabled-hosted-vifs-site-registration-over-direct-connect) below.
 
-`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Registration Over Internet](#nestedblock--direct_connect_enabled--hosted_vifs--site_registration_over_internet) below.
+`site_registration_over_internet` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Registration Over Internet](#direct-connect-enabled-hosted-vifs-site-registration-over-internet) below.
 
-`vif_list` - (Optional) List of Hosted VIF Config. List of Hosted VIF Config. See [Vif List](#nestedblock--direct_connect_enabled--hosted_vifs--vif_list) below.
+`vif_list` - (Optional) List of Hosted VIF Config. List of Hosted VIF Config. See [Vif List](#direct-connect-enabled-hosted-vifs-vif-list) below.
 
-<a id="nestedblock--direct_connect_enabled--hosted_vifs--site_registration_over_direct_connect"></a>
+<a id="direct-connect-enabled-hosted-vifs-site-registration-over-direct-connect"></a>
 
 ### Direct Connect Enabled Hosted Vifs Site Registration Over Direct Connect
 
 `cloudlink_network_name` - (Optional) Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support (`String`).
 
-<a id="nestedblock--direct_connect_enabled--hosted_vifs--site_registration_over_internet"></a>
+<a id="direct-connect-enabled-hosted-vifs-site-registration-over-internet"></a>
 
 ### Direct Connect Enabled Hosted Vifs Site Registration Over Internet
 
-<a id="nestedblock--direct_connect_enabled--hosted_vifs--vif_list"></a>
+<a id="direct-connect-enabled-hosted-vifs-vif-list"></a>
 
 ### Direct Connect Enabled Hosted Vifs Vif List
 
 `other_region` - (Optional) Other Region. Other Region (`String`).
 
-`same_as_site_region` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Site Region](#nestedblock--direct_connect_enabled--hosted_vifs--vif_list--same_as_site_region) below.
+`same_as_site_region` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Site Region](#direct-connect-enabled-hosted-vifs-vif-list-same-as-site-region) below.
 
 `vif_id` - (Optional) VIF ID. AWS Direct Connect VIF ID that needs to be connected to the site (`String`).
 
-<a id="nestedblock--direct_connect_enabled--hosted_vifs--vif_list--same_as_site_region"></a>
+<a id="direct-connect-enabled-hosted-vifs-vif-list-same-as-site-region"></a>
 
 ### Direct Connect Enabled Hosted Vifs Vif List Same As Site Region
 
-<a id="nestedblock--direct_connect_enabled--standard_vifs"></a>
+<a id="direct-connect-enabled-standard-vifs"></a>
 
 ### Direct Connect Enabled Standard Vifs
 
-<a id="nestedblock--kubernetes_upgrade_drain"></a>
+<a id="kubernetes-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#kubernetes-upgrade-drain-disable-upgrade-drain) below.
 
-`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain) below.
+`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
-<a id="nestedblock--kubernetes_upgrade_drain--disable_upgrade_drain"></a>
+<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain Disable Upgrade Drain
 
-<a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain"></a>
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode) below.
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
 
-<a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--disable_vega_upgrade_mode"></a>
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
 
-<a id="nestedblock--kubernetes_upgrade_drain--enable_upgrade_drain--enable_vega_upgrade_mode"></a>
+<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
 
-<a id="nestedblock--log_receiver"></a>
+<a id="log-receiver"></a>
 
 ### Log Receiver
 
@@ -523,77 +523,77 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--logs_streaming_disabled"></a>
+<a id="logs-streaming-disabled"></a>
 
 ### Logs Streaming Disabled
 
-<a id="nestedblock--offline_survivability_mode"></a>
+<a id="offline-survivability-mode"></a>
 
 ### Offline Survivability Mode
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#nestedblock--offline_survivability_mode--enable_offline_survivability_mode) below.
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#offline-survivability-mode-enable-offline-survivability-mode) below.
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#nestedblock--offline_survivability_mode--no_offline_survivability_mode) below.
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#offline-survivability-mode-no-offline-survivability-mode) below.
 
-<a id="nestedblock--offline_survivability_mode--enable_offline_survivability_mode"></a>
+<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>
 
 ### Offline Survivability Mode Enable Offline Survivability Mode
 
-<a id="nestedblock--offline_survivability_mode--no_offline_survivability_mode"></a>
+<a id="offline-survivability-mode-no-offline-survivability-mode"></a>
 
 ### Offline Survivability Mode No Offline Survivability Mode
 
-<a id="nestedblock--os"></a>
+<a id="os"></a>
 
 ### OS
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#nestedblock--os--default_os_version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#os-default-os-version) below.
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
 
-<a id="nestedblock--os--default_os_version"></a>
+<a id="os-default-os-version"></a>
 
 ### OS Default OS Version
 
-<a id="nestedblock--performance_enhancement_mode"></a>
+<a id="performance-enhancement-mode"></a>
 
 ### Performance Enhancement Mode
 
-`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced) below.
+`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#nestedblock--performance_enhancement_mode--perf_mode_l7_enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#performance-enhancement-mode-perf-mode-l7-enhanced) below.
 
-<a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced"></a>
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo) below.
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
 
-<a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--jumbo"></a>
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
 
-<a id="nestedblock--performance_enhancement_mode--perf_mode_l3_enhanced--no_jumbo"></a>
+<a id="performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
 
-<a id="nestedblock--performance_enhancement_mode--perf_mode_l7_enhanced"></a>
+<a id="performance-enhancement-mode-perf-mode-l7-enhanced"></a>
 
 ### Performance Enhancement Mode Perf Mode L7 Enhanced
 
-<a id="nestedblock--private_connectivity"></a>
+<a id="private-connectivity"></a>
 
 ### Private Connectivity
 
-`cloud_link` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Link](#nestedblock--private_connectivity--cloud_link) below.
+`cloud_link` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Link](#private-connectivity-cloud-link) below.
 
-`inside` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside](#nestedblock--private_connectivity--inside) below.
+`inside` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside](#private-connectivity-inside) below.
 
-`outside` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside](#nestedblock--private_connectivity--outside) below.
+`outside` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside](#private-connectivity-outside) below.
 
-<a id="nestedblock--private_connectivity--cloud_link"></a>
+<a id="private-connectivity-cloud-link"></a>
 
 ### Private Connectivity Cloud Link
 
@@ -603,59 +603,59 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--private_connectivity--inside"></a>
+<a id="private-connectivity-inside"></a>
 
 ### Private Connectivity Inside
 
-<a id="nestedblock--private_connectivity--outside"></a>
+<a id="private-connectivity-outside"></a>
 
 ### Private Connectivity Outside
 
-<a id="nestedblock--sw"></a>
+<a id="sw"></a>
 
 ### Sw
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#nestedblock--sw--default_sw_version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#sw-default-sw-version) below.
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
 
-<a id="nestedblock--sw--default_sw_version"></a>
+<a id="sw-default-sw-version"></a>
 
 ### Sw Default Sw Version
 
-<a id="nestedblock--tags"></a>
+<a id="tags"></a>
 
 ### Tags
 
-<a id="nestedblock--tgw_security"></a>
+<a id="tgw-security"></a>
 
 ### Tgw Security
 
-`active_east_west_service_policies` - (Optional) Active Service Policies. Active service policies for the east-west proxy. See [Active East West Service Policies](#nestedblock--tgw_security--active_east_west_service_policies) below.
+`active_east_west_service_policies` - (Optional) Active Service Policies. Active service policies for the east-west proxy. See [Active East West Service Policies](#tgw-security-active-east-west-service-policies) below.
 
-`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#nestedblock--tgw_security--active_enhanced_firewall_policies) below.
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#tgw-security-active-enhanced-firewall-policies) below.
 
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#nestedblock--tgw_security--active_forward_proxy_policies) below.
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#tgw-security-active-forward-proxy-policies) below.
 
-`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#nestedblock--tgw_security--active_network_policies) below.
+`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#tgw-security-active-network-policies) below.
 
-`east_west_service_policy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [East West Service Policy Allow All](#nestedblock--tgw_security--east_west_service_policy_allow_all) below.
+`east_west_service_policy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [East West Service Policy Allow All](#tgw-security-east-west-service-policy-allow-all) below.
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#nestedblock--tgw_security--forward_proxy_allow_all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#tgw-security-forward-proxy-allow-all) below.
 
-`no_east_west_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No East West Policy](#nestedblock--tgw_security--no_east_west_policy) below.
+`no_east_west_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No East West Policy](#tgw-security-no-east-west-policy) below.
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#nestedblock--tgw_security--no_forward_proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#tgw-security-no-forward-proxy) below.
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#nestedblock--tgw_security--no_network_policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#tgw-security-no-network-policy) below.
 
-<a id="nestedblock--tgw_security--active_east_west_service_policies"></a>
+<a id="tgw-security-active-east-west-service-policies"></a>
 
 ### Tgw Security Active East West Service Policies
 
-`service_policies` - (Optional) Service Policies. A list of references to service_policy objects. See [Service Policies](#nestedblock--tgw_security--active_east_west_service_policies--service_policies) below.
+`service_policies` - (Optional) Service Policies. A list of references to service_policy objects. See [Service Policies](#tgw-security-active-east-west-service-policies-service-policies) below.
 
-<a id="nestedblock--tgw_security--active_east_west_service_policies--service_policies"></a>
+<a id="tgw-security-active-east-west-service-policies-service-policies"></a>
 
 ### Tgw Security Active East West Service Policies Service Policies
 
@@ -665,13 +665,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--tgw_security--active_enhanced_firewall_policies"></a>
+<a id="tgw-security-active-enhanced-firewall-policies"></a>
 
 ### Tgw Security Active Enhanced Firewall Policies
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#nestedblock--tgw_security--active_enhanced_firewall_policies--enhanced_firewall_policies) below.
+`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
-<a id="nestedblock--tgw_security--active_enhanced_firewall_policies--enhanced_firewall_policies"></a>
+<a id="tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
 ### Tgw Security Active Enhanced Firewall Policies Enhanced Firewall Policies
 
@@ -681,13 +681,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--tgw_security--active_forward_proxy_policies"></a>
+<a id="tgw-security-active-forward-proxy-policies"></a>
 
 ### Tgw Security Active Forward Proxy Policies
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#nestedblock--tgw_security--active_forward_proxy_policies--forward_proxy_policies) below.
+`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#tgw-security-active-forward-proxy-policies-forward-proxy-policies) below.
 
-<a id="nestedblock--tgw_security--active_forward_proxy_policies--forward_proxy_policies"></a>
+<a id="tgw-security-active-forward-proxy-policies-forward-proxy-policies"></a>
 
 ### Tgw Security Active Forward Proxy Policies Forward Proxy Policies
 
@@ -697,13 +697,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--tgw_security--active_network_policies"></a>
+<a id="tgw-security-active-network-policies"></a>
 
 ### Tgw Security Active Network Policies
 
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#nestedblock--tgw_security--active_network_policies--network_policies) below.
+`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#tgw-security-active-network-policies-network-policies) below.
 
-<a id="nestedblock--tgw_security--active_network_policies--network_policies"></a>
+<a id="tgw-security-active-network-policies-network-policies"></a>
 
 ### Tgw Security Active Network Policies Network Policies
 
@@ -713,27 +713,27 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--tgw_security--east_west_service_policy_allow_all"></a>
+<a id="tgw-security-east-west-service-policy-allow-all"></a>
 
 ### Tgw Security East West Service Policy Allow All
 
-<a id="nestedblock--tgw_security--forward_proxy_allow_all"></a>
+<a id="tgw-security-forward-proxy-allow-all"></a>
 
 ### Tgw Security Forward Proxy Allow All
 
-<a id="nestedblock--tgw_security--no_east_west_policy"></a>
+<a id="tgw-security-no-east-west-policy"></a>
 
 ### Tgw Security No East West Policy
 
-<a id="nestedblock--tgw_security--no_forward_proxy"></a>
+<a id="tgw-security-no-forward-proxy"></a>
 
 ### Tgw Security No Forward Proxy
 
-<a id="nestedblock--tgw_security--no_network_policy"></a>
+<a id="tgw-security-no-network-policy"></a>
 
 ### Tgw Security No Network Policy
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -745,109 +745,109 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--vn_config"></a>
+<a id="vn-config"></a>
 
 ### Vn Config
 
-`allowed_vip_port` - (Optional) Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site. See [Allowed VIP Port](#nestedblock--vn_config--allowed_vip_port) below.
+`allowed_vip_port` - (Optional) Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site. See [Allowed VIP Port](#vn-config-allowed-vip-port) below.
 
-`allowed_vip_port_sli` - (Optional) Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site. See [Allowed VIP Port Sli](#nestedblock--vn_config--allowed_vip_port_sli) below.
+`allowed_vip_port_sli` - (Optional) Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site. See [Allowed VIP Port Sli](#vn-config-allowed-vip-port-sli) below.
 
-`dc_cluster_group_inside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside Vn](#nestedblock--vn_config--dc_cluster_group_inside_vn) below.
+`dc_cluster_group_inside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside Vn](#vn-config-dc-cluster-group-inside-vn) below.
 
-`dc_cluster_group_outside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Outside Vn](#nestedblock--vn_config--dc_cluster_group_outside_vn) below.
+`dc_cluster_group_outside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Outside Vn](#vn-config-dc-cluster-group-outside-vn) below.
 
-`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#nestedblock--vn_config--global_network_list) below.
+`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#vn-config-global-network-list) below.
 
-`inside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Inside Static Routes](#nestedblock--vn_config--inside_static_routes) below.
+`inside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Inside Static Routes](#vn-config-inside-static-routes) below.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#nestedblock--vn_config--no_dc_cluster_group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#vn-config-no-dc-cluster-group) below.
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#nestedblock--vn_config--no_global_network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#vn-config-no-global-network) below.
 
-`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#nestedblock--vn_config--no_inside_static_routes) below.
+`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#vn-config-no-inside-static-routes) below.
 
-`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#nestedblock--vn_config--no_outside_static_routes) below.
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#vn-config-no-outside-static-routes) below.
 
-`outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#nestedblock--vn_config--outside_static_routes) below.
+`outside_static_routes` - (Optional) Static Route List Type. List of static routes. See [Outside Static Routes](#vn-config-outside-static-routes) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#nestedblock--vn_config--sm_connection_public_ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#vn-config-sm-connection-public-ip) below.
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#nestedblock--vn_config--sm_connection_pvt_ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#vn-config-sm-connection-pvt-ip) below.
 
-<a id="nestedblock--vn_config--allowed_vip_port"></a>
+<a id="vn-config-allowed-vip-port"></a>
 
 ### Vn Config Allowed VIP Port
 
-`custom_ports` - (Optional) Custom Ports. List of Custom port. See [Custom Ports](#nestedblock--vn_config--allowed_vip_port--custom_ports) below.
+`custom_ports` - (Optional) Custom Ports. List of Custom port. See [Custom Ports](#vn-config-allowed-vip-port-custom-ports) below.
 
-`disable_allowed_vip_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Allowed VIP Port](#nestedblock--vn_config--allowed_vip_port--disable_allowed_vip_port) below.
+`disable_allowed_vip_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Allowed VIP Port](#vn-config-allowed-vip-port-disable-allowed-vip-port) below.
 
-`use_http_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP HTTPS Port](#nestedblock--vn_config--allowed_vip_port--use_http_https_port) below.
+`use_http_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP HTTPS Port](#vn-config-allowed-vip-port-use-http-https-port) below.
 
-`use_http_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP Port](#nestedblock--vn_config--allowed_vip_port--use_http_port) below.
+`use_http_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP Port](#vn-config-allowed-vip-port-use-http-port) below.
 
-`use_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTPS Port](#nestedblock--vn_config--allowed_vip_port--use_https_port) below.
+`use_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTPS Port](#vn-config-allowed-vip-port-use-https-port) below.
 
-<a id="nestedblock--vn_config--allowed_vip_port--custom_ports"></a>
+<a id="vn-config-allowed-vip-port-custom-ports"></a>
 
 ### Vn Config Allowed VIP Port Custom Ports
 
 `port_ranges` - (Optional) Port Ranges. Port Ranges (`String`).
 
-<a id="nestedblock--vn_config--allowed_vip_port--disable_allowed_vip_port"></a>
+<a id="vn-config-allowed-vip-port-disable-allowed-vip-port"></a>
 
 ### Vn Config Allowed VIP Port Disable Allowed VIP Port
 
-<a id="nestedblock--vn_config--allowed_vip_port--use_http_https_port"></a>
+<a id="vn-config-allowed-vip-port-use-http-https-port"></a>
 
 ### Vn Config Allowed VIP Port Use HTTP HTTPS Port
 
-<a id="nestedblock--vn_config--allowed_vip_port--use_http_port"></a>
+<a id="vn-config-allowed-vip-port-use-http-port"></a>
 
 ### Vn Config Allowed VIP Port Use HTTP Port
 
-<a id="nestedblock--vn_config--allowed_vip_port--use_https_port"></a>
+<a id="vn-config-allowed-vip-port-use-https-port"></a>
 
 ### Vn Config Allowed VIP Port Use HTTPS Port
 
-<a id="nestedblock--vn_config--allowed_vip_port_sli"></a>
+<a id="vn-config-allowed-vip-port-sli"></a>
 
 ### Vn Config Allowed VIP Port Sli
 
-`custom_ports` - (Optional) Custom Ports. List of Custom port. See [Custom Ports](#nestedblock--vn_config--allowed_vip_port_sli--custom_ports) below.
+`custom_ports` - (Optional) Custom Ports. List of Custom port. See [Custom Ports](#vn-config-allowed-vip-port-sli-custom-ports) below.
 
-`disable_allowed_vip_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Allowed VIP Port](#nestedblock--vn_config--allowed_vip_port_sli--disable_allowed_vip_port) below.
+`disable_allowed_vip_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Allowed VIP Port](#vn-config-allowed-vip-port-sli-disable-allowed-vip-port) below.
 
-`use_http_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP HTTPS Port](#nestedblock--vn_config--allowed_vip_port_sli--use_http_https_port) below.
+`use_http_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP HTTPS Port](#vn-config-allowed-vip-port-sli-use-http-https-port) below.
 
-`use_http_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP Port](#nestedblock--vn_config--allowed_vip_port_sli--use_http_port) below.
+`use_http_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTP Port](#vn-config-allowed-vip-port-sli-use-http-port) below.
 
-`use_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTPS Port](#nestedblock--vn_config--allowed_vip_port_sli--use_https_port) below.
+`use_https_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use HTTPS Port](#vn-config-allowed-vip-port-sli-use-https-port) below.
 
-<a id="nestedblock--vn_config--allowed_vip_port_sli--custom_ports"></a>
+<a id="vn-config-allowed-vip-port-sli-custom-ports"></a>
 
 ### Vn Config Allowed VIP Port Sli Custom Ports
 
 `port_ranges` - (Optional) Port Ranges. Port Ranges (`String`).
 
-<a id="nestedblock--vn_config--allowed_vip_port_sli--disable_allowed_vip_port"></a>
+<a id="vn-config-allowed-vip-port-sli-disable-allowed-vip-port"></a>
 
 ### Vn Config Allowed VIP Port Sli Disable Allowed VIP Port
 
-<a id="nestedblock--vn_config--allowed_vip_port_sli--use_http_https_port"></a>
+<a id="vn-config-allowed-vip-port-sli-use-http-https-port"></a>
 
 ### Vn Config Allowed VIP Port Sli Use HTTP HTTPS Port
 
-<a id="nestedblock--vn_config--allowed_vip_port_sli--use_http_port"></a>
+<a id="vn-config-allowed-vip-port-sli-use-http-port"></a>
 
 ### Vn Config Allowed VIP Port Sli Use HTTP Port
 
-<a id="nestedblock--vn_config--allowed_vip_port_sli--use_https_port"></a>
+<a id="vn-config-allowed-vip-port-sli-use-https-port"></a>
 
 ### Vn Config Allowed VIP Port Sli Use HTTPS Port
 
-<a id="nestedblock--vn_config--dc_cluster_group_inside_vn"></a>
+<a id="vn-config-dc-cluster-group-inside-vn"></a>
 
 ### Vn Config Dc Cluster Group Inside Vn
 
@@ -857,7 +857,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--vn_config--dc_cluster_group_outside_vn"></a>
+<a id="vn-config-dc-cluster-group-outside-vn"></a>
 
 ### Vn Config Dc Cluster Group Outside Vn
 
@@ -867,103 +867,103 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--vn_config--global_network_list"></a>
+<a id="vn-config-global-network-list"></a>
 
 ### Vn Config Global Network List
 
-`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#nestedblock--vn_config--global_network_list--global_network_connections) below.
+`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#vn-config-global-network-list-global-network-connections) below.
 
-<a id="nestedblock--vn_config--global_network_list--global_network_connections"></a>
+<a id="vn-config-global-network-list-global-network-connections"></a>
 
 ### Vn Config Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#nestedblock--vn_config--global_network_list--global_network_connections--sli_to_global_dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#nestedblock--vn_config--global_network_list--global_network_connections--slo_to_global_dr) below.
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#vn-config-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-<a id="nestedblock--vn_config--global_network_list--global_network_connections--sli_to_global_dr"></a>
+<a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr"></a>
 
 ### Vn Config Global Network List Global Network Connections Sli To Global DR
 
-<a id="nestedblock--vn_config--global_network_list--global_network_connections--slo_to_global_dr"></a>
+<a id="vn-config-global-network-list-global-network-connections-slo-to-global-dr"></a>
 
 ### Vn Config Global Network List Global Network Connections Slo To Global DR
 
-<a id="nestedblock--vn_config--inside_static_routes"></a>
+<a id="vn-config-inside-static-routes"></a>
 
 ### Vn Config Inside Static Routes
 
-`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--vn_config--inside_static_routes--static_route_list) below.
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#vn-config-inside-static-routes-static-route-list) below.
 
-<a id="nestedblock--vn_config--inside_static_routes--static_route_list"></a>
+<a id="vn-config-inside-static-routes-static-route-list"></a>
 
 ### Vn Config Inside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--vn_config--inside_static_routes--static_route_list--custom_static_route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#vn-config-inside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
-<a id="nestedblock--vn_config--inside_static_routes--static_route_list--custom_static_route"></a>
+<a id="vn-config-inside-static-routes-static-route-list-custom-static-route"></a>
 
 ### Vn Config Inside Static Routes Static Route List Custom Static Route
 
-<a id="nestedblock--vn_config--no_dc_cluster_group"></a>
+<a id="vn-config-no-dc-cluster-group"></a>
 
 ### Vn Config No Dc Cluster Group
 
-<a id="nestedblock--vn_config--no_global_network"></a>
+<a id="vn-config-no-global-network"></a>
 
 ### Vn Config No Global Network
 
-<a id="nestedblock--vn_config--no_inside_static_routes"></a>
+<a id="vn-config-no-inside-static-routes"></a>
 
 ### Vn Config No Inside Static Routes
 
-<a id="nestedblock--vn_config--no_outside_static_routes"></a>
+<a id="vn-config-no-outside-static-routes"></a>
 
 ### Vn Config No Outside Static Routes
 
-<a id="nestedblock--vn_config--outside_static_routes"></a>
+<a id="vn-config-outside-static-routes"></a>
 
 ### Vn Config Outside Static Routes
 
-`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#nestedblock--vn_config--outside_static_routes--static_route_list) below.
+`static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#vn-config-outside-static-routes-static-route-list) below.
 
-<a id="nestedblock--vn_config--outside_static_routes--static_route_list"></a>
+<a id="vn-config-outside-static-routes-static-route-list"></a>
 
 ### Vn Config Outside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#nestedblock--vn_config--outside_static_routes--static_route_list--custom_static_route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#vn-config-outside-static-routes-static-route-list-custom-static-route) below.
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
-<a id="nestedblock--vn_config--outside_static_routes--static_route_list--custom_static_route"></a>
+<a id="vn-config-outside-static-routes-static-route-list-custom-static-route"></a>
 
 ### Vn Config Outside Static Routes Static Route List Custom Static Route
 
-<a id="nestedblock--vn_config--sm_connection_public_ip"></a>
+<a id="vn-config-sm-connection-public-ip"></a>
 
 ### Vn Config Sm Connection Public IP
 
-<a id="nestedblock--vn_config--sm_connection_pvt_ip"></a>
+<a id="vn-config-sm-connection-pvt-ip"></a>
 
 ### Vn Config Sm Connection Pvt IP
 
-<a id="nestedblock--vpc_attachments"></a>
+<a id="vpc-attachments"></a>
 
 ### Vpc Attachments
 
-`vpc_list` - (Optional) VPC List. List of VPC attachments to transit gateway. See [Vpc List](#nestedblock--vpc_attachments--vpc_list) below.
+`vpc_list` - (Optional) VPC List. List of VPC attachments to transit gateway. See [Vpc List](#vpc-attachments-vpc-list) below.
 
-<a id="nestedblock--vpc_attachments--vpc_list"></a>
+<a id="vpc-attachments-vpc-list"></a>
 
 ### Vpc Attachments Vpc List
 
-`labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall. See [Labels](#nestedblock--vpc_attachments--vpc_list--labels) below.
+`labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall. See [Labels](#vpc-attachments-vpc-list-labels) below.
 
 `vpc_id` - (Optional) VPC ID. Information about existing VPC (`String`).
 
-<a id="nestedblock--vpc_attachments--vpc_list--labels"></a>
+<a id="vpc-attachments-vpc-list-labels"></a>
 
 ### Vpc Attachments Vpc List Labels
 

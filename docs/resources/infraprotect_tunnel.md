@@ -90,27 +90,27 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--bandwidth"></a>
+<a id="bandwidth"></a>
 
 ### Bandwidth
 
 `bandwidth_max_mb` - (Optional) Bandwidth Max in MB. Bandwidth max allowed (`Number`).
 
-<a id="nestedblock--bgp_information"></a>
+<a id="bgp-information"></a>
 
 ### BGP Information
 
-`asn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Asn](#nestedblock--bgp_information--asn) below.
+`asn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Asn](#bgp-information-asn) below.
 
 `holddown_timer_seconds` - (Optional) Hold down Timer. BGP hold down timer, in seconds (`Number`).
 
-`no_secret` - (Optional) Empty. This can be used for messages where no values are needed. See [No Secret](#nestedblock--bgp_information--no_secret) below.
+`no_secret` - (Optional) Empty. This can be used for messages where no values are needed. See [No Secret](#bgp-information-no-secret) below.
 
-`peer_secret_override` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Peer Secret Override](#nestedblock--bgp_information--peer_secret_override) below.
+`peer_secret_override` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Peer Secret Override](#bgp-information-peer-secret-override) below.
 
-`use_default_secret` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Secret](#nestedblock--bgp_information--use_default_secret) below.
+`use_default_secret` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Secret](#bgp-information-use-default-secret) below.
 
-<a id="nestedblock--bgp_information--asn"></a>
+<a id="bgp-information-asn"></a>
 
 ### BGP Information Asn
 
@@ -120,19 +120,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--bgp_information--no_secret"></a>
+<a id="bgp-information-no-secret"></a>
 
 ### BGP Information No Secret
 
-<a id="nestedblock--bgp_information--peer_secret_override"></a>
+<a id="bgp-information-peer-secret-override"></a>
 
 ### BGP Information Peer Secret Override
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#nestedblock--bgp_information--peer_secret_override--blindfold_secret_info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#nestedblock--bgp_information--peer_secret_override--clear_secret_info) below.
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#bgp-information-peer-secret-override-clear-secret-info) below.
 
-<a id="nestedblock--bgp_information--peer_secret_override--blindfold_secret_info"></a>
+<a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>
 
 ### BGP Information Peer Secret Override Blindfold Secret Info
 
@@ -142,7 +142,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
-<a id="nestedblock--bgp_information--peer_secret_override--clear_secret_info"></a>
+<a id="bgp-information-peer-secret-override-clear-secret-info"></a>
 
 ### BGP Information Peer Secret Override Clear Secret Info
 
@@ -150,11 +150,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
-<a id="nestedblock--bgp_information--use_default_secret"></a>
+<a id="bgp-information-use-default-secret"></a>
 
 ### BGP Information Use Default Secret
 
-<a id="nestedblock--firewall_rule_group"></a>
+<a id="firewall-rule-group"></a>
 
 ### Firewall Rule Group
 
@@ -164,79 +164,79 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--gre_ipv4"></a>
+<a id="gre-ipv4"></a>
 
 ### Gre IPv4
 
 `customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel (`String`).
 
-`fragmentation_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragmentation Disabled](#nestedblock--gre_ipv4--fragmentation_disabled) below.
+`fragmentation_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragmentation Disabled](#gre-ipv4-fragmentation-disabled) below.
 
-`fragmentation_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragmentation Enabled](#nestedblock--gre_ipv4--fragmentation_enabled) below.
+`fragmentation_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragmentation Enabled](#gre-ipv4-fragmentation-enabled) below.
 
-`ipv6_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv6 Interconnect Disabled](#nestedblock--gre_ipv4--ipv6_interconnect_disabled) below.
+`ipv6_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv6 Interconnect Disabled](#gre-ipv4-ipv6-interconnect-disabled) below.
 
-`ipv6_interconnect_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv6 Interconnect Enabled](#nestedblock--gre_ipv4--ipv6_interconnect_enabled) below.
+`ipv6_interconnect_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv6 Interconnect Enabled](#gre-ipv4-ipv6-interconnect-enabled) below.
 
-`keepalive_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Keepalive Disabled](#nestedblock--gre_ipv4--keepalive_disabled) below.
+`keepalive_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Keepalive Disabled](#gre-ipv4-keepalive-disabled) below.
 
-`keepalive_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Keepalive Enabled](#nestedblock--gre_ipv4--keepalive_enabled) below.
+`keepalive_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Keepalive Enabled](#gre-ipv4-keepalive-enabled) below.
 
-<a id="nestedblock--gre_ipv4--fragmentation_disabled"></a>
+<a id="gre-ipv4-fragmentation-disabled"></a>
 
 ### Gre IPv4 Fragmentation Disabled
 
-<a id="nestedblock--gre_ipv4--fragmentation_enabled"></a>
+<a id="gre-ipv4-fragmentation-enabled"></a>
 
 ### Gre IPv4 Fragmentation Enabled
 
-<a id="nestedblock--gre_ipv4--ipv6_interconnect_disabled"></a>
+<a id="gre-ipv4-ipv6-interconnect-disabled"></a>
 
 ### Gre IPv4 IPv6 Interconnect Disabled
 
-<a id="nestedblock--gre_ipv4--ipv6_interconnect_enabled"></a>
+<a id="gre-ipv4-ipv6-interconnect-enabled"></a>
 
 ### Gre IPv4 IPv6 Interconnect Enabled
 
-<a id="nestedblock--gre_ipv4--keepalive_disabled"></a>
+<a id="gre-ipv4-keepalive-disabled"></a>
 
 ### Gre IPv4 Keepalive Disabled
 
-<a id="nestedblock--gre_ipv4--keepalive_enabled"></a>
+<a id="gre-ipv4-keepalive-enabled"></a>
 
 ### Gre IPv4 Keepalive Enabled
 
-<a id="nestedblock--gre_ipv6"></a>
+<a id="gre-ipv6"></a>
 
 ### Gre IPv6
 
 `customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel (`String`).
 
-`ipv4_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv4 Interconnect Disabled](#nestedblock--gre_ipv6--ipv4_interconnect_disabled) below.
+`ipv4_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv4 Interconnect Disabled](#gre-ipv6-ipv4-interconnect-disabled) below.
 
-`ipv4_interconnect_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv4 Interconnect Enabled](#nestedblock--gre_ipv6--ipv4_interconnect_enabled) below.
+`ipv4_interconnect_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv4 Interconnect Enabled](#gre-ipv6-ipv4-interconnect-enabled) below.
 
-<a id="nestedblock--gre_ipv6--ipv4_interconnect_disabled"></a>
+<a id="gre-ipv6-ipv4-interconnect-disabled"></a>
 
 ### Gre IPv6 IPv4 Interconnect Disabled
 
-<a id="nestedblock--gre_ipv6--ipv4_interconnect_enabled"></a>
+<a id="gre-ipv6-ipv4-interconnect-enabled"></a>
 
 ### Gre IPv6 IPv4 Interconnect Enabled
 
-<a id="nestedblock--ip_in_ip"></a>
+<a id="ip-in-ip"></a>
 
 ### IP In IP
 
 `customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel (`String`).
 
-<a id="nestedblock--ipv6_to_ipv6"></a>
+<a id="ipv6-to-ipv6"></a>
 
 ### IPv6 To IPv6
 
 `customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -248,21 +248,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--tunnel_location"></a>
+<a id="tunnel-location"></a>
 
 ### Tunnel Location
 
 `name` - (Optional) Location Name. Destination tunnel Location (`String`).
 
-`zone1` - (Optional) Empty. This can be used for messages where no values are needed. See [Zone1](#nestedblock--tunnel_location--zone1) below.
+`zone1` - (Optional) Empty. This can be used for messages where no values are needed. See [Zone1](#tunnel-location-zone1) below.
 
-`zone2` - (Optional) Empty. This can be used for messages where no values are needed. See [Zone2](#nestedblock--tunnel_location--zone2) below.
+`zone2` - (Optional) Empty. This can be used for messages where no values are needed. See [Zone2](#tunnel-location-zone2) below.
 
-<a id="nestedblock--tunnel_location--zone1"></a>
+<a id="tunnel-location-zone1"></a>
 
 ### Tunnel Location Zone1
 
-<a id="nestedblock--tunnel_location--zone2"></a>
+<a id="tunnel-location-zone2"></a>
 
 ### Tunnel Location Zone2
 

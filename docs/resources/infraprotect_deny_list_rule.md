@@ -88,27 +88,27 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--expiration_never"></a>
+<a id="expiration-never"></a>
 
 ### Expiration Never
 
-<a id="nestedblock--one_day"></a>
+<a id="one-day"></a>
 
 ### One Day
 
-<a id="nestedblock--one_hour"></a>
+<a id="one-hour"></a>
 
 ### One Hour
 
-<a id="nestedblock--one_month"></a>
+<a id="one-month"></a>
 
 ### One Month
 
-<a id="nestedblock--one_year"></a>
+<a id="one-year"></a>
 
 ### One Year
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

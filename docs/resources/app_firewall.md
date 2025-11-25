@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--ai_risk_based_blocking"></a>
+<a id="ai-risk-based-blocking"></a>
 
 ### Ai Risk Based Blocking
 
@@ -122,21 +122,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_risk_action` - (Optional) Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`. Defaults to `AI_BLOCK` (`String`).
 
-<a id="nestedblock--allow_all_response_codes"></a>
+<a id="allow-all-response-codes"></a>
 
 ### Allow All Response Codes
 
-<a id="nestedblock--allowed_response_codes"></a>
+<a id="allowed-response-codes"></a>
 
 ### Allowed Response Codes
 
 `response_code` - (Optional) Response Code. List of HTTP response status codes that are allowed (`List`).
 
-<a id="nestedblock--blocking"></a>
+<a id="blocking"></a>
 
 ### Blocking
 
-<a id="nestedblock--blocking_page"></a>
+<a id="blocking-page"></a>
 
 ### Blocking Page
 
@@ -144,7 +144,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `response_code` - (Optional) HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code U... Possible values include `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, and others. Defaults to `EmptyStatusCode` (`String`).
 
-<a id="nestedblock--bot_protection_setting"></a>
+<a id="bot-protection-setting"></a>
 
 ### Bot Protection Setting
 
@@ -154,81 +154,81 @@ In addition to all arguments above, the following attributes are exported:
 
 `suspicious_bot_action` - (Optional) Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK` (`String`).
 
-<a id="nestedblock--custom_anonymization"></a>
+<a id="custom-anonymization"></a>
 
 ### Custom Anonymization
 
-`anonymization_config` - (Optional) Configuration. List of HTTP headers, cookies and query parameters whose values will be masked. See [Anonymization Config](#nestedblock--custom_anonymization--anonymization_config) below.
+`anonymization_config` - (Optional) Configuration. List of HTTP headers, cookies and query parameters whose values will be masked. See [Anonymization Config](#custom-anonymization-anonymization-config) below.
 
-<a id="nestedblock--custom_anonymization--anonymization_config"></a>
+<a id="custom-anonymization-anonymization-config"></a>
 
 ### Custom Anonymization Anonymization Config
 
-`cookie` - (Optional) Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies. See [Cookie](#nestedblock--custom_anonymization--anonymization_config--cookie) below.
+`cookie` - (Optional) Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies. See [Cookie](#custom-anonymization-anonymization-config-cookie) below.
 
-`http_header` - (Optional) Anonymize HTTP Header. Configure anonymization for HTTP Headers. See [HTTP Header](#nestedblock--custom_anonymization--anonymization_config--http_header) below.
+`http_header` - (Optional) Anonymize HTTP Header. Configure anonymization for HTTP Headers. See [HTTP Header](#custom-anonymization-anonymization-config-http-header) below.
 
-`query_parameter` - (Optional) Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters. See [Query Parameter](#nestedblock--custom_anonymization--anonymization_config--query_parameter) below.
+`query_parameter` - (Optional) Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters. See [Query Parameter](#custom-anonymization-anonymization-config-query-parameter) below.
 
-<a id="nestedblock--custom_anonymization--anonymization_config--cookie"></a>
+<a id="custom-anonymization-anonymization-config-cookie"></a>
 
 ### Custom Anonymization Anonymization Config Cookie
 
 `cookie_name` - (Optional) Cookie Name. Masks the cookie value. The setting does not mask the cookie name (`String`).
 
-<a id="nestedblock--custom_anonymization--anonymization_config--http_header"></a>
+<a id="custom-anonymization-anonymization-config-http-header"></a>
 
 ### Custom Anonymization Anonymization Config HTTP Header
 
 `header_name` - (Optional) Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name (`String`).
 
-<a id="nestedblock--custom_anonymization--anonymization_config--query_parameter"></a>
+<a id="custom-anonymization-anonymization-config-query-parameter"></a>
 
 ### Custom Anonymization Anonymization Config Query Parameter
 
 `query_param_name` - (Optional) Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name (`String`).
 
-<a id="nestedblock--default_anonymization"></a>
+<a id="default-anonymization"></a>
 
 ### Default Anonymization
 
-<a id="nestedblock--default_bot_setting"></a>
+<a id="default-bot-setting"></a>
 
 ### Default Bot Setting
 
-<a id="nestedblock--default_detection_settings"></a>
+<a id="default-detection-settings"></a>
 
 ### Default Detection Settings
 
-<a id="nestedblock--detection_settings"></a>
+<a id="detection-settings"></a>
 
 ### Detection Settings
 
-`bot_protection_setting` - (Optional) Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation. See [Bot Protection Setting](#nestedblock--detection_settings--bot_protection_setting) below.
+`bot_protection_setting` - (Optional) Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation. See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
 
-`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#nestedblock--detection_settings--default_bot_setting) below.
+`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#detection-settings-default-bot-setting) below.
 
-`default_violation_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Violation Settings](#nestedblock--detection_settings--default_violation_settings) below.
+`default_violation_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Violation Settings](#detection-settings-default-violation-settings) below.
 
-`disable_staging` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Staging](#nestedblock--detection_settings--disable_staging) below.
+`disable_staging` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Staging](#detection-settings-disable-staging) below.
 
-`disable_suppression` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Suppression](#nestedblock--detection_settings--disable_suppression) below.
+`disable_suppression` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Suppression](#detection-settings-disable-suppression) below.
 
-`disable_threat_campaigns` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Threat Campaigns](#nestedblock--detection_settings--disable_threat_campaigns) below.
+`disable_threat_campaigns` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Threat Campaigns](#detection-settings-disable-threat-campaigns) below.
 
-`enable_suppression` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Suppression](#nestedblock--detection_settings--enable_suppression) below.
+`enable_suppression` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Suppression](#detection-settings-enable-suppression) below.
 
-`enable_threat_campaigns` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Threat Campaigns](#nestedblock--detection_settings--enable_threat_campaigns) below.
+`enable_threat_campaigns` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Threat Campaigns](#detection-settings-enable-threat-campaigns) below.
 
-`signature_selection_setting` - (Optional) Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components. See [Signature Selection Setting](#nestedblock--detection_settings--signature_selection_setting) below.
+`signature_selection_setting` - (Optional) Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components. See [Signature Selection Setting](#detection-settings-signature-selection-setting) below.
 
-`stage_new_and_updated_signatures` - (Optional) Attack Signatures Staging Settings. Attack Signatures staging configuration. See [Stage New And Updated Signatures](#nestedblock--detection_settings--stage_new_and_updated_signatures) below.
+`stage_new_and_updated_signatures` - (Optional) Attack Signatures Staging Settings. Attack Signatures staging configuration. See [Stage New And Updated Signatures](#detection-settings-stage-new-and-updated-signatures) below.
 
-`stage_new_signatures` - (Optional) Attack Signatures Staging Settings. Attack Signatures staging configuration. See [Stage New Signatures](#nestedblock--detection_settings--stage_new_signatures) below.
+`stage_new_signatures` - (Optional) Attack Signatures Staging Settings. Attack Signatures staging configuration. See [Stage New Signatures](#detection-settings-stage-new-signatures) below.
 
-`violation_settings` - (Optional) Violation Settings. Specifies violation settings to be used by WAF. See [Violation Settings](#nestedblock--detection_settings--violation_settings) below.
+`violation_settings` - (Optional) Violation Settings. Specifies violation settings to be used by WAF. See [Violation Settings](#detection-settings-violation-settings) below.
 
-<a id="nestedblock--detection_settings--bot_protection_setting"></a>
+<a id="detection-settings-bot-protection-setting"></a>
 
 ### Detection Settings Bot Protection Setting
 
@@ -238,97 +238,97 @@ In addition to all arguments above, the following attributes are exported:
 
 `suspicious_bot_action` - (Optional) Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK` (`String`).
 
-<a id="nestedblock--detection_settings--default_bot_setting"></a>
+<a id="detection-settings-default-bot-setting"></a>
 
 ### Detection Settings Default Bot Setting
 
-<a id="nestedblock--detection_settings--default_violation_settings"></a>
+<a id="detection-settings-default-violation-settings"></a>
 
 ### Detection Settings Default Violation Settings
 
-<a id="nestedblock--detection_settings--disable_staging"></a>
+<a id="detection-settings-disable-staging"></a>
 
 ### Detection Settings Disable Staging
 
-<a id="nestedblock--detection_settings--disable_suppression"></a>
+<a id="detection-settings-disable-suppression"></a>
 
 ### Detection Settings Disable Suppression
 
-<a id="nestedblock--detection_settings--disable_threat_campaigns"></a>
+<a id="detection-settings-disable-threat-campaigns"></a>
 
 ### Detection Settings Disable Threat Campaigns
 
-<a id="nestedblock--detection_settings--enable_suppression"></a>
+<a id="detection-settings-enable-suppression"></a>
 
 ### Detection Settings Enable Suppression
 
-<a id="nestedblock--detection_settings--enable_threat_campaigns"></a>
+<a id="detection-settings-enable-threat-campaigns"></a>
 
 ### Detection Settings Enable Threat Campaigns
 
-<a id="nestedblock--detection_settings--signature_selection_setting"></a>
+<a id="detection-settings-signature-selection-setting"></a>
 
 ### Detection Settings Signature Selection Setting
 
-`attack_type_settings` - (Optional) Attack Type Settings. Specifies attack-type settings to be used by WAF. See [Attack Type Settings](#nestedblock--detection_settings--signature_selection_setting--attack_type_settings) below.
+`attack_type_settings` - (Optional) Attack Type Settings. Specifies attack-type settings to be used by WAF. See [Attack Type Settings](#detection-settings-signature-selection-setting-attack-type-settings) below.
 
-`default_attack_type_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Attack Type Settings](#nestedblock--detection_settings--signature_selection_setting--default_attack_type_settings) below.
+`default_attack_type_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Attack Type Settings](#detection-settings-signature-selection-setting-default-attack-type-settings) below.
 
-`high_medium_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [High Medium Accuracy Signatures](#nestedblock--detection_settings--signature_selection_setting--high_medium_accuracy_signatures) below.
+`high_medium_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [High Medium Accuracy Signatures](#detection-settings-signature-selection-setting-high-medium-accuracy-signatures) below.
 
-`high_medium_low_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [High Medium Low Accuracy Signatures](#nestedblock--detection_settings--signature_selection_setting--high_medium_low_accuracy_signatures) below.
+`high_medium_low_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [High Medium Low Accuracy Signatures](#detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures) below.
 
-`only_high_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [Only High Accuracy Signatures](#nestedblock--detection_settings--signature_selection_setting--only_high_accuracy_signatures) below.
+`only_high_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [Only High Accuracy Signatures](#detection-settings-signature-selection-setting-only-high-accuracy-signatures) below.
 
-<a id="nestedblock--detection_settings--signature_selection_setting--attack_type_settings"></a>
+<a id="detection-settings-signature-selection-setting-attack-type-settings"></a>
 
 ### Detection Settings Signature Selection Setting Attack Type Settings
 
 `disabled_attack_types` - (Optional) Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection (`List`).
 
-<a id="nestedblock--detection_settings--signature_selection_setting--default_attack_type_settings"></a>
+<a id="detection-settings-signature-selection-setting-default-attack-type-settings"></a>
 
 ### Detection Settings Signature Selection Setting Default Attack Type Settings
 
-<a id="nestedblock--detection_settings--signature_selection_setting--high_medium_accuracy_signatures"></a>
+<a id="detection-settings-signature-selection-setting-high-medium-accuracy-signatures"></a>
 
 ### Detection Settings Signature Selection Setting High Medium Accuracy Signatures
 
-<a id="nestedblock--detection_settings--signature_selection_setting--high_medium_low_accuracy_signatures"></a>
+<a id="detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures"></a>
 
 ### Detection Settings Signature Selection Setting High Medium Low Accuracy Signatures
 
-<a id="nestedblock--detection_settings--signature_selection_setting--only_high_accuracy_signatures"></a>
+<a id="detection-settings-signature-selection-setting-only-high-accuracy-signatures"></a>
 
 ### Detection Settings Signature Selection Setting Only High Accuracy Signatures
 
-<a id="nestedblock--detection_settings--stage_new_and_updated_signatures"></a>
+<a id="detection-settings-stage-new-and-updated-signatures"></a>
 
 ### Detection Settings Stage New And Updated Signatures
 
 `staging_period` - (Optional) Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days (`Number`).
 
-<a id="nestedblock--detection_settings--stage_new_signatures"></a>
+<a id="detection-settings-stage-new-signatures"></a>
 
 ### Detection Settings Stage New Signatures
 
 `staging_period` - (Optional) Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days (`Number`).
 
-<a id="nestedblock--detection_settings--violation_settings"></a>
+<a id="detection-settings-violation-settings"></a>
 
 ### Detection Settings Violation Settings
 
 `disabled_violation_types` - (Optional) Disabled Violations. List of violations to be excluded (`List`).
 
-<a id="nestedblock--disable_anonymization"></a>
+<a id="disable-anonymization"></a>
 
 ### Disable Anonymization
 
-<a id="nestedblock--monitoring"></a>
+<a id="monitoring"></a>
 
 ### Monitoring
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -340,7 +340,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--use_default_blocking_page"></a>
+<a id="use-default-blocking-page"></a>
 
 ### Use Default Blocking Page
 

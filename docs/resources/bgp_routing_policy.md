@@ -74,77 +74,77 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--rules"></a>
+<a id="rules"></a>
 
 ### Rules
 
-`action` - (Optional) BGP Route Action. Action to be enforced if the BGP route matches the rule. See [Action](#nestedblock--rules--action) below.
+`action` - (Optional) BGP Route Action. Action to be enforced if the BGP route matches the rule. See [Action](#rules-action) below.
 
-`match` - (Optional) BGP Route Match. Predicates which have to match information in route for action to be applied. See [Match](#nestedblock--rules--match) below.
+`match` - (Optional) BGP Route Match. Predicates which have to match information in route for action to be applied. See [Match](#rules-match) below.
 
-<a id="nestedblock--rules--action"></a>
+<a id="rules-action"></a>
 
 ### Rules Action
 
-`aggregate` - (Optional) Empty. This can be used for messages where no values are needed. See [Aggregate](#nestedblock--rules--action--aggregate) below.
+`aggregate` - (Optional) Empty. This can be used for messages where no values are needed. See [Aggregate](#rules-action-aggregate) below.
 
-`allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow](#nestedblock--rules--action--allow) below.
+`allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow](#rules-action-allow) below.
 
 `as_path` - (Optional) AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic (`String`).
 
-`community` - (Optional) BGP Community list. List of BGP communities. See [Community](#nestedblock--rules--action--community) below.
+`community` - (Optional) BGP Community list. List of BGP communities. See [Community](#rules-action-community) below.
 
-`deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny](#nestedblock--rules--action--deny) below.
+`deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny](#rules-action-deny) below.
 
 `local_preference` - (Optional) Local preference. BGP Local Preference is generally used to influence outgoing traffic (`Number`).
 
 `metric` - (Optional) MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS (`Number`).
 
-<a id="nestedblock--rules--action--aggregate"></a>
+<a id="rules-action-aggregate"></a>
 
 ### Rules Action Aggregate
 
-<a id="nestedblock--rules--action--allow"></a>
+<a id="rules-action-allow"></a>
 
 ### Rules Action Allow
 
-<a id="nestedblock--rules--action--community"></a>
+<a id="rules-action-community"></a>
 
 ### Rules Action Community
 
 `community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
 
-<a id="nestedblock--rules--action--deny"></a>
+<a id="rules-action-deny"></a>
 
 ### Rules Action Deny
 
-<a id="nestedblock--rules--match"></a>
+<a id="rules-match"></a>
 
 ### Rules Match
 
 `as_path` - (Optional) AS path to match. AS path can also be a regex, which will be matched against route information (`String`).
 
-`community` - (Optional) BGP Community list. List of BGP communities. See [Community](#nestedblock--rules--match--community) below.
+`community` - (Optional) BGP Community list. List of BGP communities. See [Community](#rules-match-community) below.
 
-`ip_prefixes` - (Optional) BGP Prefix List. List of IP prefix and prefix length range match condition. See [IP Prefixes](#nestedblock--rules--match--ip_prefixes) below.
+`ip_prefixes` - (Optional) BGP Prefix List. List of IP prefix and prefix length range match condition. See [IP Prefixes](#rules-match-ip-prefixes) below.
 
-<a id="nestedblock--rules--match--community"></a>
+<a id="rules-match-community"></a>
 
 ### Rules Match Community
 
 `community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
 
-<a id="nestedblock--rules--match--ip_prefixes"></a>
+<a id="rules-match-ip-prefixes"></a>
 
 ### Rules Match IP Prefixes
 
-`prefixes` - (Optional) Prefix list. List of IP prefix. See [Prefixes](#nestedblock--rules--match--ip_prefixes--prefixes) below.
+`prefixes` - (Optional) Prefix list. List of IP prefix. See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
 
-<a id="nestedblock--rules--match--ip_prefixes--prefixes"></a>
+<a id="rules-match-ip-prefixes-prefixes"></a>
 
 ### Rules Match IP Prefixes Prefixes
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

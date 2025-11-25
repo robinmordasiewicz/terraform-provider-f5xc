@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--addon_service"></a>
+<a id="addon-service"></a>
 
 ### Addon Service
 
@@ -88,21 +88,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--notification_preference"></a>
+<a id="notification-preference"></a>
 
 ### Notification Preference
 
-`emails` - (Optional) Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription. See [Emails](#nestedblock--notification_preference--emails) below.
+`emails` - (Optional) Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription. See [Emails](#notification-preference-emails) below.
 
-`support_ticket_id` - (Optional) Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription. See [Support Ticket Id](#nestedblock--notification_preference--support_ticket_id) below.
+`support_ticket_id` - (Optional) Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription. See [Support Ticket Id](#notification-preference-support-ticket-id) below.
 
-<a id="nestedblock--notification_preference--emails"></a>
+<a id="notification-preference-emails"></a>
 
 ### Notification Preference Emails
 
 `email_ids` - (Optional) Emails. Email ids associated with the Addon Subscription (`List`).
 
-<a id="nestedblock--notification_preference--support_ticket_id"></a>
+<a id="notification-preference-support-ticket-id"></a>
 
 ### Notification Preference Support Ticket Id
 
@@ -110,7 +110,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `unsubscription_ticket_id` - (Optional) Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

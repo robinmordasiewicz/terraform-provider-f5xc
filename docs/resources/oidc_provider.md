@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--azure_oidc_spec_type"></a>
+<a id="azure-oidc-spec-type"></a>
 
 ### Azure Oidc Spec Type
 
@@ -110,7 +110,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `user_info_url` - (Optional) User Info URL. The User Info URL specified in your OIDC application (`String`).
 
-<a id="nestedblock--google_oidc_spec_type"></a>
+<a id="google-oidc-spec-type"></a>
 
 ### Google Oidc Spec Type
 
@@ -120,7 +120,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `hosted_domain` - (Optional) Hosted Domain. set hosted domain to restrict user input on login form to use email address from this email domain. for example, setting value company.com will enforce user email input to have only username@company.com leave empty if no restriction is required for email address. ie for example allow user@company1.com and user@company2.com (`String`).
 
-<a id="nestedblock--oidc_v10_spec_type"></a>
+<a id="oidc-v10-spec-type"></a>
 
 ### Oidc V10 Spec Type
 
@@ -160,7 +160,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `validate_signatures` - (Optional) Validate Signatures. Enable/disable signature validation of external IDP signatures (`Bool`).
 
-<a id="nestedblock--okta_oidc_spec_type"></a>
+<a id="okta-oidc-spec-type"></a>
 
 ### Okta Oidc Spec Type
 
@@ -186,7 +186,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `user_info_url` - (Optional) User Info URL. The User Info URL specified in your OIDC application (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

@@ -63,7 +63,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--ipv4_prefixes"></a>
+<a id="ipv4-prefixes"></a>
 
 ### IPv4 Prefixes
 
@@ -71,7 +71,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ipv4_prefix` - (Optional) IPv4 Prefix (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

@@ -82,55 +82,55 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--global_network"></a>
+<a id="global-network"></a>
 
 ### Global Network
 
-<a id="nestedblock--site_local_inside_network"></a>
+<a id="site-local-inside-network"></a>
 
 ### Site Local Inside Network
 
-<a id="nestedblock--site_local_network"></a>
+<a id="site-local-network"></a>
 
 ### Site Local Network
 
-<a id="nestedblock--static_routes"></a>
+<a id="static-routes"></a>
 
 ### Static Routes
 
 `attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#nestedblock--static_routes--default_gateway) below.
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#static-routes-default-gateway) below.
 
 `ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
 
 `ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
 
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#nestedblock--static_routes--node_interface) below.
+`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#static-routes-node-interface) below.
 
-<a id="nestedblock--static_routes--default_gateway"></a>
+<a id="static-routes-default-gateway"></a>
 
 ### Static Routes Default Gateway
 
-<a id="nestedblock--static_routes--node_interface"></a>
+<a id="static-routes-node-interface"></a>
 
 ### Static Routes Node Interface
 
-`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#nestedblock--static_routes--node_interface--list) below.
+`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#static-routes-node-interface-list) below.
 
-<a id="nestedblock--static_routes--node_interface--list"></a>
+<a id="static-routes-node-interface-list"></a>
 
 ### Static Routes Node Interface List
 
-`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#nestedblock--static_routes--node_interface--list--interface) below.
+`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#static-routes-node-interface-list-interface) below.
 
 `node` - (Optional) Node. Node name on this site (`String`).
 
-<a id="nestedblock--static_routes--node_interface--list--interface"></a>
+<a id="static-routes-node-interface-list-interface"></a>
 
 ### Static Routes Node Interface List Interface
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

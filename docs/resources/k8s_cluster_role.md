@@ -80,27 +80,27 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--k8s_cluster_role_selector"></a>
+<a id="k8s-cluster-role-selector"></a>
 
 ### K8s Cluster Role Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--policy_rule_list"></a>
+<a id="policy-rule-list"></a>
 
 ### Policy Rule List
 
-`policy_rule` - (Optional) Policy Rules. List of rules for role permissions. See [Policy Rule](#nestedblock--policy_rule_list--policy_rule) below.
+`policy_rule` - (Optional) Policy Rules. List of rules for role permissions. See [Policy Rule](#policy-rule-list-policy-rule) below.
 
-<a id="nestedblock--policy_rule_list--policy_rule"></a>
+<a id="policy-rule-list-policy-rule"></a>
 
 ### Policy Rule List Policy Rule
 
-`non_resource_url_list` - (Optional) List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource. See [Non Resource URL List](#nestedblock--policy_rule_list--policy_rule--non_resource_url_list) below.
+`non_resource_url_list` - (Optional) List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource. See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
 
-`resource_list` - (Optional) Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed. See [Resource List](#nestedblock--policy_rule_list--policy_rule--resource_list) below.
+`resource_list` - (Optional) Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed. See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
 
-<a id="nestedblock--policy_rule_list--policy_rule--non_resource_url_list"></a>
+<a id="policy-rule-list-policy-rule-non-resource-url-list"></a>
 
 ### Policy Rule List Policy Rule Non Resource URL List
 
@@ -108,7 +108,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations (`List`).
 
-<a id="nestedblock--policy_rule_list--policy_rule--resource_list"></a>
+<a id="policy-rule-list-policy-rule-resource-list"></a>
 
 ### Policy Rule List Policy Rule Resource List
 
@@ -120,7 +120,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

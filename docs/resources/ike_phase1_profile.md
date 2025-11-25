@@ -96,35 +96,35 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--ike_keylifetime_hours"></a>
+<a id="ike-keylifetime-hours"></a>
 
 ### Ike Keylifetime Hours
 
 `duration` - (Optional) Duration (`Number`).
 
-<a id="nestedblock--ike_keylifetime_minutes"></a>
+<a id="ike-keylifetime-minutes"></a>
 
 ### Ike Keylifetime Minutes
 
 `duration` - (Optional) Duration (`Number`).
 
-<a id="nestedblock--reauth_disabled"></a>
+<a id="reauth-disabled"></a>
 
 ### Reauth Disabled
 
-<a id="nestedblock--reauth_timeout_days"></a>
+<a id="reauth-timeout-days"></a>
 
 ### Reauth Timeout Days
 
 `duration` - (Optional) Duration (`Number`).
 
-<a id="nestedblock--reauth_timeout_hours"></a>
+<a id="reauth-timeout-hours"></a>
 
 ### Reauth Timeout Hours
 
 `duration` - (Optional) Duration (`Number`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--use_default_keylifetime"></a>
+<a id="use-default-keylifetime"></a>
 
 ### Use Default Keylifetime
 

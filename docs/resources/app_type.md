@@ -76,37 +76,37 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--business_logic_markup_setting"></a>
+<a id="business-logic-markup-setting"></a>
 
 ### Business Logic Markup Setting
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--business_logic_markup_setting--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#business-logic-markup-setting-disable) below.
 
-`discovered_api_settings` - (Optional) Discovered API Settings. x-example: '2' Configure Discovered API Settings. See [Discovered API Settings](#nestedblock--business_logic_markup_setting--discovered_api_settings) below.
+`discovered_api_settings` - (Optional) Discovered API Settings. x-example: '2' Configure Discovered API Settings. See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--business_logic_markup_setting--enable) below.
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#business-logic-markup-setting-enable) below.
 
-<a id="nestedblock--business_logic_markup_setting--disable"></a>
+<a id="business-logic-markup-setting-disable"></a>
 
 ### Business Logic Markup Setting Disable
 
-<a id="nestedblock--business_logic_markup_setting--discovered_api_settings"></a>
+<a id="business-logic-markup-setting-discovered-api-settings"></a>
 
 ### Business Logic Markup Setting Discovered API Settings
 
 `purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
 
-<a id="nestedblock--business_logic_markup_setting--enable"></a>
+<a id="business-logic-markup-setting-enable"></a>
 
 ### Business Logic Markup Setting Enable
 
-<a id="nestedblock--features"></a>
+<a id="features"></a>
 
 ### Features
 
 `type` - (Optional) AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis. Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`. Defaults to `BUSINESS_LOGIC_MARKUP` (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

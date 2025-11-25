@@ -84,77 +84,77 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--domains"></a>
+<a id="domains"></a>
 
 ### Domains
 
 `allow_destructive_methods` - (Optional) Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data (`Bool`).
 
-`credentials` - (Optional) Credentials. Add credentials for API testing to use in the selected environment. See [Credentials](#nestedblock--domains--credentials) below.
+`credentials` - (Optional) Credentials. Add credentials for API testing to use in the selected environment. See [Credentials](#domains-credentials) below.
 
 `domain` - (Optional) Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments (`String`).
 
-<a id="nestedblock--domains--credentials"></a>
+<a id="domains-credentials"></a>
 
 ### Domains Credentials
 
-`admin` - (Optional) Empty. This can be used for messages where no values are needed. See [Admin](#nestedblock--domains--credentials--admin) below.
+`admin` - (Optional) Empty. This can be used for messages where no values are needed. See [Admin](#domains-credentials-admin) below.
 
-`api_key` - (Optional) API Key. See [API Key](#nestedblock--domains--credentials--api_key) below.
+`api_key` - (Optional) API Key. See [API Key](#domains-credentials-api-key) below.
 
-`basic_auth` - (Optional) Basic Authentication. See [Basic Auth](#nestedblock--domains--credentials--basic_auth) below.
+`basic_auth` - (Optional) Basic Authentication. See [Basic Auth](#domains-credentials-basic-auth) below.
 
-`bearer_token` - (Optional) Bearer. See [Bearer Token](#nestedblock--domains--credentials--bearer_token) below.
+`bearer_token` - (Optional) Bearer. See [Bearer Token](#domains-credentials-bearer-token) below.
 
 `credential_name` - (Optional) Name. Enter a unique name for the credentials used in API testing (`String`).
 
-`login_endpoint` - (Optional) Login Endpoint. See [Login Endpoint](#nestedblock--domains--credentials--login_endpoint) below.
+`login_endpoint` - (Optional) Login Endpoint. See [Login Endpoint](#domains-credentials-login-endpoint) below.
 
-`standard` - (Optional) Empty. This can be used for messages where no values are needed. See [Standard](#nestedblock--domains--credentials--standard) below.
+`standard` - (Optional) Empty. This can be used for messages where no values are needed. See [Standard](#domains-credentials-standard) below.
 
-<a id="nestedblock--domains--credentials--admin"></a>
+<a id="domains-credentials-admin"></a>
 
 ### Domains Credentials Admin
 
-<a id="nestedblock--domains--credentials--api_key"></a>
+<a id="domains-credentials-api-key"></a>
 
 ### Domains Credentials API Key
 
 `key` - (Optional) Key (`String`).
 
-`value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Value](#nestedblock--domains--credentials--api_key--value) below.
+`value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Value](#domains-credentials-api-key-value) below.
 
-<a id="nestedblock--domains--credentials--api_key--value"></a>
+<a id="domains-credentials-api-key-value"></a>
 
 ### Domains Credentials API Key Value
 
-<a id="nestedblock--domains--credentials--basic_auth"></a>
+<a id="domains-credentials-basic-auth"></a>
 
 ### Domains Credentials Basic Auth
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#nestedblock--domains--credentials--basic_auth--password) below.
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#domains-credentials-basic-auth-password) below.
 
 `user` - (Optional) User (`String`).
 
-<a id="nestedblock--domains--credentials--basic_auth--password"></a>
+<a id="domains-credentials-basic-auth-password"></a>
 
 ### Domains Credentials Basic Auth Password
 
-<a id="nestedblock--domains--credentials--bearer_token"></a>
+<a id="domains-credentials-bearer-token"></a>
 
 ### Domains Credentials Bearer Token
 
-`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#nestedblock--domains--credentials--bearer_token--token) below.
+`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#domains-credentials-bearer-token-token) below.
 
-<a id="nestedblock--domains--credentials--bearer_token--token"></a>
+<a id="domains-credentials-bearer-token-token"></a>
 
 ### Domains Credentials Bearer Token Token
 
-<a id="nestedblock--domains--credentials--login_endpoint"></a>
+<a id="domains-credentials-login-endpoint"></a>
 
 ### Domains Credentials Login Endpoint
 
-`json_payload` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [JSON Payload](#nestedblock--domains--credentials--login_endpoint--json_payload) below.
+`json_payload` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [JSON Payload](#domains-credentials-login-endpoint-json-payload) below.
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values include `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, and others. Defaults to `ANY` (`String`).
 
@@ -162,27 +162,27 @@ In addition to all arguments above, the following attributes are exported:
 
 `token_response_key` - (Optional) Token Response Key (`String`).
 
-<a id="nestedblock--domains--credentials--login_endpoint--json_payload"></a>
+<a id="domains-credentials-login-endpoint-json-payload"></a>
 
 ### Domains Credentials Login Endpoint JSON Payload
 
-<a id="nestedblock--domains--credentials--standard"></a>
+<a id="domains-credentials-standard"></a>
 
 ### Domains Credentials Standard
 
-<a id="nestedblock--every_day"></a>
+<a id="every-day"></a>
 
 ### Every Day
 
-<a id="nestedblock--every_month"></a>
+<a id="every-month"></a>
 
 ### Every Month
 
-<a id="nestedblock--every_week"></a>
+<a id="every-week"></a>
 
 ### Every Week
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

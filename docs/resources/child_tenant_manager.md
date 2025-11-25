@@ -76,15 +76,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--group_assignments"></a>
+<a id="group-assignments"></a>
 
 ### Group Assignments
 
 `child_tenant_groups` - (Optional) Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user (`List`).
 
-`group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Group](#nestedblock--group_assignments--group) below.
+`group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Group](#group-assignments-group) below.
 
-<a id="nestedblock--group_assignments--group"></a>
+<a id="group-assignments-group"></a>
 
 ### Group Assignments Group
 
@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--tenant_owner_group"></a>
+<a id="tenant-owner-group"></a>
 
 ### Tenant Owner Group
 
@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

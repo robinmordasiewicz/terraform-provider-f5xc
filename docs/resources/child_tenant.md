@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--child_tenant_manager"></a>
+<a id="child-tenant-manager"></a>
 
 ### Child Tenant Manager
 
@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--contact_detail"></a>
+<a id="contact-detail"></a>
 
 ### Contact Detail
 
@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `zip_code` - (Optional) ZIP code (`String`).
 
-<a id="nestedblock--customer_info"></a>
+<a id="customer-info"></a>
 
 ### Customer Info
 
@@ -130,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `last_name` - (Optional) Last Name (`String`).
 
-<a id="nestedblock--tenant_profile"></a>
+<a id="tenant-profile"></a>
 
 ### Tenant Profile
 
@@ -140,7 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

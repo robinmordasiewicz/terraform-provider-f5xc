@@ -74,47 +74,47 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--pod_security_admission_specs"></a>
+<a id="pod-security-admission-specs"></a>
 
 ### Pod Security Admission Specs
 
-`audit` - (Optional) Empty. This can be used for messages where no values are needed. See [Audit](#nestedblock--pod_security_admission_specs--audit) below.
+`audit` - (Optional) Empty. This can be used for messages where no values are needed. See [Audit](#pod-security-admission-specs-audit) below.
 
-`baseline` - (Optional) Empty. This can be used for messages where no values are needed. See [Baseline](#nestedblock--pod_security_admission_specs--baseline) below.
+`baseline` - (Optional) Empty. This can be used for messages where no values are needed. See [Baseline](#pod-security-admission-specs-baseline) below.
 
-`enforce` - (Optional) Empty. This can be used for messages where no values are needed. See [Enforce](#nestedblock--pod_security_admission_specs--enforce) below.
+`enforce` - (Optional) Empty. This can be used for messages where no values are needed. See [Enforce](#pod-security-admission-specs-enforce) below.
 
-`privileged` - (Optional) Empty. This can be used for messages where no values are needed. See [Privileged](#nestedblock--pod_security_admission_specs--privileged) below.
+`privileged` - (Optional) Empty. This can be used for messages where no values are needed. See [Privileged](#pod-security-admission-specs-privileged) below.
 
-`restricted` - (Optional) Empty. This can be used for messages where no values are needed. See [Restricted](#nestedblock--pod_security_admission_specs--restricted) below.
+`restricted` - (Optional) Empty. This can be used for messages where no values are needed. See [Restricted](#pod-security-admission-specs-restricted) below.
 
-`warn` - (Optional) Empty. This can be used for messages where no values are needed. See [Warn](#nestedblock--pod_security_admission_specs--warn) below.
+`warn` - (Optional) Empty. This can be used for messages where no values are needed. See [Warn](#pod-security-admission-specs-warn) below.
 
-<a id="nestedblock--pod_security_admission_specs--audit"></a>
+<a id="pod-security-admission-specs-audit"></a>
 
 ### Pod Security Admission Specs Audit
 
-<a id="nestedblock--pod_security_admission_specs--baseline"></a>
+<a id="pod-security-admission-specs-baseline"></a>
 
 ### Pod Security Admission Specs Baseline
 
-<a id="nestedblock--pod_security_admission_specs--enforce"></a>
+<a id="pod-security-admission-specs-enforce"></a>
 
 ### Pod Security Admission Specs Enforce
 
-<a id="nestedblock--pod_security_admission_specs--privileged"></a>
+<a id="pod-security-admission-specs-privileged"></a>
 
 ### Pod Security Admission Specs Privileged
 
-<a id="nestedblock--pod_security_admission_specs--restricted"></a>
+<a id="pod-security-admission-specs-restricted"></a>
 
 ### Pod Security Admission Specs Restricted
 
-<a id="nestedblock--pod_security_admission_specs--warn"></a>
+<a id="pod-security-admission-specs-warn"></a>
 
 ### Pod Security Admission Specs Warn
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

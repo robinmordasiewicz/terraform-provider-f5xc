@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--fallback_pool"></a>
+<a id="fallback-pool"></a>
 
 ### Fallback Pool
 
@@ -100,25 +100,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--response_cache"></a>
+<a id="response-cache"></a>
 
 ### Response Cache
 
-`default_response_cache_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Response Cache Parameters](#nestedblock--response_cache--default_response_cache_parameters) below.
+`default_response_cache_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Response Cache Parameters](#response-cache-default-response-cache-parameters) below.
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--response_cache--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#response-cache-disable) below.
 
-`response_cache_parameters` - (Optional) Response Cache Parameters. See [Response Cache Parameters](#nestedblock--response_cache--response_cache_parameters) below.
+`response_cache_parameters` - (Optional) Response Cache Parameters. See [Response Cache Parameters](#response-cache-response-cache-parameters) below.
 
-<a id="nestedblock--response_cache--default_response_cache_parameters"></a>
+<a id="response-cache-default-response-cache-parameters"></a>
 
 ### Response Cache Default Response Cache Parameters
 
-<a id="nestedblock--response_cache--disable"></a>
+<a id="response-cache-disable"></a>
 
 ### Response Cache Disable
 
-<a id="nestedblock--response_cache--response_cache_parameters"></a>
+<a id="response-cache-response-cache-parameters"></a>
 
 ### Response Cache Response Cache Parameters
 
@@ -128,55 +128,55 @@ In addition to all arguments above, the following attributes are exported:
 
 `cache_ttl` - (Optional) TTL. TTL for response cache (`Number`).
 
-<a id="nestedblock--rule_list"></a>
+<a id="rule-list"></a>
 
 ### Rule List
 
-`rules` - (Optional) Load Balancing Rules. Rules to perform load balancing. See [Rules](#nestedblock--rule_list--rules) below.
+`rules` - (Optional) Load Balancing Rules. Rules to perform load balancing. See [Rules](#rule-list-rules) below.
 
-<a id="nestedblock--rule_list--rules"></a>
+<a id="rule-list-rules"></a>
 
 ### Rule List Rules
 
-`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#nestedblock--rule_list--rules--asn_list) below.
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#rule-list-rules-asn-list) below.
 
-`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--rule_list--rules--asn_matcher) below.
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#rule-list-rules-asn-matcher) below.
 
-`geo_location_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Geo Location Label Selector](#nestedblock--rule_list--rules--geo_location_label_selector) below.
+`geo_location_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Geo Location Label Selector](#rule-list-rules-geo-location-label-selector) below.
 
-`geo_location_set` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Geo Location Set](#nestedblock--rule_list--rules--geo_location_set) below.
+`geo_location_set` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Geo Location Set](#rule-list-rules-geo-location-set) below.
 
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#nestedblock--rule_list--rules--ip_prefix_list) below.
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#rule-list-rules-ip-prefix-list) below.
 
-`ip_prefix_set` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Prefix Set](#nestedblock--rule_list--rules--ip_prefix_set) below.
+`ip_prefix_set` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Prefix Set](#rule-list-rules-ip-prefix-set) below.
 
-`pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#nestedblock--rule_list--rules--pool) below.
+`pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#rule-list-rules-pool) below.
 
 `score` - (Optional) Score. When multiple load balancing rules match a query, the one with the highest score is chosen (`Number`).
 
-<a id="nestedblock--rule_list--rules--asn_list"></a>
+<a id="rule-list-rules-asn-list"></a>
 
 ### Rule List Rules Asn List
 
 `as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
 
-<a id="nestedblock--rule_list--rules--asn_matcher"></a>
+<a id="rule-list-rules-asn-matcher"></a>
 
 ### Rule List Rules Asn Matcher
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#nestedblock--rule_list--rules--asn_matcher--asn_sets) below.
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
 
-<a id="nestedblock--rule_list--rules--asn_matcher--asn_sets"></a>
+<a id="rule-list-rules-asn-matcher-asn-sets"></a>
 
 ### Rule List Rules Asn Matcher Asn Sets
 
-<a id="nestedblock--rule_list--rules--geo_location_label_selector"></a>
+<a id="rule-list-rules-geo-location-label-selector"></a>
 
 ### Rule List Rules Geo Location Label Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--rule_list--rules--geo_location_set"></a>
+<a id="rule-list-rules-geo-location-set"></a>
 
 ### Rule List Rules Geo Location Set
 
@@ -186,7 +186,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--rule_list--rules--ip_prefix_list"></a>
+<a id="rule-list-rules-ip-prefix-list"></a>
 
 ### Rule List Rules IP Prefix List
 
@@ -194,19 +194,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
-<a id="nestedblock--rule_list--rules--ip_prefix_set"></a>
+<a id="rule-list-rules-ip-prefix-set"></a>
 
 ### Rule List Rules IP Prefix Set
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#nestedblock--rule_list--rules--ip_prefix_set--prefix_sets) below.
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#rule-list-rules-ip-prefix-set-prefix-sets) below.
 
-<a id="nestedblock--rule_list--rules--ip_prefix_set--prefix_sets"></a>
+<a id="rule-list-rules-ip-prefix-set-prefix-sets"></a>
 
 ### Rule List Rules IP Prefix Set Prefix Sets
 
-<a id="nestedblock--rule_list--rules--pool"></a>
+<a id="rule-list-rules-pool"></a>
 
 ### Rule List Rules Pool
 
@@ -216,7 +216,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

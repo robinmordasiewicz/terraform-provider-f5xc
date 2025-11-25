@@ -78,19 +78,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--enable_disable_compliance_checks"></a>
+<a id="enable-disable-compliance-checks"></a>
 
 ### Enable Disable Compliance Checks
 
-`disable_compliance_checks` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Compliance Checks](#nestedblock--enable_disable_compliance_checks--disable_compliance_checks) below.
+`disable_compliance_checks` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Compliance Checks](#enable-disable-compliance-checks-disable-compliance-checks) below.
 
-`enable_compliance_checks` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Enable Compliance Checks](#nestedblock--enable_disable_compliance_checks--enable_compliance_checks) below.
+`enable_compliance_checks` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
 
-<a id="nestedblock--enable_disable_compliance_checks--disable_compliance_checks"></a>
+<a id="enable-disable-compliance-checks-disable-compliance-checks"></a>
 
 ### Enable Disable Compliance Checks Disable Compliance Checks
 
-<a id="nestedblock--enable_disable_compliance_checks--enable_compliance_checks"></a>
+<a id="enable-disable-compliance-checks-enable-compliance-checks"></a>
 
 ### Enable Disable Compliance Checks Enable Compliance Checks
 
@@ -100,23 +100,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--enable_disable_signatures"></a>
+<a id="enable-disable-signatures"></a>
 
 ### Enable Disable Signatures
 
-`disable_signature` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Signature](#nestedblock--enable_disable_signatures--disable_signature) below.
+`disable_signature` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Signature](#enable-disable-signatures-disable-signature) below.
 
-`enable_signature` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Signature](#nestedblock--enable_disable_signatures--enable_signature) below.
+`enable_signature` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Signature](#enable-disable-signatures-enable-signature) below.
 
-<a id="nestedblock--enable_disable_signatures--disable_signature"></a>
+<a id="enable-disable-signatures-disable-signature"></a>
 
 ### Enable Disable Signatures Disable Signature
 
-<a id="nestedblock--enable_disable_signatures--enable_signature"></a>
+<a id="enable-disable-signatures-enable-signature"></a>
 
 ### Enable Disable Signatures Enable Signature
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

@@ -74,15 +74,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--protocol_policer"></a>
+<a id="protocol-policer"></a>
 
 ### Protocol Policer
 
-`policer` - (Optional) Policer. Reference to policer object to apply traffic rate limits. See [Policer](#nestedblock--protocol_policer--policer) below.
+`policer` - (Optional) Policer. Reference to policer object to apply traffic rate limits. See [Policer](#protocol-policer-policer) below.
 
-`protocol` - (Optional) Protocol Type. Protocol and protocol specific flags to be matched in packet. See [Protocol](#nestedblock--protocol_policer--protocol) below.
+`protocol` - (Optional) Protocol Type. Protocol and protocol specific flags to be matched in packet. See [Protocol](#protocol-policer-protocol) below.
 
-<a id="nestedblock--protocol_policer--policer"></a>
+<a id="protocol-policer-policer"></a>
 
 ### Protocol Policer Policer
 
@@ -96,39 +96,39 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--protocol_policer--protocol"></a>
+<a id="protocol-policer-protocol"></a>
 
 ### Protocol Policer Protocol
 
-`dns` - (Optional) DNS Packets. Match all DNS packets inclusing UDP and TCP. See [DNS](#nestedblock--protocol_policer--protocol--dns) below.
+`dns` - (Optional) DNS Packets. Match all DNS packets inclusing UDP and TCP. See [DNS](#protocol-policer-protocol-dns) below.
 
-`icmp` - (Optional) ICMP Packet Type. ICMP message type to match in packet. See [ICMP](#nestedblock--protocol_policer--protocol--icmp) below.
+`icmp` - (Optional) ICMP Packet Type. ICMP message type to match in packet. See [ICMP](#protocol-policer-protocol-icmp) below.
 
-`tcp` - (Optional) TCP Packet Type. Specification of TCP flag to be matched in a TCP packet. See [TCP](#nestedblock--protocol_policer--protocol--tcp) below.
+`tcp` - (Optional) TCP Packet Type. Specification of TCP flag to be matched in a TCP packet. See [TCP](#protocol-policer-protocol-tcp) below.
 
-`udp` - (Optional) UDP Packets. Match all UDP packets. See [UDP](#nestedblock--protocol_policer--protocol--udp) below.
+`udp` - (Optional) UDP Packets. Match all UDP packets. See [UDP](#protocol-policer-protocol-udp) below.
 
-<a id="nestedblock--protocol_policer--protocol--dns"></a>
+<a id="protocol-policer-protocol-dns"></a>
 
 ### Protocol Policer Protocol DNS
 
-<a id="nestedblock--protocol_policer--protocol--icmp"></a>
+<a id="protocol-policer-protocol-icmp"></a>
 
 ### Protocol Policer Protocol ICMP
 
 `type` - (Optional) ICMP type. ICMP message type to be matched in packet (`List`).
 
-<a id="nestedblock--protocol_policer--protocol--tcp"></a>
+<a id="protocol-policer-protocol-tcp"></a>
 
 ### Protocol Policer Protocol TCP
 
 `flags` - (Optional) TCP flags. TCP flag to be matched in a TCP packet (`List`).
 
-<a id="nestedblock--protocol_policer--protocol--udp"></a>
+<a id="protocol-policer-protocol-udp"></a>
 
 ### Protocol Policer Protocol UDP
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

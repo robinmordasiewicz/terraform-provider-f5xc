@@ -82,13 +82,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--bigip_virtual_server"></a>
+<a id="bigip-virtual-server"></a>
 
 ### Bigip Virtual Server
 
-`bigip_virtual_server` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Bigip Virtual Server](#nestedblock--bigip_virtual_server--bigip_virtual_server) below.
+`bigip_virtual_server` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
 
-<a id="nestedblock--bigip_virtual_server--bigip_virtual_server"></a>
+<a id="bigip-virtual-server-bigip-virtual-server"></a>
 
 ### Bigip Virtual Server Bigip Virtual Server
 
@@ -98,13 +98,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--cdn_loadbalancer"></a>
+<a id="cdn-loadbalancer"></a>
 
 ### CDN Loadbalancer
 
-`cdn_loadbalancer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CDN Loadbalancer](#nestedblock--cdn_loadbalancer--cdn_loadbalancer) below.
+`cdn_loadbalancer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
 
-<a id="nestedblock--cdn_loadbalancer--cdn_loadbalancer"></a>
+<a id="cdn-loadbalancer-cdn-loadbalancer"></a>
 
 ### CDN Loadbalancer CDN Loadbalancer
 
@@ -114,7 +114,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--elements"></a>
+<a id="elements"></a>
 
 ### Elements
 
@@ -122,13 +122,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `path_regex` - (Optional) Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex (`String`).
 
-<a id="nestedblock--http_loadbalancer"></a>
+<a id="http-loadbalancer"></a>
 
 ### HTTP Loadbalancer
 
-`http_loadbalancer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [HTTP Loadbalancer](#nestedblock--http_loadbalancer--http_loadbalancer) below.
+`http_loadbalancer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
 
-<a id="nestedblock--http_loadbalancer--http_loadbalancer"></a>
+<a id="http-loadbalancer-http-loadbalancer"></a>
 
 ### HTTP Loadbalancer HTTP Loadbalancer
 
@@ -138,7 +138,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

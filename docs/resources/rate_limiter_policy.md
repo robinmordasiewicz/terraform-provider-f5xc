@@ -80,19 +80,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--any_server"></a>
+<a id="any-server"></a>
 
 ### Any Server
 
-<a id="nestedblock--rules"></a>
+<a id="rules"></a>
 
 ### Rules
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#nestedblock--rules--metadata) below.
+`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#rules-metadata) below.
 
-`spec` - (Optional) Rate Limiter Rule Specification. Shape of Rate Limiter Rule. See [Spec](#nestedblock--rules--spec) below.
+`spec` - (Optional) Rate Limiter Rule Specification. Shape of Rate Limiter Rule. See [Spec](#rules-spec) below.
 
-<a id="nestedblock--rules--metadata"></a>
+<a id="rules-metadata"></a>
 
 ### Rules Metadata
 
@@ -100,77 +100,77 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
-<a id="nestedblock--rules--spec"></a>
+<a id="rules-spec"></a>
 
 ### Rules Spec
 
-`any_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Asn](#nestedblock--rules--spec--any_asn) below.
+`any_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Asn](#rules-spec-any-asn) below.
 
-`any_country` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Country](#nestedblock--rules--spec--any_country) below.
+`any_country` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Country](#rules-spec-any-country) below.
 
-`any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any IP](#nestedblock--rules--spec--any_ip) below.
+`any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any IP](#rules-spec-any-ip) below.
 
-`apply_rate_limiter` - (Optional) Empty. This can be used for messages where no values are needed. See [Apply Rate Limiter](#nestedblock--rules--spec--apply_rate_limiter) below.
+`apply_rate_limiter` - (Optional) Empty. This can be used for messages where no values are needed. See [Apply Rate Limiter](#rules-spec-apply-rate-limiter) below.
 
-`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#nestedblock--rules--spec--asn_list) below.
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#rules-spec-asn-list) below.
 
-`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#nestedblock--rules--spec--asn_matcher) below.
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#rules-spec-asn-matcher) below.
 
-`bypass_rate_limiter` - (Optional) Empty. This can be used for messages where no values are needed. See [Bypass Rate Limiter](#nestedblock--rules--spec--bypass_rate_limiter) below.
+`bypass_rate_limiter` - (Optional) Empty. This can be used for messages where no values are needed. See [Bypass Rate Limiter](#rules-spec-bypass-rate-limiter) below.
 
-`country_list` - (Optional) Country Codes List. List of Country Codes to match against. See [Country List](#nestedblock--rules--spec--country_list) below.
+`country_list` - (Optional) Country Codes List. List of Country Codes to match against. See [Country List](#rules-spec-country-list) below.
 
-`custom_rate_limiter` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Rate Limiter](#nestedblock--rules--spec--custom_rate_limiter) below.
+`custom_rate_limiter` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Rate Limiter](#rules-spec-custom-rate-limiter) below.
 
-`domain_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Domain Matcher](#nestedblock--rules--spec--domain_matcher) below.
+`domain_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Domain Matcher](#rules-spec-domain-matcher) below.
 
-`headers` - (Optional) A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#nestedblock--rules--spec--headers) below.
+`headers` - (Optional) A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#rules-spec-headers) below.
 
-`http_method` - (Optional) HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true. See [HTTP Method](#nestedblock--rules--spec--http_method) below.
+`http_method` - (Optional) HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true. See [HTTP Method](#rules-spec-http-method) below.
 
-`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#nestedblock--rules--spec--ip_matcher) below.
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#rules-spec-ip-matcher) below.
 
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#nestedblock--rules--spec--ip_prefix_list) below.
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#rules-spec-ip-prefix-list) below.
 
-`path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions. See [Path](#nestedblock--rules--spec--path) below.
+`path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions. See [Path](#rules-spec-path) below.
 
-<a id="nestedblock--rules--spec--any_asn"></a>
+<a id="rules-spec-any-asn"></a>
 
 ### Rules Spec Any Asn
 
-<a id="nestedblock--rules--spec--any_country"></a>
+<a id="rules-spec-any-country"></a>
 
 ### Rules Spec Any Country
 
-<a id="nestedblock--rules--spec--any_ip"></a>
+<a id="rules-spec-any-ip"></a>
 
 ### Rules Spec Any IP
 
-<a id="nestedblock--rules--spec--apply_rate_limiter"></a>
+<a id="rules-spec-apply-rate-limiter"></a>
 
 ### Rules Spec Apply Rate Limiter
 
-<a id="nestedblock--rules--spec--asn_list"></a>
+<a id="rules-spec-asn-list"></a>
 
 ### Rules Spec Asn List
 
 `as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
 
-<a id="nestedblock--rules--spec--asn_matcher"></a>
+<a id="rules-spec-asn-matcher"></a>
 
 ### Rules Spec Asn Matcher
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#nestedblock--rules--spec--asn_matcher--asn_sets) below.
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
 
-<a id="nestedblock--rules--spec--asn_matcher--asn_sets"></a>
+<a id="rules-spec-asn-matcher-asn-sets"></a>
 
 ### Rules Spec Asn Matcher Asn Sets
 
-<a id="nestedblock--rules--spec--bypass_rate_limiter"></a>
+<a id="rules-spec-bypass-rate-limiter"></a>
 
 ### Rules Spec Bypass Rate Limiter
 
-<a id="nestedblock--rules--spec--country_list"></a>
+<a id="rules-spec-country-list"></a>
 
 ### Rules Spec Country List
 
@@ -178,7 +178,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
 
-<a id="nestedblock--rules--spec--custom_rate_limiter"></a>
+<a id="rules-spec-custom-rate-limiter"></a>
 
 ### Rules Spec Custom Rate Limiter
 
@@ -188,7 +188,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--rules--spec--domain_matcher"></a>
+<a id="rules-spec-domain-matcher"></a>
 
 ### Rules Spec Domain Matcher
 
@@ -196,33 +196,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-<a id="nestedblock--rules--spec--headers"></a>
+<a id="rules-spec-headers"></a>
 
 ### Rules Spec Headers
 
-`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#nestedblock--rules--spec--headers--check_not_present) below.
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#rules-spec-headers-check-not-present) below.
 
-`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#nestedblock--rules--spec--headers--check_present) below.
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#rules-spec-headers-check-present) below.
 
 `invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
 
-`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#nestedblock--rules--spec--headers--item) below.
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#rules-spec-headers-item) below.
 
 `name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
 
-<a id="nestedblock--rules--spec--headers--check_not_present"></a>
+<a id="rules-spec-headers-check-not-present"></a>
 
 ### Rules Spec Headers Check Not Present
 
-<a id="nestedblock--rules--spec--headers--check_present"></a>
+<a id="rules-spec-headers-check-present"></a>
 
 ### Rules Spec Headers Check Present
 
-<a id="nestedblock--rules--spec--headers--item"></a>
+<a id="rules-spec-headers-item"></a>
 
 ### Rules Spec Headers Item
 
-<a id="nestedblock--rules--spec--http_method"></a>
+<a id="rules-spec-http-method"></a>
 
 ### Rules Spec HTTP Method
 
@@ -230,19 +230,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `methods` - (Optional) Method List. List of methods values to match against (`List`).
 
-<a id="nestedblock--rules--spec--ip_matcher"></a>
+<a id="rules-spec-ip-matcher"></a>
 
 ### Rules Spec IP Matcher
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#nestedblock--rules--spec--ip_matcher--prefix_sets) below.
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#rules-spec-ip-matcher-prefix-sets) below.
 
-<a id="nestedblock--rules--spec--ip_matcher--prefix_sets"></a>
+<a id="rules-spec-ip-matcher-prefix-sets"></a>
 
 ### Rules Spec IP Matcher Prefix Sets
 
-<a id="nestedblock--rules--spec--ip_prefix_list"></a>
+<a id="rules-spec-ip-prefix-list"></a>
 
 ### Rules Spec IP Prefix List
 
@@ -250,7 +250,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
 
-<a id="nestedblock--rules--spec--path"></a>
+<a id="rules-spec-path"></a>
 
 ### Rules Spec Path
 
@@ -266,7 +266,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `transformers` - (Optional) Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching (`List`).
 
-<a id="nestedblock--server_name_matcher"></a>
+<a id="server-name-matcher"></a>
 
 ### Server Name Matcher
 
@@ -274,13 +274,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `regex_values` - (Optional) Regex Values. A list of regular expressions to match the input against (`List`).
 
-<a id="nestedblock--server_selector"></a>
+<a id="server-selector"></a>
 
 ### Server Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

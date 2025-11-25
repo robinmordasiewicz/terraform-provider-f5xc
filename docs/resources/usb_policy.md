@@ -66,7 +66,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--allowed_devices"></a>
+<a id="allowed-devices"></a>
 
 ### Allowed Devices
 
@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `id_vendor` - (Optional) Vendor ID. Vendor ID (Assigned by USB Org) in hex (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

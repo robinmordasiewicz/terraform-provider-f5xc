@@ -78,19 +78,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--api_limits"></a>
+<a id="api-limits"></a>
 
 ### API Limits
 
-<a id="nestedblock--object_limits"></a>
+<a id="object-limits"></a>
 
 ### Object Limits
 
-<a id="nestedblock--resource_limits"></a>
+<a id="resource-limits"></a>
 
 ### Resource Limits
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

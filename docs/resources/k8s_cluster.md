@@ -141,95 +141,95 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--cluster_scoped_access_deny"></a>
+<a id="cluster-scoped-access-deny"></a>
 
 ### Cluster Scoped Access Deny
 
-<a id="nestedblock--cluster_scoped_access_permit"></a>
+<a id="cluster-scoped-access-permit"></a>
 
 ### Cluster Scoped Access Permit
 
-<a id="nestedblock--cluster_wide_app_list"></a>
+<a id="cluster-wide-app-list"></a>
 
 ### Cluster Wide App List
 
-`cluster_wide_apps` - (Optional) Cluster Wide Application List. List of cluster wide applications. See [Cluster Wide Apps](#nestedblock--cluster_wide_app_list--cluster_wide_apps) below.
+`cluster_wide_apps` - (Optional) Cluster Wide Application List. List of cluster wide applications. See [Cluster Wide Apps](#cluster-wide-app-list-cluster-wide-apps) below.
 
-<a id="nestedblock--cluster_wide_app_list--cluster_wide_apps"></a>
+<a id="cluster-wide-app-list-cluster-wide-apps"></a>
 
 ### Cluster Wide App List Cluster Wide Apps
 
-`argo_cd` - (Optional) Argo CD configuration. description Parameters for Argo Continuous Deployment(CD) application. See [Argo Cd](#nestedblock--cluster_wide_app_list--cluster_wide_apps--argo_cd) below.
+`argo_cd` - (Optional) Argo CD configuration. description Parameters for Argo Continuous Deployment(CD) application. See [Argo Cd](#cluster-wide-app-list-cluster-wide-apps-argo-cd) below.
 
-`dashboard` - (Optional) K8s Dashboard configuration. description Parameters for K8s dashboard. See [Dashboard](#nestedblock--cluster_wide_app_list--cluster_wide_apps--dashboard) below.
+`dashboard` - (Optional) K8s Dashboard configuration. description Parameters for K8s dashboard. See [Dashboard](#cluster-wide-app-list-cluster-wide-apps-dashboard) below.
 
-`metrics_server` - (Optional) K8s Metrics Server configuration. description Parameters for Kubernetes Metrics Server application. See [Metrics Server](#nestedblock--cluster_wide_app_list--cluster_wide_apps--metrics_server) below.
+`metrics_server` - (Optional) K8s Metrics Server configuration. description Parameters for Kubernetes Metrics Server application. See [Metrics Server](#cluster-wide-app-list-cluster-wide-apps-metrics-server) below.
 
-`prometheus` - (Optional) Prometheus access configuration. description Parameters for Prometheus server access. See [Prometheus](#nestedblock--cluster_wide_app_list--cluster_wide_apps--prometheus) below.
+`prometheus` - (Optional) Prometheus access configuration. description Parameters for Prometheus server access. See [Prometheus](#cluster-wide-app-list-cluster-wide-apps-prometheus) below.
 
-<a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--argo_cd"></a>
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd"></a>
 
 ### Cluster Wide App List Cluster Wide Apps Argo Cd
 
-`local_domain` - (Optional) Local Access Configuration. Parameters required to enable local access. See [Local Domain](#nestedblock--cluster_wide_app_list--cluster_wide_apps--argo_cd--local_domain) below.
+`local_domain` - (Optional) Local Access Configuration. Parameters required to enable local access. See [Local Domain](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) below.
 
-<a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--argo_cd--local_domain"></a>
+<a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain"></a>
 
 ### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain
 
-<a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--dashboard"></a>
+<a id="cluster-wide-app-list-cluster-wide-apps-dashboard"></a>
 
 ### Cluster Wide App List Cluster Wide Apps Dashboard
 
-<a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--metrics_server"></a>
+<a id="cluster-wide-app-list-cluster-wide-apps-metrics-server"></a>
 
 ### Cluster Wide App List Cluster Wide Apps Metrics Server
 
-<a id="nestedblock--cluster_wide_app_list--cluster_wide_apps--prometheus"></a>
+<a id="cluster-wide-app-list-cluster-wide-apps-prometheus"></a>
 
 ### Cluster Wide App List Cluster Wide Apps Prometheus
 
-<a id="nestedblock--global_access_enable"></a>
+<a id="global-access-enable"></a>
 
 ### Global Access Enable
 
-<a id="nestedblock--insecure_registry_list"></a>
+<a id="insecure-registry-list"></a>
 
 ### Insecure Registry List
 
 `insecure_registries` - (Optional) Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000' (`List`).
 
-<a id="nestedblock--local_access_config"></a>
+<a id="local-access-config"></a>
 
 ### Local Access Config
 
-`default_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Port](#nestedblock--local_access_config--default_port) below.
+`default_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Port](#local-access-config-default-port) below.
 
 `local_domain` - (Optional) Local Domain. Local K8s API server will be accessible at <site name>.<local domain> (`String`).
 
 `port` - (Optional) Custom k8s Port. Use custom K8s port for API server. Available port range is less than 65000 except reserved ports (`Number`).
 
-<a id="nestedblock--local_access_config--default_port"></a>
+<a id="local-access-config-default-port"></a>
 
 ### Local Access Config Default Port
 
-<a id="nestedblock--no_cluster_wide_apps"></a>
+<a id="no-cluster-wide-apps"></a>
 
 ### No Cluster Wide Apps
 
-<a id="nestedblock--no_global_access"></a>
+<a id="no-global-access"></a>
 
 ### No Global Access
 
-<a id="nestedblock--no_insecure_registries"></a>
+<a id="no-insecure-registries"></a>
 
 ### No Insecure Registries
 
-<a id="nestedblock--no_local_access"></a>
+<a id="no-local-access"></a>
 
 ### No Local Access
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 
@@ -241,13 +241,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
-<a id="nestedblock--use_custom_cluster_role_bindings"></a>
+<a id="use-custom-cluster-role-bindings"></a>
 
 ### Use Custom Cluster Role Bindings
 
-`cluster_role_bindings` - (Optional) Cluster Role Binding List. List of active cluster role binding list for a K8s cluster. See [Cluster Role Bindings](#nestedblock--use_custom_cluster_role_bindings--cluster_role_bindings) below.
+`cluster_role_bindings` - (Optional) Cluster Role Binding List. List of active cluster role binding list for a K8s cluster. See [Cluster Role Bindings](#use-custom-cluster-role-bindings-cluster-role-bindings) below.
 
-<a id="nestedblock--use_custom_cluster_role_bindings--cluster_role_bindings"></a>
+<a id="use-custom-cluster-role-bindings-cluster-role-bindings"></a>
 
 ### Use Custom Cluster Role Bindings Cluster Role Bindings
 
@@ -257,13 +257,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--use_custom_cluster_role_list"></a>
+<a id="use-custom-cluster-role-list"></a>
 
 ### Use Custom Cluster Role List
 
-`cluster_roles` - (Optional) Cluster Role List. List of active cluster role list for a K8s cluster. See [Cluster Roles](#nestedblock--use_custom_cluster_role_list--cluster_roles) below.
+`cluster_roles` - (Optional) Cluster Role List. List of active cluster role list for a K8s cluster. See [Cluster Roles](#use-custom-cluster-role-list-cluster-roles) below.
 
-<a id="nestedblock--use_custom_cluster_role_list--cluster_roles"></a>
+<a id="use-custom-cluster-role-list-cluster-roles"></a>
 
 ### Use Custom Cluster Role List Cluster Roles
 
@@ -273,7 +273,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--use_custom_pod_security_admission"></a>
+<a id="use-custom-pod-security-admission"></a>
 
 ### Use Custom Pod Security Admission
 
@@ -283,13 +283,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--use_custom_psp_list"></a>
+<a id="use-custom-psp-list"></a>
 
 ### Use Custom Psp List
 
-`pod_security_policies` - (Optional) Pod Security Policy List. List of active Pod security policies for a K8s cluster. See [Pod Security Policies](#nestedblock--use_custom_psp_list--pod_security_policies) below.
+`pod_security_policies` - (Optional) Pod Security Policy List. List of active Pod security policies for a K8s cluster. See [Pod Security Policies](#use-custom-psp-list-pod-security-policies) below.
 
-<a id="nestedblock--use_custom_psp_list--pod_security_policies"></a>
+<a id="use-custom-psp-list-pod-security-policies"></a>
 
 ### Use Custom Psp List Pod Security Policies
 
@@ -299,27 +299,27 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="nestedblock--use_default_cluster_role_bindings"></a>
+<a id="use-default-cluster-role-bindings"></a>
 
 ### Use Default Cluster Role Bindings
 
-<a id="nestedblock--use_default_cluster_roles"></a>
+<a id="use-default-cluster-roles"></a>
 
 ### Use Default Cluster Roles
 
-<a id="nestedblock--use_default_pod_security_admission"></a>
+<a id="use-default-pod-security-admission"></a>
 
 ### Use Default Pod Security Admission
 
-<a id="nestedblock--use_default_psp"></a>
+<a id="use-default-psp"></a>
 
 ### Use Default Psp
 
-<a id="nestedblock--vk8s_namespace_access_deny"></a>
+<a id="vk8s-namespace-access-deny"></a>
 
 ### Vk8s Namespace Access Deny
 
-<a id="nestedblock--vk8s_namespace_access_permit"></a>
+<a id="vk8s-namespace-access-permit"></a>
 
 ### Vk8s Namespace Access Permit
 

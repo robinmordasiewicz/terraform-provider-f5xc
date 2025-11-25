@@ -76,59 +76,59 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="nestedblock--rules"></a>
+<a id="rules"></a>
 
 ### Rules
 
-`action` - (Optional) Action. Action to apply on the packet if the NAT rule is applied. See [Action](#nestedblock--rules--action) below.
+`action` - (Optional) Action. Action to apply on the packet if the NAT rule is applied. See [Action](#rules-action) below.
 
-`cloud_connect` - (Optional) Cloud Connect Reference Type. Reference to Cloud connect Object. See [Cloud Connect](#nestedblock--rules--cloud_connect) below.
+`cloud_connect` - (Optional) Cloud Connect Reference Type. Reference to Cloud connect Object. See [Cloud Connect](#rules-cloud-connect) below.
 
-`criteria` - (Optional) Match Criteria. Match criteria of the packet to apply the NAT Rule. See [Criteria](#nestedblock--rules--criteria) below.
+`criteria` - (Optional) Match Criteria. Match criteria of the packet to apply the NAT Rule. See [Criteria](#rules-criteria) below.
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#nestedblock--rules--disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#rules-disable) below.
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#nestedblock--rules--enable) below.
+`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#rules-enable) below.
 
 `name` - (Optional) Name. Name of the Rule (`String`).
 
-`network_interface` - (Optional) NetworkInterface Reference Type. Reference to Network Interface Object. See [Network Interface](#nestedblock--rules--network_interface) below.
+`network_interface` - (Optional) NetworkInterface Reference Type. Reference to Network Interface Object. See [Network Interface](#rules-network-interface) below.
 
-`segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#nestedblock--rules--segment) below.
+`segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#rules-segment) below.
 
-`virtual_network` - (Optional) Virtual Network Reference Type. Carries the reference to virtual network. See [Virtual Network](#nestedblock--rules--virtual_network) below.
+`virtual_network` - (Optional) Virtual Network Reference Type. Carries the reference to virtual network. See [Virtual Network](#rules-virtual-network) below.
 
-<a id="nestedblock--rules--action"></a>
+<a id="rules-action"></a>
 
 ### Rules Action
 
-`dynamic` - (Optional) Dynamic Pool. Dynamic Pool Configuration. See [Dynamic](#nestedblock--rules--action--dynamic) below.
+`dynamic` - (Optional) Dynamic Pool. Dynamic Pool Configuration. See [Dynamic](#rules-action-dynamic) below.
 
 `virtual_cidr` - (Optional) Virtual Subnet NAT. Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectional fashion. The range of the real CIDR and virtual CIDRs should be the same (e.g. if the real CIDR has the CIDR 10.10.10.0/24, the virtual CIDR has 100.100.100.0/24 (`String`).
 
-<a id="nestedblock--rules--action--dynamic"></a>
+<a id="rules-action-dynamic"></a>
 
 ### Rules Action Dynamic
 
-`elastic_ips` - (Optional) Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object. See [Elastic Ips](#nestedblock--rules--action--dynamic--elastic_ips) below.
+`elastic_ips` - (Optional) Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object. See [Elastic Ips](#rules-action-dynamic-elastic-ips) below.
 
-`pools` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Pools](#nestedblock--rules--action--dynamic--pools) below.
+`pools` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Pools](#rules-action-dynamic-pools) below.
 
-<a id="nestedblock--rules--action--dynamic--elastic_ips"></a>
+<a id="rules-action-dynamic-elastic-ips"></a>
 
 ### Rules Action Dynamic Elastic Ips
 
-<a id="nestedblock--rules--action--dynamic--pools"></a>
+<a id="rules-action-dynamic-pools"></a>
 
 ### Rules Action Dynamic Pools
 
-<a id="nestedblock--rules--cloud_connect"></a>
+<a id="rules-cloud-connect"></a>
 
 ### Rules Cloud Connect
 
-`refs` - (Optional) Cloud Connect. Reference to Cloud Connect Object. See [Refs](#nestedblock--rules--cloud_connect--refs) below.
+`refs` - (Optional) Cloud Connect. Reference to Cloud Connect Object. See [Refs](#rules-cloud-connect-refs) below.
 
-<a id="nestedblock--rules--cloud_connect--refs"></a>
+<a id="rules-cloud-connect-refs"></a>
 
 ### Rules Cloud Connect Refs
 
@@ -142,135 +142,135 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--rules--criteria"></a>
+<a id="rules-criteria"></a>
 
 ### Rules Criteria
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#nestedblock--rules--criteria--any) below.
+`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#rules-criteria-any) below.
 
 `destination_cidr` - (Optional) Destination IP. Destination IP of the packet to match (`List`).
 
-`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#nestedblock--rules--criteria--destination_port) below.
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#rules-criteria-destination-port) below.
 
-`icmp` - (Optional) Empty. This can be used for messages where no values are needed. See [ICMP](#nestedblock--rules--criteria--icmp) below.
+`icmp` - (Optional) Empty. This can be used for messages where no values are needed. See [ICMP](#rules-criteria-icmp) below.
 
 `protocol` - (Optional) Protocols. Protocols like TCP, UDP. Possible values are `ALL`, `ICMP`, `TCP`, `UDP`. Defaults to `ALL` (`String`).
 
-`segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#nestedblock--rules--criteria--segment) below.
+`segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#rules-criteria-segment) below.
 
 `source_cidr` - (Optional) Source IP. Source IP of the packet to match (`List`).
 
-`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#nestedblock--rules--criteria--source_port) below.
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#rules-criteria-source-port) below.
 
-`tcp` - (Optional) Port Match Configuration. Action to apply on the packet if the NAT rule is applied. See [TCP](#nestedblock--rules--criteria--tcp) below.
+`tcp` - (Optional) Port Match Configuration. Action to apply on the packet if the NAT rule is applied. See [TCP](#rules-criteria-tcp) below.
 
-`udp` - (Optional) Port Match Configuration. Action to apply on the packet if the NAT rule is applied. See [UDP](#nestedblock--rules--criteria--udp) below.
+`udp` - (Optional) Port Match Configuration. Action to apply on the packet if the NAT rule is applied. See [UDP](#rules-criteria-udp) below.
 
-`virtual_network` - (Optional) Virtual Network Reference Type. Carries the reference to virtual network. See [Virtual Network](#nestedblock--rules--criteria--virtual_network) below.
+`virtual_network` - (Optional) Virtual Network Reference Type. Carries the reference to virtual network. See [Virtual Network](#rules-criteria-virtual-network) below.
 
-<a id="nestedblock--rules--criteria--any"></a>
+<a id="rules-criteria-any"></a>
 
 ### Rules Criteria Any
 
-<a id="nestedblock--rules--criteria--destination_port"></a>
+<a id="rules-criteria-destination-port"></a>
 
 ### Rules Criteria Destination Port
 
-`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--rules--criteria--destination_port--no_port_match) below.
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#rules-criteria-destination-port-no-port-match) below.
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
 `port_ranges` - (Optional) Configuration for port_ranges (`String`).
 
-<a id="nestedblock--rules--criteria--destination_port--no_port_match"></a>
+<a id="rules-criteria-destination-port-no-port-match"></a>
 
 ### Rules Criteria Destination Port No Port Match
 
-<a id="nestedblock--rules--criteria--icmp"></a>
+<a id="rules-criteria-icmp"></a>
 
 ### Rules Criteria ICMP
 
-<a id="nestedblock--rules--criteria--segment"></a>
+<a id="rules-criteria-segment"></a>
 
 ### Rules Criteria Segment
 
-`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#nestedblock--rules--criteria--segment--refs) below.
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#rules-criteria-segment-refs) below.
 
-<a id="nestedblock--rules--criteria--segment--refs"></a>
+<a id="rules-criteria-segment-refs"></a>
 
 ### Rules Criteria Segment Refs
 
-<a id="nestedblock--rules--criteria--source_port"></a>
+<a id="rules-criteria-source-port"></a>
 
 ### Rules Criteria Source Port
 
-`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#nestedblock--rules--criteria--source_port--no_port_match) below.
+`no_port_match` - (Optional) Empty. This can be used for messages where no values are needed. See [No Port Match](#rules-criteria-source-port-no-port-match) below.
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
 `port_ranges` - (Optional) Configuration for port_ranges (`String`).
 
-<a id="nestedblock--rules--criteria--source_port--no_port_match"></a>
+<a id="rules-criteria-source-port-no-port-match"></a>
 
 ### Rules Criteria Source Port No Port Match
 
-<a id="nestedblock--rules--criteria--tcp"></a>
+<a id="rules-criteria-tcp"></a>
 
 ### Rules Criteria TCP
 
-`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#nestedblock--rules--criteria--tcp--destination_port) below.
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#rules-criteria-tcp-destination-port) below.
 
-`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#nestedblock--rules--criteria--tcp--source_port) below.
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#rules-criteria-tcp-source-port) below.
 
-<a id="nestedblock--rules--criteria--tcp--destination_port"></a>
+<a id="rules-criteria-tcp-destination-port"></a>
 
 ### Rules Criteria TCP Destination Port
 
-<a id="nestedblock--rules--criteria--tcp--source_port"></a>
+<a id="rules-criteria-tcp-source-port"></a>
 
 ### Rules Criteria TCP Source Port
 
-<a id="nestedblock--rules--criteria--udp"></a>
+<a id="rules-criteria-udp"></a>
 
 ### Rules Criteria UDP
 
-`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#nestedblock--rules--criteria--udp--destination_port) below.
+`destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Destination Port](#rules-criteria-udp-destination-port) below.
 
-`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#nestedblock--rules--criteria--udp--source_port) below.
+`source_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port. See [Source Port](#rules-criteria-udp-source-port) below.
 
-<a id="nestedblock--rules--criteria--udp--destination_port"></a>
+<a id="rules-criteria-udp-destination-port"></a>
 
 ### Rules Criteria UDP Destination Port
 
-<a id="nestedblock--rules--criteria--udp--source_port"></a>
+<a id="rules-criteria-udp-source-port"></a>
 
 ### Rules Criteria UDP Source Port
 
-<a id="nestedblock--rules--criteria--virtual_network"></a>
+<a id="rules-criteria-virtual-network"></a>
 
 ### Rules Criteria Virtual Network
 
-`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#nestedblock--rules--criteria--virtual_network--refs) below.
+`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#rules-criteria-virtual-network-refs) below.
 
-<a id="nestedblock--rules--criteria--virtual_network--refs"></a>
+<a id="rules-criteria-virtual-network-refs"></a>
 
 ### Rules Criteria Virtual Network Refs
 
-<a id="nestedblock--rules--disable"></a>
+<a id="rules-disable"></a>
 
 ### Rules Disable
 
-<a id="nestedblock--rules--enable"></a>
+<a id="rules-enable"></a>
 
 ### Rules Enable
 
-<a id="nestedblock--rules--network_interface"></a>
+<a id="rules-network-interface"></a>
 
 ### Rules Network Interface
 
-`refs` - (Optional) Network Interface. Reference to Network Interface Object. See [Refs](#nestedblock--rules--network_interface--refs) below.
+`refs` - (Optional) Network Interface. Reference to Network Interface Object. See [Refs](#rules-network-interface-refs) below.
 
-<a id="nestedblock--rules--network_interface--refs"></a>
+<a id="rules-network-interface-refs"></a>
 
 ### Rules Network Interface Refs
 
@@ -284,13 +284,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--rules--segment"></a>
+<a id="rules-segment"></a>
 
 ### Rules Segment
 
-`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#nestedblock--rules--segment--refs) below.
+`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#rules-segment-refs) below.
 
-<a id="nestedblock--rules--segment--refs"></a>
+<a id="rules-segment-refs"></a>
 
 ### Rules Segment Refs
 
@@ -304,13 +304,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--rules--virtual_network"></a>
+<a id="rules-virtual-network"></a>
 
 ### Rules Virtual Network
 
-`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#nestedblock--rules--virtual_network--refs) below.
+`refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#rules-virtual-network-refs) below.
 
-<a id="nestedblock--rules--virtual_network--refs"></a>
+<a id="rules-virtual-network-refs"></a>
 
 ### Rules Virtual Network Refs
 
@@ -324,13 +324,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--site"></a>
+<a id="site"></a>
 
 ### Site
 
-`refs` - (Optional) Site. Reference to Site Object. See [Refs](#nestedblock--site--refs) below.
+`refs` - (Optional) Site. Reference to Site Object. See [Refs](#site-refs) below.
 
-<a id="nestedblock--site--refs"></a>
+<a id="site-refs"></a>
 
 ### Site Refs
 
@@ -344,7 +344,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="nestedblock--timeouts"></a>
+<a id="timeouts"></a>
 
 ### Timeouts
 

@@ -15,12 +15,22 @@ resource "f5xc_healthcheck" "example" {
     "owner" = "platform-team"
   }
 
-  # Health Check specific configuration
+  // One of the arguments from this list "http_health_check tcp_health_check udp_icmp_health_check" must be set
+
   http_health_check {
+    // One of the arguments from this list "host_header use_origin_server_name" must be set
+
     use_origin_server_name {}
+
     path                  = "/health"
     use_http2             = false
     expected_status_codes = ["200"]
+
+    // One of the arguments from this list "headers request_headers_to_remove" must be set
+
+    headers = {
+      "x-health-check" = "true"
+    }
   }
 
   healthy_threshold   = 3

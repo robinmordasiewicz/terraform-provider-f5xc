@@ -2,6 +2,7 @@
 // +build ignore
 
 // This tool generates comprehensive example Terraform configurations for all F5 XC resources.
+// Examples follow the Volterra provider style with inline OneOf comments showing mutually exclusive options.
 package main
 
 import (
@@ -21,6 +22,7 @@ type SchemaInfo struct {
 	Description  string
 	Attributes   []AttributeInfo
 	Blocks       []BlockInfo
+	OneOfGroups  []OneOfGroup
 }
 
 type AttributeInfo struct {
@@ -29,6 +31,7 @@ type AttributeInfo struct {
 	Description string
 	Required    bool
 	Optional    bool
+	OneOfGroup  string // Which OneOf group this attribute belongs to
 }
 
 type BlockInfo struct {
@@ -37,6 +40,13 @@ type BlockInfo struct {
 	IsList      bool
 	Attributes  []AttributeInfo
 	Blocks      []BlockInfo
+	OneOfGroup  string // Which OneOf group this block belongs to
+}
+
+// OneOfGroup represents a group of mutually exclusive options
+type OneOfGroup struct {
+	Options     []string // List of mutually exclusive option names
+	Description string   // Description of the group
 }
 
 func main() {
@@ -111,6 +121,9 @@ func parseResourceFile(filename string) *SchemaInfo {
 		schema.Description = match[1]
 	}
 
+	// Parse OneOf groups from MarkdownDescription fields
+	schema.OneOfGroups = parseOneOfGroups(text)
+
 	// Parse attributes
 	schema.Attributes = parseAttributes(text)
 
@@ -118,6 +131,59 @@ func parseResourceFile(filename string) *SchemaInfo {
 	schema.Blocks = parseBlocks(text)
 
 	return schema
+}
+
+// parseOneOfGroups extracts OneOf groups from [OneOf: option1, option2] markers in MarkdownDescription
+func parseOneOfGroups(content string) []OneOfGroup {
+	var groups []OneOfGroup
+	seen := make(map[string]bool)
+
+	// Pattern to match [OneOf: option1, option2, option3] in MarkdownDescription
+	oneOfRe := regexp.MustCompile(`\[OneOf:\s*([^\]]+)\]`)
+	matches := oneOfRe.FindAllStringSubmatch(content, -1)
+
+	for _, match := range matches {
+		optionsStr := match[1]
+		// Split by comma and clean up
+		options := strings.Split(optionsStr, ",")
+		var cleanOptions []string
+		for _, opt := range options {
+			opt = strings.TrimSpace(opt)
+			if opt != "" {
+				cleanOptions = append(cleanOptions, opt)
+			}
+		}
+
+		if len(cleanOptions) > 1 {
+			// Create a key to deduplicate
+			key := strings.Join(cleanOptions, "|")
+			if !seen[key] {
+				seen[key] = true
+				groups = append(groups, OneOfGroup{
+					Options: cleanOptions,
+				})
+			}
+		}
+	}
+
+	return groups
+}
+
+// formatOneOfComment formats options into Volterra-style comment
+func formatOneOfComment(options []string) string {
+	return fmt.Sprintf("// One of the arguments from this list \"%s\" must be set", strings.Join(options, " "))
+}
+
+// getOneOfGroupForBlock finds the OneOf group that contains this block name
+func getOneOfGroupForBlock(blockName string, groups []OneOfGroup) *OneOfGroup {
+	for i := range groups {
+		for _, opt := range groups[i].Options {
+			if opt == blockName {
+				return &groups[i]
+			}
+		}
+	}
+	return nil
 }
 
 func parseAttributes(content string) []AttributeInfo {
@@ -207,13 +273,93 @@ func generateExample(resourceName string, schema *SchemaInfo) string {
 func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema *SchemaInfo) {
 	switch resourceName {
 	case "http_loadbalancer":
-		sb.WriteString("\n  # HTTP Load Balancer specific configuration\n")
-		sb.WriteString("  domains = [\"app.example.com\"]\n\n")
-		sb.WriteString("  # Advertise on public internet\n")
-		sb.WriteString("  advertise_on_internet {\n")
-		sb.WriteString("    default_vip {}\n")
+		sb.WriteString("\n  // One of the arguments from this list \"advertise_custom advertise_on_public advertise_on_public_default_vip do_not_advertise\" must be set\n\n")
+		sb.WriteString("  advertise_on_public_default_vip = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"api_definition api_definitions api_specification disable_api_definition\" must be set\n\n")
+		sb.WriteString("  disable_api_definition = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"disable_api_discovery enable_api_discovery\" must be set\n\n")
+		sb.WriteString("  enable_api_discovery {\n")
+		sb.WriteString("    // One of the arguments from this list \"api_discovery_from_code_scan api_discovery_from_discovered_schema api_discovery_from_live_traffic\" must be set\n\n")
+		sb.WriteString("    api_discovery_from_live_traffic {}\n\n")
+		sb.WriteString("    discovered_api_settings {\n")
+		sb.WriteString("      purge_duration_for_inactive_discovered_apis = \"30\"\n")
+		sb.WriteString("    }\n\n")
+		sb.WriteString("    // One of the arguments from this list \"disable_learn_from_redirect_traffic enable_learn_from_redirect_traffic\" must be set\n\n")
+		sb.WriteString("    disable_learn_from_redirect_traffic = true\n")
 		sb.WriteString("  }\n\n")
-		sb.WriteString("  # Default origin server\n")
+		sb.WriteString("  // One of the arguments from this list \"api_testing disable_api_testing\" must be set\n\n")
+		sb.WriteString("  disable_api_testing = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"captcha_challenge enable_challenge js_challenge no_challenge policy_based_challenge\" must be set\n\n")
+		sb.WriteString("  js_challenge {\n")
+		sb.WriteString("    cookie_expiry     = 3600\n")
+		sb.WriteString("    custom_page       = \"\"\n")
+		sb.WriteString("    js_script_delay   = 5000\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  domains = [\"app.example.com\", \"www.example.com\"]\n\n")
+		sb.WriteString("  // One of the arguments from this list \"cookie_stickiness least_active random ring_hash round_robin source_ip_stickiness\" must be set\n\n")
+		sb.WriteString("  round_robin = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"http https https_auto_cert\" must be set\n\n")
+		sb.WriteString("  https_auto_cert {\n")
+		sb.WriteString("    http_redirect = true\n")
+		sb.WriteString("    add_hsts      = true\n\n")
+		sb.WriteString("    // One of the arguments from this list \"default_header no_headers server_name\" must be set\n\n")
+		sb.WriteString("    default_header {}\n\n")
+		sb.WriteString("    tls_config {\n")
+		sb.WriteString("      // One of the arguments from this list \"custom_security default_security low_security medium_security\" must be set\n\n")
+		sb.WriteString("      default_security {}\n")
+		sb.WriteString("    }\n\n")
+		sb.WriteString("    // One of the arguments from this list \"no_mtls use_mtls\" must be set\n\n")
+		sb.WriteString("    no_mtls {}\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  // One of the arguments from this list \"disable_malicious_user_detection enable_malicious_user_detection\" must be set\n\n")
+		sb.WriteString("  enable_malicious_user_detection = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"disable_malware_protection malware_protection_settings\" must be set\n\n")
+		sb.WriteString("  disable_malware_protection = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"api_rate_limit disable_rate_limit rate_limit\" must be set\n\n")
+		sb.WriteString("  rate_limit {\n")
+		sb.WriteString("    rate_limiter {\n")
+		sb.WriteString("      name      = \"example-rate-limiter\"\n")
+		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString("    }\n")
+		sb.WriteString("    no_ip_allowed_list {}\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  // One of the arguments from this list \"default_sensitive_data_policy sensitive_data_policy\" must be set\n\n")
+		sb.WriteString("  default_sensitive_data_policy = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"active_service_policies no_service_policies service_policies_from_namespace\" must be set\n\n")
+		sb.WriteString("  active_service_policies {\n")
+		sb.WriteString("    policies {\n")
+		sb.WriteString("      name      = \"example-service-policy\"\n")
+		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString("    }\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  // One of the arguments from this list \"disable_threat_mesh enable_threat_mesh\" must be set\n\n")
+		sb.WriteString("  enable_threat_mesh = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"disable_trust_client_ip_headers enable_trust_client_ip_headers\" must be set\n\n")
+		sb.WriteString("  disable_trust_client_ip_headers = true\n\n")
+		sb.WriteString("  // One of the arguments from this list \"user_id_client_ip user_identification\" must be set\n\n")
+		sb.WriteString("  user_identification {\n")
+		sb.WriteString("    name      = \"example-user-identification\"\n")
+		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  // One of the arguments from this list \"app_firewall disable_waf\" must be set\n\n")
+		sb.WriteString("  app_firewall {\n")
+		sb.WriteString("    name      = \"example-app-firewall\"\n")
+		sb.WriteString("    namespace = \"shared\"\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  // One of the arguments from this list \"bot_defense bot_defense_advanced disable_bot_defense\" must be set\n\n")
+		sb.WriteString("  bot_defense {\n")
+		sb.WriteString("    policy {\n")
+		sb.WriteString("      // One of the arguments from this list \"js_download_path js_insert_all_pages js_insert_all_pages_except\" must be set\n\n")
+		sb.WriteString("      js_insert_all_pages {\n")
+		sb.WriteString("        javascript_location = \"AFTER_HEAD\"\n")
+		sb.WriteString("      }\n\n")
+		sb.WriteString("      // One of the arguments from this list \"disable_mobile_sdk enable_mobile_sdk\" must be set\n\n")
+		sb.WriteString("      disable_mobile_sdk {}\n")
+		sb.WriteString("    }\n")
+		sb.WriteString("    regional_endpoint = \"US\"\n")
+		sb.WriteString("    timeout           = 1000\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  // Default route pools configuration\n")
 		sb.WriteString("  default_route_pools {\n")
 		sb.WriteString("    pool {\n")
 		sb.WriteString("      name      = \"example-origin-pool\"\n")
@@ -221,43 +367,70 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("    }\n")
 		sb.WriteString("    weight   = 1\n")
 		sb.WriteString("    priority = 1\n")
-		sb.WriteString("  }\n\n")
-		sb.WriteString("  # Enable HTTP to HTTPS redirect\n")
-		sb.WriteString("  http {\n")
-		sb.WriteString("    dns_volterra_managed = true\n")
-		sb.WriteString("  }\n\n")
-		sb.WriteString("  # Disable rate limiting by default\n")
-		sb.WriteString("  disable_rate_limit {}\n\n")
-		sb.WriteString("  # No WAF by default\n")
-		sb.WriteString("  disable_waf {}\n")
+		sb.WriteString("  }\n")
 
 	case "origin_pool":
-		sb.WriteString("\n  # Origin Pool specific configuration\n")
+		sb.WriteString("\n  // Origin servers configuration\n")
 		sb.WriteString("  origin_servers {\n")
-		sb.WriteString("    public_ip {\n")
-		sb.WriteString("      ip = \"203.0.113.10\"\n")
+		sb.WriteString("    // One of the arguments from this list \"consul_service custom_endpoint_object k8s_service private_ip private_name public_ip public_name vn_private_ip vn_private_name\" must be set\n\n")
+		sb.WriteString("    public_name {\n")
+		sb.WriteString("      dns_name         = \"origin.example.com\"\n")
+		sb.WriteString("      refresh_interval = 60\n")
+		sb.WriteString("    }\n\n")
+		sb.WriteString("    labels = {\n")
+		sb.WriteString("      \"app\" = \"backend\"\n")
+		sb.WriteString("    }\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  origin_servers {\n")
+		sb.WriteString("    // One of the arguments from this list \"consul_service custom_endpoint_object k8s_service private_ip private_name public_ip public_name vn_private_ip vn_private_name\" must be set\n\n")
+		sb.WriteString("    k8s_service {\n")
+		sb.WriteString("      service_name = \"backend-svc\"\n\n")
+		sb.WriteString("      // One of the arguments from this list \"inside_network outside_network vk8s_networks\" must be set\n\n")
+		sb.WriteString("      vk8s_networks {}\n\n")
+		sb.WriteString("      site_locator {\n")
+		sb.WriteString("        // One of the arguments from this list \"site virtual_site\" must be set\n\n")
+		sb.WriteString("        site {\n")
+		sb.WriteString("          name      = \"example-site\"\n")
+		sb.WriteString("          namespace = \"system\"\n")
+		sb.WriteString("        }\n")
+		sb.WriteString("      }\n")
 		sb.WriteString("    }\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  port = 443\n\n")
-		sb.WriteString("  # Use TLS to origin\n")
+		sb.WriteString("  // One of the arguments from this list \"no_tls use_tls\" must be set\n\n")
 		sb.WriteString("  use_tls {\n")
-		sb.WriteString("    use_host_header_as_sni {}\n")
+		sb.WriteString("    // One of the arguments from this list \"disable_sni sni use_host_header_as_sni\" must be set\n\n")
+		sb.WriteString("    sni = \"backend.example.com\"\n\n")
 		sb.WriteString("    tls_config {\n")
+		sb.WriteString("      // One of the arguments from this list \"custom_security default_security low_security medium_security\" must be set\n\n")
 		sb.WriteString("      default_security {}\n")
-		sb.WriteString("    }\n")
-		sb.WriteString("    skip_server_verification {}\n")
+		sb.WriteString("    }\n\n")
+		sb.WriteString("    // One of the arguments from this list \"no_mtls use_mtls use_mtls_obj\" must be set\n\n")
+		sb.WriteString("    no_mtls {}\n\n")
+		sb.WriteString("    // One of the arguments from this list \"skip_server_verification use_server_verification volterra_trusted_ca\" must be set\n\n")
+		sb.WriteString("    volterra_trusted_ca {}\n")
 		sb.WriteString("  }\n\n")
-		sb.WriteString("  # Endpoint selection\n")
+		sb.WriteString("  // Health check configuration\n")
+		sb.WriteString("  healthcheck {\n")
+		sb.WriteString("    name      = \"example-healthcheck\"\n")
+		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  // Load balancing configuration\n")
 		sb.WriteString("  endpoint_selection     = \"LOCAL_PREFERRED\"\n")
-		sb.WriteString("  loadbalancer_algorithm = \"LB_OVERRIDE\"\n")
+		sb.WriteString("  loadbalancer_algorithm = \"ROUND_ROBIN\"\n")
 
 	case "healthcheck":
-		sb.WriteString("\n  # Health Check specific configuration\n")
+		sb.WriteString("\n  // One of the arguments from this list \"http_health_check tcp_health_check udp_icmp_health_check\" must be set\n\n")
 		sb.WriteString("  http_health_check {\n")
-		sb.WriteString("    use_origin_server_name {}\n")
-		sb.WriteString("    path                   = \"/health\"\n")
-		sb.WriteString("    use_http2              = false\n")
-		sb.WriteString("    expected_status_codes  = [\"200\"]\n")
+		sb.WriteString("    // One of the arguments from this list \"host_header use_origin_server_name\" must be set\n\n")
+		sb.WriteString("    use_origin_server_name {}\n\n")
+		sb.WriteString("    path                  = \"/health\"\n")
+		sb.WriteString("    use_http2             = false\n")
+		sb.WriteString("    expected_status_codes = [\"200\"]\n\n")
+		sb.WriteString("    // One of the arguments from this list \"headers request_headers_to_remove\" must be set\n\n")
+		sb.WriteString("    headers = {\n")
+		sb.WriteString("      \"x-health-check\" = \"true\"\n")
+		sb.WriteString("    }\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  healthy_threshold   = 3\n")
 		sb.WriteString("  unhealthy_threshold = 3\n")
@@ -265,16 +438,19 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  timeout             = 5\n")
 
 	case "app_firewall":
-		sb.WriteString("\n  # Web Application Firewall configuration\n")
-		sb.WriteString("  # Block malicious requests\n")
+		sb.WriteString("\n  // One of the arguments from this list \"blocking monitoring\" must be set\n\n")
 		sb.WriteString("  blocking {}\n\n")
-		sb.WriteString("  # Use default detection settings\n")
+		sb.WriteString("  // One of the arguments from this list \"custom_blocking_page use_default_blocking_page\" must be set\n\n")
 		sb.WriteString("  use_default_blocking_page {}\n\n")
-		sb.WriteString("  # Default bot defense configuration\n")
-		sb.WriteString("  default_bot_setting {}\n\n")
-		sb.WriteString("  # Default detection settings\n")
+		sb.WriteString("  // One of the arguments from this list \"bot_protection_setting default_bot_setting\" must be set\n\n")
+		sb.WriteString("  bot_protection_setting {\n")
+		sb.WriteString("    malicious_bot_action  = \"BLOCK\"\n")
+		sb.WriteString("    suspicious_bot_action = \"REPORT\"\n")
+		sb.WriteString("    good_bot_action       = \"REPORT\"\n")
+		sb.WriteString("  }\n\n")
+		sb.WriteString("  // One of the arguments from this list \"custom_detection_settings default_detection_settings\" must be set\n\n")
 		sb.WriteString("  default_detection_settings {}\n\n")
-		sb.WriteString("  # Allow all response codes\n")
+		sb.WriteString("  // One of the arguments from this list \"allow_all_response_codes allowed_response_codes\" must be set\n\n")
 		sb.WriteString("  allow_all_response_codes {}\n")
 
 	case "service_policy":
@@ -768,25 +944,28 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  global_access_enable {}\n")
 
 	case "virtual_k8s":
-		sb.WriteString("\n  # Virtual Kubernetes configuration\n")
-		sb.WriteString("  # Virtual site selection\n")
+		sb.WriteString("\n  // Virtual site selection for workload deployment\n")
 		sb.WriteString("  vsite_refs {\n")
 		sb.WriteString("    name      = \"example-virtual-site\"\n")
 		sb.WriteString("    namespace = \"system\"\n")
 		sb.WriteString("  }\n\n")
-		sb.WriteString("  # Disable cluster global access\n")
-		sb.WriteString("  disabled {}\n")
+		sb.WriteString("  // One of the arguments from this list \"disabled isolated\" must be set\n\n")
+		sb.WriteString("  isolated {}\n\n")
+		sb.WriteString("  // Default workload flavor reference\n")
+		sb.WriteString("  default_flavor_ref {\n")
+		sb.WriteString("    name      = \"example-workload-flavor\"\n")
+		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString("  }\n")
 
 	case "virtual_network":
-		sb.WriteString("\n  # Virtual Network configuration\n")
+		sb.WriteString("\n  // One of the arguments from this list \"global_network legacy_type site_local_inside_network site_local_network srv6_network\" must be set\n\n")
 		sb.WriteString("  site_local_network {}\n\n")
-		sb.WriteString("  # DHCP range for the network\n")
-		sb.WriteString("  srv6_network {\n")
-		sb.WriteString("    enterprise_network {\n")
-		sb.WriteString("      srv6_network_ns_params {\n")
-		sb.WriteString("        namespace = \"system\"\n")
-		sb.WriteString("      }\n")
-		sb.WriteString("    }\n")
+		sb.WriteString("  // Static routes configuration (optional)\n")
+		sb.WriteString("  static_routes {\n")
+		sb.WriteString("    ip_prefixes = [\"10.0.0.0/8\"]\n\n")
+		sb.WriteString("    // One of the arguments from this list \"default_gateway ip_address node_interface\" must be set\n\n")
+		sb.WriteString("    default_gateway {}\n\n")
+		sb.WriteString("    attrs = [\"ROUTE_ATTR_INSTALL_FORWARDING\"]\n")
 		sb.WriteString("  }\n")
 
 	case "fleet":

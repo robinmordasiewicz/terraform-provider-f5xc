@@ -15,13 +15,19 @@ resource "f5xc_virtual_k8s" "example" {
     "owner" = "platform-team"
   }
 
-  # Virtual Kubernetes configuration
-  # Virtual site selection
+  // Virtual site selection for workload deployment
   vsite_refs {
     name      = "example-virtual-site"
     namespace = "system"
   }
 
-  # Disable cluster global access
-  disabled {}
+  // One of the arguments from this list "disabled isolated" must be set
+
+  isolated {}
+
+  // Default workload flavor reference
+  default_flavor_ref {
+    name      = "example-workload-flavor"
+    namespace = "system"
+  }
 }

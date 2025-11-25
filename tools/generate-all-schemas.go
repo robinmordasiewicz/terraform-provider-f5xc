@@ -727,10 +727,6 @@ func cleanDescription(desc string) string {
 	desc = strings.TrimSpace(desc)
 	// Remove trailing periods that were left after cleanup
 	desc = regexp.MustCompile(`\.\s*\.`).ReplaceAllString(desc, ".")
-	// Limit description length to prevent overly long strings
-	if len(desc) > 500 {
-		desc = desc[:497] + "..."
-	}
 	return desc
 }
 
@@ -816,12 +812,6 @@ func formatEnumDescription(desc string, enumValues []interface{}) string {
 	// Format based on number of values per HashiCorp standards
 	if len(formattedValues) == 1 {
 		return fmt.Sprintf("%s The only possible value is %s.", desc, formattedValues[0])
-	}
-
-	// Limit to first 10 values to avoid overly long descriptions
-	if len(formattedValues) > 10 {
-		formattedValues = formattedValues[:10]
-		return fmt.Sprintf("%s Possible values include %s, and others.", desc, strings.Join(formattedValues, ", "))
 	}
 
 	return fmt.Sprintf("%s Possible values are %s.", desc, strings.Join(formattedValues, ", "))

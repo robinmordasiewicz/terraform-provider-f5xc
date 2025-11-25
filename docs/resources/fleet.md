@@ -65,51 +65,63 @@ resource "f5xc_fleet" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `allow_all_usb`, `deny_all_usb`, `usb_policy`
 
-    - `allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+`allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. See [Blocked Services](#blocked-services) below for details.
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `bond_device_list`, `no_bond_devices`
 
-    - `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
-    - `no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
 
--> **Note:** Only one of the following may be set:
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-    - `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#dc-cluster-group) below for details.
-    - `dc_cluster_group_inside` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
-    - `no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set: `dc_cluster_group`, `dc_cluster_group_inside`, `no_dc_cluster_group`
 
--> **Note:** Only one of the following may be set:
+`dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#dc-cluster-group) below for details.
 
-    - `default_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `device_list` - (Optional) List of Devices. Add device for all interfaces belonging to this fleet. See [Device List](#device-list) below for details.
-    - `interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interface List](#interface-list) below for details.
+`dc_cluster_group_inside` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
 
--> **Note:** Only one of the following may be set:
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-    - `default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
+-> **Note:** Only one of the following may be set: `default_config`, `device_list`, `interface_list`
 
--> **Note:** Only one of the following may be set:
+`default_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-    - `default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Class List](#storage-class-list) below for details.
+`device_list` - (Optional) List of Devices. Add device for all interfaces belonging to this fleet. See [Device List](#device-list) below for details.
 
--> **Note:** Only one of the following may be set:
+`interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interface List](#interface-list) below for details.
 
-    - `disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU. See [Enable Vgpu](#enable-vgpu) below for details.
+-> **Note:** Only one of the following may be set: `default_sriov_interface`, `sriov_interfaces`
 
--> **Note:** Only one of the following may be set:
+`default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-    - `disable_vm` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `enable_vm` - (Optional) VM Configuration. VMs support configuration (`Block`).
+`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration. See [Sriov Interfaces](#sriov-interfaces) below for details.
+
+-> **Note:** Only one of the following may be set: `default_storage_class`, `storage_class_list`
+
+`default_storage_class` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet. See [Storage Class List](#storage-class-list) below for details.
+
+-> **Note:** Only one of the following may be set: `disable_gpu`, `enable_gpu`, `enable_vgpu`
+
+`disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU. See [Enable Vgpu](#enable-vgpu) below for details.
+
+-> **Note:** Only one of the following may be set: `disable_vm`, `enable_vm`
+
+`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`enable_vm` - (Optional) VM Configuration. VMs support configuration (`Block`).
 
 `enable_default_fleet_config_download` - (Optional) Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config (`Bool`).
 
@@ -119,29 +131,33 @@ resource "f5xc_fleet" "example" {
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `log_receiver`, `logs_streaming_disabled`
 
-    - `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
-    - `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
+
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_connectors` - (Optional) Network Connectors. Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet. See [Network Connectors](#network-connectors) below for details.
 
 `network_firewall` - (Optional) Network Firewall. Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network. See [Network Firewall](#network-firewall) below for details.
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `no_storage_device`, `storage_device_list`
 
-    - `no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet (`Block`).
+`no_storage_device` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Note:** Only one of the following may be set:
+`storage_device_list` - (Optional) Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet (`Block`).
 
-    - `no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet (`Block`).
+-> **Note:** Only one of the following may be set: `no_storage_interfaces`, `storage_interface_list`
 
--> **Note:** Only one of the following may be set:
+`no_storage_interfaces` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-    - `no_storage_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes (`Block`).
+`storage_interface_list` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet (`Block`).
+
+-> **Note:** Only one of the following may be set: `no_storage_static_routes`, `storage_static_routes`
+
+`no_storage_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`storage_static_routes` - (Optional) Storage Static Routes List. List of storage static routes (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config (`String`).
 

@@ -62,10 +62,11 @@ resource "f5xc_bot_defense_app_infrastructure" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `cloud_hosted`, `data_center_hosted`
 
-    - `cloud_hosted` - (Optional) F5 Hosted. Infra F5 Hosted. See [Cloud Hosted](#cloud-hosted) below for details.
-    - `data_center_hosted` - (Optional) F5 Hosted. Infra F5 Hosted. See [Data Center Hosted](#data-center-hosted) below for details.
+`cloud_hosted` - (Optional) F5 Hosted. Infra F5 Hosted. See [Cloud Hosted](#cloud-hosted) below for details.
+
+`data_center_hosted` - (Optional) F5 Hosted. Infra F5 Hosted. See [Data Center Hosted](#data-center-hosted) below for details.
 
 `environment_type` - (Optional) Environment Type. Environment Type Production environment Testing environment. Possible values are `PRODUCTION`, `TESTING`. Defaults to `PRODUCTION` (`String`).
 

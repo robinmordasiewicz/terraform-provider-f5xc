@@ -64,10 +64,11 @@ resource "f5xc_advertise_policy" "example" {
 
 `address` - (Optional) VIP. Optional. VIP to advertise. This VIP can be either V4/V6 address You can not specify this if where contains a site or virtual site of type REGIONAL_EDGE or public network If not specified and 'where' is specified with site or virtual site option, inside_vip or outside_vip specified in the site object will be used based on the network type. If inside_vip/outside_vip is not configured in the site object, system use interface IP in the respected networks (`String`).
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `port`, `port_ranges`
 
-    - `port` - (Optional) TCP/UDP Port. Port to advertise (`Number`).
-    - `port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+`port` - (Optional) TCP/UDP Port. Port to advertise (`Number`).
+
+`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
 `protocol` - (Optional) Protocol. Protocol to advertise (`String`).
 

@@ -72,27 +72,31 @@ resource "f5xc_origin_pool" "example" {
 
 `advanced_options` - (Optional) Origin Pool Advanced Options. Configure Advanced options for origin pool. See [Advanced Options](#advanced-options) below for details.
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `automatic_port`, `lb_port`, `port`
 
-    - `automatic_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `lb_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `port` - (Optional) Port. Endpoint service is available on this port (`Number`).
+`automatic_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`lb_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`port` - (Optional) Port. Endpoint service is available on this port (`Number`).
 
 `endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED` (`String`).
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `health_check_port`, `same_as_endpoint_port`
 
-    - `health_check_port` - (Optional) Health check port. Port used for performing health check (`Number`).
-    - `same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`health_check_port` - (Optional) Health check port. Port used for performing health check (`Number`).
+
+`same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects. See [Healthcheck](#healthcheck) below for details.
 
 `loadbalancer_algorithm` - (Optional) Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN` (`String`).
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `no_tls`, `use_tls`
 
-    - `no_tls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters (`Block`).
+`no_tls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters (`Block`).
 
 `origin_servers` - (Optional) Origin Servers. List of origin servers in this pool. See [Origin Servers](#origin-servers) below for details.
 

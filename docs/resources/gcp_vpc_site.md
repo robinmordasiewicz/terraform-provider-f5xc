@@ -95,11 +95,13 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 `admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `block_all_services`, `blocked_services`, `default_blocked_services`
 
-    - `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
-    - `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `cloud_credentials` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Credentials](#cloud-credentials) below for details.
 
@@ -113,29 +115,33 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 `gcp_region` - (Optional) GCP Region. Name for GCP Region (`String`).
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `ingress_egress_gw`, `ingress_gw`, `voltstack_cluster`
 
-    - `ingress_egress_gw` - (Optional) GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
-    - `ingress_gw` - (Optional) GCP Ingress Gateway. Single interface GCP ingress site (`Block`).
-    - `voltstack_cluster` - (Optional) GCP App Stack Cluster. App Stack cluster of single interface GCP site (`Block`).
+`ingress_egress_gw` - (Optional) GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+
+`ingress_gw` - (Optional) GCP Ingress Gateway. Single interface GCP ingress site (`Block`).
+
+`voltstack_cluster` - (Optional) GCP App Stack Cluster. App Stack cluster of single interface GCP site (`Block`).
 
 `instance_type` - (Optional) GCP Instance Type for Node. Select Instance size based on performance needed (`String`).
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded (`Block`).
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `log_receiver`, `logs_streaming_disabled`
 
-    - `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-    - `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen (`Block`).
 
 `os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions (`Block`).
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `private_connect_disabled`, `private_connectivity`
 
-    - `private_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration (`Block`).
+`private_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration (`Block`).
 
 `ssh_key` - (Optional) Public SSH key. Public SSH key for accessing the site (`String`).
 

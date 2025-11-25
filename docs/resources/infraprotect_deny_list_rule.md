@@ -62,14 +62,19 @@ resource "f5xc_infraprotect_deny_list_rule" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `expiration_never`, `expiration_timestamp`, `one_day`, `one_hour`, `one_month`, `one_year`
 
-    - `expiration_never` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `expiration_timestamp` - (Optional) Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards (`String`).
-    - `one_day` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `one_hour` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `one_month` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `one_year` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`expiration_never` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`expiration_timestamp` - (Optional) Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards (`String`).
+
+`one_day` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`one_hour` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`one_month` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`one_year` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `prefix` - (Optional) Prefix. Prefix (`String`).
 

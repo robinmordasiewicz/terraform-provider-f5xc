@@ -66,11 +66,13 @@ resource "f5xc_api_testing" "example" {
 
 `domains` - (Optional) Testing Environments. Add and configure testing domains and credentials. See [Domains](#domains) below for details.
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `every_day`, `every_month`, `every_week`
 
-    - `every_day` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `every_month` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `every_week` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`every_day` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`every_month` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`every_week` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

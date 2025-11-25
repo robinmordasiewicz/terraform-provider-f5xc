@@ -62,17 +62,21 @@ resource "f5xc_ike1" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `ike_keylifetime_hours`, `ike_keylifetime_minutes`, `use_default_keylifetime`
 
-    - `ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
-    - `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-    - `use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
 
--> **Note:** Only one of the following may be set:
+`ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 
-    - `reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-    - `reauth_timeout_days` - (Optional) Days. Set Duration in days. See [Reauth Timeout Days](#reauth-timeout-days) below for details.
-    - `reauth_timeout_hours` - (Optional) Hours. Input Hours. See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
+`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+-> **Note:** Only one of the following may be set: `reauth_disabled`, `reauth_timeout_days`, `reauth_timeout_hours`
+
+`reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+
+`reauth_timeout_days` - (Optional) Days. Set Duration in days. See [Reauth Timeout Days](#reauth-timeout-days) below for details.
+
+`reauth_timeout_hours` - (Optional) Hours. Input Hours. See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

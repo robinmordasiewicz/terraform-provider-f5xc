@@ -71,29 +71,33 @@ resource "f5xc_securemesh_site" "example" {
 
 `address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `blocked_services`, `default_blocked_services`
 
-    - `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
-    - `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
--> **Note:** Only one of the following may be set:
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-    - `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
-    - `no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set: `bond_device_list`, `no_bond_devices`
+
+`bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
+
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `custom_network_config`, `default_network_config`
 
-    - `custom_network_config` - (Optional) SmsNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
-    - `default_network_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`custom_network_config` - (Optional) SmsNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
+
+`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded (`Block`).
 
--> **Note:** Only one of the following may be set:
+-> **Note:** Only one of the following may be set: `log_receiver`, `logs_streaming_disabled`
 
-    - `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-    - `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes (`Block`).
 

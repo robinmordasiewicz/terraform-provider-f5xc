@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [Global Log Receiver Nested Blocks Guide](/docs/guides/global_log_receiver_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [Global Log Receiver Nested Blocks](./global_log_receiver_nested_blocks).
 
 ## Import
 

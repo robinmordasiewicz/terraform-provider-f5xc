@@ -174,7 +174,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [Voltstack Site Nested Blocks Guide](/docs/guides/voltstack_site_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [Voltstack Site Nested Blocks](./voltstack_site_nested_blocks).
 
 ## Import
 

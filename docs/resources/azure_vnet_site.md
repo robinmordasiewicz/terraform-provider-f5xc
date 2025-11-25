@@ -176,7 +176,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [Azure Vnet Site Nested Blocks Guide](/docs/guides/azure_vnet_site_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [Azure Vnet Site Nested Blocks](./azure_vnet_site_nested_blocks).
 
 ## Import
 

@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Nested Block Reference
 
-This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [Workload Nested Blocks Guide](/docs/guides/workload_nested_blocks).
+This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [Workload Nested Blocks](./workload_nested_blocks).
 
 ## Import
 

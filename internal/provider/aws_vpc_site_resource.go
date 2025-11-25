@@ -50,6 +50,8 @@ type AWSVPCSiteResourceModel struct {
 	Address types.String `tfsdk:"address"`
 	Annotations types.Map `tfsdk:"annotations"`
 	AWSRegion types.String `tfsdk:"aws_region"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	DiskSize types.Int64 `tfsdk:"disk_size"`
 	InstanceType types.String `tfsdk:"instance_type"`
 	Labels types.Map `tfsdk:"labels"`
@@ -94,12 +96,20 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"aws_region": schema.StringAttribute{
 				MarkdownDescription: "AWS Region. Name for AWS Region.",
+				Optional: true,
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
 			"disk_size": schema.Int64Attribute{
@@ -111,7 +121,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

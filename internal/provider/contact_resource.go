@@ -54,6 +54,8 @@ type ContactResourceModel struct {
 	ContactType types.String `tfsdk:"contact_type"`
 	Country types.String `tfsdk:"country"`
 	County types.String `tfsdk:"county"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	PhoneNumber types.String `tfsdk:"phone_number"`
 	State types.String `tfsdk:"state"`
@@ -101,7 +103,7 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -121,8 +123,16 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "County.",
 				Optional: true,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

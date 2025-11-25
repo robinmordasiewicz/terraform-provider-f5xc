@@ -49,6 +49,8 @@ type DataTypeResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Compliances types.List `tfsdk:"compliances"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	IsPii types.Bool `tfsdk:"is_pii"`
 	IsSensitiveData types.Bool `tfsdk:"is_sensitive_data"`
 	Labels types.Map `tfsdk:"labels"`
@@ -86,7 +88,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -94,6 +96,14 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
 			},
 			"is_pii": schema.BoolAttribute{
 				MarkdownDescription: "Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)",
@@ -104,7 +114,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

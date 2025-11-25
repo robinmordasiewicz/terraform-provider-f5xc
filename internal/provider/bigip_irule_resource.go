@@ -49,6 +49,8 @@ type BigIPIruleResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Code types.String `tfsdk:"code"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	IruleName types.String `tfsdk:"irule_name"`
 	Labels types.Map `tfsdk:"labels"`
 	Source types.String `tfsdk:"source"`
@@ -86,7 +88,7 @@ func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -94,12 +96,20 @@ func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "iRule code. iRule code content, this content will be base64 encoded for preserving formating",
 				Optional: true,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"irule_name": schema.StringAttribute{
 				MarkdownDescription: "iRule name. iRule name",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

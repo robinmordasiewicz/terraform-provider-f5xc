@@ -49,7 +49,9 @@ type IKEPhase1ProfileResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
 	AuthenticationAlgos types.List `tfsdk:"authentication_algos"`
+	Description types.String `tfsdk:"description"`
 	DhGroup types.List `tfsdk:"dh_group"`
+	Disable types.Bool `tfsdk:"disable"`
 	EncryptionAlgos types.List `tfsdk:"encryption_algos"`
 	Labels types.Map `tfsdk:"labels"`
 	Prf types.List `tfsdk:"prf"`
@@ -87,7 +89,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -96,10 +98,18 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
 			"dh_group": schema.ListAttribute{
 				MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT`.",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
 			},
 			"encryption_algos": schema.ListAttribute{
 				MarkdownDescription: "Configure Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT`.",
@@ -107,7 +117,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

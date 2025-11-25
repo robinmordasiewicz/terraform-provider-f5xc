@@ -51,6 +51,8 @@ type VirtualHostResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	AppendServerName types.String `tfsdk:"append_server_name"`
 	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
 	DisableDNSResolve types.Bool `tfsdk:"disable_dns_resolve"`
 	Domains types.List `tfsdk:"domains"`
@@ -101,7 +103,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -111,6 +113,14 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"connection_idle_timeout": schema.Int64Attribute{
 				MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+				Optional: true,
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
 			"disable_default_error_pages": schema.BoolAttribute{
@@ -131,7 +141,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

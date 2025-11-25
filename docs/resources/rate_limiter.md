@@ -69,7 +69,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="limits"></a>
 
-### Limits
+**Limits**
 
 `action_block` - (Optional) Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold. See [Action Block](#limits-action-block) below.
 
@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="limits-action-block"></a>
 
-### Limits Action Block
+**Limits Action Block**
 
 `hours` - (Optional) Hours. Input Duration Hours. See [Hours](#limits-action-block-hours) below.
 
@@ -99,25 +99,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="limits-action-block-hours"></a>
 
-### Limits Action Block Hours
+**Limits Action Block Hours**
 
 `duration` - (Optional) Duration (`Number`).
 
 <a id="limits-action-block-minutes"></a>
 
-### Limits Action Block Minutes
+**Limits Action Block Minutes**
 
 `duration` - (Optional) Duration (`Number`).
 
 <a id="limits-action-block-seconds"></a>
 
-### Limits Action Block Seconds
+**Limits Action Block Seconds**
 
 `duration` - (Optional) Duration (`Number`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -129,7 +129,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="user-identification"></a>
 
-### User Identification
+**User Identification**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 

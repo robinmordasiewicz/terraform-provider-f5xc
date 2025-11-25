@@ -82,13 +82,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="forward-proxy-pbr"></a>
 
-### Forward Proxy Pbr
+**Forward Proxy Pbr**
 
 `forward_proxy_pbr_rules` - (Optional) L3/L4 routing rules. Network(L3/L4) routing policy rules. See [Forward Proxy Pbr Rules](#forward-proxy-pbr-forward-proxy-pbr-rules) below.
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules
+**Forward Proxy Pbr Forward Proxy Pbr Rules**
 
 `all_destinations` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -110,7 +110,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Forwarding Class List
+**Forward Proxy Pbr Forward Proxy Pbr Rules Forwarding Class List**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -120,13 +120,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-http-list"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List
+**Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List**
 
 `http_list` - (Optional) HTTP URLs. URLs for HTTP connections (`Block`).
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-ip-prefix-set"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules IP Prefix Set
+**Forward Proxy Pbr Forward Proxy Pbr Rules IP Prefix Set**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -136,13 +136,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-label-selector"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Label Selector
+**Forward Proxy Pbr Forward Proxy Pbr Rules Label Selector**
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-metadata"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Metadata
+**Forward Proxy Pbr Forward Proxy Pbr Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
@@ -150,19 +150,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules Prefix List
+**Forward Proxy Pbr Forward Proxy Pbr Rules Prefix List**
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-tls-list"></a>
 
-### Forward Proxy Pbr Forward Proxy Pbr Rules TLS List
+**Forward Proxy Pbr Forward Proxy Pbr Rules TLS List**
 
 `tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections (`Block`).
 
 <a id="forwarding-class-list"></a>
 
-### Forwarding Class List
+**Forwarding Class List**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -172,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="network-pbr"></a>
 
-### Network Pbr
+**Network Pbr**
 
 `any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -184,13 +184,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="network-pbr-label-selector"></a>
 
-### Network Pbr Label Selector
+**Network Pbr Label Selector**
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="network-pbr-network-pbr-rules"></a>
 
-### Network Pbr Network Pbr Rules
+**Network Pbr Network Pbr Rules**
 
 `all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -216,13 +216,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="network-pbr-network-pbr-rules-applications"></a>
 
-### Network Pbr Network Pbr Rules Applications
+**Network Pbr Network Pbr Rules Applications**
 
 `applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
 
 <a id="network-pbr-network-pbr-rules-forwarding-class-list"></a>
 
-### Network Pbr Network Pbr Rules Forwarding Class List
+**Network Pbr Network Pbr Rules Forwarding Class List**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -232,13 +232,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="network-pbr-network-pbr-rules-ip-prefix-set"></a>
 
-### Network Pbr Network Pbr Rules IP Prefix Set
+**Network Pbr Network Pbr Rules IP Prefix Set**
 
 `ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="network-pbr-network-pbr-rules-metadata"></a>
 
-### Network Pbr Network Pbr Rules Metadata
+**Network Pbr Network Pbr Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
@@ -246,13 +246,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="network-pbr-network-pbr-rules-prefix-list"></a>
 
-### Network Pbr Network Pbr Rules Prefix List
+**Network Pbr Network Pbr Rules Prefix List**
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="network-pbr-network-pbr-rules-protocol-port-range"></a>
 
-### Network Pbr Network Pbr Rules Protocol Port Range
+**Network Pbr Network Pbr Rules Protocol Port Range**
 
 `port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
 
@@ -260,13 +260,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="network-pbr-prefix-list"></a>
 
-### Network Pbr Prefix List
+**Network Pbr Prefix List**
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

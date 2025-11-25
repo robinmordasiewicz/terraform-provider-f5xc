@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cloud-hosted"></a>
 
-### Cloud Hosted
+**Cloud Hosted**
 
 `egress` - (Optional) Egress. Egress. See [Egress](#cloud-hosted-egress) below.
 
@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cloud-hosted-egress"></a>
 
-### Cloud Hosted Egress
+**Cloud Hosted Egress**
 
 `ip_address` - (Optional) IP Address. Egress IP address (`String`).
 
@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cloud-hosted-ingress"></a>
 
-### Cloud Hosted Ingress
+**Cloud Hosted Ingress**
 
 `host_name` - (Optional) Ingress value. Ingress Host Name (`String`).
 
@@ -114,7 +114,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="data-center-hosted"></a>
 
-### Data Center Hosted
+**Data Center Hosted**
 
 `egress` - (Optional) Egress. Egress. See [Egress](#data-center-hosted-egress) below.
 
@@ -126,7 +126,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="data-center-hosted-egress"></a>
 
-### Data Center Hosted Egress
+**Data Center Hosted Egress**
 
 `ip_address` - (Optional) IP Address. Egress IP address (`String`).
 
@@ -134,7 +134,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="data-center-hosted-ingress"></a>
 
-### Data Center Hosted Ingress
+**Data Center Hosted Ingress**
 
 `host_name` - (Optional) Ingress value. Ingress Host Name (`String`).
 
@@ -144,7 +144,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -98,31 +98,31 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ike-keylifetime-hours"></a>
 
-### Ike Keylifetime Hours
+**Ike Keylifetime Hours**
 
 `duration` - (Optional) Duration (`Number`).
 
 <a id="ike-keylifetime-minutes"></a>
 
-### Ike Keylifetime Minutes
+**Ike Keylifetime Minutes**
 
 `duration` - (Optional) Duration (`Number`).
 
 <a id="reauth-timeout-days"></a>
 
-### Reauth Timeout Days
+**Reauth Timeout Days**
 
 `duration` - (Optional) Duration (`Number`).
 
 <a id="reauth-timeout-hours"></a>
 
-### Reauth Timeout Hours
+**Reauth Timeout Hours**
 
 `duration` - (Optional) Duration (`Number`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

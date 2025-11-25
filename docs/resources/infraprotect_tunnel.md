@@ -92,13 +92,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bandwidth"></a>
 
-### Bandwidth
+**Bandwidth**
 
 `bandwidth_max_mb` - (Optional) Bandwidth Max in MB. Bandwidth max allowed (`Number`).
 
 <a id="bgp-information"></a>
 
-### BGP Information
+**BGP Information**
 
 `asn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Asn](#bgp-information-asn) below.
 
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-information-asn"></a>
 
-### BGP Information Asn
+**BGP Information Asn**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -122,7 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-information-peer-secret-override"></a>
 
-### BGP Information Peer Secret Override
+**BGP Information Peer Secret Override**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
 
@@ -130,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>
 
-### BGP Information Peer Secret Override Blindfold Secret Info
+**BGP Information Peer Secret Override Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -140,7 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-information-peer-secret-override-clear-secret-info"></a>
 
-### BGP Information Peer Secret Override Clear Secret Info
+**BGP Information Peer Secret Override Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
@@ -148,7 +148,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="firewall-rule-group"></a>
 
-### Firewall Rule Group
+**Firewall Rule Group**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -158,7 +158,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gre-ipv4"></a>
 
-### Gre IPv4
+**Gre IPv4**
 
 `customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel (`String`).
 
@@ -176,7 +176,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gre-ipv6"></a>
 
-### Gre IPv6
+**Gre IPv6**
 
 `customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel (`String`).
 
@@ -186,19 +186,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ip-in-ip"></a>
 
-### IP In IP
+**IP In IP**
 
 `customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel (`String`).
 
 <a id="ipv6-to-ipv6"></a>
 
-### IPv6 To IPv6
+**IPv6 To IPv6**
 
 `customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel (`String`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -210,7 +210,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tunnel-location"></a>
 
-### Tunnel Location
+**Tunnel Location**
 
 `name` - (Optional) Location Name. Destination tunnel Location (`String`).
 

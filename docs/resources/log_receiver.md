@@ -77,7 +77,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="syslog"></a>
 
-### Syslog
+**Syslog**
 
 `syslog_rfc5424` - (Optional) Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length (`Number`).
 
@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="syslog-tcp-server"></a>
 
-### Syslog TCP Server
+**Syslog TCP Server**
 
 `port` - (Optional) Port Number. Port number used for communication (`Number`).
 
@@ -97,7 +97,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="syslog-tls-server"></a>
 
-### Syslog TLS Server
+**Syslog TLS Server**
 
 `default_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -117,7 +117,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="syslog-tls-server-mtls-enable"></a>
 
-### Syslog TLS Server mTLS Enable
+**Syslog TLS Server mTLS Enable**
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
@@ -125,7 +125,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="syslog-udp-server"></a>
 
-### Syslog UDP Server
+**Syslog UDP Server**
 
 `port` - (Optional) Port Number. Port number used for communication (`Number`).
 
@@ -133,7 +133,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

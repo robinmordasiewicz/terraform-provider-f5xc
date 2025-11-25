@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site"></a>
 
-### AWS Tgw Site
+**AWS Tgw Site**
 
 `cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cred](#aws-tgw-site-cred) below.
 
@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-cred"></a>
 
-### AWS Tgw Site Cred
+**AWS Tgw Site Cred**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-site"></a>
 
-### AWS Tgw Site Site
+**AWS Tgw Site Site**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -112,13 +112,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-vpc-attachments"></a>
 
-### AWS Tgw Site Vpc Attachments
+**AWS Tgw Site Vpc Attachments**
 
 `vpc_list` - (Optional) VPC List. See [Vpc List](#aws-tgw-site-vpc-attachments-vpc-list) below.
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list"></a>
 
-### AWS Tgw Site Vpc Attachments Vpc List
+**AWS Tgw Site Vpc Attachments Vpc List**
 
 `custom_routing` - (Optional) AWS Route Table List. AWS Route Table List (`Block`).
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-vnet-site"></a>
 
-### Azure Vnet Site
+**Azure Vnet Site**
 
 `site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#azure-vnet-site-site) below.
 
@@ -140,7 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-vnet-site-site"></a>
 
-### Azure Vnet Site Site
+**Azure Vnet Site Site**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -150,13 +150,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-vnet-site-vnet-attachments"></a>
 
-### Azure Vnet Site Vnet Attachments
+**Azure Vnet Site Vnet Attachments**
 
 `vnet_list` - (Optional) VNET List. See [Vnet List](#azure-vnet-site-vnet-attachments-vnet-list) below.
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list"></a>
 
-### Azure Vnet Site Vnet Attachments Vnet List
+**Azure Vnet Site Vnet Attachments Vnet List**
 
 `custom_routing` - (Optional) List Azure Route Table with Static Route. List Azure Route Table with Static Route (`Block`).
 
@@ -172,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="segment"></a>
 
-### Segment
+**Segment**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -182,7 +182,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

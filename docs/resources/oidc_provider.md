@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-oidc-spec-type"></a>
 
-### Azure Oidc Spec Type
+**Azure Oidc Spec Type**
 
 `authorization_url` - (Optional) Authorization URL. The authorization URL of your OIDC application (`String`).
 
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="google-oidc-spec-type"></a>
 
-### Google Oidc Spec Type
+**Google Oidc Spec Type**
 
 `client_id` - (Optional) Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field (`String`).
 
@@ -122,7 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oidc-v10-spec-type"></a>
 
-### Oidc V10 Spec Type
+**Oidc V10 Spec Type**
 
 `allowed_clock_skew` - (Optional) Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens. Default value is zero (`String`).
 
@@ -162,7 +162,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="okta-oidc-spec-type"></a>
 
-### Okta Oidc Spec Type
+**Okta Oidc Spec Type**
 
 `authorization_url` - (Optional) Authorization URL. The authorization URL of your OIDC application (`String`).
 
@@ -188,7 +188,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -92,19 +92,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advanced-action"></a>
 
-### Advanced Action
+**Advanced Action**
 
 `action` - (Optional) Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG` (`String`).
 
 <a id="ip-prefix-set"></a>
 
-### IP Prefix Set
+**IP Prefix Set**
 
 `ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#ip-prefix-set-ref) below.
 
 <a id="ip-prefix-set-ref"></a>
 
-### IP Prefix Set Ref
+**IP Prefix Set Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -118,25 +118,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="label-matcher"></a>
 
-### Label Matcher
+**Label Matcher**
 
 `keys` - (Optional) Keys. The list of label key names that have to match (`List`).
 
 <a id="prefix"></a>
 
-### Prefix
+**Prefix**
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 <a id="prefix-selector"></a>
 
-### Prefix Selector
+**Prefix Selector**
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

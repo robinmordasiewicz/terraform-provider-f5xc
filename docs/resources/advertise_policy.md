@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="public-ip"></a>
 
-### Public IP
+**Public IP**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters"></a>
 
-### TLS Parameters
+**TLS Parameters**
 
 `client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params"></a>
 
-### TLS Parameters Common Params
+**TLS Parameters Common Params**
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used (`List`).
 
@@ -146,7 +146,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
-### TLS Parameters Common Params TLS Certificates
+**TLS Parameters Common Params TLS Certificates**
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
@@ -162,7 +162,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
-### TLS Parameters Common Params Validation Params
+**TLS Parameters Common Params Validation Params**
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
@@ -174,7 +174,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where"></a>
 
-### Where
+**Where**
 
 `site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#where-site) below.
 
@@ -184,7 +184,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site"></a>
 
-### Where Site
+**Where Site**
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -196,7 +196,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site-ref"></a>
 
-### Where Site Ref
+**Where Site Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -210,13 +210,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-network"></a>
 
-### Where Virtual Network
+**Where Virtual Network**
 
 `ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#where-virtual-network-ref) below.
 
 <a id="where-virtual-network-ref"></a>
 
-### Where Virtual Network Ref
+**Where Virtual Network Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -230,7 +230,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site"></a>
 
-### Where Virtual Site
+**Where Virtual Site**
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -242,7 +242,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site-ref"></a>
 
-### Where Virtual Site Ref
+**Where Virtual Site Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 

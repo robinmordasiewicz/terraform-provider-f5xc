@@ -74,13 +74,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="mitigation-type"></a>
 
-### Mitigation Type
+**Mitigation Type**
 
 `rules` - (Optional) Rules. Define the threat levels and the corresponding mitigation actions to be taken. See [Rules](#mitigation-type-rules) below.
 
 <a id="mitigation-type-rules"></a>
 
-### Mitigation Type Rules
+**Mitigation Type Rules**
 
 `mitigation_action` - (Optional) Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user. See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
 
@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="mitigation-type-rules-mitigation-action"></a>
 
-### Mitigation Type Rules Mitigation Action
+**Mitigation Type Rules Mitigation Action**
 
 `block_temporarily` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="mitigation-type-rules-threat-level"></a>
 
-### Mitigation Type Rules Threat Level
+**Mitigation Type Rules Threat Level**
 
 `high` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -108,7 +108,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

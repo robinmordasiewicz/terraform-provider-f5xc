@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules"></a>
 
-### Rules
+**Rules**
 
 `action` - (Optional) BGP Route Action. Action to be enforced if the BGP route matches the rule. See [Action](#rules-action) below.
 
@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-action"></a>
 
-### Rules Action
+**Rules Action**
 
 `aggregate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -102,13 +102,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-action-community"></a>
 
-### Rules Action Community
+**Rules Action Community**
 
 `community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
 
 <a id="rules-match"></a>
 
-### Rules Match
+**Rules Match**
 
 `as_path` - (Optional) AS path to match. AS path can also be a regex, which will be matched against route information (`String`).
 
@@ -118,19 +118,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-match-community"></a>
 
-### Rules Match Community
+**Rules Match Community**
 
 `community` - (Optional) BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value (`List`).
 
 <a id="rules-match-ip-prefixes"></a>
 
-### Rules Match IP Prefixes
+**Rules Match IP Prefixes**
 
 `prefixes` - (Optional) Prefix list. List of IP prefix (`Block`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

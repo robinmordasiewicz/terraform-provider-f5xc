@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-disable-compliance-checks"></a>
 
-### Enable Disable Compliance Checks
+**Enable Disable Compliance Checks**
 
 `disable_compliance_checks` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-disable-compliance-checks-enable-compliance-checks"></a>
 
-### Enable Disable Compliance Checks Enable Compliance Checks
+**Enable Disable Compliance Checks Enable Compliance Checks**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-disable-signatures"></a>
 
-### Enable Disable Signatures
+**Enable Disable Signatures**
 
 `disable_signature` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="business-logic-markup-setting"></a>
 
-### Business Logic Markup Setting
+**Business Logic Markup Setting**
 
 `disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -88,19 +88,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="business-logic-markup-setting-discovered-api-settings"></a>
 
-### Business Logic Markup Setting Discovered API Settings
+**Business Logic Markup Setting Discovered API Settings**
 
 `purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
 
 <a id="features"></a>
 
-### Features
+**Features**
 
 `type` - (Optional) AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis. Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`. Defaults to `BUSINESS_LOGIC_MARKUP` (`String`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

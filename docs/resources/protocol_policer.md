@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-policer"></a>
 
-### Protocol Policer
+**Protocol Policer**
 
 `policer` - (Optional) Policer. Reference to policer object to apply traffic rate limits. See [Policer](#protocol-policer-policer) below.
 
@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-policer-policer"></a>
 
-### Protocol Policer Policer
+**Protocol Policer Policer**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-policer-protocol"></a>
 
-### Protocol Policer Protocol
+**Protocol Policer Protocol**
 
 `dns` - (Optional) DNS Packets. Match all DNS packets inclusing UDP and TCP (`Block`).
 
@@ -110,19 +110,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-policer-protocol-icmp"></a>
 
-### Protocol Policer Protocol ICMP
+**Protocol Policer Protocol ICMP**
 
 `type` - (Optional) ICMP type. ICMP message type to be matched in packet (`List`).
 
 <a id="protocol-policer-protocol-tcp"></a>
 
-### Protocol Policer Protocol TCP
+**Protocol Policer Protocol TCP**
 
 `flags` - (Optional) TCP flags. TCP flag to be matched in a TCP packet (`List`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-token"></a>
 
-### API Token
+**API Token**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#api-token-blindfold-secret-info) below.
 
@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-token-blindfold-secret-info"></a>
 
-### API Token Blindfold Secret Info
+**API Token Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-token-clear-secret-info"></a>
 
-### API Token Clear Secret Info
+**API Token Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
@@ -110,13 +110,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ip"></a>
 
-### IP
+**IP**
 
 `addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
 
 <a id="password"></a>
 
-### Password
+**Password**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#password-blindfold-secret-info) below.
 
@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="password-blindfold-secret-info"></a>
 
-### Password Blindfold Secret Info
+**Password Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -134,7 +134,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="password-clear-secret-info"></a>
 
-### Password Clear Secret Info
+**Password Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
@@ -142,7 +142,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

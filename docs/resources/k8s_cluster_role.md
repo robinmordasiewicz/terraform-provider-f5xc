@@ -82,19 +82,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="k8s-cluster-role-selector"></a>
 
-### K8s Cluster Role Selector
+**K8s Cluster Role Selector**
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="policy-rule-list"></a>
 
-### Policy Rule List
+**Policy Rule List**
 
 `policy_rule` - (Optional) Policy Rules. List of rules for role permissions. See [Policy Rule](#policy-rule-list-policy-rule) below.
 
 <a id="policy-rule-list-policy-rule"></a>
 
-### Policy Rule List Policy Rule
+**Policy Rule List Policy Rule**
 
 `non_resource_url_list` - (Optional) List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource. See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
 
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-rule-list-policy-rule-non-resource-url-list"></a>
 
-### Policy Rule List Policy Rule Non Resource URL List
+**Policy Rule List Policy Rule Non Resource URL List**
 
 `urls` - (Optional) Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex (`List`).
 
@@ -110,7 +110,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-rule-list-policy-rule-resource-list"></a>
 
-### Policy Rule List Policy Rule Resource List
+**Policy Rule List Policy Rule Resource List**
 
 `api_groups` - (Optional) API Groups. Allowed list of API group that contains resources, all resources of a given API group (`List`).
 
@@ -122,7 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

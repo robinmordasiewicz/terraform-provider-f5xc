@@ -122,7 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="circuit-breaker"></a>
 
-### Circuit Breaker
+**Circuit Breaker**
 
 `connection_limit` - (Optional) Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit (`Number`).
 
@@ -136,13 +136,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="endpoint-subsets"></a>
 
-### Endpoint Subsets
+**Endpoint Subsets**
 
 `keys` - (Optional) Keys. List of keys that define a cluster subset class (`List`).
 
 <a id="endpoints"></a>
 
-### Endpoints
+**Endpoints**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -156,7 +156,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="health-checks"></a>
 
-### Health Checks
+**Health Checks**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -170,13 +170,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http1-config"></a>
 
-### Http1 Config
+**Http1 Config**
 
 `header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#http1-config-header-transformation) below.
 
 <a id="http1-config-header-transformation"></a>
 
-### Http1 Config Header Transformation
+**Http1 Config Header Transformation**
 
 `default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -188,13 +188,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http2-options"></a>
 
-### Http2 Options
+**Http2 Options**
 
 `enabled` - (Optional) HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections (`Bool`).
 
 <a id="outlier-detection"></a>
 
-### Outlier Detection
+**Outlier Detection**
 
 `base_ejection_time` - (Optional) Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds (`Number`).
 
@@ -208,7 +208,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -220,7 +220,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters"></a>
 
-### TLS Parameters
+**TLS Parameters**
 
 `cert_params` - (Optional) Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store. See [Cert Params](#tls-parameters-cert-params) below.
 
@@ -240,7 +240,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-cert-params"></a>
 
-### TLS Parameters Cert Params
+**TLS Parameters Cert Params**
 
 `certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication. See [Certificates](#tls-parameters-cert-params-certificates) below.
 
@@ -254,7 +254,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-cert-params-certificates"></a>
 
-### TLS Parameters Cert Params Certificates
+**TLS Parameters Cert Params Certificates**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -268,7 +268,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-cert-params-validation-params"></a>
 
-### TLS Parameters Cert Params Validation Params
+**TLS Parameters Cert Params Validation Params**
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
@@ -280,7 +280,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params"></a>
 
-### TLS Parameters Common Params
+**TLS Parameters Common Params**
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used (`List`).
 
@@ -294,7 +294,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
-### TLS Parameters Common Params TLS Certificates
+**TLS Parameters Common Params TLS Certificates**
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
@@ -310,7 +310,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
-### TLS Parameters Common Params Validation Params
+**TLS Parameters Common Params Validation Params**
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
@@ -322,7 +322,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="upstream-conn-pool-reuse-type"></a>
 
-### Upstream Conn Pool Reuse Type
+**Upstream Conn Pool Reuse Type**
 
 `disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 

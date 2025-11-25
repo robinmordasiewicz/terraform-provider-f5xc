@@ -116,13 +116,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom"></a>
 
-### Advertise Custom
+**Advertise Custom**
 
 `advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#advertise-custom-advertise-where) below.
 
 <a id="advertise-custom-advertise-where"></a>
 
-### Advertise Custom Advertise Where
+**Advertise Custom Advertise Where**
 
 `advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-custom-advertise-where-advertise-on-public) below.
 
@@ -144,13 +144,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-advertise-on-public"></a>
 
-### Advertise Custom Advertise Where Advertise On Public
+**Advertise Custom Advertise Where Advertise On Public**
 
 `public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="advertise-custom-advertise-where-site"></a>
 
-### Advertise Custom Advertise Where Site
+**Advertise Custom Advertise Where Site**
 
 `ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
 
@@ -160,7 +160,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-network"></a>
 
-### Advertise Custom Advertise Where Virtual Network
+**Advertise Custom Advertise Where Virtual Network**
 
 `default_v6_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -174,7 +174,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site"></a>
 
-### Advertise Custom Advertise Where Virtual Site
+**Advertise Custom Advertise Where Virtual Site**
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
@@ -182,7 +182,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site-with-vip"></a>
 
-### Advertise Custom Advertise Where Virtual Site With VIP
+**Advertise Custom Advertise Where Virtual Site With VIP**
 
 `ip` - (Optional) IP Address. Use given IP address as VIP on the site (`String`).
 
@@ -192,7 +192,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-vk8s-service"></a>
 
-### Advertise Custom Advertise Where Vk8s Service
+**Advertise Custom Advertise Where Vk8s Service**
 
 `site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
@@ -200,13 +200,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-on-public"></a>
 
-### Advertise On Public
+**Advertise On Public**
 
 `public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public IP](#advertise-on-public-public-ip) below.
 
 <a id="advertise-on-public-public-ip"></a>
 
-### Advertise On Public Public IP
+**Advertise On Public Public IP**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -216,7 +216,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-pools-weights"></a>
 
-### Origin Pools Weights
+**Origin Pools Weights**
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#origin-pools-weights-cluster) below.
 
@@ -230,7 +230,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-pools-weights-cluster"></a>
 
-### Origin Pools Weights Cluster
+**Origin Pools Weights Cluster**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -240,7 +240,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-pools-weights-pool"></a>
 
-### Origin Pools Weights Pool
+**Origin Pools Weights Pool**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -250,7 +250,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

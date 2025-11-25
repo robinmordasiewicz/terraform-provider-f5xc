@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="author-restrictions"></a>
 
-### Author Restrictions
+**Author Restrictions**
 
 `allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -92,13 +92,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="author-restrictions-allow-list"></a>
 
-### Author Restrictions Allow List
+**Author Restrictions Allow List**
 
 `custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#author-restrictions-allow-list-custom-list) below.
 
 <a id="author-restrictions-allow-list-custom-list"></a>
 
-### Author Restrictions Allow List Custom List
+**Author Restrictions Allow List Custom List**
 
 `exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
 
@@ -106,13 +106,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="author-restrictions-deny-list"></a>
 
-### Author Restrictions Deny List
+**Author Restrictions Deny List**
 
 `custom_list` - (Optional) List of User Id(s). List of user id(s). See [Custom List](#author-restrictions-deny-list-custom-list) below.
 
 <a id="author-restrictions-deny-list-custom-list"></a>
 
-### Author Restrictions Deny List Custom List
+**Author Restrictions Deny List Custom List**
 
 `exact_value` - (Optional) Exact User Id. exact_match contains user_id to match against (`String`).
 
@@ -120,7 +120,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="user-restrictions"></a>
 
-### User Restrictions
+**User Restrictions**
 
 `all_tenants` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -144,7 +144,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="user-restrictions-user-restrictions"></a>
 
-### User Restrictions User Restrictions
+**User Restrictions User Restrictions**
 
 `allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -156,13 +156,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="user-restrictions-user-restrictions-allow-list"></a>
 
-### User Restrictions User Restrictions Allow List
+**User Restrictions User Restrictions Allow List**
 
 `custom_list` - (Optional) List of User Id(s). List of user id(s) (`Block`).
 
 <a id="user-restrictions-user-restrictions-deny-list"></a>
 
-### User Restrictions User Restrictions Deny List
+**User Restrictions User Restrictions Deny List**
 
 `custom_list` - (Optional) List of User Id(s). List of user id(s) (`Block`).
 

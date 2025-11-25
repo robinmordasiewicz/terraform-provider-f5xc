@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec"></a>
 
-### Psp Spec
+**Psp Spec**
 
 `allow_privilege_escalation` - (Optional) Allow Privilege Escalation. Pod can request to privilege escalation (`Bool`).
 
@@ -146,13 +146,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-allowed-capabilities"></a>
 
-### Psp Spec Allowed Capabilities
+**Psp Spec Allowed Capabilities**
 
 `capabilities` - (Optional) Capability List. List of capabilities that docker container has (`List`).
 
 <a id="psp-spec-allowed-host-paths"></a>
 
-### Psp Spec Allowed Host Paths
+**Psp Spec Allowed Host Paths**
 
 `path_prefix` - (Optional) Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support * (`String`).
 
@@ -160,19 +160,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-default-capabilities"></a>
 
-### Psp Spec Default Capabilities
+**Psp Spec Default Capabilities**
 
 `capabilities` - (Optional) Capability List. List of capabilities that docker container has (`List`).
 
 <a id="psp-spec-drop-capabilities"></a>
 
-### Psp Spec Drop Capabilities
+**Psp Spec Drop Capabilities**
 
 `capabilities` - (Optional) Capability List. List of capabilities that docker container has (`List`).
 
 <a id="psp-spec-fs-group-strategy-options"></a>
 
-### Psp Spec Fs Group Strategy Options
+**Psp Spec Fs Group Strategy Options**
 
 `id_ranges` - (Optional) ID Ranges. List of range of ID(s). See [Id Ranges](#psp-spec-fs-group-strategy-options-id-ranges) below.
 
@@ -180,7 +180,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-fs-group-strategy-options-id-ranges"></a>
 
-### Psp Spec Fs Group Strategy Options Id Ranges
+**Psp Spec Fs Group Strategy Options Id Ranges**
 
 `max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
@@ -188,7 +188,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-run-as-group"></a>
 
-### Psp Spec Run As Group
+**Psp Spec Run As Group**
 
 `id_ranges` - (Optional) ID Ranges. List of range of ID(s). See [Id Ranges](#psp-spec-run-as-group-id-ranges) below.
 
@@ -196,7 +196,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-run-as-group-id-ranges"></a>
 
-### Psp Spec Run As Group Id Ranges
+**Psp Spec Run As Group Id Ranges**
 
 `max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
@@ -204,7 +204,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-run-as-user"></a>
 
-### Psp Spec Run As User
+**Psp Spec Run As User**
 
 `id_ranges` - (Optional) ID Ranges. List of range of ID(s). See [Id Ranges](#psp-spec-run-as-user-id-ranges) below.
 
@@ -212,7 +212,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-run-as-user-id-ranges"></a>
 
-### Psp Spec Run As User Id Ranges
+**Psp Spec Run As User Id Ranges**
 
 `max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
@@ -220,7 +220,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-supplemental-groups"></a>
 
-### Psp Spec Supplemental Groups
+**Psp Spec Supplemental Groups**
 
 `id_ranges` - (Optional) ID Ranges. List of range of ID(s). See [Id Ranges](#psp-spec-supplemental-groups-id-ranges) below.
 
@@ -228,7 +228,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-supplemental-groups-id-ranges"></a>
 
-### Psp Spec Supplemental Groups Id Ranges
+**Psp Spec Supplemental Groups Id Ranges**
 
 `max_id` - (Optional) Ending ID. Ending(maximum) ID for for ID range (`Number`).
 
@@ -236,7 +236,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

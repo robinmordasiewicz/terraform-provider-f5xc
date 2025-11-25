@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules"></a>
 
-### WAF Exclusion Rules
+**WAF Exclusion Rules**
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -114,7 +114,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control"></a>
 
-### WAF Exclusion Rules App Firewall Detection Control
+**WAF Exclusion Rules App Firewall Detection Control**
 
 `exclude_attack_type_contexts` - (Optional) Attack Types. Attack Types to be excluded for the defined match criteria. See [Exclude Attack Type Contexts](#waf-exclusion-rules-app-firewall-detection-control-exclude-attack-type-contexts) below.
 
@@ -126,7 +126,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-### WAF Exclusion Rules App Firewall Detection Control Exclude Attack Type Contexts
+**WAF Exclusion Rules App Firewall Detection Control Exclude Attack Type Contexts**
 
 `context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
 
@@ -136,13 +136,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-### WAF Exclusion Rules App Firewall Detection Control Exclude Bot Name Contexts
+**WAF Exclusion Rules App Firewall Detection Control Exclude Bot Name Contexts**
 
 `bot_name` - (Optional) Bot Name (`String`).
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-### WAF Exclusion Rules App Firewall Detection Control Exclude Signature Contexts
+**WAF Exclusion Rules App Firewall Detection Control Exclude Signature Contexts**
 
 `context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
 
@@ -152,7 +152,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-### WAF Exclusion Rules App Firewall Detection Control Exclude Violation Contexts
+**WAF Exclusion Rules App Firewall Detection Control Exclude Violation Contexts**
 
 `context` - (Optional) WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY` (`String`).
 
@@ -162,7 +162,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-metadata"></a>
 
-### WAF Exclusion Rules Metadata
+**WAF Exclusion Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 

@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="k8s-cluster-role"></a>
 
-### K8s Cluster Role
+**K8s Cluster Role**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="subjects"></a>
 
-### Subjects
+**Subjects**
 
 `group` - (Optional) Group. Group id of the user group (`String`).
 
@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="subjects-service-account"></a>
 
-### Subjects Service Account
+**Subjects Service Account**
 
 `name` - (Optional) Name. Name of the service account (`String`).
 
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

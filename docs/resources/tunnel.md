@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip"></a>
 
-### Local IP
+**Local IP**
 
 `intf` - (Optional) Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet. See [Intf](#local-ip-intf) below.
 
@@ -94,13 +94,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip-intf"></a>
 
-### Local IP Intf
+**Local IP Intf**
 
 `local_intf` - (Optional) Local Interface. Local interface to be used for filling in source information of IP and network for transport. See [Local Intf](#local-ip-intf-local-intf) below.
 
 <a id="local-ip-intf-local-intf"></a>
 
-### Local IP Intf Local Intf
+**Local IP Intf Local Intf**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -114,7 +114,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip-ip-address"></a>
 
-### Local IP IP Address
+**Local IP IP Address**
 
 `auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip-ip-address-ip-address"></a>
 
-### Local IP IP Address IP Address
+**Local IP IP Address IP Address**
 
 `ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation (`Block`).
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip-ip-address-virtual-network-type"></a>
 
-### Local IP IP Address Virtual Network Type
+**Local IP IP Address Virtual Network Type**
 
 `public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -142,19 +142,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="params"></a>
 
-### Params
+**Params**
 
 `ipsec` - (Optional) IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE. See [Ipsec](#params-ipsec) below.
 
 <a id="params-ipsec"></a>
 
-### Params Ipsec
+**Params Ipsec**
 
 `ipsec_psk` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
 
 <a id="params-ipsec-ipsec-psk"></a>
 
-### Params Ipsec Ipsec Psk
+**Params Ipsec Ipsec Psk**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -162,7 +162,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="remote-ip"></a>
 
-### Remote IP
+**Remote IP**
 
 `endpoints` - (Optional) Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel. See [Endpoints](#remote-ip-endpoints) below.
 
@@ -170,13 +170,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="remote-ip-endpoints"></a>
 
-### Remote IP Endpoints
+**Remote IP Endpoints**
 
 `endpoints` - (Optional) Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes (`Block`).
 
 <a id="remote-ip-ip"></a>
 
-### Remote IP IP
+**Remote IP IP**
 
 `ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#remote-ip-ip-ipv4) below.
 
@@ -184,19 +184,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="remote-ip-ip-ipv4"></a>
 
-### Remote IP IP IPv4
+**Remote IP IP IPv4**
 
 `addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
 
 <a id="remote-ip-ip-ipv6"></a>
 
-### Remote IP IP IPv6
+**Remote IP IP IPv6**
 
 `addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

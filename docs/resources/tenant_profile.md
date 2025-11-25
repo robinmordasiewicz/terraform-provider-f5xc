@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ct-groups"></a>
 
-### Ct Groups
+**Ct Groups**
 
 `name` - (Optional) Name. Name of the child tenant user group (`String`).
 
@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ct-groups-namespace-roles"></a>
 
-### Ct Groups Namespace Roles
+**Ct Groups Namespace Roles**
 
 `namespace` - (Optional) Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically (`String`).
 
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="favicon"></a>
 
-### Favicon
+**Favicon**
 
 `aws_s3` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="logo"></a>
 
-### Logo
+**Logo**
 
 `aws_s3` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -122,7 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="plan"></a>
 
-### Plan
+**Plan**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

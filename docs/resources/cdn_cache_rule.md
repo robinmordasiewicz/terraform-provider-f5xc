@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules"></a>
 
-### Cache Rules
+**Cache Rules**
 
 `cache_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-eligible-for-cache"></a>
 
-### Cache Rules Eligible For Cache
+**Cache Rules Eligible For Cache**
 
 `scheme_proxy_host_request_uri` - (Optional) Cache TTL Enable Props. Cache TTL Enable Values. See [Scheme Proxy Host Request URI](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) below.
 
@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri"></a>
 
-### Cache Rules Eligible For Cache Scheme Proxy Host Request URI
+**Cache Rules Eligible For Cache Scheme Proxy Host Request URI**
 
 `cache_override` - (Optional) Cache Override. Honour Cache Override (`Bool`).
 
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri"></a>
 
-### Cache Rules Eligible For Cache Scheme Proxy Host URI
+**Cache Rules Eligible For Cache Scheme Proxy Host URI**
 
 `cache_override` - (Optional) Cache Override. Honour Cache Override (`Bool`).
 
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list"></a>
 
-### Cache Rules Rule Expression List
+**Cache Rules Rule Expression List**
 
 `cache_rule_expression` - (Optional) Terms. The Cache Rule Expression Terms that are ANDed. See [Cache Rule Expression](#cache-rules-rule-expression-list-cache-rule-expression) below.
 
@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression"></a>
 
-### Cache Rules Rule Expression List Cache Rule Expression
+**Cache Rules Rule Expression List Cache Rule Expression**
 
 `cache_headers` - (Optional) Cache Headers. Configure cache rule headers to match the criteria (`Block`).
 
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

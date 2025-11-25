@@ -81,7 +81,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-inventory-exclusion-list"></a>
 
-### API Inventory Exclusion List
+**API Inventory Exclusion List**
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
 
@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-inventory-inclusion-list"></a>
 
-### API Inventory Inclusion List
+**API Inventory Inclusion List**
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
 
@@ -97,7 +97,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="non-api-endpoints"></a>
 
-### Non API Endpoints
+**Non API Endpoints**
 
 `method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
 
@@ -105,7 +105,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

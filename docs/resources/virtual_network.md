@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="static-routes"></a>
 
-### Static Routes
+**Static Routes**
 
 `attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
 
@@ -98,13 +98,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="static-routes-node-interface"></a>
 
-### Static Routes Node Interface
+**Static Routes Node Interface**
 
 `list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#static-routes-node-interface-list) below.
 
 <a id="static-routes-node-interface-list"></a>
 
-### Static Routes Node Interface List
+**Static Routes Node Interface List**
 
 `interface` - (Optional) Interface. Interface reference on this node (`Block`).
 
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -179,7 +179,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="blocked-services"></a>
 
-### Blocked Services
+**Blocked Services**
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -191,13 +191,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bond-device-list"></a>
 
-### Bond Device List
+**Bond Device List**
 
 `bond_devices` - (Optional) Bond Devices. List of bond devices. See [Bond Devices](#bond-device-list-bond-devices) below.
 
 <a id="bond-device-list-bond-devices"></a>
 
-### Bond Device List Bond Devices
+**Bond Device List Bond Devices**
 
 `active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -213,13 +213,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bond-device-list-bond-devices-lacp"></a>
 
-### Bond Device List Bond Devices Lacp
+**Bond Device List Bond Devices Lacp**
 
 `rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
 
 <a id="dc-cluster-group"></a>
 
-### Dc Cluster Group
+**Dc Cluster Group**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -229,7 +229,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dc-cluster-group-inside"></a>
 
-### Dc Cluster Group Inside
+**Dc Cluster Group Inside**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -239,13 +239,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="device-list"></a>
 
-### Device List
+**Device List**
 
 `devices` - (Optional) Devices. Configuration for all devices in the fleet. Examples of devices are - network interfaces, cameras, scanners etc. Configuration a device is applied on VER node if the VER node is member of this fleet and has an corresponding interface/device. The mapping from device configured in fleet with interface/device in VER node depends on the type of device and is documented in device instance specific sections. See [Devices](#device-list-devices) below.
 
 <a id="device-list-devices"></a>
 
-### Device List Devices
+**Device List Devices**
 
 `name` - (Optional) Device Name. Name of the device including the unit number (e.g. eth0 or disk1). The name must match name of device in host-OS of node (`String`).
 
@@ -255,7 +255,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="device-list-devices-network-device"></a>
 
-### Device List Devices Network Device
+**Device List Devices Network Device**
 
 `interface` - (Optional) Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if use is NETWORK_INTERFACE_USE_OUTSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL if use is NETWORK_INTERFACE_USE_INSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE (`Block`).
 
@@ -263,7 +263,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-vgpu"></a>
 
-### Enable Vgpu
+**Enable Vgpu**
 
 `feature_type` - (Optional) Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server. Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`. Defaults to `UNLICENSED` (`String`).
 
@@ -273,7 +273,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="inside-virtual-network"></a>
 
-### Inside Virtual Network
+**Inside Virtual Network**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -287,13 +287,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="interface-list"></a>
 
-### Interface List
+**Interface List**
 
 `interfaces` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interfaces](#interface-list-interfaces) below.
 
 <a id="interface-list-interfaces"></a>
 
-### Interface List Interfaces
+**Interface List Interfaces**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -303,7 +303,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kubernetes-upgrade-drain"></a>
 
-### Kubernetes Upgrade Drain
+**Kubernetes Upgrade Drain**
 
 `disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -311,7 +311,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
-### Kubernetes Upgrade Drain Enable Upgrade Drain
+**Kubernetes Upgrade Drain Enable Upgrade Drain**
 
 `disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -323,7 +323,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="log-receiver"></a>
 
-### Log Receiver
+**Log Receiver**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -333,7 +333,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="network-connectors"></a>
 
-### Network Connectors
+**Network Connectors**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -347,7 +347,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="network-firewall"></a>
 
-### Network Firewall
+**Network Firewall**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -361,7 +361,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="outside-virtual-network"></a>
 
-### Outside Virtual Network
+**Outside Virtual Network**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -375,7 +375,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="performance-enhancement-mode"></a>
 
-### Performance Enhancement Mode
+**Performance Enhancement Mode**
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
@@ -383,7 +383,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
-### Performance Enhancement Mode Perf Mode L3 Enhanced
+**Performance Enhancement Mode Perf Mode L3 Enhanced**
 
 `jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -391,13 +391,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="sriov-interfaces"></a>
 
-### Sriov Interfaces
+**Sriov Interfaces**
 
 `sriov_interface` - (Optional) Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration. See [Sriov Interface](#sriov-interfaces-sriov-interface) below.
 
 <a id="sriov-interfaces-sriov-interface"></a>
 
-### Sriov Interfaces Sriov Interface
+**Sriov Interfaces Sriov Interface**
 
 `interface_name` - (Optional) Name of physical interface. Name of SR-IOV physical interface (`String`).
 
@@ -407,13 +407,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-class-list"></a>
 
-### Storage Class List
+**Storage Class List**
 
 `storage_classes` - (Optional) List of Storage Classes. List of custom storage classes. See [Storage Classes](#storage-class-list-storage-classes) below.
 
 <a id="storage-class-list-storage-classes"></a>
 
-### Storage Class List Storage Classes
+**Storage Class List Storage Classes**
 
 `advanced_storage_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value (`Block`).
 
@@ -439,13 +439,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-class-list-storage-classes-custom-storage"></a>
 
-### Storage Class List Storage Classes Custom Storage
+**Storage Class List Storage Classes Custom Storage**
 
 `yaml` - (Optional) Storage Class YAML. K8s YAML for StorageClass (`String`).
 
 <a id="storage-class-list-storage-classes-hpe-storage"></a>
 
-### Storage Class List Storage Classes Hpe Storage
+**Storage Class List Storage Classes Hpe Storage**
 
 `allow_mutations` - (Optional) allowMutations. mutation can override specified parameters (`String`).
 
@@ -481,7 +481,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-class-list-storage-classes-netapp-trident"></a>
 
-### Storage Class List Storage Classes Netapp Trident
+**Storage Class List Storage Classes Netapp Trident**
 
 `selector` - (Optional) Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool (`Block`).
 
@@ -489,7 +489,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-class-list-storage-classes-pure-service-orchestrator"></a>
 
-### Storage Class List Storage Classes Pure Service Orchestrator
+**Storage Class List Storage Classes Pure Service Orchestrator**
 
 `backend` - (Optional) Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool (`String`).
 
@@ -499,13 +499,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list"></a>
 
-### Storage Device List
+**Storage Device List**
 
 `storage_devices` - (Optional) List of Storage Devices. List of custom storage devices. See [Storage Devices](#storage-device-list-storage-devices) below.
 
 <a id="storage-device-list-storage-devices"></a>
 
-### Storage Device List Storage Devices
+**Storage Device List Storage Devices**
 
 `advanced_advanced_parameters` - (Optional) Advanced Parameters. Map of parameter name and string value (`Block`).
 
@@ -521,7 +521,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-hpe-storage"></a>
 
-### Storage Device List Storage Devices Hpe Storage
+**Storage Device List Storage Devices Hpe Storage**
 
 `api_server_port` - (Optional) Storage server Port. Enter Storage Server Port (`Number`).
 
@@ -539,7 +539,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident"></a>
 
-### Storage Device List Storage Devices Netapp Trident
+**Storage Device List Storage Devices Netapp Trident**
 
 `netapp_backend_ontap_nas` - (Optional) Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS (`Block`).
 
@@ -547,7 +547,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator"></a>
 
-### Storage Device List Storage Devices Pure Service Orchestrator
+**Storage Device List Storage Devices Pure Service Orchestrator**
 
 `arrays` - (Optional) Arrays Configuration. Device configuration for PSO Arrays (`Block`).
 
@@ -559,13 +559,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-interface-list"></a>
 
-### Storage Interface List
+**Storage Interface List**
 
 `interfaces` - (Optional) List of Interfaces. Add all interfaces belonging to this fleet. See [Interfaces](#storage-interface-list-interfaces) below.
 
 <a id="storage-interface-list-interfaces"></a>
 
-### Storage Interface List Interfaces
+**Storage Interface List Interfaces**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -575,13 +575,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes"></a>
 
-### Storage Static Routes
+**Storage Static Routes**
 
 `storage_routes` - (Optional) List of Static Routes. List of storage static routes. See [Storage Routes](#storage-static-routes-storage-routes) below.
 
 <a id="storage-static-routes-storage-routes"></a>
 
-### Storage Static Routes Storage Routes
+**Storage Static Routes Storage Routes**
 
 `attrs` - (Optional) Attributes. List of route attributes associated with the static route (`List`).
 
@@ -593,7 +593,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes-storage-routes-nexthop"></a>
 
-### Storage Static Routes Storage Routes Nexthop
+**Storage Static Routes Storage Routes Nexthop**
 
 `interface` - (Optional) Network Interface. Nexthop is network interface when type is 'Network-Interface' (`Block`).
 
@@ -603,7 +603,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes-storage-routes-subnets"></a>
 
-### Storage Static Routes Storage Routes Subnets
+**Storage Static Routes Storage Routes Subnets**
 
 `ipv4` - (Optional) IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32 (`Block`).
 
@@ -611,7 +611,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -623,7 +623,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="usb-policy"></a>
 
-### Usb Policy
+**Usb Policy**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 

@@ -84,13 +84,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bigip-virtual-server"></a>
 
-### Bigip Virtual Server
+**Bigip Virtual Server**
 
 `bigip_virtual_server` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
 
 <a id="bigip-virtual-server-bigip-virtual-server"></a>
 
-### Bigip Virtual Server Bigip Virtual Server
+**Bigip Virtual Server Bigip Virtual Server**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -100,13 +100,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cdn-loadbalancer"></a>
 
-### CDN Loadbalancer
+**CDN Loadbalancer**
 
 `cdn_loadbalancer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
 
 <a id="cdn-loadbalancer-cdn-loadbalancer"></a>
 
-### CDN Loadbalancer CDN Loadbalancer
+**CDN Loadbalancer CDN Loadbalancer**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="elements"></a>
 
-### Elements
+**Elements**
 
 `methods` - (Optional) HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list (`List`).
 
@@ -124,13 +124,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-loadbalancer"></a>
 
-### HTTP Loadbalancer
+**HTTP Loadbalancer**
 
 `http_loadbalancer` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
 
 <a id="http-loadbalancer-http-loadbalancer"></a>
 
-### HTTP Loadbalancer HTTP Loadbalancer
+**HTTP Loadbalancer HTTP Loadbalancer**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -140,7 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="child-tenant-manager"></a>
 
-### Child Tenant Manager
+**Child Tenant Manager**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="contact-detail"></a>
 
-### Contact Detail
+**Contact Detail**
 
 `address1` - (Optional) Address Line 1 (`String`).
 
@@ -120,7 +120,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="customer-info"></a>
 
-### Customer Info
+**Customer Info**
 
 `additional_info` - (Optional) Additional Info. Use this field for any additional information about the new child tenant (`String`).
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tenant-profile"></a>
 
-### Tenant Profile
+**Tenant Profile**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -142,7 +142,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

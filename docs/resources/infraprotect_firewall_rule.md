@@ -130,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-icmp"></a>
 
-### Protocol ICMP
+**Protocol ICMP**
 
 `echo_reply` - (Optional) Echo-Reply. Echo-Reply (`Bool`).
 
@@ -148,7 +148,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-icmp6"></a>
 
-### Protocol Icmp6
+**Protocol Icmp6**
 
 `destination_unreachable` - (Optional) Destination-Unreachable. Destination-Unreachable (`Bool`).
 
@@ -174,7 +174,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-tcp"></a>
 
-### Protocol TCP
+**Protocol TCP**
 
 `description` - (Optional) Description. Description (`String`).
 
@@ -188,7 +188,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-udp"></a>
 
-### Protocol UDP
+**Protocol UDP**
 
 `description` - (Optional) Description. Description (`String`).
 
@@ -202,7 +202,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

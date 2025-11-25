@@ -94,13 +94,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="active-enhanced-firewall-policies"></a>
 
-### Active Enhanced Firewall Policies
+**Active Enhanced Firewall Policies**
 
 `enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 <a id="active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
-### Active Enhanced Firewall Policies Enhanced Firewall Policies
+**Active Enhanced Firewall Policies Enhanced Firewall Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -110,13 +110,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="active-fast-acls"></a>
 
-### Active Fast Acls
+**Active Fast Acls**
 
 `fast_acls` - (Optional) Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall. See [Fast Acls](#active-fast-acls-fast-acls) below.
 
 <a id="active-fast-acls-fast-acls"></a>
 
-### Active Fast Acls Fast Acls
+**Active Fast Acls Fast Acls**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -126,13 +126,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="active-forward-proxy-policies"></a>
 
-### Active Forward Proxy Policies
+**Active Forward Proxy Policies**
 
 `forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
 <a id="active-forward-proxy-policies-forward-proxy-policies"></a>
 
-### Active Forward Proxy Policies Forward Proxy Policies
+**Active Forward Proxy Policies Forward Proxy Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -142,13 +142,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="active-network-policies"></a>
 
-### Active Network Policies
+**Active Network Policies**
 
 `network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#active-network-policies-network-policies) below.
 
 <a id="active-network-policies-network-policies"></a>
 
-### Active Network Policies Network Policies
+**Active Network Policies Network Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -158,7 +158,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

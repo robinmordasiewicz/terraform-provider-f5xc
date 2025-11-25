@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ai-risk-based-blocking"></a>
 
-### Ai Risk Based Blocking
+**Ai Risk Based Blocking**
 
 `high_risk_action` - (Optional) Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`. Defaults to `AI_BLOCK` (`String`).
 
@@ -126,13 +126,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allowed-response-codes"></a>
 
-### Allowed Response Codes
+**Allowed Response Codes**
 
 `response_code` - (Optional) Response Code. List of HTTP response status codes that are allowed (`List`).
 
 <a id="blocking-page"></a>
 
-### Blocking Page
+**Blocking Page**
 
 `blocking_page` - (Optional) Blocking Response Page Body. Define the content of the response page (e.g., an HTML document or a JSON object), use the {{request_id}} placeholder to provide users with a unique identifier to be able to trace the blocked request in the logs. The maximum allowed size of response body is 4096 bytes after base64 encoding, which would be about 3070 bytes in plain text (`String`).
 
@@ -140,7 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-protection-setting"></a>
 
-### Bot Protection Setting
+**Bot Protection Setting**
 
 `good_bot_action` - (Optional) Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK` (`String`).
 
@@ -150,13 +150,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-anonymization"></a>
 
-### Custom Anonymization
+**Custom Anonymization**
 
 `anonymization_config` - (Optional) Configuration. List of HTTP headers, cookies and query parameters whose values will be masked. See [Anonymization Config](#custom-anonymization-anonymization-config) below.
 
 <a id="custom-anonymization-anonymization-config"></a>
 
-### Custom Anonymization Anonymization Config
+**Custom Anonymization Anonymization Config**
 
 `cookie` - (Optional) Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies. See [Cookie](#custom-anonymization-anonymization-config-cookie) below.
 
@@ -166,25 +166,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-anonymization-anonymization-config-cookie"></a>
 
-### Custom Anonymization Anonymization Config Cookie
+**Custom Anonymization Anonymization Config Cookie**
 
 `cookie_name` - (Optional) Cookie Name. Masks the cookie value. The setting does not mask the cookie name (`String`).
 
 <a id="custom-anonymization-anonymization-config-http-header"></a>
 
-### Custom Anonymization Anonymization Config HTTP Header
+**Custom Anonymization Anonymization Config HTTP Header**
 
 `header_name` - (Optional) Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name (`String`).
 
 <a id="custom-anonymization-anonymization-config-query-parameter"></a>
 
-### Custom Anonymization Anonymization Config Query Parameter
+**Custom Anonymization Anonymization Config Query Parameter**
 
 `query_param_name` - (Optional) Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name (`String`).
 
 <a id="detection-settings"></a>
 
-### Detection Settings
+**Detection Settings**
 
 `bot_protection_setting` - (Optional) Bot Protection. Configuration of WAF Bot Protection. See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
 
@@ -212,7 +212,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="detection-settings-bot-protection-setting"></a>
 
-### Detection Settings Bot Protection Setting
+**Detection Settings Bot Protection Setting**
 
 `good_bot_action` - (Optional) Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK` (`String`).
 
@@ -222,7 +222,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="detection-settings-signature-selection-setting"></a>
 
-### Detection Settings Signature Selection Setting
+**Detection Settings Signature Selection Setting**
 
 `attack_type_settings` - (Optional) Attack Type Settings. Specifies attack-type settings to be used by WAF. See [Attack Type Settings](#detection-settings-signature-selection-setting-attack-type-settings) below.
 
@@ -236,31 +236,31 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="detection-settings-signature-selection-setting-attack-type-settings"></a>
 
-### Detection Settings Signature Selection Setting Attack Type Settings
+**Detection Settings Signature Selection Setting Attack Type Settings**
 
 `disabled_attack_types` - (Optional) Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection (`List`).
 
 <a id="detection-settings-stage-new-and-updated-signatures"></a>
 
-### Detection Settings Stage New And Updated Signatures
+**Detection Settings Stage New And Updated Signatures**
 
 `staging_period` - (Optional) Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days (`Number`).
 
 <a id="detection-settings-stage-new-signatures"></a>
 
-### Detection Settings Stage New Signatures
+**Detection Settings Stage New Signatures**
 
 `staging_period` - (Optional) Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days (`Number`).
 
 <a id="detection-settings-violation-settings"></a>
 
-### Detection Settings Violation Settings
+**Detection Settings Violation Settings**
 
 `disabled_violation_types` - (Optional) Disabled Violations. List of violations to be excluded (`List`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

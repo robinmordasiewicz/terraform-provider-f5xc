@@ -976,17 +976,10 @@ func transformDoc(filePath string) error {
 	propagateOneOfConstraints(&specAttrs, oneOfConstraintMap)
 	propagateOneOfConstraints(&readOnlyAttrs, oneOfConstraintMap)
 
-	// Helper function to write attribute
-	printedConstraints := make(map[string]bool)
-	writeAttr := func(attr attrInfo) {
+	// Helper function to format a single attribute line
+	// prefix is used for blockquote formatting (e.g., "> - " for OneOf groups)
+	formatAttrLine := func(attr attrInfo, prefix string) string {
 		typeStr := extractSimpleType(attr.typeInfo)
-
-		// Write OneOf constraint hint if present and not already printed
-		constraintKey := normalizeOneOfKey(attr.oneOfConstraint)
-		if attr.oneOfConstraint != "" && !printedConstraints[constraintKey] {
-			output.WriteString(fmt.Sprintf("> **Note:** One of the arguments from this list \"%s\" must be set.\n\n", attr.oneOfConstraint))
-			printedConstraints[constraintKey] = true
-		}
 
 		// Clean any existing "See [X](#x) below" references from description to avoid duplication
 		desc := attr.desc
@@ -1001,19 +994,38 @@ func transformDoc(filePath string) error {
 		// 2. The anchor is within safe rendering range (Terraform Registry truncates large pages)
 		if attr.hasNested && anchorsWithContent[anchorName] && safeAnchors[anchorName] {
 			if desc != "" {
-				output.WriteString(fmt.Sprintf("`%s` - %s %s. See [%s](#%s) below for details.\n\n",
-					attr.name, attr.reqStr, desc, toTitleCase(attr.name), anchorName))
-			} else {
-				output.WriteString(fmt.Sprintf("`%s` - %s See [%s](#%s) below for details.\n\n",
-					attr.name, attr.reqStr, toTitleCase(attr.name), anchorName))
+				return fmt.Sprintf("%s`%s` - %s %s. See [%s](#%s) below for details.",
+					prefix, attr.name, attr.reqStr, desc, toTitleCase(attr.name), anchorName)
 			}
-		} else {
-			if desc != "" {
-				output.WriteString(fmt.Sprintf("`%s` - %s %s (`%s`).\n\n", attr.name, attr.reqStr, desc, typeStr))
-			} else {
-				output.WriteString(fmt.Sprintf("`%s` - %s (`%s`).\n\n", attr.name, attr.reqStr, typeStr))
-			}
+			return fmt.Sprintf("%s`%s` - %s See [%s](#%s) below for details.",
+				prefix, attr.name, attr.reqStr, toTitleCase(attr.name), anchorName)
 		}
+		if desc != "" {
+			return fmt.Sprintf("%s`%s` - %s %s (`%s`).", prefix, attr.name, attr.reqStr, desc, typeStr)
+		}
+		return fmt.Sprintf("%s`%s` - %s (`%s`).", prefix, attr.name, attr.reqStr, typeStr)
+	}
+
+	// Helper function to write a standalone attribute (not in OneOf group)
+	writeAttr := func(attr attrInfo) {
+		output.WriteString(formatAttrLine(attr, ""))
+		output.WriteString("\n\n")
+	}
+
+	// Helper function to write a OneOf group with all properties inside a blockquote
+	writeOneOfGroup := func(attrs []attrInfo) {
+		if len(attrs) == 0 {
+			return
+		}
+		// Write the simplified note header using Terraform Registry info callout syntax
+		// -> creates light blue informational style callout
+		output.WriteString("-> **Note:** Only one of the following may be set:\n\n")
+		// Write each attribute as a bullet item within the callout
+		for _, attr := range attrs {
+			output.WriteString(formatAttrLine(attr, "    - "))
+			output.WriteString("\n")
+		}
+		output.WriteString("\n")
 	}
 
 	// Write Metadata Argument Reference section (if we have metadata attrs)
@@ -1031,8 +1043,44 @@ func transformDoc(filePath string) error {
 		// Group attributes by OneOf constraint and sort for proper display
 		sortedAttrs := groupAndSortAttributes(specAttrs)
 
+		// Process attributes, grouping consecutive OneOf constraints together
+		var currentGroup []attrInfo
+		var currentConstraint string
+
 		for _, attr := range sortedAttrs {
-			writeAttr(attr)
+			constraintKey := normalizeOneOfKey(attr.oneOfConstraint)
+
+			if constraintKey != currentConstraint {
+				// Constraint changed - flush the previous group
+				if len(currentGroup) > 0 {
+					if currentConstraint != "" {
+						// Previous group was a OneOf group
+						writeOneOfGroup(currentGroup)
+					} else {
+						// Previous items were standalone
+						for _, a := range currentGroup {
+							writeAttr(a)
+						}
+					}
+				}
+				// Start new group
+				currentGroup = []attrInfo{attr}
+				currentConstraint = constraintKey
+			} else {
+				// Same constraint - add to current group
+				currentGroup = append(currentGroup, attr)
+			}
+		}
+
+		// Flush the last group
+		if len(currentGroup) > 0 {
+			if currentConstraint != "" {
+				writeOneOfGroup(currentGroup)
+			} else {
+				for _, a := range currentGroup {
+					writeAttr(a)
+				}
+			}
 		}
 	}
 
@@ -1144,10 +1192,19 @@ func transformDoc(filePath string) error {
 			}
 
 			// Transform h6 OneOf headings to blockquotes (MD001 compliance) in nested blocks
+			// Note: For nested blocks, we use a simplified note format consistent with main schema
 			if strings.HasPrefix(line, "###### One of") {
 				oneOfH6Regex := regexp.MustCompile(`###### One of the arguments from this list "([^"]+)" must be set`)
 				if m := oneOfH6Regex.FindStringSubmatch(line); m != nil {
-					output.WriteString(fmt.Sprintf("> **Note:** One of the arguments from this list \"%s\" must be set.\n\n", m[1]))
+					// Use Terraform Registry info callout syntax for light blue style
+					output.WriteString("-> **Note:** Only one of the following may be set:\n\n")
+					// Parse the constraint list to output as bullet items
+					constraintList := m[1]
+					attrs := strings.Split(constraintList, ", ")
+					for _, attrName := range attrs {
+						output.WriteString(fmt.Sprintf("    - `%s`\n", strings.TrimSpace(attrName)))
+					}
+					output.WriteString("\n")
 				}
 				continue
 			}

@@ -68,27 +68,27 @@ resource "f5xc_app_firewall" "example" {
 
 `ai_risk_based_blocking` - (Optional) Risk-Based Blocking (Powered by AI) - Preview. All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode. See [Ai Risk Based Blocking](#ai-risk-based-blocking) below for details.
 
-`default_detection_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Detection Settings](#default-detection-settings) below for details.
+`default_detection_settings` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `detection_settings` - (Optional) Configuration for WAF attack detection sensitivity and signature coverage. Controls which attack signatures are enabled and how they detect potential threats. See [Detection Settings](#detection-settings) below for details.
 
 > **Note:** One of the arguments from this list "allow_all_response_codes, allowed_response_codes" must be set.
 
-`allow_all_response_codes` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Response Codes](#allow-all-response-codes) below for details.
+`allow_all_response_codes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `allowed_response_codes` - (Optional) Allowed Response Codes. List of HTTP response status codes that are allowed. See [Allowed Response Codes](#allowed-response-codes) below for details.
 
 > **Note:** One of the arguments from this list "blocking, monitoring" must be set.
 
-`blocking` - (Optional) Empty. This can be used for messages where no values are needed. See [Blocking](#blocking) below for details.
+`blocking` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`monitoring` - (Optional) Empty. This can be used for messages where no values are needed. See [Monitoring](#monitoring) below for details.
+`monitoring` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "blocking_page, use_default_blocking_page" must be set.
 
 `blocking_page` - (Optional) Custom Blocking Response Page. Custom blocking response page body. See [Blocking Page](#blocking-page) below for details.
 
-`use_default_blocking_page` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Blocking Page](#use-default-blocking-page) below for details.
+`use_default_blocking_page` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `bot_protection_setting` - (Optional) Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation. See [Bot Protection Setting](#bot-protection-setting) below for details.
 
@@ -96,11 +96,11 @@ resource "f5xc_app_firewall" "example" {
 
 `custom_anonymization` - (Optional) Anonymization Configuration. Anonymization settings which is a list of HTTP headers, parameters and cookies. See [Custom Anonymization](#custom-anonymization) below for details.
 
-`default_anonymization` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Anonymization](#default-anonymization) below for details.
+`default_anonymization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_anonymization` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Anonymization](#disable-anonymization) below for details.
+`disable_anonymization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#default-bot-setting) below for details.
+`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -122,19 +122,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `medium_risk_action` - (Optional) Risk Based Blocking Action. Action to be performed on the request Log and block Log only. Possible values are `AI_BLOCK`, `AI_REPORT`. Defaults to `AI_BLOCK` (`String`).
 
-<a id="allow-all-response-codes"></a>
-
-### Allow All Response Codes
-
 <a id="allowed-response-codes"></a>
 
 ### Allowed Response Codes
 
 `response_code` - (Optional) Response Code. List of HTTP response status codes that are allowed (`List`).
-
-<a id="blocking"></a>
-
-### Blocking
 
 <a id="blocking-page"></a>
 
@@ -188,37 +180,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `query_param_name` - (Optional) Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name (`String`).
 
-<a id="default-anonymization"></a>
-
-### Default Anonymization
-
-<a id="default-bot-setting"></a>
-
-### Default Bot Setting
-
-<a id="default-detection-settings"></a>
-
-### Default Detection Settings
-
 <a id="detection-settings"></a>
 
 ### Detection Settings
 
 `bot_protection_setting` - (Optional) Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation. See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
 
-`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Bot Setting](#detection-settings-default-bot-setting) below.
+`default_bot_setting` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_violation_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Violation Settings](#detection-settings-default-violation-settings) below.
+`default_violation_settings` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_staging` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Staging](#detection-settings-disable-staging) below.
+`disable_staging` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_suppression` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Suppression](#detection-settings-disable-suppression) below.
+`disable_suppression` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_threat_campaigns` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Threat Campaigns](#detection-settings-disable-threat-campaigns) below.
+`disable_threat_campaigns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_suppression` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Suppression](#detection-settings-enable-suppression) below.
+`enable_suppression` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_threat_campaigns` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Threat Campaigns](#detection-settings-enable-threat-campaigns) below.
+`enable_threat_campaigns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `signature_selection_setting` - (Optional) Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components. See [Signature Selection Setting](#detection-settings-signature-selection-setting) below.
 
@@ -238,69 +218,25 @@ In addition to all arguments above, the following attributes are exported:
 
 `suspicious_bot_action` - (Optional) Bot Action. Action to be performed on the request Log and block Log only Disable detection. Possible values are `BLOCK`, `REPORT`, `IGNORE`. Defaults to `BLOCK` (`String`).
 
-<a id="detection-settings-default-bot-setting"></a>
-
-### Detection Settings Default Bot Setting
-
-<a id="detection-settings-default-violation-settings"></a>
-
-### Detection Settings Default Violation Settings
-
-<a id="detection-settings-disable-staging"></a>
-
-### Detection Settings Disable Staging
-
-<a id="detection-settings-disable-suppression"></a>
-
-### Detection Settings Disable Suppression
-
-<a id="detection-settings-disable-threat-campaigns"></a>
-
-### Detection Settings Disable Threat Campaigns
-
-<a id="detection-settings-enable-suppression"></a>
-
-### Detection Settings Enable Suppression
-
-<a id="detection-settings-enable-threat-campaigns"></a>
-
-### Detection Settings Enable Threat Campaigns
-
 <a id="detection-settings-signature-selection-setting"></a>
 
 ### Detection Settings Signature Selection Setting
 
 `attack_type_settings` - (Optional) Attack Type Settings. Specifies attack-type settings to be used by WAF. See [Attack Type Settings](#detection-settings-signature-selection-setting-attack-type-settings) below.
 
-`default_attack_type_settings` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Attack Type Settings](#detection-settings-signature-selection-setting-default-attack-type-settings) below.
+`default_attack_type_settings` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`high_medium_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [High Medium Accuracy Signatures](#detection-settings-signature-selection-setting-high-medium-accuracy-signatures) below.
+`high_medium_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`high_medium_low_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [High Medium Low Accuracy Signatures](#detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures) below.
+`high_medium_low_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`only_high_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed. See [Only High Accuracy Signatures](#detection-settings-signature-selection-setting-only-high-accuracy-signatures) below.
+`only_high_accuracy_signatures` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="detection-settings-signature-selection-setting-attack-type-settings"></a>
 
 ### Detection Settings Signature Selection Setting Attack Type Settings
 
 `disabled_attack_types` - (Optional) Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection (`List`).
-
-<a id="detection-settings-signature-selection-setting-default-attack-type-settings"></a>
-
-### Detection Settings Signature Selection Setting Default Attack Type Settings
-
-<a id="detection-settings-signature-selection-setting-high-medium-accuracy-signatures"></a>
-
-### Detection Settings Signature Selection Setting High Medium Accuracy Signatures
-
-<a id="detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures"></a>
-
-### Detection Settings Signature Selection Setting High Medium Low Accuracy Signatures
-
-<a id="detection-settings-signature-selection-setting-only-high-accuracy-signatures"></a>
-
-### Detection Settings Signature Selection Setting Only High Accuracy Signatures
 
 <a id="detection-settings-stage-new-and-updated-signatures"></a>
 
@@ -320,14 +256,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `disabled_violation_types` - (Optional) Disabled Violations. List of violations to be excluded (`List`).
 
-<a id="disable-anonymization"></a>
-
-### Disable Anonymization
-
-<a id="monitoring"></a>
-
-### Monitoring
-
 <a id="timeouts"></a>
 
 ### Timeouts
@@ -339,10 +267,6 @@ In addition to all arguments above, the following attributes are exported:
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-<a id="use-default-blocking-page"></a>
-
-### Use Default Blocking Page
 
 ## Import
 

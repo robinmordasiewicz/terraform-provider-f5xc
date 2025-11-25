@@ -64,13 +64,13 @@ resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
 
 > **Note:** One of the arguments from this list "activation_announce, activation_withdraw" must be set.
 
-`activation_announce` - (Optional) Empty. This can be used for messages where no values are needed. See [Activation Announce](#activation-announce) below for details.
+`activation_announce` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`activation_withdraw` - (Optional) Empty. This can be used for messages where no values are needed. See [Activation Withdraw](#activation-withdraw) below for details.
+`activation_withdraw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "expiration_never, expiration_timestamp" must be set.
 
-`expiration_never` - (Optional) Empty. This can be used for messages where no values are needed. See [Expiration Never](#expiration-never) below for details.
+`expiration_never` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `expiration_timestamp` - (Optional) Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards (`String`).
 
@@ -85,18 +85,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="activation-announce"></a>
-
-### Activation Announce
-
-<a id="activation-withdraw"></a>
-
-### Activation Withdraw
-
-<a id="expiration-never"></a>
-
-### Expiration Never
 
 <a id="timeouts"></a>
 

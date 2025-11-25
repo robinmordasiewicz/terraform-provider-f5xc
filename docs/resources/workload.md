@@ -111,17 +111,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Job Configuration Parameters
 
-`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#job-configuration-parameters-env-var) below.
+`env_var` - (Optional) Environment Variable. Environment Variable (`Block`).
 
-`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#job-configuration-parameters-file) below.
-
-<a id="job-configuration-parameters-env-var"></a>
-
-### Job Configuration Parameters Env Var
-
-<a id="job-configuration-parameters-file"></a>
-
-### Job Configuration Parameters File
+`file` - (Optional) Configuration File. Configuration File for the workload (`Block`).
 
 <a id="job-containers"></a>
 
@@ -133,7 +125,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#job-containers-custom-flavor) below.
 
-`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Flavor](#job-containers-default-flavor) below.
+`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY` (`String`).
 
@@ -157,101 +149,65 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="job-containers-default-flavor"></a>
-
-### Job Containers Default Flavor
-
 <a id="job-containers-image"></a>
 
 ### Job Containers Image
 
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#job-containers-image-container-registry) below.
+`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed (`String`).
 
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#job-containers-image-public) below.
+`public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
-
-<a id="job-containers-image-container-registry"></a>
-
-### Job Containers Image Container Registry
-
-<a id="job-containers-image-public"></a>
-
-### Job Containers Image Public
 
 <a id="job-containers-liveness-check"></a>
 
 ### Job Containers Liveness Check
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#job-containers-liveness-check-exec-health-check) below.
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#job-containers-liveness-check-http-health-check) below.
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#job-containers-liveness-check-tcp-health-check) below.
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
-<a id="job-containers-liveness-check-exec-health-check"></a>
-
-### Job Containers Liveness Check Exec Health Check
-
-<a id="job-containers-liveness-check-http-health-check"></a>
-
-### Job Containers Liveness Check HTTP Health Check
-
-<a id="job-containers-liveness-check-tcp-health-check"></a>
-
-### Job Containers Liveness Check TCP Health Check
 
 <a id="job-containers-readiness-check"></a>
 
 ### Job Containers Readiness Check
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#job-containers-readiness-check-exec-health-check) below.
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#job-containers-readiness-check-http-health-check) below.
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#job-containers-readiness-check-tcp-health-check) below.
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
 
-<a id="job-containers-readiness-check-exec-health-check"></a>
-
-### Job Containers Readiness Check Exec Health Check
-
-<a id="job-containers-readiness-check-http-health-check"></a>
-
-### Job Containers Readiness Check HTTP Health Check
-
-<a id="job-containers-readiness-check-tcp-health-check"></a>
-
-### Job Containers Readiness Check TCP Health Check
-
 <a id="job-deploy-options"></a>
 
 ### Job Deploy Options
 
-`all_res` - (Optional) Empty. This can be used for messages where no values are needed. See [All Res](#job-deploy-options-all-res) below.
+`all_res` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Virtual Sites](#job-deploy-options-default-virtual-sites) below.
+`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `deploy_ce_sites` - (Optional) Customer Sites. This defines a way to deploy a workload on specific Customer sites. See [Deploy CE Sites](#job-deploy-options-deploy-ce-sites) below.
 
@@ -261,53 +217,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `deploy_re_virtual_sites` - (Optional) Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites. See [Deploy RE Virtual Sites](#job-deploy-options-deploy-re-virtual-sites) below.
 
-<a id="job-deploy-options-all-res"></a>
-
-### Job Deploy Options All Res
-
-<a id="job-deploy-options-default-virtual-sites"></a>
-
-### Job Deploy Options Default Virtual Sites
-
 <a id="job-deploy-options-deploy-ce-sites"></a>
 
 ### Job Deploy Options Deploy CE Sites
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#job-deploy-options-deploy-ce-sites-site) below.
-
-<a id="job-deploy-options-deploy-ce-sites-site"></a>
-
-### Job Deploy Options Deploy CE Sites Site
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed (`Block`).
 
 <a id="job-deploy-options-deploy-ce-virtual-sites"></a>
 
 ### Job Deploy Options Deploy CE Virtual Sites
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#job-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
-
-<a id="job-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
-
-### Job Deploy Options Deploy CE Virtual Sites Virtual Site
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed (`Block`).
 
 <a id="job-deploy-options-deploy-re-sites"></a>
 
 ### Job Deploy Options Deploy RE Sites
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#job-deploy-options-deploy-re-sites-site) below.
-
-<a id="job-deploy-options-deploy-re-sites-site"></a>
-
-### Job Deploy Options Deploy RE Sites Site
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed (`Block`).
 
 <a id="job-deploy-options-deploy-re-virtual-sites"></a>
 
 ### Job Deploy Options Deploy RE Virtual Sites
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#job-deploy-options-deploy-re-virtual-sites-virtual-site) below.
-
-<a id="job-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
-
-### Job Deploy Options Deploy RE Virtual Sites Virtual Site
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed (`Block`).
 
 <a id="job-volumes"></a>
 
@@ -325,41 +257,25 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Job Volumes Empty Dir
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#job-volumes-empty-dir-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
 `size_limit` - (Optional) Size Limit (in GiB) (`Number`).
-
-<a id="job-volumes-empty-dir-mount"></a>
-
-### Job Volumes Empty Dir Mount
 
 <a id="job-volumes-host-path"></a>
 
 ### Job Volumes Host Path
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#job-volumes-host-path-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
 `path` - (Optional) Path. Path of the directory on the host (`String`).
-
-<a id="job-volumes-host-path-mount"></a>
-
-### Job Volumes Host Path Mount
 
 <a id="job-volumes-persistent-volume"></a>
 
 ### Job Volumes Persistent Volume
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#job-volumes-persistent-volume-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#job-volumes-persistent-volume-storage) below.
-
-<a id="job-volumes-persistent-volume-mount"></a>
-
-### Job Volumes Persistent Volume Mount
-
-<a id="job-volumes-persistent-volume-storage"></a>
-
-### Job Volumes Persistent Volume Storage
+`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC) (`Block`).
 
 <a id="service"></a>
 
@@ -375,7 +291,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `num_replicas` - (Optional) Number of Replicas. Number of replicas of service to spawn per site (`Number`).
 
-`scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed. See [Scale To Zero](#service-scale-to-zero) below.
+`scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volumes` - (Optional) Configuration for volumes. See [Volumes](#service-volumes) below.
 
@@ -389,59 +305,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `advertise_on_public` - (Optional) Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP. See [Advertise On Public](#service-advertise-options-advertise-on-public) below.
 
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#service-advertise-options-do-not-advertise) below.
+`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="service-advertise-options-advertise-custom"></a>
 
 ### Service Advertise Options Advertise Custom
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#service-advertise-options-advertise-custom-advertise-where) below.
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available (`Block`).
 
-`ports` - (Optional) Configuration for ports. See [Ports](#service-advertise-options-advertise-custom-ports) below.
-
-<a id="service-advertise-options-advertise-custom-advertise-where"></a>
-
-### Service Advertise Options Advertise Custom Advertise Where
-
-<a id="service-advertise-options-advertise-custom-ports"></a>
-
-### Service Advertise Options Advertise Custom Ports
+`ports` - (Optional) Configuration for ports (`Block`).
 
 <a id="service-advertise-options-advertise-in-cluster"></a>
 
 ### Service Advertise Options Advertise In Cluster
 
-`multi_ports` - (Optional) Multiple Ports. Multiple ports. See [Multi Ports](#service-advertise-options-advertise-in-cluster-multi-ports) below.
+`multi_ports` - (Optional) Multiple Ports. Multiple ports (`Block`).
 
-`port` - (Optional) Configuration for port. See [Port](#service-advertise-options-advertise-in-cluster-port) below.
-
-<a id="service-advertise-options-advertise-in-cluster-multi-ports"></a>
-
-### Service Advertise Options Advertise In Cluster Multi Ports
-
-<a id="service-advertise-options-advertise-in-cluster-port"></a>
-
-### Service Advertise Options Advertise In Cluster Port
+`port` - (Optional) Configuration for port (`Block`).
 
 <a id="service-advertise-options-advertise-on-public"></a>
 
 ### Service Advertise Options Advertise On Public
 
-`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports. See [Multi Ports](#service-advertise-options-advertise-on-public-multi-ports) below.
+`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports (`Block`).
 
-`port` - (Optional) Advertise Port. Advertise single port. See [Port](#service-advertise-options-advertise-on-public-port) below.
-
-<a id="service-advertise-options-advertise-on-public-multi-ports"></a>
-
-### Service Advertise Options Advertise On Public Multi Ports
-
-<a id="service-advertise-options-advertise-on-public-port"></a>
-
-### Service Advertise Options Advertise On Public Port
-
-<a id="service-advertise-options-do-not-advertise"></a>
-
-### Service Advertise Options Do Not Advertise
+`port` - (Optional) Advertise Port. Advertise single port (`Block`).
 
 <a id="service-configuration"></a>
 
@@ -453,17 +341,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Service Configuration Parameters
 
-`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#service-configuration-parameters-env-var) below.
+`env_var` - (Optional) Environment Variable. Environment Variable (`Block`).
 
-`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#service-configuration-parameters-file) below.
-
-<a id="service-configuration-parameters-env-var"></a>
-
-### Service Configuration Parameters Env Var
-
-<a id="service-configuration-parameters-file"></a>
-
-### Service Configuration Parameters File
+`file` - (Optional) Configuration File. Configuration File for the workload (`Block`).
 
 <a id="service-containers"></a>
 
@@ -475,7 +355,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#service-containers-custom-flavor) below.
 
-`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Flavor](#service-containers-default-flavor) below.
+`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY` (`String`).
 
@@ -499,101 +379,65 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="service-containers-default-flavor"></a>
-
-### Service Containers Default Flavor
-
 <a id="service-containers-image"></a>
 
 ### Service Containers Image
 
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#service-containers-image-container-registry) below.
+`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed (`String`).
 
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#service-containers-image-public) below.
+`public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
-
-<a id="service-containers-image-container-registry"></a>
-
-### Service Containers Image Container Registry
-
-<a id="service-containers-image-public"></a>
-
-### Service Containers Image Public
 
 <a id="service-containers-liveness-check"></a>
 
 ### Service Containers Liveness Check
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#service-containers-liveness-check-exec-health-check) below.
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#service-containers-liveness-check-http-health-check) below.
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#service-containers-liveness-check-tcp-health-check) below.
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
-<a id="service-containers-liveness-check-exec-health-check"></a>
-
-### Service Containers Liveness Check Exec Health Check
-
-<a id="service-containers-liveness-check-http-health-check"></a>
-
-### Service Containers Liveness Check HTTP Health Check
-
-<a id="service-containers-liveness-check-tcp-health-check"></a>
-
-### Service Containers Liveness Check TCP Health Check
 
 <a id="service-containers-readiness-check"></a>
 
 ### Service Containers Readiness Check
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#service-containers-readiness-check-exec-health-check) below.
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#service-containers-readiness-check-http-health-check) below.
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#service-containers-readiness-check-tcp-health-check) below.
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
 
-<a id="service-containers-readiness-check-exec-health-check"></a>
-
-### Service Containers Readiness Check Exec Health Check
-
-<a id="service-containers-readiness-check-http-health-check"></a>
-
-### Service Containers Readiness Check HTTP Health Check
-
-<a id="service-containers-readiness-check-tcp-health-check"></a>
-
-### Service Containers Readiness Check TCP Health Check
-
 <a id="service-deploy-options"></a>
 
 ### Service Deploy Options
 
-`all_res` - (Optional) Empty. This can be used for messages where no values are needed. See [All Res](#service-deploy-options-all-res) below.
+`all_res` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Virtual Sites](#service-deploy-options-default-virtual-sites) below.
+`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `deploy_ce_sites` - (Optional) Customer Sites. This defines a way to deploy a workload on specific Customer sites. See [Deploy CE Sites](#service-deploy-options-deploy-ce-sites) below.
 
@@ -603,57 +447,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `deploy_re_virtual_sites` - (Optional) Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites. See [Deploy RE Virtual Sites](#service-deploy-options-deploy-re-virtual-sites) below.
 
-<a id="service-deploy-options-all-res"></a>
-
-### Service Deploy Options All Res
-
-<a id="service-deploy-options-default-virtual-sites"></a>
-
-### Service Deploy Options Default Virtual Sites
-
 <a id="service-deploy-options-deploy-ce-sites"></a>
 
 ### Service Deploy Options Deploy CE Sites
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#service-deploy-options-deploy-ce-sites-site) below.
-
-<a id="service-deploy-options-deploy-ce-sites-site"></a>
-
-### Service Deploy Options Deploy CE Sites Site
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed (`Block`).
 
 <a id="service-deploy-options-deploy-ce-virtual-sites"></a>
 
 ### Service Deploy Options Deploy CE Virtual Sites
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#service-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
-
-<a id="service-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
-
-### Service Deploy Options Deploy CE Virtual Sites Virtual Site
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed (`Block`).
 
 <a id="service-deploy-options-deploy-re-sites"></a>
 
 ### Service Deploy Options Deploy RE Sites
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#service-deploy-options-deploy-re-sites-site) below.
-
-<a id="service-deploy-options-deploy-re-sites-site"></a>
-
-### Service Deploy Options Deploy RE Sites Site
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed (`Block`).
 
 <a id="service-deploy-options-deploy-re-virtual-sites"></a>
 
 ### Service Deploy Options Deploy RE Virtual Sites
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#service-deploy-options-deploy-re-virtual-sites-virtual-site) below.
-
-<a id="service-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
-
-### Service Deploy Options Deploy RE Virtual Sites Virtual Site
-
-<a id="service-scale-to-zero"></a>
-
-### Service Scale To Zero
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed (`Block`).
 
 <a id="service-volumes"></a>
 
@@ -671,41 +487,25 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Service Volumes Empty Dir
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#service-volumes-empty-dir-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
 `size_limit` - (Optional) Size Limit (in GiB) (`Number`).
-
-<a id="service-volumes-empty-dir-mount"></a>
-
-### Service Volumes Empty Dir Mount
 
 <a id="service-volumes-host-path"></a>
 
 ### Service Volumes Host Path
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#service-volumes-host-path-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
 `path` - (Optional) Path. Path of the directory on the host (`String`).
-
-<a id="service-volumes-host-path-mount"></a>
-
-### Service Volumes Host Path Mount
 
 <a id="service-volumes-persistent-volume"></a>
 
 ### Service Volumes Persistent Volume
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#service-volumes-persistent-volume-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#service-volumes-persistent-volume-storage) below.
-
-<a id="service-volumes-persistent-volume-mount"></a>
-
-### Service Volumes Persistent Volume Mount
-
-<a id="service-volumes-persistent-volume-storage"></a>
-
-### Service Volumes Persistent Volume Storage
+`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC) (`Block`).
 
 <a id="simple-service"></a>
 
@@ -715,9 +515,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `container` - (Optional) Container Configuration. ContainerType configures the container information. See [Container](#simple-service-container) below.
 
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#simple-service-disabled) below.
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#simple-service-do-not-advertise) below.
+`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enabled` - (Optional) Persistent Storage Volume. Persistent storage volume configuration for the workload. See [Enabled](#simple-service-enabled) below.
 
@@ -735,17 +535,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Simple Service Configuration Parameters
 
-`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#simple-service-configuration-parameters-env-var) below.
+`env_var` - (Optional) Environment Variable. Environment Variable (`Block`).
 
-`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#simple-service-configuration-parameters-file) below.
-
-<a id="simple-service-configuration-parameters-env-var"></a>
-
-### Simple Service Configuration Parameters Env Var
-
-<a id="simple-service-configuration-parameters-file"></a>
-
-### Simple Service Configuration Parameters File
+`file` - (Optional) Configuration File. Configuration File for the workload (`Block`).
 
 <a id="simple-service-container"></a>
 
@@ -757,7 +549,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#simple-service-container-custom-flavor) below.
 
-`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Flavor](#simple-service-container-default-flavor) below.
+`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY` (`String`).
 
@@ -781,101 +573,57 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="simple-service-container-default-flavor"></a>
-
-### Simple Service Container Default Flavor
-
 <a id="simple-service-container-image"></a>
 
 ### Simple Service Container Image
 
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#simple-service-container-image-container-registry) below.
+`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed (`String`).
 
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#simple-service-container-image-public) below.
+`public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
-
-<a id="simple-service-container-image-container-registry"></a>
-
-### Simple Service Container Image Container Registry
-
-<a id="simple-service-container-image-public"></a>
-
-### Simple Service Container Image Public
 
 <a id="simple-service-container-liveness-check"></a>
 
 ### Simple Service Container Liveness Check
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#simple-service-container-liveness-check-exec-health-check) below.
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#simple-service-container-liveness-check-http-health-check) below.
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#simple-service-container-liveness-check-tcp-health-check) below.
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
-<a id="simple-service-container-liveness-check-exec-health-check"></a>
-
-### Simple Service Container Liveness Check Exec Health Check
-
-<a id="simple-service-container-liveness-check-http-health-check"></a>
-
-### Simple Service Container Liveness Check HTTP Health Check
-
-<a id="simple-service-container-liveness-check-tcp-health-check"></a>
-
-### Simple Service Container Liveness Check TCP Health Check
 
 <a id="simple-service-container-readiness-check"></a>
 
 ### Simple Service Container Readiness Check
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#simple-service-container-readiness-check-exec-health-check) below.
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#simple-service-container-readiness-check-http-health-check) below.
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#simple-service-container-readiness-check-tcp-health-check) below.
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
-<a id="simple-service-container-readiness-check-exec-health-check"></a>
-
-### Simple Service Container Readiness Check Exec Health Check
-
-<a id="simple-service-container-readiness-check-http-health-check"></a>
-
-### Simple Service Container Readiness Check HTTP Health Check
-
-<a id="simple-service-container-readiness-check-tcp-health-check"></a>
-
-### Simple Service Container Readiness Check TCP Health Check
-
-<a id="simple-service-disabled"></a>
-
-### Simple Service Disabled
-
-<a id="simple-service-do-not-advertise"></a>
-
-### Simple Service Do Not Advertise
 
 <a id="simple-service-enabled"></a>
 
@@ -889,17 +637,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Simple Service Enabled Persistent Volume
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#simple-service-enabled-persistent-volume-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#simple-service-enabled-persistent-volume-storage) below.
-
-<a id="simple-service-enabled-persistent-volume-mount"></a>
-
-### Simple Service Enabled Persistent Volume Mount
-
-<a id="simple-service-enabled-persistent-volume-storage"></a>
-
-### Simple Service Enabled Persistent Volume Storage
+`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC) (`Block`).
 
 <a id="simple-service-simple-advertise"></a>
 
@@ -925,7 +665,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `persistent_volumes` - (Optional) Persistent Storage Configuration. Persistent storage configuration for the service. See [Persistent Volumes](#stateful-service-persistent-volumes) below.
 
-`scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed. See [Scale To Zero](#stateful-service-scale-to-zero) below.
+`scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volumes` - (Optional) Ephemeral Volumes. Ephemeral volumes for the service. See [Volumes](#stateful-service-volumes) below.
 
@@ -939,59 +679,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `advertise_on_public` - (Optional) Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP. See [Advertise On Public](#stateful-service-advertise-options-advertise-on-public) below.
 
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#stateful-service-advertise-options-do-not-advertise) below.
+`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="stateful-service-advertise-options-advertise-custom"></a>
 
 ### Stateful Service Advertise Options Advertise Custom
 
-`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available. See [Advertise Where](#stateful-service-advertise-options-advertise-custom-advertise-where) below.
+`advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available (`Block`).
 
-`ports` - (Optional) Configuration for ports. See [Ports](#stateful-service-advertise-options-advertise-custom-ports) below.
-
-<a id="stateful-service-advertise-options-advertise-custom-advertise-where"></a>
-
-### Stateful Service Advertise Options Advertise Custom Advertise Where
-
-<a id="stateful-service-advertise-options-advertise-custom-ports"></a>
-
-### Stateful Service Advertise Options Advertise Custom Ports
+`ports` - (Optional) Configuration for ports (`Block`).
 
 <a id="stateful-service-advertise-options-advertise-in-cluster"></a>
 
 ### Stateful Service Advertise Options Advertise In Cluster
 
-`multi_ports` - (Optional) Multiple Ports. Multiple ports. See [Multi Ports](#stateful-service-advertise-options-advertise-in-cluster-multi-ports) below.
+`multi_ports` - (Optional) Multiple Ports. Multiple ports (`Block`).
 
-`port` - (Optional) Configuration for port. See [Port](#stateful-service-advertise-options-advertise-in-cluster-port) below.
-
-<a id="stateful-service-advertise-options-advertise-in-cluster-multi-ports"></a>
-
-### Stateful Service Advertise Options Advertise In Cluster Multi Ports
-
-<a id="stateful-service-advertise-options-advertise-in-cluster-port"></a>
-
-### Stateful Service Advertise Options Advertise In Cluster Port
+`port` - (Optional) Configuration for port (`Block`).
 
 <a id="stateful-service-advertise-options-advertise-on-public"></a>
 
 ### Stateful Service Advertise Options Advertise On Public
 
-`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports. See [Multi Ports](#stateful-service-advertise-options-advertise-on-public-multi-ports) below.
+`multi_ports` - (Optional) Advertise Multiple Ports. Advertise multiple ports (`Block`).
 
-`port` - (Optional) Advertise Port. Advertise single port. See [Port](#stateful-service-advertise-options-advertise-on-public-port) below.
-
-<a id="stateful-service-advertise-options-advertise-on-public-multi-ports"></a>
-
-### Stateful Service Advertise Options Advertise On Public Multi Ports
-
-<a id="stateful-service-advertise-options-advertise-on-public-port"></a>
-
-### Stateful Service Advertise Options Advertise On Public Port
-
-<a id="stateful-service-advertise-options-do-not-advertise"></a>
-
-### Stateful Service Advertise Options Do Not Advertise
+`port` - (Optional) Advertise Port. Advertise single port (`Block`).
 
 <a id="stateful-service-configuration"></a>
 
@@ -1003,17 +715,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Stateful Service Configuration Parameters
 
-`env_var` - (Optional) Environment Variable. Environment Variable. See [Env Var](#stateful-service-configuration-parameters-env-var) below.
+`env_var` - (Optional) Environment Variable. Environment Variable (`Block`).
 
-`file` - (Optional) Configuration File. Configuration File for the workload. See [File](#stateful-service-configuration-parameters-file) below.
-
-<a id="stateful-service-configuration-parameters-env-var"></a>
-
-### Stateful Service Configuration Parameters Env Var
-
-<a id="stateful-service-configuration-parameters-file"></a>
-
-### Stateful Service Configuration Parameters File
+`file` - (Optional) Configuration File. Configuration File for the workload (`Block`).
 
 <a id="stateful-service-containers"></a>
 
@@ -1025,7 +729,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_flavor` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Flavor](#stateful-service-containers-custom-flavor) below.
 
-`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Flavor](#stateful-service-containers-default-flavor) below.
+`default_flavor` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `flavor` - (Optional) Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory. Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`. Defaults to `CONTAINER_FLAVOR_TYPE_TINY` (`String`).
 
@@ -1049,101 +753,65 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="stateful-service-containers-default-flavor"></a>
-
-### Stateful Service Containers Default Flavor
-
 <a id="stateful-service-containers-image"></a>
 
 ### Stateful Service Containers Image
 
-`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Container Registry](#stateful-service-containers-image-container-registry) below.
+`container_registry` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `name` - (Optional) Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed (`String`).
 
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#stateful-service-containers-image-public) below.
+`public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
-
-<a id="stateful-service-containers-image-container-registry"></a>
-
-### Stateful Service Containers Image Container Registry
-
-<a id="stateful-service-containers-image-public"></a>
-
-### Stateful Service Containers Image Public
 
 <a id="stateful-service-containers-liveness-check"></a>
 
 ### Stateful Service Containers Liveness Check
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#stateful-service-containers-liveness-check-exec-health-check) below.
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#stateful-service-containers-liveness-check-http-health-check) below.
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#stateful-service-containers-liveness-check-tcp-health-check) below.
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
-
-<a id="stateful-service-containers-liveness-check-exec-health-check"></a>
-
-### Stateful Service Containers Liveness Check Exec Health Check
-
-<a id="stateful-service-containers-liveness-check-http-health-check"></a>
-
-### Stateful Service Containers Liveness Check HTTP Health Check
-
-<a id="stateful-service-containers-liveness-check-tcp-health-check"></a>
-
-### Stateful Service Containers Liveness Check TCP Health Check
 
 <a id="stateful-service-containers-readiness-check"></a>
 
 ### Stateful Service Containers Readiness Check
 
-`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. See [Exec Health Check](#stateful-service-containers-readiness-check-exec-health-check) below.
+`exec_health_check` - (Optional) Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy (`Block`).
 
 `healthy_threshold` - (Optional) Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy (`Number`).
 
-`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests. See [HTTP Health Check](#stateful-service-containers-readiness-check-http-health-check) below.
+`http_health_check` - (Optional) HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests (`Block`).
 
 `initial_delay` - (Optional) Initial Delay. Number of seconds after the container has started before health checks are initiated (`Number`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two health check requests (`Number`).
 
-`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection. See [TCP Health Check](#stateful-service-containers-readiness-check-tcp-health-check) below.
+`tcp_health_check` - (Optional) TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection (`Block`).
 
 `timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
 
 `unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy (`Number`).
 
-<a id="stateful-service-containers-readiness-check-exec-health-check"></a>
-
-### Stateful Service Containers Readiness Check Exec Health Check
-
-<a id="stateful-service-containers-readiness-check-http-health-check"></a>
-
-### Stateful Service Containers Readiness Check HTTP Health Check
-
-<a id="stateful-service-containers-readiness-check-tcp-health-check"></a>
-
-### Stateful Service Containers Readiness Check TCP Health Check
-
 <a id="stateful-service-deploy-options"></a>
 
 ### Stateful Service Deploy Options
 
-`all_res` - (Optional) Empty. This can be used for messages where no values are needed. See [All Res](#stateful-service-deploy-options-all-res) below.
+`all_res` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Virtual Sites](#stateful-service-deploy-options-default-virtual-sites) below.
+`default_virtual_sites` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `deploy_ce_sites` - (Optional) Customer Sites. This defines a way to deploy a workload on specific Customer sites. See [Deploy CE Sites](#stateful-service-deploy-options-deploy-ce-sites) below.
 
@@ -1153,53 +821,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `deploy_re_virtual_sites` - (Optional) Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites. See [Deploy RE Virtual Sites](#stateful-service-deploy-options-deploy-re-virtual-sites) below.
 
-<a id="stateful-service-deploy-options-all-res"></a>
-
-### Stateful Service Deploy Options All Res
-
-<a id="stateful-service-deploy-options-default-virtual-sites"></a>
-
-### Stateful Service Deploy Options Default Virtual Sites
-
 <a id="stateful-service-deploy-options-deploy-ce-sites"></a>
 
 ### Stateful Service Deploy Options Deploy CE Sites
 
-`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed. See [Site](#stateful-service-deploy-options-deploy-ce-sites-site) below.
-
-<a id="stateful-service-deploy-options-deploy-ce-sites-site"></a>
-
-### Stateful Service Deploy Options Deploy CE Sites Site
+`site` - (Optional) List of Customer Sites to Deploy. Which customer sites should this workload be deployed (`Block`).
 
 <a id="stateful-service-deploy-options-deploy-ce-virtual-sites"></a>
 
 ### Stateful Service Deploy Options Deploy CE Virtual Sites
 
-`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed. See [Virtual Site](#stateful-service-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
-
-<a id="stateful-service-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
-
-### Stateful Service Deploy Options Deploy CE Virtual Sites Virtual Site
+`virtual_site` - (Optional) List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed (`Block`).
 
 <a id="stateful-service-deploy-options-deploy-re-sites"></a>
 
 ### Stateful Service Deploy Options Deploy RE Sites
 
-`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed. See [Site](#stateful-service-deploy-options-deploy-re-sites-site) below.
-
-<a id="stateful-service-deploy-options-deploy-re-sites-site"></a>
-
-### Stateful Service Deploy Options Deploy RE Sites Site
+`site` - (Optional) List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed (`Block`).
 
 <a id="stateful-service-deploy-options-deploy-re-virtual-sites"></a>
 
 ### Stateful Service Deploy Options Deploy RE Virtual Sites
 
-`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed. See [Virtual Site](#stateful-service-deploy-options-deploy-re-virtual-sites-virtual-site) below.
-
-<a id="stateful-service-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
-
-### Stateful Service Deploy Options Deploy RE Virtual Sites Virtual Site
+`virtual_site` - (Optional) List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed (`Block`).
 
 <a id="stateful-service-persistent-volumes"></a>
 
@@ -1213,21 +857,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Stateful Service Persistent Volumes Persistent Volume
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#stateful-service-persistent-volumes-persistent-volume-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
-`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC). See [Storage](#stateful-service-persistent-volumes-persistent-volume-storage) below.
-
-<a id="stateful-service-persistent-volumes-persistent-volume-mount"></a>
-
-### Stateful Service Persistent Volumes Persistent Volume Mount
-
-<a id="stateful-service-persistent-volumes-persistent-volume-storage"></a>
-
-### Stateful Service Persistent Volumes Persistent Volume Storage
-
-<a id="stateful-service-scale-to-zero"></a>
-
-### Stateful Service Scale To Zero
+`storage` - (Optional) Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC) (`Block`).
 
 <a id="stateful-service-volumes"></a>
 
@@ -1243,25 +875,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Stateful Service Volumes Empty Dir
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#stateful-service-volumes-empty-dir-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
 `size_limit` - (Optional) Size Limit (in GiB) (`Number`).
-
-<a id="stateful-service-volumes-empty-dir-mount"></a>
-
-### Stateful Service Volumes Empty Dir Mount
 
 <a id="stateful-service-volumes-host-path"></a>
 
 ### Stateful Service Volumes Host Path
 
-`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload. See [Mount](#stateful-service-volumes-host-path-mount) below.
+`mount` - (Optional) Volume Mount. Volume mount describes how volume is mounted inside a workload (`Block`).
 
 `path` - (Optional) Path. Path of the directory on the host (`String`).
-
-<a id="stateful-service-volumes-host-path-mount"></a>
-
-### Stateful Service Volumes Host Path Mount
 
 <a id="timeouts"></a>
 

@@ -66,13 +66,13 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#no-network-policy) below for details.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "active_forward_proxy_policies, no_forward_proxy" must be set.
 
 `active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#no-forward-proxy) below for details.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `admin_user_credentials` - (Optional) Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access. See [Admin User Credentials](#admin-user-credentials) below for details.
 
@@ -100,7 +100,7 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services" must be set.
 
-`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Block All Services](#block-all-services) below for details.
+`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
@@ -108,39 +108,39 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy. See [Custom Proxy](#custom-proxy) below for details.
 
-`f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 Proxy](#f5-proxy) below for details.
+`f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "custom_proxy_bypass, no_proxy_bypass" must be set.
 
 `custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy. See [Custom Proxy Bypass](#custom-proxy-bypass) below for details.
 
-`no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed. See [No Proxy Bypass](#no-proxy-bypass) below for details.
+`no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group_sli, no_s2s_connectivity_sli" must be set.
 
 `dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Sli](#dc-cluster-group-sli) below for details.
 
-`no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed. See [No S2s Connectivity Sli](#no-s2s-connectivity-sli) below for details.
+`no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group_slo, no_s2s_connectivity_slo, site_mesh_group_on_slo" must be set.
 
 `dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Slo](#dc-cluster-group-slo) below for details.
 
-`no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed. See [No S2s Connectivity Slo](#no-s2s-connectivity-slo) below for details.
+`no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `site_mesh_group_on_slo` - (Optional) Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used. See [Site Mesh Group On Slo](#site-mesh-group-on-slo) below for details.
 
 > **Note:** One of the arguments from this list "disable_ha, enable_ha" must be set.
 
-`disable_ha` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable HA](#disable-ha) below for details.
+`disable_ha` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_ha` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable HA](#enable-ha) below for details.
+`enable_ha` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "disable_url_categorization, enable_url_categorization" must be set.
 
-`disable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable URL Categorization](#disable-url-categorization) below for details.
+`disable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable URL Categorization](#enable-url-categorization) below for details.
+`enable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site. See [DNS NTP Config](#dns-ntp-config) below for details.
 
@@ -152,7 +152,7 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
 
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handl. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
@@ -262,15 +262,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#aws-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="aws-not-managed-node-list-interface-list"></a>
-
-### AWS Not Managed Node List Interface List
 
 <a id="azure"></a>
 
@@ -290,15 +286,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#azure-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="azure-not-managed-node-list-interface-list"></a>
-
-### Azure Not Managed Node List Interface List
 
 <a id="baremetal"></a>
 
@@ -318,19 +310,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#baremetal-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="baremetal-not-managed-node-list-interface-list"></a>
-
-### Baremetal Not Managed Node List Interface List
-
-<a id="block-all-services"></a>
-
-### Block All Services
 
 <a id="blocked-services"></a>
 
@@ -342,33 +326,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Blocked Services Blocked Sevice
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-blocked-sevice-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-blocked-sevice-ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-blocked-sevice-web-user-interface) below.
-
-<a id="blocked-services-blocked-sevice-dns"></a>
-
-### Blocked Services Blocked Sevice DNS
-
-<a id="blocked-services-blocked-sevice-ssh"></a>
-
-### Blocked Services Blocked Sevice SSH
-
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>
-
-### Blocked Services Blocked Sevice Web User Interface
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="custom-proxy"></a>
 
 ### Custom Proxy
 
-`disable_re_tunnel` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable RE Tunnel](#custom-proxy-disable-re-tunnel) below.
+`disable_re_tunnel` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_re_tunnel` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable RE Tunnel](#custom-proxy-enable-re-tunnel) below.
+`enable_re_tunnel` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#custom-proxy-password) below.
 
@@ -377,14 +349,6 @@ In addition to all arguments above, the following attributes are exported:
 `proxy_port` - (Optional) Proxy Port. Specify the Port of the internal Enterprise Proxy (`Number`).
 
 `username` - (Optional) Username. If the internal Enterprise Proxy is using basic authentication, specify the username. This is an optional field (`String`).
-
-<a id="custom-proxy-disable-re-tunnel"></a>
-
-### Custom Proxy Disable RE Tunnel
-
-<a id="custom-proxy-enable-re-tunnel"></a>
-
-### Custom Proxy Enable RE Tunnel
 
 <a id="custom-proxy-password"></a>
 
@@ -438,14 +402,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="disable-ha"></a>
-
-### Disable HA
-
-<a id="disable-url-categorization"></a>
-
-### Disable URL Categorization
-
 <a id="dns-ntp-config"></a>
 
 ### DNS NTP Config
@@ -454,9 +410,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_ntp` - (Optional) NTP Servers. NTP Servers. See [Custom NTP](#dns-ntp-config-custom-ntp) below.
 
-`f5_dns_default` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 DNS Default](#dns-ntp-config-f5-dns-default) below.
+`f5_dns_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`f5_ntp_default` - (Optional) Empty. This can be used for messages where no values are needed. See [F5 NTP Default](#dns-ntp-config-f5-ntp-default) below.
+`f5_ntp_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="dns-ntp-config-custom-dns"></a>
 
@@ -469,22 +425,6 @@ In addition to all arguments above, the following attributes are exported:
 ### DNS NTP Config Custom NTP
 
 `ntp_servers` - (Optional) NTP Servers. NTP Servers (`List`).
-
-<a id="dns-ntp-config-f5-dns-default"></a>
-
-### DNS NTP Config F5 DNS Default
-
-<a id="dns-ntp-config-f5-ntp-default"></a>
-
-### DNS NTP Config F5 NTP Default
-
-<a id="enable-ha"></a>
-
-### Enable HA
-
-<a id="enable-url-categorization"></a>
-
-### Enable URL Categorization
 
 <a id="equinix"></a>
 
@@ -504,19 +444,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#equinix-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="equinix-not-managed-node-list-interface-list"></a>
-
-### Equinix Not Managed Node List Interface List
-
-<a id="f5-proxy"></a>
-
-### F5 Proxy
 
 <a id="gcp"></a>
 
@@ -536,15 +468,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#gcp-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="gcp-not-managed-node-list-interface-list"></a>
-
-### GCP Not Managed Node List Interface List
 
 <a id="kvm"></a>
 
@@ -564,15 +492,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#kvm-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="kvm-not-managed-node-list-interface-list"></a>
-
-### Kvm Not Managed Node List Interface List
 
 <a id="load-balancing"></a>
 
@@ -584,33 +508,25 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Local Vrf
 
-`default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#local-vrf-default-config) below.
+`default_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sli Config](#local-vrf-default-sli-config) below.
+`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `sli_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Sli Config](#local-vrf-sli-config) below.
 
 `slo_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Slo Config](#local-vrf-slo-config) below.
 
-<a id="local-vrf-default-config"></a>
-
-### Local Vrf Default Config
-
-<a id="local-vrf-default-sli-config"></a>
-
-### Local Vrf Default Sli Config
-
 <a id="local-vrf-sli-config"></a>
 
 ### Local Vrf Sli Config
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#local-vrf-sli-config-labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy (`Block`).
 
 `nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#local-vrf-sli-config-no-static-routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#local-vrf-sli-config-no-v6-static-routes) below.
+`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_routes` - (Optional) Static Routes List. See [Static Routes](#local-vrf-sli-config-static-routes) below.
 
@@ -618,49 +534,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
 
-<a id="local-vrf-sli-config-labels"></a>
-
-### Local Vrf Sli Config Labels
-
-<a id="local-vrf-sli-config-no-static-routes"></a>
-
-### Local Vrf Sli Config No Static Routes
-
-<a id="local-vrf-sli-config-no-v6-static-routes"></a>
-
-### Local Vrf Sli Config No V6 Static Routes
-
 <a id="local-vrf-sli-config-static-routes"></a>
 
 ### Local Vrf Sli Config Static Routes
 
-`static_routes` - (Optional) Static Routes. See [Static Routes](#local-vrf-sli-config-static-routes-static-routes) below.
-
-<a id="local-vrf-sli-config-static-routes-static-routes"></a>
-
-### Local Vrf Sli Config Static Routes Static Routes
+`static_routes` - (Optional) Static Routes (`Block`).
 
 <a id="local-vrf-sli-config-static-v6-routes"></a>
 
 ### Local Vrf Sli Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#local-vrf-sli-config-static-v6-routes-static-routes) below.
-
-<a id="local-vrf-sli-config-static-v6-routes-static-routes"></a>
-
-### Local Vrf Sli Config Static V6 Routes Static Routes
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
 
 <a id="local-vrf-slo-config"></a>
 
 ### Local Vrf Slo Config
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#local-vrf-slo-config-labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy (`Block`).
 
 `nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#local-vrf-slo-config-no-static-routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#local-vrf-slo-config-no-v6-static-routes) below.
+`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_routes` - (Optional) Static Routes List. See [Static Routes](#local-vrf-slo-config-static-routes) below.
 
@@ -668,37 +564,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
 
-<a id="local-vrf-slo-config-labels"></a>
-
-### Local Vrf Slo Config Labels
-
-<a id="local-vrf-slo-config-no-static-routes"></a>
-
-### Local Vrf Slo Config No Static Routes
-
-<a id="local-vrf-slo-config-no-v6-static-routes"></a>
-
-### Local Vrf Slo Config No V6 Static Routes
-
 <a id="local-vrf-slo-config-static-routes"></a>
 
 ### Local Vrf Slo Config Static Routes
 
-`static_routes` - (Optional) Static Routes. See [Static Routes](#local-vrf-slo-config-static-routes-static-routes) below.
-
-<a id="local-vrf-slo-config-static-routes-static-routes"></a>
-
-### Local Vrf Slo Config Static Routes Static Routes
+`static_routes` - (Optional) Static Routes (`Block`).
 
 <a id="local-vrf-slo-config-static-v6-routes"></a>
 
 ### Local Vrf Slo Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#local-vrf-slo-config-static-v6-routes-static-routes) below.
-
-<a id="local-vrf-slo-config-static-v6-routes-static-routes"></a>
-
-### Local Vrf Slo Config Static V6 Routes Static Routes
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
 
 <a id="log-receiver"></a>
 
@@ -709,30 +585,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="logs-streaming-disabled"></a>
-
-### Logs Streaming Disabled
-
-<a id="no-forward-proxy"></a>
-
-### No Forward Proxy
-
-<a id="no-network-policy"></a>
-
-### No Network Policy
-
-<a id="no-proxy-bypass"></a>
-
-### No Proxy Bypass
-
-<a id="no-s2s-connectivity-sli"></a>
-
-### No S2s Connectivity Sli
-
-<a id="no-s2s-connectivity-slo"></a>
-
-### No S2s Connectivity Slo
 
 <a id="nutanix"></a>
 
@@ -752,15 +604,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#nutanix-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="nutanix-not-managed-node-list-interface-list"></a>
-
-### Nutanix Not Managed Node List Interface List
 
 <a id="oci"></a>
 
@@ -780,31 +628,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#oci-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
 
-<a id="oci-not-managed-node-list-interface-list"></a>
-
-### Oci Not Managed Node List Interface List
-
 <a id="offline-survivability-mode"></a>
 
 ### Offline Survivability Mode
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#offline-survivability-mode-enable-offline-survivability-mode) below.
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#offline-survivability-mode-no-offline-survivability-mode) below.
-
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>
-
-### Offline Survivability Mode Enable Offline Survivability Mode
-
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>
-
-### Offline Survivability Mode No Offline Survivability Mode
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="openstack"></a>
 
@@ -824,15 +660,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#openstack-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="openstack-not-managed-node-list-interface-list"></a>
-
-### Openstack Not Managed Node List Interface List
 
 <a id="performance-enhancement-mode"></a>
 
@@ -840,39 +672,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Performance Enhancement Mode Perf Mode L7 Enhanced
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="re-select"></a>
 
 ### RE Select
 
-`geo_proximity` - (Optional) Empty. This can be used for messages where no values are needed. See [Geo Proximity](#re-select-geo-proximity) below.
+`geo_proximity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `specific_re` - (Optional) Specific RE. Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs. See [Specific RE](#re-select-specific-re) below.
-
-<a id="re-select-geo-proximity"></a>
-
-### RE Select Geo Proximity
 
 <a id="re-select-specific-re"></a>
 
@@ -884,17 +700,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Site Mesh Group On Slo
 
-`no_site_mesh_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Site Mesh Group](#site-mesh-group-on-slo-no-site-mesh-group) below.
+`no_site_mesh_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `site_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site Mesh Group](#site-mesh-group-on-slo-site-mesh-group) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#site-mesh-group-on-slo-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#site-mesh-group-on-slo-sm-connection-pvt-ip) below.
-
-<a id="site-mesh-group-on-slo-no-site-mesh-group"></a>
-
-### Site Mesh Group On Slo No Site Mesh Group
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="site-mesh-group-on-slo-site-mesh-group"></a>
 
@@ -905,14 +717,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="site-mesh-group-on-slo-sm-connection-public-ip"></a>
-
-### Site Mesh Group On Slo Sm Connection Public IP
-
-<a id="site-mesh-group-on-slo-sm-connection-pvt-ip"></a>
-
-### Site Mesh Group On Slo Sm Connection Pvt IP
 
 <a id="software-settings"></a>
 
@@ -926,25 +730,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Software Settings OS
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#software-settings-os-default-os-version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
-
-<a id="software-settings-os-default-os-version"></a>
-
-### Software Settings OS Default OS Version
 
 <a id="software-settings-sw"></a>
 
 ### Software Settings Sw
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#software-settings-sw-default-sw-version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
-
-<a id="software-settings-sw-default-sw-version"></a>
-
-### Software Settings Sw Default Sw Version
 
 <a id="timeouts"></a>
 
@@ -968,33 +764,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Upgrade Settings Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#upgrade-settings-kubernetes-upgrade-drain-disable-upgrade-drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain) below.
-
-<a id="upgrade-settings-kubernetes-upgrade-drain-disable-upgrade-drain"></a>
-
-### Upgrade Settings Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
-
-<a id="upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
-
-### Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
-
-<a id="upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
-
-### Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="vmware"></a>
 
@@ -1014,15 +798,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `hostname` - (Optional) Hostname. Hostname for this Node (`String`).
 
-`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node. See [Interface List](#vmware-not-managed-node-list-interface-list) below.
+`interface_list` - (Optional) Interfaces. Manage interfaces belonging to this node (`Block`).
 
 `public_ip` - (Optional) Public IP. Public IP for this Node (`String`).
 
 `type` - (Optional) Type. Type for this Node, can be Control or Worker (`String`).
-
-<a id="vmware-not-managed-node-list-interface-list"></a>
-
-### Vmware Not Managed Node List Interface List
 
 ## Import
 

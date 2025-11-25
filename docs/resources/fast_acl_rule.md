@@ -156,19 +156,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Port
 
-`all` - (Optional) Empty. This can be used for messages where no values are needed. See [All](#port-all) below.
+`all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#port-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `user_defined` - (Optional) Configuration for user_defined (`Number`).
-
-<a id="port-all"></a>
-
-### Port All
-
-<a id="port-dns"></a>
-
-### Port DNS
 
 <a id="prefix"></a>
 

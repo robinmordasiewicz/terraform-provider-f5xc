@@ -66,9 +66,9 @@ resource "f5xc_subnet" "example" {
 
 `connect_to_layer2` - (Optional) Subnet connection to Layer2 Interface. See [Connect To Layer2](#connect-to-layer2) below for details.
 
-`connect_to_slo` - (Optional) Empty. This can be used for messages where no values are needed. See [Connect To Slo](#connect-to-slo) below for details.
+`connect_to_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`isolated_nw` - (Optional) Empty. This can be used for messages where no values are needed. See [Isolated Nw](#isolated-nw) below for details.
+`isolated_nw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `site_subnet_params` - (Optional) Site Subnet Parameters. Configure subnet parameters per site. See [Site Subnet Params](#site-subnet-params) below for details.
 
@@ -98,29 +98,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="connect-to-slo"></a>
-
-### Connect To Slo
-
-<a id="isolated-nw"></a>
-
-### Isolated Nw
-
 <a id="site-subnet-params"></a>
 
 ### Site Subnet Params
 
-`dhcp` - (Optional) Empty. This can be used for messages where no values are needed. See [DHCP](#site-subnet-params-dhcp) below.
+`dhcp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#site-subnet-params-site) below.
 
-`static_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Static IP](#site-subnet-params-static-ip) below.
+`static_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `subnet_dhcp_server_params` - (Optional) Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet. See [Subnet DHCP Server Params](#site-subnet-params-subnet-dhcp-server-params) below.
-
-<a id="site-subnet-params-dhcp"></a>
-
-### Site Subnet Params DHCP
 
 <a id="site-subnet-params-site"></a>
 
@@ -131,10 +119,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="site-subnet-params-static-ip"></a>
-
-### Site Subnet Params Static IP
 
 <a id="site-subnet-params-subnet-dhcp-server-params"></a>
 

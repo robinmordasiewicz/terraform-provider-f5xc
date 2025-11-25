@@ -104,17 +104,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### App Type Settings Business Logic Markup Setting
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#app-type-settings-business-logic-markup-setting-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#app-type-settings-business-logic-markup-setting-enable) below.
-
-<a id="app-type-settings-business-logic-markup-setting-disable"></a>
-
-### App Type Settings Business Logic Markup Setting Disable
-
-<a id="app-type-settings-business-logic-markup-setting-enable"></a>
-
-### App Type Settings Business Logic Markup Setting Enable
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="app-type-settings-timeseries-analyses-setting"></a>
 
@@ -134,133 +126,53 @@ In addition to all arguments above, the following attributes are exported:
 
 ### App Type Settings User Behavior Analysis Setting
 
-`disable_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Detection](#app-type-settings-user-behavior-analysis-setting-disable-detection) below.
+`disable_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_learning` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Learning](#app-type-settings-user-behavior-analysis-setting-disable-learning) below.
+`disable_learning` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_detection` - (Optional) Malicious User Detection Settings. Various factors about user activity are monitored and analysed to determine malicious users. These settings allow tuning those factors used by the system to detect malicious users. See [Enable Detection](#app-type-settings-user-behavior-analysis-setting-enable-detection) below.
 
-`enable_learning` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Learning](#app-type-settings-user-behavior-analysis-setting-enable-learning) below.
-
-<a id="app-type-settings-user-behavior-analysis-setting-disable-detection"></a>
-
-### App Type Settings User Behavior Analysis Setting Disable Detection
-
-<a id="app-type-settings-user-behavior-analysis-setting-disable-learning"></a>
-
-### App Type Settings User Behavior Analysis Setting Disable Learning
+`enable_learning` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection"></a>
 
 ### App Type Settings User Behavior Analysis Setting Enable Detection
 
-`bola_detection_automatic` - (Optional) Empty. This can be used for messages where no values are needed. See [Bola Detection Automatic](#app-type-settings-user-behavior-analysis-setting-enable-detection-bola-detection-automatic) below.
+`bola_detection_automatic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `cooling_off_period` - (Optional) Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none (`Number`).
 
-`exclude_bola_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Bola Detection](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bola-detection) below.
+`exclude_bola_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exclude_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Bot Defense Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bot-defense-activity) below.
+`exclude_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exclude_failed_login_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Failed Login Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-failed-login-activity) below.
+`exclude_failed_login_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exclude_forbidden_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Forbidden Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-forbidden-activity) below.
+`exclude_forbidden_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exclude_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude IP Reputation](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-ip-reputation) below.
+`exclude_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exclude_non_existent_url_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Non Existent URL Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-non-existent-url-activity) below.
+`exclude_non_existent_url_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exclude_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude Rate Limit](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-rate-limit) below.
+`exclude_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exclude_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Exclude WAF Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-waf-activity) below.
+`exclude_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`include_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Include Bot Defense Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-bot-defense-activity) below.
+`include_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`include_failed_login_activity` - (Optional) Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior. See [Include Failed Login Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) below.
+`include_failed_login_activity` - (Optional) Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior (`Block`).
 
-`include_forbidden_activity` - (Optional) Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior. See [Include Forbidden Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) below.
+`include_forbidden_activity` - (Optional) Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior (`Block`).
 
-`include_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed. See [Include IP Reputation](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-ip-reputation) below.
+`include_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`include_non_existent_url_activity_automatic` - (Optional) Non-existent URL Automatic Activity Settings. See [Include Non Existent URL Activity Automatic](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) below.
+`include_non_existent_url_activity_automatic` - (Optional) Non-existent URL Automatic Activity Settings (`Block`).
 
-`include_non_existent_url_activity_custom` - (Optional) Non-existent URL Custom Activity Setting. See [Include Non Existent URL Activity Custom](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) below.
+`include_non_existent_url_activity_custom` - (Optional) Non-existent URL Custom Activity Setting (`Block`).
 
-`include_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed. See [Include Rate Limit](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-rate-limit) below.
+`include_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`include_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed. See [Include WAF Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-waf-activity) below.
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-bola-detection-automatic"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Bola Detection Automatic
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bola-detection"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Bola Detection
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-bot-defense-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Bot Defense Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-failed-login-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Failed Login Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-forbidden-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Forbidden Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-ip-reputation"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Exclude IP Reputation
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-non-existent-url-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Non Existent URL Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-rate-limit"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Exclude Rate Limit
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-exclude-waf-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Exclude WAF Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-bot-defense-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Include Bot Defense Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Include Failed Login Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Include Forbidden Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-ip-reputation"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Include IP Reputation
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Automatic
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Custom
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-rate-limit"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Include Rate Limit
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-waf-activity"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Detection Include WAF Activity
-
-<a id="app-type-settings-user-behavior-analysis-setting-enable-learning"></a>
-
-### App Type Settings User Behavior Analysis Setting Enable Learning
+`include_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="timeouts"></a>
 

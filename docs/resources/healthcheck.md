@@ -69,7 +69,7 @@ resource "f5xc_healthcheck" "example" {
 
 `tcp_health_check` - (Optional) TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>. See [TCP Health Check](#tcp-health-check) below for details.
 
-`udp_icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [UDP ICMP Health Check](#udp-icmp-health-check) below for details.
+`udp_icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `interval` - (Optional) Interval. Time interval in seconds between two healthcheck requests (`Number`).
 
@@ -95,7 +95,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `expected_status_codes` - (Optional) Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-' (`List`).
 
-`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. See [Headers](#http-health-check-headers) below.
+`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs (`Block`).
 
 `host_header` - (Optional) Host Header Value. The value of the host header (`String`).
 
@@ -105,15 +105,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `use_http2` - (Optional) Use HTTP2. If set, health checks will be made using HTTP/2 (`Bool`).
 
-`use_origin_server_name` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Origin Server Name](#http-health-check-use-origin-server-name) below.
-
-<a id="http-health-check-headers"></a>
-
-### HTTP Health Check Headers
-
-<a id="http-health-check-use-origin-server-name"></a>
-
-### HTTP Health Check Use Origin Server Name
+`use_origin_server_name` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tcp-health-check"></a>
 
@@ -134,10 +126,6 @@ In addition to all arguments above, the following attributes are exported:
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-<a id="udp-icmp-health-check"></a>
-
-### UDP ICMP Health Check
 
 ## Import
 

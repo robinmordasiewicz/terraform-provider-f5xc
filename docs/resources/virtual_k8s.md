@@ -62,9 +62,9 @@ resource "f5xc_virtual_k8s" "example" {
 
 > **Note:** One of the arguments from this list "disabled, isolated" must be set.
 
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#disabled) below for details.
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`isolated` - (Optional) Empty. This can be used for messages where no values are needed. See [Isolated](#isolated) below for details.
+`isolated` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -87,14 +87,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="disabled"></a>
-
-### Disabled
-
-<a id="isolated"></a>
-
-### Isolated
 
 <a id="timeouts"></a>
 

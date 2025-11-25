@@ -70,15 +70,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules
 
-`client_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Asn](#rules-client-asn) below.
+`client_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`client_city` - (Optional) Empty. This can be used for messages where no values are needed. See [Client City](#rules-client-city) below.
+`client_city` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`client_country` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Country](#rules-client-country) below.
+`client_country` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`client_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Client IP](#rules-client-ip) below.
+`client_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`client_region` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Region](#rules-client-region) below.
+`client_region` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `cookie_name` - (Optional) Cookie Name. Use the HTTP cookie value for the given name as user identifier (`String`).
 
@@ -86,59 +86,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `ip_and_http_header_name` - (Optional) HTTP Header Name. Name of HTTP header from which the value should be extracted (`String`).
 
-`ip_and_ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [IP And Ja4 TLS Fingerprint](#rules-ip-and-ja4-tls-fingerprint) below.
+`ip_and_ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ip_and_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [IP And TLS Fingerprint](#rules-ip-and-tls-fingerprint) below.
+`ip_and_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [Ja4 TLS Fingerprint](#rules-ja4-tls-fingerprint) below.
+`ja4_tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `jwt_claim_name` - (Optional) JWT Claim Name. Use the JWT claim value as user identifier (`String`).
 
-`none` - (Optional) Empty. This can be used for messages where no values are needed. See [None](#rules-none) below.
+`none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `query_param_key` - (Optional) Query Parameter Key. Use the query parameter value for the given key as user identifier (`String`).
 
-`tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed. See [TLS Fingerprint](#rules-tls-fingerprint) below.
-
-<a id="rules-client-asn"></a>
-
-### Rules Client Asn
-
-<a id="rules-client-city"></a>
-
-### Rules Client City
-
-<a id="rules-client-country"></a>
-
-### Rules Client Country
-
-<a id="rules-client-ip"></a>
-
-### Rules Client IP
-
-<a id="rules-client-region"></a>
-
-### Rules Client Region
-
-<a id="rules-ip-and-ja4-tls-fingerprint"></a>
-
-### Rules IP And Ja4 TLS Fingerprint
-
-<a id="rules-ip-and-tls-fingerprint"></a>
-
-### Rules IP And TLS Fingerprint
-
-<a id="rules-ja4-tls-fingerprint"></a>
-
-### Rules Ja4 TLS Fingerprint
-
-<a id="rules-none"></a>
-
-### Rules None
-
-<a id="rules-tls-fingerprint"></a>
-
-### Rules TLS Fingerprint
+`tls_fingerprint` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="timeouts"></a>
 

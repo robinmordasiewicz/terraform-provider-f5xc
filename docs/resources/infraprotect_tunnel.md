@@ -104,11 +104,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `holddown_timer_seconds` - (Optional) Hold down Timer. BGP hold down timer, in seconds (`Number`).
 
-`no_secret` - (Optional) Empty. This can be used for messages where no values are needed. See [No Secret](#bgp-information-no-secret) below.
+`no_secret` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `peer_secret_override` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Peer Secret Override](#bgp-information-peer-secret-override) below.
 
-`use_default_secret` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Secret](#bgp-information-use-default-secret) below.
+`use_default_secret` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="bgp-information-asn"></a>
 
@@ -119,10 +119,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="bgp-information-no-secret"></a>
-
-### BGP Information No Secret
 
 <a id="bgp-information-peer-secret-override"></a>
 
@@ -150,10 +146,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
-<a id="bgp-information-use-default-secret"></a>
-
-### BGP Information Use Default Secret
-
 <a id="firewall-rule-group"></a>
 
 ### Firewall Rule Group
@@ -170,41 +162,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `customer_endpoint_ipv4` - (Optional) Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel (`String`).
 
-`fragmentation_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragmentation Disabled](#gre-ipv4-fragmentation-disabled) below.
+`fragmentation_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`fragmentation_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragmentation Enabled](#gre-ipv4-fragmentation-enabled) below.
+`fragmentation_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ipv6_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv6 Interconnect Disabled](#gre-ipv4-ipv6-interconnect-disabled) below.
+`ipv6_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ipv6_interconnect_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv6 Interconnect Enabled](#gre-ipv4-ipv6-interconnect-enabled) below.
+`ipv6_interconnect_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`keepalive_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Keepalive Disabled](#gre-ipv4-keepalive-disabled) below.
+`keepalive_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`keepalive_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Keepalive Enabled](#gre-ipv4-keepalive-enabled) below.
-
-<a id="gre-ipv4-fragmentation-disabled"></a>
-
-### Gre IPv4 Fragmentation Disabled
-
-<a id="gre-ipv4-fragmentation-enabled"></a>
-
-### Gre IPv4 Fragmentation Enabled
-
-<a id="gre-ipv4-ipv6-interconnect-disabled"></a>
-
-### Gre IPv4 IPv6 Interconnect Disabled
-
-<a id="gre-ipv4-ipv6-interconnect-enabled"></a>
-
-### Gre IPv4 IPv6 Interconnect Enabled
-
-<a id="gre-ipv4-keepalive-disabled"></a>
-
-### Gre IPv4 Keepalive Disabled
-
-<a id="gre-ipv4-keepalive-enabled"></a>
-
-### Gre IPv4 Keepalive Enabled
+`keepalive_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="gre-ipv6"></a>
 
@@ -212,17 +180,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `customer_endpoint_ipv6` - (Optional) Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel (`String`).
 
-`ipv4_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv4 Interconnect Disabled](#gre-ipv6-ipv4-interconnect-disabled) below.
+`ipv4_interconnect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ipv4_interconnect_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [IPv4 Interconnect Enabled](#gre-ipv6-ipv4-interconnect-enabled) below.
-
-<a id="gre-ipv6-ipv4-interconnect-disabled"></a>
-
-### Gre IPv6 IPv4 Interconnect Disabled
-
-<a id="gre-ipv6-ipv4-interconnect-enabled"></a>
-
-### Gre IPv6 IPv4 Interconnect Enabled
+`ipv4_interconnect_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ip-in-ip"></a>
 
@@ -254,17 +214,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Location Name. Destination tunnel Location (`String`).
 
-`zone1` - (Optional) Empty. This can be used for messages where no values are needed. See [Zone1](#tunnel-location-zone1) below.
+`zone1` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`zone2` - (Optional) Empty. This can be used for messages where no values are needed. See [Zone2](#tunnel-location-zone2) below.
-
-<a id="tunnel-location-zone1"></a>
-
-### Tunnel Location Zone1
-
-<a id="tunnel-location-zone2"></a>
-
-### Tunnel Location Zone2
+`zone2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 ## Import
 

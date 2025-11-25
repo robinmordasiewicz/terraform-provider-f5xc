@@ -97,11 +97,11 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
 
-`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Block All Services](#block-all-services) below for details.
+`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `cloud_credentials` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Credentials](#cloud-credentials) below for details.
 
@@ -111,7 +111,7 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 `disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
-`gcp_labels` - (Optional) GCP Labels. GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console. See [GCP Labels](#gcp-labels) below for details.
+`gcp_labels` - (Optional) GCP Labels. GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console (`Block`).
 
 `gcp_region` - (Optional) GCP Region. Name for GCP Region (`String`).
 
@@ -131,7 +131,7 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
 
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handl. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
@@ -139,7 +139,7 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 > **Note:** One of the arguments from this list "private_connect_disabled, private_connectivity" must be set.
 
-`private_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Private Connect Disabled](#private-connect-disabled) below for details.
+`private_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration. See [Private Connectivity](#private-connectivity) below for details.
 
@@ -183,10 +183,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
-<a id="block-all-services"></a>
-
-### Block All Services
-
 <a id="blocked-services"></a>
 
 ### Blocked Services
@@ -197,25 +193,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Blocked Services Blocked Sevice
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-blocked-sevice-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-blocked-sevice-ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-blocked-sevice-web-user-interface) below.
-
-<a id="blocked-services-blocked-sevice-dns"></a>
-
-### Blocked Services Blocked Sevice DNS
-
-<a id="blocked-services-blocked-sevice-ssh"></a>
-
-### Blocked Services Blocked Sevice SSH
-
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>
-
-### Blocked Services Blocked Sevice Web User Interface
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="cloud-credentials"></a>
 
@@ -243,14 +227,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
 
-<a id="default-blocked-services"></a>
-
-### Default Blocked Services
-
-<a id="gcp-labels"></a>
-
-### GCP Labels
-
 <a id="ingress-egress-gw"></a>
 
 ### Ingress Egress Gw
@@ -265,7 +241,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group_outside_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Outside Vn](#ingress-egress-gw-dc-cluster-group-outside-vn) below.
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#ingress-egress-gw-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `gcp_certified_hw` - (Optional) GCP Certified Hardware. Name for GCP certified hardware (`String`).
 
@@ -279,17 +255,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `inside_subnet` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Inside Subnet](#ingress-egress-gw-inside-subnet) below.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#ingress-egress-gw-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#ingress-egress-gw-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#ingress-egress-gw-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Inside Static Routes](#ingress-egress-gw-no-inside-static-routes) below.
+`no_inside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#ingress-egress-gw-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#ingress-egress-gw-no-outside-static-routes) below.
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `node_number` - (Optional) Number of main nodes. Number of main nodes to create, either 1 or 3 (`Number`).
 
@@ -301,9 +277,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#ingress-egress-gw-performance-enhancement-mode) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#ingress-egress-gw-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#ingress-egress-gw-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-active-enhanced-firewall-policies"></a>
 
@@ -373,10 +349,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="ingress-egress-gw-forward-proxy-allow-all"></a>
-
-### Ingress Egress Gw Forward Proxy Allow All
-
 <a id="ingress-egress-gw-global-network-list"></a>
 
 ### Ingress Egress Gw Global Network List
@@ -387,17 +359,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR
-
-<a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="ingress-egress-gw-inside-network"></a>
 
@@ -407,7 +371,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `new_network` - (Optional) GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network. See [New Network](#ingress-egress-gw-inside-network-new-network) below.
 
-`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name. See [New Network Autogenerate](#ingress-egress-gw-inside-network-new-network-autogenerate) below.
+`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name (`Block`).
 
 <a id="ingress-egress-gw-inside-network-existing-network"></a>
 
@@ -421,10 +385,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
 
-<a id="ingress-egress-gw-inside-network-new-network-autogenerate"></a>
-
-### Ingress Egress Gw Inside Network New Network Autogenerate
-
 <a id="ingress-egress-gw-inside-static-routes"></a>
 
 ### Ingress Egress Gw Inside Static Routes
@@ -435,13 +395,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Inside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route"></a>
-
-### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route
 
 <a id="ingress-egress-gw-inside-subnet"></a>
 
@@ -465,30 +421,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `subnet_name` - (Optional) VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty (`String`).
 
-<a id="ingress-egress-gw-no-dc-cluster-group"></a>
-
-### Ingress Egress Gw No Dc Cluster Group
-
-<a id="ingress-egress-gw-no-forward-proxy"></a>
-
-### Ingress Egress Gw No Forward Proxy
-
-<a id="ingress-egress-gw-no-global-network"></a>
-
-### Ingress Egress Gw No Global Network
-
-<a id="ingress-egress-gw-no-inside-static-routes"></a>
-
-### Ingress Egress Gw No Inside Static Routes
-
-<a id="ingress-egress-gw-no-network-policy"></a>
-
-### Ingress Egress Gw No Network Policy
-
-<a id="ingress-egress-gw-no-outside-static-routes"></a>
-
-### Ingress Egress Gw No Outside Static Routes
-
 <a id="ingress-egress-gw-outside-network"></a>
 
 ### Ingress Egress Gw Outside Network
@@ -497,7 +429,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `new_network` - (Optional) GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network. See [New Network](#ingress-egress-gw-outside-network-new-network) below.
 
-`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name. See [New Network Autogenerate](#ingress-egress-gw-outside-network-new-network-autogenerate) below.
+`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name (`Block`).
 
 <a id="ingress-egress-gw-outside-network-existing-network"></a>
 
@@ -511,10 +443,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
 
-<a id="ingress-egress-gw-outside-network-new-network-autogenerate"></a>
-
-### Ingress Egress Gw Outside Network New Network Autogenerate
-
 <a id="ingress-egress-gw-outside-static-routes"></a>
 
 ### Ingress Egress Gw Outside Static Routes
@@ -525,13 +453,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ingress Egress Gw Outside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route"></a>
-
-### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route
 
 <a id="ingress-egress-gw-outside-subnet"></a>
 
@@ -561,35 +485,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Ingress Egress Gw Performance Enhancement Mode Perf Mode L7 Enhanced
-
-<a id="ingress-egress-gw-sm-connection-public-ip"></a>
-
-### Ingress Egress Gw Sm Connection Public IP
-
-<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>
-
-### Ingress Egress Gw Sm Connection Pvt IP
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-gw"></a>
 
@@ -615,7 +519,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `new_network` - (Optional) GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network. See [New Network](#ingress-gw-local-network-new-network) below.
 
-`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name. See [New Network Autogenerate](#ingress-gw-local-network-new-network-autogenerate) below.
+`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name (`Block`).
 
 <a id="ingress-gw-local-network-existing-network"></a>
 
@@ -628,10 +532,6 @@ In addition to all arguments above, the following attributes are exported:
 ### Ingress Gw Local Network New Network
 
 `name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
-
-<a id="ingress-gw-local-network-new-network-autogenerate"></a>
-
-### Ingress Gw Local Network New Network Autogenerate
 
 <a id="ingress-gw-local-subnet"></a>
 
@@ -661,59 +561,35 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="ingress-gw-performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Ingress Gw Performance Enhancement Mode Perf Mode L7 Enhanced
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="kubernetes-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#kubernetes-upgrade-drain-disable-upgrade-drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
-
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>
-
-### Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="log-receiver"></a>
 
@@ -725,41 +601,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="logs-streaming-disabled"></a>
-
-### Logs Streaming Disabled
-
 <a id="offline-survivability-mode"></a>
 
 ### Offline Survivability Mode
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#offline-survivability-mode-enable-offline-survivability-mode) below.
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#offline-survivability-mode-no-offline-survivability-mode) below.
-
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>
-
-### Offline Survivability Mode Enable Offline Survivability Mode
-
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>
-
-### Offline Survivability Mode No Offline Survivability Mode
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="os"></a>
 
 ### OS
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#os-default-os-version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
-
-<a id="os-default-os-version"></a>
-
-### OS Default OS Version
-
-<a id="private-connect-disabled"></a>
-
-### Private Connect Disabled
 
 <a id="private-connectivity"></a>
 
@@ -767,9 +623,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `cloud_link` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Link](#private-connectivity-cloud-link) below.
 
-`inside` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside](#private-connectivity-inside) below.
+`inside` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`outside` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside](#private-connectivity-outside) below.
+`outside` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="private-connectivity-cloud-link"></a>
 
@@ -781,25 +637,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="private-connectivity-inside"></a>
-
-### Private Connectivity Inside
-
-<a id="private-connectivity-outside"></a>
-
-### Private Connectivity Outside
-
 <a id="sw"></a>
 
 ### Sw
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#sw-default-sw-version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
-
-<a id="sw-default-sw-version"></a>
-
-### Sw Default Sw Version
 
 <a id="timeouts"></a>
 
@@ -825,9 +669,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
 
-`default_storage` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Storage](#voltstack-cluster-default-storage) below.
+`default_storage` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#voltstack-cluster-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `gcp_certified_hw` - (Optional) GCP Certified Hardware. Name for GCP certified hardware (`String`).
 
@@ -837,17 +681,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [K8s Cluster](#voltstack-cluster-k8s-cluster) below.
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#voltstack-cluster-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#voltstack-cluster-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#voltstack-cluster-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [No K8s Cluster](#voltstack-cluster-no-k8s-cluster) below.
+`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#voltstack-cluster-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Outside Static Routes](#voltstack-cluster-no-outside-static-routes) below.
+`no_outside_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `node_number` - (Optional) Number of main Nodes. Number of main nodes to create, either 1 or 3 (`Number`).
 
@@ -857,9 +701,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `site_local_subnet` - (Optional) GCP VPC network choice. This defines choice about GCP VPC network for a view. See [Site Local Subnet](#voltstack-cluster-site-local-subnet) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#voltstack-cluster-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#voltstack-cluster-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `storage_class_list` - (Optional) Custom Storage Class List. Add additional custom storage classes in kubernetes for this site. See [Storage Class List](#voltstack-cluster-storage-class-list) below.
 
@@ -921,14 +765,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="voltstack-cluster-default-storage"></a>
-
-### Voltstack Cluster Default Storage
-
-<a id="voltstack-cluster-forward-proxy-allow-all"></a>
-
-### Voltstack Cluster Forward Proxy Allow All
-
 <a id="voltstack-cluster-global-network-list"></a>
 
 ### Voltstack Cluster Global Network List
@@ -939,17 +775,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Voltstack Cluster Global Network List Global Network Connections Sli To Global DR
-
-<a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Voltstack Cluster Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="voltstack-cluster-k8s-cluster"></a>
 
@@ -961,30 +789,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="voltstack-cluster-no-dc-cluster-group"></a>
-
-### Voltstack Cluster No Dc Cluster Group
-
-<a id="voltstack-cluster-no-forward-proxy"></a>
-
-### Voltstack Cluster No Forward Proxy
-
-<a id="voltstack-cluster-no-global-network"></a>
-
-### Voltstack Cluster No Global Network
-
-<a id="voltstack-cluster-no-k8s-cluster"></a>
-
-### Voltstack Cluster No K8s Cluster
-
-<a id="voltstack-cluster-no-network-policy"></a>
-
-### Voltstack Cluster No Network Policy
-
-<a id="voltstack-cluster-no-outside-static-routes"></a>
-
-### Voltstack Cluster No Outside Static Routes
-
 <a id="voltstack-cluster-outside-static-routes"></a>
 
 ### Voltstack Cluster Outside Static Routes
@@ -995,13 +799,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Voltstack Cluster Outside Static Routes Static Route List
 
-`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them. See [Custom Static Route](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) below.
+`custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
-
-<a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route"></a>
-
-### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route
 
 <a id="voltstack-cluster-site-local-network"></a>
 
@@ -1011,7 +811,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `new_network` - (Optional) GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network. See [New Network](#voltstack-cluster-site-local-network-new-network) below.
 
-`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name. See [New Network Autogenerate](#voltstack-cluster-site-local-network-new-network-autogenerate) below.
+`new_network_autogenerate` - (Optional) GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name (`Block`).
 
 <a id="voltstack-cluster-site-local-network-existing-network"></a>
 
@@ -1024,10 +824,6 @@ In addition to all arguments above, the following attributes are exported:
 ### Voltstack Cluster Site Local Network New Network
 
 `name` - (Optional) GCP VPC Network Name. Name for your GCP VPC Network (`String`).
-
-<a id="voltstack-cluster-site-local-network-new-network-autogenerate"></a>
-
-### Voltstack Cluster Site Local Network New Network Autogenerate
 
 <a id="voltstack-cluster-site-local-subnet"></a>
 
@@ -1050,14 +846,6 @@ In addition to all arguments above, the following attributes are exported:
 `primary_ipv4` - (Optional) IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space (`String`).
 
 `subnet_name` - (Optional) VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty (`String`).
-
-<a id="voltstack-cluster-sm-connection-public-ip"></a>
-
-### Voltstack Cluster Sm Connection Public IP
-
-<a id="voltstack-cluster-sm-connection-pvt-ip"></a>
-
-### Voltstack Cluster Sm Connection Pvt IP
 
 <a id="voltstack-cluster-storage-class-list"></a>
 

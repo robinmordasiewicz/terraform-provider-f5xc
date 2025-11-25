@@ -226,9 +226,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `follow_redirects` - (Optional) Follow Redirects. Configure whether HTTP requests follow HTTP 3xx redirects (`Bool`).
 
-`no_authorization` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authorization](#webhook-http-config-no-authorization) below.
+`no_authorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No TLS](#webhook-http-config-no-tls) below.
+`no_tls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `use_tls` - (Optional) TLS Config. Configures the token request's TLS settings. See [Use TLS](#webhook-http-config-use-tls) below.
 
@@ -236,47 +236,27 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Webhook HTTP Config Auth Token
 
-`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#webhook-http-config-auth-token-token) below.
-
-<a id="webhook-http-config-auth-token-token"></a>
-
-### Webhook HTTP Config Auth Token Token
+`token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 <a id="webhook-http-config-basic-auth"></a>
 
 ### Webhook HTTP Config Basic Auth
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#webhook-http-config-basic-auth-password) below.
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `user_name` - (Optional) User Name. HTTP Basic Auth User Name (`String`).
-
-<a id="webhook-http-config-basic-auth-password"></a>
-
-### Webhook HTTP Config Basic Auth Password
 
 <a id="webhook-http-config-client-cert-obj"></a>
 
 ### Webhook HTTP Config Client Cert Obj
 
-`use_tls_obj` - (Optional) Certificate Object. Reference to client certificate object. See [Use TLS Obj](#webhook-http-config-client-cert-obj-use-tls-obj) below.
-
-<a id="webhook-http-config-client-cert-obj-use-tls-obj"></a>
-
-### Webhook HTTP Config Client Cert Obj Use TLS Obj
-
-<a id="webhook-http-config-no-authorization"></a>
-
-### Webhook HTTP Config No Authorization
-
-<a id="webhook-http-config-no-tls"></a>
-
-### Webhook HTTP Config No TLS
+`use_tls_obj` - (Optional) Certificate Object. Reference to client certificate object (`Block`).
 
 <a id="webhook-http-config-use-tls"></a>
 
 ### Webhook HTTP Config Use TLS
 
-`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#webhook-http-config-use-tls-disable-sni) below.
+`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
@@ -284,21 +264,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
-`use_server_verification` - (Optional) TLS Validation Context for Servers. Upstream TLS Validation Context. See [Use Server Verification](#webhook-http-config-use-tls-use-server-verification) below.
+`use_server_verification` - (Optional) TLS Validation Context for Servers. Upstream TLS Validation Context (`Block`).
 
-`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Trusted CA](#webhook-http-config-use-tls-volterra-trusted-ca) below.
-
-<a id="webhook-http-config-use-tls-disable-sni"></a>
-
-### Webhook HTTP Config Use TLS Disable Sni
-
-<a id="webhook-http-config-use-tls-use-server-verification"></a>
-
-### Webhook HTTP Config Use TLS Use Server Verification
-
-<a id="webhook-http-config-use-tls-volterra-trusted-ca"></a>
-
-### Webhook HTTP Config Use TLS Volterra Trusted CA
+`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="webhook-url"></a>
 

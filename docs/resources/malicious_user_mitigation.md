@@ -90,45 +90,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Mitigation Type Rules Mitigation Action
 
-`block_temporarily` - (Optional) Empty. This can be used for messages where no values are needed. See [Block Temporarily](#mitigation-type-rules-mitigation-action-block-temporarily) below.
+`block_temporarily` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`captcha_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Captcha Challenge](#mitigation-type-rules-mitigation-action-captcha-challenge) below.
+`captcha_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`javascript_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [Javascript Challenge](#mitigation-type-rules-mitigation-action-javascript-challenge) below.
-
-<a id="mitigation-type-rules-mitigation-action-block-temporarily"></a>
-
-### Mitigation Type Rules Mitigation Action Block Temporarily
-
-<a id="mitigation-type-rules-mitigation-action-captcha-challenge"></a>
-
-### Mitigation Type Rules Mitigation Action Captcha Challenge
-
-<a id="mitigation-type-rules-mitigation-action-javascript-challenge"></a>
-
-### Mitigation Type Rules Mitigation Action Javascript Challenge
+`javascript_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="mitigation-type-rules-threat-level"></a>
 
 ### Mitigation Type Rules Threat Level
 
-`high` - (Optional) Empty. This can be used for messages where no values are needed. See [High](#mitigation-type-rules-threat-level-high) below.
+`high` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low` - (Optional) Empty. This can be used for messages where no values are needed. See [Low](#mitigation-type-rules-threat-level-low) below.
+`low` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium](#mitigation-type-rules-threat-level-medium) below.
-
-<a id="mitigation-type-rules-threat-level-high"></a>
-
-### Mitigation Type Rules Threat Level High
-
-<a id="mitigation-type-rules-threat-level-low"></a>
-
-### Mitigation Type Rules Threat Level Low
-
-<a id="mitigation-type-rules-threat-level-medium"></a>
-
-### Mitigation Type Rules Threat Level Medium
+`medium` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="timeouts"></a>
 

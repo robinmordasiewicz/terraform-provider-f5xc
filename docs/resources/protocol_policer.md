@@ -100,17 +100,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Protocol Policer Protocol
 
-`dns` - (Optional) DNS Packets. Match all DNS packets inclusing UDP and TCP. See [DNS](#protocol-policer-protocol-dns) below.
+`dns` - (Optional) DNS Packets. Match all DNS packets inclusing UDP and TCP (`Block`).
 
 `icmp` - (Optional) ICMP Packet Type. ICMP message type to match in packet. See [ICMP](#protocol-policer-protocol-icmp) below.
 
 `tcp` - (Optional) TCP Packet Type. Specification of TCP flag to be matched in a TCP packet. See [TCP](#protocol-policer-protocol-tcp) below.
 
-`udp` - (Optional) UDP Packets. Match all UDP packets. See [UDP](#protocol-policer-protocol-udp) below.
-
-<a id="protocol-policer-protocol-dns"></a>
-
-### Protocol Policer Protocol DNS
+`udp` - (Optional) UDP Packets. Match all UDP packets (`Block`).
 
 <a id="protocol-policer-protocol-icmp"></a>
 
@@ -123,10 +119,6 @@ In addition to all arguments above, the following attributes are exported:
 ### Protocol Policer Protocol TCP
 
 `flags` - (Optional) TCP flags. TCP flag to be matched in a TCP packet (`List`).
-
-<a id="protocol-policer-protocol-udp"></a>
-
-### Protocol Policer Protocol UDP
 
 <a id="timeouts"></a>
 

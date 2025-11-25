@@ -68,7 +68,7 @@ resource "f5xc_ike_phase2_profile" "example" {
 
 `dh_group_set` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. See [Dh Group Set](#dh-group-set) below for details.
 
-`disable_pfs` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Pfs](#disable-pfs) below for details.
+`disable_pfs` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `encryption_algos` - (Optional) Encryption Algorithms. Choose one or more encryption algorithms (`List`).
 
@@ -78,7 +78,7 @@ resource "f5xc_ike_phase2_profile" "example" {
 
 `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 
-`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Keylifetime](#use-default-keylifetime) below for details.
+`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -95,10 +95,6 @@ In addition to all arguments above, the following attributes are exported:
 ### Dh Group Set
 
 `dh_groups` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile (`List`).
-
-<a id="disable-pfs"></a>
-
-### Disable Pfs
 
 <a id="ike-keylifetime-hours"></a>
 
@@ -123,10 +119,6 @@ In addition to all arguments above, the following attributes are exported:
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-<a id="use-default-keylifetime"></a>
-
-### Use Default Keylifetime
 
 ## Import
 

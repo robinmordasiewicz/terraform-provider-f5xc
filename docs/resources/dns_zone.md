@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `default_rr_set_group` - (Optional) Add and manage DNS resource record sets part of Default set group. See [Default Rr Set Group](#primary-default-rr-set-group) below.
 
-`default_soa_parameters` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Soa Parameters](#primary-default-soa-parameters) below.
+`default_soa_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dnssec_mode` - (Optional) Disable. See [Dnssec Mode](#primary-dnssec-mode) below.
 
@@ -169,11 +169,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) AFSDB Value. See [Values](#primary-default-rr-set-group-afsdb-record-values) below.
-
-<a id="primary-default-rr-set-group-afsdb-record-values"></a>
-
-### Primary Default Rr Set Group Afsdb Record Values
+`values` - (Optional) AFSDB Value (`Block`).
 
 <a id="primary-default-rr-set-group-alias-record"></a>
 
@@ -187,11 +183,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) CAA Record Value. See [Values](#primary-default-rr-set-group-caa-record-values) below.
-
-<a id="primary-default-rr-set-group-caa-record-values"></a>
-
-### Primary Default Rr Set Group Caa Record Values
+`values` - (Optional) CAA Record Value (`Block`).
 
 <a id="primary-default-rr-set-group-cds-record"></a>
 
@@ -199,11 +191,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) DS Value. See [Values](#primary-default-rr-set-group-cds-record-values) below.
-
-<a id="primary-default-rr-set-group-cds-record-values"></a>
-
-### Primary Default Rr Set Group Cds Record Values
+`values` - (Optional) DS Value (`Block`).
 
 <a id="primary-default-rr-set-group-cert-record"></a>
 
@@ -211,11 +199,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) CERT Value. See [Values](#primary-default-rr-set-group-cert-record-values) below.
-
-<a id="primary-default-rr-set-group-cert-record-values"></a>
-
-### Primary Default Rr Set Group Cert Record Values
+`values` - (Optional) CERT Value (`Block`).
 
 <a id="primary-default-rr-set-group-cname-record"></a>
 
@@ -231,11 +215,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) DS Value. See [Values](#primary-default-rr-set-group-ds-record-values) below.
-
-<a id="primary-default-rr-set-group-ds-record-values"></a>
-
-### Primary Default Rr Set Group Ds Record Values
+`values` - (Optional) DS Value (`Block`).
 
 <a id="primary-default-rr-set-group-eui48-record"></a>
 
@@ -259,11 +239,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain (`String`).
 
-`value` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Value](#primary-default-rr-set-group-lb-record-value) below.
-
-<a id="primary-default-rr-set-group-lb-record-value"></a>
-
-### Primary Default Rr Set Group LB Record Value
+`value` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="primary-default-rr-set-group-loc-record"></a>
 
@@ -271,11 +247,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) LOC Value. See [Values](#primary-default-rr-set-group-loc-record-values) below.
-
-<a id="primary-default-rr-set-group-loc-record-values"></a>
-
-### Primary Default Rr Set Group Loc Record Values
+`values` - (Optional) LOC Value (`Block`).
 
 <a id="primary-default-rr-set-group-mx-record"></a>
 
@@ -283,11 +255,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) MX Record Value. See [Values](#primary-default-rr-set-group-mx-record-values) below.
-
-<a id="primary-default-rr-set-group-mx-record-values"></a>
-
-### Primary Default Rr Set Group Mx Record Values
+`values` - (Optional) MX Record Value (`Block`).
 
 <a id="primary-default-rr-set-group-naptr-record"></a>
 
@@ -295,11 +263,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) NAPTR Value. See [Values](#primary-default-rr-set-group-naptr-record-values) below.
-
-<a id="primary-default-rr-set-group-naptr-record-values"></a>
-
-### Primary Default Rr Set Group Naptr Record Values
+`values` - (Optional) NAPTR Value (`Block`).
 
 <a id="primary-default-rr-set-group-ns-record"></a>
 
@@ -323,11 +287,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) SRV Value. See [Values](#primary-default-rr-set-group-srv-record-values) below.
-
-<a id="primary-default-rr-set-group-srv-record-values"></a>
-
-### Primary Default Rr Set Group Srv Record Values
+`values` - (Optional) SRV Value (`Block`).
 
 <a id="primary-default-rr-set-group-sshfp-record"></a>
 
@@ -335,11 +295,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) SSHFP Value. See [Values](#primary-default-rr-set-group-sshfp-record-values) below.
-
-<a id="primary-default-rr-set-group-sshfp-record-values"></a>
-
-### Primary Default Rr Set Group Sshfp Record Values
+`values` - (Optional) SSHFP Value (`Block`).
 
 <a id="primary-default-rr-set-group-tlsa-record"></a>
 
@@ -347,11 +303,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
-`values` - (Optional) TLSA Value. See [Values](#primary-default-rr-set-group-tlsa-record-values) below.
-
-<a id="primary-default-rr-set-group-tlsa-record-values"></a>
-
-### Primary Default Rr Set Group Tlsa Record Values
+`values` - (Optional) TLSA Value (`Block`).
 
 <a id="primary-default-rr-set-group-txt-record"></a>
 
@@ -361,25 +313,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `values` - (Optional) Text (`List`).
 
-<a id="primary-default-soa-parameters"></a>
-
-### Primary Default Soa Parameters
-
 <a id="primary-dnssec-mode"></a>
 
 ### Primary Dnssec Mode
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#primary-dnssec-mode-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Enable. DNSSEC enable. See [Enable](#primary-dnssec-mode-enable) below.
-
-<a id="primary-dnssec-mode-disable"></a>
-
-### Primary Dnssec Mode Disable
-
-<a id="primary-dnssec-mode-enable"></a>
-
-### Primary Dnssec Mode Enable
+`enable` - (Optional) Enable. DNSSEC enable (`Block`).
 
 <a id="primary-rr-set-group"></a>
 
@@ -401,135 +341,51 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Primary Rr Set Group Rr Set
 
-`a_record` - (Optional) DNSAResourceRecord. A Records. See [A Record](#primary-rr-set-group-rr-set-a-record) below.
+`a_record` - (Optional) DNSAResourceRecord. A Records (`Block`).
 
-`aaaa_record` - (Optional) DNSAAAAResourceRecord. RecordSet for AAAA Records. See [Aaaa Record](#primary-rr-set-group-rr-set-aaaa-record) below.
+`aaaa_record` - (Optional) DNSAAAAResourceRecord. RecordSet for AAAA Records (`Block`).
 
-`afsdb_record` - (Optional) DNS AFSDB Record. DNS AFSDB Record. See [Afsdb Record](#primary-rr-set-group-rr-set-afsdb-record) below.
+`afsdb_record` - (Optional) DNS AFSDB Record. DNS AFSDB Record (`Block`).
 
-`alias_record` - (Optional) DNSAliasResourceRecord. See [Alias Record](#primary-rr-set-group-rr-set-alias-record) below.
+`alias_record` - (Optional) DNSAliasResourceRecord (`Block`).
 
-`caa_record` - (Optional) DNSCAAResourceRecord. See [Caa Record](#primary-rr-set-group-rr-set-caa-record) below.
+`caa_record` - (Optional) DNSCAAResourceRecord (`Block`).
 
-`cds_record` - (Optional) DNS CDS Record. DNS CDS Record. See [Cds Record](#primary-rr-set-group-rr-set-cds-record) below.
+`cds_record` - (Optional) DNS CDS Record. DNS CDS Record (`Block`).
 
-`cert_record` - (Optional) DNS CERT Record. DNS CERT Record. See [Cert Record](#primary-rr-set-group-rr-set-cert-record) below.
+`cert_record` - (Optional) DNS CERT Record. DNS CERT Record (`Block`).
 
-`cname_record` - (Optional) DNSCNAMEResourceRecord. See [Cname Record](#primary-rr-set-group-rr-set-cname-record) below.
+`cname_record` - (Optional) DNSCNAMEResourceRecord (`Block`).
 
 `description` - (Optional) Comment (`String`).
 
-`ds_record` - (Optional) DNS DS Record. DNS DS Record. See [Ds Record](#primary-rr-set-group-rr-set-ds-record) below.
+`ds_record` - (Optional) DNS DS Record. DNS DS Record (`Block`).
 
-`eui48_record` - (Optional) DNS EUI48 Record. DNS EUI48 Record. See [Eui48 Record](#primary-rr-set-group-rr-set-eui48-record) below.
+`eui48_record` - (Optional) DNS EUI48 Record. DNS EUI48 Record (`Block`).
 
-`eui64_record` - (Optional) DNS EUI64 Record. DNS EUI64 Record. See [Eui64 Record](#primary-rr-set-group-rr-set-eui64-record) below.
+`eui64_record` - (Optional) DNS EUI64 Record. DNS EUI64 Record (`Block`).
 
-`lb_record` - (Optional) DNS Load Balancer Record. DNS Load Balancer Record. See [LB Record](#primary-rr-set-group-rr-set-lb-record) below.
+`lb_record` - (Optional) DNS Load Balancer Record. DNS Load Balancer Record (`Block`).
 
-`loc_record` - (Optional) DNS LOC Record. DNS LOC Record. See [Loc Record](#primary-rr-set-group-rr-set-loc-record) below.
+`loc_record` - (Optional) DNS LOC Record. DNS LOC Record (`Block`).
 
-`mx_record` - (Optional) DNSMXResourceRecord. See [Mx Record](#primary-rr-set-group-rr-set-mx-record) below.
+`mx_record` - (Optional) DNSMXResourceRecord (`Block`).
 
-`naptr_record` - (Optional) DNS NAPTR Record. DNS NAPTR Record. See [Naptr Record](#primary-rr-set-group-rr-set-naptr-record) below.
+`naptr_record` - (Optional) DNS NAPTR Record. DNS NAPTR Record (`Block`).
 
-`ns_record` - (Optional) DNSNSResourceRecord. See [Ns Record](#primary-rr-set-group-rr-set-ns-record) below.
+`ns_record` - (Optional) DNSNSResourceRecord (`Block`).
 
-`ptr_record` - (Optional) DNSPTRResourceRecord. See [Ptr Record](#primary-rr-set-group-rr-set-ptr-record) below.
+`ptr_record` - (Optional) DNSPTRResourceRecord (`Block`).
 
-`srv_record` - (Optional) DNSSRVResourceRecord. See [Srv Record](#primary-rr-set-group-rr-set-srv-record) below.
+`srv_record` - (Optional) DNSSRVResourceRecord (`Block`).
 
-`sshfp_record` - (Optional) DNS SSHFP Record. DNS SSHFP Record. See [Sshfp Record](#primary-rr-set-group-rr-set-sshfp-record) below.
+`sshfp_record` - (Optional) DNS SSHFP Record. DNS SSHFP Record (`Block`).
 
-`tlsa_record` - (Optional) DNS TLSA Record. DNS TLSA Record. See [Tlsa Record](#primary-rr-set-group-rr-set-tlsa-record) below.
+`tlsa_record` - (Optional) DNS TLSA Record. DNS TLSA Record (`Block`).
 
 `ttl` - (Optional) Time to live (`Number`).
 
-`txt_record` - (Optional) DNSTXTResourceRecord. See [Txt Record](#primary-rr-set-group-rr-set-txt-record) below.
-
-<a id="primary-rr-set-group-rr-set-a-record"></a>
-
-### Primary Rr Set Group Rr Set A Record
-
-<a id="primary-rr-set-group-rr-set-aaaa-record"></a>
-
-### Primary Rr Set Group Rr Set Aaaa Record
-
-<a id="primary-rr-set-group-rr-set-afsdb-record"></a>
-
-### Primary Rr Set Group Rr Set Afsdb Record
-
-<a id="primary-rr-set-group-rr-set-alias-record"></a>
-
-### Primary Rr Set Group Rr Set Alias Record
-
-<a id="primary-rr-set-group-rr-set-caa-record"></a>
-
-### Primary Rr Set Group Rr Set Caa Record
-
-<a id="primary-rr-set-group-rr-set-cds-record"></a>
-
-### Primary Rr Set Group Rr Set Cds Record
-
-<a id="primary-rr-set-group-rr-set-cert-record"></a>
-
-### Primary Rr Set Group Rr Set Cert Record
-
-<a id="primary-rr-set-group-rr-set-cname-record"></a>
-
-### Primary Rr Set Group Rr Set Cname Record
-
-<a id="primary-rr-set-group-rr-set-ds-record"></a>
-
-### Primary Rr Set Group Rr Set Ds Record
-
-<a id="primary-rr-set-group-rr-set-eui48-record"></a>
-
-### Primary Rr Set Group Rr Set Eui48 Record
-
-<a id="primary-rr-set-group-rr-set-eui64-record"></a>
-
-### Primary Rr Set Group Rr Set Eui64 Record
-
-<a id="primary-rr-set-group-rr-set-lb-record"></a>
-
-### Primary Rr Set Group Rr Set LB Record
-
-<a id="primary-rr-set-group-rr-set-loc-record"></a>
-
-### Primary Rr Set Group Rr Set Loc Record
-
-<a id="primary-rr-set-group-rr-set-mx-record"></a>
-
-### Primary Rr Set Group Rr Set Mx Record
-
-<a id="primary-rr-set-group-rr-set-naptr-record"></a>
-
-### Primary Rr Set Group Rr Set Naptr Record
-
-<a id="primary-rr-set-group-rr-set-ns-record"></a>
-
-### Primary Rr Set Group Rr Set Ns Record
-
-<a id="primary-rr-set-group-rr-set-ptr-record"></a>
-
-### Primary Rr Set Group Rr Set Ptr Record
-
-<a id="primary-rr-set-group-rr-set-srv-record"></a>
-
-### Primary Rr Set Group Rr Set Srv Record
-
-<a id="primary-rr-set-group-rr-set-sshfp-record"></a>
-
-### Primary Rr Set Group Rr Set Sshfp Record
-
-<a id="primary-rr-set-group-rr-set-tlsa-record"></a>
-
-### Primary Rr Set Group Rr Set Tlsa Record
-
-<a id="primary-rr-set-group-rr-set-txt-record"></a>
-
-### Primary Rr Set Group Rr Set Txt Record
+`txt_record` - (Optional) DNSTXTResourceRecord (`Block`).
 
 <a id="primary-soa-parameters"></a>
 

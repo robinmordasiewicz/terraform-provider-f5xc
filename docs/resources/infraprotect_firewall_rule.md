@@ -64,37 +64,37 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 > **Note:** One of the arguments from this list "action_allow, action_deny" must be set.
 
-`action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Action Allow](#action-allow) below for details.
+`action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`action_deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Action Deny](#action-deny) below for details.
+`action_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "destination_prefix_all, destination_prefix_single" must be set.
 
-`destination_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Prefix All](#destination-prefix-all) below for details.
+`destination_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `destination_prefix_single` - (Optional) Configuration for destination_prefix_single (`String`).
 
 > **Note:** One of the arguments from this list "fragments_allow, fragments_deny" must be set.
 
-`fragments_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragments Allow](#fragments-allow) below for details.
+`fragments_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`fragments_deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Fragments Deny](#fragments-deny) below for details.
+`fragments_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "protocol_ah, protocol_all, protocol_esp, protocol_gre, protocol_icmp, protocol_icmp6, protocol_ipv6, protocol_tcp, protocol_udp" must be set.
 
-`protocol_ah` - (Optional) Empty. This can be used for messages where no values are needed. See [Protocol Ah](#protocol-ah) below for details.
+`protocol_ah` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`protocol_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Protocol All](#protocol-all) below for details.
+`protocol_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`protocol_esp` - (Optional) Empty. This can be used for messages where no values are needed. See [Protocol Esp](#protocol-esp) below for details.
+`protocol_esp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`protocol_gre` - (Optional) Empty. This can be used for messages where no values are needed. See [Protocol Gre](#protocol-gre) below for details.
+`protocol_gre` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `protocol_icmp` - (Optional) ICMP Protocol. x-required ICMP Protocol. See [Protocol ICMP](#protocol-icmp) below for details.
 
 `protocol_icmp6` - (Optional) ICMP6 Protocol. x-required ICMP6 Protocol. See [Protocol Icmp6](#protocol-icmp6) below for details.
 
-`protocol_ipv6` - (Optional) Empty. This can be used for messages where no values are needed. See [Protocol IPv6](#protocol-ipv6) below for details.
+`protocol_ipv6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `protocol_tcp` - (Optional) TCP Protocol. x-required TCP Protocol. See [Protocol TCP](#protocol-tcp) below for details.
 
@@ -102,23 +102,23 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 > **Note:** One of the arguments from this list "source_prefix_all, source_prefix_single" must be set.
 
-`source_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Prefix All](#source-prefix-all) below for details.
+`source_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `source_prefix_single` - (Optional) Configuration for source_prefix_single (`String`).
 
 > **Note:** One of the arguments from this list "state_off, state_on" must be set.
 
-`state_off` - (Optional) Empty. This can be used for messages where no values are needed. See [State Off](#state-off) below for details.
+`state_off` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`state_on` - (Optional) Empty. This can be used for messages where no values are needed. See [State On](#state-on) below for details.
+`state_on` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
 > **Note:** One of the arguments from this list "version_ipv4, version_ipv6" must be set.
 
-`version_ipv4` - (Optional) Empty. This can be used for messages where no values are needed. See [Version IPv4](#version-ipv4) below for details.
+`version_ipv4` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`version_ipv6` - (Optional) Empty. This can be used for messages where no values are needed. See [Version IPv6](#version-ipv6) below for details.
+`version_ipv6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 ### Attributes Reference
 
@@ -127,42 +127,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="action-allow"></a>
-
-### Action Allow
-
-<a id="action-deny"></a>
-
-### Action Deny
-
-<a id="destination-prefix-all"></a>
-
-### Destination Prefix All
-
-<a id="fragments-allow"></a>
-
-### Fragments Allow
-
-<a id="fragments-deny"></a>
-
-### Fragments Deny
-
-<a id="protocol-ah"></a>
-
-### Protocol Ah
-
-<a id="protocol-all"></a>
-
-### Protocol All
-
-<a id="protocol-esp"></a>
-
-### Protocol Esp
-
-<a id="protocol-gre"></a>
-
-### Protocol Gre
 
 <a id="protocol-icmp"></a>
 
@@ -208,31 +172,19 @@ In addition to all arguments above, the following attributes are exported:
 
 `time_exceeded` - (Optional) Time-Exceeded. Time-Exceeded (`Bool`).
 
-<a id="protocol-ipv6"></a>
-
-### Protocol IPv6
-
 <a id="protocol-tcp"></a>
 
 ### Protocol TCP
 
 `description` - (Optional) Configuration for description (`String`).
 
-`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#protocol-tcp-destination-port-all) below.
+`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `destination_port_range` - (Optional) Port Range. Port Range (`String`).
 
-`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#protocol-tcp-source-port-all) below.
+`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `source_port_range` - (Optional) Port Range. Port Range (`String`).
-
-<a id="protocol-tcp-destination-port-all"></a>
-
-### Protocol TCP Destination Port All
-
-<a id="protocol-tcp-source-port-all"></a>
-
-### Protocol TCP Source Port All
 
 <a id="protocol-udp"></a>
 
@@ -240,33 +192,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `description` - (Optional) Configuration for description (`String`).
 
-`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Destination Port All](#protocol-udp-destination-port-all) below.
+`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `destination_port_range` - (Optional) Port Range. Port Range (`String`).
 
-`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Source Port All](#protocol-udp-source-port-all) below.
+`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `source_port_range` - (Optional) Port Range. Port Range (`String`).
-
-<a id="protocol-udp-destination-port-all"></a>
-
-### Protocol UDP Destination Port All
-
-<a id="protocol-udp-source-port-all"></a>
-
-### Protocol UDP Source Port All
-
-<a id="source-prefix-all"></a>
-
-### Source Prefix All
-
-<a id="state-off"></a>
-
-### State Off
-
-<a id="state-on"></a>
-
-### State On
 
 <a id="timeouts"></a>
 
@@ -279,14 +211,6 @@ In addition to all arguments above, the following attributes are exported:
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-<a id="version-ipv4"></a>
-
-### Version IPv4
-
-<a id="version-ipv6"></a>
-
-### Version IPv6
 
 ## Import
 

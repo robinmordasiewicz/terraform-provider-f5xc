@@ -58,7 +58,7 @@ resource "f5xc_dns_domain" "example" {
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
-`volterra_managed` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Managed](#volterra-managed) below for details.
+`volterra_managed` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 ### Attributes Reference
 
@@ -79,10 +79,6 @@ In addition to all arguments above, the following attributes are exported:
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-<a id="volterra-managed"></a>
-
-### Volterra Managed
 
 ## Import
 

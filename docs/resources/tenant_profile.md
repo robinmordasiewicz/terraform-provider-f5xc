@@ -104,29 +104,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Favicon
 
-`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [AWS S3](#favicon-aws-s3) below.
+`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `content` - (Optional) Configuration for content (`String`).
 
 `content_type` - (Optional) Content Type. Content type of the file (MIME type) (`String`).
-
-<a id="favicon-aws-s3"></a>
-
-### Favicon AWS S3
 
 <a id="logo"></a>
 
 ### Logo
 
-`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed. See [AWS S3](#logo-aws-s3) below.
+`aws_s3` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `content` - (Optional) Configuration for content (`String`).
 
 `content_type` - (Optional) Content Type. Content type of the file (MIME type) (`String`).
-
-<a id="logo-aws-s3"></a>
-
-### Logo AWS S3
 
 <a id="plan"></a>
 

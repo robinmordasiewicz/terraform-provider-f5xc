@@ -66,11 +66,11 @@ resource "f5xc_service_policy" "example" {
 
 > **Note:** One of the arguments from this list "allow_all_requests, allow_list, deny_all_requests, deny_list, rule_list" must be set.
 
-`allow_all_requests` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All Requests](#allow-all-requests) below for details.
+`allow_all_requests` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `allow_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Allow List](#allow-list) below for details.
 
-`deny_all_requests` - (Optional) Empty. This can be used for messages where no values are needed. See [Deny All Requests](#deny-all-requests) below for details.
+`deny_all_requests` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `deny_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Deny List](#deny-list) below for details.
 
@@ -78,7 +78,7 @@ resource "f5xc_service_policy" "example" {
 
 > **Note:** One of the arguments from this list "any_server, server_name, server_name_matcher, server_selector" must be set.
 
-`any_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Server](#any-server) below for details.
+`any_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `server_name` - (Optional) Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name (`String`).
 
@@ -96,10 +96,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="allow-all-requests"></a>
-
-### Allow All Requests
-
 <a id="allow-list"></a>
 
 ### Allow List
@@ -110,11 +106,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB (`List`).
 
-`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Allow](#allow-list-default-action-allow) below.
+`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Deny](#allow-list-default-action-deny) below.
+`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#allow-list-default-action-next-policy) below.
+`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_prefix_set` - (Optional) IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set. See [IP Prefix Set](#allow-list-ip-prefix-set) below.
 
@@ -140,18 +136,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="allow-list-default-action-allow"></a>
-
-### Allow List Default Action Allow
-
-<a id="allow-list-default-action-deny"></a>
-
-### Allow List Default Action Deny
-
-<a id="allow-list-default-action-next-policy"></a>
-
-### Allow List Default Action Next Policy
-
 <a id="allow-list-ip-prefix-set"></a>
 
 ### Allow List IP Prefix Set
@@ -168,14 +152,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
-<a id="any-server"></a>
-
-### Any Server
-
-<a id="deny-all-requests"></a>
-
-### Deny All Requests
-
 <a id="deny-list"></a>
 
 ### Deny List
@@ -186,11 +162,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `country_list` - (Optional) Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB (`List`).
 
-`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Allow](#deny-list-default-action-allow) below.
+`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Deny](#deny-list-default-action-deny) below.
+`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#deny-list-default-action-next-policy) below.
+`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_prefix_set` - (Optional) IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set. See [IP Prefix Set](#deny-list-ip-prefix-set) below.
 
@@ -215,18 +191,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="deny-list-default-action-allow"></a>
-
-### Deny List Default Action Allow
-
-<a id="deny-list-default-action-deny"></a>
-
-### Deny List Default Action Deny
-
-<a id="deny-list-default-action-next-policy"></a>
-
-### Deny List Default Action Next Policy
 
 <a id="deny-list-ip-prefix-set"></a>
 
@@ -272,189 +236,69 @@ In addition to all arguments above, the following attributes are exported:
 
 `action` - (Optional) Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY D... Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY` (`String`).
 
-`any_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Asn](#rule-list-rules-spec-any-asn) below.
+`any_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`any_client` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Client](#rule-list-rules-spec-any-client) below.
+`any_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any IP](#rule-list-rules-spec-any-ip) below.
+`any_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`api_group_matcher` - (Optional) String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true. See [API Group Matcher](#rule-list-rules-spec-api-group-matcher) below.
+`api_group_matcher` - (Optional) String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true (`Block`).
 
-`arg_matchers` - (Optional) Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true. See [Arg Matchers](#rule-list-rules-spec-arg-matchers) below.
+`arg_matchers` - (Optional) Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true (`Block`).
 
-`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#rule-list-rules-spec-asn-list) below.
+`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`Block`).
 
-`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#rule-list-rules-spec-asn-matcher) below.
+`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets (`Block`).
 
-`body_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Body Matcher](#rule-list-rules-spec-body-matcher) below.
+`body_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
 
-`bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing. See [Bot Action](#rule-list-rules-spec-bot-action) below.
+`bot_action` - (Optional) Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing (`Block`).
 
 `client_name` - (Optional) Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name (`String`).
 
-`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Client Name Matcher](#rule-list-rules-spec-client-name-matcher) below.
+`client_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
 
-`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Client Selector](#rule-list-rules-spec-client-selector) below.
+`client_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar (`Block`).
 
-`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matchers](#rule-list-rules-spec-cookie-matchers) below.
+`cookie_matchers` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true (`Block`).
 
-`domain_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Domain Matcher](#rule-list-rules-spec-domain-matcher) below.
+`domain_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
 
 `expiration_timestamp` - (Optional) Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore (`String`).
 
-`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true. See [Headers](#rule-list-rules-spec-headers) below.
+`headers` - (Optional) HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true (`Block`).
 
-`http_method` - (Optional) HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true. See [HTTP Method](#rule-list-rules-spec-http-method) below.
+`http_method` - (Optional) HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true (`Block`).
 
-`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Matcher](#rule-list-rules-spec-ip-matcher) below.
+`ip_matcher` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true (`Block`).
 
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#rule-list-rules-spec-ip-prefix-list) below.
+`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against (`Block`).
 
-`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories. See [IP Threat Category List](#rule-list-rules-spec-ip-threat-category-list) below.
+`ip_threat_category_list` - (Optional) IP Threat Category List Type. List of IP threat categories (`Block`).
 
-`ja4_tls_fingerprint` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length. See [Ja4 TLS Fingerprint](#rule-list-rules-spec-ja4-tls-fingerprint) below.
+`ja4_tls_fingerprint` - (Optional) JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length (`Block`).
 
-`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. See [JWT Claims](#rule-list-rules-spec-jwt-claims) below.
+`jwt_claims` - (Optional) JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true (`Block`).
 
-`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name. See [Label Matcher](#rule-list-rules-spec-label-matcher) below.
+`label_matcher` - (Optional) Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name (`Block`).
 
-`mum_action` - (Optional) Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing. See [Mum Action](#rule-list-rules-spec-mum-action) below.
+`mum_action` - (Optional) Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing (`Block`).
 
-`path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions. See [Path](#rule-list-rules-spec-path) below.
+`path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions (`Block`).
 
-`port_matcher` - (Optional) Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true. See [Port Matcher](#rule-list-rules-spec-port-matcher) below.
+`port_matcher` - (Optional) Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true (`Block`).
 
-`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true. See [Query Params](#rule-list-rules-spec-query-params) below.
+`query_params` - (Optional) HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true (`Block`).
 
-`request_constraints` - (Optional) Request Constraints. See [Request Constraints](#rule-list-rules-spec-request-constraints) below.
+`request_constraints` - (Optional) Request Constraints (`Block`).
 
-`segment_policy` - (Optional) Configure Segments. Configure source and destination segment for policy. See [Segment Policy](#rule-list-rules-spec-segment-policy) below.
+`segment_policy` - (Optional) Configure Segments. Configure source and destination segment for policy (`Block`).
 
-`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values. See [TLS Fingerprint Matcher](#rule-list-rules-spec-tls-fingerprint-matcher) below.
+`tls_fingerprint_matcher` - (Optional) TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values (`Block`).
 
-`user_identity_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [User Identity Matcher](#rule-list-rules-spec-user-identity-matcher) below.
+`user_identity_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
 
-`waf_action` - (Optional) App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings. See [WAF Action](#rule-list-rules-spec-waf-action) below.
-
-<a id="rule-list-rules-spec-any-asn"></a>
-
-### Rule List Rules Spec Any Asn
-
-<a id="rule-list-rules-spec-any-client"></a>
-
-### Rule List Rules Spec Any Client
-
-<a id="rule-list-rules-spec-any-ip"></a>
-
-### Rule List Rules Spec Any IP
-
-<a id="rule-list-rules-spec-api-group-matcher"></a>
-
-### Rule List Rules Spec API Group Matcher
-
-<a id="rule-list-rules-spec-arg-matchers"></a>
-
-### Rule List Rules Spec Arg Matchers
-
-<a id="rule-list-rules-spec-asn-list"></a>
-
-### Rule List Rules Spec Asn List
-
-<a id="rule-list-rules-spec-asn-matcher"></a>
-
-### Rule List Rules Spec Asn Matcher
-
-<a id="rule-list-rules-spec-body-matcher"></a>
-
-### Rule List Rules Spec Body Matcher
-
-<a id="rule-list-rules-spec-bot-action"></a>
-
-### Rule List Rules Spec Bot Action
-
-<a id="rule-list-rules-spec-client-name-matcher"></a>
-
-### Rule List Rules Spec Client Name Matcher
-
-<a id="rule-list-rules-spec-client-selector"></a>
-
-### Rule List Rules Spec Client Selector
-
-<a id="rule-list-rules-spec-cookie-matchers"></a>
-
-### Rule List Rules Spec Cookie Matchers
-
-<a id="rule-list-rules-spec-domain-matcher"></a>
-
-### Rule List Rules Spec Domain Matcher
-
-<a id="rule-list-rules-spec-headers"></a>
-
-### Rule List Rules Spec Headers
-
-<a id="rule-list-rules-spec-http-method"></a>
-
-### Rule List Rules Spec HTTP Method
-
-<a id="rule-list-rules-spec-ip-matcher"></a>
-
-### Rule List Rules Spec IP Matcher
-
-<a id="rule-list-rules-spec-ip-prefix-list"></a>
-
-### Rule List Rules Spec IP Prefix List
-
-<a id="rule-list-rules-spec-ip-threat-category-list"></a>
-
-### Rule List Rules Spec IP Threat Category List
-
-<a id="rule-list-rules-spec-ja4-tls-fingerprint"></a>
-
-### Rule List Rules Spec Ja4 TLS Fingerprint
-
-<a id="rule-list-rules-spec-jwt-claims"></a>
-
-### Rule List Rules Spec JWT Claims
-
-<a id="rule-list-rules-spec-label-matcher"></a>
-
-### Rule List Rules Spec Label Matcher
-
-<a id="rule-list-rules-spec-mum-action"></a>
-
-### Rule List Rules Spec Mum Action
-
-<a id="rule-list-rules-spec-path"></a>
-
-### Rule List Rules Spec Path
-
-<a id="rule-list-rules-spec-port-matcher"></a>
-
-### Rule List Rules Spec Port Matcher
-
-<a id="rule-list-rules-spec-query-params"></a>
-
-### Rule List Rules Spec Query Params
-
-<a id="rule-list-rules-spec-request-constraints"></a>
-
-### Rule List Rules Spec Request Constraints
-
-<a id="rule-list-rules-spec-segment-policy"></a>
-
-### Rule List Rules Spec Segment Policy
-
-<a id="rule-list-rules-spec-tls-fingerprint-matcher"></a>
-
-### Rule List Rules Spec TLS Fingerprint Matcher
-
-<a id="rule-list-rules-spec-user-identity-matcher"></a>
-
-### Rule List Rules Spec User Identity Matcher
-
-<a id="rule-list-rules-spec-waf-action"></a>
-
-### Rule List Rules Spec WAF Action
+`waf_action` - (Optional) App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings (`Block`).
 
 <a id="server-name-matcher"></a>
 

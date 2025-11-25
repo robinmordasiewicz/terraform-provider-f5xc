@@ -90,17 +90,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Type
 
-`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#type-control-and-data-plane-mesh) below.
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#type-data-plane-mesh) below.
-
-<a id="type-control-and-data-plane-mesh"></a>
-
-### Type Control And Data Plane Mesh
-
-<a id="type-data-plane-mesh"></a>
-
-### Type Data Plane Mesh
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 ## Import
 

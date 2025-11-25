@@ -68,7 +68,7 @@ resource "f5xc_dns_lb_health_check" "example" {
 
 `https_health_check` - (Optional) HTTP Health Check. See [HTTPS Health Check](#https-health-check) below for details.
 
-`icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [ICMP Health Check](#icmp-health-check) below for details.
+`icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tcp_health_check` - (Optional) TCP Health Check. See [TCP Health Check](#tcp-health-check) below for details.
 
@@ -109,10 +109,6 @@ In addition to all arguments above, the following attributes are exported:
 `receive` - (Optional) Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax (`String`).
 
 `send` - (Optional) Send String. HTTP payload to send to the target (`String`).
-
-<a id="icmp-health-check"></a>
-
-### ICMP Health Check
 
 <a id="tcp-health-check"></a>
 

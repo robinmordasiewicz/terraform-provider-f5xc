@@ -90,9 +90,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Forward Proxy Pbr Forward Proxy Pbr Rules
 
-`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [All Destinations](#forward-proxy-pbr-forward-proxy-pbr-rules-all-destinations) below.
+`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sources](#forward-proxy-pbr-forward-proxy-pbr-rules-all-sources) below.
+`all_sources` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `forwarding_class_list` - (Optional) Forwarding Class. Ordered list of forwarding Class to be used if no rule match. See [Forwarding Class List](#forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list) below.
 
@@ -108,14 +108,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tls_list` - (Optional) DomainListType. See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list) below.
 
-<a id="forward-proxy-pbr-forward-proxy-pbr-rules-all-destinations"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules All Destinations
-
-<a id="forward-proxy-pbr-forward-proxy-pbr-rules-all-sources"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules All Sources
-
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list"></a>
 
 ### Forward Proxy Pbr Forward Proxy Pbr Rules Forwarding Class List
@@ -130,11 +122,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [HTTP List](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list) below.
-
-<a id="forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List HTTP List
+`http_list` - (Optional) HTTP URLs. URLs for HTTP connections (`Block`).
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-ip-prefix-set"></a>
 
@@ -170,11 +158,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Forward Proxy Pbr Forward Proxy Pbr Rules TLS List
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list) below.
-
-<a id="forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list"></a>
-
-### Forward Proxy Pbr Forward Proxy Pbr Rules TLS List TLS List
+`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections (`Block`).
 
 <a id="forwarding-class-list"></a>
 
@@ -190,17 +174,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Network Pbr
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#network-pbr-any) below.
+`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Label Selector](#network-pbr-label-selector) below.
 
 `network_pbr_rules` - (Optional) L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule. See [Network Pbr Rules](#network-pbr-network-pbr-rules) below.
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#network-pbr-prefix-list) below.
-
-<a id="network-pbr-any"></a>
-
-### Network Pbr Any
 
 <a id="network-pbr-label-selector"></a>
 
@@ -212,13 +192,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Network Pbr Network Pbr Rules
 
-`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All TCP Traffic](#network-pbr-network-pbr-rules-all-tcp-traffic) below.
+`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Traffic](#network-pbr-network-pbr-rules-all-traffic) below.
+`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All UDP Traffic](#network-pbr-network-pbr-rules-all-udp-traffic) below.
+`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#network-pbr-network-pbr-rules-any) below.
+`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#network-pbr-network-pbr-rules-applications) below.
 
@@ -233,22 +213,6 @@ In addition to all arguments above, the following attributes are exported:
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#network-pbr-network-pbr-rules-prefix-list) below.
 
 `protocol_port_range` - (Optional) Protocol and Port. Protocol and Port ranges. See [Protocol Port Range](#network-pbr-network-pbr-rules-protocol-port-range) below.
-
-<a id="network-pbr-network-pbr-rules-all-tcp-traffic"></a>
-
-### Network Pbr Network Pbr Rules All TCP Traffic
-
-<a id="network-pbr-network-pbr-rules-all-traffic"></a>
-
-### Network Pbr Network Pbr Rules All Traffic
-
-<a id="network-pbr-network-pbr-rules-all-udp-traffic"></a>
-
-### Network Pbr Network Pbr Rules All UDP Traffic
-
-<a id="network-pbr-network-pbr-rules-any"></a>
-
-### Network Pbr Network Pbr Rules Any
 
 <a id="network-pbr-network-pbr-rules-applications"></a>
 
@@ -270,11 +234,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Network Pbr Network Pbr Rules IP Prefix Set
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#network-pbr-network-pbr-rules-ip-prefix-set-ref) below.
-
-<a id="network-pbr-network-pbr-rules-ip-prefix-set-ref"></a>
-
-### Network Pbr Network Pbr Rules IP Prefix Set Ref
+`ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="network-pbr-network-pbr-rules-metadata"></a>
 

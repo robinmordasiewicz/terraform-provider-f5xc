@@ -86,17 +86,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `adv_action` - (Optional) Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction. See [Adv Action](#egress-rules-adv-action) below.
 
-`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All TCP Traffic](#egress-rules-all-tcp-traffic) below.
+`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Traffic](#egress-rules-all-traffic) below.
+`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All UDP Traffic](#egress-rules-all-udp-traffic) below.
+`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#egress-rules-any) below.
+`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#egress-rules-applications) below.
 
-`inside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Endpoints](#egress-rules-inside-endpoints) below.
+`inside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#egress-rules-ip-prefix-set) below.
 
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#egress-rules-metadata) below.
 
-`outside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Endpoints](#egress-rules-outside-endpoints) below.
+`outside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#egress-rules-prefix-list) below.
 
@@ -118,31 +118,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `action` - (Optional) Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG` (`String`).
 
-<a id="egress-rules-all-tcp-traffic"></a>
-
-### Egress Rules All TCP Traffic
-
-<a id="egress-rules-all-traffic"></a>
-
-### Egress Rules All Traffic
-
-<a id="egress-rules-all-udp-traffic"></a>
-
-### Egress Rules All UDP Traffic
-
-<a id="egress-rules-any"></a>
-
-### Egress Rules Any
-
 <a id="egress-rules-applications"></a>
 
 ### Egress Rules Applications
 
 `applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
-
-<a id="egress-rules-inside-endpoints"></a>
-
-### Egress Rules Inside Endpoints
 
 <a id="egress-rules-ip-prefix-set"></a>
 
@@ -184,10 +164,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
-<a id="egress-rules-outside-endpoints"></a>
-
-### Egress Rules Outside Endpoints
-
 <a id="egress-rules-prefix-list"></a>
 
 ### Egress Rules Prefix List
@@ -206,33 +182,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Endpoint
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#endpoint-any) below.
+`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`inside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Endpoints](#endpoint-inside-endpoints) below.
+`inside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Label Selector](#endpoint-label-selector) below.
 
-`outside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Endpoints](#endpoint-outside-endpoints) below.
+`outside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#endpoint-prefix-list) below.
-
-<a id="endpoint-any"></a>
-
-### Endpoint Any
-
-<a id="endpoint-inside-endpoints"></a>
-
-### Endpoint Inside Endpoints
 
 <a id="endpoint-label-selector"></a>
 
 ### Endpoint Label Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
-
-<a id="endpoint-outside-endpoints"></a>
-
-### Endpoint Outside Endpoints
 
 <a id="endpoint-prefix-list"></a>
 
@@ -248,17 +212,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `adv_action` - (Optional) Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction. See [Adv Action](#ingress-rules-adv-action) below.
 
-`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All TCP Traffic](#ingress-rules-all-tcp-traffic) below.
+`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All Traffic](#ingress-rules-all-traffic) below.
+`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed. See [All UDP Traffic](#ingress-rules-all-udp-traffic) below.
+`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed. See [Any](#ingress-rules-any) below.
+`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#ingress-rules-applications) below.
 
-`inside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Endpoints](#ingress-rules-inside-endpoints) below.
+`inside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#ingress-rules-ip-prefix-set) below.
 
@@ -268,7 +232,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#ingress-rules-metadata) below.
 
-`outside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Endpoints](#ingress-rules-outside-endpoints) below.
+`outside_endpoints` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#ingress-rules-prefix-list) below.
 
@@ -280,31 +244,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `action` - (Optional) Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG` (`String`).
 
-<a id="ingress-rules-all-tcp-traffic"></a>
-
-### Ingress Rules All TCP Traffic
-
-<a id="ingress-rules-all-traffic"></a>
-
-### Ingress Rules All Traffic
-
-<a id="ingress-rules-all-udp-traffic"></a>
-
-### Ingress Rules All UDP Traffic
-
-<a id="ingress-rules-any"></a>
-
-### Ingress Rules Any
-
 <a id="ingress-rules-applications"></a>
 
 ### Ingress Rules Applications
 
 `applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
-
-<a id="ingress-rules-inside-endpoints"></a>
-
-### Ingress Rules Inside Endpoints
 
 <a id="ingress-rules-ip-prefix-set"></a>
 
@@ -345,10 +289,6 @@ In addition to all arguments above, the following attributes are exported:
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
-
-<a id="ingress-rules-outside-endpoints"></a>
-
-### Ingress Rules Outside Endpoints
 
 <a id="ingress-rules-prefix-list"></a>
 

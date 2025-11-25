@@ -60,7 +60,7 @@ resource "f5xc_rate_limiter_policy" "example" {
 
 > **Note:** One of the arguments from this list "any_server, server_name, server_name_matcher, server_selector" must be set.
 
-`any_server` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Server](#any-server) below for details.
+`any_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `server_name` - (Optional) Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request (`String`).
 
@@ -79,10 +79,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="any-server"></a>
-
-### Any Server
 
 <a id="rules"></a>
 
@@ -104,19 +100,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules Spec
 
-`any_asn` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Asn](#rules-spec-any-asn) below.
+`any_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`any_country` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Country](#rules-spec-any-country) below.
+`any_country` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`any_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Any IP](#rules-spec-any-ip) below.
+`any_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`apply_rate_limiter` - (Optional) Empty. This can be used for messages where no values are needed. See [Apply Rate Limiter](#rules-spec-apply-rate-limiter) below.
+`apply_rate_limiter` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#rules-spec-asn-list) below.
 
 `asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#rules-spec-asn-matcher) below.
 
-`bypass_rate_limiter` - (Optional) Empty. This can be used for messages where no values are needed. See [Bypass Rate Limiter](#rules-spec-bypass-rate-limiter) below.
+`bypass_rate_limiter` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `country_list` - (Optional) Country Codes List. List of Country Codes to match against. See [Country List](#rules-spec-country-list) below.
 
@@ -134,22 +130,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `path` - (Optional) Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions. See [Path](#rules-spec-path) below.
 
-<a id="rules-spec-any-asn"></a>
-
-### Rules Spec Any Asn
-
-<a id="rules-spec-any-country"></a>
-
-### Rules Spec Any Country
-
-<a id="rules-spec-any-ip"></a>
-
-### Rules Spec Any IP
-
-<a id="rules-spec-apply-rate-limiter"></a>
-
-### Rules Spec Apply Rate Limiter
-
 <a id="rules-spec-asn-list"></a>
 
 ### Rules Spec Asn List
@@ -160,15 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules Spec Asn Matcher
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
-
-<a id="rules-spec-asn-matcher-asn-sets"></a>
-
-### Rules Spec Asn Matcher Asn Sets
-
-<a id="rules-spec-bypass-rate-limiter"></a>
-
-### Rules Spec Bypass Rate Limiter
+`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects (`Block`).
 
 <a id="rules-spec-country-list"></a>
 
@@ -200,27 +172,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules Spec Headers
 
-`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Not Present](#rules-spec-headers-check-not-present) below.
+`check_not_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`check_present` - (Optional) Empty. This can be used for messages where no values are needed. See [Check Present](#rules-spec-headers-check-present) below.
+`check_present` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `invert_matcher` - (Optional) Invert Header Matcher. Invert the match result (`Bool`).
 
-`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions. See [Item](#rules-spec-headers-item) below.
+`item` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
 
 `name` - (Optional) Header Name. A case-insensitive HTTP header name (`String`).
-
-<a id="rules-spec-headers-check-not-present"></a>
-
-### Rules Spec Headers Check Not Present
-
-<a id="rules-spec-headers-check-present"></a>
-
-### Rules Spec Headers Check Present
-
-<a id="rules-spec-headers-item"></a>
-
-### Rules Spec Headers Item
 
 <a id="rules-spec-http-method"></a>
 
@@ -236,11 +196,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#rules-spec-ip-matcher-prefix-sets) below.
-
-<a id="rules-spec-ip-matcher-prefix-sets"></a>
-
-### Rules Spec IP Matcher Prefix Sets
+`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="rules-spec-ip-prefix-list"></a>
 

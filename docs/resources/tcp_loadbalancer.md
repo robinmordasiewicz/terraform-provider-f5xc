@@ -75,9 +75,9 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 `active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
 
-`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed. See [No Service Policies](#no-service-policies) below for details.
+`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed. See [Service Policies From Namespace](#service-policies-from-namespace) below for details.
+`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise" must be set.
 
@@ -85,37 +85,37 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 `advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
 
-`advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Advertise On Public Default VIP](#advertise-on-public-default-vip) below for details.
+`advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Advertise](#do-not-advertise) below for details.
+`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "default_lb_with_sni, no_sni, sni" must be set.
 
-`default_lb_with_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Default LB With Sni](#default-lb-with-sni) below for details.
+`default_lb_with_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [No Sni](#no-sni) below for details.
+`no_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Sni](#sni) below for details.
+`sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by Volterra. This requires the domain to be delegated to F5XC using the Delegated Domain feature (`Bool`).
 
 > **Note:** One of the arguments from this list "do_not_retract_cluster, retract_cluster" must be set.
 
-`do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Do Not Retract Cluster](#do-not-retract-cluster) below for details.
+`do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Retract Cluster](#retract-cluster) below for details.
+`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A (`List`).
 
 > **Note:** One of the arguments from this list "hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness" must be set.
 
-`hash_policy_choice_least_active` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Least Active](#hash-policy-choice-least-active) below for details.
+`hash_policy_choice_least_active` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`hash_policy_choice_random` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Random](#hash-policy-choice-random) below for details.
+`hash_policy_choice_random` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`hash_policy_choice_round_robin` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Round Robin](#hash-policy-choice-round-robin) below for details.
+`hash_policy_choice_round_robin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`hash_policy_choice_source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed. See [Hash Policy Choice Source IP Stickiness](#hash-policy-choice-source-ip-stickiness) below for details.
+`hash_policy_choice_source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `idle_timeout` - (Optional) Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds (`Number`).
 
@@ -129,7 +129,7 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "tcp, tls_tcp, tls_tcp_auto_cert" must be set.
 
-`tcp` - (Optional) Empty. This can be used for messages where no values are needed. See [TCP](#tcp) below for details.
+`tcp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_tcp` - (Optional) BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates. See [TLS TCP](#tls-tcp) below for details.
 
@@ -179,7 +179,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `site` - (Optional) Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised. See [Site](#advertise-custom-advertise-where-site) below.
 
-`use_default_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Default Port](#advertise-custom-advertise-where-use-default-port) below.
+`use_default_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `virtual_network` - (Optional) Virtual Network. Parameters to advertise on a given virtual network. See [Virtual Network](#advertise-custom-advertise-where-virtual-network) below.
 
@@ -193,11 +193,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Advertise Custom Advertise Where Advertise On Public
 
-`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Public IP](#advertise-custom-advertise-where-advertise-on-public-public-ip) below.
-
-<a id="advertise-custom-advertise-where-advertise-on-public-public-ip"></a>
-
-### Advertise Custom Advertise Where Advertise On Public Public IP
+`public_ip` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="advertise-custom-advertise-where-site"></a>
 
@@ -207,41 +203,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#advertise-custom-advertise-where-site-site) below.
-
-<a id="advertise-custom-advertise-where-site-site"></a>
-
-### Advertise Custom Advertise Where Site Site
-
-<a id="advertise-custom-advertise-where-use-default-port"></a>
-
-### Advertise Custom Advertise Where Use Default Port
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="advertise-custom-advertise-where-virtual-network"></a>
 
 ### Advertise Custom Advertise Where Virtual Network
 
-`default_v6_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default V6 VIP](#advertise-custom-advertise-where-virtual-network-default-v6-vip) below.
+`default_v6_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Default VIP](#advertise-custom-advertise-where-virtual-network-default-vip) below.
+`default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `specific_v6_vip` - (Optional) Specific V6 VIP. Use given IPv6 address as VIP on virtual Network (`String`).
 
 `specific_vip` - (Optional) Specific V4 VIP. Use given IPv4 address as VIP on virtual Network (`String`).
 
-`virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Network](#advertise-custom-advertise-where-virtual-network-virtual-network) below.
-
-<a id="advertise-custom-advertise-where-virtual-network-default-v6-vip"></a>
-
-### Advertise Custom Advertise Where Virtual Network Default V6 VIP
-
-<a id="advertise-custom-advertise-where-virtual-network-default-vip"></a>
-
-### Advertise Custom Advertise Where Virtual Network Default VIP
-
-<a id="advertise-custom-advertise-where-virtual-network-virtual-network"></a>
-
-### Advertise Custom Advertise Where Virtual Network Virtual Network
+`virtual_network` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="advertise-custom-advertise-where-virtual-site"></a>
 
@@ -249,11 +225,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE` (`String`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-virtual-site-virtual-site) below.
-
-<a id="advertise-custom-advertise-where-virtual-site-virtual-site"></a>
-
-### Advertise Custom Advertise Where Virtual Site Virtual Site
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="advertise-custom-advertise-where-virtual-site-with-vip"></a>
 
@@ -263,27 +235,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `network` - (Optional) Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks. Possible values are `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`, `SITE_NETWORK_SPECIFIED_VIP_INSIDE`. Defaults to `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE` (`String`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-virtual-site-with-vip-virtual-site) below.
-
-<a id="advertise-custom-advertise-where-virtual-site-with-vip-virtual-site"></a>
-
-### Advertise Custom Advertise Where Virtual Site With VIP Virtual Site
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="advertise-custom-advertise-where-vk8s-service"></a>
 
 ### Advertise Custom Advertise Where Vk8s Service
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#advertise-custom-advertise-where-vk8s-service-site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#advertise-custom-advertise-where-vk8s-service-virtual-site) below.
-
-<a id="advertise-custom-advertise-where-vk8s-service-site"></a>
-
-### Advertise Custom Advertise Where Vk8s Service Site
-
-<a id="advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
-
-### Advertise Custom Advertise Where Vk8s Service Virtual Site
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="advertise-on-public"></a>
 
@@ -301,53 +261,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="advertise-on-public-default-vip"></a>
-
-### Advertise On Public Default VIP
-
-<a id="default-lb-with-sni"></a>
-
-### Default LB With Sni
-
-<a id="do-not-advertise"></a>
-
-### Do Not Advertise
-
-<a id="do-not-retract-cluster"></a>
-
-### Do Not Retract Cluster
-
-<a id="hash-policy-choice-least-active"></a>
-
-### Hash Policy Choice Least Active
-
-<a id="hash-policy-choice-random"></a>
-
-### Hash Policy Choice Random
-
-<a id="hash-policy-choice-round-robin"></a>
-
-### Hash Policy Choice Round Robin
-
-<a id="hash-policy-choice-source-ip-stickiness"></a>
-
-### Hash Policy Choice Source IP Stickiness
-
-<a id="no-service-policies"></a>
-
-### No Service Policies
-
-<a id="no-sni"></a>
-
-### No Sni
-
 <a id="origin-pools-weights"></a>
 
 ### Origin Pools Weights
 
 `cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cluster](#origin-pools-weights-cluster) below.
 
-`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured. See [Endpoint Subsets](#origin-pools-weights-endpoint-subsets) below.
+`endpoint_subsets` - (Optional) Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured (`Block`).
 
 `pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#origin-pools-weights-pool) below.
 
@@ -365,10 +285,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="origin-pools-weights-endpoint-subsets"></a>
-
-### Origin Pools Weights Endpoint Subsets
-
 <a id="origin-pools-weights-pool"></a>
 
 ### Origin Pools Weights Pool
@@ -378,22 +294,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="retract-cluster"></a>
-
-### Retract Cluster
-
-<a id="service-policies-from-namespace"></a>
-
-### Service Policies From Namespace
-
-<a id="sni"></a>
-
-### Sni
-
-<a id="tcp"></a>
-
-### TCP
 
 <a id="timeouts"></a>
 
@@ -421,7 +321,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificates` - (Optional) Certificates. Select one or more certificates with any domain names. See [Certificates](#tls-tcp-tls-cert-params-certificates) below.
 
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No mTLS](#tls-tcp-tls-cert-params-no-mtls) below.
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#tls-tcp-tls-cert-params-tls-config) below.
 
@@ -437,37 +337,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="tls-tcp-tls-cert-params-no-mtls"></a>
-
-### TLS TCP TLS Cert Params No mTLS
-
 <a id="tls-tcp-tls-cert-params-tls-config"></a>
 
 ### TLS TCP TLS Cert Params TLS Config
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#tls-tcp-tls-cert-params-tls-config-custom-security) below.
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#tls-tcp-tls-cert-params-tls-config-default-security) below.
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#tls-tcp-tls-cert-params-tls-config-low-security) below.
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#tls-tcp-tls-cert-params-tls-config-medium-security) below.
-
-<a id="tls-tcp-tls-cert-params-tls-config-custom-security"></a>
-
-### TLS TCP TLS Cert Params TLS Config Custom Security
-
-<a id="tls-tcp-tls-cert-params-tls-config-default-security"></a>
-
-### TLS TCP TLS Cert Params TLS Config Default Security
-
-<a id="tls-tcp-tls-cert-params-tls-config-low-security"></a>
-
-### TLS TCP TLS Cert Params TLS Config Low Security
-
-<a id="tls-tcp-tls-cert-params-tls-config-medium-security"></a>
-
-### TLS TCP TLS Cert Params TLS Config Medium Security
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tls-tcp-tls-cert-params-use-mtls"></a>
 
@@ -475,43 +355,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#tls-tcp-tls-cert-params-use-mtls-crl) below.
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No CRL](#tls-tcp-tls-cert-params-use-mtls-no-crl) below.
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#tls-tcp-tls-cert-params-use-mtls-trusted-ca) below.
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#tls-tcp-tls-cert-params-use-mtls-xfcc-disabled) below.
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#tls-tcp-tls-cert-params-use-mtls-xfcc-options) below.
-
-<a id="tls-tcp-tls-cert-params-use-mtls-crl"></a>
-
-### TLS TCP TLS Cert Params Use mTLS CRL
-
-<a id="tls-tcp-tls-cert-params-use-mtls-no-crl"></a>
-
-### TLS TCP TLS Cert Params Use mTLS No CRL
-
-<a id="tls-tcp-tls-cert-params-use-mtls-trusted-ca"></a>
-
-### TLS TCP TLS Cert Params Use mTLS Trusted CA
-
-<a id="tls-tcp-tls-cert-params-use-mtls-xfcc-disabled"></a>
-
-### TLS TCP TLS Cert Params Use mTLS Xfcc Disabled
-
-<a id="tls-tcp-tls-cert-params-use-mtls-xfcc-options"></a>
-
-### TLS TCP TLS Cert Params Use mTLS Xfcc Options
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
 
 <a id="tls-tcp-tls-parameters"></a>
 
 ### TLS TCP TLS Parameters
 
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No mTLS](#tls-tcp-tls-parameters-no-mtls) below.
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_certificates` - (Optional) TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms. See [TLS Certificates](#tls-tcp-tls-parameters-tls-certificates) below.
 
@@ -519,69 +379,33 @@ In addition to all arguments above, the following attributes are exported:
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#tls-tcp-tls-parameters-use-mtls) below.
 
-<a id="tls-tcp-tls-parameters-no-mtls"></a>
-
-### TLS TCP TLS Parameters No mTLS
-
 <a id="tls-tcp-tls-parameters-tls-certificates"></a>
 
 ### TLS TCP TLS Parameters TLS Certificates
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#tls-tcp-tls-parameters-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#tls-tcp-tls-parameters-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#tls-tcp-tls-parameters-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#tls-tcp-tls-parameters-tls-certificates-use-system-defaults) below.
-
-<a id="tls-tcp-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
-
-### TLS TCP TLS Parameters TLS Certificates Custom Hash Algorithms
-
-<a id="tls-tcp-tls-parameters-tls-certificates-disable-ocsp-stapling"></a>
-
-### TLS TCP TLS Parameters TLS Certificates Disable OCSP Stapling
-
-<a id="tls-tcp-tls-parameters-tls-certificates-private-key"></a>
-
-### TLS TCP TLS Parameters TLS Certificates Private Key
-
-<a id="tls-tcp-tls-parameters-tls-certificates-use-system-defaults"></a>
-
-### TLS TCP TLS Parameters TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tls-tcp-tls-parameters-tls-config"></a>
 
 ### TLS TCP TLS Parameters TLS Config
 
-`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#tls-tcp-tls-parameters-tls-config-custom-security) below.
+`custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers (`Block`).
 
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#tls-tcp-tls-parameters-tls-config-default-security) below.
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#tls-tcp-tls-parameters-tls-config-low-security) below.
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#tls-tcp-tls-parameters-tls-config-medium-security) below.
-
-<a id="tls-tcp-tls-parameters-tls-config-custom-security"></a>
-
-### TLS TCP TLS Parameters TLS Config Custom Security
-
-<a id="tls-tcp-tls-parameters-tls-config-default-security"></a>
-
-### TLS TCP TLS Parameters TLS Config Default Security
-
-<a id="tls-tcp-tls-parameters-tls-config-low-security"></a>
-
-### TLS TCP TLS Parameters TLS Config Low Security
-
-<a id="tls-tcp-tls-parameters-tls-config-medium-security"></a>
-
-### TLS TCP TLS Parameters TLS Config Medium Security
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tls-tcp-tls-parameters-use-mtls"></a>
 
@@ -589,51 +413,27 @@ In addition to all arguments above, the following attributes are exported:
 
 `client_certificate_optional` - (Optional) Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted (`Bool`).
 
-`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#tls-tcp-tls-parameters-use-mtls-crl) below.
+`crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No CRL](#tls-tcp-tls-parameters-use-mtls-no-crl) below.
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#tls-tcp-tls-parameters-use-mtls-trusted-ca) below.
+`trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#tls-tcp-tls-parameters-use-mtls-xfcc-disabled) below.
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#tls-tcp-tls-parameters-use-mtls-xfcc-options) below.
-
-<a id="tls-tcp-tls-parameters-use-mtls-crl"></a>
-
-### TLS TCP TLS Parameters Use mTLS CRL
-
-<a id="tls-tcp-tls-parameters-use-mtls-no-crl"></a>
-
-### TLS TCP TLS Parameters Use mTLS No CRL
-
-<a id="tls-tcp-tls-parameters-use-mtls-trusted-ca"></a>
-
-### TLS TCP TLS Parameters Use mTLS Trusted CA
-
-<a id="tls-tcp-tls-parameters-use-mtls-xfcc-disabled"></a>
-
-### TLS TCP TLS Parameters Use mTLS Xfcc Disabled
-
-<a id="tls-tcp-tls-parameters-use-mtls-xfcc-options"></a>
-
-### TLS TCP TLS Parameters Use mTLS Xfcc Options
+`xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests (`Block`).
 
 <a id="tls-tcp-auto-cert"></a>
 
 ### TLS TCP Auto Cert
 
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No mTLS](#tls-tcp-auto-cert-no-mtls) below.
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#tls-tcp-auto-cert-tls-config) below.
 
 `use_mtls` - (Optional) Clients TLS validation context. Validation context for downstream client TLS connections. See [Use mTLS](#tls-tcp-auto-cert-use-mtls) below.
-
-<a id="tls-tcp-auto-cert-no-mtls"></a>
-
-### TLS TCP Auto Cert No mTLS
 
 <a id="tls-tcp-auto-cert-tls-config"></a>
 
@@ -641,11 +441,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#tls-tcp-auto-cert-tls-config-custom-security) below.
 
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#tls-tcp-auto-cert-tls-config-default-security) below.
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#tls-tcp-auto-cert-tls-config-low-security) below.
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#tls-tcp-auto-cert-tls-config-medium-security) below.
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tls-tcp-auto-cert-tls-config-custom-security"></a>
 
@@ -657,18 +457,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
-<a id="tls-tcp-auto-cert-tls-config-default-security"></a>
-
-### TLS TCP Auto Cert TLS Config Default Security
-
-<a id="tls-tcp-auto-cert-tls-config-low-security"></a>
-
-### TLS TCP Auto Cert TLS Config Low Security
-
-<a id="tls-tcp-auto-cert-tls-config-medium-security"></a>
-
-### TLS TCP Auto Cert TLS Config Medium Security
-
 <a id="tls-tcp-auto-cert-use-mtls"></a>
 
 ### TLS TCP Auto Cert Use mTLS
@@ -677,13 +465,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `crl` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CRL](#tls-tcp-auto-cert-use-mtls-crl) below.
 
-`no_crl` - (Optional) Empty. This can be used for messages where no values are needed. See [No CRL](#tls-tcp-auto-cert-use-mtls-no-crl) below.
+`no_crl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `trusted_ca` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Trusted CA](#tls-tcp-auto-cert-use-mtls-trusted-ca) below.
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer (`String`).
 
-`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Xfcc Disabled](#tls-tcp-auto-cert-use-mtls-xfcc-disabled) below.
+`xfcc_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `xfcc_options` - (Optional) XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. See [Xfcc Options](#tls-tcp-auto-cert-use-mtls-xfcc-options) below.
 
@@ -697,10 +485,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="tls-tcp-auto-cert-use-mtls-no-crl"></a>
-
-### TLS TCP Auto Cert Use mTLS No CRL
-
 <a id="tls-tcp-auto-cert-use-mtls-trusted-ca"></a>
 
 ### TLS TCP Auto Cert Use mTLS Trusted CA
@@ -710,10 +494,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="tls-tcp-auto-cert-use-mtls-xfcc-disabled"></a>
-
-### TLS TCP Auto Cert Use mTLS Xfcc Disabled
 
 <a id="tls-tcp-auto-cert-use-mtls-xfcc-options"></a>
 

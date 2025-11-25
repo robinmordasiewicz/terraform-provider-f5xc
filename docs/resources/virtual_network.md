@@ -62,13 +62,13 @@ resource "f5xc_virtual_network" "example" {
 
 > **Note:** One of the arguments from this list "global_network, legacy_type, site_local_inside_network, site_local_network" must be set.
 
-`global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Global Network](#global-network) below for details.
+`global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `legacy_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside Network](#site-local-inside-network) below for details.
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#site-local-network) below for details.
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_routes` - (Optional) Static Routes. List of static routes on the virtual network. See [Static Routes](#static-routes) below for details.
 
@@ -82,35 +82,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="global-network"></a>
-
-### Global Network
-
-<a id="site-local-inside-network"></a>
-
-### Site Local Inside Network
-
-<a id="site-local-network"></a>
-
-### Site Local Network
-
 <a id="static-routes"></a>
 
 ### Static Routes
 
 `attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability (`List`).
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#static-routes-default-gateway) below.
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
 
 `ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
 
 `node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#static-routes-node-interface) below.
-
-<a id="static-routes-default-gateway"></a>
-
-### Static Routes Default Gateway
 
 <a id="static-routes-node-interface"></a>
 
@@ -122,13 +106,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Static Routes Node Interface List
 
-`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#static-routes-node-interface-list-interface) below.
+`interface` - (Optional) Interface. Interface reference on this node (`Block`).
 
 `node` - (Optional) Node. Node name on this site (`String`).
-
-<a id="static-routes-node-interface-list-interface"></a>
-
-### Static Routes Node Interface List Interface
 
 <a id="timeouts"></a>
 

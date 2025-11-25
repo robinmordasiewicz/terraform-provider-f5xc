@@ -91,29 +91,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn` - (Optional) ASN. Autonomous System Number (`Number`).
 
-`from_site` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site](#bgp-parameters-from-site) below.
+`from_site` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_address` - (Optional) IP Address. Use the configured IPv4 Address as Router ID (`String`).
 
-`local_address` - (Optional) Empty. This can be used for messages where no values are needed. See [Local Address](#bgp-parameters-local-address) below.
-
-<a id="bgp-parameters-from-site"></a>
-
-### BGP Parameters From Site
-
-<a id="bgp-parameters-local-address"></a>
-
-### BGP Parameters Local Address
+`local_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="peers"></a>
 
 ### Peers
 
-`bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Bfd Disabled](#peers-bfd-disabled) below.
+`bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `bfd_enabled` - (Optional) BFD. BFD parameters. See [Bfd Enabled](#peers-bfd-enabled) below.
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#peers-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `external` - (Optional) External BGP Peer. External BGP Peer parameters. See [External](#peers-external) below.
 
@@ -121,15 +113,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#peers-metadata) below.
 
-`passive_mode_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Disabled](#peers-passive-mode-disabled) below.
+`passive_mode_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`passive_mode_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Passive Mode Enabled](#peers-passive-mode-enabled) below.
+`passive_mode_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `routing_policies` - (Optional) BGP Routing Policy. List of rules which can be applied on all or particular nodes. See [Routing Policies](#peers-routing-policies) below.
-
-<a id="peers-bfd-disabled"></a>
-
-### Peers Bfd Disabled
 
 <a id="peers-bfd-enabled"></a>
 
@@ -141,10 +129,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `transmit_interval_milliseconds` - (Optional) Transmit Interval. BFD transmit interval timer, in milliseconds (`Number`).
 
-<a id="peers-disable"></a>
-
-### Peers Disable
-
 <a id="peers-external"></a>
 
 ### Peers External
@@ -155,21 +139,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `asn` - (Optional) ASN. Autonomous System Number for BGP peer (`Number`).
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway](#peers-external-default-gateway) below.
+`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_gateway_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Gateway V6](#peers-external-default-gateway-v6) below.
+`default_gateway_v6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#peers-external-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable V6](#peers-external-disable-v6) below.
+`disable_v6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`external_connector` - (Optional) Empty. This can be used for messages where no values are needed. See [External Connector](#peers-external-external-connector) below.
+`external_connector` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `family_inet` - (Optional) BGP Family Inet. Parameters for inet family. See [Family Inet](#peers-external-family-inet) below.
 
-`from_site` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site](#peers-external-from-site) below.
+`from_site` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`from_site_v6` - (Optional) Empty. This can be used for messages where no values are needed. See [From Site V6](#peers-external-from-site-v6) below.
+`from_site_v6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `interface` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Interface](#peers-external-interface) below.
 
@@ -177,7 +161,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `md5_auth_key` - (Optional) MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385) (`String`).
 
-`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authentication](#peers-external-no-authentication) below.
+`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `port` - (Optional) Peer Port. Peer TCP port number (`Number`).
 
@@ -189,49 +173,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `subnet_end_offset_v6` - (Optional) Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet (`Number`).
 
-<a id="peers-external-default-gateway"></a>
-
-### Peers External Default Gateway
-
-<a id="peers-external-default-gateway-v6"></a>
-
-### Peers External Default Gateway V6
-
-<a id="peers-external-disable"></a>
-
-### Peers External Disable
-
-<a id="peers-external-disable-v6"></a>
-
-### Peers External Disable V6
-
-<a id="peers-external-external-connector"></a>
-
-### Peers External External Connector
-
 <a id="peers-external-family-inet"></a>
 
 ### Peers External Family Inet
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#peers-external-family-inet-disable) below.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#peers-external-family-inet-enable) below.
-
-<a id="peers-external-family-inet-disable"></a>
-
-### Peers External Family Inet Disable
-
-<a id="peers-external-family-inet-enable"></a>
-
-### Peers External Family Inet Enable
-
-<a id="peers-external-from-site"></a>
-
-### Peers External From Site
-
-<a id="peers-external-from-site-v6"></a>
-
-### Peers External From Site V6
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="peers-external-interface"></a>
 
@@ -247,15 +195,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Peers External Interface List
 
-`interfaces` - (Optional) Interface List. List of network interfaces. See [Interfaces](#peers-external-interface-list-interfaces) below.
-
-<a id="peers-external-interface-list-interfaces"></a>
-
-### Peers External Interface List Interfaces
-
-<a id="peers-external-no-authentication"></a>
-
-### Peers External No Authentication
+`interfaces` - (Optional) Interface List. List of network interfaces (`Block`).
 
 <a id="peers-metadata"></a>
 
@@ -264,14 +204,6 @@ In addition to all arguments above, the following attributes are exported:
 `description` - (Optional) Description. Human readable description (`String`).
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
-
-<a id="peers-passive-mode-disabled"></a>
-
-### Peers Passive Mode Disabled
-
-<a id="peers-passive-mode-enabled"></a>
-
-### Peers Passive Mode Enabled
 
 <a id="peers-routing-policies"></a>
 
@@ -283,35 +215,15 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Peers Routing Policies Route Policy
 
-`all_nodes` - (Optional) Empty. This can be used for messages where no values are needed. See [All Nodes](#peers-routing-policies-route-policy-all-nodes) below.
+`all_nodes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`inbound` - (Optional) Empty. This can be used for messages where no values are needed. See [Inbound](#peers-routing-policies-route-policy-inbound) below.
+`inbound` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`node_name` - (Optional) Nodes. List of nodes on which BGP routing policy has to be applied. See [Node Name](#peers-routing-policies-route-policy-node-name) below.
+`node_name` - (Optional) Nodes. List of nodes on which BGP routing policy has to be applied (`Block`).
 
-`object_refs` - (Optional) BGP routing policy. Select route policy to apply. See [Object Refs](#peers-routing-policies-route-policy-object-refs) below.
+`object_refs` - (Optional) BGP routing policy. Select route policy to apply (`Block`).
 
-`outbound` - (Optional) Empty. This can be used for messages where no values are needed. See [Outbound](#peers-routing-policies-route-policy-outbound) below.
-
-<a id="peers-routing-policies-route-policy-all-nodes"></a>
-
-### Peers Routing Policies Route Policy All Nodes
-
-<a id="peers-routing-policies-route-policy-inbound"></a>
-
-### Peers Routing Policies Route Policy Inbound
-
-<a id="peers-routing-policies-route-policy-node-name"></a>
-
-### Peers Routing Policies Route Policy Node Name
-
-<a id="peers-routing-policies-route-policy-object-refs"></a>
-
-### Peers Routing Policies Route Policy Object Refs
-
-<a id="peers-routing-policies-route-policy-outbound"></a>
-
-### Peers Routing Policies Route Policy Outbound
+`outbound` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="timeouts"></a>
 
@@ -337,21 +249,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A site direct reference. See [Ref](#where-site-ref) below.
-
-<a id="where-site-disable-internet-vip"></a>
-
-### Where Site Disable Internet VIP
-
-<a id="where-site-enable-internet-vip"></a>
-
-### Where Site Enable Internet VIP
 
 <a id="where-site-ref"></a>
 
@@ -371,21 +275,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Virtual Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-virtual-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-virtual-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#where-virtual-site-ref) below.
-
-<a id="where-virtual-site-disable-internet-vip"></a>
-
-### Where Virtual Site Disable Internet VIP
-
-<a id="where-virtual-site-enable-internet-vip"></a>
-
-### Where Virtual Site Enable Internet VIP
 
 <a id="where-virtual-site-ref"></a>
 

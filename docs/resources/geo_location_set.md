@@ -55,7 +55,7 @@ resource "f5xc_geo_location_set" "example" {
 
 `custom_geo_location_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings ar. See [Custom Geo Location Selector](#custom-geo-location-selector) below for details.
 
-`global` - (Optional) Empty. This can be used for messages where no values are needed. See [Global](#global) below for details.
+`global` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -72,10 +72,6 @@ In addition to all arguments above, the following attributes are exported:
 ### Custom Geo Location Selector
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
-
-<a id="global"></a>
-
-### Global
 
 <a id="timeouts"></a>
 

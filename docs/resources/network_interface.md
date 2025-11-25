@@ -88,49 +88,29 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Dedicated Interface
 
-`cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Cluster](#dedicated-interface-cluster) below.
+`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `device` - (Optional) Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE (`String`).
 
-`is_primary` - (Optional) Empty. This can be used for messages where no values are needed. See [Is Primary](#dedicated-interface-is-primary) below.
+`is_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface. See [Monitor](#dedicated-interface-monitor) below.
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
 
-`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Monitor Disabled](#dedicated-interface-monitor-disabled) below.
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
 
 `node` - (Optional) Specific Node. Configuration will apply to a device on the given node of the site (`String`).
 
-`not_primary` - (Optional) Empty. This can be used for messages where no values are needed. See [Not Primary](#dedicated-interface-not-primary) below.
+`not_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
-
-<a id="dedicated-interface-cluster"></a>
-
-### Dedicated Interface Cluster
-
-<a id="dedicated-interface-is-primary"></a>
-
-### Dedicated Interface Is Primary
-
-<a id="dedicated-interface-monitor"></a>
-
-### Dedicated Interface Monitor
-
-<a id="dedicated-interface-monitor-disabled"></a>
-
-### Dedicated Interface Monitor Disabled
-
-<a id="dedicated-interface-not-primary"></a>
-
-### Dedicated Interface Not Primary
 
 <a id="dedicated-management-interface"></a>
 
 ### Dedicated Management Interface
 
-`cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Cluster](#dedicated-management-interface-cluster) below.
+`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `device` - (Optional) Interface Device. Name of the device for which interface is configured (`String`).
 
@@ -138,83 +118,63 @@ In addition to all arguments above, the following attributes are exported:
 
 `node` - (Optional) Specific Node. Configuration will apply to a device on the given node of the site (`String`).
 
-<a id="dedicated-management-interface-cluster"></a>
-
-### Dedicated Management Interface Cluster
-
 <a id="ethernet-interface"></a>
 
 ### Ethernet Interface
 
-`cluster` - (Optional) Empty. This can be used for messages where no values are needed. See [Cluster](#ethernet-interface-cluster) below.
+`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `device` - (Optional) Ethernet Device. Interface configuration for the ethernet device (`String`).
 
-`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed. See [DHCP Client](#ethernet-interface-dhcp-client) below.
+`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dhcp_server` - (Optional) DHCPServerParametersType. See [DHCP Server](#ethernet-interface-dhcp-server) below.
 
 `ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#ethernet-interface-ipv6-auto-config) below.
 
-`is_primary` - (Optional) Empty. This can be used for messages where no values are needed. See [Is Primary](#ethernet-interface-is-primary) below.
+`is_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface. See [Monitor](#ethernet-interface-monitor) below.
+`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
 
-`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Monitor Disabled](#ethernet-interface-monitor-disabled) below.
+`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
 
-`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed. See [No IPv6 Address](#ethernet-interface-no-ipv6-address) below.
+`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `node` - (Optional) Specific Node. Configuration will apply to a device on the given node (`String`).
 
-`not_primary` - (Optional) Empty. This can be used for messages where no values are needed. See [Not Primary](#ethernet-interface-not-primary) below.
+`not_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
 
-`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside Network](#ethernet-interface-site-local-inside-network) below.
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#ethernet-interface-site-local-network) below.
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_ip` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IP](#ethernet-interface-static-ip) below.
 
 `static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#ethernet-interface-static-ipv6-address) below.
 
-`storage_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Storage Network](#ethernet-interface-storage-network) below.
+`storage_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`untagged` - (Optional) Empty. This can be used for messages where no values are needed. See [Untagged](#ethernet-interface-untagged) below.
+`untagged` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `vlan_id` - (Optional) VLAN Id. Configure a VLAN tagged ethernet interface (`Number`).
-
-<a id="ethernet-interface-cluster"></a>
-
-### Ethernet Interface Cluster
-
-<a id="ethernet-interface-dhcp-client"></a>
-
-### Ethernet Interface DHCP Client
 
 <a id="ethernet-interface-dhcp-server"></a>
 
 ### Ethernet Interface DHCP Server
 
-`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic From End](#ethernet-interface-dhcp-server-automatic-from-end) below.
+`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic From Start](#ethernet-interface-dhcp-server-automatic-from-start) below.
+`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dhcp_networks` - (Optional) DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses. See [DHCP Networks](#ethernet-interface-dhcp-server-dhcp-networks) below.
 
-`fixed_ip_map` - (Optional) Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client. See [Fixed IP Map](#ethernet-interface-dhcp-server-fixed-ip-map) below.
+`fixed_ip_map` - (Optional) Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client (`Block`).
 
 `interface_ip_map` - (Optional) Interface IPv4 Assignments. Specify static IPv4 addresses per node. See [Interface IP Map](#ethernet-interface-dhcp-server-interface-ip-map) below.
-
-<a id="ethernet-interface-dhcp-server-automatic-from-end"></a>
-
-### Ethernet Interface DHCP Server Automatic From End
-
-<a id="ethernet-interface-dhcp-server-automatic-from-start"></a>
-
-### Ethernet Interface DHCP Server Automatic From Start
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks"></a>
 
@@ -224,105 +184,41 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns_address` - (Optional) Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server (`String`).
 
-`first_address` - (Optional) Empty. This can be used for messages where no values are needed. See [First Address](#ethernet-interface-dhcp-server-dhcp-networks-first-address) below.
+`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`last_address` - (Optional) Empty. This can be used for messages where no values are needed. See [Last Address](#ethernet-interface-dhcp-server-dhcp-networks-last-address) below.
+`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_prefix` - (Optional) Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24 (`String`).
 
 `pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
 
-`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#ethernet-interface-dhcp-server-dhcp-networks-pools) below.
+`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges (`Block`).
 
-`same_as_dgw` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Dgw](#ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw) below.
-
-<a id="ethernet-interface-dhcp-server-dhcp-networks-first-address"></a>
-
-### Ethernet Interface DHCP Server DHCP Networks First Address
-
-<a id="ethernet-interface-dhcp-server-dhcp-networks-last-address"></a>
-
-### Ethernet Interface DHCP Server DHCP Networks Last Address
-
-<a id="ethernet-interface-dhcp-server-dhcp-networks-pools"></a>
-
-### Ethernet Interface DHCP Server DHCP Networks Pools
-
-<a id="ethernet-interface-dhcp-server-dhcp-networks-same-as-dgw"></a>
-
-### Ethernet Interface DHCP Server DHCP Networks Same As Dgw
-
-<a id="ethernet-interface-dhcp-server-fixed-ip-map"></a>
-
-### Ethernet Interface DHCP Server Fixed IP Map
+`same_as_dgw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="ethernet-interface-dhcp-server-interface-ip-map"></a>
 
 ### Ethernet Interface DHCP Server Interface IP Map
 
-`interface_ip_map` - (Optional) Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node. See [Interface IP Map](#ethernet-interface-dhcp-server-interface-ip-map-interface-ip-map) below.
-
-<a id="ethernet-interface-dhcp-server-interface-ip-map-interface-ip-map"></a>
-
-### Ethernet Interface DHCP Server Interface IP Map Interface IP Map
+`interface_ip_map` - (Optional) Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node (`Block`).
 
 <a id="ethernet-interface-ipv6-auto-config"></a>
 
 ### Ethernet Interface IPv6 Auto Config
 
-`host` - (Optional) Empty. This can be used for messages where no values are needed. See [Host](#ethernet-interface-ipv6-auto-config-host) below.
+`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `router` - (Optional) IPV6AutoConfigRouterType. See [Router](#ethernet-interface-ipv6-auto-config-router) below.
-
-<a id="ethernet-interface-ipv6-auto-config-host"></a>
-
-### Ethernet Interface IPv6 Auto Config Host
 
 <a id="ethernet-interface-ipv6-auto-config-router"></a>
 
 ### Ethernet Interface IPv6 Auto Config Router
 
-`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#ethernet-interface-ipv6-auto-config-router-dns-config) below.
+`dns_config` - (Optional) IPV6DnsConfig (`Block`).
 
 `network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
 
-`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#ethernet-interface-ipv6-auto-config-router-stateful) below.
-
-<a id="ethernet-interface-ipv6-auto-config-router-dns-config"></a>
-
-### Ethernet Interface IPv6 Auto Config Router DNS Config
-
-<a id="ethernet-interface-ipv6-auto-config-router-stateful"></a>
-
-### Ethernet Interface IPv6 Auto Config Router Stateful
-
-<a id="ethernet-interface-is-primary"></a>
-
-### Ethernet Interface Is Primary
-
-<a id="ethernet-interface-monitor"></a>
-
-### Ethernet Interface Monitor
-
-<a id="ethernet-interface-monitor-disabled"></a>
-
-### Ethernet Interface Monitor Disabled
-
-<a id="ethernet-interface-no-ipv6-address"></a>
-
-### Ethernet Interface No IPv6 Address
-
-<a id="ethernet-interface-not-primary"></a>
-
-### Ethernet Interface Not Primary
-
-<a id="ethernet-interface-site-local-inside-network"></a>
-
-### Ethernet Interface Site Local Inside Network
-
-<a id="ethernet-interface-site-local-network"></a>
-
-### Ethernet Interface Site Local Network
+`stateful` - (Optional) DHCPIPV6 Stateful Server (`Block`).
 
 <a id="ethernet-interface-static-ip"></a>
 
@@ -336,11 +232,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ethernet Interface Static IP Cluster Static IP
 
-`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address. See [Interface IP Map](#ethernet-interface-static-ip-cluster-static-ip-interface-ip-map) below.
-
-<a id="ethernet-interface-static-ip-cluster-static-ip-interface-ip-map"></a>
-
-### Ethernet Interface Static IP Cluster Static IP Interface IP Map
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
 
 <a id="ethernet-interface-static-ip-node-static-ip"></a>
 
@@ -362,11 +254,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Ethernet Interface Static IPv6 Address Cluster Static IP
 
-`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address. See [Interface IP Map](#ethernet-interface-static-ipv6-address-cluster-static-ip-interface-ip-map) below.
-
-<a id="ethernet-interface-static-ipv6-address-cluster-static-ip-interface-ip-map"></a>
-
-### Ethernet Interface Static IPv6 Address Cluster Static IP Interface IP Map
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
 
 <a id="ethernet-interface-static-ipv6-address-node-static-ip"></a>
 
@@ -375,14 +263,6 @@ In addition to all arguments above, the following attributes are exported:
 `default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
 
 `ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
-
-<a id="ethernet-interface-storage-network"></a>
-
-### Ethernet Interface Storage Network
-
-<a id="ethernet-interface-untagged"></a>
-
-### Ethernet Interface Untagged
 
 <a id="layer2-interface"></a>
 
@@ -400,13 +280,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `device` - (Optional) Ethernet Device. Physical ethernet interface (`String`).
 
-`untagged` - (Optional) Empty. This can be used for messages where no values are needed. See [Untagged](#layer2-interface-l2sriov-interface-untagged) below.
+`untagged` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `vlan_id` - (Optional) VLAN Id. Configure a VLAN tagged interface (`Number`).
-
-<a id="layer2-interface-l2sriov-interface-untagged"></a>
-
-### Layer2 Interface L2sriov Interface Untagged
 
 <a id="layer2-interface-l2vlan-interface"></a>
 
@@ -444,21 +320,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
 
-`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside Network](#tunnel-interface-site-local-inside-network) below.
+`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Network](#tunnel-interface-site-local-network) below.
+`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_ip` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IP](#tunnel-interface-static-ip) below.
 
 `tunnel` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Tunnel](#tunnel-interface-tunnel) below.
-
-<a id="tunnel-interface-site-local-inside-network"></a>
-
-### Tunnel Interface Site Local Inside Network
-
-<a id="tunnel-interface-site-local-network"></a>
-
-### Tunnel Interface Site Local Network
 
 <a id="tunnel-interface-static-ip"></a>
 
@@ -472,11 +340,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Tunnel Interface Static IP Cluster Static IP
 
-`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address. See [Interface IP Map](#tunnel-interface-static-ip-cluster-static-ip-interface-ip-map) below.
-
-<a id="tunnel-interface-static-ip-cluster-static-ip-interface-ip-map"></a>
-
-### Tunnel Interface Static IP Cluster Static IP Interface IP Map
+`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
 
 <a id="tunnel-interface-static-ip-node-static-ip"></a>
 

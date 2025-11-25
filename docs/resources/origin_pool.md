@@ -74,9 +74,9 @@ resource "f5xc_origin_pool" "example" {
 
 > **Note:** One of the arguments from this list "automatic_port, lb_port, port" must be set.
 
-`automatic_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Automatic Port](#automatic-port) below for details.
+`automatic_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`lb_port` - (Optional) Empty. This can be used for messages where no values are needed. See [LB Port](#lb-port) below for details.
+`lb_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `port` - (Optional) Port. Endpoint service is available on this port (`Number`).
 
@@ -86,7 +86,7 @@ resource "f5xc_origin_pool" "example" {
 
 `health_check_port` - (Optional) Health check port. Port used for performing health check (`Number`).
 
-`same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed. See [Same As Endpoint Port](#same-as-endpoint-port) below for details.
+`same_as_endpoint_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `healthcheck` - (Optional) Health Check object. Reference to healthcheck configuration objects. See [Healthcheck](#healthcheck) below for details.
 
@@ -94,7 +94,7 @@ resource "f5xc_origin_pool" "example" {
 
 > **Note:** One of the arguments from this list "no_tls, use_tls" must be set.
 
-`no_tls` - (Optional) Empty. This can be used for messages where no values are needed. See [No TLS](#no-tls) below for details.
+`no_tls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `use_tls` - (Optional) TLS Parameters for Origin Servers. Upstream TLS Parameters. See [Use TLS](#use-tls) below for details.
 
@@ -116,25 +116,25 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Advanced Options
 
-`auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto HTTP Config](#advanced-options-auto-http-config) below.
+`auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly. See [Circuit Breaker](#advanced-options-circuit-breaker) below.
 
 `connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds (`Number`).
 
-`default_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Circuit Breaker](#advanced-options-default-circuit-breaker) below.
+`default_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Circuit Breaker](#advanced-options-disable-circuit-breaker) below.
+`disable_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_lb_source_ip_persistance` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable LB Source IP Persistance](#advanced-options-disable-lb-source-ip-persistance) below.
+`disable_lb_source_ip_persistance` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_outlier_detection` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Outlier Detection](#advanced-options-disable-outlier-detection) below.
+`disable_outlier_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Proxy Protocol](#advanced-options-disable-proxy-protocol) below.
+`disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_subsets` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Subsets](#advanced-options-disable-subsets) below.
+`disable_subsets` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_lb_source_ip_persistance` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable LB Source IP Persistance](#advanced-options-enable-lb-source-ip-persistance) below.
+`enable_lb_source_ip_persistance` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_subsets` - (Optional) Origin Pool Subset Options. Configure subset options for origin pool. See [Enable Subsets](#advanced-options-enable-subsets) below.
 
@@ -144,19 +144,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `http_idle_timeout` - (Optional) HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes (`Number`).
 
-`no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed. See [No Panic Threshold](#advanced-options-no-panic-threshold) below.
+`no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host i. See [Outlier Detection](#advanced-options-outlier-detection) below.
 
 `panic_threshold` - (Optional) Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status (`Number`).
 
-`proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V1](#advanced-options-proxy-protocol-v1) below.
+`proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed. See [Proxy Protocol V2](#advanced-options-proxy-protocol-v2) below.
-
-<a id="advanced-options-auto-http-config"></a>
-
-### Advanced Options Auto HTTP Config
+`proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="advanced-options-circuit-breaker"></a>
 
@@ -172,69 +168,29 @@ In addition to all arguments above, the following attributes are exported:
 
 `retries` - (Optional) Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count (`Number`).
 
-<a id="advanced-options-default-circuit-breaker"></a>
-
-### Advanced Options Default Circuit Breaker
-
-<a id="advanced-options-disable-circuit-breaker"></a>
-
-### Advanced Options Disable Circuit Breaker
-
-<a id="advanced-options-disable-lb-source-ip-persistance"></a>
-
-### Advanced Options Disable LB Source IP Persistance
-
-<a id="advanced-options-disable-outlier-detection"></a>
-
-### Advanced Options Disable Outlier Detection
-
-<a id="advanced-options-disable-proxy-protocol"></a>
-
-### Advanced Options Disable Proxy Protocol
-
-<a id="advanced-options-disable-subsets"></a>
-
-### Advanced Options Disable Subsets
-
-<a id="advanced-options-enable-lb-source-ip-persistance"></a>
-
-### Advanced Options Enable LB Source IP Persistance
-
 <a id="advanced-options-enable-subsets"></a>
 
 ### Advanced Options Enable Subsets
 
-`any_endpoint` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Endpoint](#advanced-options-enable-subsets-any-endpoint) below.
+`any_endpoint` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `default_subset` - (Optional) Origin Pool Default Subset. Default Subset definition. See [Default Subset](#advanced-options-enable-subsets-default-subset) below.
 
 `endpoint_subsets` - (Optional) Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class. See [Endpoint Subsets](#advanced-options-enable-subsets-endpoint-subsets) below.
 
-`fail_request` - (Optional) Empty. This can be used for messages where no values are needed. See [Fail Request](#advanced-options-enable-subsets-fail-request) below.
-
-<a id="advanced-options-enable-subsets-any-endpoint"></a>
-
-### Advanced Options Enable Subsets Any Endpoint
+`fail_request` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="advanced-options-enable-subsets-default-subset"></a>
 
 ### Advanced Options Enable Subsets Default Subset
 
-`default_subset` - (Optional) Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists. See [Default Subset](#advanced-options-enable-subsets-default-subset-default-subset) below.
-
-<a id="advanced-options-enable-subsets-default-subset-default-subset"></a>
-
-### Advanced Options Enable Subsets Default Subset Default Subset
+`default_subset` - (Optional) Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists (`Block`).
 
 <a id="advanced-options-enable-subsets-endpoint-subsets"></a>
 
 ### Advanced Options Enable Subsets Endpoint Subsets
 
 `keys` - (Optional) Keys. List of keys that define a cluster subset class (`List`).
-
-<a id="advanced-options-enable-subsets-fail-request"></a>
-
-### Advanced Options Enable Subsets Fail Request
 
 <a id="advanced-options-http1-config"></a>
 
@@ -246,39 +202,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Advanced Options Http1 Config Header Transformation
 
-`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header Transformation](#advanced-options-http1-config-header-transformation-default-header-transformation) below.
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Legacy Header Transformation](#advanced-options-http1-config-header-transformation-legacy-header-transformation) below.
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Preserve Case Header Transformation](#advanced-options-http1-config-header-transformation-preserve-case-header-transformation) below.
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Proper Case Header Transformation](#advanced-options-http1-config-header-transformation-proper-case-header-transformation) below.
-
-<a id="advanced-options-http1-config-header-transformation-default-header-transformation"></a>
-
-### Advanced Options Http1 Config Header Transformation Default Header Transformation
-
-<a id="advanced-options-http1-config-header-transformation-legacy-header-transformation"></a>
-
-### Advanced Options Http1 Config Header Transformation Legacy Header Transformation
-
-<a id="advanced-options-http1-config-header-transformation-preserve-case-header-transformation"></a>
-
-### Advanced Options Http1 Config Header Transformation Preserve Case Header Transformation
-
-<a id="advanced-options-http1-config-header-transformation-proper-case-header-transformation"></a>
-
-### Advanced Options Http1 Config Header Transformation Proper Case Header Transformation
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="advanced-options-http2-options"></a>
 
 ### Advanced Options Http2 Options
 
 `enabled` - (Optional) HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections (`Bool`).
-
-<a id="advanced-options-no-panic-threshold"></a>
-
-### Advanced Options No Panic Threshold
 
 <a id="advanced-options-outlier-detection"></a>
 
@@ -294,18 +230,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
 
-<a id="advanced-options-proxy-protocol-v1"></a>
-
-### Advanced Options Proxy Protocol V1
-
-<a id="advanced-options-proxy-protocol-v2"></a>
-
-### Advanced Options Proxy Protocol V2
-
-<a id="automatic-port"></a>
-
-### Automatic Port
-
 <a id="healthcheck"></a>
 
 ### Healthcheck
@@ -315,14 +239,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="lb-port"></a>
-
-### LB Port
-
-<a id="no-tls"></a>
-
-### No TLS
 
 <a id="origin-servers"></a>
 
@@ -336,7 +252,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `k8s_service` - (Optional) K8s Service Name on given Sites. Specify origin server with K8s service name and site information. See [K8s Service](#origin-servers-k8s-service) below.
 
-`labels` - (Optional) Origin Server Labels. Add Labels for this origin server, these labels can be used to form subset. See [Labels](#origin-servers-labels) below.
+`labels` - (Optional) Origin Server Labels. Add Labels for this origin server, these labels can be used to form subset (`Block`).
 
 `private_ip` - (Optional) IP address on given Sites. Specify origin server with private or public IP address and site information. See [Private IP](#origin-servers-private-ip) below.
 
@@ -360,9 +276,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Origin Servers Consul Service
 
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#origin-servers-consul-service-inside-network) below.
+`inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#origin-servers-consul-service-outside-network) below.
+`outside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `service_name` - (Optional) Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id (`String`).
 
@@ -370,45 +286,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#origin-servers-consul-service-snat-pool) below.
 
-<a id="origin-servers-consul-service-inside-network"></a>
-
-### Origin Servers Consul Service Inside Network
-
-<a id="origin-servers-consul-service-outside-network"></a>
-
-### Origin Servers Consul Service Outside Network
-
 <a id="origin-servers-consul-service-site-locator"></a>
 
 ### Origin Servers Consul Service Site Locator
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#origin-servers-consul-service-site-locator-site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#origin-servers-consul-service-site-locator-virtual-site) below.
-
-<a id="origin-servers-consul-service-site-locator-site"></a>
-
-### Origin Servers Consul Service Site Locator Site
-
-<a id="origin-servers-consul-service-site-locator-virtual-site"></a>
-
-### Origin Servers Consul Service Site Locator Virtual Site
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="origin-servers-consul-service-snat-pool"></a>
 
 ### Origin Servers Consul Service Snat Pool
 
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#origin-servers-consul-service-snat-pool-no-snat-pool) below.
+`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#origin-servers-consul-service-snat-pool-snat-pool) below.
-
-<a id="origin-servers-consul-service-snat-pool-no-snat-pool"></a>
-
-### Origin Servers Consul Service Snat Pool No Snat Pool
-
-<a id="origin-servers-consul-service-snat-pool-snat-pool"></a>
-
-### Origin Servers Consul Service Snat Pool Snat Pool
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
 
 <a id="origin-servers-custom-endpoint-object"></a>
 
@@ -430,9 +322,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Origin Servers K8s Service
 
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#origin-servers-k8s-service-inside-network) below.
+`inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#origin-servers-k8s-service-outside-network) below.
+`outside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `protocol` - (Optional) Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP` (`String`).
 
@@ -442,79 +334,39 @@ In addition to all arguments above, the following attributes are exported:
 
 `snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#origin-servers-k8s-service-snat-pool) below.
 
-`vk8s_networks` - (Optional) Empty. This can be used for messages where no values are needed. See [Vk8s Networks](#origin-servers-k8s-service-vk8s-networks) below.
-
-<a id="origin-servers-k8s-service-inside-network"></a>
-
-### Origin Servers K8s Service Inside Network
-
-<a id="origin-servers-k8s-service-outside-network"></a>
-
-### Origin Servers K8s Service Outside Network
+`vk8s_networks` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="origin-servers-k8s-service-site-locator"></a>
 
 ### Origin Servers K8s Service Site Locator
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#origin-servers-k8s-service-site-locator-site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#origin-servers-k8s-service-site-locator-virtual-site) below.
-
-<a id="origin-servers-k8s-service-site-locator-site"></a>
-
-### Origin Servers K8s Service Site Locator Site
-
-<a id="origin-servers-k8s-service-site-locator-virtual-site"></a>
-
-### Origin Servers K8s Service Site Locator Virtual Site
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="origin-servers-k8s-service-snat-pool"></a>
 
 ### Origin Servers K8s Service Snat Pool
 
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#origin-servers-k8s-service-snat-pool-no-snat-pool) below.
+`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#origin-servers-k8s-service-snat-pool-snat-pool) below.
-
-<a id="origin-servers-k8s-service-snat-pool-no-snat-pool"></a>
-
-### Origin Servers K8s Service Snat Pool No Snat Pool
-
-<a id="origin-servers-k8s-service-snat-pool-snat-pool"></a>
-
-### Origin Servers K8s Service Snat Pool Snat Pool
-
-<a id="origin-servers-k8s-service-vk8s-networks"></a>
-
-### Origin Servers K8s Service Vk8s Networks
-
-<a id="origin-servers-labels"></a>
-
-### Origin Servers Labels
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
 
 <a id="origin-servers-private-ip"></a>
 
 ### Origin Servers Private IP
 
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#origin-servers-private-ip-inside-network) below.
+`inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip` - (Optional) IP. Private IPv4 address (`String`).
 
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#origin-servers-private-ip-outside-network) below.
+`outside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `segment` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Segment](#origin-servers-private-ip-segment) below.
 
 `site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#origin-servers-private-ip-site-locator) below.
 
 `snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#origin-servers-private-ip-snat-pool) below.
-
-<a id="origin-servers-private-ip-inside-network"></a>
-
-### Origin Servers Private IP Inside Network
-
-<a id="origin-servers-private-ip-outside-network"></a>
-
-### Origin Servers Private IP Outside Network
 
 <a id="origin-servers-private-ip-segment"></a>
 
@@ -530,33 +382,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Origin Servers Private IP Site Locator
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#origin-servers-private-ip-site-locator-site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#origin-servers-private-ip-site-locator-virtual-site) below.
-
-<a id="origin-servers-private-ip-site-locator-site"></a>
-
-### Origin Servers Private IP Site Locator Site
-
-<a id="origin-servers-private-ip-site-locator-virtual-site"></a>
-
-### Origin Servers Private IP Site Locator Virtual Site
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="origin-servers-private-ip-snat-pool"></a>
 
 ### Origin Servers Private IP Snat Pool
 
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#origin-servers-private-ip-snat-pool-no-snat-pool) below.
+`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#origin-servers-private-ip-snat-pool-snat-pool) below.
-
-<a id="origin-servers-private-ip-snat-pool-no-snat-pool"></a>
-
-### Origin Servers Private IP Snat Pool No Snat Pool
-
-<a id="origin-servers-private-ip-snat-pool-snat-pool"></a>
-
-### Origin Servers Private IP Snat Pool Snat Pool
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
 
 <a id="origin-servers-private-name"></a>
 
@@ -564,9 +400,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns_name` - (Optional) DNS Name. DNS Name (`String`).
 
-`inside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Inside Network](#origin-servers-private-name-inside-network) below.
+`inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`outside_network` - (Optional) Empty. This can be used for messages where no values are needed. See [Outside Network](#origin-servers-private-name-outside-network) below.
+`outside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `refresh_interval` - (Optional) DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767` (`Number`).
 
@@ -575,14 +411,6 @@ In addition to all arguments above, the following attributes are exported:
 `site_locator` - (Optional) Site or Virtual Site. This message defines a reference to a site or virtual site object. See [Site Locator](#origin-servers-private-name-site-locator) below.
 
 `snat_pool` - (Optional) Snat Pool. Snat Pool configuration. See [Snat Pool](#origin-servers-private-name-snat-pool) below.
-
-<a id="origin-servers-private-name-inside-network"></a>
-
-### Origin Servers Private Name Inside Network
-
-<a id="origin-servers-private-name-outside-network"></a>
-
-### Origin Servers Private Name Outside Network
 
 <a id="origin-servers-private-name-segment"></a>
 
@@ -598,33 +426,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Origin Servers Private Name Site Locator
 
-`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Site](#origin-servers-private-name-site-locator-site) below.
+`site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
-`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Virtual Site](#origin-servers-private-name-site-locator-virtual-site) below.
-
-<a id="origin-servers-private-name-site-locator-site"></a>
-
-### Origin Servers Private Name Site Locator Site
-
-<a id="origin-servers-private-name-site-locator-virtual-site"></a>
-
-### Origin Servers Private Name Site Locator Virtual Site
+`virtual_site` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="origin-servers-private-name-snat-pool"></a>
 
 ### Origin Servers Private Name Snat Pool
 
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#origin-servers-private-name-snat-pool-no-snat-pool) below.
+`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#origin-servers-private-name-snat-pool-snat-pool) below.
-
-<a id="origin-servers-private-name-snat-pool-no-snat-pool"></a>
-
-### Origin Servers Private Name Snat Pool No Snat Pool
-
-<a id="origin-servers-private-name-snat-pool-snat-pool"></a>
-
-### Origin Servers Private Name Snat Pool Snat Pool
+`snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint (`Block`).
 
 <a id="origin-servers-public-ip"></a>
 
@@ -676,10 +488,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="same-as-endpoint-port"></a>
-
-### Same As Endpoint Port
-
 <a id="timeouts"></a>
 
 ### Timeouts
@@ -696,39 +504,31 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Upstream Conn Pool Reuse Type
 
-`disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Conn Pool Reuse](#upstream-conn-pool-reuse-type-disable-conn-pool-reuse) below.
+`disable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Conn Pool Reuse](#upstream-conn-pool-reuse-type-enable-conn-pool-reuse) below.
-
-<a id="upstream-conn-pool-reuse-type-disable-conn-pool-reuse"></a>
-
-### Upstream Conn Pool Reuse Type Disable Conn Pool Reuse
-
-<a id="upstream-conn-pool-reuse-type-enable-conn-pool-reuse"></a>
-
-### Upstream Conn Pool Reuse Type Enable Conn Pool Reuse
+`enable_conn_pool_reuse` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="use-tls"></a>
 
 ### Use TLS
 
-`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Session Key Caching](#use-tls-default-session-key-caching) below.
+`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Session Key Caching](#use-tls-disable-session-key-caching) below.
+`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#use-tls-disable-sni) below.
+`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
 
-`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed. See [No mTLS](#use-tls-no-mtls) below.
+`no_mtls` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`skip_server_verification` - (Optional) Empty. This can be used for messages where no values are needed. See [Skip Server Verification](#use-tls-skip-server-verification) below.
+`skip_server_verification` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
 `tls_config` - (Optional) TLS Config. This defines various options to configure TLS configuration parameters. See [TLS Config](#use-tls-tls-config) below.
 
-`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#use-tls-use-host-header-as-sni) below.
+`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `use_mtls` - (Optional) mTLS Certificate. mTLS Client Certificate. See [Use mTLS](#use-tls-use-mtls) below.
 
@@ -736,27 +536,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `use_server_verification` - (Optional) TLS Validation Context for Origin Servers. Upstream TLS Validation Context. See [Use Server Verification](#use-tls-use-server-verification) below.
 
-`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed. See [Volterra Trusted CA](#use-tls-volterra-trusted-ca) below.
-
-<a id="use-tls-default-session-key-caching"></a>
-
-### Use TLS Default Session Key Caching
-
-<a id="use-tls-disable-session-key-caching"></a>
-
-### Use TLS Disable Session Key Caching
-
-<a id="use-tls-disable-sni"></a>
-
-### Use TLS Disable Sni
-
-<a id="use-tls-no-mtls"></a>
-
-### Use TLS No mTLS
-
-<a id="use-tls-skip-server-verification"></a>
-
-### Use TLS Skip Server Verification
+`volterra_trusted_ca` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="use-tls-tls-config"></a>
 
@@ -764,11 +544,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `custom_security` - (Optional) Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers. See [Custom Security](#use-tls-tls-config-custom-security) below.
 
-`default_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Security](#use-tls-tls-config-default-security) below.
+`default_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`low_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Low Security](#use-tls-tls-config-low-security) below.
+`low_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`medium_security` - (Optional) Empty. This can be used for messages where no values are needed. See [Medium Security](#use-tls-tls-config-medium-security) below.
+`medium_security` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="use-tls-tls-config-custom-security"></a>
 
@@ -779,22 +559,6 @@ In addition to all arguments above, the following attributes are exported:
 `max_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
 `min_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
-
-<a id="use-tls-tls-config-default-security"></a>
-
-### Use TLS TLS Config Default Security
-
-<a id="use-tls-tls-config-low-security"></a>
-
-### Use TLS TLS Config Low Security
-
-<a id="use-tls-tls-config-medium-security"></a>
-
-### Use TLS TLS Config Medium Security
-
-<a id="use-tls-use-host-header-as-sni"></a>
-
-### Use TLS Use Host Header As Sni
 
 <a id="use-tls-use-mtls"></a>
 
@@ -808,31 +572,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#use-tls-use-mtls-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#use-tls-use-mtls-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#use-tls-use-mtls-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#use-tls-use-mtls-tls-certificates-use-system-defaults) below.
-
-<a id="use-tls-use-mtls-tls-certificates-custom-hash-algorithms"></a>
-
-### Use TLS Use mTLS TLS Certificates Custom Hash Algorithms
-
-<a id="use-tls-use-mtls-tls-certificates-disable-ocsp-stapling"></a>
-
-### Use TLS Use mTLS TLS Certificates Disable OCSP Stapling
-
-<a id="use-tls-use-mtls-tls-certificates-private-key"></a>
-
-### Use TLS Use mTLS TLS Certificates Private Key
-
-<a id="use-tls-use-mtls-tls-certificates-use-system-defaults"></a>
-
-### Use TLS Use mTLS TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="use-tls-use-mtls-obj"></a>
 
@@ -861,10 +609,6 @@ In addition to all arguments above, the following attributes are exported:
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
-
-<a id="use-tls-volterra-trusted-ca"></a>
-
-### Use TLS Volterra Trusted CA
 
 ## Import
 

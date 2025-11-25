@@ -64,17 +64,17 @@ resource "f5xc_infraprotect_deny_list_rule" "example" {
 
 > **Note:** One of the arguments from this list "expiration_never, expiration_timestamp, one_day, one_hour, one_month, one_year" must be set.
 
-`expiration_never` - (Optional) Empty. This can be used for messages where no values are needed. See [Expiration Never](#expiration-never) below for details.
+`expiration_never` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `expiration_timestamp` - (Optional) Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards (`String`).
 
-`one_day` - (Optional) Empty. This can be used for messages where no values are needed. See [One Day](#one-day) below for details.
+`one_day` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`one_hour` - (Optional) Empty. This can be used for messages where no values are needed. See [One Hour](#one-hour) below for details.
+`one_hour` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`one_month` - (Optional) Empty. This can be used for messages where no values are needed. See [One Month](#one-month) below for details.
+`one_month` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`one_year` - (Optional) Empty. This can be used for messages where no values are needed. See [One Year](#one-year) below for details.
+`one_year` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `prefix` - (Optional) Configuration for prefix (`String`).
 
@@ -87,26 +87,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="expiration-never"></a>
-
-### Expiration Never
-
-<a id="one-day"></a>
-
-### One Day
-
-<a id="one-hour"></a>
-
-### One Hour
-
-<a id="one-month"></a>
-
-### One Month
-
-<a id="one-year"></a>
-
-### One Year
 
 <a id="timeouts"></a>
 

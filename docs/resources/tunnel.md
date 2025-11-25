@@ -116,53 +116,29 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Local IP IP Address
 
-`auto` - (Optional) Empty. This can be used for messages where no values are needed. See [Auto](#local-ip-ip-address-auto) below.
+`auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `ip_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [IP Address](#local-ip-ip-address-ip-address) below.
 
 `virtual_network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system. See [Virtual Network Type](#local-ip-ip-address-virtual-network-type) below.
 
-<a id="local-ip-ip-address-auto"></a>
-
-### Local IP IP Address Auto
-
 <a id="local-ip-ip-address-ip-address"></a>
 
 ### Local IP IP Address IP Address
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#local-ip-ip-address-ip-address-ipv4) below.
+`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation (`Block`).
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#local-ip-ip-address-ip-address-ipv6) below.
-
-<a id="local-ip-ip-address-ip-address-ipv4"></a>
-
-### Local IP IP Address IP Address IPv4
-
-<a id="local-ip-ip-address-ip-address-ipv6"></a>
-
-### Local IP IP Address IP Address IPv6
+`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':' (`Block`).
 
 <a id="local-ip-ip-address-virtual-network-type"></a>
 
 ### Local IP IP Address Virtual Network Type
 
-`public` - (Optional) Empty. This can be used for messages where no values are needed. See [Public](#local-ip-ip-address-virtual-network-type-public) below.
+`public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_local` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local](#local-ip-ip-address-virtual-network-type-site-local) below.
+`site_local` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`site_local_inside` - (Optional) Empty. This can be used for messages where no values are needed. See [Site Local Inside](#local-ip-ip-address-virtual-network-type-site-local-inside) below.
-
-<a id="local-ip-ip-address-virtual-network-type-public"></a>
-
-### Local IP IP Address Virtual Network Type Public
-
-<a id="local-ip-ip-address-virtual-network-type-site-local"></a>
-
-### Local IP IP Address Virtual Network Type Site Local
-
-<a id="local-ip-ip-address-virtual-network-type-site-local-inside"></a>
-
-### Local IP IP Address Virtual Network Type Site Local Inside
+`site_local_inside` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="params"></a>
 
@@ -180,17 +156,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Params Ipsec Ipsec Psk
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#params-ipsec-ipsec-psk-clear-secret-info) below.
-
-<a id="params-ipsec-ipsec-psk-blindfold-secret-info"></a>
-
-### Params Ipsec Ipsec Psk Blindfold Secret Info
-
-<a id="params-ipsec-ipsec-psk-clear-secret-info"></a>
-
-### Params Ipsec Ipsec Psk Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="remote-ip"></a>
 
@@ -204,11 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Remote IP Endpoints
 
-`endpoints` - (Optional) Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes. See [Endpoints](#remote-ip-endpoints-endpoints) below.
-
-<a id="remote-ip-endpoints-endpoints"></a>
-
-### Remote IP Endpoints Endpoints
+`endpoints` - (Optional) Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes (`Block`).
 
 <a id="remote-ip-ip"></a>
 

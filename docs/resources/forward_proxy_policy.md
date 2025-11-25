@@ -72,7 +72,7 @@ resource "f5xc_forward_proxy_policy" "example" {
 
 > **Note:** One of the arguments from this list "allow_all, allow_list, deny_list, rule_list" must be set.
 
-`allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Allow All](#allow-all) below for details.
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `allow_list` - (Optional) Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP). See [Allow List](#allow-list) below for details.
 
@@ -82,9 +82,9 @@ resource "f5xc_forward_proxy_policy" "example" {
 
 > **Note:** One of the arguments from this list "any_proxy, drp_http_connect, network_connector, proxy_label_selector" must be set.
 
-`any_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Proxy](#any-proxy) below for details.
+`any_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`drp_http_connect` - (Optional) Empty. This can be used for messages where no values are needed. See [Drp HTTP Connect](#drp-http-connect) below for details.
+`drp_http_connect` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_connector` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Network Connector](#network-connector) below for details.
 
@@ -100,37 +100,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="allow-all"></a>
-
-### Allow All
-
 <a id="allow-list"></a>
 
 ### Allow List
 
-`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Allow](#allow-list-default-action-allow) below.
+`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Deny](#allow-list-default-action-deny) below.
+`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#allow-list-default-action-next-policy) below.
+`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dest_list` - (Optional) L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI. See [Dest List](#allow-list-dest-list) below.
 
 `http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [HTTP List](#allow-list-http-list) below.
 
 `tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [TLS List](#allow-list-tls-list) below.
-
-<a id="allow-list-default-action-allow"></a>
-
-### Allow List Default Action Allow
-
-<a id="allow-list-default-action-deny"></a>
-
-### Allow List Default Action Deny
-
-<a id="allow-list-default-action-next-policy"></a>
-
-### Allow List Default Action Next Policy
 
 <a id="allow-list-dest-list"></a>
 
@@ -146,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Allow List HTTP List
 
-`any_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Path](#allow-list-http-list-any-path) below.
+`any_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `exact_value` - (Optional) Exact Values. Exact domain name (`String`).
 
@@ -160,10 +144,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `suffix_value` - (Optional) Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' (`String`).
 
-<a id="allow-list-http-list-any-path"></a>
-
-### Allow List HTTP List Any Path
-
 <a id="allow-list-tls-list"></a>
 
 ### Allow List TLS List
@@ -174,37 +154,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
 
-<a id="any-proxy"></a>
-
-### Any Proxy
-
 <a id="deny-list"></a>
 
 ### Deny List
 
-`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Allow](#deny-list-default-action-allow) below.
+`default_action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Deny](#deny-list-default-action-deny) below.
+`default_action_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Action Next Policy](#deny-list-default-action-next-policy) below.
+`default_action_next_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dest_list` - (Optional) L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI. See [Dest List](#deny-list-dest-list) below.
 
 `http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [HTTP List](#deny-list-http-list) below.
 
 `tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [TLS List](#deny-list-tls-list) below.
-
-<a id="deny-list-default-action-allow"></a>
-
-### Deny List Default Action Allow
-
-<a id="deny-list-default-action-deny"></a>
-
-### Deny List Default Action Deny
-
-<a id="deny-list-default-action-next-policy"></a>
-
-### Deny List Default Action Next Policy
 
 <a id="deny-list-dest-list"></a>
 
@@ -220,7 +184,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Deny List HTTP List
 
-`any_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Any Path](#deny-list-http-list-any-path) below.
+`any_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `exact_value` - (Optional) Exact Values. Exact domain name (`String`).
 
@@ -234,10 +198,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `suffix_value` - (Optional) Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' (`String`).
 
-<a id="deny-list-http-list-any-path"></a>
-
-### Deny List HTTP List Any Path
-
 <a id="deny-list-tls-list"></a>
 
 ### Deny List TLS List
@@ -247,10 +207,6 @@ In addition to all arguments above, the following attributes are exported:
 `regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
 
 `suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
-
-<a id="drp-http-connect"></a>
-
-### Drp HTTP Connect
 
 <a id="network-connector"></a>
 
@@ -280,9 +236,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `action` - (Optional) Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY D... Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY` (`String`).
 
-`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed. See [All Destinations](#rule-list-rules-all-destinations) below.
+`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`all_sources` - (Optional) Empty. This can be used for messages where no values are needed. See [All Sources](#rule-list-rules-all-sources) below.
+`all_sources` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dst_asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Dst Asn List](#rule-list-rules-dst-asn-list) below.
 
@@ -302,7 +258,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#rule-list-rules-metadata) below.
 
-`no_http_connect_port` - (Optional) Empty. This can be used for messages where no values are needed. See [No HTTP Connect Port](#rule-list-rules-no-http-connect-port) below.
+`no_http_connect_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `port_matcher` - (Optional) Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true. See [Port Matcher](#rule-list-rules-port-matcher) below.
 
@@ -311,14 +267,6 @@ In addition to all arguments above, the following attributes are exported:
 `tls_list` - (Optional) DomainListType. See [TLS List](#rule-list-rules-tls-list) below.
 
 `url_category_list` - (Optional) URL Category List Type. List of URL categories. See [URL Category List](#rule-list-rules-url-category-list) below.
-
-<a id="rule-list-rules-all-destinations"></a>
-
-### Rule List Rules All Destinations
-
-<a id="rule-list-rules-all-sources"></a>
-
-### Rule List Rules All Sources
 
 <a id="rule-list-rules-dst-asn-list"></a>
 
@@ -362,11 +310,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rule List Rules HTTP List
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [HTTP List](#rule-list-rules-http-list-http-list) below.
-
-<a id="rule-list-rules-http-list-http-list"></a>
-
-### Rule List Rules HTTP List HTTP List
+`http_list` - (Optional) HTTP URLs. URLs for HTTP connections (`Block`).
 
 <a id="rule-list-rules-ip-prefix-set"></a>
 
@@ -392,10 +336,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
 
-<a id="rule-list-rules-no-http-connect-port"></a>
-
-### Rule List Rules No HTTP Connect Port
-
 <a id="rule-list-rules-port-matcher"></a>
 
 ### Rule List Rules Port Matcher
@@ -414,11 +354,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rule List Rules TLS List
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [TLS List](#rule-list-rules-tls-list-tls-list) below.
-
-<a id="rule-list-rules-tls-list-tls-list"></a>
-
-### Rule List Rules TLS List TLS List
+`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections (`Block`).
 
 <a id="rule-list-rules-url-category-list"></a>
 

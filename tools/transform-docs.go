@@ -503,35 +503,94 @@ func convertNestedBlockAnchor(nestedPath string) string {
 	return result
 }
 
-// transformAnchorsOnly handles already-transformed files by just updating anchor IDs and references
-// This preserves all existing content while fixing the anchor format mismatch
+// transformAnchorsOnly handles already-transformed files by:
+// 1. Converting any remaining nestedblock anchor IDs to simplified format
+// 2. Removing empty sections (anchor + header with no content)
+// 3. Removing "See...below" links that point to empty sections
 func transformAnchorsOnly(filePath string, content string) error {
-	// Regex to match nestedblock anchor IDs: <a id="nestedblock--xxx"></a>
-	anchorRegex := regexp.MustCompile(`<a id="nestedblock--([^"]+)"></a>`)
+	lines := strings.Split(content, "\n")
 
-	// Regex to match nestedblock references in links: (#nestedblock--xxx)
-	linkRegex := regexp.MustCompile(`\(#nestedblock--([^)]+)\)`)
+	// First pass: identify which anchors have content
+	anchorsWithContent := make(map[string]bool)
+	allAnchors := make(map[string]bool)
+	anchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
+	attrLineRegex := regexp.MustCompile("^`[^`]+` - \\((Required|Optional)\\)")
+	var currentAnchor string
 
-	// Convert anchor IDs
-	result := anchorRegex.ReplaceAllStringFunc(content, func(match string) string {
-		m := anchorRegex.FindStringSubmatch(match)
-		if m != nil {
-			newAnchor := convertNestedBlockAnchor(m[1])
-			return fmt.Sprintf(`<a id="%s"></a>`, newAnchor)
+	for _, line := range lines {
+		if m := anchorRegex.FindStringSubmatch(line); m != nil {
+			currentAnchor = m[1]
+			allAnchors[currentAnchor] = true
+		} else if currentAnchor != "" && attrLineRegex.MatchString(line) {
+			anchorsWithContent[currentAnchor] = true
 		}
-		return match
-	})
+	}
 
-	// Convert link references
-	result = linkRegex.ReplaceAllStringFunc(result, func(match string) string {
-		m := linkRegex.FindStringSubmatch(match)
-		if m != nil {
-			newAnchor := convertNestedBlockAnchor(m[1])
-			return fmt.Sprintf(`(#%s)`, newAnchor)
+	// Second pass: filter output
+	var output strings.Builder
+	skipUntilNextAnchor := false
+	seeRefRegex := regexp.MustCompile(`\s*See \[([^\]]+)\]\(#([^)]+)\) below[^.]*\.?`)
+
+	for i := 0; i < len(lines); i++ {
+		line := lines[i]
+
+		// Check if this is an anchor line
+		if m := anchorRegex.FindStringSubmatch(line); m != nil {
+			anchorName := m[1]
+
+			// Convert any nestedblock format anchors
+			if strings.HasPrefix(anchorName, "nestedblock--") {
+				anchorName = convertNestedBlockAnchor(strings.TrimPrefix(anchorName, "nestedblock--"))
+				line = fmt.Sprintf(`<a id="%s"></a>`, anchorName)
+			}
+
+			// Skip empty anchors and their headers
+			if !anchorsWithContent[anchorName] {
+				skipUntilNextAnchor = true
+				// Also skip the next line if it's a header
+				if i+1 < len(lines) && strings.HasPrefix(lines[i+1], "###") {
+					i++ // Skip the header line
+				}
+				// Also skip following blank lines
+				for i+1 < len(lines) && strings.TrimSpace(lines[i+1]) == "" {
+					i++
+				}
+				continue
+			}
+
+			skipUntilNextAnchor = false
+			output.WriteString(line)
+			output.WriteString("\n")
+			continue
 		}
-		return match
-	})
 
+		// Skip content of empty blocks
+		if skipUntilNextAnchor {
+			continue
+		}
+
+		// Process attribute lines to remove links to empty anchors
+		if attrLineRegex.MatchString(line) {
+			if m := seeRefRegex.FindStringSubmatch(line); m != nil {
+				anchorRef := m[2]
+				if !anchorsWithContent[anchorRef] {
+					// Remove the "See...below" reference
+					line = seeRefRegex.ReplaceAllString(line, "")
+					line = strings.TrimSpace(line)
+					// Ensure proper ending punctuation
+					if !strings.HasSuffix(line, ".") && !strings.HasSuffix(line, ")") {
+						line = line + "."
+					}
+				}
+			}
+		}
+
+		output.WriteString(line)
+		output.WriteString("\n")
+	}
+
+	// Normalize blank lines and write
+	result := normalizeBlankLines(output.String())
 	return os.WriteFile(filePath, []byte(result), 0644)
 }
 
@@ -551,15 +610,21 @@ func transformDoc(filePath string) error {
 
 	lines := strings.Split(contentStr, "\n")
 
-	// Find key sections and collect all anchor names
+	// Find key sections and collect all anchor names, tracking which have content
 	schemaStart := -1
 	importStart := -1
 	firstNestedAnchor := -1
 	existingAnchors := make(map[string]bool)
+	anchorsWithContent := make(map[string]bool) // NEW: track anchors that have actual attributes
 	// Match both original tfplugindocs format (nestedblock--xxx) and already-transformed format (xxx-yyy)
 	anchorRegexOriginal := regexp.MustCompile(`<a id="nestedblock--([^"]+)"></a>`)
 	anchorRegexSimplified := regexp.MustCompile(`<a id="([a-z0-9-]+)"></a>`)
+	// Attribute line patterns to detect content
+	attrLineRegex := regexp.MustCompile(`^- \x60[^\x60]+\x60 \([^)]+\)`)
+	transformedAttrLineRegex := regexp.MustCompile("^`[^`]+` - \\((Required|Optional)\\)")
 
+	// First pass: identify all anchors and which ones have content
+	var currentAnchorName string
 	for i, line := range lines {
 		// Handle both original tfplugindocs format (## Schema) and already-transformed format (## Argument Reference)
 		if strings.HasPrefix(line, "## Schema") || strings.HasPrefix(line, "## Argument Reference") {
@@ -578,6 +643,7 @@ func transformDoc(filePath string) error {
 				// Store the simplified anchor name that will be generated
 				anchorName := strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(m[1], "_", "-"), "--", "-"))
 				existingAnchors[anchorName] = true
+				currentAnchorName = anchorName
 			}
 		} else if strings.HasPrefix(line, "<a id=\"") && !strings.Contains(line, "nestedblock") {
 			// Check for already-transformed simplified anchor format
@@ -586,7 +652,12 @@ func transformDoc(filePath string) error {
 					firstNestedAnchor = i
 				}
 				existingAnchors[m[1]] = true
+				currentAnchorName = m[1]
 			}
+		}
+		// Check if current line is an attribute line (indicates the current anchor has content)
+		if currentAnchorName != "" && (attrLineRegex.MatchString(line) || transformedAttrLineRegex.MatchString(line)) {
+			anchorsWithContent[currentAnchorName] = true
 		}
 	}
 
@@ -768,8 +839,8 @@ func transformDoc(filePath string) error {
 		desc = strings.TrimSuffix(desc, ".")
 
 		anchorName := toAnchorName(attr.name)
-		// Only generate "See ... below" links if the anchor actually exists in the file
-		if attr.hasNested && existingAnchors[anchorName] {
+		// Only generate "See ... below" links if the anchor has actual content (not empty blocks)
+		if attr.hasNested && anchorsWithContent[anchorName] {
 			if desc != "" {
 				output.WriteString(fmt.Sprintf("`%s` - %s %s. See [%s](#%s) below for details.\n\n",
 					attr.name, attr.reqStr, desc, toTitleCase(attr.name), anchorName))
@@ -815,8 +886,16 @@ func transformDoc(filePath string) error {
 		}
 	}
 
-	// Process nested blocks if present
-	if firstNestedAnchor > 0 {
+	// Process nested blocks if present - only output blocks that have content
+	hasAnyContentBlocks := false
+	for anchor := range anchorsWithContent {
+		if existingAnchors[anchor] {
+			hasAnyContentBlocks = true
+			break
+		}
+	}
+
+	if firstNestedAnchor > 0 && hasAnyContentBlocks {
 		output.WriteString("\n---\n\n")
 
 		nestedEnd := importStart
@@ -827,6 +906,7 @@ func transformDoc(filePath string) error {
 		// Transform each nested block
 		currentBlockName := ""
 		inNestedBlock := false
+		skipCurrentBlock := false // NEW: track whether to skip empty blocks
 
 		// Regex patterns for anchor detection
 		anchorRegexOriginal := regexp.MustCompile(`<a id="nestedblock--([^"]+)"></a>`)
@@ -843,6 +923,15 @@ func transformDoc(filePath string) error {
 					currentBlockName = strings.ReplaceAll(attrPath, "--", ".")
 					// Convert to simplified anchor: underscores and -- become hyphens
 					anchorName := strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(attrPath, "_", "-"), "--", "-"))
+
+					// Skip empty blocks (those without content)
+					if !anchorsWithContent[anchorName] {
+						skipCurrentBlock = true
+						inNestedBlock = false
+						continue
+					}
+
+					skipCurrentBlock = false
 					// Add blank line before anchor for proper markdown formatting
 					output.WriteString(fmt.Sprintf("\n<a id=\"%s\"></a>\n\n", anchorName))
 					inNestedBlock = true
@@ -852,10 +941,24 @@ func transformDoc(filePath string) error {
 				// Already-transformed simplified format: preserve as-is
 				if m := anchorRegexSimplified.FindStringSubmatch(line); m != nil {
 					currentBlockName = strings.ReplaceAll(m[1], "-", ".")
+
+					// Skip empty blocks (those without content)
+					if !anchorsWithContent[m[1]] {
+						skipCurrentBlock = true
+						inNestedBlock = false
+						continue
+					}
+
+					skipCurrentBlock = false
 					// Write anchor as-is (already in simplified format)
 					output.WriteString(fmt.Sprintf("\n<a id=\"%s\"></a>\n\n", m[1]))
 					inNestedBlock = true
 				}
+				continue
+			}
+
+			// Skip everything in empty blocks
+			if skipCurrentBlock {
 				continue
 			}
 
@@ -909,14 +1012,20 @@ func transformDoc(filePath string) error {
 							nestedAnchor = strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(am[1], "_", "-"), "--", "-"))
 						}
 
-						if nestedAnchor != "" && desc != "" {
+						// Only generate "See...below" link if the nested anchor has content
+						if nestedAnchor != "" && anchorsWithContent[nestedAnchor] && desc != "" {
 							output.WriteString(fmt.Sprintf("`%s` - (Optional) %s. See [%s](#%s) below.\n\n",
 								name, desc, toTitleCase(name), nestedAnchor))
-						} else if nestedAnchor != "" {
+						} else if nestedAnchor != "" && anchorsWithContent[nestedAnchor] {
 							output.WriteString(fmt.Sprintf("`%s` - (Optional) See [%s](#%s) below.\n\n",
 								name, toTitleCase(name), nestedAnchor))
 						} else {
-							output.WriteString(fmt.Sprintf("`%s` - (Optional) %s (`%s`).\n\n", name, desc, typeStr))
+							// No nested content - just output the description with type
+							if desc != "" {
+								output.WriteString(fmt.Sprintf("`%s` - (Optional) %s (`%s`).\n\n", name, desc, typeStr))
+							} else {
+								output.WriteString(fmt.Sprintf("`%s` - (Optional) (`%s`).\n\n", name, typeStr))
+							}
 						}
 					} else {
 						if desc != "" {
@@ -931,7 +1040,20 @@ func transformDoc(filePath string) error {
 
 			// Handle already-transformed attribute lines - format: `name` - (Optional) ...
 			if inNestedBlock && strings.HasPrefix(line, "`") && strings.Contains(line, "` - (") {
-				// Already-transformed format: preserve as-is
+				// Already-transformed format: check for and remove links to empty anchors
+				seeRefRegex := regexp.MustCompile(`\s*See \[([^\]]+)\]\(#([^)]+)\) below[^.]*\.?`)
+				if m := seeRefRegex.FindStringSubmatch(line); m != nil {
+					anchorRef := m[2]
+					if !anchorsWithContent[anchorRef] {
+						// Remove the "See...below" reference since anchor has no content
+						line = seeRefRegex.ReplaceAllString(line, "")
+						line = strings.TrimSpace(line)
+						// Ensure line ends with proper format
+						if !strings.HasSuffix(line, ".") && !strings.HasSuffix(line, ")") {
+							line = line + "."
+						}
+					}
+				}
 				output.WriteString(line + "\n\n")
 				continue
 			}

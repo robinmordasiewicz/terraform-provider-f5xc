@@ -118,29 +118,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Rules Key Value Pattern Key Pattern
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
+`exact_values` - (Optional) Exact Values. List of exact values to match (`Block`).
 
 `regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
 `substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
-
-<a id="rules-key-value-pattern-key-pattern-exact-values"></a>
-
-### Rules Key Value Pattern Key Pattern Exact Values
 
 <a id="rules-key-value-pattern-value-pattern"></a>
 
 ### Rules Key Value Pattern Value Pattern
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
+`exact_values` - (Optional) Exact Values. List of exact values to match (`Block`).
 
 `regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
 
 `substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
-
-<a id="rules-key-value-pattern-value-pattern-exact-values"></a>
-
-### Rules Key Value Pattern Value Pattern Exact Values
 
 <a id="rules-value-pattern"></a>
 

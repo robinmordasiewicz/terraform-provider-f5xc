@@ -67,9 +67,9 @@ resource "f5xc_site_mesh_group" "example" {
 
 > **Note:** One of the arguments from this list "disable_re_fallback, enable_re_fallback" must be set.
 
-`disable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable RE Fallback](#disable-re-fallback) below for details.
+`disable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable RE Fallback](#enable-re-fallback) below for details.
+`enable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "full_mesh, hub_mesh, spoke_mesh" must be set.
 
@@ -91,63 +91,31 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="disable-re-fallback"></a>
-
-### Disable RE Fallback
-
-<a id="enable-re-fallback"></a>
-
-### Enable RE Fallback
-
 <a id="full-mesh"></a>
 
 ### Full Mesh
 
-`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#full-mesh-control-and-data-plane-mesh) below.
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#full-mesh-data-plane-mesh) below.
-
-<a id="full-mesh-control-and-data-plane-mesh"></a>
-
-### Full Mesh Control And Data Plane Mesh
-
-<a id="full-mesh-data-plane-mesh"></a>
-
-### Full Mesh Data Plane Mesh
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="hub-mesh"></a>
 
 ### Hub Mesh
 
-`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#hub-mesh-control-and-data-plane-mesh) below.
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#hub-mesh-data-plane-mesh) below.
-
-<a id="hub-mesh-control-and-data-plane-mesh"></a>
-
-### Hub Mesh Control And Data Plane Mesh
-
-<a id="hub-mesh-data-plane-mesh"></a>
-
-### Hub Mesh Data Plane Mesh
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="spoke-mesh"></a>
 
 ### Spoke Mesh
 
-`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Control And Data Plane Mesh](#spoke-mesh-control-and-data-plane-mesh) below.
+`control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed. See [Data Plane Mesh](#spoke-mesh-data-plane-mesh) below.
+`data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `hub_mesh_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Hub Mesh Group](#spoke-mesh-hub-mesh-group) below.
-
-<a id="spoke-mesh-control-and-data-plane-mesh"></a>
-
-### Spoke Mesh Control And Data Plane Mesh
-
-<a id="spoke-mesh-data-plane-mesh"></a>
-
-### Spoke Mesh Data Plane Mesh
 
 <a id="spoke-mesh-hub-mesh-group"></a>
 

@@ -62,9 +62,9 @@ resource "f5xc_infraprotect_asn" "example" {
 
 > **Note:** One of the arguments from this list "bgp_session_disabled, bgp_session_enabled" must be set.
 
-`bgp_session_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [BGP Session Disabled](#bgp-session-disabled) below for details.
+`bgp_session_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`bgp_session_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [BGP Session Enabled](#bgp-session-enabled) below for details.
+`bgp_session_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -75,14 +75,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="bgp-session-disabled"></a>
-
-### BGP Session Disabled
-
-<a id="bgp-session-enabled"></a>
-
-### BGP Session Enabled
 
 <a id="timeouts"></a>
 

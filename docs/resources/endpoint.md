@@ -120,13 +120,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Snat Pool
 
-`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed. See [No Snat Pool](#snat-pool-no-snat-pool) below.
+`no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `snat_pool` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Snat Pool](#snat-pool-snat-pool) below.
-
-<a id="snat-pool-no-snat-pool"></a>
-
-### Snat Pool No Snat Pool
 
 <a id="snat-pool-snat-pool"></a>
 
@@ -160,21 +156,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A site direct reference. See [Ref](#where-site-ref) below.
-
-<a id="where-site-disable-internet-vip"></a>
-
-### Where Site Disable Internet VIP
-
-<a id="where-site-enable-internet-vip"></a>
-
-### Where Site Enable Internet VIP
 
 <a id="where-site-ref"></a>
 
@@ -214,21 +202,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Virtual Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-virtual-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-virtual-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#where-virtual-site-ref) below.
-
-<a id="where-virtual-site-disable-internet-vip"></a>
-
-### Where Virtual Site Disable Internet VIP
-
-<a id="where-virtual-site-enable-internet-vip"></a>
-
-### Where Virtual Site Enable Internet VIP
 
 <a id="where-virtual-site-ref"></a>
 

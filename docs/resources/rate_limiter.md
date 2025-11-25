@@ -75,13 +75,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `burst_multiplier` - (Optional) Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate (`Number`).
 
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#limits-disabled) below.
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`leaky_bucket` - (Optional) Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5. See [Leaky Bucket](#limits-leaky-bucket) below.
+`leaky_bucket` - (Optional) Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5 (`Block`).
 
 `period_multiplier` - (Optional) Periods. This setting, combined with Per Period units, provides a duration (`Number`).
 
-`token_bucket` - (Optional) Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits. See [Token Bucket](#limits-token-bucket) below.
+`token_bucket` - (Optional) Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits (`Block`).
 
 `total_number` - (Optional) Number Of Requests. The total number of allowed requests per rate-limiting period (`Number`).
 
@@ -114,18 +114,6 @@ In addition to all arguments above, the following attributes are exported:
 ### Limits Action Block Seconds
 
 `duration` - (Optional) Duration (`Number`).
-
-<a id="limits-disabled"></a>
-
-### Limits Disabled
-
-<a id="limits-leaky-bucket"></a>
-
-### Limits Leaky Bucket
-
-<a id="limits-token-bucket"></a>
-
-### Limits Token Bucket
 
 <a id="timeouts"></a>
 

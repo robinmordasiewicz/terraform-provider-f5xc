@@ -75,13 +75,13 @@ resource "f5xc_securemesh_site" "example" {
 
 `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
 
-`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Blocked Services](#default-blocked-services) below for details.
+`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "bond_device_list, no_bond_devices" must be set.
 
 `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
 
-`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed. See [No Bond Devices](#no-bond-devices) below for details.
+`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
@@ -89,7 +89,7 @@ resource "f5xc_securemesh_site" "example" {
 
 `custom_network_config` - (Optional) SmsNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
 
-`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Network Config](#default-network-config) below for details.
+`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
@@ -97,7 +97,7 @@ resource "f5xc_securemesh_site" "example" {
 
 `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
 
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Logs Streaming Disabled](#logs-streaming-disabled) below for details.
+`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes. See [Master Node Configuration](#master-node-configuration) below for details.
 
@@ -133,25 +133,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Blocked Services Blocked Sevice
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed. See [DNS](#blocked-services-blocked-sevice-dns) below.
+`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed. See [SSH](#blocked-services-blocked-sevice-ssh) below.
+`ssh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed. See [Web User Interface](#blocked-services-blocked-sevice-web-user-interface) below.
-
-<a id="blocked-services-blocked-sevice-dns"></a>
-
-### Blocked Services Blocked Sevice DNS
-
-<a id="blocked-services-blocked-sevice-ssh"></a>
-
-### Blocked Services Blocked Sevice SSH
-
-<a id="blocked-services-blocked-sevice-web-user-interface"></a>
-
-### Blocked Services Blocked Sevice Web User Interface
+`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="bond-device-list"></a>
 
@@ -163,7 +151,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Bond Device List Bond Devices
 
-`active_backup` - (Optional) Empty. This can be used for messages where no values are needed. See [Active Backup](#bond-device-list-bond-devices-active-backup) below.
+`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
 
@@ -174,10 +162,6 @@ In addition to all arguments above, the following attributes are exported:
 `link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
 
 `name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
-
-<a id="bond-device-list-bond-devices-active-backup"></a>
-
-### Bond Device List Bond Devices Active Backup
 
 <a id="bond-device-list-bond-devices-lacp"></a>
 
@@ -203,31 +187,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#custom-network-config-active-network-policies) below.
 
-`default_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Config](#custom-network-config-default-config) below.
+`default_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_interface_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Interface Config](#custom-network-config-default-interface-config) below.
+`default_interface_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sli Config](#custom-network-config-default-sli-config) below.
+`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed. See [Forward Proxy Allow All](#custom-network-config-forward-proxy-allow-all) below.
+`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#custom-network-config-global-network-list) below.
 
 `interface_list` - (Optional) List of Interface. Configure network interfaces for this Secure Mesh site. See [Interface List](#custom-network-config-interface-list) below.
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Forward Proxy](#custom-network-config-no-forward-proxy) below.
+`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed. See [No Global Network](#custom-network-config-no-global-network) below.
+`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed. See [No Network Policy](#custom-network-config-no-network-policy) below.
+`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `sli_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Sli Config](#custom-network-config-sli-config) below.
 
 `slo_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Slo Config](#custom-network-config-slo-config) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Public IP](#custom-network-config-sm-connection-public-ip) below.
+`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed. See [Sm Connection Pvt IP](#custom-network-config-sm-connection-pvt-ip) below.
+`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `tunnel_dead_timeout` - (Optional) Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used (`Number`).
 
@@ -281,22 +265,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="custom-network-config-default-config"></a>
-
-### Custom Network Config Default Config
-
-<a id="custom-network-config-default-interface-config"></a>
-
-### Custom Network Config Default Interface Config
-
-<a id="custom-network-config-default-sli-config"></a>
-
-### Custom Network Config Default Sli Config
-
-<a id="custom-network-config-forward-proxy-allow-all"></a>
-
-### Custom Network Config Forward Proxy Allow All
-
 <a id="custom-network-config-global-network-list"></a>
 
 ### Custom Network Config Global Network List
@@ -307,17 +275,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Custom Network Config Global Network List Global Network Connections
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
+`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) below.
-
-<a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr"></a>
-
-### Custom Network Config Global Network List Global Network Connections Sli To Global DR
-
-<a id="custom-network-config-global-network-list-global-network-connections-slo-to-global-dr"></a>
-
-### Custom Network Config Global Network List Global Network Connections Slo To Global DR
+`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 <a id="custom-network-config-interface-list"></a>
 
@@ -329,55 +289,19 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Custom Network Config Interface List Interfaces
 
-`dc_cluster_group_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Dc Cluster Group Connectivity Interface Disabled](#custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-disabled) below.
+`dc_cluster_group_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dc_cluster_group_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Dc Cluster Group Connectivity Interface Enabled](#custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-enabled) below.
+`dc_cluster_group_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration. See [Dedicated Interface](#custom-network-config-interface-list-interfaces-dedicated-interface) below.
+`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration (`Block`).
 
-`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration. See [Dedicated Management Interface](#custom-network-config-interface-list-interfaces-dedicated-management-interface) below.
+`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration (`Block`).
 
 `description` - (Optional) Interface Description. Description for this Interface (`String`).
 
-`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Ethernet Interface](#custom-network-config-interface-list-interfaces-ethernet-interface) below.
+`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration (`Block`).
 
-`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy. See [Labels](#custom-network-config-interface-list-interfaces-labels) below.
-
-<a id="custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-disabled"></a>
-
-### Custom Network Config Interface List Interfaces Dc Cluster Group Connectivity Interface Disabled
-
-<a id="custom-network-config-interface-list-interfaces-dc-cluster-group-connectivity-interface-enabled"></a>
-
-### Custom Network Config Interface List Interfaces Dc Cluster Group Connectivity Interface Enabled
-
-<a id="custom-network-config-interface-list-interfaces-dedicated-interface"></a>
-
-### Custom Network Config Interface List Interfaces Dedicated Interface
-
-<a id="custom-network-config-interface-list-interfaces-dedicated-management-interface"></a>
-
-### Custom Network Config Interface List Interfaces Dedicated Management Interface
-
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface"></a>
-
-### Custom Network Config Interface List Interfaces Ethernet Interface
-
-<a id="custom-network-config-interface-list-interfaces-labels"></a>
-
-### Custom Network Config Interface List Interfaces Labels
-
-<a id="custom-network-config-no-forward-proxy"></a>
-
-### Custom Network Config No Forward Proxy
-
-<a id="custom-network-config-no-global-network"></a>
-
-### Custom Network Config No Global Network
-
-<a id="custom-network-config-no-network-policy"></a>
-
-### Custom Network Config No Network Policy
+`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
 
 <a id="custom-network-config-sli-config"></a>
 
@@ -385,15 +309,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#custom-network-config-sli-config-dc-cluster-group) below.
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#custom-network-config-sli-config-labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy (`Block`).
 
 `nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#custom-network-config-sli-config-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#custom-network-config-sli-config-no-static-routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#custom-network-config-sli-config-no-v6-static-routes) below.
+`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#custom-network-config-sli-config-static-routes) below.
 
@@ -411,41 +335,17 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="custom-network-config-sli-config-labels"></a>
-
-### Custom Network Config Sli Config Labels
-
-<a id="custom-network-config-sli-config-no-dc-cluster-group"></a>
-
-### Custom Network Config Sli Config No Dc Cluster Group
-
-<a id="custom-network-config-sli-config-no-static-routes"></a>
-
-### Custom Network Config Sli Config No Static Routes
-
-<a id="custom-network-config-sli-config-no-v6-static-routes"></a>
-
-### Custom Network Config Sli Config No V6 Static Routes
-
 <a id="custom-network-config-sli-config-static-routes"></a>
 
 ### Custom Network Config Sli Config Static Routes
 
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#custom-network-config-sli-config-static-routes-static-routes) below.
-
-<a id="custom-network-config-sli-config-static-routes-static-routes"></a>
-
-### Custom Network Config Sli Config Static Routes Static Routes
+`static_routes` - (Optional) Static Routes. List of static routes (`Block`).
 
 <a id="custom-network-config-sli-config-static-v6-routes"></a>
 
 ### Custom Network Config Sli Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#custom-network-config-sli-config-static-v6-routes-static-routes) below.
-
-<a id="custom-network-config-sli-config-static-v6-routes-static-routes"></a>
-
-### Custom Network Config Sli Config Static V6 Routes Static Routes
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
 
 <a id="custom-network-config-slo-config"></a>
 
@@ -453,15 +353,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#custom-network-config-slo-config-dc-cluster-group) below.
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy. See [Labels](#custom-network-config-slo-config-labels) below.
+`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy (`Block`).
 
 `nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed. See [No Dc Cluster Group](#custom-network-config-slo-config-no-dc-cluster-group) below.
+`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No Static Routes](#custom-network-config-slo-config-no-static-routes) below.
+`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed. See [No V6 Static Routes](#custom-network-config-slo-config-no-v6-static-routes) below.
+`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#custom-network-config-slo-config-static-routes) below.
 
@@ -479,89 +379,37 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="custom-network-config-slo-config-labels"></a>
-
-### Custom Network Config Slo Config Labels
-
-<a id="custom-network-config-slo-config-no-dc-cluster-group"></a>
-
-### Custom Network Config Slo Config No Dc Cluster Group
-
-<a id="custom-network-config-slo-config-no-static-routes"></a>
-
-### Custom Network Config Slo Config No Static Routes
-
-<a id="custom-network-config-slo-config-no-v6-static-routes"></a>
-
-### Custom Network Config Slo Config No V6 Static Routes
-
 <a id="custom-network-config-slo-config-static-routes"></a>
 
 ### Custom Network Config Slo Config Static Routes
 
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#custom-network-config-slo-config-static-routes-static-routes) below.
-
-<a id="custom-network-config-slo-config-static-routes-static-routes"></a>
-
-### Custom Network Config Slo Config Static Routes Static Routes
+`static_routes` - (Optional) Static Routes. List of static routes (`Block`).
 
 <a id="custom-network-config-slo-config-static-v6-routes"></a>
 
 ### Custom Network Config Slo Config Static V6 Routes
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#custom-network-config-slo-config-static-v6-routes-static-routes) below.
-
-<a id="custom-network-config-slo-config-static-v6-routes-static-routes"></a>
-
-### Custom Network Config Slo Config Static V6 Routes Static Routes
-
-<a id="custom-network-config-sm-connection-public-ip"></a>
-
-### Custom Network Config Sm Connection Public IP
-
-<a id="custom-network-config-sm-connection-pvt-ip"></a>
-
-### Custom Network Config Sm Connection Pvt IP
-
-<a id="default-blocked-services"></a>
-
-### Default Blocked Services
-
-<a id="default-network-config"></a>
-
-### Default Network Config
+`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes (`Block`).
 
 <a id="kubernetes-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Upgrade Drain](#kubernetes-upgrade-drain-disable-upgrade-drain) below.
+`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
-
-<a id="kubernetes-upgrade-drain-disable-upgrade-drain"></a>
-
-### Kubernetes Upgrade Drain Disable Upgrade Drain
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 ### Kubernetes Upgrade Drain Enable Upgrade Drain
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode) below.
+`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
 
 `drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Vega Upgrade Mode](#kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode) below.
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-disable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Disable Vega Upgrade Mode
-
-<a id="kubernetes-upgrade-drain-enable-upgrade-drain-enable-vega-upgrade-mode"></a>
-
-### Kubernetes Upgrade Drain Enable Upgrade Drain Enable Vega Upgrade Mode
+`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="log-receiver"></a>
 
@@ -573,10 +421,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
-<a id="logs-streaming-disabled"></a>
-
-### Logs Streaming Disabled
-
 <a id="master-node-configuration"></a>
 
 ### Master Node Configuration
@@ -585,37 +429,21 @@ In addition to all arguments above, the following attributes are exported:
 
 `public_ip` - (Optional) Public IP. IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group (`String`).
 
-<a id="no-bond-devices"></a>
-
-### No Bond Devices
-
 <a id="offline-survivability-mode"></a>
 
 ### Offline Survivability Mode
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Offline Survivability Mode](#offline-survivability-mode-enable-offline-survivability-mode) below.
+`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed. See [No Offline Survivability Mode](#offline-survivability-mode-no-offline-survivability-mode) below.
-
-<a id="offline-survivability-mode-enable-offline-survivability-mode"></a>
-
-### Offline Survivability Mode Enable Offline Survivability Mode
-
-<a id="offline-survivability-mode-no-offline-survivability-mode"></a>
-
-### Offline Survivability Mode No Offline Survivability Mode
+`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="os"></a>
 
 ### OS
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default OS Version](#os-default-os-version) below.
+`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
-
-<a id="os-default-os-version"></a>
-
-### OS Default OS Version
 
 <a id="performance-enhancement-mode"></a>
 
@@ -623,39 +451,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed. See [Perf Mode L7 Enhanced](#performance-enhancement-mode-perf-mode-l7-enhanced) below.
+`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 ### Performance Enhancement Mode Perf Mode L3 Enhanced
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-jumbo) below.
+`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed. See [No Jumbo](#performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo) below.
-
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced Jumbo
-
-<a id="performance-enhancement-mode-perf-mode-l3-enhanced-no-jumbo"></a>
-
-### Performance Enhancement Mode Perf Mode L3 Enhanced No Jumbo
-
-<a id="performance-enhancement-mode-perf-mode-l7-enhanced"></a>
-
-### Performance Enhancement Mode Perf Mode L7 Enhanced
+`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="sw"></a>
 
 ### Sw
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Sw Version](#sw-default-sw-version) below.
+`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
-
-<a id="sw-default-sw-version"></a>
-
-### Sw Default Sw Version
 
 <a id="timeouts"></a>
 

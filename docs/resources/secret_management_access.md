@@ -106,33 +106,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Access Info REST Auth Info Basic Auth
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#access-info-rest-auth-info-basic-auth-password) below.
+`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `username` - (Optional) Username. The username to encode in Basic Auth scheme (`String`).
-
-<a id="access-info-rest-auth-info-basic-auth-password"></a>
-
-### Access Info REST Auth Info Basic Auth Password
 
 <a id="access-info-rest-auth-info-headers-auth"></a>
 
 ### Access Info REST Auth Info Headers Auth
 
-`headers` - (Optional) Headers. The set of authentication headers to pass in HTTP request. See [Headers](#access-info-rest-auth-info-headers-auth-headers) below.
-
-<a id="access-info-rest-auth-info-headers-auth-headers"></a>
-
-### Access Info REST Auth Info Headers Auth Headers
+`headers` - (Optional) Headers. The set of authentication headers to pass in HTTP request (`Block`).
 
 <a id="access-info-rest-auth-info-query-params-auth"></a>
 
 ### Access Info REST Auth Info Query Params Auth
 
-`query_params` - (Optional) Query Parameters. The set of authentication parameters to be passed as query parameters. See [Query Params](#access-info-rest-auth-info-query-params-auth-query-params) below.
-
-<a id="access-info-rest-auth-info-query-params-auth-query-params"></a>
-
-### Access Info REST Auth Info Query Params Auth Query Params
+`query_params` - (Optional) Query Parameters. The set of authentication parameters to be passed as query parameters (`Block`).
 
 <a id="access-info-tls-config"></a>
 
@@ -142,23 +130,23 @@ In addition to all arguments above, the following attributes are exported:
 
 `common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#access-info-tls-config-common-params) below.
 
-`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Session Key Caching](#access-info-tls-config-default-session-key-caching) below.
+`default_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Session Key Caching](#access-info-tls-config-disable-session-key-caching) below.
+`disable_session_key_caching` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Sni](#access-info-tls-config-disable-sni) below.
+`disable_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_session_keys` - (Optional) Max Session Keys Cached. x-example:'25' Number of session keys that are cached (`Number`).
 
 `sni` - (Optional) SNI Value. SNI value to be used (`String`).
 
-`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Host Header As Sni](#access-info-tls-config-use-host-header-as-sni) below.
+`use_host_header_as_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="access-info-tls-config-cert-params"></a>
 
 ### Access Info TLS Config Cert Params
 
-`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication. See [Certificates](#access-info-tls-config-cert-params-certificates) below.
+`certificates` - (Optional) Client Certificate. Client TLS Certificate required for mTLS authentication (`Block`).
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_ (`List`).
 
@@ -166,15 +154,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
-`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#access-info-tls-config-cert-params-validation-params) below.
-
-<a id="access-info-tls-config-cert-params-certificates"></a>
-
-### Access Info TLS Config Cert Params Certificates
-
-<a id="access-info-tls-config-cert-params-validation-params"></a>
-
-### Access Info TLS Config Cert Params Validation Params
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification (`Block`).
 
 <a id="access-info-tls-config-common-params"></a>
 
@@ -186,33 +166,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
-`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates. See [TLS Certificates](#access-info-tls-config-common-params-tls-certificates) below.
+`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates (`Block`).
 
-`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#access-info-tls-config-common-params-validation-params) below.
-
-<a id="access-info-tls-config-common-params-tls-certificates"></a>
-
-### Access Info TLS Config Common Params TLS Certificates
-
-<a id="access-info-tls-config-common-params-validation-params"></a>
-
-### Access Info TLS Config Common Params Validation Params
-
-<a id="access-info-tls-config-default-session-key-caching"></a>
-
-### Access Info TLS Config Default Session Key Caching
-
-<a id="access-info-tls-config-disable-session-key-caching"></a>
-
-### Access Info TLS Config Disable Session Key Caching
-
-<a id="access-info-tls-config-disable-sni"></a>
-
-### Access Info TLS Config Disable Sni
-
-<a id="access-info-tls-config-use-host-header-as-sni"></a>
-
-### Access Info TLS Config Use Host Header As Sni
+`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification (`Block`).
 
 <a id="access-info-vault-auth-info"></a>
 
@@ -228,27 +184,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `role_id` - (Optional) Role ID. role-id to be used for authentication (`String`).
 
-`secret_id` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Id](#access-info-vault-auth-info-app-role-auth-secret-id) below.
-
-<a id="access-info-vault-auth-info-app-role-auth-secret-id"></a>
-
-### Access Info Vault Auth Info App Role Auth Secret Id
+`secret_id` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 <a id="access-info-vault-auth-info-token"></a>
 
 ### Access Info Vault Auth Info Token
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#access-info-vault-auth-info-token-blindfold-secret-info) below.
+`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#access-info-vault-auth-info-token-clear-secret-info) below.
-
-<a id="access-info-vault-auth-info-token-blindfold-secret-info"></a>
-
-### Access Info Vault Auth Info Token Blindfold Secret Info
-
-<a id="access-info-vault-auth-info-token-clear-secret-info"></a>
-
-### Access Info Vault Auth Info Token Clear Secret Info
+`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
 <a id="timeouts"></a>
 
@@ -276,21 +220,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A site direct reference. See [Ref](#where-site-ref) below.
-
-<a id="where-site-disable-internet-vip"></a>
-
-### Where Site Disable Internet VIP
-
-<a id="where-site-enable-internet-vip"></a>
-
-### Where Site Enable Internet VIP
 
 <a id="where-site-ref"></a>
 
@@ -330,21 +266,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Where Virtual Site
 
-`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Internet VIP](#where-virtual-site-disable-internet-vip) below.
+`disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Internet VIP](#where-virtual-site-enable-internet-vip) below.
+`enable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site... Possible values include `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, and others. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
 
 `ref` - (Optional) Reference. A virtual_site direct reference. See [Ref](#where-virtual-site-ref) below.
-
-<a id="where-virtual-site-disable-internet-vip"></a>
-
-### Where Virtual Site Disable Internet VIP
-
-<a id="where-virtual-site-enable-internet-vip"></a>
-
-### Where Virtual Site Enable Internet VIP
 
 <a id="where-virtual-site-ref"></a>
 

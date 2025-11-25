@@ -70,9 +70,9 @@ resource "f5xc_virtual_host" "example" {
 
 `append_server_name` - (Optional) Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed (`String`).
 
-`default_header` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header](#default-header) below for details.
+`default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`pass_through` - (Optional) Empty. This can be used for messages where no values are needed. See [Pass Through](#pass-through) below for details.
+`pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `server_name` - (Optional) Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header (`String`).
 
@@ -80,7 +80,7 @@ resource "f5xc_virtual_host" "example" {
 
 `authentication` - (Optional) Authentication Details. Authentication related information. This allows to configure the URL to redirect after the authentication Authentication Object Reference, configuration of cookie params etc. See [Authentication](#authentication) below for details.
 
-`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed. See [No Authentication](#no-authentication) below for details.
+`no_authentication` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#buffer-policy) below for details.
 
@@ -90,7 +90,7 @@ resource "f5xc_virtual_host" "example" {
 
 `js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set o. See [Js Challenge](#js-challenge) below for details.
 
-`no_challenge` - (Optional) Empty. This can be used for messages where no values are needed. See [No Challenge](#no-challenge) below for details.
+`no_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#coalescing-options) below for details.
 
@@ -102,13 +102,13 @@ resource "f5xc_virtual_host" "example" {
 
 `csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and. See [CSRF Policy](#csrf-policy) below for details.
 
-`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value is the uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64. See [Custom Errors](#custom-errors) below for details.
+`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value is the uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 (`Block`).
 
 > **Note:** One of the arguments from this list "default_loadbalancer, non_default_loadbalancer" must be set.
 
-`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Loadbalancer](#default-loadbalancer) below for details.
+`default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed. See [Non Default Loadbalancer](#non-default-loadbalancer) below for details.
+`non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `disable_default_error_pages` - (Optional) Disable default error pages. An option to specify whether to disable using default F5XC error pages (`Bool`).
 
@@ -116,9 +116,9 @@ resource "f5xc_virtual_host" "example" {
 
 > **Note:** One of the arguments from this list "disable_path_normalize, enable_path_normalize" must be set.
 
-`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Path Normalize](#disable-path-normalize) below for details.
+`disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable Path Normalize](#enable-path-normalize) below for details.
+`enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.co (`List`).
 
@@ -200,11 +200,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `cookie_params` - (Optional) Cookie Parameters. Specifies different cookie related config parameters for authentication. See [Cookie Params](#authentication-cookie-params) below.
 
-`redirect_dynamic` - (Optional) Empty. This can be used for messages where no values are needed. See [Redirect Dynamic](#authentication-redirect-dynamic) below.
+`redirect_dynamic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `redirect_url` - (Optional) Configure Redirect URL. user can provide a URL for e.g `HTTPS://abc.xyz.com` where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider (`String`).
 
-`use_auth_object_config` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Auth Object Config](#authentication-use-auth-object-config) below.
+`use_auth_object_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="authentication-auth-config"></a>
 
@@ -230,7 +230,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `cookie_refresh_interval` - (Optional) Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds (`Number`).
 
-`kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object. See [Kms Key HMAC](#authentication-cookie-params-kms-key-hmac) below.
+`kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object (`Block`).
 
 `session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
 
@@ -238,33 +238,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Authentication Cookie Params Auth HMAC
 
-`prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Prim Key](#authentication-cookie-params-auth-hmac-prim-key) below.
+`prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time (`String`).
 
-`sec_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Sec Key](#authentication-cookie-params-auth-hmac-sec-key) below.
+`sec_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
 `sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time (`String`).
-
-<a id="authentication-cookie-params-auth-hmac-prim-key"></a>
-
-### Authentication Cookie Params Auth HMAC Prim Key
-
-<a id="authentication-cookie-params-auth-hmac-sec-key"></a>
-
-### Authentication Cookie Params Auth HMAC Sec Key
-
-<a id="authentication-cookie-params-kms-key-hmac"></a>
-
-### Authentication Cookie Params Kms Key HMAC
-
-<a id="authentication-redirect-dynamic"></a>
-
-### Authentication Redirect Dynamic
-
-<a id="authentication-use-auth-object-config"></a>
-
-### Authentication Use Auth Object Config
 
 <a id="buffer-policy"></a>
 
@@ -286,17 +266,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Coalescing Options
 
-`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Coalescing](#coalescing-options-default-coalescing) below.
+`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed. See [Strict Coalescing](#coalescing-options-strict-coalescing) below.
-
-<a id="coalescing-options-default-coalescing"></a>
-
-### Coalescing Options Default Coalescing
-
-<a id="coalescing-options-strict-coalescing"></a>
-
-### Coalescing Options Strict Coalescing
+`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="compression-params"></a>
 
@@ -334,41 +306,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ### CSRF Policy
 
-`all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed. See [All Load Balancer Domains](#csrf-policy-all-load-balancer-domains) below.
+`all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `custom_domain_list` - (Optional) Domain name list. List of domain names used for Host header matching. See [Custom Domain List](#csrf-policy-custom-domain-list) below.
 
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed. See [Disabled](#csrf-policy-disabled) below.
-
-<a id="csrf-policy-all-load-balancer-domains"></a>
-
-### CSRF Policy All Load Balancer Domains
+`disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="csrf-policy-custom-domain-list"></a>
 
 ### CSRF Policy Custom Domain List
 
 `domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form (`List`).
-
-<a id="csrf-policy-disabled"></a>
-
-### CSRF Policy Disabled
-
-<a id="custom-errors"></a>
-
-### Custom Errors
-
-<a id="default-header"></a>
-
-### Default Header
-
-<a id="default-loadbalancer"></a>
-
-### Default Loadbalancer
-
-<a id="disable-path-normalize"></a>
-
-### Disable Path Normalize
 
 <a id="dynamic-reverse-proxy"></a>
 
@@ -396,19 +344,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="enable-path-normalize"></a>
-
-### Enable Path Normalize
-
 <a id="http-protocol-options"></a>
 
 ### HTTP Protocol Options
 
 `http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#http-protocol-options-http-protocol-enable-v1-only) below.
 
-`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed. See [HTTP Protocol Enable V1 V2](#http-protocol-options-http-protocol-enable-v1-v2) below.
+`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed. See [HTTP Protocol Enable V2 Only](#http-protocol-options-http-protocol-enable-v2-only) below.
+`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="http-protocol-options-http-protocol-enable-v1-only"></a>
 
@@ -420,37 +364,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Default Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation-default-header-transformation) below.
+`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Legacy Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation-legacy-header-transformation) below.
+`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Preserve Case Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation-preserve-case-header-transformation) below.
+`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed. See [Proper Case Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation-proper-case-header-transformation) below.
-
-<a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation-default-header-transformation"></a>
-
-### HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation Default Header Transformation
-
-<a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation-legacy-header-transformation"></a>
-
-### HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation Legacy Header Transformation
-
-<a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation-preserve-case-header-transformation"></a>
-
-### HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation Preserve Case Header Transformation
-
-<a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation-proper-case-header-transformation"></a>
-
-### HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation Proper Case Header Transformation
-
-<a id="http-protocol-options-http-protocol-enable-v1-v2"></a>
-
-### HTTP Protocol Options HTTP Protocol Enable V1 V2
-
-<a id="http-protocol-options-http-protocol-enable-v2-only"></a>
-
-### HTTP Protocol Options HTTP Protocol Enable V2 Only
+`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="js-challenge"></a>
 
@@ -461,22 +381,6 @@ In addition to all arguments above, the following attributes are exported:
 `custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
 
 `js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
-
-<a id="no-authentication"></a>
-
-### No Authentication
-
-<a id="no-challenge"></a>
-
-### No Challenge
-
-<a id="non-default-loadbalancer"></a>
-
-### Non Default Loadbalancer
-
-<a id="pass-through"></a>
-
-### Pass Through
 
 <a id="rate-limiter-allowed-prefixes"></a>
 
@@ -576,31 +480,31 @@ In addition to all arguments above, the following attributes are exported:
 
 `add_expiry` - (Optional) Configuration for add_expiry (`String`).
 
-`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Httponly](#response-cookies-to-add-add-httponly) below.
+`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Partitioned](#response-cookies-to-add-add-partitioned) below.
+`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `add_path` - (Optional) Configuration for add_path (`String`).
 
-`add_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Add Secure](#response-cookies-to-add-add-secure) below.
+`add_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Domain](#response-cookies-to-add-ignore-domain) below.
+`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Expiry](#response-cookies-to-add-ignore-expiry) below.
+`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Httponly](#response-cookies-to-add-ignore-httponly) below.
+`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Max Age](#response-cookies-to-add-ignore-max-age) below.
+`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Partitioned](#response-cookies-to-add-ignore-partitioned) below.
+`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Path](#response-cookies-to-add-ignore-path) below.
+`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Samesite](#response-cookies-to-add-ignore-samesite) below.
+`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Secure](#response-cookies-to-add-ignore-secure) below.
+`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed. See [Ignore Value](#response-cookies-to-add-ignore-value) below.
+`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
 
@@ -608,75 +512,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
 
-`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Lax](#response-cookies-to-add-samesite-lax) below.
+`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite None](#response-cookies-to-add-samesite-none) below.
+`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed. See [Samesite Strict](#response-cookies-to-add-samesite-strict) below.
+`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#response-cookies-to-add-secret-value) below.
 
 `value` - (Optional) Value. Value of the Cookie header (`String`).
-
-<a id="response-cookies-to-add-add-httponly"></a>
-
-### Response Cookies To Add Add Httponly
-
-<a id="response-cookies-to-add-add-partitioned"></a>
-
-### Response Cookies To Add Add Partitioned
-
-<a id="response-cookies-to-add-add-secure"></a>
-
-### Response Cookies To Add Add Secure
-
-<a id="response-cookies-to-add-ignore-domain"></a>
-
-### Response Cookies To Add Ignore Domain
-
-<a id="response-cookies-to-add-ignore-expiry"></a>
-
-### Response Cookies To Add Ignore Expiry
-
-<a id="response-cookies-to-add-ignore-httponly"></a>
-
-### Response Cookies To Add Ignore Httponly
-
-<a id="response-cookies-to-add-ignore-max-age"></a>
-
-### Response Cookies To Add Ignore Max Age
-
-<a id="response-cookies-to-add-ignore-partitioned"></a>
-
-### Response Cookies To Add Ignore Partitioned
-
-<a id="response-cookies-to-add-ignore-path"></a>
-
-### Response Cookies To Add Ignore Path
-
-<a id="response-cookies-to-add-ignore-samesite"></a>
-
-### Response Cookies To Add Ignore Samesite
-
-<a id="response-cookies-to-add-ignore-secure"></a>
-
-### Response Cookies To Add Ignore Secure
-
-<a id="response-cookies-to-add-ignore-value"></a>
-
-### Response Cookies To Add Ignore Value
-
-<a id="response-cookies-to-add-samesite-lax"></a>
-
-### Response Cookies To Add Samesite Lax
-
-<a id="response-cookies-to-add-samesite-none"></a>
-
-### Response Cookies To Add Samesite None
-
-<a id="response-cookies-to-add-samesite-strict"></a>
-
-### Response Cookies To Add Samesite Strict
 
 <a id="response-cookies-to-add-secret-value"></a>
 
@@ -796,15 +640,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Slow DDOS Mitigation
 
-`disable_request_timeout` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Request Timeout](#slow-ddos-mitigation-disable-request-timeout) below.
+`disable_request_timeout` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds. This setting provides protection against Slowloris attacks (`Number`).
 
 `request_timeout` - (Optional) Custom Timeout (`Number`).
-
-<a id="slow-ddos-mitigation-disable-request-timeout"></a>
-
-### Slow DDOS Mitigation Disable Request Timeout
 
 <a id="timeouts"></a>
 
@@ -826,15 +666,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_ (`List`).
 
-`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Optional](#tls-cert-params-client-certificate-optional) below.
+`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Required](#tls-cert-params-client-certificate-required) below.
+`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `maximum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
 `minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
 
-`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [No Client Certificate](#tls-cert-params-no-client-certificate) below.
+`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#tls-cert-params-validation-params) below.
 
@@ -854,18 +694,6 @@ In addition to all arguments above, the following attributes are exported:
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
-<a id="tls-cert-params-client-certificate-optional"></a>
-
-### TLS Cert Params Client Certificate Optional
-
-<a id="tls-cert-params-client-certificate-required"></a>
-
-### TLS Cert Params Client Certificate Required
-
-<a id="tls-cert-params-no-client-certificate"></a>
-
-### TLS Cert Params No Client Certificate
-
 <a id="tls-cert-params-validation-params"></a>
 
 ### TLS Cert Params Validation Params
@@ -882,33 +710,21 @@ In addition to all arguments above, the following attributes are exported:
 
 ### TLS Cert Params Validation Params Trusted CA
 
-`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA List](#tls-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
-
-<a id="tls-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
-
-### TLS Cert Params Validation Params Trusted CA Trusted CA List
+`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate (`Block`).
 
 <a id="tls-parameters"></a>
 
 ### TLS Parameters
 
-`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Optional](#tls-parameters-client-certificate-optional) below.
+`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed. See [Client Certificate Required](#tls-parameters-client-certificate-required) below.
+`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#tls-parameters-common-params) below.
 
-`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed. See [No Client Certificate](#tls-parameters-no-client-certificate) below.
+`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
-
-<a id="tls-parameters-client-certificate-optional"></a>
-
-### TLS Parameters Client Certificate Optional
-
-<a id="tls-parameters-client-certificate-required"></a>
-
-### TLS Parameters Client Certificate Required
 
 <a id="tls-parameters-common-params"></a>
 
@@ -930,31 +746,15 @@ In addition to all arguments above, the following attributes are exported:
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) below.
+`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used (`Block`).
 
 `description` - (Optional) Configuration for description (`String`).
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable OCSP Stapling](#tls-parameters-common-params-tls-certificates-disable-ocsp-stapling) below.
+`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#tls-parameters-common-params-tls-certificates-private-key) below.
+`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed. See [Use System Defaults](#tls-parameters-common-params-tls-certificates-use-system-defaults) below.
-
-<a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
-
-### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
-
-<a id="tls-parameters-common-params-tls-certificates-disable-ocsp-stapling"></a>
-
-### TLS Parameters Common Params TLS Certificates Disable OCSP Stapling
-
-<a id="tls-parameters-common-params-tls-certificates-private-key"></a>
-
-### TLS Parameters Common Params TLS Certificates Private Key
-
-<a id="tls-parameters-common-params-tls-certificates-use-system-defaults"></a>
-
-### TLS Parameters Common Params TLS Certificates Use System Defaults
+`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
@@ -962,19 +762,11 @@ In addition to all arguments above, the following attributes are exported:
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-parameters-common-params-validation-params-trusted-ca) below.
+`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate (`Block`).
 
 `trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
-
-<a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
-
-### TLS Parameters Common Params Validation Params Trusted CA
-
-<a id="tls-parameters-no-client-certificate"></a>
-
-### TLS Parameters No Client Certificate
 
 <a id="user-identification"></a>
 
@@ -996,9 +788,9 @@ In addition to all arguments above, the following attributes are exported:
 
 `app_firewall` - (Optional) App Firewall Reference. A list of references to the app_firewall configuration objects. See [App Firewall](#waf-type-app-firewall) below.
 
-`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable WAF](#waf-type-disable-waf) below.
+`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`inherit_waf` - (Optional) Empty. This can be used for messages where no values are needed. See [Inherit WAF](#waf-type-inherit-waf) below.
+`inherit_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 <a id="waf-type-app-firewall"></a>
 
@@ -1019,14 +811,6 @@ In addition to all arguments above, the following attributes are exported:
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
-
-<a id="waf-type-disable-waf"></a>
-
-### WAF Type Disable WAF
-
-<a id="waf-type-inherit-waf"></a>
-
-### WAF Type Inherit WAF
 
 ## Import
 

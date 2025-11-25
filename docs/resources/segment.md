@@ -56,13 +56,13 @@ resource "f5xc_segment" "example" {
 
 > **Note:** One of the arguments from this list "disable, enable" must be set.
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable](#disable) below for details.
+`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `labels` - (Optional) Labels to apply to this resource (`Map`).
 
 ### Spec Argument Reference
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed. See [Enable](#enable) below for details.
+`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
@@ -73,14 +73,6 @@ In addition to all arguments above, the following attributes are exported:
 `id` - (Optional) Unique identifier for the resource (`String`).
 
 ---
-
-<a id="disable"></a>
-
-### Disable
-
-<a id="enable"></a>
-
-### Enable
 
 <a id="timeouts"></a>
 

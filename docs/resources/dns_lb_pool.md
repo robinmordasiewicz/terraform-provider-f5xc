@@ -82,7 +82,7 @@ resource "f5xc_dns_lb_pool" "example" {
 
 `ttl` - (Optional) TTL. Custom TTL in seconds (default 30) for responses from this pool (`Number`).
 
-`use_rrset_ttl` - (Optional) Empty. This can be used for messages where no values are needed. See [Use Rrset TTL](#use-rrset-ttl) below for details.
+`use_rrset_ttl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 ### Attributes Reference
 
@@ -96,17 +96,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ### A Pool
 
-`disable_health_check` - (Optional) Empty. This can be used for messages where no values are needed. See [Disable Health Check](#a-pool-disable-health-check) below.
+`disable_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `health_check` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Health Check](#a-pool-health-check) below.
 
 `max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
 `members` - (Optional) Pool Members. See [Members](#a-pool-members) below.
-
-<a id="a-pool-disable-health-check"></a>
-
-### A Pool Disable Health Check
 
 <a id="a-pool-health-check"></a>
 
@@ -229,10 +225,6 @@ In addition to all arguments above, the following attributes are exported:
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
-
-<a id="use-rrset-ttl"></a>
-
-### Use Rrset TTL
 
 ## Import
 

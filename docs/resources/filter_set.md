@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="filter-fields"></a>
 
-### Filter Fields
+**Filter Fields**
 
 `date_field` - (Optional) Filter Date/Time Range Field. either an absolute time range or a relative time interval. See [Date Field](#filter-fields-date-field) below.
 
@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="filter-fields-date-field"></a>
 
-### Filter Fields Date Field
+**Filter Fields Date Field**
 
 `absolute` - (Optional) Date Range. Date range is for selecting a date range. See [Absolute](#filter-fields-date-field-absolute) below.
 
@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="filter-fields-date-field-absolute"></a>
 
-### Filter Fields Date Field Absolute
+**Filter Fields Date Field Absolute**
 
 `end_date` - (Optional) End Date. Contains end date (`String`).
 
@@ -106,19 +106,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="filter-fields-filter-expression-field"></a>
 
-### Filter Fields Filter Expression Field
+**Filter Fields Filter Expression Field**
 
 `expression` - (Optional) Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values (`String`).
 
 <a id="filter-fields-string-field"></a>
 
-### Filter Fields String Field
+**Filter Fields String Field**
 
 `field_values` - (Optional) String Value(s) (`List`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

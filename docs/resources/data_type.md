@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules"></a>
 
-### Rules
+**Rules**
 
 `key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#rules-key-pattern) below.
 
@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-pattern"></a>
 
-### Rules Key Pattern
+**Rules Key Pattern**
 
 `exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-pattern-exact-values) below.
 
@@ -102,13 +102,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-pattern-exact-values"></a>
 
-### Rules Key Pattern Exact Values
+**Rules Key Pattern Exact Values**
 
 `exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
 
 <a id="rules-key-value-pattern"></a>
 
-### Rules Key Value Pattern
+**Rules Key Value Pattern**
 
 `key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-value-pattern-key-pattern"></a>
 
-### Rules Key Value Pattern Key Pattern
+**Rules Key Value Pattern Key Pattern**
 
 `exact_values` - (Optional) Exact Values. List of exact values to match (`Block`).
 
@@ -126,7 +126,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-value-pattern-value-pattern"></a>
 
-### Rules Key Value Pattern Value Pattern
+**Rules Key Value Pattern Value Pattern**
 
 `exact_values` - (Optional) Exact Values. List of exact values to match (`Block`).
 
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-value-pattern"></a>
 
-### Rules Value Pattern
+**Rules Value Pattern**
 
 `exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-value-pattern-exact-values) below.
 
@@ -146,13 +146,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-value-pattern-exact-values"></a>
 
-### Rules Value Pattern Exact Values
+**Rules Value Pattern Exact Values**
 
 `exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

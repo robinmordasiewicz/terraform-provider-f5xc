@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings"></a>
 
-### App Type Settings
+**App Type Settings**
 
 `app_type_ref` - (Optional) AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data. See [App Type Ref](#app-type-settings-app-type-ref) below.
 
@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-app-type-ref"></a>
 
-### App Type Settings App Type Ref
+**App Type Settings App Type Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-business-logic-markup-setting"></a>
 
-### App Type Settings Business Logic Markup Setting
+**App Type Settings Business Logic Markup Setting**
 
 `disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -110,13 +110,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-timeseries-analyses-setting"></a>
 
-### App Type Settings Timeseries Analyses Setting
+**App Type Settings Timeseries Analyses Setting**
 
 `metric_selectors` - (Optional) Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic. See [Metric Selectors](#app-type-settings-timeseries-analyses-setting-metric-selectors) below.
 
 <a id="app-type-settings-timeseries-analyses-setting-metric-selectors"></a>
 
-### App Type Settings Timeseries Analyses Setting Metric Selectors
+**App Type Settings Timeseries Analyses Setting Metric Selectors**
 
 `metric` - (Optional) Metrics. Choose one or more metrics to be included in the detection logic (`List`).
 
@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-user-behavior-analysis-setting"></a>
 
-### App Type Settings User Behavior Analysis Setting
+**App Type Settings User Behavior Analysis Setting**
 
 `disable_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection"></a>
 
-### App Type Settings User Behavior Analysis Setting Enable Detection
+**App Type Settings User Behavior Analysis Setting Enable Detection**
 
 `bola_detection_automatic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -176,7 +176,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

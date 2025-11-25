@@ -87,7 +87,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-parameters"></a>
 
-### BGP Parameters
+**BGP Parameters**
 
 `asn` - (Optional) ASN. Autonomous System Number (`Number`).
 
@@ -99,7 +99,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers"></a>
 
-### Peers
+**Peers**
 
 `bfd_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -121,7 +121,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-bfd-enabled"></a>
 
-### Peers Bfd Enabled
+**Peers Bfd Enabled**
 
 `multiplier` - (Optional) Multiplier. Specify Number of missed packets to bring session down' (`Number`).
 
@@ -131,7 +131,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-external"></a>
 
-### Peers External
+**Peers External**
 
 `address` - (Optional) Peer Address. Specify IPv4 peer address (`String`).
 
@@ -175,7 +175,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-external-family-inet"></a>
 
-### Peers External Family Inet
+**Peers External Family Inet**
 
 `disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -183,7 +183,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-external-interface"></a>
 
-### Peers External Interface
+**Peers External Interface**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -193,13 +193,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-external-interface-list"></a>
 
-### Peers External Interface List
+**Peers External Interface List**
 
 `interfaces` - (Optional) Interface List. List of network interfaces (`Block`).
 
 <a id="peers-metadata"></a>
 
-### Peers Metadata
+**Peers Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
@@ -207,13 +207,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-routing-policies"></a>
 
-### Peers Routing Policies
+**Peers Routing Policies**
 
 `route_policy` - (Optional) BGP Routing policy. Route policy to be applied. See [Route Policy](#peers-routing-policies-route-policy) below.
 
 <a id="peers-routing-policies-route-policy"></a>
 
-### Peers Routing Policies Route Policy
+**Peers Routing Policies Route Policy**
 
 `all_nodes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -227,7 +227,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -239,7 +239,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where"></a>
 
-### Where
+**Where**
 
 `site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#where-site) below.
 
@@ -247,7 +247,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site"></a>
 
-### Where Site
+**Where Site**
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -259,7 +259,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site-ref"></a>
 
-### Where Site Ref
+**Where Site Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -273,7 +273,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site"></a>
 
-### Where Virtual Site
+**Where Virtual Site**
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -285,7 +285,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site-ref"></a>
 
-### Where Virtual Site Ref
+**Where Virtual Site Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 

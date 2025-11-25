@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra"></a>
 
-### Infra
+**Infra**
 
 `availability_zone` - (Optional) Availability Zone. An Availability Zone is a high-availability offering that protects your applications and data from datacenter failures (`String`).
 
@@ -110,7 +110,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info"></a>
 
-### Infra Hw Info
+**Infra Hw Info**
 
 `bios` - (Optional) Bios Data. BIOS information. See [Bios](#infra-hw-info-bios) below.
 
@@ -140,7 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-bios"></a>
 
-### Infra Hw Info Bios
+**Infra Hw Info Bios**
 
 `date` - (Optional) Date. information from /sys/class/dmi/id/bios_date (`String`).
 
@@ -150,7 +150,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-board"></a>
 
-### Infra Hw Info Board
+**Infra Hw Info Board**
 
 `asset_tag` - (Optional) Asset Tag. information from /sys/class/dmi/id/board_asset_tag (`String`).
 
@@ -164,7 +164,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-chassis"></a>
 
-### Infra Hw Info Chassis
+**Infra Hw Info Chassis**
 
 `asset_tag` - (Optional) Asset Tag. information from /sys/class/dmi/id/chassis_asset_tag (`String`).
 
@@ -178,7 +178,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-cpu"></a>
 
-### Infra Hw Info CPU
+**Infra Hw Info CPU**
 
 `cache` - (Optional) Cache. CPU cache size in KB (`Number`).
 
@@ -196,7 +196,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-gpu"></a>
 
-### Infra Hw Info GPU
+**Infra Hw Info GPU**
 
 `cuda_version` - (Optional) Cuda Version. GPU Cuda Version (`String`).
 
@@ -206,7 +206,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-kernel"></a>
 
-### Infra Hw Info Kernel
+**Infra Hw Info Kernel**
 
 `architecture` - (Optional) Architecture. kernel architecture (`String`).
 
@@ -216,7 +216,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-memory"></a>
 
-### Infra Hw Info Memory
+**Infra Hw Info Memory**
 
 `size_mb` - (Optional) RAM. RAM size in MB (`Number`).
 
@@ -226,7 +226,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-network"></a>
 
-### Infra Hw Info Network
+**Infra Hw Info Network**
 
 `driver` - (Optional) Driver. driver of device, eg. e1000e (`String`).
 
@@ -246,7 +246,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-os"></a>
 
-### Infra Hw Info OS
+**Infra Hw Info OS**
 
 `architecture` - (Optional) Architecture. Architecture of OS (`String`).
 
@@ -260,7 +260,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-product"></a>
 
-### Infra Hw Info Product
+**Infra Hw Info Product**
 
 `name` - (Optional) Name. product name, eg. for AWS m5a.xlarge. Info taken from /sys/class/dmi/id/product_name (`String`).
 
@@ -272,7 +272,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-storage"></a>
 
-### Infra Hw Info Storage
+**Infra Hw Info Storage**
 
 `driver` - (Optional) Driver. driver of device (`String`).
 
@@ -288,7 +288,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-usb"></a>
 
-### Infra Hw Info Usb
+**Infra Hw Info Usb**
 
 `address` - (Optional) Address. Address of the device on the bus in decimal (`Number`).
 
@@ -330,7 +330,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-internet-proxy"></a>
 
-### Infra Internet Proxy
+**Infra Internet Proxy**
 
 `http_proxy` - (Optional) HTTP PROXY. It will be used as the proxy URL for HTTP requests and HTTPS requests unless overridden by HTTPSProxy or NoProxy (`String`).
 
@@ -342,13 +342,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-sw-info"></a>
 
-### Infra Sw Info
+**Infra Sw Info**
 
 `sw_version` - (Optional) SW Version. SW Version in the site (`String`).
 
 <a id="passport"></a>
 
-### Passport
+**Passport**
 
 `cluster_name` - (Optional) Cluster Name (`String`).
 
@@ -372,7 +372,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy"></a>
 
-### Enable Forward Proxy
+**Enable Forward Proxy**
 
 `connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
 
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept"></a>
 
-### Enable Forward Proxy TLS Intercept
+**Enable Forward Proxy TLS Intercept**
 
 `custom_certificate` - (Optional) TLS Certificate. Handle to fetch certificate and key. See [Custom Certificate](#enable-forward-proxy-tls-intercept-custom-certificate) below.
 
@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate"></a>
 
-### Enable Forward Proxy TLS Intercept Custom Certificate
+**Enable Forward Proxy TLS Intercept Custom Certificate**
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
@@ -134,19 +134,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept-policy"></a>
 
-### Enable Forward Proxy TLS Intercept Policy
+**Enable Forward Proxy TLS Intercept Policy**
 
 `interception_rules` - (Optional) TLS Interception Rules. List of ordered rules to enable or disable for TLS interception (`Block`).
 
 <a id="sli-to-global-dr"></a>
 
-### Sli To Global DR
+**Sli To Global DR**
 
 `global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#sli-to-global-dr-global-vn) below.
 
 <a id="sli-to-global-dr-global-vn"></a>
 
-### Sli To Global DR Global Vn
+**Sli To Global DR Global Vn**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -156,7 +156,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="sli-to-slo-snat"></a>
 
-### Sli To Slo Snat
+**Sli To Slo Snat**
 
 `default_gw_snat` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -164,13 +164,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="slo-to-global-dr"></a>
 
-### Slo To Global DR
+**Slo To Global DR**
 
 `global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#slo-to-global-dr-global-vn) below.
 
 <a id="slo-to-global-dr-global-vn"></a>
 
-### Slo To Global DR Global Vn
+**Slo To Global DR Global Vn**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -180,7 +180,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

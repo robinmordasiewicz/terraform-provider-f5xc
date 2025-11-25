@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-health-check"></a>
 
-### HTTP Health Check
+**HTTP Health Check**
 
 `health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
@@ -100,7 +100,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-health-check"></a>
 
-### HTTPS Health Check
+**HTTPS Health Check**
 
 `health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tcp-health-check"></a>
 
-### TCP Health Check
+**TCP Health Check**
 
 `health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tcp-hex-health-check"></a>
 
-### TCP Hex Health Check
+**TCP Hex Health Check**
 
 `health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -148,7 +148,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="udp-health-check"></a>
 
-### UDP Health Check
+**UDP Health Check**
 
 `health_check_port` - (Optional) Health Check Port. Port used for performing health check (`Number`).
 

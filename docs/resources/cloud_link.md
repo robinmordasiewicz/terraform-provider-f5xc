@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws"></a>
 
-### AWS
+**AWS**
 
 `aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#aws-aws-cred) below.
 
@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-aws-cred"></a>
 
-### AWS AWS Cred
+**AWS AWS Cred**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -106,13 +106,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-byoc"></a>
 
-### AWS Byoc
+**AWS Byoc**
 
 `connections` - (Optional) Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs. See [Connections](#aws-byoc-connections) below.
 
 <a id="aws-byoc-connections"></a>
 
-### AWS Byoc Connections
+**AWS Byoc Connections**
 
 `auth_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
@@ -138,13 +138,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enabled"></a>
 
-### Enabled
+**Enabled**
 
 `cloudlink_network_name` - (Optional) Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support (`String`).
 
 <a id="gcp"></a>
 
-### GCP
+**GCP**
 
 `byoc` - (Optional) GCP Bring Your Own Connections. List of GCP Bring You Own Connections. See [Byoc](#gcp-byoc) below.
 
@@ -152,13 +152,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-byoc"></a>
 
-### GCP Byoc
+**GCP Byoc**
 
 `connections` - (Optional) Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity. See [Connections](#gcp-byoc-connections) below.
 
 <a id="gcp-byoc-connections"></a>
 
-### GCP Byoc Connections
+**GCP Byoc Connections**
 
 `interconnect_attachment_name` - (Optional) Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment (`String`).
 
@@ -172,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-gcp-cred"></a>
 
-### GCP GCP Cred
+**GCP GCP Cred**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -182,7 +182,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

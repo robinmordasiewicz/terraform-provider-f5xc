@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary"></a>
 
-### Primary
+**Primary**
 
 `allow_http_lb_managed_records` - (Optional) Option to allow user-created HTTP, TCP, and CDN load balancer related resource records to be automatically managed in a protected RRset (`Bool`).
 
@@ -99,7 +99,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group"></a>
 
-### Primary Default Rr Set Group
+**Primary Default Rr Set Group**
 
 `a_record` - (Optional) DNSAResourceRecord. A Records. See [A Record](#primary-default-rr-set-group-a-record) below.
 
@@ -149,7 +149,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-a-record"></a>
 
-### Primary Default Rr Set Group A Record
+**Primary Default Rr Set Group A Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -157,7 +157,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-aaaa-record"></a>
 
-### Primary Default Rr Set Group Aaaa Record
+**Primary Default Rr Set Group Aaaa Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -165,7 +165,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-afsdb-record"></a>
 
-### Primary Default Rr Set Group Afsdb Record
+**Primary Default Rr Set Group Afsdb Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -173,13 +173,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-alias-record"></a>
 
-### Primary Default Rr Set Group Alias Record
+**Primary Default Rr Set Group Alias Record**
 
 `value` - (Optional) Domain. A valid domain name, for example: example.com (`String`).
 
 <a id="primary-default-rr-set-group-caa-record"></a>
 
-### Primary Default Rr Set Group Caa Record
+**Primary Default Rr Set Group Caa Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -187,7 +187,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-cds-record"></a>
 
-### Primary Default Rr Set Group Cds Record
+**Primary Default Rr Set Group Cds Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -195,7 +195,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-cert-record"></a>
 
-### Primary Default Rr Set Group Cert Record
+**Primary Default Rr Set Group Cert Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -203,7 +203,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-cname-record"></a>
 
-### Primary Default Rr Set Group Cname Record
+**Primary Default Rr Set Group Cname Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -211,7 +211,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-ds-record"></a>
 
-### Primary Default Rr Set Group Ds Record
+**Primary Default Rr Set Group Ds Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -219,7 +219,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-eui48-record"></a>
 
-### Primary Default Rr Set Group Eui48 Record
+**Primary Default Rr Set Group Eui48 Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -227,7 +227,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-eui64-record"></a>
 
-### Primary Default Rr Set Group Eui64 Record
+**Primary Default Rr Set Group Eui64 Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -235,7 +235,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-lb-record"></a>
 
-### Primary Default Rr Set Group LB Record
+**Primary Default Rr Set Group LB Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain (`String`).
 
@@ -243,7 +243,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-loc-record"></a>
 
-### Primary Default Rr Set Group Loc Record
+**Primary Default Rr Set Group Loc Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -251,7 +251,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-mx-record"></a>
 
-### Primary Default Rr Set Group Mx Record
+**Primary Default Rr Set Group Mx Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -259,7 +259,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-naptr-record"></a>
 
-### Primary Default Rr Set Group Naptr Record
+**Primary Default Rr Set Group Naptr Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -267,7 +267,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-ns-record"></a>
 
-### Primary Default Rr Set Group Ns Record
+**Primary Default Rr Set Group Ns Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -275,7 +275,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-ptr-record"></a>
 
-### Primary Default Rr Set Group Ptr Record
+**Primary Default Rr Set Group Ptr Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -283,7 +283,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-srv-record"></a>
 
-### Primary Default Rr Set Group Srv Record
+**Primary Default Rr Set Group Srv Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -291,7 +291,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-sshfp-record"></a>
 
-### Primary Default Rr Set Group Sshfp Record
+**Primary Default Rr Set Group Sshfp Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -299,7 +299,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-tlsa-record"></a>
 
-### Primary Default Rr Set Group Tlsa Record
+**Primary Default Rr Set Group Tlsa Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -307,7 +307,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-default-rr-set-group-txt-record"></a>
 
-### Primary Default Rr Set Group Txt Record
+**Primary Default Rr Set Group Txt Record**
 
 `name` - (Optional) Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain (`String`).
 
@@ -315,7 +315,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-dnssec-mode"></a>
 
-### Primary Dnssec Mode
+**Primary Dnssec Mode**
 
 `disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -323,7 +323,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-rr-set-group"></a>
 
-### Primary Rr Set Group
+**Primary Rr Set Group**
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#primary-rr-set-group-metadata) below.
 
@@ -331,7 +331,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-rr-set-group-metadata"></a>
 
-### Primary Rr Set Group Metadata
+**Primary Rr Set Group Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
@@ -339,7 +339,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-rr-set-group-rr-set"></a>
 
-### Primary Rr Set Group Rr Set
+**Primary Rr Set Group Rr Set**
 
 `a_record` - (Optional) DNSAResourceRecord. A Records (`Block`).
 
@@ -389,7 +389,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="primary-soa-parameters"></a>
 
-### Primary Soa Parameters
+**Primary Soa Parameters**
 
 `expire` - (Optional) Expire. expire value indicates when secondary nameservers should stop answering request for this zone if primary does not respond (`Number`).
 
@@ -403,7 +403,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="secondary"></a>
 
-### Secondary
+**Secondary**
 
 `primary_servers` - (Optional) DNS Primary Server IP (`List`).
 
@@ -415,7 +415,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="secondary-tsig-key-value"></a>
 
-### Secondary Tsig Key Value
+**Secondary Tsig Key Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#secondary-tsig-key-value-blindfold-secret-info) below.
 
@@ -423,7 +423,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="secondary-tsig-key-value-blindfold-secret-info"></a>
 
-### Secondary Tsig Key Value Blindfold Secret Info
+**Secondary Tsig Key Value Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -433,7 +433,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="secondary-tsig-key-value-clear-secret-info"></a>
 
-### Secondary Tsig Key Value Clear Secret Info
+**Secondary Tsig Key Value Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
@@ -441,7 +441,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

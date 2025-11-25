@@ -91,7 +91,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-health-check"></a>
 
-### HTTP Health Check
+**HTTP Health Check**
 
 `expected_status_codes` - (Optional) Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-' (`List`).
 
@@ -109,7 +109,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tcp-health-check"></a>
 
-### TCP Health Check
+**TCP Health Check**
 
 `expected_response` - (Optional) Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload (`String`).
 
@@ -117,7 +117,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dns-name-advanced"></a>
 
-### DNS Name Advanced
+**DNS Name Advanced**
 
 `name` - (Optional) Endpoint DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
 
@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-info"></a>
 
-### Service Info
+**Service Info**
 
 `discovery_type` - (Optional) Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic BIG-IP Clusters Discover for Third Party Application. Possible values are `INVALID_DISCOVERY`, `K8S`, `CONSUL`, `CLASSIC_BIGIP`, `THIRD_PARTY` (`String`).
 
@@ -112,13 +112,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-info-service-selector"></a>
 
-### Service Info Service Selector
+**Service Info Service Selector**
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="snat-pool"></a>
 
-### Snat Pool
+**Snat Pool**
 
 `no_snat_pool` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -126,13 +126,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="snat-pool-snat-pool"></a>
 
-### Snat Pool Snat Pool
+**Snat Pool Snat Pool**
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -144,7 +144,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where"></a>
 
-### Where
+**Where**
 
 `site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#where-site) below.
 
@@ -154,7 +154,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site"></a>
 
-### Where Site
+**Where Site**
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -166,7 +166,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site-ref"></a>
 
-### Where Site Ref
+**Where Site Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -180,13 +180,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-network"></a>
 
-### Where Virtual Network
+**Where Virtual Network**
 
 `ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#where-virtual-network-ref) below.
 
 <a id="where-virtual-network-ref"></a>
 
-### Where Virtual Network Ref
+**Where Virtual Network Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -200,7 +200,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site"></a>
 
-### Where Virtual Site
+**Where Virtual Site**
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -212,7 +212,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site-ref"></a>
 
-### Where Virtual Site Ref
+**Where Virtual Site Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 

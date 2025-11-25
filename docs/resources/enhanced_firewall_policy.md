@@ -96,37 +96,37 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allowed-destinations"></a>
 
-### Allowed Destinations
+**Allowed Destinations**
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 <a id="allowed-sources"></a>
 
-### Allowed Sources
+**Allowed Sources**
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 <a id="denied-destinations"></a>
 
-### Denied Destinations
+**Denied Destinations**
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 <a id="denied-sources"></a>
 
-### Denied Sources
+**Denied Sources**
 
 `prefix` - (Optional) Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length (`List`).
 
 <a id="rule-list"></a>
 
-### Rule List
+**Rule List**
 
 `rules` - (Optional) List of Enhanced Firewall Policy Rules. Ordered List of Enhanced Firewall Policy Rules. See [Rules](#rule-list-rules) below.
 
 <a id="rule-list-rules"></a>
 
-### Rule List Rules
+**Rule List Rules**
 
 `advanced_action` - (Optional) Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction. See [Advanced Action](#rule-list-rules-advanced-action) below.
 
@@ -184,55 +184,55 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-advanced-action"></a>
 
-### Rule List Rules Advanced Action
+**Rule List Rules Advanced Action**
 
 `action` - (Optional) Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG` (`String`).
 
 <a id="rule-list-rules-applications"></a>
 
-### Rule List Rules Applications
+**Rule List Rules Applications**
 
 `applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP (`List`).
 
 <a id="rule-list-rules-destination-aws-vpc-ids"></a>
 
-### Rule List Rules Destination AWS Vpc Ids
+**Rule List Rules Destination AWS Vpc Ids**
 
 `vpc_id` - (Optional) AWS VPC List. List of VPC Identifiers in AWS (`List`).
 
 <a id="rule-list-rules-destination-ip-prefix-set"></a>
 
-### Rule List Rules Destination IP Prefix Set
+**Rule List Rules Destination IP Prefix Set**
 
 `ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="rule-list-rules-destination-label-selector"></a>
 
-### Rule List Rules Destination Label Selector
+**Rule List Rules Destination Label Selector**
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="rule-list-rules-destination-prefix-list"></a>
 
-### Rule List Rules Destination Prefix List
+**Rule List Rules Destination Prefix List**
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="rule-list-rules-insert-service"></a>
 
-### Rule List Rules Insert Service
+**Rule List Rules Insert Service**
 
 `nfv_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
 <a id="rule-list-rules-label-matcher"></a>
 
-### Rule List Rules Label Matcher
+**Rule List Rules Label Matcher**
 
 `keys` - (Optional) Keys. The list of label key names that have to match (`List`).
 
 <a id="rule-list-rules-metadata"></a>
 
-### Rule List Rules Metadata
+**Rule List Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
@@ -240,7 +240,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-protocol-port-range"></a>
 
-### Rule List Rules Protocol Port Range
+**Rule List Rules Protocol Port Range**
 
 `port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
 
@@ -248,31 +248,31 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-source-aws-vpc-ids"></a>
 
-### Rule List Rules Source AWS Vpc Ids
+**Rule List Rules Source AWS Vpc Ids**
 
 `vpc_id` - (Optional) AWS VPC List. List of VPC Identifiers in AWS (`List`).
 
 <a id="rule-list-rules-source-ip-prefix-set"></a>
 
-### Rule List Rules Source IP Prefix Set
+**Rule List Rules Source IP Prefix Set**
 
 `ref` - (Optional) Reference. A list of references to ip_prefix_set objects (`Block`).
 
 <a id="rule-list-rules-source-label-selector"></a>
 
-### Rule List Rules Source Label Selector
+**Rule List Rules Source Label Selector**
 
 `expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
 
 <a id="rule-list-rules-source-prefix-list"></a>
 
-### Rule List Rules Source Prefix List
+**Rule List Rules Source Prefix List**
 
 `prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

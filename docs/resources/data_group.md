@@ -82,25 +82,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="address-records"></a>
 
-### Address Records
+**Address Records**
 
 `records` - (Optional) Address records (`Block`).
 
 <a id="integer-records"></a>
 
-### Integer Records
+**Integer Records**
 
 `records` - (Optional) Integer records (`Block`).
 
 <a id="string-records"></a>
 
-### String Records
+**String Records**
 
 `records` - (Optional) String records (`Block`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

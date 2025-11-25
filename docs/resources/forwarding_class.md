@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dscp"></a>
 
-### Dscp
+**Dscp**
 
 `drop_precedence` - (Optional) DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer. Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`. Defaults to `DSCP_AF_FAKE` (`String`).
 
@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policer"></a>
 
-### Policer
+**Policer**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -114,7 +114,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

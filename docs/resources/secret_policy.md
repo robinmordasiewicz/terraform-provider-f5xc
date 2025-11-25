@@ -83,13 +83,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list"></a>
 
-### Rule List
+**Rule List**
 
 `rules` - (Optional) Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list. See [Rules](#rule-list-rules) below.
 
 <a id="rule-list-rules"></a>
 
-### Rule List Rules
+**Rule List Rules**
 
 `metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#rule-list-rules-metadata) below.
 
@@ -97,7 +97,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-metadata"></a>
 
-### Rule List Rules Metadata
+**Rule List Rules Metadata**
 
 `description` - (Optional) Description. Human readable description (`String`).
 
@@ -105,7 +105,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec"></a>
 
-### Rule List Rules Spec
+**Rule List Rules Spec**
 
 `action` - (Optional) Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY` (`String`).
 
@@ -117,7 +117,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

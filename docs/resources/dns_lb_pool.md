@@ -94,7 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="a-pool"></a>
 
-### A Pool
+**A Pool**
 
 `disable_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="a-pool-health-check"></a>
 
-### A Pool Health Check
+**A Pool Health Check**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="a-pool-members"></a>
 
-### A Pool Members
+**A Pool Members**
 
 `disable` - (Optional) Disable. A value of true will disable the pool-member (`Bool`).
 
@@ -130,7 +130,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aaaa-pool"></a>
 
-### Aaaa Pool
+**Aaaa Pool**
 
 `max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
@@ -138,7 +138,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aaaa-pool-members"></a>
 
-### Aaaa Pool Members
+**Aaaa Pool Members**
 
 `disable` - (Optional) Disable. A value of true will disable the pool-member (`Bool`).
 
@@ -152,13 +152,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cname-pool"></a>
 
-### Cname Pool
+**Cname Pool**
 
 `members` - (Optional) Pool Members. See [Members](#cname-pool-members) below.
 
 <a id="cname-pool-members"></a>
 
-### Cname Pool Members
+**Cname Pool Members**
 
 `domain` - (Optional) Domain (`String`).
 
@@ -170,7 +170,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="mx-pool"></a>
 
-### Mx Pool
+**Mx Pool**
 
 `max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
@@ -178,7 +178,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="mx-pool-members"></a>
 
-### Mx Pool Members
+**Mx Pool Members**
 
 `domain` - (Optional) Domain (`String`).
 
@@ -190,7 +190,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="srv-pool"></a>
 
-### Srv Pool
+**Srv Pool**
 
 `max_answers` - (Optional) Maximum Answers. Limit on number of Resource Records to be included in the response to query (`Number`).
 
@@ -198,7 +198,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="srv-pool-members"></a>
 
-### Srv Pool Members
+**Srv Pool Members**
 
 `final_translation` - (Optional) Final Translation. If this flag is true, the SRV record will not be translated further (`Bool`).
 
@@ -216,7 +216,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

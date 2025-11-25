@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="addon-service"></a>
 
-### Addon Service
+**Addon Service**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="notification-preference"></a>
 
-### Notification Preference
+**Notification Preference**
 
 `emails` - (Optional) Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription. See [Emails](#notification-preference-emails) below.
 
@@ -98,13 +98,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="notification-preference-emails"></a>
 
-### Notification Preference Emails
+**Notification Preference Emails**
 
 `email_ids` - (Optional) Emails. Email ids associated with the Addon Subscription (`List`).
 
 <a id="notification-preference-support-ticket-id"></a>
 
-### Notification Preference Support Ticket Id
+**Notification Preference Support Ticket Id**
 
 `subscription_ticket_id` - (Optional) Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription (`String`).
 
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

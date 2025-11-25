@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="full-mesh"></a>
 
-### Full Mesh
+**Full Mesh**
 
 `control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -101,7 +101,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="hub-mesh"></a>
 
-### Hub Mesh
+**Hub Mesh**
 
 `control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -109,7 +109,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="spoke-mesh"></a>
 
-### Spoke Mesh
+**Spoke Mesh**
 
 `control_and_data_plane_mesh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -119,7 +119,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="spoke-mesh-hub-mesh-group"></a>
 
-### Spoke Mesh Hub Mesh Group
+**Spoke Mesh Hub Mesh Group**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -129,7 +129,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -141,7 +141,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="virtual-site"></a>
 
-### Virtual Site
+**Virtual Site**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 

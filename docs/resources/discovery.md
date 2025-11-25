@@ -100,7 +100,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul"></a>
 
-### Discovery Consul
+**Discovery Consul**
 
 `access_info` - (Optional) Hashicorp Consul Parameters. Hashicorp Consul API server information. See [Access Info](#discovery-consul-access-info) below.
 
@@ -108,7 +108,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info"></a>
 
-### Discovery Consul Access Info
+**Discovery Consul Access Info**
 
 `connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#discovery-consul-access-info-connection-info) below.
 
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-connection-info"></a>
 
-### Discovery Consul Access Info Connection Info
+**Discovery Consul Access Info Connection Info**
 
 `api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-http-basic-auth-info"></a>
 
-### Discovery Consul Access Info HTTP Basic Auth Info
+**Discovery Consul Access Info HTTP Basic Auth Info**
 
 `passwd_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
@@ -132,7 +132,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-publish-info"></a>
 
-### Discovery Consul Publish Info
+**Discovery Consul Publish Info**
 
 `disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -140,7 +140,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s"></a>
 
-### Discovery K8s
+**Discovery K8s**
 
 `access_info` - (Optional) K8s API Server. K8S API server access. See [Access Info](#discovery-k8s-access-info) below.
 
@@ -152,7 +152,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info"></a>
 
-### Discovery K8s Access Info
+**Discovery K8s Access Info**
 
 `connection_info` - (Optional) REST API Config. Configuration details to access discovery service REST API. See [Connection Info](#discovery-k8s-access-info-connection-info) below.
 
@@ -164,7 +164,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-connection-info"></a>
 
-### Discovery K8s Access Info Connection Info
+**Discovery K8s Access Info Connection Info**
 
 `api_server` - (Optional) API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair (`String`).
 
@@ -172,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-kubeconfig-url"></a>
 
-### Discovery K8s Access Info Kubeconfig URL
+**Discovery K8s Access Info Kubeconfig URL**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -180,13 +180,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-namespace-mapping"></a>
 
-### Discovery K8s Namespace Mapping
+**Discovery K8s Namespace Mapping**
 
 `items` - (Optional) Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex. See [Items](#discovery-k8s-namespace-mapping-items) below.
 
 <a id="discovery-k8s-namespace-mapping-items"></a>
 
-### Discovery K8s Namespace Mapping Items
+**Discovery K8s Namespace Mapping Items**
 
 `namespace` - (Optional) F5XC Application Namespaces. Select a namespace (`String`).
 
@@ -194,7 +194,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-publish-info"></a>
 
-### Discovery K8s Publish Info
+**Discovery K8s Publish Info**
 
 `disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -206,7 +206,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-publish-info-dns-delegation"></a>
 
-### Discovery K8s Publish Info DNS Delegation
+**Discovery K8s Publish Info DNS Delegation**
 
 `dns_mode` - (Optional) DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-DNS KubeDNS: External K8s cluster is running kube-DNS. Possible values are `CORE_DNS`, `KUBE_DNS`. Defaults to `CORE_DNS` (`String`).
 
@@ -214,13 +214,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-publish-info-publish"></a>
 
-### Discovery K8s Publish Info Publish
+**Discovery K8s Publish Info Publish**
 
 `namespace` - (Optional) Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists (`String`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -232,7 +232,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where"></a>
 
-### Where
+**Where**
 
 `site` - (Optional) Site Reference. This specifies a direct reference to a site configuration object. See [Site](#where-site) below.
 
@@ -242,7 +242,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site"></a>
 
-### Where Site
+**Where Site**
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -254,7 +254,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site-ref"></a>
 
-### Where Site Ref
+**Where Site Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -268,13 +268,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-network"></a>
 
-### Where Virtual Network
+**Where Virtual Network**
 
 `ref` - (Optional) Reference. A virtual network direct reference. See [Ref](#where-virtual-network-ref) below.
 
 <a id="where-virtual-network-ref"></a>
 
-### Where Virtual Network Ref
+**Where Virtual Network Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -288,7 +288,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site"></a>
 
-### Where Virtual Site
+**Where Virtual Site**
 
 `disable_internet_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -300,7 +300,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site-ref"></a>
 
-### Where Virtual Site Ref
+**Where Virtual Site Ref**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 

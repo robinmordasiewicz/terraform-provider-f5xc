@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains"></a>
 
-### Domains
+**Domains**
 
 `domain` - (Optional) Domains to Crawl. Select the domain to execute API Crawling with given credentials (`String`).
 
@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-simple-login"></a>
 
-### Domains Simple Login
+**Domains Simple Login**
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#domains-simple-login-password) below.
 
@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-simple-login-password"></a>
 
-### Domains Simple Login Password
+**Domains Simple Login Password**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -100,7 +100,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

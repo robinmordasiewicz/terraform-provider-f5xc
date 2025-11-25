@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration"></a>
 
-### Code Base Integration
+**Code Base Integration**
 
 `azure_repos` - (Optional) Azure Repos Integration. See [Azure Repos](#code-base-integration-azure-repos) below.
 
@@ -94,13 +94,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-azure-repos"></a>
 
-### Code Base Integration Azure Repos
+**Code Base Integration Azure Repos**
 
 `access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-azure-repos-access-token) below.
 
 <a id="code-base-integration-azure-repos-access-token"></a>
 
-### Code Base Integration Azure Repos Access Token
+**Code Base Integration Azure Repos Access Token**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -108,7 +108,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-bitbucket"></a>
 
-### Code Base Integration Bitbucket
+**Code Base Integration Bitbucket**
 
 `passwd` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd](#code-base-integration-bitbucket-passwd) below.
 
@@ -116,7 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-bitbucket-passwd"></a>
 
-### Code Base Integration Bitbucket Passwd
+**Code Base Integration Bitbucket Passwd**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-bitbucket-server"></a>
 
-### Code Base Integration Bitbucket Server
+**Code Base Integration Bitbucket Server**
 
 `passwd` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd](#code-base-integration-bitbucket-server-passwd) below.
 
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-bitbucket-server-passwd"></a>
 
-### Code Base Integration Bitbucket Server Passwd
+**Code Base Integration Bitbucket Server Passwd**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -144,7 +144,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-github"></a>
 
-### Code Base Integration Github
+**Code Base Integration Github**
 
 `access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-github-access-token) below.
 
@@ -154,7 +154,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-github-access-token"></a>
 
-### Code Base Integration Github Access Token
+**Code Base Integration Github Access Token**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -162,7 +162,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-github-enterprise"></a>
 
-### Code Base Integration Github Enterprise
+**Code Base Integration Github Enterprise**
 
 `access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-github-enterprise-access-token) below.
 
@@ -172,7 +172,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-github-enterprise-access-token"></a>
 
-### Code Base Integration Github Enterprise Access Token
+**Code Base Integration Github Enterprise Access Token**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -180,13 +180,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-gitlab"></a>
 
-### Code Base Integration Gitlab
+**Code Base Integration Gitlab**
 
 `access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-gitlab-access-token) below.
 
 <a id="code-base-integration-gitlab-access-token"></a>
 
-### Code Base Integration Gitlab Access Token
+**Code Base Integration Gitlab Access Token**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -194,7 +194,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-gitlab-enterprise"></a>
 
-### Code Base Integration Gitlab Enterprise
+**Code Base Integration Gitlab Enterprise**
 
 `access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-gitlab-enterprise-access-token) below.
 
@@ -202,7 +202,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration-gitlab-enterprise-access-token"></a>
 
-### Code Base Integration Gitlab Enterprise Access Token
+**Code Base Integration Gitlab Enterprise Access Token**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
@@ -210,7 +210,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

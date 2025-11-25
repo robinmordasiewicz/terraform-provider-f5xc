@@ -80,19 +80,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="basic-configuration"></a>
 
-### Basic Configuration
+**Basic Configuration**
 
 `display_name` - (Optional) Display Name. Tenant display name in the login screen (`String`).
 
 <a id="brute-force-detection-settings"></a>
 
-### Brute Force Detection Settings
+**Brute Force Detection Settings**
 
 `max_login_failures` - (Optional) Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes (`Number`).
 
 <a id="password-policy"></a>
 
-### Password Policy
+**Password Policy**
 
 `digits` - (Optional) Min Number Of Digits. The number of digits required to be in the password string (`Number`).
 
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

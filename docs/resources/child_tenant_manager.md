@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="group-assignments"></a>
 
-### Group Assignments
+**Group Assignments**
 
 `child_tenant_groups` - (Optional) Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user (`List`).
 
@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="group-assignments-group"></a>
 
-### Group Assignments Group
+**Group Assignments Group**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tenant-owner-group"></a>
 
-### Tenant Owner Group
+**Tenant Owner Group**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -106,7 +106,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

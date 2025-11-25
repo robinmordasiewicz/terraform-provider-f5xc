@@ -84,13 +84,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="connect-to-layer2"></a>
 
-### Connect To Layer2
+**Connect To Layer2**
 
 `layer2_intf_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Layer2 Intf Ref](#connect-to-layer2-layer2-intf-ref) below.
 
 <a id="connect-to-layer2-layer2-intf-ref"></a>
 
-### Connect To Layer2 Layer2 Intf Ref
+**Connect To Layer2 Layer2 Intf Ref**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -100,7 +100,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-subnet-params"></a>
 
-### Site Subnet Params
+**Site Subnet Params**
 
 `dhcp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -112,7 +112,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-subnet-params-site"></a>
 
-### Site Subnet Params Site
+**Site Subnet Params Site**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -122,19 +122,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-subnet-params-subnet-dhcp-server-params"></a>
 
-### Site Subnet Params Subnet DHCP Server Params
+**Site Subnet Params Subnet DHCP Server Params**
 
 `dhcp_networks` - (Optional) Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) below.
 
 <a id="site-subnet-params-subnet-dhcp-server-params-dhcp-networks"></a>
 
-### Site Subnet Params Subnet DHCP Server Params DHCP Networks
+**Site Subnet Params Subnet DHCP Server Params DHCP Networks**
 
 `network_prefix` - (Optional) Network Prefix. Network prefix for subnet (`String`).
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

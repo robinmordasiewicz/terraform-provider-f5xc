@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules"></a>
 
-### Rules
+**Rules**
 
 `action` - (Optional) Action. Action to apply on the packet if the NAT rule is applied. See [Action](#rules-action) below.
 
@@ -100,7 +100,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-action"></a>
 
-### Rules Action
+**Rules Action**
 
 `dynamic` - (Optional) Dynamic Pool. Dynamic Pool Configuration. See [Dynamic](#rules-action-dynamic) below.
 
@@ -108,7 +108,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-action-dynamic"></a>
 
-### Rules Action Dynamic
+**Rules Action Dynamic**
 
 `elastic_ips` - (Optional) Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object (`Block`).
 
@@ -116,13 +116,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-cloud-connect"></a>
 
-### Rules Cloud Connect
+**Rules Cloud Connect**
 
 `refs` - (Optional) Cloud Connect. Reference to Cloud Connect Object. See [Refs](#rules-cloud-connect-refs) below.
 
 <a id="rules-cloud-connect-refs"></a>
 
-### Rules Cloud Connect Refs
+**Rules Cloud Connect Refs**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -136,7 +136,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-criteria"></a>
 
-### Rules Criteria
+**Rules Criteria**
 
 `any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -162,7 +162,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-criteria-destination-port"></a>
 
-### Rules Criteria Destination Port
+**Rules Criteria Destination Port**
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -172,13 +172,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-criteria-segment"></a>
 
-### Rules Criteria Segment
+**Rules Criteria Segment**
 
 `refs` - (Optional) Segment. Reference to Segment Object (`Block`).
 
 <a id="rules-criteria-source-port"></a>
 
-### Rules Criteria Source Port
+**Rules Criteria Source Port**
 
 `no_port_match` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -188,7 +188,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-criteria-tcp"></a>
 
-### Rules Criteria TCP
+**Rules Criteria TCP**
 
 `destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
 
@@ -196,7 +196,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-criteria-udp"></a>
 
-### Rules Criteria UDP
+**Rules Criteria UDP**
 
 `destination_port` - (Optional) Port to Match. Port match of the request can be a range or a specific port (`Block`).
 
@@ -204,19 +204,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-criteria-virtual-network"></a>
 
-### Rules Criteria Virtual Network
+**Rules Criteria Virtual Network**
 
 `refs` - (Optional) Virtual Network Reference. Reference to virtual network (`Block`).
 
 <a id="rules-network-interface"></a>
 
-### Rules Network Interface
+**Rules Network Interface**
 
 `refs` - (Optional) Network Interface. Reference to Network Interface Object. See [Refs](#rules-network-interface-refs) below.
 
 <a id="rules-network-interface-refs"></a>
 
-### Rules Network Interface Refs
+**Rules Network Interface Refs**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -230,13 +230,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-segment"></a>
 
-### Rules Segment
+**Rules Segment**
 
 `refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#rules-segment-refs) below.
 
 <a id="rules-segment-refs"></a>
 
-### Rules Segment Refs
+**Rules Segment Refs**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -250,13 +250,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-virtual-network"></a>
 
-### Rules Virtual Network
+**Rules Virtual Network**
 
 `refs` - (Optional) Virtual Network Reference. Reference to virtual network. See [Refs](#rules-virtual-network-refs) below.
 
 <a id="rules-virtual-network-refs"></a>
 
-### Rules Virtual Network Refs
+**Rules Virtual Network Refs**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -270,13 +270,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site"></a>
 
-### Site
+**Site**
 
 `refs` - (Optional) Site. Reference to Site Object. See [Refs](#site-refs) below.
 
 <a id="site-refs"></a>
 
-### Site Refs
+**Site Refs**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -290,7 +290,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

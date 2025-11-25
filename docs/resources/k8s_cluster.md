@@ -143,13 +143,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cluster-wide-app-list"></a>
 
-### Cluster Wide App List
+**Cluster Wide App List**
 
 `cluster_wide_apps` - (Optional) Cluster Wide Application List. List of cluster wide applications. See [Cluster Wide Apps](#cluster-wide-app-list-cluster-wide-apps) below.
 
 <a id="cluster-wide-app-list-cluster-wide-apps"></a>
 
-### Cluster Wide App List Cluster Wide Apps
+**Cluster Wide App List Cluster Wide Apps**
 
 `argo_cd` - (Optional) Argo CD configuration. description Parameters for Argo Continuous Deployment(CD) application. See [Argo Cd](#cluster-wide-app-list-cluster-wide-apps-argo-cd) below.
 
@@ -161,19 +161,19 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd"></a>
 
-### Cluster Wide App List Cluster Wide Apps Argo Cd
+**Cluster Wide App List Cluster Wide Apps Argo Cd**
 
 `local_domain` - (Optional) Local Access Configuration. Parameters required to enable local access (`Block`).
 
 <a id="insecure-registry-list"></a>
 
-### Insecure Registry List
+**Insecure Registry List**
 
 `insecure_registries` - (Optional) Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000' (`List`).
 
 <a id="local-access-config"></a>
 
-### Local Access Config
+**Local Access Config**
 
 `default_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -183,7 +183,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -195,13 +195,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="use-custom-cluster-role-bindings"></a>
 
-### Use Custom Cluster Role Bindings
+**Use Custom Cluster Role Bindings**
 
 `cluster_role_bindings` - (Optional) Cluster Role Binding List. List of active cluster role binding list for a K8s cluster. See [Cluster Role Bindings](#use-custom-cluster-role-bindings-cluster-role-bindings) below.
 
 <a id="use-custom-cluster-role-bindings-cluster-role-bindings"></a>
 
-### Use Custom Cluster Role Bindings Cluster Role Bindings
+**Use Custom Cluster Role Bindings Cluster Role Bindings**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -211,13 +211,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="use-custom-cluster-role-list"></a>
 
-### Use Custom Cluster Role List
+**Use Custom Cluster Role List**
 
 `cluster_roles` - (Optional) Cluster Role List. List of active cluster role list for a K8s cluster. See [Cluster Roles](#use-custom-cluster-role-list-cluster-roles) below.
 
 <a id="use-custom-cluster-role-list-cluster-roles"></a>
 
-### Use Custom Cluster Role List Cluster Roles
+**Use Custom Cluster Role List Cluster Roles**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -227,7 +227,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="use-custom-pod-security-admission"></a>
 
-### Use Custom Pod Security Admission
+**Use Custom Pod Security Admission**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -237,13 +237,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="use-custom-psp-list"></a>
 
-### Use Custom Psp List
+**Use Custom Psp List**
 
 `pod_security_policies` - (Optional) Pod Security Policy List. List of active Pod security policies for a K8s cluster. See [Pod Security Policies](#use-custom-psp-list-pod-security-policies) below.
 
 <a id="use-custom-psp-list-pod-security-policies"></a>
 
-### Use Custom Psp List Pod Security Policies
+**Use Custom Psp List Pod Security Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 

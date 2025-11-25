@@ -76,13 +76,13 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-data-types"></a>
 
-### Custom Data Types
+**Custom Data Types**
 
 `custom_data_type_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
 
 <a id="custom-data-types-custom-data-type-ref"></a>
 
-### Custom Data Types Custom Data Type Ref
+**Custom Data Types Custom Data Type Ref**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 

@@ -62,16 +62,14 @@ resource "f5xc_ike2" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set:
+-> **Only one of the following may be set:**
+`dh_group_set` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. See [Dh Group Set](#dh-group-set) below for details.
+<br>`disable_pfs` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-- `dh_group_set` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. See [Dh Group Set](#dh-group-set) below for details.
-- `disable_pfs` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
--> **Note:** Only one of the following may be set:
-
-- `ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
-- `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-- `use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Only one of the following may be set:**
+`ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
+<br>`ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+<br>`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

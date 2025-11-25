@@ -62,12 +62,11 @@ resource "f5xc_oidc_provider" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set:
-
-- `azure_oidc_spec_type` - (Optional) Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider. See [Azure Oidc Spec Type](#azure-oidc-spec-type) below for details.
-- `google_oidc_spec_type` - (Optional) Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider. See [Google Oidc Spec Type](#google-oidc-spec-type) below for details.
-- `oidc_v10_spec_type` - (Optional) OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider. See [Oidc V10 Spec Type](#oidc-v10-spec-type) below for details.
-- `okta_oidc_spec_type` - (Optional) Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider. See [Okta Oidc Spec Type](#okta-oidc-spec-type) below for details.
+-> **Only one of the following may be set:**
+`azure_oidc_spec_type` - (Optional) Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider. See [Azure Oidc Spec Type](#azure-oidc-spec-type) below for details.
+<br>`google_oidc_spec_type` - (Optional) Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider. See [Google Oidc Spec Type](#google-oidc-spec-type) below for details.
+<br>`oidc_v10_spec_type` - (Optional) OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider. See [Oidc V10 Spec Type](#oidc-v10-spec-type) below for details.
+<br>`okta_oidc_spec_type` - (Optional) Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider. See [Okta Oidc Spec Type](#okta-oidc-spec-type) below for details.
 
 `provider_type` - (Optional) Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC. Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`. Defaults to `DEFAULT` (`String`).
 

@@ -96,18 +96,16 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
 
--> **Note:** Only one of the following may be set:
-
-- `alternate_region` - (Optional) Alternate Azure Region Name. Name of the azure region which does not support availability zones (`String`).
-- `azure_region` - (Optional) Recommended Azure Region Name. Name of the azure region which supports availability zones (`String`).
+-> **Only one of the following may be set:**
+`alternate_region` - (Optional) Alternate Azure Region Name. Name of the azure region which does not support availability zones (`String`).
+<br>`azure_region` - (Optional) Recommended Azure Region Name. Name of the azure region which supports availability zones (`String`).
 
 `azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Azure Cred](#azure-cred) below for details.
 
--> **Note:** Only one of the following may be set:
-
-- `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-- `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
-- `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Only one of the following may be set:**
+`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+<br>`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
@@ -115,29 +113,26 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
--> **Note:** Only one of the following may be set:
-
-- `ingress_egress_gw` - (Optional) Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
-- `ingress_egress_gw_ar` - (Optional) Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones (`Block`).
-- `ingress_gw` - (Optional) Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region (`Block`).
-- `ingress_gw_ar` - (Optional) Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site (`Block`).
-- `voltstack_cluster` - (Optional) Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes (`Block`).
-- `voltstack_cluster_ar` - (Optional) Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes (`Block`).
+-> **Only one of the following may be set:**
+`ingress_egress_gw` - (Optional) Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+<br>`ingress_egress_gw_ar` - (Optional) Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones (`Block`).
+<br>`ingress_gw` - (Optional) Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region (`Block`).
+<br>`ingress_gw_ar` - (Optional) Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site (`Block`).
+<br>`voltstack_cluster` - (Optional) Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes (`Block`).
+<br>`voltstack_cluster_ar` - (Optional) Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes (`Block`).
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded (`Block`).
 
--> **Note:** Only one of the following may be set:
-
-- `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-- `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Only one of the following may be set:**
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+<br>`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `machine_type` - (Optional) Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options (`String`).
 
--> **Note:** Only one of the following may be set:
-
-- `no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-- `nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
-- `total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
+-> **Only one of the following may be set:**
+`no_worker_nodes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>`nodes_per_az` - (Optional) Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21 (`Number`).
+<br>`total_nodes` - (Optional) Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site (`Number`).
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen (`Block`).
 

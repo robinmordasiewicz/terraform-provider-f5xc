@@ -70,19 +70,17 @@ resource "f5xc_forward_proxy_policy" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set:
+-> **Only one of the following may be set:**
+`allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>`allow_list` - (Optional) Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP). See [Allow List](#allow-list) below for details.
+<br>`deny_list` - (Optional) Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP). See [Deny List](#deny-list) below for details.
+<br>`rule_list` - (Optional) Custom Rule List. List of custom rules. See [Rule List](#rule-list) below for details.
 
-- `allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-- `allow_list` - (Optional) Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP). See [Allow List](#allow-list) below for details.
-- `deny_list` - (Optional) Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP). See [Deny List](#deny-list) below for details.
-- `rule_list` - (Optional) Custom Rule List. List of custom rules. See [Rule List](#rule-list) below for details.
-
--> **Note:** Only one of the following may be set:
-
-- `any_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-- `drp_http_connect` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-- `network_connector` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Network Connector](#network-connector) below for details.
-- `proxy_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Proxy Label Selector](#proxy-label-selector) below for details.
+-> **Only one of the following may be set:**
+`any_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>`drp_http_connect` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>`network_connector` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Network Connector](#network-connector) below for details.
+<br>`proxy_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Proxy Label Selector](#proxy-label-selector) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

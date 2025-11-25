@@ -62,20 +62,17 @@ resource "f5xc_nfv_service" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set:
+-> **Only one of the following may be set:**
+`disable_https_management` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>`https_management` - (Optional) HTTPS based management. HTTPS based configuration. See [HTTPS Management](#https-management) below for details.
 
-- `disable_https_management` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-- `https_management` - (Optional) HTTPS based management. HTTPS based configuration. See [HTTPS Management](#https-management) below for details.
+-> **Only one of the following may be set:**
+`disable_ssh_access` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>`enabled_ssh_access` - (Optional) SSH based management. SSH based configuration. See [Enabled SSH Access](#enabled-ssh-access) below for details.
 
--> **Note:** Only one of the following may be set:
-
-- `disable_ssh_access` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-- `enabled_ssh_access` - (Optional) SSH based management. SSH based configuration. See [Enabled SSH Access](#enabled-ssh-access) below for details.
-
--> **Note:** Only one of the following may be set:
-
-- `f5_big_ip_aws_service` - (Optional) Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS. See [F5 Big IP AWS Service](#f5-big-ip-aws-service) below for details.
-- `palo_alto_fw_service` - (Optional) Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration (`Block`).
+-> **Only one of the following may be set:**
+`f5_big_ip_aws_service` - (Optional) Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS. See [F5 Big IP AWS Service](#f5-big-ip-aws-service) below for details.
+<br>`palo_alto_fw_service` - (Optional) Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration (`Block`).
 
 `timeouts` - (Optional) (`Block`).
 

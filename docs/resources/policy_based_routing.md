@@ -62,11 +62,10 @@ resource "f5xc_policy_based_routing" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `forward_proxy_pbr`, `network_pbr`
+-> **Note:** Only one of the following may be set:
 
-`forward_proxy_pbr` - (Optional) L3/L4 routing rule. Network(L3/L4) routing policy rule. See [Forward Proxy Pbr](#forward-proxy-pbr) below for details.
-
-`network_pbr` - (Optional) Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule. See [Network Pbr](#network-pbr) below for details.
+- `forward_proxy_pbr` - (Optional) L3/L4 routing rule. Network(L3/L4) routing policy rule. See [Forward Proxy Pbr](#forward-proxy-pbr) below for details.
+- `network_pbr` - (Optional) Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule. See [Network Pbr](#network-pbr) below for details.
 
 `forwarding_class_list` - (Optional) Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match. See [Forwarding Class List](#forwarding-class-list) below for details.
 

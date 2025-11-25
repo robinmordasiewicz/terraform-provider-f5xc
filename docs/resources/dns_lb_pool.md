@@ -62,27 +62,22 @@ resource "f5xc_dns_lb_pool" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `a_pool`, `aaaa_pool`, `cname_pool`, `mx_pool`, `srv_pool`
+-> **Note:** Only one of the following may be set:
 
-`a_pool` - (Optional) Pool for A Record. See [A Pool](#a-pool) below for details.
-
-`aaaa_pool` - (Optional) Pool for AAAA Record. See [Aaaa Pool](#aaaa-pool) below for details.
-
-`cname_pool` - (Optional) Pool for CNAME Record. See [Cname Pool](#cname-pool) below for details.
-
-`mx_pool` - (Optional) Pool for MX Record. See [Mx Pool](#mx-pool) below for details.
-
-`srv_pool` - (Optional) Pool for SRV Record. See [Srv Pool](#srv-pool) below for details.
+- `a_pool` - (Optional) Pool for A Record. See [A Pool](#a-pool) below for details.
+- `aaaa_pool` - (Optional) Pool for AAAA Record. See [Aaaa Pool](#aaaa-pool) below for details.
+- `cname_pool` - (Optional) Pool for CNAME Record. See [Cname Pool](#cname-pool) below for details.
+- `mx_pool` - (Optional) Pool for MX Record. See [Mx Pool](#mx-pool) below for details.
+- `srv_pool` - (Optional) Pool for SRV Record. See [Srv Pool](#srv-pool) below for details.
 
 `load_balancing_mode` - (Optional) LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority. Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`. Defaults to `ROUND_ROBIN` (`String`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
--> **Note:** Only one of the following may be set: `ttl`, `use_rrset_ttl`
+-> **Note:** Only one of the following may be set:
 
-`ttl` - (Optional) TTL. Custom TTL in seconds (default 30) for responses from this pool (`Number`).
-
-`use_rrset_ttl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `ttl` - (Optional) TTL. Custom TTL in seconds (default 30) for responses from this pool (`Number`).
+- `use_rrset_ttl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 ### Attributes Reference
 

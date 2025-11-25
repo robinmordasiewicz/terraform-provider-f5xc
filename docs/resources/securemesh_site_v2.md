@@ -62,85 +62,66 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `active_enhanced_firewall_policies`, `no_network_policy`
+-> **Note:** Only one of the following may be set:
 
-`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
+- `active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
+- `no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
 
--> **Note:** Only one of the following may be set: `active_forward_proxy_policies`, `no_forward_proxy`
-
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
+- `no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `admin_user_credentials` - (Optional) Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access. See [Admin User Credentials](#admin-user-credentials) below for details.
 
--> **Note:** Only one of the following may be set: `aws`, `azure`, `baremetal`, `equinix`, `gcp`, `kvm`, `nutanix`, `oci`, `openstack`, `vmware`
+-> **Note:** Only one of the following may be set:
 
-`aws` - (Optional) AWS Provider Type. AWS Provider Type. See [AWS](#aws) below for details.
+- `aws` - (Optional) AWS Provider Type. AWS Provider Type. See [AWS](#aws) below for details.
+- `azure` - (Optional) Azure Provider Type. Azure Provider Type. See [Azure](#azure) below for details.
+- `baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type (`Block`).
+- `equinix` - (Optional) Equinix Provider Type. Equinix Provider Type (`Block`).
+- `gcp` - (Optional) GCP Provider Type. GCP Provider Type (`Block`).
+- `kvm` - (Optional) KVM Provider Type. KVM Provider Type (`Block`).
+- `nutanix` - (Optional) Nutanix Provider Type. Nutanix Provider Type (`Block`).
+- `oci` - (Optional) OCI Provider Type. OCI Provider Type (`Block`).
+- `openstack` - (Optional) Openstack Provider Type. Openstack Provider Type (`Block`).
+- `vmware` - (Optional) VMware Provider Type. VMware Provider Type (`Block`).
 
-`azure` - (Optional) Azure Provider Type. Azure Provider Type. See [Azure](#azure) below for details.
+-> **Note:** Only one of the following may be set:
 
-`baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type (`Block`).
+- `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site (`Block`).
 
-`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`gcp` - (Optional) GCP Provider Type. GCP Provider Type (`Block`).
+- `custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy (`Block`).
+- `f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`kvm` - (Optional) KVM Provider Type. KVM Provider Type (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`nutanix` - (Optional) Nutanix Provider Type. Nutanix Provider Type (`Block`).
+- `custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy (`Block`).
+- `no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`oci` - (Optional) OCI Provider Type. OCI Provider Type (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`openstack` - (Optional) Openstack Provider Type. Openstack Provider Type (`Block`).
+- `dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+- `no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`vmware` - (Optional) VMware Provider Type. VMware Provider Type (`Block`).
+-> **Note:** Only one of the following may be set:
 
--> **Note:** Only one of the following may be set: `block_all_services`, `blocked_services`
+- `dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+- `no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `site_mesh_group_on_slo` - (Optional) Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used (`Block`).
 
-`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site (`Block`).
+- `disable_ha` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `enable_ha` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Note:** Only one of the following may be set: `custom_proxy`, `f5_proxy`
+-> **Note:** Only one of the following may be set:
 
-`custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy (`Block`).
-
-`f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
--> **Note:** Only one of the following may be set: `custom_proxy_bypass`, `no_proxy_bypass`
-
-`custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy (`Block`).
-
-`no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
--> **Note:** Only one of the following may be set: `dc_cluster_group_sli`, `no_s2s_connectivity_sli`
-
-`dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-
-`no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
--> **Note:** Only one of the following may be set: `dc_cluster_group_slo`, `no_s2s_connectivity_slo`, `site_mesh_group_on_slo`
-
-`dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-
-`no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`site_mesh_group_on_slo` - (Optional) Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used (`Block`).
-
--> **Note:** Only one of the following may be set: `disable_ha`, `enable_ha`
-
-`disable_ha` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`enable_ha` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
--> **Note:** Only one of the following may be set: `disable_url_categorization`, `enable_url_categorization`
-
-`disable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`enable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `disable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `enable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site (`Block`).
 
@@ -148,11 +129,10 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `local_vrf` - (Optional) Local VRF Settings. There can be two local VRFs on each site. The Site Local Outside (SLO) local VRF is used to connect WAN side workloads to this site and to connect the site to F5 Distributed Cloud for management. All sites are required to have an SLO local VRF. The Site Local Inside (SLI) local VRF is used to connect LAN side workloads to this site. SLI local VRF is optional (`Block`).
 
--> **Note:** Only one of the following may be set: `log_receiver`, `logs_streaming_disabled`
+-> **Note:** Only one of the following may be set:
 
-`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-
-`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+- `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen (`Block`).
 

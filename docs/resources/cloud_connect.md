@@ -62,11 +62,10 @@ resource "f5xc_cloud_connect" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `aws_tgw_site`, `azure_vnet_site`
+-> **Note:** Only one of the following may be set:
 
-`aws_tgw_site` - (Optional) AWS TGW Site Type. Cloud Connect AWS TGW Site Type. See [AWS Tgw Site](#aws-tgw-site) below for details.
-
-`azure_vnet_site` - (Optional) Azure VNET Site Type. Cloud Connect Azure VNET Site Type. See [Azure Vnet Site](#azure-vnet-site) below for details.
+- `aws_tgw_site` - (Optional) AWS TGW Site Type. Cloud Connect AWS TGW Site Type. See [AWS Tgw Site](#aws-tgw-site) below for details.
+- `azure_vnet_site` - (Optional) Azure VNET Site Type. Cloud Connect Azure VNET Site Type. See [Azure Vnet Site](#azure-vnet-site) below for details.
 
 `segment` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Segment](#segment) below for details.
 

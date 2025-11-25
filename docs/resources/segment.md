@@ -60,9 +60,9 @@ resource "f5xc_segment" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `enable`
+-> **Note:** Only one of the following may be set:
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

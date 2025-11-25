@@ -59,17 +59,13 @@ resource "f5xc_cloud_credentials" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `aws_assume_role`, `aws_secret_key`, `azure_client_secret`, `azure_pfx_certificate`, `gcp_cred_file`
+-> **Note:** Only one of the following may be set:
 
-`aws_assume_role` - (Optional) AWS Assume Role to Handle Delegated Access. AWS Assume Role to Handle Delegated Access. See [AWS Assume Role](#aws-assume-role) below for details.
-
-`aws_secret_key` - (Optional) AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type. See [AWS Secret Key](#aws-secret-key) below for details.
-
-`azure_client_secret` - (Optional) Azure Client Secret. Azure Credentials Client Secret type. See [Azure Client Secret](#azure-client-secret) below for details.
-
-`azure_pfx_certificate` - (Optional) Client Certificate. Azure Credentials Client Certificate type. See [Azure Pfx Certificate](#azure-pfx-certificate) below for details.
-
-`gcp_cred_file` - (Optional) GCP Credentials. GCP Credentials type. See [GCP Cred File](#gcp-cred-file) below for details.
+- `aws_assume_role` - (Optional) AWS Assume Role to Handle Delegated Access. AWS Assume Role to Handle Delegated Access. See [AWS Assume Role](#aws-assume-role) below for details.
+- `aws_secret_key` - (Optional) AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type. See [AWS Secret Key](#aws-secret-key) below for details.
+- `azure_client_secret` - (Optional) Azure Client Secret. Azure Credentials Client Secret type. See [Azure Client Secret](#azure-client-secret) below for details.
+- `azure_pfx_certificate` - (Optional) Client Certificate. Azure Credentials Client Certificate type. See [Azure Pfx Certificate](#azure-pfx-certificate) below for details.
+- `gcp_cred_file` - (Optional) GCP Credentials. GCP Credentials type. See [GCP Cred File](#gcp-cred-file) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

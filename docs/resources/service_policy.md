@@ -64,27 +64,20 @@ resource "f5xc_service_policy" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `allow_all_requests`, `allow_list`, `deny_all_requests`, `deny_list`, `rule_list`
+-> **Note:** Only one of the following may be set:
 
-`allow_all_requests` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `allow_all_requests` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `allow_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Allow List](#allow-list) below for details.
+- `deny_all_requests` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `deny_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Deny List](#deny-list) below for details.
+- `rule_list` - (Optional) Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm. See [Rule List](#rule-list) below for details.
 
-`allow_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Allow List](#allow-list) below for details.
+-> **Note:** Only one of the following may be set:
 
-`deny_all_requests` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`deny_list` - (Optional) Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria. See [Deny List](#deny-list) below for details.
-
-`rule_list` - (Optional) Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm. See [Rule List](#rule-list) below for details.
-
--> **Note:** Only one of the following may be set: `any_server`, `server_name`, `server_name_matcher`, `server_selector`
-
-`any_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`server_name` - (Optional) Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name (`String`).
-
-`server_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
-
-`server_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE (`Block`).
+- `any_server` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `server_name` - (Optional) Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name (`String`).
+- `server_name_matcher` - (Optional) Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions (`Block`).
+- `server_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE (`Block`).
 
 `timeouts` - (Optional) (`Block`).
 

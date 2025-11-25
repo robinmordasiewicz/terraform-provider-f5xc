@@ -71,69 +71,55 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `active_service_policies`, `no_service_policies`, `service_policies_from_namespace`
+-> **Note:** Only one of the following may be set:
 
-`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
+- `active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
+- `no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **Note:** Only one of the following may be set:
 
-`service_policies_from_namespace` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
+- `advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
+- `advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Note:** Only one of the following may be set: `advertise_custom`, `advertise_on_public`, `advertise_on_public_default_vip`, `do_not_advertise`
+-> **Note:** Only one of the following may be set:
 
-`advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
-
-`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
-
-`advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
--> **Note:** Only one of the following may be set: `default_lb_with_sni`, `no_sni`, `sni`
-
-`default_lb_with_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`no_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `default_lb_with_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `no_sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `sni` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by Volterra. This requires the domain to be delegated to F5XC using the Delegated Domain feature (`Bool`).
 
--> **Note:** Only one of the following may be set: `do_not_retract_cluster`, `retract_cluster`
+-> **Note:** Only one of the following may be set:
 
-`do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `do_not_retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `retract_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if SNI is activated on the given TCP Load Balancer. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system (`List`).
 
--> **Note:** Only one of the following may be set: `hash_policy_choice_least_active`, `hash_policy_choice_random`, `hash_policy_choice_round_robin`, `hash_policy_choice_source_ip_stickiness`
+-> **Note:** Only one of the following may be set:
 
-`hash_policy_choice_least_active` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`hash_policy_choice_random` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`hash_policy_choice_round_robin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`hash_policy_choice_source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `hash_policy_choice_least_active` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `hash_policy_choice_random` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `hash_policy_choice_round_robin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `hash_policy_choice_source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `idle_timeout` - (Optional) Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds (`Number`).
 
--> **Note:** Only one of the following may be set: `listen_port`, `port_ranges`
+-> **Note:** Only one of the following may be set:
 
-`listen_port` - (Optional) Listen Port. Listen Port for this load balancer (`Number`).
-
-`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+- `listen_port` - (Optional) Listen Port. Listen Port for this load balancer (`Number`).
+- `port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
 `origin_pools_weights` - (Optional) Origin Pools. Origin pools and weights used for this load balancer. See [Origin Pools Weights](#origin-pools-weights) below for details.
 
--> **Note:** Only one of the following may be set: `tcp`, `tls_tcp`, `tls_tcp_auto_cert`
+-> **Note:** Only one of the following may be set:
 
-`tcp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`tls_tcp` - (Optional) BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates. See [TLS TCP](#tls-tcp) below for details.
-
-`tls_tcp_auto_cert` - (Optional) TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates (`Block`).
+- `tcp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+- `tls_tcp` - (Optional) BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates. See [TLS TCP](#tls-tcp) below for details.
+- `tls_tcp_auto_cert` - (Optional) TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

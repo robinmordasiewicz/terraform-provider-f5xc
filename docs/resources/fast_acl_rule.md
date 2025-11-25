@@ -64,11 +64,10 @@ resource "f5xc_fast_acl_rule" "example" {
 
 `action` - (Optional) Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic. See [Action](#action) below for details.
 
--> **Note:** Only one of the following may be set: `ip_prefix_set`, `prefix`
+-> **Note:** Only one of the following may be set:
 
-`ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#ip-prefix-set) below for details.
-
-`prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#prefix) below for details.
+- `ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#ip-prefix-set) below for details.
+- `prefix` - (Optional) IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes. See [Prefix](#prefix) below for details.
 
 `port` - (Optional) Source Ports. L4 port numbers to match. See [Port](#port) below for details.
 

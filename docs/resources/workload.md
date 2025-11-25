@@ -67,15 +67,12 @@ resource "f5xc_workload" "example" {
 
 ### Spec Argument Reference
 
--> **Note:** Only one of the following may be set: `job`, `service`, `simple_service`, `stateful_service`
+-> **Note:** Only one of the following may be set:
 
-`job` - (Optional) Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc. See [Job](#job) below for details.
-
-`service` - (Optional) ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc. See [Service](#service) below for details.
-
-`simple_service` - (Optional) SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP (`Block`).
-
-`stateful_service` - (Optional) StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc (`Block`).
+- `job` - (Optional) Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc. See [Job](#job) below for details.
+- `service` - (Optional) ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc. See [Service](#service) below for details.
+- `simple_service` - (Optional) SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP (`Block`).
+- `stateful_service` - (Optional) StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc (`Block`).
 
 `timeouts` - (Optional) (`Block`).
 

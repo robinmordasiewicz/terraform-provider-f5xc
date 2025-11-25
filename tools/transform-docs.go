@@ -350,11 +350,11 @@ func main() {
 		fmt.Printf("Transformed: docs/index.md\n")
 	}
 
-	// Report documents that were split to guides
+	// Report documents that were split into nested blocks pages
 	if len(splitDocs) > 0 {
-		fmt.Fprintf(os.Stderr, "\n📚 INFO: %d document(s) were split into guide pages:\n", len(splitDocs))
+		fmt.Fprintf(os.Stderr, "\n📚 INFO: %d document(s) were split into nested blocks pages:\n", len(splitDocs))
 		for _, doc := range splitDocs {
-			fmt.Fprintf(os.Stderr, "   • docs/guides/%s_nested_blocks.md\n", doc)
+			fmt.Fprintf(os.Stderr, "   • docs/resources/%s_nested_blocks.md\n", doc)
 		}
 		fmt.Fprintf(os.Stderr, "\n")
 	}
@@ -1551,22 +1551,20 @@ func extractNestedBlocks(content string) []nestedBlockInfo {
 	return blocks
 }
 
-// generateGuidePage creates a guide page for nested block documentation
-func generateGuidePage(resourceName, subcategory string, blocks []nestedBlockInfo) error {
+// generateNestedBlocksPage creates a nested blocks page in docs/resources/
+func generateNestedBlocksPage(resourceName, subcategory string, blocks []nestedBlockInfo) error {
 	if len(blocks) == 0 {
 		return nil
 	}
 
-	// Create guides directory if it doesn't exist
-	guidesDir := "docs/guides"
-	if err := os.MkdirAll(guidesDir, 0755); err != nil {
-		return fmt.Errorf("failed to create guides directory: %w", err)
-	}
+	// Output to docs/resources/ to keep related files together
+	// (docs/guides/ is reserved for tutorials)
+	resourcesDir := "docs/resources"
 
-	// Generate guide filename
-	guideFile := filepath.Join(guidesDir, resourceName+"_nested_blocks.md")
+	// Generate nested blocks filename
+	nestedFile := filepath.Join(resourcesDir, resourceName+"_nested_blocks.md")
 
-	// Build guide content
+	// Build nested blocks page content
 	var content strings.Builder
 
 	// Write frontmatter
@@ -1580,7 +1578,7 @@ func generateGuidePage(resourceName, subcategory string, blocks []nestedBlockInf
 	// Write header
 	content.WriteString(fmt.Sprintf("# %s Nested Blocks\n\n", displayName))
 	content.WriteString(fmt.Sprintf("This page contains detailed documentation for nested blocks in the `f5xc_%s` resource.\n\n", resourceName))
-	content.WriteString(fmt.Sprintf("For the main resource documentation, see [f5xc_%s](/docs/resources/%s).\n\n", resourceName, resourceName))
+	content.WriteString(fmt.Sprintf("For the main resource documentation, see [f5xc_%s](./resources/%s).\n\n", resourceName, resourceName))
 
 	// Write table of contents
 	content.WriteString("## Contents\n\n")
@@ -1600,10 +1598,10 @@ func generateGuidePage(resourceName, subcategory string, blocks []nestedBlockInf
 	// Normalize blank lines
 	result := normalizeBlankLines(content.String())
 
-	return os.WriteFile(guideFile, []byte(result), 0644)
+	return os.WriteFile(nestedFile, []byte(result), 0644)
 }
 
-// splitLargeDocument splits a large document into main page + guide pages
+// splitLargeDocument splits a large document into main page + nested blocks page
 // Returns the modified main content and generates guide pages
 func splitLargeDocument(filePath string, content string) (string, error) {
 	lines := strings.Split(content, "\n")
@@ -1651,9 +1649,9 @@ func splitLargeDocument(filePath string, content string) (string, error) {
 	resourceName := strings.TrimSuffix(baseName, ".md")
 	subcategory := getSubcategory(filePath)
 
-	// Generate guide page
-	if err := generateGuidePage(resourceName, subcategory, blocks); err != nil {
-		return content, fmt.Errorf("failed to generate guide page: %w", err)
+	// Generate nested blocks page in docs/resources/
+	if err := generateNestedBlocksPage(resourceName, subcategory, blocks); err != nil {
+		return content, fmt.Errorf("failed to generate nested blocks page: %w", err)
 	}
 
 	// Build modified main content with link to guide
@@ -1664,10 +1662,10 @@ func splitLargeDocument(filePath string, content string) (string, error) {
 		output.WriteString(lines[i] + "\n")
 	}
 
-	// Add link to guide page instead of inline nested blocks
+	// Add link to nested blocks page instead of inline nested blocks
 	output.WriteString("\n---\n\n")
 	output.WriteString("## Nested Block Reference\n\n")
-	output.WriteString(fmt.Sprintf("This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [%s Nested Blocks Guide](/docs/guides/%s_nested_blocks).\n\n",
+	output.WriteString(fmt.Sprintf("This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see [%s Nested Blocks](./%s_nested_blocks).\n\n",
 		toTitleCase(resourceName), resourceName))
 
 	// Write import section if exists

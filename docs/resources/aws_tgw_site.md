@@ -107,25 +107,25 @@ resource "f5xc_aws_tgw_site" "example" {
 
 `aws_parameters` - (Optional) AWS Service VPC and TGW. Setup AWS services VPC, transit gateway and site. See [AWS Parameters](#aws-parameters) below for details.
 
--> **Only one of the following may be set:**
-`block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
-<br>`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+<br>&#x2022; `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
 `custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
 
--> **Only one of the following may be set:**
-`direct_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](#direct-connect-enabled) below for details.
-<br>`private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration (`Block`).
+-> **One of the following:**
+&#x2022; `direct_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](#direct-connect-enabled) below for details.
+<br>&#x2022; `private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration (`Block`).
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
 
--> **Only one of the following may be set:**
-`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
-<br>`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
+<br>&#x2022; `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 

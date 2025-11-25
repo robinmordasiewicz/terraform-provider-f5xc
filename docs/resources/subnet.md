@@ -66,10 +66,10 @@ resource "f5xc_subnet" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`connect_to_layer2` - (Optional) Subnet connection to Layer2 Interface. See [Connect To Layer2](#connect-to-layer2) below for details.
-<br>`connect_to_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`isolated_nw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `connect_to_layer2` - (Optional) Subnet connection to Layer2 Interface. See [Connect To Layer2](#connect-to-layer2) below for details.
+<br>&#x2022; `connect_to_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `isolated_nw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `site_subnet_params` - (Optional) Site Subnet Parameters. Configure subnet parameters per site. See [Site Subnet Params](#site-subnet-params) below for details.
 

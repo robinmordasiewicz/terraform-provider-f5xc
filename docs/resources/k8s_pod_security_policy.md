@@ -66,9 +66,9 @@ resource "f5xc_k8s_pod_security_policy" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`psp_spec` - (Optional) Pod Security Policy Specification. Form based pod security specification. See [Psp Spec](#psp-spec) below for details.
-<br>`yaml` - (Optional) K8s YAML. K8s YAML for Pod Security Policy (`String`).
+-> **One of the following:**
+&#x2022; `psp_spec` - (Optional) Pod Security Policy Specification. Form based pod security specification. See [Psp Spec](#psp-spec) below for details.
+<br>&#x2022; `yaml` - (Optional) K8s YAML. K8s YAML for Pod Security Policy (`String`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

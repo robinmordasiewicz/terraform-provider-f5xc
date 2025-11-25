@@ -66,11 +66,11 @@ resource "f5xc_endpoint" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`dns_name` - (Optional) Endpoint Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
-<br>`dns_name_advanced` - (Optional) DNS Name Advanced Type. Specifies name and TTL used for DNS resolution. See [DNS Name Advanced](#dns-name-advanced) below for details.
-<br>`ip` - (Optional) Endpoint IP Address. Endpoint is reachable at the given IPv4/IPv6 address (`String`).
-<br>`service_info` - (Optional) Service Info Type. Specifies whether endpoint service is discovered by name or labels. See [Service Info](#service-info) below for details.
+-> **One of the following:**
+&#x2022; `dns_name` - (Optional) Endpoint Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name (`String`).
+<br>&#x2022; `dns_name_advanced` - (Optional) DNS Name Advanced Type. Specifies name and TTL used for DNS resolution. See [DNS Name Advanced](#dns-name-advanced) below for details.
+<br>&#x2022; `ip` - (Optional) Endpoint IP Address. Endpoint is reachable at the given IPv4/IPv6 address (`String`).
+<br>&#x2022; `service_info` - (Optional) Service Info Type. Specifies whether endpoint service is discovered by name or labels. See [Service Info](#service-info) below for details.
 
 `health_check_port` - (Optional) Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port (`Number`).
 

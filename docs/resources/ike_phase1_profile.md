@@ -72,17 +72,17 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 `encryption_algos` - (Optional) Configure Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT` (`List`).
 
--> **Only one of the following may be set:**
-`ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
-<br>`ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-<br>`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
+<br>&#x2022; `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+<br>&#x2022; `use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `prf` - (Optional) PseudoRandomFunction. Select PseudoRandomFunction for IKE SA. Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`. Defaults to `PRF_DEFAULT` (`List`).
 
--> **Only one of the following may be set:**
-`reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`reauth_timeout_days` - (Optional) Days. Set Duration in days. See [Reauth Timeout Days](#reauth-timeout-days) below for details.
-<br>`reauth_timeout_hours` - (Optional) Hours. Input Hours. See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
+-> **One of the following:**
+&#x2022; `reauth_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `reauth_timeout_days` - (Optional) Days. Set Duration in days. See [Reauth Timeout Days](#reauth-timeout-days) below for details.
+<br>&#x2022; `reauth_timeout_hours` - (Optional) Hours. Input Hours. See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

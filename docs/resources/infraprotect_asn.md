@@ -64,9 +64,9 @@ resource "f5xc_infraprotect_asn" "example" {
 
 `asn` - (Optional) ASN. 2-byte or 4-byte Autonomous System Number (ASN) (`Number`).
 
--> **Only one of the following may be set:**
-`bgp_session_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`bgp_session_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `bgp_session_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `bgp_session_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

@@ -66,12 +66,12 @@ resource "f5xc_network_interface" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration. See [Dedicated Interface](#dedicated-interface) below for details.
-<br>`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration. See [Dedicated Management Interface](#dedicated-management-interface) below for details.
-<br>`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Ethernet Interface](#ethernet-interface) below for details.
-<br>`layer2_interface` - (Optional) Layer2 Interface. Layer2 Interface Configuration. See [Layer2 Interface](#layer2-interface) below for details.
-<br>`tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration (`Block`).
+-> **One of the following:**
+&#x2022; `dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration. See [Dedicated Interface](#dedicated-interface) below for details.
+<br>&#x2022; `dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration. See [Dedicated Management Interface](#dedicated-management-interface) below for details.
+<br>&#x2022; `ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Ethernet Interface](#ethernet-interface) below for details.
+<br>&#x2022; `layer2_interface` - (Optional) Layer2 Interface. Layer2 Interface Configuration. See [Layer2 Interface](#layer2-interface) below for details.
+<br>&#x2022; `tunnel_interface` - (Optional) Tunnel Interface. Tunnel Interface Configuration (`Block`).
 
 `timeouts` - (Optional) (`Block`).
 

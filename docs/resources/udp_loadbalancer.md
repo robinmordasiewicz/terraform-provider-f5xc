@@ -72,11 +72,11 @@ resource "f5xc_udp_loadbalancer" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
-<br>`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
-<br>`advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
+<br>&#x2022; `advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
+<br>&#x2022; `advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `dns_volterra_managed` - (Optional) Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain to be delegated to F5 Distributed Cloud using the Delegated Domain feature or a DNS CNAME record must be created in your DNS provider's portal (`Bool`).
 
@@ -84,16 +84,16 @@ resource "f5xc_udp_loadbalancer" "example" {
 
 `enable_per_packet_load_balancing` - (Optional) Per Packet Load Balancing. Per packet load balancing: If disabled (default): First packet identified by source IP/port and local IP/port is sent to an upstream server as the load balancing algorithm dictates, and subsequent packets with the same identity are forwarded to the same upstream server without rechecking the algorithm If enabled: Each packet is directed to an upstream server as the load balancing algorithm dictates (`Bool`).
 
--> **Only one of the following may be set:**
-`hash_policy_choice_random` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`hash_policy_choice_round_robin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`hash_policy_choice_source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `hash_policy_choice_random` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `hash_policy_choice_round_robin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `hash_policy_choice_source_ip_stickiness` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `idle_timeout` - (Optional) Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds (`Number`).
 
--> **Only one of the following may be set:**
-`listen_port` - (Optional) Listen Port. Listen Port for this load balancer (`Number`).
-<br>`port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
+-> **One of the following:**
+&#x2022; `listen_port` - (Optional) Listen Port. Listen Port for this load balancer (`Number`).
+<br>&#x2022; `port_ranges` - (Optional) Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-' (`String`).
 
 `origin_pools_weights` - (Optional) Origin Pools. Origin pools with weights and priorities used for this load balancer. See [Origin Pools Weights](#origin-pools-weights) below for details.
 

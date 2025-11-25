@@ -66,9 +66,9 @@ resource "f5xc_apm" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`aws_site_type_choice` - (Optional) AWS Transit Gateway Site choice. Virtual F5 BIG-IP APM service to be deployed as external service on AWS Transit Gateway Site. See [AWS Site Type Choice](#aws-site-type-choice) below for details.
-<br>`baremetal_site_type_choice` - (Optional) Virtual BIG-IP on App Stack Bare Metal Site. Virtual BIG-IP specification for App Stack Bare Metal Site. See [Baremetal Site Type Choice](#baremetal-site-type-choice) below for details.
+-> **One of the following:**
+&#x2022; `aws_site_type_choice` - (Optional) AWS Transit Gateway Site choice. Virtual F5 BIG-IP APM service to be deployed as external service on AWS Transit Gateway Site. See [AWS Site Type Choice](#aws-site-type-choice) below for details.
+<br>&#x2022; `baremetal_site_type_choice` - (Optional) Virtual BIG-IP on App Stack Bare Metal Site. Virtual BIG-IP specification for App Stack Bare Metal Site. See [Baremetal Site Type Choice](#baremetal-site-type-choice) below for details.
 
 `https_management` - (Optional) HTTPS based management. HTTPS based configuration. See [HTTPS Management](#https-management) below for details.
 

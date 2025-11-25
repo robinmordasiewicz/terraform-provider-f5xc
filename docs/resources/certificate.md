@@ -64,10 +64,10 @@ resource "f5xc_certificate" "example" {
 
 `certificate_url` - (Optional) Certificate. Certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
--> **Only one of the following may be set:**
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
-<br>`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
+<br>&#x2022; `disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#private-key) below for details.
 

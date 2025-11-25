@@ -66,42 +66,42 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`action_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `action_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`destination_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`destination_prefix_single` - (Optional) Prefix. Prefix (`String`).
+-> **One of the following:**
+&#x2022; `destination_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `destination_prefix_single` - (Optional) Prefix. Prefix (`String`).
 
--> **Only one of the following may be set:**
-`fragments_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`fragments_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `fragments_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `fragments_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`protocol_ah` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`protocol_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`protocol_esp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`protocol_gre` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`protocol_icmp` - (Optional) ICMP Protocol. x-required ICMP Protocol. See [Protocol ICMP](#protocol-icmp) below for details.
-<br>`protocol_icmp6` - (Optional) ICMP6 Protocol. x-required ICMP6 Protocol. See [Protocol Icmp6](#protocol-icmp6) below for details.
-<br>`protocol_ipv6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`protocol_tcp` - (Optional) TCP Protocol. x-required TCP Protocol. See [Protocol TCP](#protocol-tcp) below for details.
-<br>`protocol_udp` - (Optional) UDP Protocol. x-required UDP Protocol. See [Protocol UDP](#protocol-udp) below for details.
+-> **One of the following:**
+&#x2022; `protocol_ah` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `protocol_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `protocol_esp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `protocol_gre` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `protocol_icmp` - (Optional) ICMP Protocol. x-required ICMP Protocol. See [Protocol ICMP](#protocol-icmp) below for details.
+<br>&#x2022; `protocol_icmp6` - (Optional) ICMP6 Protocol. x-required ICMP6 Protocol. See [Protocol Icmp6](#protocol-icmp6) below for details.
+<br>&#x2022; `protocol_ipv6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `protocol_tcp` - (Optional) TCP Protocol. x-required TCP Protocol. See [Protocol TCP](#protocol-tcp) below for details.
+<br>&#x2022; `protocol_udp` - (Optional) UDP Protocol. x-required UDP Protocol. See [Protocol UDP](#protocol-udp) below for details.
 
--> **Only one of the following may be set:**
-`source_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`source_prefix_single` - (Optional) Prefix. Prefix (`String`).
+-> **One of the following:**
+&#x2022; `source_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `source_prefix_single` - (Optional) Prefix. Prefix (`String`).
 
--> **Only one of the following may be set:**
-`state_off` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`state_on` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `state_off` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `state_on` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 
--> **Only one of the following may be set:**
-`version_ipv4` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`version_ipv6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `version_ipv4` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `version_ipv6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 ### Attributes Reference
 

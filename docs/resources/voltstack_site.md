@@ -78,57 +78,57 @@ resource "f5xc_voltstack_site" "example" {
 
 `address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
 
--> **Only one of the following may be set:**
-`allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+-> **One of the following:**
+&#x2022; `allow_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `deny_all_usb` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `usb_policy` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
 
--> **Only one of the following may be set:**
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
-<br>`default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+<br>&#x2022; `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
-<br>`no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
+<br>&#x2022; `no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
 
 `custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
 
--> **Only one of the following may be set:**
-`custom_network_config` - (Optional) VssNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
-<br>`default_network_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `custom_network_config` - (Optional) VssNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
+<br>&#x2022; `default_network_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`custom_storage_config` - (Optional) VssStorageConfiguration (`Block`).
-<br>`default_storage_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `custom_storage_config` - (Optional) VssStorageConfiguration (`Block`).
+<br>&#x2022; `default_storage_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration (`Block`).
+-> **One of the following:**
+&#x2022; `default_sriov_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `sriov_interfaces` - (Optional) Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration (`Block`).
 
--> **Only one of the following may be set:**
-`disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU (`Block`).
+-> **One of the following:**
+&#x2022; `disable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `enable_gpu` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `enable_vgpu` - (Optional) vGPU Configuration. Licensing configuration for NVIDIA vGPU (`Block`).
 
--> **Only one of the following may be set:**
-`disable_vm` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`enable_vm` - (Optional) VM Configuration. VMs support configuration (`Block`).
+-> **One of the following:**
+&#x2022; `disable_vm` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `enable_vm` - (Optional) VM Configuration. VMs support configuration (`Block`).
 
--> **Only one of the following may be set:**
-`k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-<br>`no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `k8s_cluster` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+<br>&#x2022; `no_k8s_cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded (`Block`).
 
--> **Only one of the following may be set:**
-`local_control_plane` - (Optional) Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc (`Block`).
-<br>`no_local_control_plane` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `local_control_plane` - (Optional) Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc (`Block`).
+<br>&#x2022; `no_local_control_plane` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-<br>`logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
+<br>&#x2022; `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes (`Block`).
 

@@ -69,9 +69,9 @@ resource "f5xc_dns_zone" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`primary` - (Optional) PrimaryDNSCreateSpecType. See [Primary](#primary) below for details.
-<br>`secondary` - (Optional) SecondaryDNSCreateSpecType (`Block`).
+-> **One of the following:**
+&#x2022; `primary` - (Optional) PrimaryDNSCreateSpecType. See [Primary](#primary) below for details.
+<br>&#x2022; `secondary` - (Optional) SecondaryDNSCreateSpecType (`Block`).
 
 `timeouts` - (Optional) (`Block`).
 

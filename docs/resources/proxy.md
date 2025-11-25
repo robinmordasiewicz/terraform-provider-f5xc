@@ -55,27 +55,27 @@ resource "f5xc_proxy" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br>`no_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
+<br>&#x2022; `no_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
 
--> **Only one of the following may be set:**
-`do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`site_virtual_sites` - (Optional) Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites (`Block`).
+-> **One of the following:**
+&#x2022; `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `site_virtual_sites` - (Optional) Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites (`Block`).
 
--> **Only one of the following may be set:**
-`dynamic_proxy` - (Optional) DynamicProxyType. See [Dynamic Proxy](#dynamic-proxy) below for details.
-<br>`http_proxy` - (Optional) HTTP Connect Proxy. Parameters for HTTP Connect Proxy (`Block`).
+-> **One of the following:**
+&#x2022; `dynamic_proxy` - (Optional) DynamicProxyType. See [Dynamic Proxy](#dynamic-proxy) below for details.
+<br>&#x2022; `http_proxy` - (Optional) HTTP Connect Proxy. Parameters for HTTP Connect Proxy (`Block`).
 
--> **Only one of the following may be set:**
-`no_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception (`Block`).
+-> **One of the following:**
+&#x2022; `no_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `tls_intercept` - (Optional) Configuration for TLS interception. Configuration to enable TLS interception (`Block`).
 
--> **Only one of the following may be set:**
-`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) (`Block`).
 

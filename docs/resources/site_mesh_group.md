@@ -69,14 +69,14 @@ resource "f5xc_site_mesh_group" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`disable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`enable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `disable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `enable_re_fallback` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`full_mesh` - (Optional) Full Mesh. Details of Full Mesh Group Type. See [Full Mesh](#full-mesh) below for details.
-<br>`hub_mesh` - (Optional) Hub Full Mesh. Details of Hub Full Mesh Group Type. See [Hub Mesh](#hub-mesh) below for details.
-<br>`spoke_mesh` - (Optional) Spoke. Details of Spoke Mesh Group Type. See [Spoke Mesh](#spoke-mesh) below for details.
+-> **One of the following:**
+&#x2022; `full_mesh` - (Optional) Full Mesh. Details of Full Mesh Group Type. See [Full Mesh](#full-mesh) below for details.
+<br>&#x2022; `hub_mesh` - (Optional) Hub Full Mesh. Details of Hub Full Mesh Group Type. See [Hub Mesh](#hub-mesh) below for details.
+<br>&#x2022; `spoke_mesh` - (Optional) Spoke. Details of Spoke Mesh Group Type. See [Spoke Mesh](#spoke-mesh) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

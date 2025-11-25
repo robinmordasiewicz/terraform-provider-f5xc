@@ -66,10 +66,10 @@ resource "f5xc_cluster" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`http1_config` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections. See [Http1 Config](#http1-config) below for details.
-<br>`http2_options` - (Optional) Http2 Protocol Options. Http2 Protocol options for upstream connections. See [Http2 Options](#http2-options) below for details.
+-> **One of the following:**
+&#x2022; `auto_http_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `http1_config` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections. See [Http1 Config](#http1-config) below for details.
+<br>&#x2022; `http2_options` - (Optional) Http2 Protocol Options. Http2 Protocol options for upstream connections. See [Http2 Options](#http2-options) below for details.
 
 `circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly. See [Circuit Breaker](#circuit-breaker) below for details.
 
@@ -77,10 +77,10 @@ resource "f5xc_cluster" "example" {
 
 `default_subset` - (Optional) Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists (`Block`).
 
--> **Only one of the following may be set:**
-`disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `disable_proxy_protocol` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `proxy_protocol_v1` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `proxy_protocol_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `endpoint_selection` - (Optional) Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED` (`String`).
 
@@ -96,9 +96,9 @@ resource "f5xc_cluster" "example" {
 
 `loadbalancer_algorithm` - (Optional) Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN` (`String`).
 
--> **Only one of the following may be set:**
-`no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`panic_threshold` - (Optional) Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status (`Number`).
+-> **One of the following:**
+&#x2022; `no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `panic_threshold` - (Optional) Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status (`Number`).
 
 `outlier_detection` - (Optional) Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied. See [Outlier Detection](#outlier-detection) below for details.
 

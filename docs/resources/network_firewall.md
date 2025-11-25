@@ -66,18 +66,18 @@ resource "f5xc_network_firewall" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
-<br>`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#active-network-policies) below for details.
-<br>`disable_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
+<br>&#x2022; `active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#active-network-policies) below for details.
+<br>&#x2022; `disable_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`active_fast_acls` - (Optional) Active Fast ACL(s). List of Fast ACL(s). See [Active Fast Acls](#active-fast-acls) below for details.
-<br>`disable_fast_acl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `active_fast_acls` - (Optional) Active Fast ACL(s). List of Fast ACL(s). See [Active Fast Acls](#active-fast-acls) below for details.
+<br>&#x2022; `disable_fast_acl` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br>`disable_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
+<br>&#x2022; `disable_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

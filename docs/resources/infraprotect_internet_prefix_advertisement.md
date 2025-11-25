@@ -66,13 +66,13 @@ resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`activation_announce` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`activation_withdraw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `activation_announce` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `activation_withdraw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
--> **Only one of the following may be set:**
-`expiration_never` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`expiration_timestamp` - (Optional) Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards (`String`).
+-> **One of the following:**
+&#x2022; `expiration_never` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `expiration_timestamp` - (Optional) Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards (`String`).
 
 `prefix` - (Optional) Prefix. Advertisement Prefix Advertisement prefix lookup depending on type (`String`).
 

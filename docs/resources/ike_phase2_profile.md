@@ -68,16 +68,16 @@ resource "f5xc_ike_phase2_profile" "example" {
 
 `authentication_algos` - (Optional) Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the AES-gcm or AES-ccm encryption algorithms. Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`. Defaults to `AUTH_ALG_DEFAULT` (`List`).
 
--> **Only one of the following may be set:**
-`dh_group_set` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. See [Dh Group Set](#dh-group-set) below for details.
-<br>`disable_pfs` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `dh_group_set` - (Optional) Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. See [Dh Group Set](#dh-group-set) below for details.
+<br>&#x2022; `disable_pfs` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `encryption_algos` - (Optional) Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT` (`List`).
 
--> **Only one of the following may be set:**
-`ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
-<br>`ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-<br>`use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `ike_keylifetime_hours` - (Optional) Hours. Input Hours. See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
+<br>&#x2022; `ike_keylifetime_minutes` - (Optional) Minutes. Set IKE Key Lifetime in minutes. See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+<br>&#x2022; `use_default_keylifetime` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

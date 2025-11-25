@@ -66,13 +66,13 @@ resource "f5xc_dns_lb_health_check" "example" {
 
 ### Spec Argument Reference
 
--> **Only one of the following may be set:**
-`http_health_check` - (Optional) HTTP Health Check. See [HTTP Health Check](#http-health-check) below for details.
-<br>`https_health_check` - (Optional) HTTP Health Check. See [HTTPS Health Check](#https-health-check) below for details.
-<br>`icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`tcp_health_check` - (Optional) TCP Health Check. See [TCP Health Check](#tcp-health-check) below for details.
-<br>`tcp_hex_health_check` - (Optional) TCP Hex Health Check. See [TCP Hex Health Check](#tcp-hex-health-check) below for details.
-<br>`udp_health_check` - (Optional) UDP Health Check. See [UDP Health Check](#udp-health-check) below for details.
+-> **One of the following:**
+&#x2022; `http_health_check` - (Optional) HTTP Health Check. See [HTTP Health Check](#http-health-check) below for details.
+<br>&#x2022; `https_health_check` - (Optional) HTTP Health Check. See [HTTPS Health Check](#https-health-check) below for details.
+<br>&#x2022; `icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `tcp_health_check` - (Optional) TCP Health Check. See [TCP Health Check](#tcp-health-check) below for details.
+<br>&#x2022; `tcp_hex_health_check` - (Optional) TCP Hex Health Check. See [TCP Hex Health Check](#tcp-hex-health-check) below for details.
+<br>&#x2022; `udp_health_check` - (Optional) UDP Health Check. See [UDP Health Check](#udp-health-check) below for details.
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

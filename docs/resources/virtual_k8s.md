@@ -64,9 +64,9 @@ resource "f5xc_virtual_k8s" "example" {
 
 `default_flavor_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Default Flavor Ref](#default-flavor-ref) below for details.
 
--> **Only one of the following may be set:**
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>`isolated` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+-> **One of the following:**
+&#x2022; `disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+<br>&#x2022; `isolated` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
 

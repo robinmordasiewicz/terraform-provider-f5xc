@@ -190,6 +190,22 @@ See [ROADMAP.md](docs/ROADMAP.md) for detailed development timeline and feature 
 
 This project is licensed under the Mozilla Public License 2.0 - see the [LICENSE](LICENSE) file for details.
 
+## 📖 References
+
+### HashiCorp Documentation
+
+- [Provider Documentation Style and Structure](https://developer.hashicorp.com/terraform/registry/providers/docs)
+- [Publishing Providers to the Registry](https://developer.hashicorp.com/terraform/registry/providers/publishing)
+
+### Reference Providers
+
+This provider follows patterns established by HashiCorp's official providers:
+
+| Provider | Registry | Source Code |
+|----------|----------|-------------|
+| AzureRM | [Registry](https://registry.terraform.io/providers/hashicorp/azurerm/latest) | [GitHub](https://github.com/hashicorp/terraform-provider-azurerm) |
+| AWS | [Registry](https://registry.terraform.io/providers/hashicorp/aws/latest) | [GitHub](https://github.com/hashicorp/terraform-provider-aws) |
+
 ## 🙏 Acknowledgments
 
 - **HashiCorp**: For the excellent Terraform Plugin Framework

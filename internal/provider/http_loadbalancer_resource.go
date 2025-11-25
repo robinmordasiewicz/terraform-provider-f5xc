@@ -49,6 +49,8 @@ type HTTPLoadBalancerResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	AddLocation types.Bool `tfsdk:"add_location"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Domains types.List `tfsdk:"domains"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
@@ -89,9 +91,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
 			},
 			"domains": schema.ListAttribute{
 				MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Loadbalancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system.",
@@ -99,7 +109,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

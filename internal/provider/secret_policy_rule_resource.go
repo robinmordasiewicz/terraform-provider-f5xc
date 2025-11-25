@@ -50,6 +50,8 @@ type SecretPolicyRuleResourceModel struct {
 	Action types.String `tfsdk:"action"`
 	Annotations types.Map `tfsdk:"annotations"`
 	ClientName types.String `tfsdk:"client_name"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
@@ -89,7 +91,7 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -97,8 +99,16 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: client_name, client_name_matcher, client_selector] Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name",
 				Optional: true,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

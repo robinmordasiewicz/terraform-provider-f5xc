@@ -51,6 +51,8 @@ type AzureVNETSiteResourceModel struct {
 	AlternateRegion types.String `tfsdk:"alternate_region"`
 	Annotations types.Map `tfsdk:"annotations"`
 	AzureRegion types.String `tfsdk:"azure_region"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	DiskSize types.Int64 `tfsdk:"disk_size"`
 	Labels types.Map `tfsdk:"labels"`
 	MachineType types.String `tfsdk:"machine_type"`
@@ -100,7 +102,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -108,12 +110,20 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Recommended Azure Region Name. Name of the azure region which supports availability zones.",
 				Optional: true,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"disk_size": schema.Int64Attribute{
 				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

@@ -50,6 +50,8 @@ type PolicerResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	BurstSize types.Int64 `tfsdk:"burst_size"`
 	CommittedInformationRate types.Int64 `tfsdk:"committed_information_rate"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	PolicerMode types.String `tfsdk:"policer_mode"`
 	PolicerType types.String `tfsdk:"policer_type"`
@@ -87,7 +89,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -99,8 +101,16 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps",
 				Optional: true,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

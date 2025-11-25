@@ -49,6 +49,8 @@ type AdvertisePolicyResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Address types.String `tfsdk:"address"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	Port types.Int64 `tfsdk:"port"`
 	PortRanges types.String `tfsdk:"port_ranges"`
@@ -92,12 +94,20 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

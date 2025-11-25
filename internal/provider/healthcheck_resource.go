@@ -48,6 +48,8 @@ type HealthcheckResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
 	Interval types.Int64 `tfsdk:"interval"`
 	JitterPercent types.Int64 `tfsdk:"jitter_percent"`
@@ -88,9 +90,17 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
 			},
 			"healthy_threshold": schema.Int64Attribute{
 				MarkdownDescription: "Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy.",
@@ -105,7 +115,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

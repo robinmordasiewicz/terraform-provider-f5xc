@@ -50,6 +50,8 @@ type SecretPolicyResourceModel struct {
 	AllowF5xc types.Bool `tfsdk:"allow_f5xc"`
 	Annotations types.Map `tfsdk:"annotations"`
 	DecryptCacheTimeout types.String `tfsdk:"decrypt_cache_timeout"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
@@ -89,7 +91,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 				Optional: true,
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -97,8 +99,16 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 				MarkdownDescription: "Decrypt Cache Timeout. decrypt_cache_timeout contains the amount of time a decrypted secret is cached in wingman. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)",
 				Optional: true,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

@@ -48,6 +48,8 @@ type InfraprotectInternetPrefixAdvertisementResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
 	Labels types.Map `tfsdk:"labels"`
 	Prefix types.String `tfsdk:"prefix"`
@@ -85,16 +87,24 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
 			},
 			"expiration_timestamp": schema.StringAttribute{
 				MarkdownDescription: "Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

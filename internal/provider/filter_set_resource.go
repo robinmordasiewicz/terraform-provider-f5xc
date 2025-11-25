@@ -49,6 +49,8 @@ type FilterSetResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
 	ContextKey types.String `tfsdk:"context_key"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
@@ -84,7 +86,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -92,8 +94,16 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				MarkdownDescription: "Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable",
 				Optional: true,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

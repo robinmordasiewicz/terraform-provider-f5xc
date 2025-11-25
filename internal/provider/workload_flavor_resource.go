@@ -48,6 +48,8 @@ type WorkloadFlavorResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	EphemeralStorage types.String `tfsdk:"ephemeral_storage"`
 	Labels types.Map `tfsdk:"labels"`
 	Memory types.String `tfsdk:"memory"`
@@ -86,16 +88,24 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
 			},
 			"ephemeral_storage": schema.StringAttribute{
 				MarkdownDescription: "Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

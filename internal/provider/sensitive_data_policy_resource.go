@@ -49,6 +49,8 @@ type SensitiveDataPolicyResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Compliances types.List `tfsdk:"compliances"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	DisabledPredefinedDataTypes types.List `tfsdk:"disabled_predefined_data_types"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
@@ -85,7 +87,7 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -94,13 +96,21 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"disabled_predefined_data_types": schema.ListAttribute{
 				MarkdownDescription: "Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

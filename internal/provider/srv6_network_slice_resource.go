@@ -51,6 +51,8 @@ type Srv6NetworkSliceResourceModel struct {
 	ConnectToAccessNetworks types.Bool `tfsdk:"connect_to_access_networks"`
 	ConnectToEnterpriseNetworks types.Bool `tfsdk:"connect_to_enterprise_networks"`
 	ConnectToInternet types.Bool `tfsdk:"connect_to_internet"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	SidPrefixes types.List `tfsdk:"sid_prefixes"`
 	ID types.String `tfsdk:"id"`
@@ -87,7 +89,7 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -103,8 +105,16 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Connect To Internet. Connect all SRv6 Virtual Networks in this slice to the Internet by importing route targets specified in the virtual network.",
 				Optional: true,
 			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

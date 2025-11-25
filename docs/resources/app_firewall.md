@@ -31,20 +31,28 @@ resource "f5xc_app_firewall" "example" {
     "owner" = "platform-team"
   }
 
-  # Web Application Firewall configuration
-  # Block malicious requests
+  // One of the arguments from this list "blocking monitoring" must be set
+
   blocking {}
 
-  # Use default detection settings
+  // One of the arguments from this list "custom_blocking_page use_default_blocking_page" must be set
+
   use_default_blocking_page {}
 
-  # Default bot defense configuration
-  default_bot_setting {}
+  // One of the arguments from this list "bot_protection_setting default_bot_setting" must be set
 
-  # Default detection settings
+  bot_protection_setting {
+    malicious_bot_action  = "BLOCK"
+    suspicious_bot_action = "REPORT"
+    good_bot_action       = "REPORT"
+  }
+
+  // One of the arguments from this list "custom_detection_settings default_detection_settings" must be set
+
   default_detection_settings {}
 
-  # Allow all response codes
+  // One of the arguments from this list "allow_all_response_codes allowed_response_codes" must be set
+
   allow_all_response_codes {}
 }
 ```

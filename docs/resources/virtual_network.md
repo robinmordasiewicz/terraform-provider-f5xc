@@ -31,16 +31,19 @@ resource "f5xc_virtual_network" "example" {
     "owner" = "platform-team"
   }
 
-  # Virtual Network configuration
+  // One of the arguments from this list "global_network legacy_type site_local_inside_network site_local_network srv6_network" must be set
+
   site_local_network {}
 
-  # DHCP range for the network
-  srv6_network {
-    enterprise_network {
-      srv6_network_ns_params {
-        namespace = "system"
-      }
-    }
+  // Static routes configuration (optional)
+  static_routes {
+    ip_prefixes = ["10.0.0.0/8"]
+
+    // One of the arguments from this list "default_gateway ip_address node_interface" must be set
+
+    default_gateway {}
+
+    attrs = ["ROUTE_ATTR_INSTALL_FORWARDING"]
   }
 }
 ```

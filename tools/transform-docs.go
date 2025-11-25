@@ -1012,20 +1012,24 @@ func transformDoc(filePath string) error {
 		output.WriteString("\n\n")
 	}
 
-	// Helper function to write a OneOf group with all properties inside a blockquote
+	// Helper function to write a OneOf group with info callout and attribute descriptions
 	writeOneOfGroup := func(attrs []attrInfo) {
 		if len(attrs) == 0 {
 			return
 		}
-		// Write the simplified note header using Terraform Registry info callout syntax
-		// -> creates light blue informational style callout
-		output.WriteString("-> **Note:** Only one of the following may be set:\n\n")
-		// Write each attribute as a bullet item within the callout
+		// Build list of attribute names for the callout
+		var attrNames []string
 		for _, attr := range attrs {
-			output.WriteString(formatAttrLine(attr, "    - "))
-			output.WriteString("\n")
+			attrNames = append(attrNames, fmt.Sprintf("`%s`", attr.name))
 		}
-		output.WriteString("\n")
+		// Write single-line info callout with attribute names
+		// -> creates light blue informational style callout (must be single paragraph)
+		output.WriteString(fmt.Sprintf("-> **Note:** Only one of the following may be set: %s\n\n", strings.Join(attrNames, ", ")))
+		// Write full attribute descriptions as regular paragraphs below
+		for _, attr := range attrs {
+			output.WriteString(formatAttrLine(attr, ""))
+			output.WriteString("\n\n")
+		}
 	}
 
 	// Write Metadata Argument Reference section (if we have metadata attrs)
@@ -1191,20 +1195,20 @@ func transformDoc(filePath string) error {
 				continue
 			}
 
-			// Transform h6 OneOf headings to blockquotes (MD001 compliance) in nested blocks
-			// Note: For nested blocks, we use a simplified note format consistent with main schema
+			// Transform h6 OneOf headings to info callouts (MD001 compliance) in nested blocks
+			// Note: For nested blocks, use single-line callout with inline attribute names
 			if strings.HasPrefix(line, "###### One of") {
 				oneOfH6Regex := regexp.MustCompile(`###### One of the arguments from this list "([^"]+)" must be set`)
 				if m := oneOfH6Regex.FindStringSubmatch(line); m != nil {
-					// Use Terraform Registry info callout syntax for light blue style
-					output.WriteString("-> **Note:** Only one of the following may be set:\n\n")
-					// Parse the constraint list to output as bullet items
+					// Parse the constraint list and format as inline backticked names
 					constraintList := m[1]
 					attrs := strings.Split(constraintList, ", ")
+					var formattedAttrs []string
 					for _, attrName := range attrs {
-						output.WriteString(fmt.Sprintf("    - `%s`\n", strings.TrimSpace(attrName)))
+						formattedAttrs = append(formattedAttrs, fmt.Sprintf("`%s`", strings.TrimSpace(attrName)))
 					}
-					output.WriteString("\n")
+					// Use Terraform Registry info callout syntax (single paragraph for light blue style)
+					output.WriteString(fmt.Sprintf("-> **Note:** Only one of the following may be set: %s\n\n", strings.Join(formattedAttrs, ", ")))
 				}
 				continue
 			}

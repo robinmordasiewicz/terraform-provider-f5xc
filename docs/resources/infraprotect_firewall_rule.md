@@ -72,7 +72,7 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 `destination_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`destination_prefix_single` - (Optional) Configuration for destination_prefix_single (`String`).
+`destination_prefix_single` - (Optional) Prefix. Prefix (`String`).
 
 > **Note:** One of the arguments from this list "fragments_allow, fragments_deny" must be set.
 
@@ -104,7 +104,7 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 `source_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`source_prefix_single` - (Optional) Configuration for source_prefix_single (`String`).
+`source_prefix_single` - (Optional) Prefix. Prefix (`String`).
 
 > **Note:** One of the arguments from this list "state_off, state_on" must be set.
 
@@ -138,13 +138,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `parameter_problem` - (Optional) Parameter-Problem. Parameter-Problem (`Bool`).
 
-`redirect` - (Optional) Configuration for redirect (`Bool`).
+`redirect` - (Optional) Redirect. Redirect (`Bool`).
 
 `source_quench` - (Optional) Source-Quench. Source-Quench (`Bool`).
 
 `time_exceeded` - (Optional) Time-Exceeded. Time-Exceeded (`Bool`).
 
-`unreachable` - (Optional) Configuration for unreachable (`Bool`).
+`unreachable` - (Optional) Unreachable. Unreachable (`Bool`).
 
 <a id="protocol-icmp6"></a>
 
@@ -164,7 +164,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `parameter_problem` - (Optional) Parameter-Problem. Parameter-Problem (`Bool`).
 
-`redirect` - (Optional) Configuration for redirect (`Bool`).
+`redirect` - (Optional) Redirect. Redirect (`Bool`).
 
 `router_advertisement` - (Optional) Router-Advertisement. Router-Advertisement (`Bool`).
 
@@ -176,7 +176,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Protocol TCP
 
-`description` - (Optional) Configuration for description (`String`).
+`description` - (Optional) Description. Description (`String`).
 
 `destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -190,7 +190,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Protocol UDP
 
-`description` - (Optional) Configuration for description (`String`).
+`description` - (Optional) Description. Description (`String`).
 
 `destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 

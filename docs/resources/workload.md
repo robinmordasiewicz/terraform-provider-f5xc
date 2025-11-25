@@ -99,13 +99,13 @@ In addition to all arguments above, the following attributes are exported:
 
 `num_replicas` - (Optional) Number of Replicas. Number of replicas of the batch job to spawn per site (`Number`).
 
-`volumes` - (Optional) Configuration for volumes. See [Volumes](#job-volumes) below.
+`volumes` - (Optional) Volumes. Volumes for the job. See [Volumes](#job-volumes) below.
 
 <a id="job-configuration"></a>
 
 ### Job Configuration
 
-`parameters` - (Optional) Configuration for parameters. See [Parameters](#job-configuration-parameters) below.
+`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#job-configuration-parameters) below.
 
 <a id="job-configuration-parameters"></a>
 
@@ -135,7 +135,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#job-containers-liveness-check) below.
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the container (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#job-containers-readiness-check) below.
 
@@ -159,7 +159,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
+`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
 
 <a id="job-containers-liveness-check"></a>
 
@@ -249,7 +249,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#job-volumes-host-path) below.
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#job-volumes-persistent-volume) below.
 
@@ -293,7 +293,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `scale_to_zero` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`volumes` - (Optional) Configuration for volumes. See [Volumes](#service-volumes) below.
+`volumes` - (Optional) Volumes. Volumes for the service. See [Volumes](#service-volumes) below.
 
 <a id="service-advertise-options"></a>
 
@@ -313,7 +313,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available (`Block`).
 
-`ports` - (Optional) Configuration for ports (`Block`).
+`ports` - (Optional) Ports. Ports to advertise (`Block`).
 
 <a id="service-advertise-options-advertise-in-cluster"></a>
 
@@ -321,7 +321,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `multi_ports` - (Optional) Multiple Ports. Multiple ports (`Block`).
 
-`port` - (Optional) Configuration for port (`Block`).
+`port` - (Optional) Port. Single port (`Block`).
 
 <a id="service-advertise-options-advertise-on-public"></a>
 
@@ -335,7 +335,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Service Configuration
 
-`parameters` - (Optional) Configuration for parameters. See [Parameters](#service-configuration-parameters) below.
+`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#service-configuration-parameters) below.
 
 <a id="service-configuration-parameters"></a>
 
@@ -365,7 +365,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#service-containers-liveness-check) below.
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the container (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#service-containers-readiness-check) below.
 
@@ -389,7 +389,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
+`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
 
 <a id="service-containers-liveness-check"></a>
 
@@ -479,7 +479,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#service-volumes-host-path) below.
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#service-volumes-persistent-volume) below.
 
@@ -529,7 +529,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Simple Service Configuration
 
-`parameters` - (Optional) Configuration for parameters. See [Parameters](#simple-service-configuration-parameters) below.
+`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#simple-service-configuration-parameters) below.
 
 <a id="simple-service-configuration-parameters"></a>
 
@@ -559,7 +559,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#simple-service-container-liveness-check) below.
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the container (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#simple-service-container-readiness-check) below.
 
@@ -583,7 +583,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
+`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
 
 <a id="simple-service-container-liveness-check"></a>
 
@@ -629,7 +629,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Simple Service Enabled
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#simple-service-enabled-persistent-volume) below.
 
@@ -645,7 +645,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Simple Service Simple Advertise
 
-`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, a (`List`).
+`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Load Balancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system (`List`).
 
 `service_port` - (Optional) Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80 (`Number`).
 
@@ -687,7 +687,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `advertise_where` - (Optional) List of Sites to Advertise. Where should this load balancer be available (`Block`).
 
-`ports` - (Optional) Configuration for ports (`Block`).
+`ports` - (Optional) Ports. Ports to advertise (`Block`).
 
 <a id="stateful-service-advertise-options-advertise-in-cluster"></a>
 
@@ -695,7 +695,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `multi_ports` - (Optional) Multiple Ports. Multiple ports (`Block`).
 
-`port` - (Optional) Configuration for port (`Block`).
+`port` - (Optional) Port. Single port (`Block`).
 
 <a id="stateful-service-advertise-options-advertise-on-public"></a>
 
@@ -709,7 +709,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Stateful Service Configuration
 
-`parameters` - (Optional) Configuration for parameters. See [Parameters](#stateful-service-configuration-parameters) below.
+`parameters` - (Optional) Parameters. Parameters for the workload. See [Parameters](#stateful-service-configuration-parameters) below.
 
 <a id="stateful-service-configuration-parameters"></a>
 
@@ -739,7 +739,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `liveness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Liveness Check](#stateful-service-containers-liveness-check) below.
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the container (`String`).
 
 `readiness_check` - (Optional) Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic. See [Readiness Check](#stateful-service-containers-readiness-check) below.
 
@@ -763,7 +763,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS:... Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
+`pull_policy` - (Optional) Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image. Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`. Defaults to `IMAGE_PULL_POLICY_DEFAULT` (`String`).
 
 <a id="stateful-service-containers-liveness-check"></a>
 
@@ -849,7 +849,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ### Stateful Service Persistent Volumes
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 `persistent_volume` - (Optional) Persistent Storage Volume. Volume containing the Persistent Storage for the workload. See [Persistent Volume](#stateful-service-persistent-volumes-persistent-volume) below.
 
@@ -869,7 +869,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `host_path` - (Optional) HostPath Volume. Volume containing a host mapped path into the workload. See [Host Path](#stateful-service-volumes-host-path) below.
 
-`name` - (Optional) Configuration for name (`String`).
+`name` - (Optional) Name. Name of the volume (`String`).
 
 <a id="stateful-service-volumes-empty-dir"></a>
 

@@ -168,7 +168,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Configuration for port_ranges (`String`).
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="rules-criteria-segment"></a>
 
@@ -184,7 +184,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `port` - (Optional) Port. Exact Port to match (`Number`).
 
-`port_ranges` - (Optional) Configuration for port_ranges (`String`).
+`port_ranges` - (Optional) Port range. Port range to match (`String`).
 
 <a id="rules-criteria-tcp"></a>
 

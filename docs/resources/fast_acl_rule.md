@@ -160,7 +160,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`user_defined` - (Optional) Configuration for user_defined (`Number`).
+`user_defined` - (Optional) User defined port. Matches the user defined port (`Number`).
 
 <a id="prefix"></a>
 

@@ -253,20 +253,40 @@ const (
 
 	// Warning threshold - warn if document has many headings (likely truncated)
 	warnH3Headings = 50
+
+	// Splitting threshold - split to guides when document exceeds this many H3 headings
+	// Using 50 (same as warning threshold) to ensure all potentially truncated docs are split
+	splitH3Threshold = 50
 )
 
 // docWarning tracks documentation files that may have issues
 type docWarning struct {
-	path       string
-	sizeKB     float64
-	h3Count    int
-	isOversized bool  // exceeds 500KB
+	path         string
+	sizeKB       float64
+	h3Count      int
+	isOversized  bool // exceeds 500KB
 	willTruncate bool // has too many H3 headings
+}
+
+// nestedBlockInfo holds information about a nested block section
+type nestedBlockInfo struct {
+	anchorName  string   // simplified anchor name (e.g., "active-service-policies")
+	displayName string   // human-readable name (e.g., "Active Service Policies")
+	content     []string // lines of content for this block
+	h3Count     int      // number of H3 headings in this block
+}
+
+// guidePageInfo holds information for generating a guide page
+type guidePageInfo struct {
+	resourceName string            // e.g., "http_loadbalancer"
+	subcategory  string            // e.g., "Load Balancing"
+	blocks       []nestedBlockInfo // nested blocks to include in the guide
 }
 
 func main() {
 	docsDir := "docs/resources"
 	var docWarnings []docWarning
+	var splitDocs []string // Track which docs were split to guides
 
 	files, err := filepath.Glob(filepath.Join(docsDir, "*.md"))
 	if err != nil {
@@ -280,6 +300,27 @@ func main() {
 		} else {
 			fmt.Printf("Transformed: %s\n", file)
 		}
+
+		// Check if document should be split (after initial transformation)
+		if shouldSplitToGuides(file) {
+			content, err := os.ReadFile(file)
+			if err == nil {
+				newContent, err := splitLargeDocument(file, string(content))
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "Error splitting %s: %v\n", file, err)
+				} else if newContent != string(content) {
+					if err := os.WriteFile(file, []byte(newContent), 0644); err != nil {
+						fmt.Fprintf(os.Stderr, "Error writing split doc %s: %v\n", file, err)
+					} else {
+						baseName := filepath.Base(file)
+						resourceName := strings.TrimSuffix(baseName, ".md")
+						splitDocs = append(splitDocs, resourceName)
+						fmt.Printf("Split to guide: %s\n", file)
+					}
+				}
+			}
+		}
+
 		// Check for potential Registry issues after transformation
 		if warn := checkDocLimits(file); warn != nil {
 			docWarnings = append(docWarnings, *warn)
@@ -307,6 +348,15 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error transforming docs/index.md: %v\n", err)
 	} else {
 		fmt.Printf("Transformed: docs/index.md\n")
+	}
+
+	// Report documents that were split to guides
+	if len(splitDocs) > 0 {
+		fmt.Fprintf(os.Stderr, "\n📚 INFO: %d document(s) were split into guide pages:\n", len(splitDocs))
+		for _, doc := range splitDocs {
+			fmt.Fprintf(os.Stderr, "   • docs/guides/%s_nested_blocks.md\n", doc)
+		}
+		fmt.Fprintf(os.Stderr, "\n")
 	}
 
 	// Report documents with potential issues
@@ -1421,4 +1471,211 @@ func normalizeOneOfKey(constraint string) string {
 	fields := strings.Split(constraint, ", ")
 	sort.Strings(fields)
 	return strings.Join(fields, ", ")
+}
+
+// countH3Headings counts the number of H3 headings in content
+func countH3Headings(content string) int {
+	count := 0
+	for _, line := range strings.Split(content, "\n") {
+		if strings.HasPrefix(line, "### ") {
+			count++
+		}
+	}
+	return count
+}
+
+// shouldSplitToGuides determines if a document should be split into guides
+func shouldSplitToGuides(filePath string) bool {
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		return false
+	}
+	return countH3Headings(string(content)) > splitH3Threshold
+}
+
+// extractNestedBlocks parses a document and extracts nested block sections
+func extractNestedBlocks(content string) []nestedBlockInfo {
+	lines := strings.Split(content, "\n")
+	var blocks []nestedBlockInfo
+
+	anchorRegex := regexp.MustCompile(`<a id="([a-z0-9-]+)"></a>`)
+	headerRegex := regexp.MustCompile(`^### (.+)$`)
+
+	var currentBlock *nestedBlockInfo
+	inNestedSection := false
+
+	for i, line := range lines {
+		// Detect start of nested block by anchor
+		if m := anchorRegex.FindStringSubmatch(line); m != nil {
+			// Save previous block if exists
+			if currentBlock != nil && len(currentBlock.content) > 0 {
+				blocks = append(blocks, *currentBlock)
+			}
+
+			// Check if next line is a header
+			displayName := m[1]
+			if i+1 < len(lines) {
+				if hm := headerRegex.FindStringSubmatch(lines[i+1]); hm != nil {
+					displayName = hm[1]
+				}
+			}
+
+			currentBlock = &nestedBlockInfo{
+				anchorName:  m[1],
+				displayName: displayName,
+				content:     []string{line},
+				h3Count:     0,
+			}
+			inNestedSection = true
+			continue
+		}
+
+		// Track H3 headings within block
+		if inNestedSection && strings.HasPrefix(line, "### ") {
+			if currentBlock != nil {
+				currentBlock.h3Count++
+			}
+		}
+
+		// Accumulate content
+		if inNestedSection && currentBlock != nil {
+			currentBlock.content = append(currentBlock.content, line)
+		}
+	}
+
+	// Save last block
+	if currentBlock != nil && len(currentBlock.content) > 0 {
+		blocks = append(blocks, *currentBlock)
+	}
+
+	return blocks
+}
+
+// generateGuidePage creates a guide page for nested block documentation
+func generateGuidePage(resourceName, subcategory string, blocks []nestedBlockInfo) error {
+	if len(blocks) == 0 {
+		return nil
+	}
+
+	// Create guides directory if it doesn't exist
+	guidesDir := "docs/guides"
+	if err := os.MkdirAll(guidesDir, 0755); err != nil {
+		return fmt.Errorf("failed to create guides directory: %w", err)
+	}
+
+	// Generate guide filename
+	guideFile := filepath.Join(guidesDir, resourceName+"_nested_blocks.md")
+
+	// Build guide content
+	var content strings.Builder
+
+	// Write frontmatter
+	displayName := toTitleCase(resourceName)
+	content.WriteString("---\n")
+	content.WriteString(fmt.Sprintf("page_title: \"%s Nested Blocks - f5xc Provider\"\n", displayName))
+	content.WriteString(fmt.Sprintf("subcategory: \"%s\"\n", subcategory))
+	content.WriteString(fmt.Sprintf("description: |-\n  Nested block reference for the %s resource.\n", displayName))
+	content.WriteString("---\n\n")
+
+	// Write header
+	content.WriteString(fmt.Sprintf("# %s Nested Blocks\n\n", displayName))
+	content.WriteString(fmt.Sprintf("This page contains detailed documentation for nested blocks in the `f5xc_%s` resource.\n\n", resourceName))
+	content.WriteString(fmt.Sprintf("For the main resource documentation, see [f5xc_%s](/docs/resources/%s).\n\n", resourceName, resourceName))
+
+	// Write table of contents
+	content.WriteString("## Contents\n\n")
+	for _, block := range blocks {
+		content.WriteString(fmt.Sprintf("- [%s](#%s)\n", block.displayName, block.anchorName))
+	}
+	content.WriteString("\n---\n\n")
+
+	// Write each nested block
+	for _, block := range blocks {
+		for _, line := range block.content {
+			content.WriteString(line + "\n")
+		}
+		content.WriteString("\n")
+	}
+
+	// Normalize blank lines
+	result := normalizeBlankLines(content.String())
+
+	return os.WriteFile(guideFile, []byte(result), 0644)
+}
+
+// splitLargeDocument splits a large document into main page + guide pages
+// Returns the modified main content and generates guide pages
+func splitLargeDocument(filePath string, content string) (string, error) {
+	lines := strings.Split(content, "\n")
+
+	// Find where nested blocks start (look for --- separator followed by anchors)
+	nestedStart := -1
+	importStart := -1
+
+	for i, line := range lines {
+		if line == "---" && i > 0 {
+			// Check if followed by anchor
+			for j := i + 1; j < len(lines) && j < i+5; j++ {
+				if strings.HasPrefix(lines[j], "<a id=\"") {
+					nestedStart = i
+					break
+				}
+			}
+		}
+		if strings.HasPrefix(line, "## Import") {
+			importStart = i
+			break
+		}
+	}
+
+	if nestedStart < 0 {
+		// No nested blocks to split
+		return content, nil
+	}
+
+	// Extract nested block content
+	nestedEnd := importStart
+	if nestedEnd < 0 {
+		nestedEnd = len(lines)
+	}
+
+	nestedContent := strings.Join(lines[nestedStart:nestedEnd], "\n")
+	blocks := extractNestedBlocks(nestedContent)
+
+	if len(blocks) == 0 {
+		return content, nil
+	}
+
+	// Get resource name and subcategory
+	baseName := filepath.Base(filePath)
+	resourceName := strings.TrimSuffix(baseName, ".md")
+	subcategory := getSubcategory(filePath)
+
+	// Generate guide page
+	if err := generateGuidePage(resourceName, subcategory, blocks); err != nil {
+		return content, fmt.Errorf("failed to generate guide page: %w", err)
+	}
+
+	// Build modified main content with link to guide
+	var output strings.Builder
+
+	// Write content before nested blocks
+	for i := 0; i < nestedStart; i++ {
+		output.WriteString(lines[i] + "\n")
+	}
+
+	// Add link to guide page instead of inline nested blocks
+	output.WriteString("\n---\n\n")
+	output.WriteString("## Nested Block Reference\n\n")
+	output.WriteString(fmt.Sprintf("This resource has extensive nested block configuration. For detailed documentation of all nested blocks, see the [%s Nested Blocks Guide](/docs/guides/%s_nested_blocks).\n\n",
+		toTitleCase(resourceName), resourceName))
+
+	// Write import section if exists
+	if importStart > 0 {
+		for i := importStart; i < len(lines); i++ {
+			output.WriteString(lines[i] + "\n")
+		}
+	}
+
+	return normalizeBlankLines(output.String()), nil
 }

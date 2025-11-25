@@ -668,36 +668,37 @@ func convertNestedBlockAnchor(nestedPath string) string {
 // transformAnchorsOnly handles already-transformed files by:
 // 1. Converting any remaining nestedblock anchor IDs to simplified format
 // 2. Removing empty sections (anchor + header with no content)
-// 3. Removing "See...below" links that point to empty or out-of-range sections
+// 3. Updating links to point to nested_blocks file if it exists
+// 4. Removing "See...below" links that point to truly empty sections
 func transformAnchorsOnly(filePath string, content string) error {
 	lines := strings.Split(content, "\n")
 
-	// Maximum number of H3 headings that Terraform Registry reliably renders
-	// Registry truncates large pages around heading ~66, so we use 60 as safe threshold
-	const maxSafeHeadings = 60
+	// Check if a nested_blocks file exists for this resource
+	baseName := filepath.Base(filePath)
+	resourceName := strings.TrimSuffix(baseName, ".md")
+	dir := filepath.Dir(filePath)
+	nestedBlocksPath := filepath.Join(dir, resourceName+"_nested_blocks.md")
+	nestedBlocksAnchors := make(map[string]bool)
 
-	// First pass: identify which anchors have content and which are within safe range
+	if nestedContent, err := os.ReadFile(nestedBlocksPath); err == nil {
+		// Read anchors from the nested_blocks file
+		nestedAnchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
+		for _, match := range nestedAnchorRegex.FindAllStringSubmatch(string(nestedContent), -1) {
+			nestedBlocksAnchors[match[1]] = true
+		}
+	}
+
+	// First pass: identify which anchors have content in this file
 	anchorsWithContent := make(map[string]bool)
-	safeAnchors := make(map[string]bool) // track anchors within safe rendering range
 	allAnchors := make(map[string]bool)
 	anchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
 	attrLineRegex := regexp.MustCompile("^`[^`]+` - \\((Required|Optional)\\)")
 	var currentAnchor string
-	h3HeadingCount := 0
 
 	for _, line := range lines {
-		// Count H3 headings to track position for safe rendering threshold
-		if strings.HasPrefix(line, "### ") {
-			h3HeadingCount++
-		}
-
 		if m := anchorRegex.FindStringSubmatch(line); m != nil {
 			currentAnchor = m[1]
 			allAnchors[currentAnchor] = true
-			// Mark as safe if within rendering threshold
-			if h3HeadingCount < maxSafeHeadings {
-				safeAnchors[currentAnchor] = true
-			}
 		} else if currentAnchor != "" && attrLineRegex.MatchString(line) {
 			anchorsWithContent[currentAnchor] = true
 		}
@@ -746,15 +747,20 @@ func transformAnchorsOnly(filePath string, content string) error {
 			continue
 		}
 
-		// Process attribute lines to remove links to anchors that either:
-		// 1. Have no content (empty blocks)
-		// 2. Are beyond the safe rendering threshold (Terraform Registry truncates large pages)
+		// Process attribute lines to update or remove anchor links
 		if attrLineRegex.MatchString(line) {
 			if m := seeRefRegex.FindStringSubmatch(line); m != nil {
 				anchorRef := m[2]
-				// Only keep link if anchor has content AND is within safe range
-				if !anchorsWithContent[anchorRef] || !safeAnchors[anchorRef] {
-					// Remove the "See...below" reference
+				linkText := m[1]
+
+				if nestedBlocksAnchors[anchorRef] {
+					// Anchor is in nested_blocks file - update link to point there
+					newLink := fmt.Sprintf(" See [%s](./%s_nested_blocks#%s) for details.", linkText, resourceName, anchorRef)
+					line = seeRefRegex.ReplaceAllString(line, newLink)
+				} else if anchorsWithContent[anchorRef] {
+					// Anchor exists in this file with content - keep link as is
+				} else {
+					// Anchor doesn't exist anywhere - remove the link
 					line = seeRefRegex.ReplaceAllString(line, "")
 					line = strings.TrimSpace(line)
 					// Ensure proper ending punctuation
@@ -774,6 +780,41 @@ func transformAnchorsOnly(filePath string, content string) error {
 	return os.WriteFile(filePath, []byte(result), 0644)
 }
 
+// convertNestedBlocksHeadings converts H3 headers to bold text in nested_blocks files
+// This reduces the heading count so the Registry can render the full content without truncation
+func convertNestedBlocksHeadings(filePath string, content string) error {
+	lines := strings.Split(content, "\n")
+	var output strings.Builder
+
+	h3Regex := regexp.MustCompile(`^### (.+)$`)
+	prevWasAnchor := false
+
+	for _, line := range lines {
+		// Convert ### Header to **Header**
+		if m := h3Regex.FindStringSubmatch(line); m != nil {
+			output.WriteString(fmt.Sprintf("**%s**\n", m[1]))
+			// Add separator after header if previous line wasn't an anchor
+			if !prevWasAnchor {
+				output.WriteString("\n")
+			}
+			prevWasAnchor = false
+			continue
+		}
+
+		// Track anchor lines (they come before headers)
+		if strings.HasPrefix(line, "<a id=") {
+			prevWasAnchor = true
+		} else if strings.TrimSpace(line) != "" {
+			prevWasAnchor = false
+		}
+
+		output.WriteString(line + "\n")
+	}
+
+	result := normalizeBlankLines(output.String())
+	return os.WriteFile(filePath, []byte(result), 0644)
+}
+
 func transformDoc(filePath string) error {
 	content, err := os.ReadFile(filePath)
 	if err != nil {
@@ -781,6 +822,11 @@ func transformDoc(filePath string) error {
 	}
 
 	contentStr := string(content)
+
+	// For nested_blocks files, convert H3 headers to bold text to reduce heading count
+	if strings.Contains(filePath, "_nested_blocks") {
+		return convertNestedBlocksHeadings(filePath, contentStr)
+	}
 
 	// Check if file is already transformed (has "## Argument Reference" instead of "## Schema")
 	// For already-transformed files, just do anchor/link conversion without full restructuring
@@ -1587,12 +1633,18 @@ func generateNestedBlocksPage(resourceName, subcategory string, blocks []nestedB
 	}
 	content.WriteString("\n---\n\n")
 
-	// Write each nested block
+	// Write each nested block, converting H3 headers to bold text to reduce heading count
+	// This allows the Registry to render the full content without truncation
+	h3ToBoldRegex := regexp.MustCompile(`^### (.+)$`)
 	for _, block := range blocks {
 		for _, line := range block.content {
+			// Convert ### Header to **Header** (keeps anchor, reduces heading count)
+			if m := h3ToBoldRegex.FindStringSubmatch(line); m != nil {
+				line = fmt.Sprintf("**%s**", m[1])
+			}
 			content.WriteString(line + "\n")
 		}
-		content.WriteString("\n")
+		content.WriteString("---\n\n") // Add separator between blocks for visual distinction
 	}
 
 	// Normalize blank lines
@@ -1604,6 +1656,11 @@ func generateNestedBlocksPage(resourceName, subcategory string, blocks []nestedB
 // splitLargeDocument splits a large document into main page + nested blocks page
 // Returns the modified main content and generates guide pages
 func splitLargeDocument(filePath string, content string) (string, error) {
+	// Skip files that are already nested_blocks pages (prevent double-splitting)
+	if strings.Contains(filePath, "_nested_blocks") {
+		return content, nil
+	}
+
 	lines := strings.Split(content, "\n")
 
 	// Find where nested blocks start (look for --- separator followed by anchors)
@@ -1654,12 +1711,38 @@ func splitLargeDocument(filePath string, content string) (string, error) {
 		return content, fmt.Errorf("failed to generate nested blocks page: %w", err)
 	}
 
+	// Build set of anchor names that are being moved to nested blocks file
+	nestedAnchors := make(map[string]bool)
+	for _, block := range blocks {
+		nestedAnchors[block.anchorName] = true
+	}
+
+	// Regex to find "See [Title](#anchor) below for details." patterns
+	seeRefRegex := regexp.MustCompile(`See \[([^\]]+)\]\(#([a-z0-9-]+)\) below[^.]*\.?`)
+
 	// Build modified main content with link to guide
 	var output strings.Builder
 
-	// Write content before nested blocks
+	// Write content before nested blocks, updating anchor links to point to nested_blocks file
 	for i := 0; i < nestedStart; i++ {
-		output.WriteString(lines[i] + "\n")
+		line := lines[i]
+		// Check if this line contains anchor references that need updating
+		if matches := seeRefRegex.FindAllStringSubmatchIndex(line, -1); matches != nil {
+			// Process matches in reverse order to preserve indices
+			for j := len(matches) - 1; j >= 0; j-- {
+				match := matches[j]
+				// Extract the anchor name (group 2: indices 4 and 5)
+				anchorName := line[match[4]:match[5]]
+				if nestedAnchors[anchorName] {
+					// Extract the link text (group 1: indices 2 and 3)
+					linkText := line[match[2]:match[3]]
+					// Replace with link to nested_blocks file
+					newLink := fmt.Sprintf("See [%s](./%s_nested_blocks#%s) for details.", linkText, resourceName, anchorName)
+					line = line[:match[0]] + newLink + line[match[1]:]
+				}
+			}
+		}
+		output.WriteString(line + "\n")
 	}
 
 	// Add link to nested blocks page instead of inline nested blocks

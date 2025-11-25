@@ -131,9 +131,12 @@ jobs:
             api-update
 
       - name: Enable auto-merge on PR
+        # IMPORTANT: Must use AUTO_MERGE_TOKEN (PAT) instead of GITHUB_TOKEN
+        # because PRs merged with GITHUB_TOKEN do NOT trigger downstream workflows.
+        # This ensures docs.yml runs after the regenerated code is merged.
         if: steps.create-pr.outputs.pull-request-operation == 'created'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
         run: |
           gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} \
             --auto --squash
